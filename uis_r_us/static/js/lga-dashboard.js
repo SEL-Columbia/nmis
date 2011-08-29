@@ -68,6 +68,17 @@ var createOurGraph = (function(pieWrap, legend, data, _opts){
 });
 // END raphael graph wrapper
 
+function SummaryText(t){
+    var sp = $('#lga-widget-wrap').find('.summary-p');
+    if(sp.length===0) {
+        sp = $('<div />')
+                .addClass('summary-p')
+                .appendTo('#lga-widget-wrap');
+    }
+    t !== undefined && sp.html(t);
+    return sp;
+}
+
 var HandleIcons = (function(){
     // I'm starting to move away from olStyling handling all the icon changes.
     window.zActions = [];

@@ -182,6 +182,7 @@ var mapBar = (function(){
 			sectorTd.delegate('a', 'click', function(){
 				var ss =  $(this).data('sectorSlug');
 				ss !== undefined && setSector(ss);
+				ss !== undefined && SummaryText(ss.toUpperCase());
 			});
 			sectorTd.appendTo(tr);
 		})();
