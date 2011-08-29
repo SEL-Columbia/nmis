@@ -108,7 +108,7 @@ class Variable(models.Model):
 
     @classmethod
     def get_full_data_dictionary(cls, as_json=True):
-        result = [v.to_dict() for v in cls.objects.all()]
+        result = dict([(v.slug, v.to_dict()) for v in cls.objects.all()])
         return result if not as_json else json.dumps(result)
 
     def value_field(self):

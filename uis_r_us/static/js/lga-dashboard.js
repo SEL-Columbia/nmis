@@ -169,6 +169,7 @@ var selectedSubSector,
     selectedColumn,
     facilitySectorSlugs,
     facilityData,
+    dataDictionary,
     overviewVariables,
     facilitySectors;
 
@@ -228,7 +229,8 @@ function loadLgaData(lgaUniqueId, onLoadCallback) {
 	var fv1 = $.getCacheJSON(siteDataUrl);
 	var fvDefs = $.getCacheJSON(variablesUrl);
 	var fvDict = $.getCacheJSON("/static/json/variable_dictionary.json");
-	$.when(fv1, fvDefs, fvDict).then(function(lgaQ, varQ, varDict){
+    var dataDict = $.getCacheJSON("/facilities/data_dictionary");
+	$.when(fv1, fvDefs, fvDict, dataDict).then(function(lgaQ, varQ, varDict, dDict){
 	    var variableDictionary = varDict[0];
 	    var lgaData = lgaQ[0];
 		var stateName = lgaData.stateName;
@@ -241,6 +243,7 @@ function loadLgaData(lgaUniqueId, onLoadCallback) {
 		        .dialog();
 		}
 		var facilityData = lgaData.facilities;
+        dataDictionary = dDict[0];
 		var varDataReq = varQ[0];
 		var facilityDataARr = [];
 		$.each(facilityData, function(k, v){
@@ -550,7 +553,7 @@ function imageUrls(imageSizes, imgId) {
             		        subgroups[val].push({
             		            name: col.name,
             		            slug: col.slug,
-            		            value: displayValue(facility[col.slug])
+            		            value: displayValue2(col.slug, facility[col.slug])
             		        });
         		        }
         		    });
@@ -776,7 +779,7 @@ function buildFacilityTable(outerWrap, data, sectors, lgaData){
             $.each(overviewVariables, function(i, variable){
                 if(variable.sector!==undefined) {
                     if(varsBySector[variable.sector]==undefined) {varsBySector[variable.sector] = [];}
-                    variable.value = displayValue(lgaData.profileData[variable.slug]);
+                    variable.value = displayValue2(variable.slug, lgaData.profileData[variable.slug]);
                     if(!!variable.in_overview) {
                         varsBySector[variable.sector].push(variable);
                     }
@@ -807,7 +810,7 @@ function buildFacilityTable(outerWrap, data, sectors, lgaData){
                 if(!variable.in_overview && !!variable.in_sector && variable.sector == s) {
                     data.variables.push({
                         name: variable.name,
-                        value: displayValue(lgaData.profileData[variable.slug])
+                        value: displayValue2(variable.slug, lgaData.profileData[variable.slug])
                     });
                 }
             });
@@ -930,7 +933,7 @@ function buildFacilityTable(outerWrap, data, sectors, lgaData){
 var decimalCount = 2;
 function displayValue(val) {
     if($.type(val)==='boolean') {
-        return val ? 'Yes' : 'No'
+        return val ? 'Yes' : 'No';
     }
     return roundDownValueIfNumber(val);
 }
@@ -953,6 +956,25 @@ function capitalizeString(str) {
 }
 function splitAndCapitalizeString(str) { return $.map(str.split('_'), capitalizeString).join(' '); }
 
+function displayValue2(slug, value) {
+    if (dataDictionary[slug] == undefined) {
+        return 'n/a';
+    }
+    switch (dataDictionary[slug]['data_type']) {
+        case 'boolean':
+            return value ? 'Yes' : 'No';
+        case 'string':
+            return splitAndCapitalizeString(value);
+        case 'float':
+            return roundDownValueIfNumber(value);
+        case 'percent':
+            return String(Math.round(roundDownValueIfNumber(value*100))) + '%';
+        case 'proportion':
+            return roundDownValueIfNumber(value);
+        default:
+            return 'n/a';
+    }
+}
 function createTableForSectorWithData(sector, data){
     var sectorData = data.bySector[sector.slug] || data.bySector[sector.name];
 	if(!sector.columns instanceof Array || !sectorData instanceof Array) {
