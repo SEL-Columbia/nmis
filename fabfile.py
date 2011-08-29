@@ -68,7 +68,7 @@ def backup(deployment_name):
 def deploy(deployment_name, reload="none"):
     """
     Example command line usage:
-    fab deploy:staging,reparse=none
+    fab deploy:staging,reload=none
     """
     _setup_env(deployment_name)
 #    import json
