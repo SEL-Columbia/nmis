@@ -182,6 +182,7 @@ var mapBar = (function(){
 			sectorTd.delegate('a', 'click', function(){
 				var ss =  $(this).data('sectorSlug');
 				ss !== undefined && setSector(ss);
+				ss !== undefined && SummaryText(ss.toUpperCase());
 			});
 			sectorTd.appendTo(tr);
 		})();
@@ -432,6 +433,8 @@ $(function(){
 							if(!!layerObj.mdg) {
 								var mdgT = mdgGoalText(+layerObj.mdg);
 								mdgDisplay.html(mdgT);
+								mdgDisplay.append($('<hr />'));
+								mdgDisplay.append(layerObj.name);
 							} else {
 								mdgDisplay.empty();
 							}
