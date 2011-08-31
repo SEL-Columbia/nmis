@@ -1,4 +1,4 @@
-NMIS Project v0.7
+NMIS Project v0.700001
 ====================
 
 1. Checkout this branch
