@@ -197,6 +197,8 @@ else:
 
 MAIN_SITE_HOSTNAME = "nmis.mdgs.gov.ng"
 
+DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
+
 #If local_settings.py wants to, it can specify extra apps to include
 ADDITIONAL_INSTALLED_APPS = ()
 
@@ -207,3 +209,7 @@ except ImportError:
           "local_settings.py file.")
 
 INSTALLED_APPS = tuple(INSTALLED_APPS + ADDITIONAL_INSTALLED_APPS)
+
+# add 'data' to the project if it's a python module
+if os.path.exists(os.path.join(DATA_DIR, '__init__.py')):
+    INSTALLED_APPS = tuple(INSTALLED_APPS + ('data', ))
