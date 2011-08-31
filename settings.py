@@ -1,5 +1,6 @@
 # Django settings for nmis project.
 import os
+import sys
 
 CURRENT_FILE = os.path.abspath(__file__)
 PROJECT_ROOT = os.path.dirname(CURRENT_FILE)
@@ -177,8 +178,6 @@ LOGGING = {
 # 732 - Kano/Takai
 # 366 - Enugu/Isi-Uzo
 LIMITED_LGA_LIST = ['366']
-
-import sys
 
 SITE_TITLE = "Baseline Data Collection"
 
