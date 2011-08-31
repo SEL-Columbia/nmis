@@ -7,6 +7,7 @@ class TestLgaList(TestCase):
 
     def test_nav_zones(self):
         nav_zones = get_nav_zones()
+        self.assertEqual(0, 100) #this is supposed to fail.
         self.assertEqual(len(nav_zones), 6)
 
     def test_nav_zones2(self):
