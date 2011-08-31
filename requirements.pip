@@ -1,6 +1,7 @@
 Django==1.3
 django-treebeard==1.61
-Fabric==1.0.1
+# fabric is really slow to install...
+#      Fabric==1.0.1
 South==0.7.3
 ipython==0.10.2
 -e git+https://github.com/mvpdev/pyxform.git#egg=pyxform
