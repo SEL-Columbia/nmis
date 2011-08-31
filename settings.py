@@ -197,8 +197,13 @@ else:
 
 MAIN_SITE_HOSTNAME = "nmis.mdgs.gov.ng"
 
+#If local_settings.py wants to, it can specify extra apps to include
+ADDITIONAL_INSTALLED_APPS = ()
+
 try:
     from local_settings import *
 except ImportError:
     print("You can override the default settings by adding a "
           "local_settings.py file.")
+
+INSTALLED_APPS = tuple(INSTALLED_APPS + ADDITIONAL_INSTALLED_APPS)
