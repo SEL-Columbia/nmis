@@ -166,8 +166,14 @@ def google_help_doc(request):
         return HttpResponse(f.read())
 
 
-def test_modes(request):
-    return render_to_response("test_modes.html")
+def test_module(request, module_id):
+    context = RequestContext(request)
+    context.module = module_id
+    context.modules = ['modes', 'tabulations']
+    if module_id in context.modules:
+        return render_to_response("test_module.html", context_instance=context)
+    else:
+        return HttpResponseRedirect("/test/modes")
 
 def test_map(request):
     return render_to_response("test_map.html")
