@@ -66,11 +66,11 @@ class Command(BaseCommand):
             self.variables_to_export = LGA.variables()
 
     def build_lga_header(self):
-        return ['lga_id', 'lga_name', 'state_id', 'state_name'] + self.variables_to_export
+        return ['geoid', 'lga_id', 'lga_name', 'state_id', 'state_name', 'zone_id', 'zone_name'] + self.variables_to_export
 
     def build_lga_row(self, lga):
         latest_data = lga.get_latest_data()
-        row = [lga.id, lga.name, lga.state.id, lga.state.name]
+        row = [lga.geoid, lga.id, lga.name, lga.state.id, lga.state.name, lga.state.zone.id, lga.state.zone.name]
         for key in self.variables_to_export:
             try:
                 row.append(latest_data[key])
