@@ -61,9 +61,11 @@ class Command(BaseCommand):
 
     def export_facilities_for_sector(self, sector):
         self.set_variables_to_export_for_sector(sector)
-        print self.build_facility_header(sector)
-        for facility in sector.facility_set.all():
-            print self.build_facility_row(facility)
+        with open(os.path.join('export', '%s.csv' % sector.slug), 'wb') as _file:
+            writer = csv.writer(_file)
+            writer.writerow(self.build_facility_header(sector))
+            for facility in sector.facility_set.all():
+                writer.writerow(self.build_facility_row(facility))
 
     def set_variables_to_export_for_sector(self, sector):
         if self.variables_to_export == 'all':
@@ -72,7 +74,7 @@ class Command(BaseCommand):
             self.sector_variables_to_export = self.variables_to_export
 
     def build_facility_header(self, sector):
-        return ','.join(['facility_id', 'state_id', 'state_name', 'lga_id', 'lga_name'] + self.sector_variables_to_export)
+        return ['facility_id', 'state_id', 'state_name', 'lga_id', 'lga_name'] + self.sector_variables_to_export
 
     def build_facility_row(self, facility):
         latest_data = facility.get_latest_data()
@@ -82,7 +84,7 @@ class Command(BaseCommand):
                 row.append(latest_data[key])
             except KeyError:
                row.append("")
-        return ','.join(['%s' % element for element in row])
+        return ['%s' % element for element in row]
 
     def old_code(self):
         for sector, facilities in Facility.export_geocoords().iteritems():
