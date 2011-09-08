@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from django.core.management import call_command
 from django.conf import settings
 from facilities.models import Facility, Variable, Sector
+from nga_districts.models import LGA
 import csv
 import os
 from optparse import make_option
@@ -53,7 +54,29 @@ class Command(BaseCommand):
                 self.variables_to_export.remove(variable)
 
     def export_lgas(self):
-        pass
+        self.set_variables_to_export_for_lga()
+        with open(os.path.join('export', 'lgas.csv'), 'wb') as _file:
+            writer = csv.writer(_file)
+            writer.writerow(self.build_lga_header())
+            for lga in LGA.objects.filter(data_loaded=True):
+                writer.writerow(self.build_lga_row(lga))
+
+    def set_variables_to_export_for_lga(self):
+        if self.variables_to_export == 'all':
+            self.variables_to_export = LGA.variables()
+
+    def build_lga_header(self):
+        return ['lga_id', 'lga_name', 'state_id', 'state_name'] + self.variables_to_export
+
+    def build_lga_row(self, lga):
+        latest_data = lga.get_latest_data()
+        row = [lga.id, lga.name, lga.state.id, lga.state.name]
+        for key in self.variables_to_export:
+            try:
+                row.append(latest_data[key])
+            except KeyError:
+               row.append("")
+        return ['%s' % element for element in row]
 
     def export_facilities(self):
         for sector_slug in self.sectors_to_load:
@@ -85,10 +108,3 @@ class Command(BaseCommand):
             except KeyError:
                row.append("")
         return ['%s' % element for element in row]
-
-    def old_code(self):
-        for sector, facilities in Facility.export_geocoords().iteritems():
-            with open(os.path.join('export', '%s.csv' % sector), 'wb') as _file:
-                writer = csv.writer(_file)
-                for facility in facilities:
-                    writer.writerow([facility['id'], facility['lat'], facility['long']])
