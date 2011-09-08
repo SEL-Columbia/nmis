@@ -98,7 +98,9 @@ var launchOpenLayers = (function(_opts){
                         scheme: 'tms',
                         tiles: [base_url + '.png'],
                         grids: [base_url + '.grid.json'],
-                        formatter: function(options, data) { return JSON.stringify([options, data]); }
+                        formatter: function(options, data) { 
+                            log(options, data);
+                            return JSON.stringify([options, data]); }
                         });
                 }
             });
