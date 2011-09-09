@@ -1246,7 +1246,7 @@ var processFacilityDataRequests = (function(dataReq, passedData){
 				list: list //the full list (this is actually an object where the keys are the unique IDs.)
 			};
 		})(passedData.data);
-        Tabulation.init(_.values(data.list));
+        Data.init(_.values(data.list));
 		debugMode && (function printTheDebugStats(){
 			log("" + sectors.length + " sectors were loaded.");
 			var placedPoints = 0;

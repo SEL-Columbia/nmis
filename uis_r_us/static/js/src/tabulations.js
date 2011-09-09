@@ -1,24 +1,51 @@
-var Tabulation = (function(){
-    var data;
-    function init (_data) {
-        data = _data;
+var Sectors = (function(){
+    var sectors;
+    function changeKey(o, key) {
+        o['_' + key] = o[key];
+        delete(o[key]);
+        return o;
+    }
+    function Sector(d){
+        changeKey(d, 'subgroups');
+        changeKey(d, 'columns');
+        $.extend(this, d);
+    }
+    Sector.prototype.subGroups = function() {
+        return this._subgroups;
+    }
+    function init(_sectors) {
+        sectors = _(_sectors).chain()
+                        .clone()
+                        .map(function(s){return new Sector(s);})
+                        .value();
         return true;
     }
-    function ensureData() {
-        if(data===undefined) {
-            warn("Data is undefined");
-        }
+    function clear() {
+        sectors = [];
     }
-    function bySector (sector) {
-        return _.map(data, function(d){
-            return 3;
-        });
+    function pluck(slug) {
+        return _(sectors).chain()
+                .filter(function(s){return s.slug == slug;})
+                .first()
+                .value();
     }
-    // function byAttributes(atts) {
-    //     return _.map(data, function(){});
-    // }
+    function all() {
+        return sectors;
+    }
+    return {
+        init: init,
+        pluck: pluck,
+        all: all,
+        clear: clear
+    };
+})();
+
+var Tabulation = (function(){
+    function init () {
+        return true;
+    }
     function filterBySector (sector) {
-        return _.filter(data, function(d){
+        return _.filter(Data.data(), function(d){
             return d.sector == sector;
         })
     }
@@ -52,6 +79,25 @@ var Tabulation = (function(){
         init: init,
         sectorSlug: sectorSlug,
         sectorSlugAsArray: sectorSlugAsArray,
-        bySector: bySector
     };
+})();
+
+var Data = (function(){
+    var data;
+    function init(_data, _sectors) {
+        data = _data;
+        Sectors.init(_sectors);
+        return true;
+    }
+    function clear() {
+        data = [];
+        Sectors.clear();
+    }
+    return {
+        Sectors: Sectors,
+        Tabulation: Tabulation,
+        data: function(){return data;},
+        init: init,
+        clear: clear
+    }
 })();
