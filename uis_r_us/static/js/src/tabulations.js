@@ -36,7 +36,6 @@ var Tabulation = (function(){
             if(occurrences[d] !== undefined)
                 occurrences[d]++;
         });
-        log(JSON.stringify(occurrences));
         return occurrences;
     }
     function sectorSlugAsArray (sector, slug, keys) {
