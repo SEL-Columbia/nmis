@@ -110,3 +110,12 @@ class LGA(NamedModel, DictModel):
     @classmethod
     def get_query_set_for_round(cls, r):
         return cls.objects.filter(survey_round=r).order_by("name")
+
+    @classmethod
+    def variables(cls):
+        # this is a hack to get a list of variables for an lga
+        try:
+            lga = LGA.objects.filter(data_loaded=True)[0]
+            return lga.get_latest_data().keys()
+        except:
+            return []

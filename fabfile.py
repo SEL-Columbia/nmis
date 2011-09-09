@@ -22,13 +22,13 @@ DEPLOYMENTS = {
     'staging': {
         'folder_name': 'nmis_dev',
         'host_string': 'wsgi@nmis-dev.mdgs.gov.ng',
-        'branch': 'feature/dj13',
+        'branch': 'develop',
         'backup': False,
         },
     'production': {
         'folder_name': 'nmis_production',
         'host_string': 'wsgi@nmis-dev.mdgs.gov.ng',
-        'branch': 'feature/dj13',
+        'branch': 'develop',
         'backup': True,
         'database_name': 'nmis_production',
         }
