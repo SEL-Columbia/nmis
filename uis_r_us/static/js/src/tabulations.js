@@ -26,7 +26,7 @@ var Tabulation = (function(){
             if(occurrences[d] !== undefined)
                 occurrences[d]++;
         });
-        return JSON.stringify(occurrences)
+        return occurrences;
     }
     return {
         init: init,

@@ -1,18 +1,18 @@
-var data;
-$.ajax({
-    url: '/static/tmp_data.json',
-    dataType: 'json',
-    async: false
-}).done(function(d){
-    data = d;
+var data = [];
+var sectors = ["agriculture", "education", "hlth", "water'"];
+_.times(40, function(i){
+    data.push({
+        sector: sectors[i%4],
+        something: i%3==0
+    });
 });
 
 test("Tabulations work with sample data", function(){
     ok(Tabulation.init(data), "Tabulation.init(data) returned true");
-    equal(Tabulation.bySector().length, 41);
-    deepEqual(Tabulation.sectorSlug("education", "school_1kmplus_catchment_area"),
+    equal(Tabulation.bySector().length, 40);
+    deepEqual(Tabulation.sectorSlug("education", "something"),
             {
-                'true': 19,
-                'false': 4
+                'true': 3,
+                'false': 7
             });
 });
