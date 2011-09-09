@@ -646,21 +646,22 @@ function imageUrls(imageSizes, imgId) {
     // END SETTER: facility
 })();
 
-function getTabulations(sector, col, keysArray) {
-	var sList = facilityData.bySector[sector];
-	var valueCounts = {};
-	// if we specify a "keysArray", then the returned valueCounts will include zero values
-	// for those keys.
-	if(keysArray!==undefined) { $.each(keysArray, function(i, val){valueCounts[val]=0;}) }
-	$(sList).each(function(i, id){
-	    var fac = facilityData.list[id];
-		var val = fac[col];
-		if(val === undefined) {val = 'undefined'}
-	    if(valueCounts[val] === undefined) { valueCounts[val] = 0; }
-		valueCounts[val]++;
-	});
-	return valueCounts;
-}
+//** getTabulations has been replaced by the testable "Tabulations" module.
+// function getTabulations(sector, col, keysArray) {
+//  var sList = facilityData.bySector[sector];
+//  var valueCounts = {};
+//  // if we specify a "keysArray", then the returned valueCounts will include zero values
+//  // for those keys.
+//  if(keysArray!==undefined) { $.each(keysArray, function(i, val){valueCounts[val]=0;}) }
+//  $(sList).each(function(i, id){
+//      var fac = facilityData.list[id];
+//      var val = fac[col];
+//      if(val === undefined) {val = 'undefined'}
+//      if(valueCounts[val] === undefined) { valueCounts[val] = 0; }
+//      valueCounts[val]++;
+//  });
+//  return valueCounts;
+// }
 
 (function(){
     var _selectedColumn;
@@ -689,9 +690,10 @@ function getTabulations(sector, col, keysArray) {
     		}
     		var hasPieChart = hasClickAction(column, 'piechart_true') || hasClickAction(column, 'piechart_false');
         	if(hasClickAction(column, 'tabulate') || hasPieChart) {
-        	    var tabulations = $.map(getTabulations(sector.slug, column.slug), function(k, val){
-                    return { 'value': k, 'occurrences': val }
-                });
+                // var tabulations = $.map(getTabulations(sector.slug, column.slug), function(k, val){
+                //                     return { 'value': k, 'occurrences': val }
+                //                 });
+                var tabulations = Tabulation.sectorSlugAsArray(sector.slug, column.slug);
                 getMustacheTemplate('facility_column_description', function(){
                     var data = {
                         tabulations: tabulations,
@@ -722,9 +724,11 @@ function getTabulations(sector, col, keysArray) {
                                 {'legend':'No','color':'#21c406','key': 'false'},
                                 {'legend':'Undefined','color':'#999','key': 'undefined'}];
                         }
+//                        var tabulations = getTabulations(sector.slug, column.slug, 'true false undefined'.split(' '));
+                        var tabulations = Tabulation.sectorSlug(sector.slug, column.slug, 'true false undefined'.split(' '));
             		    createOurGraph(pcWrap,
             		                    pieChartDisplayDefinitions,
-            		                    getTabulations(sector.slug, column.slug, 'true false undefined'.split(' ')),
+            		                    tabulations,
             		                    {});
 
                         var cdiv = $("<div />", {'class':'col-info'}).html($("<h2 />").text(column.name));
@@ -1242,7 +1246,7 @@ var processFacilityDataRequests = (function(dataReq, passedData){
 				list: list //the full list (this is actually an object where the keys are the unique IDs.)
 			};
 		})(passedData.data);
-
+        Tabulation.init(_.values(data.list));
 		debugMode && (function printTheDebugStats(){
 			log("" + sectors.length + " sectors were loaded.");
 			var placedPoints = 0;
