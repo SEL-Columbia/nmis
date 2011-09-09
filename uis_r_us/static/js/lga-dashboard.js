@@ -348,7 +348,7 @@ function buildLgaProfileBox(lga, dictionary) {
     $("<table />").append((function(tbody, pdata){
         $.each(dictionary, function(k, val){
             var name = val.name;
-            var value = pdata[k];
+            var value = displayValue2(k, pdata[k]);
             var tr = $("<tr />")
                 .append($("<td />").text(name))
                 .append($("<td />").text(value));
@@ -949,7 +949,7 @@ function buildFacilityTable(outerWrap, data, sectors, lgaData){
 	});
 }
 
-var decimalCount = 2;
+var decimalCount = 1;
 function displayValue(val) {
     if($.type(val)==='boolean') {
         return val ? 'Yes' : 'No';
@@ -959,7 +959,7 @@ function displayValue(val) {
 function roundDownValueIfNumber(val) {
     if(val===undefined) { return 'n/a'; }
     if($.type(val)==='object') {val = val.value;}
-    if($.type(val)==='number' && (''+val).length>5) {
+    if($.type(val)==='number') {
         return Math.floor(Math.pow(10, decimalCount)* val)/Math.pow(10, decimalCount);
     } else if($.type(val)==='string') {
         return splitAndCapitalizeString(val);
