@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/qunit.css" type="text/css" media="all" charset="utf-8">
+{% endblock %}
+{% block js %}
+<script src="/static/js/application.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/libs/qunit.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/src/{{module}}.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/src/{{module}}_test.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+{% block content %}
+<h1>
+	Testing Module: {{module}}
+</h1>
+<h1 id="qunit-header">QUnit Testing of NMIS Map</h1>
+<h2 id="qunit-banner"></h2>
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+<div id="qunit-fixture">test markup</div>
+{% endblock %}

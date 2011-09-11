@@ -41,9 +41,6 @@ def dashboard(request, reqpath):
         context.lga = lga
         return lga_view(context)
 
-def test_map(request):
-    return render_to_response("test_map.html")
-
 def get_nav_zones(filter_active=False):
     zone_list = Zone.objects.all().values('id', 'name')
     zones = {}
@@ -168,3 +165,15 @@ def google_help_doc(request):
     with open(cached_doc_path) as f:
         return HttpResponse(f.read())
 
+
+def test_module(request, module_id):
+    context = RequestContext(request)
+    context.module = module_id
+    context.modules = ['modes', 'tabulations']
+    if module_id in context.modules:
+        return render_to_response("test_module.html", context_instance=context)
+    else:
+        return HttpResponseRedirect("/test/modes")
+
+def test_map(request):
+    return render_to_response("test_map.html")

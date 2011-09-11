@@ -65,6 +65,14 @@ class Sector(models.Model):
     slug = models.CharField(max_length=128, primary_key=True)
     name = models.CharField(max_length=128)
 
+    def facility_variables(self):
+        # this is a hack to get a list of variables for facilities in this sector
+        try:
+            facility = Facility.objects.filter(sector=self)[0]
+            return facility.get_latest_data().keys()
+        except:
+            return []
+
 
 class LGAIndicator(Variable):
     """
