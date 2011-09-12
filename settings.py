@@ -142,7 +142,6 @@ INSTALLED_APPS = (
     'xform_manager',
     'nga_districts',
     'facilities',
-    'resources',
     'user_management',
 )
 COMPRESS = True
