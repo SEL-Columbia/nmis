@@ -35,6 +35,7 @@ var createOurGraph = (function(pieWrap, legend, data, _opts){
     		legend: legend
     	}
     })(rearranged_vals);
+
     // NOTE: hack to get around a graphael bug!
     // if there is only one color the chart will
     // use the default value (Raphael.fn.g.colors[0])
@@ -263,7 +264,6 @@ function loadLgaData(lgaUniqueId, onLoadCallback) {
 		});
 
         buildLgaProfileBox(lgaData, variableDictionary.profile_variables);
-//		buildGapAnalysisTable(lgaData);
 		processFacilityDataRequests(lgaQ, {
 		    sectors: varDataReq.sectors,
 		    overview: varDataReq.overview,
@@ -360,29 +360,6 @@ function buildLgaProfileBox(lga, dictionary) {
     oWrap.html(wrap);
 }
 
-function getGaTable(){
-    var gt = $('.widget-outer-wrap').find('div.gap-analysis-table');
-	if(gt.length===0) {
-		gt = $("<div />", {'class': 'gap-analysis-table'});
-		$('.widget-outer-wrap').prepend($('<div />', {'class':'gap-analysis-table-wrap'}).html(gt));
-	}
-	return gt;
-}
-
-function buildGapAnalysisTable(lgaData){
-    var data = lgaData.profileData;
-    var gaTableWrap = getGaTable();
-    var table = $('#gap-analysis-table-template').children().eq(0).clone();
-    table.find('.fill-me').each(function(){
-        var slug = $(this).data('variableSlug');
-        $(this).text(roundDownValueIfNumber(data[slug]))
-    });
-    //hiding gap analysis table by default for now.
-    gaTableWrap.parents().eq(0)
-            .addClass('toggleable')
-            .addClass('hidden')
-    return gaTableWrap.html(table);
-}
 // END lga-wide profile boxes
 
 // BEGIN page mode setters.
