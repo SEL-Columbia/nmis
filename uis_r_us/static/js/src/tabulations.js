@@ -1,3 +1,5 @@
+var debugMode = true;
+
 var Sectors = (function(){
     var sectors;
     function changeKey(o, key) {
@@ -13,10 +15,14 @@ var Sectors = (function(){
     Sector.prototype.subGroups = function() {
         return this._subgroups;
     }
+    Sector.prototype.getColumns = function() {
+        function displayOrderSort(a,b) { return (a.display_order > b.display_order) ? 1 : -1 }
+        return this._columns.sort(displayOrderSort);
+    }
     function init(_sectors) {
         sectors = _(_sectors).chain()
                         .clone()
-                        .map(function(s){return new Sector(s);})
+                        .map(function(s){return new Sector(_.extend({}, s));})
                         .value();
         return true;
     }
@@ -32,10 +38,36 @@ var Sectors = (function(){
     function all() {
         return sectors;
     }
+    function validate() {
+        if(!sectors instanceof Array)
+            warn("Sectors must be defined as an array");
+        if(sectors.length===0)
+            warn("Sectors array is empty");
+        _.each(sectors, function(sector){
+            if(sector.name === undefined) { warn("Sector name must be defined."); }
+            if(sector.slug === undefined) { warn("Sector slug must be defined."); }
+        });
+        var slugs = _(sectors).pluck('slug');
+        if(slugs.length !== _(slugs).uniq().length) {
+            warn("Sector slugs must not be reused");
+        }
+        // $(this.columns).each(function(i, val){
+        //   var name = val.name;
+        //   var slug = val.slug;
+        //   name === undefined && warn("Each column needs a slug", this);
+        //   slug === undefined && warn("Each column needs a name", this);
+        // });
+        return true;
+    }
+    function slugs() {
+        return _.pluck(sectors, 'slug');
+    }
     return {
         init: init,
         pluck: pluck,
+        slugs: slugs,
         all: all,
+        validate: validate,
         clear: clear
     };
 })();
@@ -45,7 +77,7 @@ var Tabulation = (function(){
         return true;
     }
     function filterBySector (sector) {
-        return _.filter(Data.data(), function(d){
+        return _.filter(NMIS.data(), function(d){
             return d.sector == sector;
         })
     }
@@ -82,10 +114,10 @@ var Tabulation = (function(){
     };
 })();
 
-var Data = (function(){
+var NMIS = (function(){
     var data;
     function init(_data, _sectors) {
-        data = _data;
+        data = _.clone(_data);
         Sectors.init(_sectors);
         return true;
     }
@@ -93,10 +125,35 @@ var Data = (function(){
         data = [];
         Sectors.clear();
     }
+    function ensureUniqueId(datum) {
+        if(datum._uid === undefined) {
+            datum._uid = _.uniqueId('fp');
+        }
+    }
+    function ensureLatLng(datum) {
+        if(datum._latlng === undefined && datum.gps !== undefined) {
+            var llArr = datum.gps.split(' ');
+            datum._latlng = [ llArr[0], llArr[1] ];
+        }
+    }
+    function validateData() {
+        Sectors.validate();
+        _(data).each(ensureUniqueId);
+        _(data).each(ensureLatLng);
+        return true;
+    }
+    function dataForSector(sectorSlug) {
+        var sector = Sectors.pluck(sectorSlug);
+        return _(data).filter(function(datum){
+            return datum.sector == sector.slug;
+        });
+    }
     return {
         Sectors: Sectors,
         Tabulation: Tabulation,
         data: function(){return data;},
+        dataForSector: dataForSector,
+        validateData: validateData,
         init: init,
         clear: clear
     }
