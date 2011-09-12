@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'registration',
+    'south',
 
     'main',
     'uis_r_us',
@@ -172,6 +173,13 @@ LOGGING = {
     }
 }
 
+# migrations
+APPS_WITH_MIGRATIONS = [
+    'display_defs',
+    'facilities',
+    'nga_districts',
+    'user_management',
+]
 
 # 394 - Kaduna/Kachia
 # 732 - Kano/Takai
