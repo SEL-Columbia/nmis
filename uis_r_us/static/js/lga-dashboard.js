@@ -1148,6 +1148,7 @@ var processFacilityDataRequests = (function(dataReq, passedData){
     } else {
 		var data, sectors, noLatLngs=0;
 		facilitySectorSlugs = [];
+        NMIS.init(passedData.data, passedData.sectors);
 
 		passedData === undefined && warn("No data was passed to the page", passedData);
 
@@ -1246,7 +1247,6 @@ var processFacilityDataRequests = (function(dataReq, passedData){
 				list: list //the full list (this is actually an object where the keys are the unique IDs.)
 			};
 		})(passedData.data);
-        Data.init(_.values(data.list));
 		debugMode && (function printTheDebugStats(){
 			log("" + sectors.length + " sectors were loaded.");
 			var placedPoints = 0;

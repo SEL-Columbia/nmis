@@ -6,18 +6,18 @@ var sectors;
 $.ajax({url: '/static/tmp_sectors.json',async: false,dataType: 'json'})
     .done(function(_sectors){sectors = _sectors;});
 
-module("Data", {
+module("NMIS", {
     setup: function(){
-        Data.init(data, sectors);
+        NMIS.init(data, sectors);
     },
     teardown: function(){
-        Data.clear();
+        NMIS.clear();
     }
 });
 
-test("Data", function(){
-    ok(Data.init(data, sectors), "Data.init() works");
-    ok(Data.Tabulation !== undefined, "Tabulation exists");
+test("NMIS", function(){
+    ok(NMIS.init(data, sectors), "NMIS.init() works");
+    ok(NMIS.Tabulation !== undefined, "Tabulation exists");
 });
 
 test("Tabulations work with sample data", function(){
@@ -47,7 +47,18 @@ test("Sectors", function(){
     var sectorList = Sectors.all();
     equal(sectorList.length, 3);
     equal(Sectors.pluck('health').slug, 'health', "Sectors.pluck(slug) works.")
-    log(sectorList[0].subGroups());
-//    ok(, "Sectors.init(...) returns true");
 });
 
+var data2;
+$.ajax({url: '/static/tmp_data.json',async: false,dataType: 'json'})
+    .done(function(_data2){data2 = _data2;});
+
+module("NMIS Data", {
+    setup: function(){}
+});
+
+test("NMIS Data Validation", function(){
+    NMIS.init(data2, sectors);
+    ok(NMIS.validateData(), "Data is validated");
+    equal(NMIS.dataForSector('health').length, 12, "Data for health has a length of x");
+});
