@@ -283,7 +283,7 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
             self.load_lga_data_from_csv(**kwargs)
 
     @print_time
-    def load_lga_data_from_csv(self, path, row_contains_variable_slug=False):
+    def load_lga_data_from_csv(self, path, source=None, row_contains_variable_slug=False):
         csv_reader = CsvReader(path)
         for d in csv_reader.iter_dicts():
             if '_lga_id' not in d:
@@ -294,11 +294,12 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
             lga = LGA.objects.get(id=d['_lga_id'])
             if row_contains_variable_slug:
                 if 'slug' in d and 'value' in d:
-                    lga.add_data_from_dict({d['slug']: d['value']})
+                    if 'source' in d: source = d['source']
+                    lga.add_data_from_dict({d['slug']: d['value']}, source=source)
                 else:
                     print "MISSING SLUG OR VALUE:", d
             else:
-                lga.add_data_from_dict(d, and_calculate=True)
+                lga.add_data_from_dict(d, source=source, and_calculate=True)
 
     @print_time
     def load_table_defs(self):
@@ -378,18 +379,18 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
     @print_time
     def calculate_lga_indicators(self):
         for i in LGAIndicator.objects.all():
-            i.set_lga_values(self.lga_ids)
+            i.set_lga_values(self.lga_ids, source='Calculated')
 
     @print_time
     def calculate_lga_gaps(self):
         for i in GapVariable.objects.all():
-            i.set_lga_values(self.lga_ids)
+            i.set_lga_values(self.lga_ids, source='Calculated')
 
     @print_time
     def calculate_lga_variables(self):
         lgas = LGA.objects.filter(id__in=[int(x) for x in self.lga_ids])
         for lga in lgas:
-            lga.add_calculated_values(lga.get_latest_data(), only_for_missing=True)
+            lga.add_calculated_values(lga.get_latest_data(), source='Caclulated', only_for_missing=True)
 
     def get_info(self):
         def get_variable_usage():
