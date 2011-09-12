@@ -296,7 +296,7 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
         """
         Table defs contain details to help display the data. (table columns, etc)
         """
-        from facility_views.models import FacilityTable, TableColumn, ColumnCategory, MapLayerDescription
+        from display_defs.models import FacilityTable, TableColumn, ColumnCategory, MapLayerDescription
         def delete_existing_table_defs():
             FacilityTable.objects.all().delete()
             TableColumn.objects.all().delete()

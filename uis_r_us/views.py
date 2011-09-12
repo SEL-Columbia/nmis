@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.forms.models import model_to_dict
-from facility_views.models import FacilityTable, MapLayerDescription
+from display_defs.models import FacilityTable, MapLayerDescription
 from nga_districts.models import LGA, Zone, State
 from django.db.models import Count
 import json

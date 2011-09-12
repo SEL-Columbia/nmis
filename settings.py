@@ -138,7 +138,7 @@ INSTALLED_APPS = (
 
     'main',
     'uis_r_us',
-    'facility_views',
+    'display_defs',
     'xform_manager',
     'nga_districts',
     'facilities',
