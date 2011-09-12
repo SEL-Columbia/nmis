@@ -199,6 +199,7 @@ class DataRecord(models.Model):
 
     variable = models.ForeignKey(Variable)
     date = models.DateField(null=True)
+    source = models.CharField(null=True, max_length=255)
 
     class Meta:
         abstract = True
@@ -223,7 +224,7 @@ class DictModel(models.Model):
     class Meta:
         abstract = True
 
-    def set(self, variable, value, date=None):
+    def set(self, variable, value, date=None, source=None):
         """
         This is used to add a data record of type variable to the instance.
         It returns the casted value for the variable.
@@ -234,6 +235,7 @@ class DictModel(models.Model):
             'variable': variable,
             self._data_record_fk: self,
             'date': date,
+            'source': source,
             }
         d, created = self._data_record_class.objects.get_or_create(**kwargs)
         d.value = variable.get_casted_value(value)
@@ -243,7 +245,7 @@ class DictModel(models.Model):
     def get(self, variable):
         return self.get_latest_value_for_variable(variable)
 
-    def add_data_from_dict(self, d, and_calculate=False, only_for_missing=False):
+    def add_data_from_dict(self, d, source=None, and_calculate=False, only_for_missing=False):
         """
         Key value pairs in d that are in the data dictionary will be
         added to the database along with any calculated variables that apply.
@@ -259,11 +261,11 @@ class DictModel(models.Model):
                 if only_for_missing and self.get(variable):
                         pass
                 else:
-                    d[key] = self.set(variable, value)
+                    d[key] = self.set(variable, value, None, source)
         if and_calculate:
-            self.add_calculated_values(d, only_for_missing)
+            self.add_calculated_values(d, source, only_for_missing)
 
-    def add_calculated_values(self, d, only_for_missing=False):
+    def add_calculated_values(self, d, source=None, only_for_missing=False):
         for cls in [CalculatedVariable, PartitionVariable]:
             for v in cls.objects.all():
                 if only_for_missing and self.get(v):
@@ -271,7 +273,7 @@ class DictModel(models.Model):
                 else:
                     v.add_calculated_value(d)
                     if v.slug in d:
-                        self.set(v, d[v.slug])
+                        self.set(v, d[v.slug], None, source)
 
     def _kwargs(self):
         """

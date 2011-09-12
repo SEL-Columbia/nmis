@@ -15,7 +15,7 @@ class FacilityBuilder(object):
     SURVEYS_WITH_FACILITIES = ['Health', 'Water', 'Education']
 
     @classmethod
-    def create_facility_from_dict(cls, d):
+    def create_facility_from_dict(cls, d, source=None):
         """
         Requires facility type, sector and lga to be specified in d, all other
         key value pairs in d that are in the data dictionary will be
@@ -43,7 +43,7 @@ class FacilityBuilder(object):
             pass
 
         facility, created = Facility.objects.get_or_create(**kwargs)
-        facility.add_data_from_dict(d, and_calculate=True)
+        facility.add_data_from_dict(d, source=source, and_calculate=True)
         return facility
 
     @classmethod

@@ -46,6 +46,13 @@ class DataLoader(object):
             lga.save()
         for lga in lgas:
             self.lga_ids = [str(lga.id)]
+            if self._debug:
+                self.load_data()
+                self.load_calculations()
+                lga.data_load_in_progress = False
+                lga.data_loaded = True
+                lga.save()
+                continue
             try:
                 self.load_data()
                 self.load_calculations()
@@ -71,6 +78,8 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
     def reset_database(self):
         self._drop_database()
         call_command('syncdb', interactive=False)
+        for app in settings.APPS_WITH_MIGRATIONS:
+            call_command('migrate', app)
 
     def load_system(self):
         self.create_users()
@@ -251,7 +260,7 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
             self.create_facilities_from_csv(**facility_csv)
 
     @print_time
-    def create_facilities_from_csv(self, sector, data_source):
+    def create_facilities_from_csv(self, sector, data_source, source=None):
         path = os.path.join(self._data_dir, 'facility_csvs', data_source)
         for d in CsvReader(path).iter_dicts():
             if '_lga_id' not in d:
@@ -262,7 +271,7 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
             d['_data_source'] = data_source
             d['_facility_type'] = sector.lower()
             d['sector'] = sector
-            facility = FacilityBuilder.create_facility_from_dict(d)
+            facility = FacilityBuilder.create_facility_from_dict(d, source=source)
 
     @print_time
     def load_lga_data(self):
@@ -296,7 +305,7 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
         """
         Table defs contain details to help display the data. (table columns, etc)
         """
-        from facility_views.models import FacilityTable, TableColumn, ColumnCategory, MapLayerDescription
+        from display_defs.models import FacilityTable, TableColumn, ColumnCategory, MapLayerDescription
         def delete_existing_table_defs():
             FacilityTable.objects.all().delete()
             TableColumn.objects.all().delete()

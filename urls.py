@@ -29,7 +29,6 @@ urlpatterns = patterns('',
     url(r'^mustache/(?P<template_name>\w+)$', ui.mustache_template),
     url(r'^test/(?P<module_id>\S+)$', ui.test_module),
     url(r'^test_maps$', ui.test_map),
-    url(r'^resources/', include('resources.urls')),
     url(r'^user_management/', include('user_management.urls')),
     url(r'^survey_photos/(?P<size>\S+)/(?P<photo_id>\S+)$', photo_redirect),
 
