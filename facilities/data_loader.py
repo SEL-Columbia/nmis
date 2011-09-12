@@ -46,6 +46,13 @@ class DataLoader(object):
             lga.save()
         for lga in lgas:
             self.lga_ids = [str(lga.id)]
+            if self._debug:
+                self.load_data()
+                self.load_calculations()
+                lga.data_load_in_progress = False
+                lga.data_loaded = True
+                lga.save()
+                continue
             try:
                 self.load_data()
                 self.load_calculations()
@@ -71,6 +78,8 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
     def reset_database(self):
         self._drop_database()
         call_command('syncdb', interactive=False)
+        for app in settings.APPS_WITH_MIGRATIONS:
+            call_command('migrate', app)
 
     def load_system(self):
         self.create_users()
@@ -251,7 +260,7 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
             self.create_facilities_from_csv(**facility_csv)
 
     @print_time
-    def create_facilities_from_csv(self, sector, data_source):
+    def create_facilities_from_csv(self, sector, data_source, source=None):
         path = os.path.join(self._data_dir, 'facility_csvs', data_source)
         for d in CsvReader(path).iter_dicts():
             if '_lga_id' not in d:
@@ -262,7 +271,7 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
             d['_data_source'] = data_source
             d['_facility_type'] = sector.lower()
             d['sector'] = sector
-            facility = FacilityBuilder.create_facility_from_dict(d)
+            facility = FacilityBuilder.create_facility_from_dict(d, source=source)
 
     @print_time
     def load_lga_data(self):
@@ -274,7 +283,7 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
             self.load_lga_data_from_csv(**kwargs)
 
     @print_time
-    def load_lga_data_from_csv(self, path, row_contains_variable_slug=False):
+    def load_lga_data_from_csv(self, path, source=None, row_contains_variable_slug=False):
         csv_reader = CsvReader(path)
         for d in csv_reader.iter_dicts():
             if '_lga_id' not in d:
@@ -285,18 +294,19 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
             lga = LGA.objects.get(id=d['_lga_id'])
             if row_contains_variable_slug:
                 if 'slug' in d and 'value' in d:
-                    lga.add_data_from_dict({d['slug']: d['value']})
+                    if 'source' in d: source = d['source']
+                    lga.add_data_from_dict({d['slug']: d['value']}, source=source)
                 else:
                     print "MISSING SLUG OR VALUE:", d
             else:
-                lga.add_data_from_dict(d, and_calculate=True)
+                lga.add_data_from_dict(d, source=source, and_calculate=True)
 
     @print_time
     def load_table_defs(self):
         """
         Table defs contain details to help display the data. (table columns, etc)
         """
-        from facility_views.models import FacilityTable, TableColumn, ColumnCategory, MapLayerDescription
+        from display_defs.models import FacilityTable, TableColumn, ColumnCategory, MapLayerDescription
         def delete_existing_table_defs():
             FacilityTable.objects.all().delete()
             TableColumn.objects.all().delete()
@@ -369,18 +379,18 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
     @print_time
     def calculate_lga_indicators(self):
         for i in LGAIndicator.objects.all():
-            i.set_lga_values(self.lga_ids)
+            i.set_lga_values(self.lga_ids, source='Calculated')
 
     @print_time
     def calculate_lga_gaps(self):
         for i in GapVariable.objects.all():
-            i.set_lga_values(self.lga_ids)
+            i.set_lga_values(self.lga_ids, source='Calculated')
 
     @print_time
     def calculate_lga_variables(self):
         lgas = LGA.objects.filter(id__in=[int(x) for x in self.lga_ids])
         for lga in lgas:
-            lga.add_calculated_values(lga.get_latest_data(), only_for_missing=True)
+            lga.add_calculated_values(lga.get_latest_data(), source='Caclulated', only_for_missing=True)
 
     def get_info(self):
         def get_variable_usage():
