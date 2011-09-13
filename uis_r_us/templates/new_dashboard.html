@@ -63,54 +63,53 @@
 	<h3>Facility Level DAta</h3>
 	<h4>Below are data from the baseline facility surveys.</h4>
 	<div class="tri-blocks">
-		<div class="health">
-			asdf
-			<br >
-			asdf
-			asdf
-			<br >
-			asdf
-			asdf
-			<br >
-			asdf
-			asdf
-			<br >
-			asdf
-			<a class="more-link" href="#">More &raquo;</a>
+		{% for key, indicators in facility_indicators %}
+		<div class="{{key}}">
+			<table>
+				<tbody>
+			{% for indicator in indicators %}
+			<tr>
+				<td>
+					{{indicator.0}}
+				</td>
+				<td>
+					{{indicator.1}}
+				</td>
+			</tr>
+			{% endfor %}
+				</tbody>
+			</table>
+			<p class="more-link"><a href="#">More &raquo;</a></p>
 		</div>
-		<div class="education">
-			asdf
-			<br >
-			asdf
-			asdf
-			<br >
-			asdf
-			asdf
-			<br >
-			asdf
-			asdf
-			<br >
-			asdf
-			<a class="more-link" href="#">More &raquo;</a>
-		</div>
-		<div class="water">
-			asdf
-			<br >
-			asdf
-			asdf
-			<br >
-			asdf
-			asdf
-			<br >
-			asdf
-			<a class="more-link" href="#">More &raquo;</a>
-		</div>
+		{% endfor %}
 	</div>
 	<div class="clearfix"></div>
 	<hr>
 	<h3>MDG Tables</h3>
 	<h4>Below are data collected from HNLSS, DHS, and other sources.</h4>
 	<div class="mdg-tables">
+		<table>
+			{% for goal, indicators in mdg_indicators %}
+			<tbody>
+				<tr colspan="3">
+					{{goal}}
+				</tr>
+				{% for indicator in indicators %}
+				<tr>
+					<td>
+						{{indicator.1}}
+					</td>
+					<td>
+						{{indicator.2}}
+					</td>
+					<td>
+						{{indicator.3}}
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+			{% endfor %}
+		</table>
 	</div>
 </div>
 
@@ -135,12 +134,15 @@
 		width: 33%;
 		position: relative;
 	}
-	.tri-blocks div a.more-link {
-		position: absolute;
-		bottom: 0;
-		right: 0;
+	.tri-blocks div table {
+		width: 100%;
 	}
-	.new-dashboard .header .profile-map {
+	.tri-blocks div p.more-link {
+		margin: 0;
+		text-align: right;
+	}
+	.mdg-tables table {
+		width: 100%;
 	}
 </style>
 {% endblock %}

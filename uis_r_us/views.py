@@ -179,4 +179,39 @@ def test_map(request):
     return render_to_response("test_map.html")
 
 def new_dashboard(request):
-    return render_to_response("new_dashboard.html")
+    context = RequestContext(request)
+    context.facility_indicators = [
+        ('health', [
+                ["Health Indicator 1", 123],
+                ["Health Indicator 2", 223],
+                ["Health Indicator 3", 323],
+                ["Health Indicator 4", 423],
+                ["Health Indicator 5", 523],
+                ["Health Indicator 6", 623],
+            ],),
+        ('education', [
+                ["Education Indicator 1", 123],
+                ["Education Indicator 2", 223],
+                ["Education Indicator 3", 323],
+                ["Education Indicator 4", 423],
+                ["Education Indicator 5", 523],
+        ],),
+        ('water', [
+                ["Water Indicator 1", 123],
+                ["Water Indicator 2", 223],
+                ["Water Indicator 3", 323],
+                ["Water Indicator 4", 423],
+                ["Water Indicator 5", 523],
+        ],)
+    ]
+    context.mdg_indicators = [
+        ("Goal 2", [
+            [None, "Students/teacher ratio for primary school [LGA]", 31.170243204578],
+            [None, "Net enrollment ratio for primary education[LGA]", .389],
+            [None, "Number of children secondary school going age", 19821.3211650392],
+            [None, "Gross enrollment ratio in primary education[LGA]", 0.5684],
+            [None, "Teacher to Classroom Ratio for primary schools(TCR)[LGA]", 3.13452914798206],
+            [None, "% teachers with formal teaching qualification for secondary school[LGA]", 0.709],
+        ])
+    ]
+    return render_to_response("new_dashboard.html", context_instance=context)
