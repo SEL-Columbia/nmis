@@ -177,3 +177,6 @@ def test_module(request, module_id):
 
 def test_map(request):
     return render_to_response("test_map.html")
+
+def new_dashboard(request):
+    return render_to_response("new_dashboard.html")

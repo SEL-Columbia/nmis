@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="new-dashboard">
+	<div class="header">
+		<div class="profile-box">
+			<h2>
+				Kano
+			</h2>
+			<h3>
+				Takai
+			</h3>
+			<table>
+				<tbody>
+					<tr>
+						<td class='key'>
+							LGA Chairman
+						</td>
+						<td class='value'>
+							Hon. Muhammad Baffa
+						</td>
+					</tr>
+					<tr>
+						<td class='key'>
+							LGA Secretary
+						</td>
+						<td class='value'>
+							Huzaifa Adamu Karfi
+						</td>
+					</tr>
+					<tr>
+						<td class='key'>
+							Population (2006)
+						</td>
+						<td class='value'>
+							202,639
+						</td>
+					</tr>
+					<tr>
+						<td class='key'>
+							Area (square km)
+						</td>
+						<td class='value'>
+							611.27
+						</td>
+					</tr>
+					<tr>
+						<td class='key'>
+							Distance from Capitol
+						</td>
+						<td class='value'>
+							92
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="profile-map">
+			Map
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<hr>
+	<h3>Facility Level DAta</h3>
+	<h4>Below are data from the baseline facility surveys.</h4>
+	<div class="tri-blocks">
+		<div class="health">
+			asdf
+			<br >
+			asdf
+			asdf
+			<br >
+			asdf
+			asdf
+			<br >
+			asdf
+			asdf
+			<br >
+			asdf
+			<a class="more-link" href="#">More &raquo;</a>
+		</div>
+		<div class="education">
+			asdf
+			<br >
+			asdf
+			asdf
+			<br >
+			asdf
+			asdf
+			<br >
+			asdf
+			asdf
+			<br >
+			asdf
+			<a class="more-link" href="#">More &raquo;</a>
+		</div>
+		<div class="water">
+			asdf
+			<br >
+			asdf
+			asdf
+			<br >
+			asdf
+			asdf
+			<br >
+			asdf
+			<a class="more-link" href="#">More &raquo;</a>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<hr>
+	<h3>MDG Tables</h3>
+	<h4>Below are data collected from HNLSS, DHS, and other sources.</h4>
+	<div class="mdg-tables">
+	</div>
+</div>
+
+{% endblock %}
+
+{% block head  %}
+<style type="text/css" media="screen">
+	.content-inner-wrap {
+		width: 1100px;
+		margin: 10px auto;
+	}
+	.clearfix {
+		clear: both;
+	}
+	.new-dashboard .header .profile-box, .new-dashboard .header #profile-map {
+		float: left;
+		width: 48%;
+		border: 1px solid blue;
+	}
+	.tri-blocks div {
+		float: left;
+		width: 33%;
+		position: relative;
+	}
+	.tri-blocks div a.more-link {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+	}
+	.new-dashboard .header .profile-map {
+	}
+</style>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" charset="utf-8">
+// javascript goes here.
+</script>
+{% endblock %}
