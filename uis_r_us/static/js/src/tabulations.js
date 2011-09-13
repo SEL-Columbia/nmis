@@ -114,13 +114,53 @@ var Tabulation = (function(){
     };
 })();
 
-var Tables = (function(){
+var FacilityTables = (function(){
     function createForSector(s) {
         var tbody = $('<tbody />');
         var sector = Sectors.pluck(s);
-        $('<tr />').append($('<td />').text('hi'))
-            .appendTo(tbody);
-        return $('<table />').append(tbody);
+        var div = $('<div />');
+        var cols = sector.getColumns().sort(function(a,b){return a.display_order-b.display_order;});
+        div.append(_createNavigation(sector));
+
+        var orderedFacilities = NMIS.dataForSector(sector.slug);
+        _.each(orderedFacilities, function(facility, i){
+            _createRow(facility, cols)
+                .appendTo(tbody);
+        });
+        div.append($('<table />')
+                        .append(_createHeadRow(sector, cols))
+                        .append(tbody));
+        return div;
+    }
+    function _createRow(facility, cols) {
+        var tr = $('<tr />');
+        _.each(cols, function(col, i){
+            $('<td />').text(i)
+                .appendTo(tr);
+        })
+        return tr;
+    }
+    function _createNavigation(sector) {
+        var p = $('<p />');
+        var subgroups = sector.subGroups(),
+            sgl = subgroups.length;
+        _.each(subgroups, function(sg, i){
+            $('<a />', {href: '#'})
+                .text(sg.name)
+                .addClass('sub-sector-link-'+sg.slug)
+                .appendTo(p);
+            if(i < sgl - 1)
+                $('<span />').text(' | ').appendTo(p);
+        });
+        return p;
+    }
+    function _createHeadRow(sector, cols) {
+        var tr = $('<tr />');
+        _.each(cols, function(col, i){
+            $('<th />').text(col.name)
+                .appendTo(tr);
+        });
+        return tr;
     }
     return {
         createForSector: createForSector
@@ -167,7 +207,7 @@ var NMIS = (function(){
         data: function(){return data;},
         dataForSector: dataForSector,
         validateData: validateData,
-        Tables: Tables,
+        FacilityTables: FacilityTables,
         init: init,
         clear: clear
     }
