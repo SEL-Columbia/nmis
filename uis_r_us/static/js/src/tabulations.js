@@ -114,6 +114,19 @@ var Tabulation = (function(){
     };
 })();
 
+var Tables = (function(){
+    function createForSector(s) {
+        var tbody = $('<tbody />');
+        var sector = Sectors.pluck(s);
+        $('<tr />').append($('<td />').text('hi'))
+            .appendTo(tbody);
+        return $('<table />').append(tbody);
+    }
+    return {
+        createForSector: createForSector
+    };
+})();
+
 var NMIS = (function(){
     var data;
     function init(_data, _sectors) {
@@ -154,6 +167,7 @@ var NMIS = (function(){
         data: function(){return data;},
         dataForSector: dataForSector,
         validateData: validateData,
+        Tables: Tables,
         init: init,
         clear: clear
     }
