@@ -63,17 +63,20 @@
 	<h3>Facility Level DAta</h3>
 	<h4>Below are data from the baseline facility surveys.</h4>
 	<div class="tri-blocks">
-		{% for key, indicators in facility_indicators %}
+		{% for key, title, indicators in facility_indicators %}
 		<div class="{{key}}">
+			<h2>
+				{{title}}
+			</h2>
 			<table>
 				<tbody>
 			{% for indicator in indicators %}
-			<tr>
-				<td>
-					{{indicator.0}}
-				</td>
+			<tr data-indicator-slug="{{indicator.0}}">
 				<td>
 					{{indicator.1}}
+				</td>
+				<td>
+					{{indicator.2}}
 				</td>
 			</tr>
 			{% endfor %}
