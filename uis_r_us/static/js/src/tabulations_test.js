@@ -75,7 +75,8 @@ module("Table builder", {
 });
 
 test("something", function(){
-    NMIS.FacilityTables.createForSector('health')
+    NMIS.FacilityTables.createForSectors(['health'])
         .appendTo(this.elem);
+    NMIS.FacilityTables.select('health', 'malaria');
     equal(this.elem.find('table').length, 1, "There is one table in the element.")
 })
