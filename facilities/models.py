@@ -193,6 +193,9 @@ class Facility(DictModel):
     _data_record_class = FacilityRecord
     _data_record_fk = 'facility'
 
+    def get_lat_lon(self):
+        return self.facility_id.split()[:2]
+
     def get_latest_data(self):
         """
         This is a temporary way to get the facility_type to the page (as if it were a data record).
