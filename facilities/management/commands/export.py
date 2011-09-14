@@ -97,11 +97,12 @@ class Command(BaseCommand):
             self.sector_variables_to_export = self.variables_to_export
 
     def build_facility_header(self, sector):
-        return ['facility_id', 'state_id', 'state_name', 'lga_id', 'lga_name'] + self.sector_variables_to_export
+        return ['facility_id', 'lat', 'lon', 'state_id', 'state_name', 'lga_id', 'lga_name'] + self.sector_variables_to_export
 
     def build_facility_row(self, facility):
         latest_data = facility.get_latest_data()
-        row = [facility.id, facility.lga.state.id, facility.lga.state.name, facility.lga.id, facility.lga.name]
+        lat, lon = facility.get_lat_lon()
+        row = [facility.id, lat, lon, facility.lga.state.id, facility.lga.state.name, facility.lga.id, facility.lga.name]
         for key in self.sector_variables_to_export:
             try:
                 row.append(latest_data[key])
