@@ -286,7 +286,17 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Number of facilities that experienced NO essential medication stock-outs in the past 3 months", g("num_no_stockout_essential_meds"), ""],
             ],),
         ],
-        'education': [],
+        'education': [
+            ('Facilities', [
+                ["Number of primary schools", "num_primary_schools", ""],
+                ["Number of junior secondary schools", "num_junior_secondary_schools", ""],
+                ["Number of senior secondary schools", "num_senior_secondary_schools", ""],
+                ["Total number of schools", "num_schools", ""],
+            ],),
+            ('Access and Participation', [
+                ["", "", ""],
+            ],),
+        ],
         'water': [],
     }
     return example.pop(sector_slug, [])

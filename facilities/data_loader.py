@@ -379,18 +379,18 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
     @print_time
     def calculate_lga_indicators(self):
         for i in LGAIndicator.objects.all():
-            i.set_lga_values(self.lga_ids, source='Calculated')
+            i.set_lga_values(self.lga_ids, source='Facility Inventory 2011')
 
     @print_time
     def calculate_lga_gaps(self):
         for i in GapVariable.objects.all():
-            i.set_lga_values(self.lga_ids, source='Calculated')
+            i.set_lga_values(self.lga_ids, source='Facility Inventory 2011')
 
     @print_time
     def calculate_lga_variables(self):
         lgas = LGA.objects.filter(id__in=[int(x) for x in self.lga_ids])
         for lga in lgas:
-            lga.add_calculated_values(lga.get_latest_data(), source='Caclulated', only_for_missing=True)
+            lga.add_calculated_values(lga.get_latest_data(), source='Facility Inventory 2011', only_for_missing=True)
 
     def get_info(self):
         def get_variable_usage():
