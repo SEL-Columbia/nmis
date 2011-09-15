@@ -25,22 +25,10 @@
 					{{indicator.0}}
 				</td>
 				<td class="indvalue">
-					{% if indicator.1 %}
-						{{indicator.1|safe}}
-					{% else %}
-					<span class="nil-value">
-						&mdash;
-					</span>
-					{% endif %}
+					{{indicator.1|safe}}
 				</td>
 				<td class="indvalue">
-					{% if indicator.2 %}
-						{{indicator.2|safe}}
-					{% else %}
-					<span class="nil-value">
-						&mdash;
-					</span>
-					{% endif %}
+					{{indicator.2|safe}}
 				</td>
 			</tr>
 			{% endfor %}
@@ -93,8 +81,5 @@
 
 {% block js %}
 <script type="text/javascript" charset="utf-8">
-//SHH don't tell anyone we're styling with javascript:
-$('.nil-value').css({'opacity':'0.5', 'font-style':'italic'});
-$('td.indvalue, th.indheader').css('text-align','center');
 </script>
 {% endblock %}
