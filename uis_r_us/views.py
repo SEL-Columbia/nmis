@@ -179,11 +179,14 @@ def test_map(request):
     return render_to_response("test_map.html")
 
 def temp_facility_buildr(lga):
+    lga_data = lga.get_latest_data()
+    def g(slug):
+        return lga_data.get(slug, None)
     ilist = []
     health_indicators = [
         #proof of concept that lga is accessible from here.
-            ["lga", lga.name, 0],
-            ["hi1", "Health Indicator 1", 123],
+#            ["lga", lga.name, 0],
+            ["hi1", "Proportion L3 Health Facilities", g("proportion_level_3_health_facilities")],
             ["hi2", "Health Indicator 2", 223],
             ["hi3", "Health Indicator 3", 323],
             ["hi4", "Health Indicator 4", 423],
