@@ -178,9 +178,11 @@ def test_module(request, module_id):
 def test_map(request):
     return render_to_response("test_map.html")
 
-def temp_facility_buildr():
+def temp_facility_buildr(lga):
     ilist = []
     health_indicators = [
+        #proof of concept that lga is accessible from here.
+            ["lga", lga.name, 0],
             ["hi1", "Health Indicator 1", 123],
             ["hi2", "Health Indicator 2", 223],
             ["hi3", "Health Indicator 3", 323],
@@ -191,27 +193,31 @@ def temp_facility_buildr():
     ilist.append(("health", "Health Facilities", health_indicators, ))
 
     education_indicators = [
-        ["ed1", "Education Indicator 1", 123],
-        ["ed2", "Education Indicator 2", 223],
-        ["ed3", "Education Indicator 3", 323],
-        ["ed4", "Education Indicator 4", 423],
-        ["ed5", "Education Indicator 5", 523],
+            ["ed1", "Education Indicator 1", 123],
+            ["ed2", "Education Indicator 2", 223],
+            ["ed3", "Education Indicator 3", 323],
+            ["ed4", "Education Indicator 4", 423],
+            ["ed5", "Education Indicator 5", 523],
         ]
     ilist.append(("education", "Schools", education_indicators,))
 
     water_indicators = [
-        ["wa1", "Water Indicator 1", 123],
-        ["wa2", "Water Indicator 2", 223],
-        ["wa3", "Water Indicator 3", 323],
-        ["wa4", "Water Indicator 4", 423],
-        ["wa5", "Water Indicator 5", 523],
-    ]
+            ["wa1", "Water Indicator 1", 123],
+            ["wa2", "Water Indicator 2", 223],
+            ["wa3", "Water Indicator 3", 323],
+            ["wa4", "Water Indicator 4", 423],
+            ["wa5", "Water Indicator 5", 523],
+        ]
     ilist.append(("water", "Community Water Points", water_indicators,))
     return ilist
 
-def new_dashboard(request):
+def new_dashboard(request, lga_id):
     context = RequestContext(request)
-    context.facility_indicators = temp_facility_buildr()
+    try:
+        lga = LGA.objects.get(unique_slug=lga_id)
+    except:
+        return HttpResponseRedirect("/")
+    context.facility_indicators = temp_facility_buildr(lga)
     context.mdg_indicators = [
         ("Goal 2", [
             [None, "Students/teacher ratio for primary school [LGA]", 31.170243204578],
@@ -224,10 +230,12 @@ def new_dashboard(request):
     ]
     return render_to_response("new_dashboard.html", context_instance=context)
 
-def tmp_variables_for_sector(sector_slug):
+def tmp_variables_for_sector(sector_slug, lga):
     example = {
         'health': [
             ('Facilities', [
+            #proof of concept that lga is accessible from here.
+                [lga.name, "lga_name", ""],
                 ["Health Posts / Dispensaries", "num_level_1_health_facilities", ""],
                 ["Primary Care Clinics", "num_level_2_health_facilities", ""],
                 ["Comprehensive Primary Care Centres", "num_level_3_health_facilities", ""],
@@ -291,10 +299,14 @@ def tmp_variables_for_sector(sector_slug):
     }
     return example.pop(sector_slug, [])
 
-def new_sector_overview(request, sector_slug):
+def new_sector_overview(request, lga_id, sector_slug):
+    try:
+        lga = LGA.objects.get(unique_slug=lga_id)
+    except:
+        return HttpResponseRedirect("/new_dashboard/")
     if sector_slug not in ["education", "health", "water"]:
         return HttpResponseRedirect("/new_dashboard/")
     context = RequestContext(request)
-    context.table_data = tmp_variables_for_sector(sector_slug)
+    context.table_data = tmp_variables_for_sector(sector_slug, lga)
     context.sector = sector_slug
     return render_to_response("new_sector_overview.html", context_instance=context)
