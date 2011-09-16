@@ -302,7 +302,50 @@ class DictModel(models.Model):
             d[variable_id][date_str(r['date'])] = non_null_value(r)
         return d
 
-    def get_latest_data(self):
+    def _filter_data_for_display(self, data):
+        """ This function gives a default formatting based on data_type for
+        any dictionary of {slugs:values}.  It should probably live somewhere
+        else but for the time being it lives here.
+        """
+        DECIMAL_PLACES = 1
+        def display_boolean(value):
+            if value:
+                return 'Yes'
+            else:
+                return 'No'
+
+        def display_string(value):
+            import re
+            return ' '.join([x.capitalize() for x in re.findall(r'\w+', value)])
+
+        def display_float(value):
+            if value is None: return None
+            return ('%f' % round(value, DECIMAL_PLACES)).rstrip('0').rstrip('.')
+
+        def display_percent(value):
+            if value is None: return None
+            return ('%f' % round(value * 100, DECIMAL_PLACES)).rstrip('0').rstrip('.')
+
+        display_functions = {
+            'boolean': display_boolean,
+            'float': display_float,
+            'string': display_string,
+            'percent': display_percent,
+            'proportion': display_float,
+        }
+        data_dictionary = Variable.get_full_data_dictionary(as_json=False)
+        filtered_data = {}
+        for slug, value in data.items():
+            filtered_data[slug] = display_functions[data_dictionary[slug]['data_type']](value)
+        return filtered_data
+
+    def get_latest_data(self, for_display=False):
+        if for_display:
+            return self._filter_data_for_display(self._get_latest_data())
+        else:
+            return self._get_latest_data()
+
+    def _get_latest_data(self):
         def non_null_value(t):
             # returns the first non-null value
             for val_k in ['string_value', 'float_value', 'boolean_value']:

@@ -179,7 +179,7 @@ def test_map(request):
     return render_to_response("test_map.html")
 
 def temp_facility_buildr(lga):
-    lga_data = lga.get_latest_data()
+    lga_data = lga.get_latest_data(for_display=True)
     def g(slug):
         return lga_data.get(slug, None)
     ilist = []
@@ -234,7 +234,7 @@ def new_dashboard(request, lga_id):
     return render_to_response("new_dashboard.html", context_instance=context)
 
 def tmp_variables_for_sector(sector_slug, lga):
-    lga_data = lga.get_latest_data()
+    lga_data = lga.get_latest_data(for_display=True)
     def g(slug):
         return lga_data.get(slug, None)
     example = {

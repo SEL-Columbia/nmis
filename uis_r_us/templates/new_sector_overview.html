@@ -25,7 +25,7 @@
 					{{indicator.0}}
 				</td>
 				<td class="indvalue">
-					{% if indicator.1 %}
+					{% if indicator.1 != None %}
 						{{indicator.1|safe}}
 					{% else %}
 					<span class="nil-value">
@@ -34,7 +34,7 @@
 					{% endif %}
 				</td>
 				<td class="indvalue">
-					{% if indicator.2 %}
+					{% if indicator.2 != None %}
 						{{indicator.2|safe}}
 					{% else %}
 					<span class="nil-value">
