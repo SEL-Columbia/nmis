@@ -324,7 +324,7 @@ class DictModel(models.Model):
 
         def display_percent(value):
             if value is None: return None
-            return ('%f' % round(value * 100, DECIMAL_PLACES)).rstrip('0').rstrip('.')
+            return ('%f' % round(value * 100, DECIMAL_PLACES)).rstrip('0').rstrip('.') + "%"
 
         display_functions = {
             'boolean': display_boolean,
