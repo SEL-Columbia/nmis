@@ -5,7 +5,9 @@
 {% block js %}
 <script src="/static/js/application.js" type="text/javascript" charset="utf-8"></script>
 <script src="/static/js/libs/qunit.js" type="text/javascript" charset="utf-8"></script>
+{% for module in modules %}
 <script src="/static/js/src/{{module}}.js" type="text/javascript" charset="utf-8"></script>
+{% endfor %}
 <script src="/static/js/src/{{module}}_test.js" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
 {% block content %}
