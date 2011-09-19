@@ -312,6 +312,7 @@ def new_sector_overview(request, lga_id, sector_slug):
     if sector_slug not in ["education", "health", "water"]:
         return HttpResponseRedirect("/new_dashboard/")
     context = RequestContext(request)
+    context.lga = lga
     context.table_data = tmp_variables_for_sector(sector_slug, lga)
     context.sector = sector_slug
     return render_to_response("new_sector_overview.html", context_instance=context)
