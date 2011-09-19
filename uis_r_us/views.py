@@ -261,7 +261,6 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Total number of nurses in the LGA", g("num_nurses"), ""],
                 ["Total number of CHEWs (Jr. and Sr.) in the LGA", g("num_chews"), ""],
                 ["Total number of laboratory technicians in the LGA", g("num_lab_techs"), ""],
-                ["Total number of non-medical staff in the LGA", g("num_non_medical_staff"), ""],
                 ["Number of facilities where all salaried staff were paid during the last pay period", g("num_staff_paid"), ""],
             ],),
             ('Child Health', [
