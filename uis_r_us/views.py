@@ -261,6 +261,12 @@ def new_dashboard(request, lga_id):
             [None, "Proportion of households with access to improved sanitation", g("percentage_households_with_access_to_improved_sanitation")],
         ]),
     ]
+    context.navs = [{ 'url': '/', 'name': 'Home' },
+                    { 'url': '/new_dashboard/%s' % lga.unique_slug,
+                        'name': lga.name,
+                        'active': True}]
+    #tmp deactivating breadcrumb
+    context.navs = False
     context.lga = lga
     return render_to_response("new_dashboard.html", context_instance=context)
 
@@ -399,6 +405,13 @@ def new_sector_overview(request, lga_id, sector_slug):
         return HttpResponseRedirect("/new_dashboard/")
     context = RequestContext(request)
     context.lga = lga
+    context.navs = [{ 'url': '/', 'name': 'Home' },
+                    { 'url': '/new_dashboard/%s' % lga.unique_slug, 'name': lga.name },
+                    { 'url': '/new_dashboard/%s/%s' % (lga.unique_slug, sector_slug),
+                        'name': sector_slug.capitalize(),
+                        'active': True }]
+    #tmp deactivating breadcrumb
+    context.navs = False
     context.table_data = tmp_variables_for_sector(sector_slug, lga)
     context.sector = sector_slug
     return render_to_response("new_sector_overview.html", context_instance=context)

@@ -234,6 +234,10 @@ table.fullw {
 	color: #555;
 	padding: 1px 6px;
 }
+#content .fwidth .nav a.nav-button.active {
+	background-color: #ddd;
+	color: #444;
+}
 #content .fwidth .nav a.nav-button:hover {
 	color: #000;
 }
