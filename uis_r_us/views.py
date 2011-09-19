@@ -169,7 +169,7 @@ def google_help_doc(request):
 def test_module(request, module_id):
     context = RequestContext(request)
     context.module = module_id
-    context.modules = ['modes', 'tabulations']
+    context.modules = ['modes', 'tabulations', 'facility_tables', 'display']
     if module_id in context.modules:
         return render_to_response("test_module.html", context_instance=context)
     else:
@@ -231,6 +231,7 @@ def new_dashboard(request, lga_id):
             [None, "% teachers with formal teaching qualification for secondary school[LGA]", 0.709],
         ])
     ]
+    context.lga = lga
     return render_to_response("new_dashboard.html", context_instance=context)
 
 def tmp_variables_for_sector(sector_slug, lga):
@@ -368,6 +369,7 @@ def new_sector_overview(request, lga_id, sector_slug):
     if sector_slug not in ["education", "health", "water"]:
         return HttpResponseRedirect("/new_dashboard/")
     context = RequestContext(request)
+    context.lga = lga
     context.table_data = tmp_variables_for_sector(sector_slug, lga)
     context.sector = sector_slug
     return render_to_response("new_sector_overview.html", context_instance=context)
