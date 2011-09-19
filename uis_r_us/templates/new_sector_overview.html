@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="new-dashboard" style="padding: 0 40px 20px;">
+	<h1 style="font-family: Comic Sans MS;text-transform:capitalize">
+		{{lga.name}} - {{sector}} Overview
+	</h1>
+	<table style="width:100%">
+		<tbody>
+			{% for sector_name, indicators in table_data %}
+			<tr>
+				<th colspan="2">
+					{{sector_name}}	
+				</th>
+				<th class="indheader">
+					Current
+				</th>
+				<th class="indheader">
+					Target
+				</th>
+			</tr>
+			{% for indicator in indicators %}
+			<tr>
+				<td class="empty-first"></td>
+				<td class="indicator-name">
+					{{indicator.0}}
+				</td>
+				<td class="indvalue">
+					{{indicator.1|safe}}
+				</td>
+				<td class="indvalue">
+					{{indicator.2|safe}}
+				</td>
+			</tr>
+			{% endfor %}
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+{% endblock %}
+
+{% block head  %}
+<style type="text/css" media="screen">
+	.content-inner-wrap {
+		width: 1100px;
+		margin: 10px auto;
+	}
+	td.empty-first {
+		width: 20px;
+	}
+	td.indvalue {
+		width: 120px;
+	}
+ /*
+	.clearfix {
+		clear: both;
+	}
+	.new-dashboard .header .profile-box, .new-dashboard .header #profile-map {
+		float: left;
+		width: 48%;
+		border: 1px solid blue;
+	}
+	.tri-blocks div {
+		float: left;
+		width: 33%;
+		position: relative;
+	}
+	.tri-blocks div table {
+		width: 100%;
+	}
+	.tri-blocks div p.more-link {
+		margin: 0;
+		text-align: right;
+	}
+	.mdg-tables table {
+		width: 100%;
+	}
+	*/
+</style>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" charset="utf-8">
+</script>
+{% endblock %}

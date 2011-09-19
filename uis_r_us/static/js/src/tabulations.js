@@ -154,6 +154,7 @@ var NMIS = (function(){
         data: function(){return data;},
         dataForSector: dataForSector,
         validateData: validateData,
+//        FacilityTables: FacilityTables,
         init: init,
         clear: clear
     }

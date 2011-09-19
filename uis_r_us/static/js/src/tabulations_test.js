@@ -62,3 +62,21 @@ test("NMIS Data Validation", function(){
     ok(NMIS.validateData(), "Data is validated");
     equal(NMIS.dataForSector('health').length, 12, "Data for health has a length of x");
 });
+
+module("Table builder", {
+    setup: function(){
+        this.elem = $('<div />');
+        $('#qunit-header').before(this.elem);
+        NMIS.init(data2, sectors);
+    },
+    teardown: function(){
+//        this.elem.remove();
+    }
+});
+
+test("something", function(){
+    NMIS.FacilityTables.createForSectors(['health'])
+        .appendTo(this.elem);
+    NMIS.FacilityTables.select('health', 'malaria');
+    equal(this.elem.find('table').length, 1, "There is one table in the element.")
+})

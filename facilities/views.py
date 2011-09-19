@@ -1,5 +1,5 @@
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseServerError
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 import json
@@ -24,7 +24,10 @@ def facilities_for_site(request, site_id):
             if t[val_k] is not None:
                 return t[val_k]
         return None
-    lga = LGA.objects.get(unique_slug=site_id)
+    try:
+        lga = LGA.objects.get(unique_slug=site_id)
+    except LGA.DoesNotExist, e:
+        return HttpResponseServerError("Site with ID: %s not found" % site_id)
     oput = {
         'lgaName': lga.name,
         'stateName': lga.state.name,

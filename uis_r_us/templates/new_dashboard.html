@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="new-dashboard">
+	<div class="header">
+		<div class="profile-box">
+			<h2>
+				Kano
+			</h2>
+			<h3>
+				Takai
+			</h3>
+			<table>
+				<tbody>
+					<tr>
+						<td class='key'>
+							LGA Chairman
+						</td>
+						<td class='value'>
+							Hon. Muhammad Baffa
+						</td>
+					</tr>
+					<tr>
+						<td class='key'>
+							LGA Secretary
+						</td>
+						<td class='value'>
+							Huzaifa Adamu Karfi
+						</td>
+					</tr>
+					<tr>
+						<td class='key'>
+							Population (2006)
+						</td>
+						<td class='value'>
+							202,639
+						</td>
+					</tr>
+					<tr>
+						<td class='key'>
+							Area (square km)
+						</td>
+						<td class='value'>
+							611.27
+						</td>
+					</tr>
+					<tr>
+						<td class='key'>
+							Distance from Capitol
+						</td>
+						<td class='value'>
+							92
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="profile-map">
+			Map
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<hr>
+	<h3>Facility Level DAta</h3>
+	<h4>Below are data from the baseline facility surveys.</h4>
+	<div class="tri-blocks">
+		{% for key, title, indicators in facility_indicators %}
+		<div class="{{key}}">
+			<h2>
+				{{title}}
+			</h2>
+			<table>
+				<tbody>
+			{% for indicator in indicators %}
+			<tr data-indicator-slug="{{indicator.0}}">
+				<td>
+					{{indicator.1}}
+				</td>
+				<td>
+					{{indicator.2}}
+				</td>
+			</tr>
+			{% endfor %}
+				</tbody>
+			</table>
+			<p class="more-link"><a href="{{key}}">More &raquo;</a></p>
+		</div>
+		{% endfor %}
+	</div>
+	<div class="clearfix"></div>
+	<hr>
+	<h3>MDG Tables</h3>
+	<h4>Below are data collected from HNLSS, DHS, and other sources.</h4>
+	<div id="mdg-table-wrap">
+	<div class="mdg-tables">
+		<table class="mdg-table">
+			{% for goal, indicators in mdg_indicators %}
+			<tbody>
+				<tr>
+					<td colspan="4" class="mdg_header">
+						{{goal}}
+					</td>
+				</tr>
+				{% for indicator in indicators %}
+				<tr>
+					<td class="empty"></td>
+					<td>
+						{{indicator.1}}
+					</td>
+					<td>
+						{{indicator.2}}
+					</td>
+					<td class="empty">
+						{{indicator.3}}
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+			{% endfor %}
+		</table>
+	</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block head  %}
+<style type="text/css" media="screen">
+	.content-inner-wrap {
+		width: 1100px;
+		margin: 10px auto;
+	}
+	.clearfix {
+		clear: both;
+	}
+	.new-dashboard .header .profile-box, .new-dashboard .header #profile-map {
+		float: left;
+		width: 50%;
+		height: 190px;
+	}
+	.tri-blocks div {
+		float: left;
+		width: 33%;
+		position: relative;
+	}
+	.tri-blocks div table {
+		width: 100%;
+	}
+	.tri-blocks div p.more-link {
+		margin: 0;
+		text-align: right;
+		padding: 0 40px;
+	}
+	.mdg-tables table {
+		width: 100%;
+	}
+	
+	div#mdg-table-wrap {
+	    width: 680px;
+	    border: 1px solid #999;
+	    padding: 8px 20px;
+	    margin: 0 auto;
+	    background-color: #fff;
+	    border-radius: 6px;
+	}
+	table.mdg-table.f {
+	    margin: 0 auto;
+	}
+	table.mdg-table {
+	  font-size: 16px;
+	  line-height: 18px; }
+	  table.mdg-table td {
+	    border: 1px solid #eeeeee;
+	    padding: 8px 12px; }
+	    table.mdg-table td.empty {
+	      border: 0 none; }
+	    table.mdg-table td.subgoal {
+	      color: #666666;
+	      text-align: right;
+	      font-size: 14px; }
+	    table.mdg-table td.mdg_header {
+	      border: 1px solid #666666;
+	      border-width: 0 0 2px 0;
+	      font-weight: bold;
+	      padding: 12px 6px 4px; }
+	    table.mdg-table td.empty {
+          border: 0 none; }
+	      table.mdg-table td.mdg_header.year {
+	        text-align: center; }
+</style>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" charset="utf-8">
+
+var DisplayMap = (function(){
+	var elem, latlng;
+	var glatlng, gmap;
+	function startMap() {
+		glatlng = new google.maps.LatLng(latlng[0], latlng[1]);
+		gmap = new google.maps.Map(elem.get(0), {
+			zoom: 8,
+			center: glatlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		});
+	}
+	function init(_elem, ll){
+		elem = $(_elem);
+		latlng = JSON.parse('['+ll+']');
+		window.startMap = startMap;
+		$('<script />')
+			.attr("src", "http://maps.googleapis.com/maps/api/js?sensor=false&callback=startMap")
+			.appendTo('body');
+	}
+	return {
+		init: init
+	};
+})();
+
+DisplayMap.init('#profile-map', "{{lga.latlng_str}}");
+
+</script>
+{% endblock %}
