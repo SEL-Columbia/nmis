@@ -231,6 +231,10 @@ def new_dashboard(request, lga_id):
             [None, "% teachers with formal teaching qualification for secondary school[LGA]", 0.709],
         ])
     ]
+    context.navs = [{ 'url': '/', 'name': 'Home' },
+                    { 'url': '/new_dashboard/%s' % lga.unique_slug,
+                        'name': lga.name,
+                        'active': True}]
     context.lga = lga
     return render_to_response("new_dashboard.html", context_instance=context)
 
@@ -370,6 +374,11 @@ def new_sector_overview(request, lga_id, sector_slug):
         return HttpResponseRedirect("/new_dashboard/")
     context = RequestContext(request)
     context.lga = lga
+    context.navs = [{ 'url': '/', 'name': 'Home' },
+                    { 'url': '/new_dashboard/%s' % lga.unique_slug, 'name': lga.name },
+                    { 'url': '/new_dashboard/%s/%s' % (lga.unique_slug, sector_slug),
+                        'name': sector_slug.capitalize(),
+                        'active': True }]
     context.table_data = tmp_variables_for_sector(sector_slug, lga)
     context.sector = sector_slug
     return render_to_response("new_sector_overview.html", context_instance=context)
