@@ -217,6 +217,14 @@ var DisplayMap = (function(){
 })();
 
 DisplayMap.init('#profile-map', "{{lga.latlng_str}}");
+var menu = $('<ul />', {id:'menu'});
+
+$('#content').before(menu);
+var lgaTmpLink = $('<a />', {href:'/new_dashboard/{{lga.unique_slug}}', id:'lga-tmp-link'}).text('LGA')
+var facTmpLink = $('<a />', {href:'/~{{lga.unique_slug}}', id:'fac-tmp-link'}).text('Facilities');
+
+$('<li />').html(lgaTmpLink).appendTo(menu);
+$('<li />').html(facTmpLink).appendTo(menu);
 
 </script>
 {% endblock %}
