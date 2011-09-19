@@ -152,6 +152,13 @@
 
 {% block js %}
 <script type="text/javascript" charset="utf-8">
-// javascript goes here.
+
+var ll = (function(lls){return _.map(lls.split(","), function(a, b){
+	return +a;
+});})("{{lga.latlng_str}}");
+
+
+(function(mw){})($('#profile-map').height(190).get(0));
+
 </script>
 {% endblock %}

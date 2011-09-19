@@ -231,6 +231,7 @@ def new_dashboard(request, lga_id):
             [None, "% teachers with formal teaching qualification for secondary school[LGA]", 0.709],
         ])
     ]
+    context.lga = lga
     return render_to_response("new_dashboard.html", context_instance=context)
 
 def tmp_variables_for_sector(sector_slug, lga):
