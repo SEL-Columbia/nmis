@@ -135,6 +135,7 @@
 	.new-dashboard .header .profile-box, .new-dashboard .header #profile-map {
 		float: left;
 		width: 50%;
+		height: 190px;
 	}
 	.tri-blocks div {
 		float: left;
@@ -191,12 +192,31 @@
 {% block js %}
 <script type="text/javascript" charset="utf-8">
 
-var ll = (function(lls){return _.map(lls.split(","), function(a, b){
-	return +a;
-});})("{{lga.latlng_str}}");
+var DisplayMap = (function(){
+	var elem, latlng;
+	var glatlng, gmap;
+	function startMap() {
+		glatlng = new google.maps.LatLng(latlng[0], latlng[1]);
+		gmap = new google.maps.Map(elem.get(0), {
+			zoom: 8,
+			center: glatlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		});
+	}
+	function init(_elem, ll){
+		elem = $(_elem);
+		latlng = JSON.parse('['+ll+']');
+		window.startMap = startMap;
+		$('<script />')
+			.attr("src", "http://maps.googleapis.com/maps/api/js?sensor=false&callback=startMap")
+			.appendTo('body');
+	}
+	return {
+		init: init
+	};
+})();
 
-
-(function(mw){})($('#profile-map').height(190).get(0));
+DisplayMap.init('#profile-map', "{{lga.latlng_str}}");
 
 </script>
 {% endblock %}
