@@ -179,7 +179,7 @@ def test_map(request):
     return render_to_response("test_map.html")
 
 def temp_facility_buildr(lga):
-    lga_data = lga.get_latest_data()
+    lga_data = lga.get_latest_data(for_display=True)
     def g(slug):
         return lga_data.get(slug, None)
     ilist = []
@@ -234,7 +234,7 @@ def new_dashboard(request, lga_id):
     return render_to_response("new_dashboard.html", context_instance=context)
 
 def tmp_variables_for_sector(sector_slug, lga):
-    lga_data = lga.get_latest_data()
+    lga_data = lga.get_latest_data(for_display=True)
     def g(slug):
         return lga_data.get(slug, None)
     example = {
@@ -270,7 +270,7 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Number of facilities that offer services 24 hours a day, 7 days a week", g("num_delivery_24_7"), ""],
                 ["Number of facilities with access to emergency transport services", g("num_access_functional_emergency_transport"), ""],
                 ["Number of facilities that offer family planning services", g("num_family_planning"), ""],
-                ["Number of facilities that do not charge any fees for maternal health services", g("num_delivery_no_user_fees"), g("target_num_delivery_no_user_fees")],
+                ["Number of facilities that do not charge any fees for maternal health services", g("num_delivery_no_user_fees"), ""],
             ],),
             ('Malaria', [
                 ["Number of facilities that perform malaria testing (RDT or microscopy)", g("num_malaria_testing"), ""],
@@ -282,7 +282,7 @@ def tmp_variables_for_sector(sector_slug, lga):
             ('Infrastructure', [
                 ["Number of facilities with access to an improved water source", g("num_water_access"), ""],
                 ["Number of facilities with functioning improved sanitation", g("num_functional_sanitation"), ""],
-                ["Number of facilities with access to some form of power source", g("num_any_power_access"), ""],
+                ["Number of facilities with access to some form of power source", g("num_any_power_source"), ""],
                 ["Number of facilities with mobile phone coverage somewhere on the premises", g("num_mobile_coverage"), ""],
             ],),
             ('Equipment and Supplies', [
@@ -291,13 +291,69 @@ def tmp_variables_for_sector(sector_slug, lga):
         ],
         'education': [
             ('Facilities', [
-                ["Number of primary schools", "num_primary_schools", ""],
-                ["Number of junior secondary schools", "num_junior_secondary_schools", ""],
-                ["Number of senior secondary schools", "num_senior_secondary_schools", ""],
-                ["Total number of schools", "num_schools", ""],
+                ["Number of primary schools", g("num_primary_schools"), ""],
+                ["Number of junior secondary schools", g("num_junior_secondary_schools"), ""],
+                ["Number of senior secondary schools", g("num_senior_secondary_schools"), ""],
+                ["Total number of schools", g("num_schools"), ""],
             ],),
             ('Access and Participation', [
-                ["", "", ""],
+                ["Primary net intake rate (NIR) for boys", "", ""],
+                ["Primary net intake rate (NIR) for girls", "", ""],
+                ["Junior secondary net intake rate (NIR) for boys", "", ""],
+                ["Junior Secondary net intake rate (NIR) for girls", "", ""],
+                ["Number of schools > 1km from catchement area", "", ""],
+                ["Number of primary schools > 1km from secondary schools", "", ""],
+                ["Number of schools with students living farther than 3km", "", ""],
+                ["Primary net enrollment rate (NER) for boys", "", ""],
+                ["Primary net enrollment rate (NER) for girls", "", ""],
+                ["Junior secondary net enrollment rate (NER) for boys", "", ""],
+                ["Junior secondary net enrollment rate (NER) for girls", "", ""],
+            ],),
+            ('Infrastructure', [
+                ["Number of schools with access to power", "", ""],
+                ["Number of schools with access to potable water", "", ""],
+                ["Number of schools with improved sanitation", "", ""],
+                ["Number of schools with separate toilets for boys and girls", "", ""],
+                ["Pupil:toilet ratio", g("pupil_toilet_ratio"), ""],
+                ["Pupil:classroom ratio", g("student_classroom_ratio_lga"), ""],
+                ["Number of classrooms needing major repair", "", ""],
+                ["Number of classrooms needing minor repair", "", ""],
+                ["Number of schools that teach outside", "", ""],
+                ["Number of schools with double shifts", "", ""],
+                ["Number of schools with multi-grade classrooms", "", ""],
+                ["Number of schools with a dispensary/health clinic", "", ""],
+                ["Number of schools with a first aid kit", "", ""],
+                ["Number of schools with a fence", "", ""],
+            ],),
+            ('Furniture', [
+                ["Number of schools with a chalkboard in every classroom", "", ""],
+                ["Pupil:bench ratio", "", ""],
+                ["Pupil:desk ratio", "", ""],
+            ],),
+            ('Staffing and Institutional Development', [
+                ["Primary school pupil:teacher ratio", "", ""],
+                ["Junior secondary school pupil:teacher ratio", "", ""],
+                ["Teaching:non-teaching staff ratio", g("teacher_nonteachingstaff_ratio_lga"), ""],
+                ["Number of qualified teachers (with NCE)", g("num_teachers_nce"), ""],
+                ["Number of teachers who participated in training in the past year", "", ""],
+                ["Number of schools that have delayed teacher payments", "", ""],
+                ["Number of schools that have missed teacher payments", "", ""],
+            ],),
+            ('Curriculum', [
+                ["Textbooks per pupil", g("num_textbooks_per_pupil"), ""],
+                ["Number of schools where exercise books are provided", "", ""],
+                ["Number of schools where pens/pencils are provided", "", ""],
+                ["Number of schools that follow the National UBE Curriculum", "", ""],
+                ["Number of schools with teaching guidebooks", "", ""],
+                ["Number of schools with a functioning library", "", ""],
+            ],),
+            ('Efficiency', [
+                ["Drop out rate", "", ""],
+                ["Transition rate (primary to junior secondary) for boys", "", ""],
+                ["Transition rate (primary to junior secondary) for girls", "", ""],
+                ["Repetition rate (primary) for boys", g("repetition_rate_primary_male"), ""],
+                ["Repetition rate (primary) for girls", g("repetition_rate_primary_female"), ""],
+                ["Literacy rate", g("literacy_rate"), ""],
             ],),
         ],
         'water': [],
