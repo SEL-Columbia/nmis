@@ -60,23 +60,23 @@
 		<div class="clearfix"></div>
 	</div>
 	<hr>
-	<h3>Facility Level DAta</h3>
+	<h3>Facility Level Data</h3>
 	<h4>Below are data from the baseline facility surveys.</h4>
 	<div class="tri-blocks">
-		{% for key, title, indicators in facility_indicators %}
+		{% for key, title, indicators, number in facility_indicators %}
 		<div class="{{key}}">
 			<h2>
-				{{title}}
+				{{title}}&nbsp;({{number}})
 			</h2>
 			<table>
 				<tbody>
 			{% for indicator in indicators %}
-			<tr data-indicator-slug="{{indicator.0}}">
+			<tr>
 				<td>
-					{{indicator.1}}
+					{{indicator.0}}
 				</td>
 				<td>
-					{{indicator.2}}
+					{{indicator.1}}
 				</td>
 			</tr>
 			{% endfor %}
@@ -104,13 +104,13 @@
 				<tr>
 					<td class="empty"></td>
 					<td>
-						{{indicator.1}}
+						{{indicator.0}}
 					</td>
 					<td>
-						{{indicator.2}}
+						{{indicator.1}}
 					</td>
 					<td class="empty">
-						{{indicator.3}}
+						{{indicator.2}}
 					</td>
 				</tr>
 				{% endfor %}

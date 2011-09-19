@@ -184,34 +184,36 @@ def temp_facility_buildr(lga):
         return lga_data.get(slug, None)
     ilist = []
     health_indicators = [
-        #proof of concept that lga is accessible from here.
-#            ["lga", lga.name, 0],
-            ["hi1", "Proportion L3 Health Facilities", g("proportion_level_3_health_facilities")],
-            ["hi2", "Health Indicator 2", 223],
-            ["hi3", "Health Indicator 3", 323],
-            ["hi4", "Health Indicator 4", 423],
-            ["hi5", "Health Indicator 5", 523],
-            ["hi6", "Health Indicator 6", 623],
+            ["Health posts & dispensaries", g("num_level_1_health_facilities")],
+            ["Primary health clinics", g("num_level_2_health_facilities")],
+            ["Primary health centres", g("num_level_3_health_facilities")],
+            ["Comprehensive health centres & hospitals", g("num_level_4_health_facilities")],
+            ["Skilled health provider:population ", g("")],
+            ["CHEW:population", g("")],
         ]
-    ilist.append(("health", "Health Facilities", health_indicators, ))
+    ilist.append(("health", "Health Facilities", health_indicators, g("num_health_facilities")))
 
     education_indicators = [
-            ["ed1", "Education Indicator 1", 123],
-            ["ed2", "Education Indicator 2", 223],
-            ["ed3", "Education Indicator 3", 323],
-            ["ed4", "Education Indicator 4", 423],
-            ["ed5", "Education Indicator 5", 523],
+            ["", g("")],
+            ["", g("")],
+            ["", g("")],
+            ["", g("")],
+            ["", g("")],
+            ["", g("")],
+            ["", g("")],
+            ["", g("")],
+            ["", g("")],
+            ["", g("")],
         ]
-    ilist.append(("education", "Schools", education_indicators,))
+    ilist.append(("education", "Schools", education_indicators, g("num_schools")))
 
     water_indicators = [
-            ["wa1", "Water Indicator 1", 123],
-            ["wa2", "Water Indicator 2", 223],
-            ["wa3", "Water Indicator 3", 323],
-            ["wa4", "Water Indicator 4", 423],
-            ["wa5", "Water Indicator 5", 523],
+            ["Protected water points", g("")],
+            ["Proportion of protected water sources that are currently functional", g("")],
+            ["Proportion within 1km of another protected water source", g("")],
+            ["Proportion of water points that charge user fees", g("")],
         ]
-    ilist.append(("water", "Community Water Points", water_indicators,))
+    ilist.append(("water", "Water Points", water_indicators, g("num_water_points")))
     return ilist
 
 def new_dashboard(request, lga_id):
