@@ -90,22 +90,26 @@
 	<hr>
 	<h3>MDG Tables</h3>
 	<h4>Below are data collected from HNLSS, DHS, and other sources.</h4>
+	<div id="mdg-table-wrap">
 	<div class="mdg-tables">
-		<table>
+		<table class="mdg-table">
 			{% for goal, indicators in mdg_indicators %}
 			<tbody>
-				<tr colspan="3">
-					{{goal}}
+				<tr>
+					<td colspan="4" class="mdg_header">
+						{{goal}}
+					</td>
 				</tr>
 				{% for indicator in indicators %}
 				<tr>
+					<td class="empty"></td>
 					<td>
 						{{indicator.1}}
 					</td>
 					<td>
 						{{indicator.2}}
 					</td>
-					<td>
+					<td class="empty">
 						{{indicator.3}}
 					</td>
 				</tr>
@@ -113,6 +117,7 @@
 			</tbody>
 			{% endfor %}
 		</table>
+	</div>
 	</div>
 </div>
 
@@ -129,8 +134,7 @@
 	}
 	.new-dashboard .header .profile-box, .new-dashboard .header #profile-map {
 		float: left;
-		width: 48%;
-		border: 1px solid blue;
+		width: 50%;
 	}
 	.tri-blocks div {
 		float: left;
@@ -143,10 +147,44 @@
 	.tri-blocks div p.more-link {
 		margin: 0;
 		text-align: right;
+		padding: 0 40px;
 	}
 	.mdg-tables table {
 		width: 100%;
 	}
+	
+	div#mdg-table-wrap {
+	    width: 680px;
+	    border: 1px solid #999;
+	    padding: 8px 20px;
+	    margin: 0 auto;
+	    background-color: #fff;
+	    border-radius: 6px;
+	}
+	table.mdg-table.f {
+	    margin: 0 auto;
+	}
+	table.mdg-table {
+	  font-size: 16px;
+	  line-height: 18px; }
+	  table.mdg-table td {
+	    border: 1px solid #eeeeee;
+	    padding: 8px 12px; }
+	    table.mdg-table td.empty {
+	      border: 0 none; }
+	    table.mdg-table td.subgoal {
+	      color: #666666;
+	      text-align: right;
+	      font-size: 14px; }
+	    table.mdg-table td.mdg_header {
+	      border: 1px solid #666666;
+	      border-width: 0 0 2px 0;
+	      font-weight: bold;
+	      padding: 12px 6px 4px; }
+	    table.mdg-table td.empty {
+          border: 0 none; }
+	      table.mdg-table td.mdg_header.year {
+	        text-align: center; }
 </style>
 {% endblock %}
 
