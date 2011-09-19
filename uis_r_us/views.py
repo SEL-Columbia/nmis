@@ -235,6 +235,8 @@ def new_dashboard(request, lga_id):
                     { 'url': '/new_dashboard/%s' % lga.unique_slug,
                         'name': lga.name,
                         'active': True}]
+    #tmp deactivating breadcrumb
+    context.navs = False
     context.lga = lga
     return render_to_response("new_dashboard.html", context_instance=context)
 
@@ -379,6 +381,8 @@ def new_sector_overview(request, lga_id, sector_slug):
                     { 'url': '/new_dashboard/%s/%s' % (lga.unique_slug, sector_slug),
                         'name': sector_slug.capitalize(),
                         'active': True }]
+    #tmp deactivating breadcrumb
+    context.navs = False
     context.table_data = tmp_variables_for_sector(sector_slug, lga)
     context.sector = sector_slug
     return render_to_response("new_sector_overview.html", context_instance=context)
