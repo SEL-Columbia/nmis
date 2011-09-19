@@ -220,16 +220,46 @@ def new_dashboard(request, lga_id):
         lga = LGA.objects.get(unique_slug=lga_id)
     except:
         return HttpResponseRedirect("/")
+    lga_data = lga.get_latest_data(for_display=True)
+    def g(slug):
+        return lga_data.get(slug, None)
     context.facility_indicators = temp_facility_buildr(lga)
     context.mdg_indicators = [
-        ("Goal 2", [
-            [None, "Students/teacher ratio for primary school [LGA]", 31.170243204578],
-            [None, "Net enrollment ratio for primary education[LGA]", .389],
-            [None, "Number of children secondary school going age", 19821.3211650392],
-            [None, "Gross enrollment ratio in primary education[LGA]", 0.5684],
-            [None, "Teacher to Classroom Ratio for primary schools(TCR)[LGA]", 3.13452914798206],
-            [None, "% teachers with formal teaching qualification for secondary school[LGA]", 0.709],
-        ])
+        ("Goal 1: Eradicate extreme poverty and hunger", [
+            [None, "Proportion of children under five who are underweight (weight-for-age)", g("prevalence_of_underweight_children_u5")],
+            [None, "Proportion of children under five with stunting (height-for-age)", g("prevalence_of_stunting_children_u5")],
+            [None, "Proportion of children under five with wasting", g("prevalence_of_wasting_children_u5")],
+        ]),
+        ("Goal 2: Achieve universal primary education", [
+            [None, "Net enrollment ratio for primary education", g("net_enrollment_ratio_primary_education")],
+            [None, "Gross enrollment ratio in primary education", g("")],
+            [None, "Net enrollment ratio for secondary education", g("net_enrollment_ratio_secondary_education")],
+            [None, "Gross enrollment ratio in secondary education", g("gross_enrollment_ratio_secondary_education")],
+            [None, "Literacy rate of 15-24 year olds (men and women)", g("literacy_rate")],
+        ]),
+        ("Goal 3: Promote gender equality and empower women", [
+            [None, "Ratio of boys to girls in primary schools", g("")],
+            [None, "Ratio of boys to girls in junior secondary schools", g("")],
+            [None, "Ratio of boys to girls in senior secondary schools ", g("")],
+        ]),
+        ("Goal 4: Reduce child mortality", [
+            [None, "DPT 3 immunization rate", g("immunization_rate_dpt3")],
+            [None, "Under five mortality rate per 1000 live births", g("mortality_rate_children_u5")],
+            [None, "Proportion of children under five years of age with diarrhea who received oral rehydration therapy", g("proportion_of_children_u5_diarrhea_treated_with_ors_med")],
+        ]),
+        ("Goal 5: Improve maternal health", [
+            [None, "Proportion of births attended by a skilled health provider", g("proportion_of_births_by_skilled_health_personnel")],
+            [None, "Proportion of pregnant women tested for HIV", g("percentage_pregnant_women_tested_for_hiv_during_pregnancy")],
+            [None, "Proportion of women who attended at least four antenatal visits", g("")],
+        ]),
+        ("Goal 6: Combat HIV/AIDS, malaria and other diseases", [
+            [None, "Proportion of children under five sleeping under insecticide-treated bednets", g("proportion_children_u5_sleeping_under_itns")],
+            [None, "Proportion of men and women ever tested for HIV", g("percentage_of_individuals_tested_for_hiv_ever")],
+        ]),
+        ("Goal 7: Ensure environmental sustainability", [
+            [None, "Proportion of households with access to an improved water source", g("percentage_households_with_access_to_improved_water_sources")],
+            [None, "Proportion of households with access to improved sanitation", g("percentage_households_with_access_to_improved_sanitation")],
+        ]),
     ]
     context.lga = lga
     return render_to_response("new_dashboard.html", context_instance=context)
