@@ -272,10 +272,10 @@ def tmp_variables_for_sector(sector_slug, lga):
         'health': [
             ('Facilities', [
             #proof of concept that lga is accessible from here.
-                ["Health Posts / Dispensaries", g("num_level_1_health_facilities"), ""],
-                ["Primary Care Clinics", g("num_level_2_health_facilities"), ""],
-                ["Comprehensive Primary Care Centres", g("num_level_3_health_facilities"), ""],
-                ["Hospitals", g("num_level_4_health_facilities"), ""],
+                ["Health Posts and Dispensaries", g("num_level_1_health_facilities"), ""],
+                ["Primary Health Clinics", g("num_level_2_health_facilities"), ""],
+                ["Primary Health Centres", g("num_level_3_health_facilities"), ""],
+                ["Comprehensive Health Centres and Hospitals:`", g("num_level_4_health_facilities"), ""],
                 ["Facilities that offer care 24 hours a day, 7 days a week", g("num_health_facilities_open_24_7"), ""],
                 ["Total number of facilities", g("num_health_facilities"), ""],
             ],),
