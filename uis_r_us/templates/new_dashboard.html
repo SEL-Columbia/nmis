@@ -205,9 +205,7 @@ var DisplayMap = (function(){
 	}
 	function init(_elem, ll){
 		elem = $(_elem);
-		latlng = _.map(ll.split(","), function(l){
-			return +l;
-		});
+		latlng = JSON.parse('['+ll+']');
 		window.startMap = startMap;
 		$('<script />')
 			.attr("src", "http://maps.googleapis.com/maps/api/js?sensor=false&callback=startMap")
