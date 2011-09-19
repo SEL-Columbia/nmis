@@ -184,34 +184,36 @@ def temp_facility_buildr(lga):
         return lga_data.get(slug, None)
     ilist = []
     health_indicators = [
-        #proof of concept that lga is accessible from here.
-#            ["lga", lga.name, 0],
-            ["hi1", "Proportion L3 Health Facilities", g("proportion_level_3_health_facilities")],
-            ["hi2", "Health Indicator 2", 223],
-            ["hi3", "Health Indicator 3", 323],
-            ["hi4", "Health Indicator 4", 423],
-            ["hi5", "Health Indicator 5", 523],
-            ["hi6", "Health Indicator 6", 623],
+            ["Health posts & dispensaries", g("num_level_1_health_facilities")],
+            ["Primary health clinics", g("num_level_2_health_facilities")],
+            ["Primary health centres", g("num_level_3_health_facilities")],
+            ["Comprehensive health centres & hospitals", g("num_level_4_health_facilities")],
+            ["Skilled health provider:population ", g("")],
+            ["CHEW:population", g("")],
         ]
-    ilist.append(("health", "Health Facilities", health_indicators, ))
+    ilist.append(("health", "Health Facilities", health_indicators, g("num_health_facilities")))
 
     education_indicators = [
-            ["ed1", "Education Indicator 1", 123],
-            ["ed2", "Education Indicator 2", 223],
-            ["ed3", "Education Indicator 3", 323],
-            ["ed4", "Education Indicator 4", 423],
-            ["ed5", "Education Indicator 5", 523],
+            ["", g("")],
+            ["", g("")],
+            ["", g("")],
+            ["", g("")],
+            ["", g("")],
+            ["", g("")],
+            ["", g("")],
+            ["", g("")],
+            ["", g("")],
+            ["", g("")],
         ]
-    ilist.append(("education", "Schools", education_indicators,))
+    ilist.append(("education", "Schools", education_indicators, g("num_schools")))
 
     water_indicators = [
-            ["wa1", "Water Indicator 1", 123],
-            ["wa2", "Water Indicator 2", 223],
-            ["wa3", "Water Indicator 3", 323],
-            ["wa4", "Water Indicator 4", 423],
-            ["wa5", "Water Indicator 5", 523],
+            ["Protected water points", g("")],
+            ["Proportion of protected water sources that are currently functional", g("")],
+            ["Proportion within 1km of another protected water source", g("")],
+            ["Proportion of water points that charge user fees", g("")],
         ]
-    ilist.append(("water", "Community Water Points", water_indicators,))
+    ilist.append(("water", "Water Points", water_indicators, g("num_water_points")))
     return ilist
 
 def new_dashboard(request, lga_id):
@@ -220,17 +222,53 @@ def new_dashboard(request, lga_id):
         lga = LGA.objects.get(unique_slug=lga_id)
     except:
         return HttpResponseRedirect("/")
+    lga_data = lga.get_latest_data(for_display=True)
+    def g(slug):
+        return lga_data.get(slug, None)
     context.facility_indicators = temp_facility_buildr(lga)
     context.mdg_indicators = [
-        ("Goal 2", [
-            [None, "Students/teacher ratio for primary school [LGA]", 31.170243204578],
-            [None, "Net enrollment ratio for primary education[LGA]", .389],
-            [None, "Number of children secondary school going age", 19821.3211650392],
-            [None, "Gross enrollment ratio in primary education[LGA]", 0.5684],
-            [None, "Teacher to Classroom Ratio for primary schools(TCR)[LGA]", 3.13452914798206],
-            [None, "% teachers with formal teaching qualification for secondary school[LGA]", 0.709],
-        ])
+        ("Goal 1: Eradicate extreme poverty and hunger", [
+            [None, "Proportion of children under five who are underweight (weight-for-age)", g("prevalence_of_underweight_children_u5")],
+            [None, "Proportion of children under five with stunting (height-for-age)", g("prevalence_of_stunting_children_u5")],
+            [None, "Proportion of children under five with wasting", g("prevalence_of_wasting_children_u5")],
+        ]),
+        ("Goal 2: Achieve universal primary education", [
+            [None, "Net enrollment ratio for primary education", g("net_enrollment_ratio_primary_education")],
+            [None, "Gross enrollment ratio in primary education", g("")],
+            [None, "Net enrollment ratio for secondary education", g("net_enrollment_ratio_secondary_education")],
+            [None, "Gross enrollment ratio in secondary education", g("gross_enrollment_ratio_secondary_education")],
+            [None, "Literacy rate of 15-24 year olds (men and women)", g("literacy_rate")],
+        ]),
+        ("Goal 3: Promote gender equality and empower women", [
+            [None, "Ratio of boys to girls in primary schools", g("")],
+            [None, "Ratio of boys to girls in junior secondary schools", g("")],
+            [None, "Ratio of boys to girls in senior secondary schools ", g("")],
+        ]),
+        ("Goal 4: Reduce child mortality", [
+            [None, "DPT 3 immunization rate", g("immunization_rate_dpt3")],
+            [None, "Under five mortality rate per 1000 live births", g("mortality_rate_children_u5")],
+            [None, "Proportion of children under five years of age with diarrhea who received oral rehydration therapy", g("proportion_of_children_u5_diarrhea_treated_with_ors_med")],
+        ]),
+        ("Goal 5: Improve maternal health", [
+            [None, "Proportion of births attended by a skilled health provider", g("proportion_of_births_by_skilled_health_personnel")],
+            [None, "Proportion of pregnant women tested for HIV", g("percentage_pregnant_women_tested_for_hiv_during_pregnancy")],
+            [None, "Proportion of women who attended at least four antenatal visits", g("")],
+        ]),
+        ("Goal 6: Combat HIV/AIDS, malaria and other diseases", [
+            [None, "Proportion of children under five sleeping under insecticide-treated bednets", g("proportion_children_u5_sleeping_under_itns")],
+            [None, "Proportion of men and women ever tested for HIV", g("percentage_of_individuals_tested_for_hiv_ever")],
+        ]),
+        ("Goal 7: Ensure environmental sustainability", [
+            [None, "Proportion of households with access to an improved water source", g("percentage_households_with_access_to_improved_water_sources")],
+            [None, "Proportion of households with access to improved sanitation", g("percentage_households_with_access_to_improved_sanitation")],
+        ]),
     ]
+    context.navs = [{ 'url': '/', 'name': 'Home' },
+                    { 'url': '/new_dashboard/%s' % lga.unique_slug,
+                        'name': lga.name,
+                        'active': True}]
+    #tmp deactivating breadcrumb
+    context.navs = False
     context.lga = lga
     return render_to_response("new_dashboard.html", context_instance=context)
 
@@ -242,10 +280,10 @@ def tmp_variables_for_sector(sector_slug, lga):
         'health': [
             ('Facilities', [
             #proof of concept that lga is accessible from here.
-                ["Health Posts / Dispensaries", g("num_level_1_health_facilities"), ""],
-                ["Primary Care Clinics", g("num_level_2_health_facilities"), ""],
-                ["Comprehensive Primary Care Centres", g("num_level_3_health_facilities"), ""],
-                ["Hospitals", g("num_level_4_health_facilities"), ""],
+                ["Health Posts and Dispensaries", g("num_level_1_health_facilities"), ""],
+                ["Primary Health Clinics", g("num_level_2_health_facilities"), ""],
+                ["Primary Health Centres", g("num_level_3_health_facilities"), ""],
+                ["Comprehensive Health Centres and Hospitals:`", g("num_level_4_health_facilities"), ""],
                 ["Facilities that offer care 24 hours a day, 7 days a week", g("num_health_facilities_open_24_7"), ""],
                 ["Total number of facilities", g("num_health_facilities"), ""],
             ],),
@@ -369,6 +407,13 @@ def new_sector_overview(request, lga_id, sector_slug):
         return HttpResponseRedirect("/new_dashboard/")
     context = RequestContext(request)
     context.lga = lga
+    context.navs = [{ 'url': '/', 'name': 'Home' },
+                    { 'url': '/new_dashboard/%s' % lga.unique_slug, 'name': lga.name },
+                    { 'url': '/new_dashboard/%s/%s' % (lga.unique_slug, sector_slug),
+                        'name': sector_slug.capitalize(),
+                        'active': True }]
+    #tmp deactivating breadcrumb
+    context.navs = False
     context.table_data = tmp_variables_for_sector(sector_slug, lga)
     context.sector = sector_slug
     return render_to_response("new_sector_overview.html", context_instance=context)
