@@ -799,3 +799,8 @@ text-align: center;
     display: block;
     width: 30px;
 }
+
+
+table.striped tr:nth-child(odd) td {
+	background-color: #eee;
+}

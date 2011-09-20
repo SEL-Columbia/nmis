@@ -1260,10 +1260,12 @@ return {
 })();
 // END CLOSURE: LGA object
 
-var menu = $('<ul />', {id: 'menu'});
-$('#content').before(menu);
-var lgaTmpLink = $('<a />', {href:'/new_dashboard/'+lgaId, id:'lga-tmp-link'}).text('LGA')
-var facTmpLink = $('<a />', {href:'/~' + lgaId, id:'fac-tmp-link'}).text('Facilities');
+if(typeof lgaId !== 'undefined') {
+    var menu = $('<ul />', {id: 'menu'});
+    $('#content').before(menu);
+    var lgaTmpLink = $('<a />', {href:'/new_dashboard/'+lgaId, id:'lga-tmp-link'}).text('LGA')
+    var facTmpLink = $('<a />', {href:'/~' + lgaId, id:'fac-tmp-link'}).text('Facilities');
 
-$('<li />').html(lgaTmpLink).appendTo(menu);
-$('<li />').html(facTmpLink).appendTo(menu);
+    $('<li />').html(lgaTmpLink).appendTo(menu);
+    $('<li />').html(facTmpLink).appendTo(menu);
+}

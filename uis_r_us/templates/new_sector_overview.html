@@ -4,7 +4,7 @@
 	<h1 style="font-family: Comic Sans MS;text-transform:capitalize">
 		{{lga.name}} - {{sector}} Overview
 	</h1>
-	<table style="width:100%">
+	<table class="striped" style="width:100%">
 		<tbody>
 			{% for sector_name, indicators in table_data %}
 			<tr>
@@ -81,5 +81,17 @@
 
 {% block js %}
 <script type="text/javascript" charset="utf-8">
+
+var lgaId = (function(l){return l==="" ? undefined : l;})("{{lga.unique_slug}}");
+
+if(typeof lgaId !== 'undefined') {
+    var menu = $('<ul />', {id: 'menu'});
+    $('#content').before(menu);
+    var lgaTmpLink = $('<a />', {href:'/new_dashboard/'+lgaId, id:'lga-tmp-link'}).text('LGA')
+    var facTmpLink = $('<a />', {href:'/~' + lgaId, id:'fac-tmp-link'}).text('Facilities');
+    $('<li />').html(lgaTmpLink).appendTo(menu);
+    $('<li />').html(facTmpLink).appendTo(menu);
+}
+
 </script>
 {% endblock %}
