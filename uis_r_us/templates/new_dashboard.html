@@ -64,7 +64,7 @@
 	<h4>Below are data from the baseline facility surveys.</h4>
 	<div class="tri-blocks">
 		{% for key, title, indicators, number in facility_indicators %}
-		<div class="{{key}}">
+		<div class="{{key}}" style="border:1px solid #eee;">
 			<h2>
 				{{title}}&nbsp;({{number}})
 			</h2>
@@ -137,10 +137,15 @@
 		width: 50%;
 		height: 190px;
 	}
+	.tri-blocks h2 {
+		margin: 4px 0;
+		padding: 2px;
+	}
 	.tri-blocks div {
 		float: left;
-		width: 33%;
+		width: 350px;
 		position: relative;
+		margin: 0 6px;
 	}
 	.tri-blocks div table {
 		width: 100%;
@@ -149,6 +154,9 @@
 		margin: 0;
 		text-align: right;
 		padding: 0 40px;
+	}
+	.tri-blocks table td {
+		padding: 2px 12px;
 	}
 	.mdg-tables table {
 		width: 100%;
