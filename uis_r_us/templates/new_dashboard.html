@@ -4,53 +4,23 @@
 	<div class="header">
 		<div class="profile-box">
 			<h2>
-				Kano
+				{{lga.name}}
 			</h2>
 			<h3>
-				Takai
+				{{state.name}}
 			</h3>
 			<table>
 				<tbody>
-					<tr>
-						<td class='key'>
-							LGA Chairman
-						</td>
-						<td class='value'>
-							Hon. Muhammad Baffa
-						</td>
-					</tr>
-					<tr>
-						<td class='key'>
-							LGA Secretary
-						</td>
-						<td class='value'>
-							Huzaifa Adamu Karfi
-						</td>
-					</tr>
-					<tr>
-						<td class='key'>
-							Population (2006)
-						</td>
-						<td class='value'>
-							202,639
-						</td>
-					</tr>
-					<tr>
-						<td class='key'>
-							Area (square km)
-						</td>
-						<td class='value'>
-							611.27
-						</td>
-					</tr>
-					<tr>
-						<td class='key'>
-							Distance from Capitol
-						</td>
-						<td class='value'>
-							92
-						</td>
-					</tr>
+                {% for key, value in profile_variables %}
+                <tr>
+                    <td class='key'>
+                        {{key}}
+                    </td>
+                    <td class='value'>
+                        {{value}}
+                    </td>
+                </tr>
+                {% endfor %}
 				</tbody>
 			</table>
 		</div>
