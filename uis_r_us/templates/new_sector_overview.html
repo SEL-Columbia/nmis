@@ -25,10 +25,10 @@
 					{{indicator.0}}
 				</td>
 				<td class="indvalue">
-					{{indicator.1|safe}}
+					{{indicator.1|safe}}{% if indicator.2 != None %}&nbsp;({{indicator.2|safe}}){% endif %}
 				</td>
 				<td class="indvalue">
-					{{indicator.2|safe}}
+					{{indicator.3|safe}}
 				</td>
 			</tr>
 			{% endfor %}
