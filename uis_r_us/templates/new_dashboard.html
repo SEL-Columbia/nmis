@@ -14,7 +14,7 @@
 				<tbody>
                 {% for key, value in profile_variables %}
                 <tr>
-                    <td class='key'>
+                    <td class='key' style="padding: 0px 50px 0px 0px">
                         {{key}}
                     </td>
                     <td class='value'>
@@ -32,7 +32,7 @@
 		<div class="clearfix"></div>
 	</div>
 	<hr>
-	<h2 class="some-lpadding">Facility Level Data</h2>
+	<h2 class="some-lpadding">LGA Overview</h2>
 	<p class="some-lpadding"><em>Below are data from the baseline facility surveys.</em></p>
 	<div class="tri-blocks">
 		{% for key, title, indicators, number in facility_indicators %}
@@ -63,7 +63,7 @@
 	</div>
 	<div class="clearfix"></div>
 	<hr>
-	<h2 class="some-lpadding">MDG Tables</h2>
+	<h2 class="some-lpadding">MDG Status</h2>
 	<p class="some-lpadding"><em>Below are data collected from HNLSS, DHS, and other sources.</em></p>
 	<div id="mdg-table-wrap">
 	<div class="mdg-tables">
@@ -177,8 +177,6 @@
 	    /*border: 1px solid #eeeeee;
 	    border-width: 0 0 1px;*/
 	    padding: 8px 12px; }
-	    table.mdg-table td.empty {
-	      border: 0 none; }
 	    table.mdg-table td.data {
 			text-align: right; }
 	    table.mdg-table td.subgoal {
