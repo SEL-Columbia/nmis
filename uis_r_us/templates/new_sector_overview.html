@@ -4,30 +4,30 @@
 	<h1 style="font-family: Comic Sans MS;text-transform:capitalize">
 		{{lga.name}} - {{sector}} Overview
 	</h1>
-	<table class="striped" style="width:100%">
+	<table class="mdg-table" style="width:100%">
 		<tbody>
 			{% for sector_name, indicators in table_data %}
 			<tr>
-				<th colspan="2">
+				<th colspan="2" class="indheader">
 					{{sector_name}}	
 				</th>
-				<th class="indheader">
+				<th class="indheader mdg_header">
 					Current
 				</th>
-				<th class="indheader">
+				<th class="indheader mdg_header">
 					Target
 				</th>
 			</tr>
 			{% for indicator in indicators %}
 			<tr>
-				<td class="empty-first"></td>
-				<td class="indicator-name">
+				<td class="empty-first bb"></td>
+				<td class="indicator-name bb">
 					{{indicator.0}}
 				</td>
-				<td class="indvalue">
+				<td class="indvalue bb">
 					{{indicator.1|safe}}{% if indicator.2 != None %}&nbsp;({{indicator.2|safe}}){% endif %}
 				</td>
-				<td class="indvalue">
+				<td class="indvalue bb">
 					{{indicator.3|safe}}
 				</td>
 			</tr>
@@ -41,6 +41,14 @@
 
 {% block head  %}
 <style type="text/css" media="screen">
+td.bb {
+	border-bottom: 1px solid #eee;
+}
+.indheader {
+	padding: 12px 6px 4px;
+	border-bottom: 2px solid #666;
+	font-weight: bold;
+}
 	.content-inner-wrap {
 		width: 1100px;
 		margin: 10px auto;
@@ -49,7 +57,41 @@
 		width: 20px;
 	}
 	td.indvalue {
+		text-align: right;
 		width: 120px;
+	}
+	
+	/*temporary*/
+	table.mdg-table.f {
+	    margin: 0 auto;
+	}
+	table.mdg-table {
+	  font-size: 15px;
+	  line-height: 17px; }
+	  table.mdg-table td {
+	    /*border: 1px solid #eeeeee;
+	    border-width: 0 0 1px;*/
+	    padding: 8px 12px; }
+	    table.mdg-table td.empty {
+	      border: 0 none; }
+	    table.mdg-table td.data {
+	      text-align: center; }
+	    table.mdg-table td.subgoal {
+	      color: #666666;
+	      text-align: right;
+	      font-size: 14px; }
+	    table.mdg-table td.mdg_header {
+	      border: 1px solid #666666;
+	      border-width: 0 0 2px 0;
+	      font-weight: bold;
+	      padding: 12px 6px 4px; }
+	    table.mdg-table td.empty {
+          border: 0 none; }
+	      table.mdg-table td.mdg_header.year {
+	        text-align: center; }
+	table.line-separated td {
+		border: 1px solid #EEE;
+		border-width: 0 0 1px;
 	}
  /*
 	.clearfix {
