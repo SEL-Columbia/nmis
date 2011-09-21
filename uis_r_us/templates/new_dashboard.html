@@ -76,9 +76,14 @@
 				{% for indicator in indicators %}
 				<tr>
 					<td class="empty"></td>
+					{% if indicator.0 %}
 					<td>
 						{{indicator.0}}
 					</td>
+					{% else %}
+					<td class="empty">
+					</td>
+					{% endif %}
 					<td>
 						{{indicator.1}}
 					</td>
