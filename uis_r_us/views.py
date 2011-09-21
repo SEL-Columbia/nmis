@@ -276,7 +276,7 @@ def new_dashboard(request, lga_id):
         ["LGA Secretary", g("secretary_name")],
         ["Population (2006)", g("pop_population")],
         ["Area (square km)", g("area_sq_km")],
-        ["Distance from capitol (km)", g("state_capital_distance")],
+        ["Distance from capital (km)", g("state_capital_distance")],
     ]
     return render_to_response("new_dashboard.html", context_instance=context)
 
@@ -291,9 +291,9 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Health Posts and Dispensaries", g("num_level_1_health_facilities"), None, g("target_level_1_health_facilities"), None],
                 ["Primary Health Clinics", g("num_level_2_health_facilities"), None, g("target_level_2_health_facilities"), None],
                 ["Primary Health Centres", g("num_level_3_health_facilities"), None, g("target_level_3_health_facilities"), None],
-                ["Comprehensive Health Centres and Hospitals:`", g("num_level_4_health_facilities"), None, g("target_level_4_health_facilities"), None],
+                ["Comprehensive Health Centres and Hospitals", g("num_level_4_health_facilities"), None, g("target_level_4_health_facilities"), None],
                 ["Total number of facilities", g("num_health_facilities"), None, g("target_total_health_facilities"), None],
-                ["Facilities that offer care 24 hours a day, 7 days a week", g("num_health_facilities_open_24_7"), g("proportion_health_facilities_open_24_7"), g("target_health_facilities_open_24_7"), "100%"],
+                ["Facilities that offer care 24 hours a day, 7 days a week", g("num_health_facilities_open_24_7"), g("proportion_health_facilities_open_24_7"), g("target_health_facilities_open_24_7"), g("target_all_but_level_1_health_facilities")],
             ],),
             ('Staffing', [
                 ["Total number of doctors in the LGA", g("num_doctors"), None, g("target_num_doctors"), None],
