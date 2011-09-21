@@ -184,7 +184,7 @@ def temp_facility_buildr(lga):
         return lga_data.get(slug, None)
     ilist = []
     health_indicators = [
-            ["Health posts & dispensaries", g("num_level_1_health_facilities")],
+            ["Health posts and dispensaries", g("num_level_1_health_facilities")],
             ["Primary health clinics", g("num_level_2_health_facilities")],
             ["Primary health centres", g("num_level_3_health_facilities")],
             ["Comprehensive health centres & hospitals", g("num_level_4_health_facilities")],
@@ -194,14 +194,14 @@ def temp_facility_buildr(lga):
     ilist.append(("health", "Health Facilities", health_indicators, g("num_health_facilities")))
 
     education_indicators = [
-            ["Preprimary & primary", g("num_preprimary_primary_level")],
+            ["Preprimary and primary", g("num_preprimary_primary_level")],
             ["Primary", g("num_primary_level")],
-            ["Primary & junior secondary", g("num_primary_js_level")],
+            ["Primary and junior secondary", g("num_primary_js_level")],
             ["Junior secondary", g("num_js_level")],
-            ["Junior secondary & senior secondary", g("num_js_ss_level")],
+            ["Junior secondary and senior secondary", g("num_js_ss_level")],
             ["Senior secondary", g("num_ss_level")],
-            ["Primary & junior secondary & senior secondary", g("num_primary_js_ss_level")],
-            ["Pupil:teacher ratio", g("student_teacher_ratio_lga")],
+            ["Primary, junior secondary and senior secondary", g("num_primary_js_ss_level")],
+            ["Pupil to teacher ratio", g("student_teacher_ratio_lga")],
             ["Proportion of teachers with NCE qualification", g("proportion_teachers_nce")],
             ["Number of classrooms in need of major repairs", g("number_classrooms_need_major_repair")],
         ]
@@ -360,8 +360,8 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Number of schools with access to potable water", g("num_schools_potable_water"), g("proportion_schools_potable_water"), "100%"],
                 ["Number of schools with improved sanitation", g("num_schools_improved_sanitation"), g("proportion_schools_improved_sanitation"), "100%"],
                 ["Number of schools with separate toilets for boys and girls", g("num_schools_gender_sep_toilet"), g("proportion_schools_gender_sep_toilet"), "100%"],
-                ["Pupil:toilet ratio", g("pupil_toilet_ratio"), None, "35 - 40"],
-                ["Pupil:classroom ratio", g("student_classroom_ratio_lga"), None, "35 - 40"],
+                ["Pupil to toilet ratio", g("pupil_toilet_ratio"), None, "35 - 40"],
+                ["Pupil to classroom ratio", g("student_classroom_ratio_lga"), None, "35 - 40"],
                 ["Number of classrooms needing major repair", g("number_classrooms_need_major_repair"), g("proportion_classrooms_need_major_repair"), "0%"],
                 ["Number of classrooms needing minor repair", g("number_classrooms_need_minor_repair"), g("proportion_classrooms_need_major_repair"), "0%"],
                 ["Number of schools that teach outside because there are not enough classrooms", g("num_schools_hold_classes_outside"), g("proportion_schools_hold_classes_outside"), "0%"],
@@ -373,13 +373,13 @@ def tmp_variables_for_sector(sector_slug, lga):
             ],),
             ('Furniture', [
                 ["Number of schools with a chalkboard in every classroom", g("num_schools_chalkboard_all_rooms"), g("proportion_schools_chalkboard_all_rooms"), "100%"],
-                ["Pupil:bench ratio", g("pupil_bench_ratio_lga"), None, "&#8804; 2"],
-                ["Pupil:desk ratio", g("pupil_desk_ratio_lga"), None, "&#8804; 1"],
+                ["Pupil to bench ratio", g("pupil_bench_ratio_lga"), None, "&#8804; 2"],
+                ["Pupil to desk ratio", g("pupil_desk_ratio_lga"), None, "&#8804; 1"],
             ],),
             ('Staffing and Institutional Development', [
-                ["Primary school pupil:teacher ratio", g("primary_school_pupil_teachers_ratio_lga"), None, "&#8804; 35"],
-                ["Junior secondary school pupil:teacher ratio", g("junior_secondary_school_pupil_teachers_ratio_lga"), None, "&#8804; 35"],
-                ["Teaching:non-teaching staff ratio", g("teacher_nonteachingstaff_ratio_lga"), None, "N/A"],
+                ["Primary school pupil to teacher ratio", g("primary_school_pupil_teachers_ratio_lga"), None, "&#8804; 35"],
+                ["Junior secondary school pupil to teacher ratio", g("junior_secondary_school_pupil_teachers_ratio_lga"), None, "&#8804; 35"],
+                ["Teaching to non-teaching staff ratio", g("teacher_nonteachingstaff_ratio_lga"), None, "N/A"],
                 ["Number of qualified teachers (with NCE)", g("num_teachers_nce"), g("proportion_teachers_nce"), "100%"],
                 ["Number of teachers who participated in training in the past year", g("num_teachers_training_last_year"), g("proportion_teachers_training_last_year"), "100%"],
                 ["Number of schools that have delayed teacher payments", g("num_schools_delay_pay"), g("proportion_schools_delay_pay"), "0%"],
