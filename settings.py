@@ -110,6 +110,7 @@ RESTRICTED_URLS = (
     (r'^/?$', 'auth.read'),
     (r'^/?~', 'auth.read'),
     (r'^/?facilities/', 'auth.read'),
+    (r'^/new_dashboard', 'auth.read'),
     )
 RESTRICTED_URLS_EXCEPTIONS = (
     )
