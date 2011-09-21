@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="/static/css/sitewide.css" type="text/css" media="all" title="Sitewide" charset="utf-8" />
 	<link rel="stylesheet" href="/static/css/tables.css" type="text/css" media="all" title="Sitewide" charset="utf-8" />
 	<link rel="stylesheet" href="/static/css/generated-donotedit.css" type="text/css" media="all" title="Sitewide" charset="utf-8" />
-    <link rel="stylesheet" href="/static/css/main.css" media="screen">
+    <link rel="stylesheet" href="/static/css/main.css" media="all">
 	<link rel="stylesheet" href="/static/jquery-ui/jquery-ui-1.8.7.custom.css" type="text/css" media="screen" title="Sitewide" charset="utf-8" />
 	<script src="/static/js/modernizr-2.js" type="text/javascript" charset="utf-8"></script>
 	{% block head %}{% endblock %}
@@ -34,7 +34,7 @@
                         {% block lga_nav %}{% endblock %}
 
                         {% block account_links %}
-		<div class="account_links">
+		<div class="account_links print-hide-block">
 			{% if user.is_authenticated %}
 			{% trans "Logged in" %}: {{ user.username }} 
 			(<a href="{% url auth_logout %}">{% trans "Log out" %}</a>

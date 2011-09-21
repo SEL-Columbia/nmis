@@ -804,3 +804,19 @@ text-align: center;
 table.striped tr:nth-child(odd) td {
 	background-color: #eee;
 }
+
+.print-hide-block {
+    display: block;
+}
+.print-hide-inline {
+    display: inline;
+}
+.print-hide-inline-block {
+    display: inline-block;
+}
+
+@media print {
+    .print-hide-block, .print-hide-inline, .print-hide-inline-block {
+        display: none;
+    }
+}
