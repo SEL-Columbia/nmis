@@ -128,9 +128,10 @@ td.bb {
 var lgaId = (function(l){return l==="" ? undefined : l;})("{{lga.unique_slug}}");
 
 if(typeof lgaId !== 'undefined') {
-    var menu = $('<ul />', {id: 'menu'});
+    var menu = $('<ul />', {id: 'menu'})
+			.addClass('print-hide-block')
     $('#content').before(menu);
-    var lgaTmpLink = $('<a />', {href:'/new_dashboard/'+lgaId, id:'lga-tmp-link'}).text('LGA')
+    var lgaTmpLink = $('<a />', {href:'/new_dashboard/'+lgaId, id:'lga-tmp-link'}).text('LGA');
     var facTmpLink = $('<a />', {href:'/~' + lgaId, id:'fac-tmp-link'}).text('Facilities');
     $('<li />').html(lgaTmpLink).appendTo(menu);
     $('<li />').html(facTmpLink).appendTo(menu);
