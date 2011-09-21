@@ -3,6 +3,7 @@
 <div class="new-dashboard">
 	<div class="header">
 		<div class="profile-box">
+			<div class="pc-inner">
 			<h2>
 				{{lga.name}}
 			</h2>
@@ -13,7 +14,7 @@
 				<tbody>
                 {% for key, value in profile_variables %}
                 <tr>
-                    <td class='key'>
+                    <td class='key' style="padding: 0px 50px 0px 0px">
                         {{key}}
                     </td>
                     <td class='value'>
@@ -24,14 +25,15 @@
 				</tbody>
 			</table>
 		</div>
+		</div>
 		<div id="profile-map">
 			Map
 		</div>
 		<div class="clearfix"></div>
 	</div>
 	<hr>
-	<h2>Facility Level Data</h2>
-	<p><em>Below are data from the baseline facility surveys.</em></p>
+	<h2 class="some-lpadding">Facility Level Data</h2>
+	<p class="some-lpadding"><em>Below are data from the baseline facility surveys.</em></p>
 	<div class="tri-blocks">
 		{% for key, title, indicators, number in facility_indicators %}
 		<div class="{{key}}" style="border:2px solid #eee;">
@@ -61,8 +63,8 @@
 	</div>
 	<div class="clearfix"></div>
 	<hr>
-	<h2>MDG Tables</h2>
-	<p><em>Below are data collected from HNLSS, DHS, and other sources.</em></p>
+	<h2 class="some-lpadding">MDG Tables</h2>
+	<p class="some-lpadding"><em>Below are data collected from HNLSS, DHS, and other sources.</em></p>
 	<div id="mdg-table-wrap">
 	<div class="mdg-tables">
 		<table class="mdg-table">
@@ -76,9 +78,14 @@
 				{% for indicator in indicators %}
 				<tr>
 					<td class="empty"></td>
+					{% if indicator.0 %}
 					<td>
 						{{indicator.0}}
 					</td>
+					{% else %}
+					<td class="empty">
+					</td>
+					{% endif %}
 					<td>
 						{{indicator.1}}
 					</td>
@@ -102,6 +109,9 @@
 		width: 1100px;
 		margin: 10px auto;
 	}
+	.some-lpadding {
+		padding-left: 12px;
+	}
 	.clearfix {
 		clear: both;
 	}
@@ -109,6 +119,17 @@
 		float: left;
 		width: 50%;
 		height: 190px;
+/*		padding: 4px 0;*/
+		background-color: #ddd;
+		padding: 6px 0px;
+		margin: 2px 0px;
+	}
+	.new-dashboard .header .pc-inner {
+		padding: 10px;
+		background-color: #eee;
+	}
+	.new-dashboard .header .pc-inner h2 {
+		margin: 0;
 	}
 
 	.tri-blocks h2 {
@@ -116,6 +137,7 @@
 		padding: 2px;
 	}
 	.tri-blocks div {
+		height: 480px;
 		float: left;
 		width: 350px;
 		position: relative;
@@ -128,6 +150,7 @@
 		margin: 0;
 		text-align: right;
 		padding: 10px 40px;
+		font-size: larger;
 	}
 	.tri-blocks table td {
 		padding: 2px 12px;
@@ -154,15 +177,13 @@
 	    /*border: 1px solid #eeeeee;
 	    border-width: 0 0 1px;*/
 	    padding: 8px 12px; }
-	    table.mdg-table td.empty {
-	      border: 0 none; }
 	    table.mdg-table td.data {
-	      text-align: center; }
+			text-align: right; }
 	    table.mdg-table td.subgoal {
 	      color: #666666;
 	      text-align: right;
 	      font-size: 14px; }
-	    table.mdg-table td.mdg_header {
+	    table.mdg-table td.mdg_header, table.mdg-table th.mdg_header {
 	      border: 1px solid #666666;
 	      border-width: 0 0 2px 0;
 	      font-weight: bold;
