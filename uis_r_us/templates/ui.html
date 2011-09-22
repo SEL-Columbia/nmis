@@ -143,32 +143,32 @@ var mapBar = (function(){
 		var tr = _elem.find('tr').detach();
 		opts.reset && tr.empty();
 
-		(function(){
-			var viewLevelTd = $('<td />').appendTo(tr);
-			$('<a />', {
-				href: '/new_dashboard/'+lgaId,
-				text: 'LGA',
-				'class': 'viewModeButton'
-				})
-				.appendTo(viewLevelTd);
-			$('<a />', {
-				href: '/~'+lgaId,
-				text: 'Facility',
-				'class': 'viewModeButton'
-				})
-				.appendTo(viewLevelTd);
-			// $.each(opts.viewLevels, function(i, button){
-			// 	$('<a />', {'href':'#', 'class':'viewLevelButton'})
-			// 		.text(button[0])
-			// 		.appendTo(viewLevelTd)
-			// 		.addClass('view-mode-'+button[1])
-			// 		.addClass('view-mode-button')
-			// 		.data('viewLevel', button[1])
-			// 		.click(function(){
-			// 			setViewMode($(this).data('viewLevel'));
-			// 		});
-			// });
-		})();
+		// (function(){
+		// 	var viewLevelTd = $('<td />').appendTo(tr);
+		// 	$('<a />', {
+		// 		href: '/new_dashboard/'+lgaId,
+		// 		text: 'LGA',
+		// 		'class': 'viewModeButton'
+		// 		})
+		// 		.appendTo(viewLevelTd);
+		// 	$('<a />', {
+		// 		href: '/~'+lgaId,
+		// 		text: 'Facility',
+		// 		'class': 'viewModeButton'
+		// 		})
+		// 		.appendTo(viewLevelTd);
+		// 	// $.each(opts.viewLevels, function(i, button){
+		// 	// 	$('<a />', {'href':'#', 'class':'viewLevelButton'})
+		// 	// 		.text(button[0])
+		// 	// 		.appendTo(viewLevelTd)
+		// 	// 		.addClass('view-mode-'+button[1])
+		// 	// 		.addClass('view-mode-button')
+		// 	// 		.data('viewLevel', button[1])
+		// 	// 		.click(function(){
+		// 	// 			setViewMode($(this).data('viewLevel'));
+		// 	// 		});
+		// 	// });
+		// })();
 
 		(function(){
 			var sectorTd = $('<td />');
@@ -192,6 +192,7 @@ var mapBar = (function(){
 						.data('sectorSlug', button[1]);
 			});
 			sectorTd.delegate('a', 'click', function(){
+				setViewMode("facility");
 				var ss =  $(this).data('sectorSlug');
 				ss !== undefined && setSector(ss);
 				ss !== undefined && SummaryText(ss.toUpperCase());
