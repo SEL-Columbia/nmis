@@ -950,7 +950,10 @@ function capitalizeString(str) {
     var strend = str.slice(1);
     return strstart.toUpperCase() + strend;
 }
-function splitAndCapitalizeString(str) { return $.map(str.split('_'), capitalizeString).join(' '); }
+function splitAndCapitalizeString(str) {
+    if (str == undefined) { return ""; }
+    return $.map(str.split('_'), capitalizeString).join(' ');
+}
 
 function displayValue2(slug, value) {
     if (dataDictionary[slug] == undefined) {
