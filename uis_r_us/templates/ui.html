@@ -145,17 +145,29 @@ var mapBar = (function(){
 
 		(function(){
 			var viewLevelTd = $('<td />').appendTo(tr);
-			$.each(opts.viewLevels, function(i, button){
-				$('<a />', {'href':'#', 'class':'viewLevelButton'})
-					.text(button[0])
-					.appendTo(viewLevelTd)
-					.addClass('view-mode-'+button[1])
-					.addClass('view-mode-button')
-					.data('viewLevel', button[1])
-					.click(function(){
-						setViewMode($(this).data('viewLevel'));
-					});
-			});
+			$('<a />', {
+				href: '/new_dashboard/'+lgaId,
+				text: 'LGA',
+				'class': 'viewModeButton'
+				})
+				.appendTo(viewLevelTd);
+			$('<a />', {
+				href: '/~'+lgaId,
+				text: 'Facility',
+				'class': 'viewModeButton'
+				})
+				.appendTo(viewLevelTd);
+			// $.each(opts.viewLevels, function(i, button){
+			// 	$('<a />', {'href':'#', 'class':'viewLevelButton'})
+			// 		.text(button[0])
+			// 		.appendTo(viewLevelTd)
+			// 		.addClass('view-mode-'+button[1])
+			// 		.addClass('view-mode-button')
+			// 		.data('viewLevel', button[1])
+			// 		.click(function(){
+			// 			setViewMode($(this).data('viewLevel'));
+			// 		});
+			// });
 		})();
 
 		(function(){
@@ -501,10 +513,13 @@ $(function(){
 			lga.loadData(lgaId, function(){
 				this.buildTable = true;
 				setTitle(createTitleForLga(this.stateName, this.lgaName));
-				var curSector = $.cookie('sector') || defaultMode.sector,
-					curLevel = $.cookie('level') || defaultMode.level;
-				setSector(curSector);
-				setViewMode(curLevel);
+				// var curSector = $.cookie('sector') || defaultMode.sector,
+				// 	curLevel = $.cookie('level') || defaultMode.level;
+				// setSector(curSector);
+				// setViewMode(curLevel);
+				setSector('health');
+				setViewMode('facility');
+
 			});
 		});
 	});

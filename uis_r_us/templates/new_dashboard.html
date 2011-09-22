@@ -3,56 +3,28 @@
 <div class="new-dashboard">
 	<div class="header">
 		<div class="profile-box">
+			<div class="pc-inner">
 			<h2>
-				Kano
+				{{lga.name}}
 			</h2>
 			<h3>
-				Takai
+				{{state.name}}
 			</h3>
-			<table>
+			<table class="striped">
 				<tbody>
-					<tr>
-						<td class='key'>
-							LGA Chairman
-						</td>
-						<td class='value'>
-							Hon. Muhammad Baffa
-						</td>
-					</tr>
-					<tr>
-						<td class='key'>
-							LGA Secretary
-						</td>
-						<td class='value'>
-							Huzaifa Adamu Karfi
-						</td>
-					</tr>
-					<tr>
-						<td class='key'>
-							Population (2006)
-						</td>
-						<td class='value'>
-							202,639
-						</td>
-					</tr>
-					<tr>
-						<td class='key'>
-							Area (square km)
-						</td>
-						<td class='value'>
-							611.27
-						</td>
-					</tr>
-					<tr>
-						<td class='key'>
-							Distance from Capitol
-						</td>
-						<td class='value'>
-							92
-						</td>
-					</tr>
+                {% for key, value in profile_variables %}
+                <tr>
+                    <td class='key' style="padding: 0px 50px 0px 0px">
+                        {{key}}
+                    </td>
+                    <td class='value'>
+                        {{value}}
+                    </td>
+                </tr>
+                {% endfor %}
 				</tbody>
 			</table>
+		</div>
 		</div>
 		<div id="profile-map">
 			Map
@@ -60,22 +32,25 @@
 		<div class="clearfix"></div>
 	</div>
 	<hr>
-	<h3>Facility Level Data</h3>
-	<h4>Below are data from the baseline facility surveys.</h4>
+	<h2 class="some-lpadding">LGA Overview</h2>
+	<p class="some-lpadding"><em>Below are data from the baseline facility surveys.</em></p>
 	<div class="tri-blocks">
 		{% for key, title, indicators, number in facility_indicators %}
-		<div class="{{key}}">
-			<h2>
-				{{title}}&nbsp;({{number}})
-			</h2>
-			<table>
+		<div class="{{key}}" style="border:2px solid #eee;">
+			<table class="mdg-table">
 				<tbody>
+			<tr>
+				<td colspan="2" class="mdg_header">
+					{{title}}&nbsp;({{number}})
+				</td>
+			</tr>
+					
 			{% for indicator in indicators %}
 			<tr>
 				<td>
 					{{indicator.0}}
 				</td>
-				<td>
+				<td class="data">
 					{{indicator.1}}
 				</td>
 			</tr>
@@ -88,8 +63,8 @@
 	</div>
 	<div class="clearfix"></div>
 	<hr>
-	<h3>MDG Tables</h3>
-	<h4>Below are data collected from HNLSS, DHS, and other sources.</h4>
+	<h2 class="some-lpadding">MDG Status</h2>
+	<p class="some-lpadding"><em>Below are data collected from HNLSS, DHS, and other sources.</em></p>
 	<div id="mdg-table-wrap">
 	<div class="mdg-tables">
 		<table class="mdg-table">
@@ -103,13 +78,18 @@
 				{% for indicator in indicators %}
 				<tr>
 					<td class="empty"></td>
+					{% if indicator.0 %}
 					<td>
 						{{indicator.0}}
 					</td>
+					{% else %}
+					<td class="empty">
+					</td>
+					{% endif %}
 					<td>
 						{{indicator.1}}
 					</td>
-					<td class="empty">
+					<td class="empty data">
 						{{indicator.2}}
 					</td>
 				</tr>
@@ -124,10 +104,13 @@
 {% endblock %}
 
 {% block head  %}
-<style type="text/css" media="screen">
+<style type="text/css" media="all">
 	.content-inner-wrap {
 		width: 1100px;
 		margin: 10px auto;
+	}
+	.some-lpadding {
+		padding-left: 12px;
 	}
 	.clearfix {
 		clear: both;
@@ -136,11 +119,29 @@
 		float: left;
 		width: 50%;
 		height: 190px;
+/*		padding: 4px 0;*/
+		background-color: #ddd;
+		padding: 6px 0px;
+		margin: 2px 0px;
+	}
+	.new-dashboard .header .pc-inner {
+		padding: 10px;
+		background-color: #eee;
+	}
+	.new-dashboard .header .pc-inner h2 {
+		margin: 0;
+	}
+
+	.tri-blocks h2 {
+		margin: 4px 0;
+		padding: 2px;
 	}
 	.tri-blocks div {
+		height: 480px;
 		float: left;
-		width: 33%;
+		width: 350px;
 		position: relative;
+		margin: 0 6px;
 	}
 	.tri-blocks div table {
 		width: 100%;
@@ -148,7 +149,11 @@
 	.tri-blocks div p.more-link {
 		margin: 0;
 		text-align: right;
-		padding: 0 40px;
+		padding: 10px 40px;
+		font-size: larger;
+	}
+	.tri-blocks table td {
+		padding: 2px 12px;
 	}
 	.mdg-tables table {
 		width: 100%;
@@ -166,18 +171,19 @@
 	    margin: 0 auto;
 	}
 	table.mdg-table {
-	  font-size: 16px;
-	  line-height: 18px; }
+	  font-size: 15px;
+	  line-height: 17px; }
 	  table.mdg-table td {
-	    border: 1px solid #eeeeee;
+	    /*border: 1px solid #eeeeee;
+	    border-width: 0 0 1px;*/
 	    padding: 8px 12px; }
-	    table.mdg-table td.empty {
-	      border: 0 none; }
+	    table.mdg-table td.data {
+			text-align: right; }
 	    table.mdg-table td.subgoal {
 	      color: #666666;
 	      text-align: right;
 	      font-size: 14px; }
-	    table.mdg-table td.mdg_header {
+	    table.mdg-table td.mdg_header, table.mdg-table th.mdg_header {
 	      border: 1px solid #666666;
 	      border-width: 0 0 2px 0;
 	      font-weight: bold;
@@ -186,6 +192,10 @@
           border: 0 none; }
 	      table.mdg-table td.mdg_header.year {
 	        text-align: center; }
+	table.line-separated td {
+		border: 1px solid #EEE;
+		border-width: 0 0 1px;
+	}
 </style>
 {% endblock %}
 

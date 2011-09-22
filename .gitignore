@@ -30,6 +30,7 @@ dropbox
 dropbox_data
 local_settings.py
 .~lock.*
+*.swp
 
 # "your code sucks, you should fix this" -- andrew
 test_static
