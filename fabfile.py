@@ -112,6 +112,7 @@ def deploy(deployment_name, reload="none"):
         if env.migrate:
             with cd(env.code_path):
                 _run_in_virtualenv("python manage.py migrate")
+    migrate_database()
 
     def reload_fixtures(flag=""):
         with cd(env.code_path):
@@ -129,13 +130,6 @@ def deploy(deployment_name, reload="none"):
         with cd(env.code_path):
             _run_in_virtualenv("python manage.py collectstatic --noinput")
     collect_static()
-    
-#    migrate_database()
-#    def reparse_surveys():
-#        with cd(env.code_path):
-#            _run_in_virtualenv("python manage.py reparse")
-#    if reparse == "all":
-#        reparse_surveys()
 
     def restart_web_server():
         """
