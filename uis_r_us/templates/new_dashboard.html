@@ -205,13 +205,50 @@
 var DisplayMap = (function(){
 	var elem, latlng;
 	var glatlng, gmap;
+
+	/**
+	 * MapBox Google Maps v3 layer type
+	 */
+	function mbLayer(options) {
+	    return new google.maps.ImageMapType({
+	        getTileUrl: function(coord, z) {
+	        // Y coordinate is flipped in Mapbox, compared to Google
+	        // Simplistic predictable hashing
+	        return 'http://tilestream.openmangrove.org:8888/1.0.0/'
+	            + options.tileset
+	            + '/' + z
+	            + '/' + coord.x
+	            + '/' + Math.abs(coord.y - (Math.pow(2, z) - 1)) + '.png';
+	        },
+	        name: options.name,
+	        alt: options.name,
+	        tileSize: new google.maps.Size(256, 256),
+	        isPng: true,
+	        minZoom: 0,
+	        maxZoom: options.maxZoom || 17
+	    });
+	}
+
 	function startMap() {
-		glatlng = new google.maps.LatLng(latlng[0], latlng[1]);
+		glatlng = new google.maps.LatLng(latlng[1], latlng[0]);
 		gmap = new google.maps.Map(elem.get(0), {
 			zoom: 8,
 			center: glatlng,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
+			panControl: false,
+			zoomControl: true,
+			mapTypeControl: false,
+			scaleControl: false,
+			streetViewControl: false,
+			overviewMapControl: true,
+			mapTypeId: google.maps.MapTypeId.TERRAIN
 		});
+		gmap.mapTypes.set('ng_base_map', mbLayer({
+			tileset: 'nigeria_base',
+			name: 'Nigeria'
+		}));
+
+		// Set the default map to world light
+		gmap.setMapTypeId('ng_base_map');
 	}
 	function init(_elem, ll){
 		elem = $(_elem);
