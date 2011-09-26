@@ -78,8 +78,7 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
     def reset_database(self):
         self._drop_database()
         call_command('syncdb', interactive=False)
-        for app in settings.APPS_WITH_MIGRATIONS:
-            call_command('migrate', app)
+        call_command('migrate')
 
     def load_system(self):
         self.create_users()
