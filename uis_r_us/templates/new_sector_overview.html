@@ -14,7 +14,7 @@
 				<th class="indheader mdg_header flush-right">
 					Current
 				</th>
-				<th class="indheader mdg_header flush-right">
+				<th class="indheader mdg_header flush-right target" style="display:none">
 					Target
 				</th>
 			</tr>
@@ -27,7 +27,7 @@
 				<td class="indvalue bb">
 					{{indicator.1|safe}}{% if indicator.2 != None %}&nbsp;({{indicator.2|safe}}){% endif %}
 				</td>
-				<td class="indvalue bb">
+				<td class="indvalue bb target" style="display:none">
 					{{indicator.3|safe}}{% if indicator.4 != None %}&nbsp;({{indicator.4|safe}}){% endif %}
 				</td>
 			</tr>
@@ -123,6 +123,41 @@ td.bb {
 {% endblock %}
 
 {% block js %}
+<script type="text/template" charset="utf-8" id="target-links">
+	<p>
+		<a href="#" class="t-show">Display Targets</a>
+		<a href="#" class="t-hide">Hide Targets</a>
+	</p>
+</script>
+<script type="text/javascript" charset="utf-8">
+	// this little module allows you to toggle the targets in the table.
+	//  (targets are identified by the selector ".target")
+	(function(){
+		if($('.new-dashboard').length==0) { console.log(".new-dashboard element does not exist.") }
+		var linkDiv = $('<div />').html($('#target-links').html());
+		function showTargets() {
+			linkDiv.find('a').hide();
+			linkDiv.find('a.t-hide').show();
+			$('table .target').show();
+		}
+		function hideTargets() {
+			linkDiv.find('a').hide();
+			linkDiv.find('a.t-show').show();
+			$('table .target').hide();
+		}
+		linkDiv.find('a').button();
+		linkDiv.delegate('a', 'click', function(evt){
+			if($(this).hasClass('t-show')) {
+				showTargets();
+			} else {
+				hideTargets();
+			}
+			evt.preventDefault();
+		})
+		hideTargets();
+		$('.new-dashboard').append(linkDiv);
+	})();
+</script>
 <script type="text/javascript" charset="utf-8">
 
 var lgaId = (function(l){return l==="" ? undefined : l;})("{{lga.unique_slug}}");
