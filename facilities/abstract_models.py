@@ -308,6 +308,9 @@ class DictModel(models.Model):
         else but for the time being it lives here.
         """
         DECIMAL_PLACES = 1
+        # hack to format for now
+        import locale
+        locale.setlocale(locale.LC_ALL, '')
         def display_boolean(value):
             if value:
                 return 'Yes'
@@ -320,11 +323,11 @@ class DictModel(models.Model):
 
         def display_float(value):
             if value is None: return None
-            return ('%f' % round(value, DECIMAL_PLACES)).rstrip('0').rstrip('.')
+            return locale.format("%f", round(value, DECIMAL_PLACES), grouping=True).rstrip('0').rstrip('.')
 
         def display_percent(value):
             if value is None: return None
-            return ('%f' % round(value * 100, DECIMAL_PLACES)).rstrip('0').rstrip('.') + "%"
+            return locale.format("%f", round(value * 100, DECIMAL_PLACES), grouping=True).rstrip('0').rstrip('.') + "%"
 
         display_functions = {
             'boolean': display_boolean,
