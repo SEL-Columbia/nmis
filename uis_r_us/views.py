@@ -416,7 +416,7 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Total number of water sources", g("num_water_points"), None, ""],
             ],),
             ('Functionality', [
-                ["Number of bore holes, protected or treated sources that are not functioning", g("num_protected_water_sources_non_functional"), g("proportion_protected_water_points_non_functional"), ""],
+                ["Number of bore holes, protected or treated sources that are non-functional", g("num_protected_water_sources_non_functional"), g("proportion_protected_water_points_non_functional"), ""],
             ]),
             ('Population Served', [
                 ["Population served per functioning borehole, protected or treated source", g("population_served_per_protected_and_functional_water_source"), None, ""],
@@ -430,11 +430,11 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Number with a motorized lift", g("num_boreholes_tubewells_non_manual"), g("proportion_boreholes_tubewells_non_manual"), ""],
             ],),
             ('Lift Mechanisms for Bore Holes and Tube Wells (Functioning by Type)', [
-                ["Number of non-motorized (human or animal-powered) lifts that are functioning", g("num_boreholes_tubewells_manual_functional"), g("proportion_boreholes_tubewells_manual_functional"), ""],
-                ["Number of diesel-powered lifts that are functioning", g("num_boreholes_tubewells_diesel_functional"), g("proportion_boreholes_tubewells_diesel_functional"), ""],
-                ["Number of electrically-powered lifts that are functioning", g("num_boreholes_tubewells_electric_functional"), g("proportion_boreholes_tubewells_electric_functional"), ""],
-                ["Number of solar-powered lifts that are functioning", g("num_boreholes_tubewells_solar_functional"), g("proportion_boreholes_tubewells_solar_functional"), ""],
-                ["Number of all motorized lifts that are functioning",g("num_boreholes_tubewells_non_manual_functional"), g("proportion_boreholes_tubewells_non_manual_functional"), ""],
+                ["Number of non-motorized (human or animal-powered) lifts that are non-functional", g("num_boreholes_tubewells_manual_non_functional"), g("proportion_boreholes_tubewells_manual_non_functional"), ""],
+                ["Number of diesel-powered lifts that are non-functional", g("num_boreholes_tubewells_diesel_non_functional"), g("proportion_boreholes_tubewells_diesel_non_functional"), ""],
+                ["Number of electrically-powered lifts that are non-functional", g("num_boreholes_tubewells_electric_non_functional"), g("proportion_boreholes_tubewells_electric_non_functional"), ""],
+                ["Number of solar-powered lifts that are non-functional", g("num_boreholes_tubewells_solar_non_functional"), g("proportion_boreholes_tubewells_solar_non_functional"), ""],
+                ["Number of all motorized lifts that are non-functional",g("num_boreholes_tubewells_non_manual_non_functional"), g("proportion_boreholes_tubewells_non_manual_non_functional"), ""],
             ]),
         ],
     }
