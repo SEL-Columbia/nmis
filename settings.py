@@ -174,14 +174,6 @@ LOGGING = {
     }
 }
 
-# migrations
-APPS_WITH_MIGRATIONS = [
-    'display_defs',
-    'facilities',
-    'nga_districts',
-    'user_management',
-]
-
 # 394 - Kaduna/Kachia
 # 732 - Kano/Takai
 # 366 - Enugu/Isi-Uzo
