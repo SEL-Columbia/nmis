@@ -208,13 +208,14 @@ def temp_facility_buildr(lga):
     ilist.append(("education", "Schools", education_indicators, g("num_schools")))
 
     water_indicators = [
-            ["Non-motorized (human or animal-powered) lift mechanisms", g("proportion_lifted_by_manual_or_animal_power")],
-            ["Motorized lift mechanisms", g("proportion_lifted_by_mechanical_power")],
-            ["Bore holes and tube wells", g("proportion_boreholes_and_tubewells")],
-            ["Protected dug wells", g("proportion_protected_dug_wells")],
+    	    ["Total number of water sources", g("num_water_points")],
             ["Developed/treated spring and surface water", g("proportion_developed_and_treated_or_protected_surface_or_spring_water")],
-            ["Bore holes, protected and treated sources that are not functional", g("proportion_protected_water_points_functional")],
-            ["Population served per well maintained bore hole, protected or treated source", g("population_served_per_protected_and_functional_water_source")],
+            ["Protected dug wells", g("proportion_protected_dug_wells")],
+            ["Bore holes and tube wells", g("proportion_boreholes_and_tubewells")],
+            ["Bore holes and tube wells with non-motorized lift mechanisms", g("proportion_boreholes_tubewells_manual")],
+            ["Bor eholes and tube wells with motorized lift mechanisms", g("proportion_boreholes_tubewells_non_manual")],
+            ["Bore holes, protected and treated sources that are functional", g("proportion_protected_water_points_non_functional")],
+            ["Population served per functional bore hole, protected or treated source", g("population_served_per_protected_and_functional_water_source")],
         ]
     ilist.append(("water", "Water Points", water_indicators, g("num_water_points")))
     return ilist
