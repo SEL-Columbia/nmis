@@ -85,25 +85,25 @@ var launchOpenLayers = (function(_opts){
                     return str;
                 }
             }
-            $.each(opts.layers, function(k, ldata){
-                var layerName = ifDefined(ldata[0]);
-                var layerKey = ifDefined(ldata[1]);
-                var layerViewLevel = ifDefined(ldata[2]);
-                var indicatorSlug = ifDefined(ldata[3]);
-                if (layerViewLevel !== undefined && indicatorSlug !== undefined) {
-                    //log("Adding to waxLayerDict", layerKey);
-                    base_url = mapserver + '1.0.0/' + ldata[1] + '/{z}/{x}/{y}';
-                    context.waxLayerDict[layerKey] = new wax.ol.Interaction({
-                        tilejson: '1.0.0',
-                        scheme: 'tms',
-                        tiles: [base_url + '.png'],
-                        grids: [base_url + '.grid.json'],
-                        formatter: function(options, data) { 
-                            log(options, data);
-                            return JSON.stringify([options, data]); }
-                        });
-                }
-            });
+//            $.each(opts.layers, function(k, ldata){
+//                var layerName = ifDefined(ldata[0]);
+//                var layerKey = ifDefined(ldata[1]);
+//                var layerViewLevel = ifDefined(ldata[2]);
+//                var indicatorSlug = ifDefined(ldata[3]);
+//                if (layerViewLevel !== undefined && indicatorSlug !== undefined) {
+//                    //log("Adding to waxLayerDict", layerKey);
+//                    base_url = mapserver + '1.0.0/' + ldata[1] + '/{z}/{x}/{y}';
+//                    context.waxLayerDict[layerKey] = new wax.ol.Interaction({
+//                        tilejson: '1.0.0',
+//                        scheme: 'tms',
+//                        tiles: [base_url + '.png'],
+//                        grids: [base_url + '.grid.json'],
+//                        formatter: function(options, data) { 
+//                            log(options, data);
+//                            return JSON.stringify([options, data]); }
+//                        });
+//                }
+//            });
             if(!mapId) {mapId = mapElem.get(0).id= "-openlayers-map-elem"}
             context.map = new OpenLayers.Map(mapId, options);
             var googleSat = new OpenLayers.Layer.Google( "Google", {type: 'satellite'});
