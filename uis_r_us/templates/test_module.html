@@ -5,6 +5,22 @@
 {% block js %}
 <script src="/static/js/application.js" type="text/javascript" charset="utf-8"></script>
 <script src="/static/js/libs/qunit.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+	var data = [];
+	var sectors = [], _sectors = ["Agriculture", "Education", "Health", "Water"];
+	_.each(_sectors, function(s){
+	    sectors.push({
+	        name: s,
+	        slug: s.toLowerCase()
+	    });
+	});
+	_.times(40, function(i){
+	    data.push({
+	        sector: sectors[i%4].slug,
+	        something: i%3==0
+	    });
+	});
+</script>
 {% for module in modules %}
 <script src="/static/js/src/{{module}}.js" type="text/javascript" charset="utf-8"></script>
 {% endfor %}
