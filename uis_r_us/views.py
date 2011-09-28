@@ -188,6 +188,7 @@ def temp_facility_buildr(lga):
             ["Primary health clinics", g("num_level_2_health_facilities")],
             ["Primary health centres", g("num_level_3_health_facilities")],
             ["Comprehensive health centres & hospitals", g("num_level_4_health_facilities")],
+            ["Other health facillities", g("num_level_other_health_facilities")],
             ["Skilled health provider per 1,000 population ", g("num_skilled_health_providers_per_1000")],
             ["CHEWs per 1,000 population", g("num_chews_per_1000")],
         ]
@@ -295,6 +296,7 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Primary Health Clinics", g("num_level_2_health_facilities"), None, g("target_level_2_health_facilities"), None],
                 ["Primary Health Centres", g("num_level_3_health_facilities"), None, g("target_level_3_health_facilities"), None],
                 ["Comprehensive Health Centres and Hospitals", g("num_level_4_health_facilities"), None, g("target_level_4_health_facilities"), None],
+                ["Other Health Facilities", g("num_level_other_health_facilities"), None, None, None],
                 ["Total number of facilities", g("num_health_facilities"), None, g("target_total_health_facilities"), None],
                 ["Facilities that offer care 24 hours a day, 7 days a week", g("num_health_facilities_open_24_7"), g("proportion_health_facilities_open_24_7"), g("target_health_facilities_open_24_7"), g("target_all_but_level_1_health_facilities")],
             ],),
