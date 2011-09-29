@@ -189,8 +189,9 @@ def temp_facility_buildr(lga):
             ["Primary health centres", g("num_level_3_health_facilities")],
             ["Comprehensive health centres & hospitals", g("num_level_4_health_facilities")],
             ["Other health facillities", g("num_level_other_health_facilities")],
-            ["Skilled health provider per 1,000 population ", g("num_skilled_health_providers_per_1000")],
+            ["Skilled health providers per 1,000 population ", g("num_skilled_health_providers_per_1000")],
             ["CHEWs per 1,000 population", g("num_chews_per_1000")],
+            ["Facilities that perform Caesarean sections", g("num_health_facilities_c_sections")],
         ]
     ilist.append(("health", "Health Facilities", health_indicators, g("num_health_facilities")))
 
@@ -203,8 +204,8 @@ def temp_facility_buildr(lga):
             ["Senior secondary", g("num_ss_level")],
             ["Primary, junior and senior secondary", g("num_primary_js_ss_level")],
             ["Pupil to teacher ratio", g("student_teacher_ratio_lga")],
-            ["Teachers with NCE qualification", g("proportion_teachers_nce")],
-            ["Classrooms in need of major repairs", g("proportion_classrooms_need_major_repair")],
+            ["Percentage of teachers with NCE qualification", g("proportion_teachers_nce")],
+            ["Classrooms in need of major repairs", g("number_classrooms_need_major_repair")],
         ]
     ilist.append(("education", "Schools", education_indicators, g("num_schools")))
 
@@ -232,39 +233,46 @@ def new_dashboard(request, lga_id):
     context.facility_indicators = temp_facility_buildr(lga)
     context.mdg_indicators = [
         ("Goal 1: Eradicate extreme poverty and hunger", [
-            [None, "Proportion of children under five who are underweight (weight-for-age)", g("prevalence_of_underweight_children_u5")],
-            [None, "Proportion of children under five with stunting (height-for-age)", g("prevalence_of_stunting_children_u5")],
-            [None, "Proportion of children under five with wasting", g("prevalence_of_wasting_children_u5")],
+            [None, "Percentage of children under five who are underweight (weight-for-age)", g("prevalence_of_underweight_children_u5")],
+            [None, "Percentage of children under five with stunting (height-for-age)", g("prevalence_of_stunting_children_u5")],
+            [None, "Percentage of children under five with wasting", g("prevalence_of_wasting_children_u5")],
         ]),
         ("Goal 2: Achieve universal primary education", [
-            [None, "Net enrollment ratio for primary education", g("net_enrollment_ratio_primary_education")],
-            [None, "Gross enrollment ratio in primary education", g("gross_enrollment_rate_primary")],
-            [None, "Net enrollment ratio for secondary education", g("net_enrollment_ratio_secondary_education")],
-            [None, "Gross enrollment ratio in secondary education", g("gross_enrollment_ratio_secondary_education")],
+            [None, "Net enrollment rate for primary education", g("net_enrollment_ratio_primary_education")],
+            [None, "Gross enrollment rate in primary education", g("gross_enrollment_rate_primary")],
+            [None, "Net enrollment rate for secondary education", g("net_enrollment_ratio_secondary_education")],
+            [None, "Gross enrollment rate in secondary education", g("gross_enrollment_ratio_secondary_education")],
             [None, "Literacy rate of 15-24 year olds (men and women)", g("literacy_rate")],
         ]),
         ("Goal 3: Promote gender equality and empower women", [
-            [None, "Ratio of boys to girls in primary schools", g("boy_girl_ratio_primary")],
-            [None, "Ratio of boys to girls in junior secondary schools", g("boy_girl_ratio_js")],
-            [None, "Ratio of boys to girls in senior secondary schools ", g("boy_girl_ratio_secondary_school")],
+            [None, "Ratio of girls to boys in primary schools", g("girl_boy_ratio_primary")],
+            [None, "Ratio of girls to boys in junior secondary schools", g("girl_boy_ratio_js")],
+            [None, "Ratio of girls to boys in senior secondary schools ", g("girl_boy_ratio_secondary_school")],
+            [None, "Gender parity index (GPI) for primary schools", g("gender_parity_index_primary")],
+            [None, "Gender parity index (GPI) for junior secondary schools", g("gender_parity_index_js")],
         ]),
         ("Goal 4: Reduce child mortality", [
+            [None, "Measles immunization rate", g("immunization_rate_measles")],
             [None, "DPT 3 immunization rate", g("immunization_rate_dpt3")],
-            [None, "Under five mortality rate per 1000 live births", g("mortality_rate_children_u5")],
-            [None, "Proportion of children under five years of age with diarrhea who received oral rehydration therapy", g("proportion_of_children_u5_diarrhea_treated_with_ors_med")],
+            [None, "Infant mortality rate (per 1,000 live births)", g("mortality_rate_infant")],
+            [None, "Under five mortality rate (per 1,000 live births)", g("mortality_rate_children_u5")],
+            [None, "Percentage of children under five years of age with diarrhea who received oral rehydration therapy", g("proportion_of_children_u5_diarrhea_treated_with_ors_med")],
         ]),
         ("Goal 5: Improve maternal health", [
-            [None, "Proportion of births attended by a skilled health provider", g("proportion_of_births_by_skilled_health_personnel")],
-            [None, "Proportion of pregnant women tested for HIV", g("percentage_pregnant_women_tested_for_hiv_during_pregnancy")],
-            [None, "Proportion of women who attended at least four antenatal visits", g("percent_antenatal_care_four")],
+            [None, "Maternal mortality", "N/A"],
+            [None, "Percentage of births attended by a skilled health provider", g("proportion_of_births_by_skilled_health_personnel")],
+            [None, "Percentage of pregnant women tested for HIV", g("percentage_pregnant_women_tested_for_hiv_during_pregnancy")],
+            [None, "Percentage of women who attended at least four antenatal visits", g("percent_antenatal_care_four")],
         ]),
         ("Goal 6: Combat HIV/AIDS, malaria and other diseases", [
-            [None, "Proportion of children under five sleeping under insecticide-treated bednets", g("proportion_children_u5_sleeping_under_itns")],
-            [None, "Proportion of men and women ever tested for HIV", g("percentage_of_individuals_tested_for_hiv_ever")],
+            [None, "HIV Prevalence", g("prevalence_of_hiv")],
+            [None, "Percentage of children under five sleeping under insecticide-treated bednets", g("proportion_children_u5_sleeping_under_itns")],
+            [None, "Percentage of men and women ever tested for HIV", g("percentage_of_individuals_tested_for_hiv_ever")],
+            [None, "Tuberculosis treatment success rate", "N/A"],
         ]),
         ("Goal 7: Ensure environmental sustainability", [
-            [None, "Proportion of households with access to an improved water source", g("percentage_households_with_access_to_improved_water_sources")],
-            [None, "Proportion of households with access to improved sanitation", g("percentage_households_with_access_to_improved_sanitation")],
+            [None, "Percentage of households with access to an improved water source", g("percentage_households_with_access_to_improved_water_sources")],
+            [None, "Percentage of households with access to improved sanitation", g("percentage_households_with_access_to_improved_sanitation")],
         ]),
     ]
     context.navs = [{ 'url': '/', 'name': 'Home' },
@@ -298,6 +306,7 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Comprehensive Health Centres and Hospitals", g("num_level_4_health_facilities"), None, g("target_level_4_health_facilities"), None],
                 ["Other Health Facilities", g("num_level_other_health_facilities"), None, None, None],
                 ["Total number of facilities", g("num_health_facilities"), None, g("target_total_health_facilities"), None],
+                ["Facilities that offer inpatient care", g("num_health_facilities_inpatient_care"), g("proportion_health_facilities_inpatient_care"), None, None],
                 ["Facilities that offer care 24 hours a day, 7 days a week", g("num_health_facilities_open_24_7"), g("proportion_health_facilities_open_24_7"), g("target_health_facilities_open_24_7"), g("target_all_but_level_1_health_facilities")],
             ],),
             ('Staffing', [
@@ -306,6 +315,8 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Total number of nurses in the LGA", g("num_nurses"), None, g("target_num_nurses"), None],
                 ["Total number of CHEWs (Jr. and Sr.) in the LGA", g("num_chews"), None, g("target_num_chews"), None],
                 ["Total number of laboratory technicians in the LGA", g("num_lab_techs"), None, g("target_num_lab_techs"), None],
+                ["Number of health providers per 1,000 population", g("num_skilled_health_providers_per_1000"), None, None, None],
+                ["Number of CHEWs per 1,000 population", g("num_chews_per_1000"), None, None, None],
                 ["Number of facilities where all salaried staff were paid during the last pay period", g("num_staff_paid"), g("proportion_staff_paid"), g("target_total_health_facilities"), "100%"],
             ],),
             ('Child Health', [
@@ -318,13 +329,19 @@ def tmp_variables_for_sector(sector_slug, lga):
             ('Maternal Health', [
                 ["Number of facilities that offer antenatal care", g("num_antenatal"), g("proportion_antenatal"), g("target_total_health_facilities"), "100%"],
                 ["Number of facilities with at least one skilled birth attendant", g("num_at_least_1_sba"), g("proportion_at_least_1_sba"), g("target_health_facilities_open_24_7"), g("target_all_but_level_1_health_facilities")],
+                ["Number of facilities that perform Caesarean sections", g("num_health_facilities_c_sections"), g("proportion_health_facilities_c_sections"), None, None],
                 ["Number of facilities that offer delivery services 24 hours a day, 7 days a week", g("num_delivery_24_7"), g("proportion_delivery_24_7"), g("target_health_facilities_open_24_7"), g("target_all_but_level_1_health_facilities")],
+
                 ["Number of facilities with access to emergency transport services", g("num_access_functional_emergency_transport"), g("proportion_access_functional_emergency_transport"), g("target_total_health_facilities"), "100%"],
                 ["Number of facilities that offer family planning services", g("num_family_planning"), g("proportion_family_planning"), g("target_total_health_facilities"), "100%"],
                 ["Number of facilities that do not charge any fees for maternal health services", g("num_delivery_no_user_fees"), g("proportion_delivery_no_user_fees"), g("target_total_health_facilities"), "100%"],
             ],),
-            ('Malaria', [
-                ["Number of facilities that perform malaria testing (RDT or microscopy)", g("num_malaria_testing"), g("proportion_malaria_testing"), g("target_total_health_facilities"), "100%"],
+            ('HIV/AIDS, Malaria and other Diseases', [
+                ["HIV/AIDS"],
+                ["Number of facilities that offer HIV testing", g("num_health_facilities_hiv_testing"), g("proportion_health_facilities_hiv_testing"), None, None],
+                ["Number of facilities that offer HIV treatment", g("num_health_facilities_hiv_testing"), g("proportion_health_facilities_hiv_testing"), None, None],
+                ["Malaria"],
+                ["Number of facilities that offer malaria testing (RDT or microscopy)", g("num_malaria_testing"), g("proportion_malaria_testing"), g("target_total_health_facilities"), "100%"],
                 ["Number of facilities that offer ACT-based treatment for malaria", g("num_act_treatment_for_malaria"), g("proportion_act_treatment_for_malaria"), g("target_total_health_facilities"), "100%"],
                 ["Number of facilities that offer malaria prophylaxis during pregnancy", g("num_malaria_prevention_pregnancy"), g("proportion_malaria_prevention_pregnancy"), g("target_total_health_facilities"), "100%"],
                 ["Number of facilities that provide bednets", g("num_offer_bednets"), g("proportion_offer_bednets"), g("target_total_health_facilities"), "100%"],
@@ -337,7 +354,7 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Number of facilities with mobile phone coverage somewhere on the premises", g("num_mobile_coverage"), g("proportion_mobile_coverage"), g("target_total_health_facilities"), "100%"],
             ],),
             ('Equipment and Supplies', [
-                ["Number of facilities that experienced NO essential medication stock-outs in the past 3 months", g("num_no_stockout_essential_meds"), g("proportion_no_stockout_essential_meds"), g("target_total_health_facilities"), "100%"],
+                ["Number of facilities that experienced a stock-out of essential medications in the past 3 months", g("num_stockout_essential_meds"), g("proportion_stockout_essential_meds"), 0, "0%"],
             ],),
         ],
         'education': [
@@ -361,6 +378,8 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Primary net enrollment rate (NER) for girls", g("net_enrollment_rate_girls_primary"), None, "100%"],
                 ["Junior secondary net enrollment rate (NER) for boys", g("net_enrollment_rate_boys_js"), None, "100%"],
                 ["Junior secondary net enrollment rate (NER) for girls", g("net_enrollment_rate_girls_js"), None, "100%"],
+                ["Gender parity index (GPI) for primary schools", g("gender_parity_index_primary"), None, "1", None],
+                ["Gender parity index (GPI) for junior secondary schools", g("gender_parity_index_js"), None, "1", None],
             ],),
             ('Infrastructure', [
                 ["Water & Santation"],
