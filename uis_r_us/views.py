@@ -235,7 +235,7 @@ def new_dashboard(request, lga_id):
         ("Goal 1: Eradicate extreme poverty and hunger", [
             [None, "Proportion of children under five who are underweight (weight-for-age)", g("prevalence_of_underweight_children_u5")],
             [None, "Proportion of children under five with stunting (height-for-age)", g("prevalence_of_stunting_children_u5")],
-            [None, "Proportion of children under five with wasting", g("prevalence_of_wasting_children_u5")],
+            [None, "Proportion of children under five with wasting (weight-for-height)", g("prevalence_of_wasting_children_u5")],
         ]),
         ("Goal 2: Achieve universal primary education", [
             [None, "Net enrollment ratio for primary education", g("net_enrollment_ratio_primary_education")],
@@ -255,7 +255,7 @@ def new_dashboard(request, lga_id):
             [None, "Proportion of children under five years of age with diarrhea who received oral rehydration therapy", g("proportion_of_children_u5_diarrhea_treated_with_ors_med")],
         ]),
         ("Goal 5: Improve maternal health", [
-            [None, "Proportion of births attended by a skilled health provider", g("proportion_of_births_by_skilled_health_personnel")],
+            [None, "Proportion of births attended by a skilled birth attendant", g("proportion_of_births_by_skilled_health_personnel")],
             [None, "Proportion of pregnant women tested for HIV", g("percentage_pregnant_women_tested_for_hiv_during_pregnancy")],
             [None, "Proportion of women who attended at least four antenatal visits", g("percent_antenatal_care_four")],
         ]),
