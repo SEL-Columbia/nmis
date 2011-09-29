@@ -210,13 +210,14 @@ def temp_facility_buildr(lga):
     ilist.append(("education", "Schools", education_indicators, g("num_schools")))
 
     water_indicators = [
-            ["Non-motorized (human or animal-powered) lift mechanisms", g("proportion_lifted_by_manual_or_animal_power")],
-            ["Motorized lift mechanisms", g("proportion_lifted_by_mechanical_power")],
-            ["Bore holes and tube wells", g("proportion_boreholes_and_tubewells")],
-            ["Protected dug wells", g("proportion_protected_dug_wells")],
+    	    ["Total number of water sources", g("num_water_points")],
             ["Developed/treated spring and surface water", g("proportion_developed_and_treated_or_protected_surface_or_spring_water")],
-            ["Bore holes, protected and treated sources that are not functional", g("proportion_protected_water_points_functional")],
-            ["Population served per well maintained bore hole, protected or treated source", g("population_served_per_protected_and_functional_water_source")],
+            ["Protected dug wells", g("proportion_protected_dug_wells")],
+            ["Bore holes and tube wells", g("proportion_boreholes_and_tubewells")],
+            ["Bore holes and tube wells with non-motorized lift mechanisms", g("proportion_boreholes_tubewells_manual")],
+            ["Bore holes and tube wells with motorized lift mechanisms", g("proportion_boreholes_tubewells_non_manual")],
+            ["Bore holes, protected and treated sources that are well-maintained", g("proportion_protected_water_points_functional")],
+            ["Population served per well-maintained bore hole, protected or treated source", g("population_served_per_protected_and_functional_water_source")],
         ]
     ilist.append(("water", "Water Points", water_indicators, g("num_water_points")))
     return ilist
@@ -434,33 +435,33 @@ def tmp_variables_for_sector(sector_slug, lga):
         ],
         'water': [
             ('Type', [
-                ["Number of bore holes and tube wells", g("num_boreholes_and_tubewells"), g("proportion_boreholes_and_tubewells"), ""],
-                ["Number of developed and treated spring and surface water", g("num_developed_and_treated_or_protected_surface_or_spring_water"), g("proportion_developed_and_treated_or_protected_surface_or_spring_water"), ""],
-                ["Number of protected dug wells", g("num_protected_dug_wells"), g("proportion_protected_dug_wells"), ""],
-                ["Number of other types of protected water sources", g("num_other_protected_sources"), g("proportion_other_protected_sources"), ""],
-                ["Number of mapped unprotected sources", g("num_mapped_unprotected_sources"), g("proportion_mapped_unprotected_sources"), ""],
+                ["Number of bore holes and tube wells", g("num_boreholes_and_tubewells"), None, ""],
+                ["Number of developed and treated spring and surface water", g("num_developed_and_treated_or_protected_surface_or_spring_water"), None, ""],
+                ["Number of protected dug wells", g("num_protected_dug_wells"), None, ""],
+                ["Number of other types of protected water sources", g("num_other_protected_sources"), None, ""],
+                ["Number of mapped unprotected sources", g("num_mapped_unprotected_sources"), None, ""],
                 ["Total number of water sources", g("num_water_points"), None, ""],
             ],),
-            ('Functionality', [
-                ["Number of bore holes, protected or treated sources that are not functioning", g("num_protected_water_sources_non_functional"), g("proportion_protected_water_points_non_functional"), ""],
+            ('Maintenance', [
+                ["Percentage of bore holes, protected or treated sources that are poorly maintained", g("num_protected_water_sources_non_functional"), g("proportion_protected_water_points_non_functional"), ""],
             ]),
             ('Population Served', [
-                ["Population served per functioning borehole, protected or treated source", g("population_served_per_protected_and_functional_water_source"), None, ""],
-                ["Population severed per borehole, protected or treated source (whether or not it is currently functioning)", g("population_served_per_all_water_sources"), None, ""],
+                ["Population served per well-maintained borehole, protected or treated source", g("population_served_per_protected_and_functional_water_source"), None, ""],
+                ["Population severed per borehole, protected or treated source (whether or not it is well-maintained)", g("population_served_per_all_water_sources"), None, ""],
             ]),
             ('Lift Mechanisms for Bore Holes and Tube Wells', [
-                ["Number that are non-motorized (human or animal-powered)", g("num_boreholes_tubewells_manual"), g("proportion_boreholes_tubewells_manual"), ""],
-                ["Number with a diesel lift", g("num_boreholes_tubewells_diesel"), g("proportion_boreholes_tubewells_diesel"), ""],
-                ["Number with an electric motor lift", g("num_boreholes_tubewells_electric"), g("proportion_boreholes_tubewells_electric"), ""],
-                ["Number with a solar lift", g("num_boreholes_tubewells_solar"), g("proportion_boreholes_tubewells_solar"), ""],
-                ["Number with a motorized lift", g("num_boreholes_tubewells_non_manual"), g("proportion_boreholes_tubewells_non_manual"), ""],
+                ["Percentage that are non-motorized (human or animal-powered)", g("num_boreholes_tubewells_manual"), g("proportion_boreholes_tubewells_manual"), ""],
+                ["Percentage with a diesel lift", g("num_boreholes_tubewells_diesel"), g("proportion_boreholes_tubewells_diesel"), ""],
+                ["Percentage with an electric motor lift", g("num_boreholes_tubewells_electric"), g("proportion_boreholes_tubewells_electric"), ""],
+                ["Percentage with a solar lift", g("num_boreholes_tubewells_solar"), g("proportion_boreholes_tubewells_solar"), ""],
+                ["Percentage with a motorized lift", g("num_boreholes_tubewells_non_manual"), g("proportion_boreholes_tubewells_non_manual"), ""],
             ],),
-            ('Lift Mechanisms for Bore Holes and Tube Wells (Functioning by Type)', [
-                ["Number of non-motorized (human or animal-powered) lifts that are functioning", g("num_boreholes_tubewells_manual_functional"), g("proportion_boreholes_tubewells_manual_functional"), ""],
-                ["Number of diesel-powered lifts that are functioning", g("num_boreholes_tubewells_diesel_functional"), g("proportion_boreholes_tubewells_diesel_functional"), ""],
-                ["Number of electrically-powered lifts that are functioning", g("num_boreholes_tubewells_electric_functional"), g("proportion_boreholes_tubewells_electric_functional"), ""],
-                ["Number of solar-powered lifts that are functioning", g("num_boreholes_tubewells_solar_functional"), g("proportion_boreholes_tubewells_solar_functional"), ""],
-                ["Number of all motorized lifts that are functioning",g("num_boreholes_tubewells_non_manual_functional"), g("proportion_boreholes_tubewells_non_manual_functional"), ""],
+            ('Poorly Maintained Lift Mechanisms for Bore Holes and Tube Wells', [
+                ["Percentage of non-motorized (human or animal-powered) lifts that are poorly maintained", g("num_boreholes_tubewells_manual_non_functional"), g("proportion_boreholes_tubewells_manual_non_functional"), ""],
+                ["Percentage of diesel-powered lifts that are poorly maintained", g("num_boreholes_tubewells_diesel_non_functional"), g("proportion_boreholes_tubewells_diesel_non_functional"), ""],
+                ["Percentage of electrically-powered lifts that are poorly maintained", g("num_boreholes_tubewells_electric_non_functional"), g("proportion_boreholes_tubewells_electric_non_functional"), ""],
+                ["Percentage of solar-powered lifts that are poorly maintained", g("num_boreholes_tubewells_solar_non_functional"), g("proportion_boreholes_tubewells_solar_non_functional"), ""],
+                ["Percentage of all motorized lifts that are poorly maintained",g("num_boreholes_tubewells_non_manual_non_functional"), g("proportion_boreholes_tubewells_non_manual_non_functional"), ""],
             ]),
         ],
     }
