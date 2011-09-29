@@ -112,7 +112,10 @@ def deploy(deployment_name, reload="none"):
         if env.migrate:
             with cd(env.code_path):
                 _run_in_virtualenv("python manage.py migrate")
-    migrate_database()
+    if reload == "all" or reload == "limit":
+        pass # don't run migrate if we are reloading the data anyways
+    else:
+        migrate_database()
 
     def reload_fixtures(flag=""):
         with cd(env.code_path):
