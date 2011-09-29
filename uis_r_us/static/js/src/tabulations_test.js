@@ -1,21 +1,3 @@
-var data = [];
-var sectors = [], _sectors = ["Agriculture", "Education", "Health", "Water"];
-_.each(_sectors, function(s){
-    sectors.push({
-        name: s,
-        slug: s.toLowerCase()
-    });
-});
-_.times(40, function(i){
-    data.push({
-        sector: sectors[i%4].slug,
-        something: i%3==0
-    });
-});
-
-// var sectors;
-// $.ajax({url: '/static/tmp_sectors.json',async: false,dataType: 'json'})
-//     .done(function(_sectors){sectors = _sectors;});
 
 module("NMIS", {
     setup: function(){
@@ -59,10 +41,6 @@ test("Sectors", function(){
     equal(sectorList.length, 4);
     equal(Sectors.pluck('health').slug, 'health', "Sectors.pluck(slug) works.")
 });
-
-// var data;
-// $.ajax({url: '/static/tmp_data.json',async: false,dataType: 'json'})
-//     .done(function(_data){data = _data;});
 
 module("NMIS Data", {
     setup: function(){}
