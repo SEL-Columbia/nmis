@@ -448,7 +448,7 @@ def tmp_variables_for_sector(sector_slug, lga):
             ]),
             ('Population Served', [
                 ["Population served per well-maintained borehole, protected or treated source", g("population_served_per_protected_and_functional_water_source"), None, ""],
-                ["Population severed per borehole, protected or treated source (whether or not it is well-maintained)", g("population_served_per_all_water_sources"), None, ""],
+                ["Population served per borehole, protected or treated source (whether or not it is well-maintained)", g("population_served_per_all_water_sources"), None, ""],
             ]),
             ('Lift Mechanisms for Bore Holes and Tube Wells', [
                 ["Percentage that are non-motorized (human or animal-powered)", g("proportion_boreholes_tubewells_manual"), h("num_boreholes_tubewells_manual", "num_boreholes_and_tubewells"), ""],
