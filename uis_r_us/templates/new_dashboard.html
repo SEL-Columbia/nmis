@@ -18,7 +18,7 @@
                         {{key}}
                     </td>
                     <td class='value'>
-                        {{value}}
+                        {{value.value}}
                     </td>
                 </tr>
                 {% endfor %}
@@ -71,7 +71,7 @@
 			{% for goal, indicators in mdg_indicators %}
 			<tbody>
 				<tr>
-					<td colspan="4" class="mdg_header">
+					<td colspan="5" class="mdg_header">
 						{{goal}}
 					</td>
 				</tr>
@@ -87,11 +87,13 @@
 					</td>
 					{% endif %}
 					<td>
-						{{indicator.1}}
-					</td>
-					<td class="empty data">
-						{{indicator.2}}
-					</td>
+                    {{indicator.1}}
+                    </td>
+                    {% for key, valsrc in indicator.2.items %}
+                        <td class="empty data">
+                        {{valsrc}}
+                        </td>
+                    {% endfor %}
 				</tr>
 				{% endfor %}
 			</tbody>

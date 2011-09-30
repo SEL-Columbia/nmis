@@ -9,6 +9,7 @@ from nga_districts.models import LGA, Zone, State
 from django.db.models import Count
 import json
 
+
 @login_required
 def dashboard(request, reqpath):
     if request.method == "POST":
@@ -181,7 +182,8 @@ def test_map(request):
 def temp_facility_buildr(lga):
     lga_data = lga.get_latest_data(for_display=True)
     def g(slug):
-        return lga_data.get(slug, None)
+        value_dict = lga_data.get(slug, None)
+        return value_dict.get('value', None)
     ilist = []
     health_indicators = [
             ["Health posts and dispensaries", g("num_level_1_health_facilities")],
@@ -296,7 +298,8 @@ def new_dashboard(request, lga_id):
 def tmp_variables_for_sector(sector_slug, lga):
     lga_data = lga.get_latest_data(for_display=True)
     def g(slug):
-        return lga_data.get(slug, None)
+        value_dict = lga_data.get(slug, None)
+        return value_dict.get('value', None)
     def h(slug1, slug2):
         return "%s/%s" % (g(slug1), g(slug2))
     example = {
