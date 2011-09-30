@@ -303,10 +303,6 @@ class DictModel(models.Model):
         return d
 
     def _filter_data_for_display(self, data):
-        """ This function gives a default formatting based on data_type for
-        any dictionary of {slugs:values}.  It should probably live somewhere
-        else but for the time being it lives here.
-        """
         DECIMAL_PLACES = 1
         # hack to format for now
         import locale
@@ -338,8 +334,8 @@ class DictModel(models.Model):
         }
         data_dictionary = Variable.get_full_data_dictionary(as_json=False)
         filtered_data = {}
-        for slug, value in data.items():
-            filtered_data[slug] = display_functions[data_dictionary[slug]['data_type']](value)
+        for slug, value_dict in data.items():
+            filtered_data[slug] = display_functions[data_dictionary[slug]['data_type']](value_dict['value'])
         return filtered_data
 
     def get_latest_data(self, for_display=False):
@@ -368,7 +364,9 @@ class DictModel(models.Model):
         modd = {}
         for variable, valtup in d.items():
             #strips out the 'date' which was used to get most recent.
-            modd[variable] = valtup[1]
+            modd[variable] = {
+                'value': valtup[1]
+            }
         return modd
 
     def get_latest_value_for_variable(self, variable):
