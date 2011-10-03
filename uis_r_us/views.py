@@ -238,12 +238,45 @@ def temp_facility_buildr(lga):
     ilist.append(("water", "Water Points", water_indicators, g("num_water_points")))
     return ilist
 
+def get_nav_urls(lga, mode='lga', sector='overview'):
+    d = {}
+    if mode == "lga":
+        d['overview'] = '/new_dashboard/%s' % lga.unique_slug
+    else:
+        d['overview'] = '/~%s' % (lga.unique_slug)
+    def sector_url(sector):
+        if mode == 'lga':
+            return '/new_dashboard/%s/%s' % (lga.unique_slug, sector)
+        else:
+            return '/~%s/%s' % (lga.unique_slug, sector)
+    def mode_url(mode):
+        if mode == "lga":
+            return "/new_dashboard/%s" % lga.unique_slug
+        else:
+            return "/~%s" % lga.unique_slug
+    sd = [(s, sector_url(s)) for s in ['health', 'education', 'water']]
+    d.update(dict(sd))
+    d.update(dict([(m, mode_url(m)) for m in ['lga', 'facility']]))
+    return d
+
 def new_dashboard(request, lga_id):
     context = RequestContext(request)
+    context.local_nav = {
+        'mode': {'lga': True},
+        'sector': {'overview': True}
+    }
     try:
         lga = LGA.objects.get(unique_slug=lga_id)
     except:
         return HttpResponseRedirect("/")
+    context.site_title = "LGA Overview"
+    context.small_title = "%s, %s" % (lga.state.name, lga.name)
+    context.breadcrumbs = [
+        ("Nigeria", "/~"),
+        (lga.state.name, "/~"),
+        (lga.name, "/new_dashboard/%s" % lga.unique_slug),
+    ]
+    context.local_nav_urls = get_nav_urls(lga, mode='lga', sector='overview')
     lga_data = lga.get_latest_data(for_display=True)
     def g(slug):
         return lga_data.get(slug, None)
@@ -501,7 +534,21 @@ def new_sector_overview(request, lga_id, sector_slug):
         return HttpResponseRedirect("/new_dashboard/")
     if sector_slug not in ["education", "health", "water"]:
         return HttpResponseRedirect("/new_dashboard/")
+    sector_name = sector_slug.capitalize()
     context = RequestContext(request)
+    context.site_title = "%s Overview" % sector_name
+    context.small_title = "%s, %s" % (lga.state.name, lga.name)
+    context.breadcrumbs = [
+        ("Nigeria", "/~"),
+        (lga.state.name, "/~"),
+        (lga.name, "/new_dashboard/%s" % lga.unique_slug),
+        (sector_name, "/new_dashboard/%s/%s" % (lga.unique_slug, sector_slug)),
+    ]
+    context.local_nav = {
+        'mode': {'lga': True},
+        'sector': {sector_slug: True}
+    }
+    context.local_nav_urls = get_nav_urls(lga, mode='lga', sector=sector_slug)
     context.lga = lga
     context.navs = [{ 'url': '/', 'name': 'Home' },
                     { 'url': '/new_dashboard/%s' % lga.unique_slug, 'name': lga.name },

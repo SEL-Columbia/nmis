@@ -18,45 +18,48 @@
 	{% block head %}{% endblock %}
 </head>
 <body class="nmis home">
-	<div id="header">
-		<div class="fwidth">
-			<a href="/" id="hlogo"><img src="/static/images/nmis_pilot.png" /></a>
-			<h2 class="site-title">Nigeria MDG Information System</h2>
-			<h2 class="title">
-	                  {% block page_title %}{{ site_title }}{% endblock %}
-			</h2>
-			{% if data_loading_count %}
-			<p class="loading-info" data-lgas-loading-count="{{data_loading_count}}" title="LGAs in progress: {{data_loading_count}}">
-				<img src="/static/images/grey-loader.gif">
-			</p>
-			{% endif %}
-
-                        {% block lga_nav %}{% endblock %}
-
-                        {% block account_links %}
-		<div class="account_links print-hide-block">
-			{% if user.is_authenticated %}
-			{% trans "Logged in" %}: {{ user.username }} 
-			(<a href="{% url auth_logout %}">{% trans "Log out" %}</a>
-                        | <a href="http://nmis.tenderapp.com/">{% trans "Help" %}</a>)
-			{% else %}
-			<a href="{% url auth_login %}">{% trans "Log in" %}</a>
-                        | <a href="http://nmis.tenderapp.com/">{% trans "Help" %}</a>			{% endif %}
-                        {% endblock %}
-		</div>
-		</div>
-	</div>
-	<div id="content">
-		<div class="fwidth">
-			{% if navs %}
-			{% include 'embed_nav.html' %}
-			{% endif %}
-			<div class="content-inner-wrap">
-				{% include "browser_message.html" %}
-				{% block content %}{% endblock %}
+	<div class="topbar">
+		<div class="fill">
+			<div class="container">
+				<div class="row">
+					<a class="brand" href="#">
+						<span class="logo">
+							<img src="/static/images/nmis_pilot.png">
+							<span>HOME</span>
+						</span>
+						Nigeria MDG Information System
+					</a>
+				</div>
+				<div class="row page-title-row">
+					<p class="bc">
+						{% for bc, link in breadcrumbs %}
+						<a href="{{link}}">{{bc}}</a>
+							{% if not forloop.last %}
+							<span> / </span>
+							{% endif %}
+						{% endfor %}
+						&nbsp;
+					</p>
+				</div>
 			</div>
 		</div>
 	</div>
+	<div class="container">
+		<div class="content">
+			{% if local_nav %}
+				{% include 'local_nav.html' %}
+			{% endif %}
+			<div class="page-header">
+				<h1>
+					{% block page_title %}{{ site_title }}{% endblock %}
+					<small>
+						{{small_title}}
+					</small>
+				</h1>
+			</div>
+			{% block content %}{% endblock %}
+		</div>
+	</div> <!-- /container -->
 	{% if site_title %}
 	<script type="text/javascript" charset="utf-8">
 		var siteTitle = "{{site_title}}";
