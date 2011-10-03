@@ -260,9 +260,15 @@ def get_nav_urls(lga, mode='lga', sector='overview'):
             return '/~%s/%s' % (lga.unique_slug, sector)
     def mode_url(mode):
         if mode == "lga":
-            return "/new_dashboard/%s" % lga.unique_slug
+            if sector == "overview":
+                return "/new_dashboard/%s" % lga.unique_slug
+            else:
+                return "/new_dashboard/%s/%s" % (lga.unique_slug, sector)
         else:
-            return "/~%s" % lga.unique_slug
+            if sector == "overview":
+                return "/~%s" % lga.unique_slug
+            else:
+                return "/~%s/%s" % (lga.unique_slug, sector)
     sd = [(s, sector_url(s)) for s in ['health', 'education', 'water']]
     d.update(dict(sd))
     d.update(dict([(m, mode_url(m)) for m in ['lga', 'facility']]))
