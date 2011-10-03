@@ -183,7 +183,10 @@ def temp_facility_buildr(lga):
     lga_data = lga.get_latest_data(for_display=True)
     def g(slug):
         value_dict = lga_data.get(slug, None)
-        return value_dict.get('value', None)
+        if value_dict:
+            return value_dict.get('value', None)
+        else:
+            return None
     ilist = []
     health_indicators = [
             ["Health posts and dispensaries", g("num_level_1_health_facilities")],
@@ -299,7 +302,10 @@ def tmp_variables_for_sector(sector_slug, lga):
     lga_data = lga.get_latest_data(for_display=True)
     def g(slug):
         value_dict = lga_data.get(slug, None)
-        return value_dict.get('value', None)
+        if value_dict:
+            return value_dict.get('value', None)
+        else:
+            return None
     def h(slug1, slug2):
         return "%s/%s" % (g(slug1), g(slug2))
     example = {

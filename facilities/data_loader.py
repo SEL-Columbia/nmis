@@ -389,7 +389,8 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
     def calculate_lga_variables(self):
         lgas = LGA.objects.filter(id__in=[int(x) for x in self.lga_ids])
         for lga in lgas:
-            lga.add_calculated_values(lga.get_latest_data(), source='Facility Inventory 2011', only_for_missing=True)
+            latest_data = dict([(k, d['value']) for k, d in lga.get_latest_data().items()])
+            lga.add_calculated_values(latest_data, source='Facility Inventory 2011', only_for_missing=True)
 
     def get_info(self):
         def get_variable_usage():
