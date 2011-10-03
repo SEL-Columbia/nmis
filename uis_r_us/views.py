@@ -93,11 +93,20 @@ def state_data(zone):
 
 def country_view(context):
     context.site_title = "Nigeria"
+    context.breadcrumbs = [
+        ("Nigeria", "/~"),
+    ]
     return render_to_response("ui.html", context_instance=context)
 
 def lga_view(context):
     context.site_title = "LGA View"
     context.lga_id = "'%s'" % context.lga.unique_slug
+    context.breadcrumbs = [
+        ("Nigeria", "/~"),
+        (context.lga.state.name, "/~"),
+        (context.lga.name, "/new_dashboard/%s" % context.lga.unique_slug),
+        ("Facility Details", "/~%s" % context.lga.unique_slug),
+    ]
     return render_to_response("ui.html", context_instance=context)
 
 
