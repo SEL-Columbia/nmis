@@ -136,6 +136,17 @@ def active_districts():
         output.append((state.name, statelgas))
     return output
 
+def all_mustache_templates(request):
+    import os, glob
+    cur_file = os.path.abspath(__file__)
+    cur_dir = os.path.dirname(cur_file)
+    all_templates = glob.glob(os.path.join(cur_dir, 'mustache', '*.html'))
+    templates = []
+    for template_path in all_templates:
+        with open(template_path, 'r') as f:
+            templates.append(f.read())
+    return HttpResponse('\n'.join(templates))
+
 def mustache_template(request, template_name):
     import os
     cur_file = os.path.abspath(__file__)
