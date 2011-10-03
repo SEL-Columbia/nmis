@@ -517,7 +517,7 @@ $(function(){
 				})();
 			});
 		});
-		this.get(pageRootUrl + ":lga", function(){
+		this.get(pageRootUrl + ":lga/?", function(){
 			var lgaId = this.params.lga;
 			$('#zone-navigation').hide();
 			setMode('lga');
@@ -531,6 +531,22 @@ $(function(){
 				setSector('health');
 				setViewMode('facility');
 
+			});
+		});
+		this.get(pageRootUrl + ":lga/:sector", function(){
+			var lgaId = this.params.lga;
+			var sectorId = this.params.sector;
+			$('#zone-navigation').hide();
+			setMode('lga');
+			lga.loadData(lgaId, function(){
+				this.buildTable = true;
+				setTitle(createTitleForLga(this.stateName, this.lgaName));
+				// var curSector = $.cookie('sector') || defaultMode.sector,
+				// 	curLevel = $.cookie('level') || defaultMode.level;
+				// setSector(curSector);
+				// setViewMode(curLevel);
+				setSector(sectorId);
+				setViewMode('facility');
 			});
 		});
 	});
