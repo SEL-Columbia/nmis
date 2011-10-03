@@ -1,4 +1,3 @@
 from old_tests import BasicDataTest, CalculatedVariableTest, \
-                GapAnalysisTest, LGAIndicatorTest, PassDataToPage, \
-                ScoreVariableTest
+                GapAnalysisTest, LGAIndicatorTest, PassDataToPage
 from import_tests import ImportDataTest

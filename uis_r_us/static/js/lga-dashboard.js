@@ -956,6 +956,8 @@ function splitAndCapitalizeString(str) {
 }
 
 function displayValue2(slug, value) {
+    // interprets value as a dict if it has a value attribute
+    if(value !== undefined && value.value !== undefined) { value = value.value; }
     if (dataDictionary[slug] == undefined) {
         return 'n/a';
     }
