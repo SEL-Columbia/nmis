@@ -9,6 +9,7 @@ from nga_districts.models import LGA, Zone, State
 from django.db.models import Count
 import json
 
+
 @login_required
 def dashboard(request, reqpath):
     if request.method == "POST":
@@ -192,7 +193,11 @@ def test_map(request):
 def temp_facility_buildr(lga):
     lga_data = lga.get_latest_data(for_display=True)
     def g(slug):
-        return lga_data.get(slug, None)
+        value_dict = lga_data.get(slug, None)
+        if value_dict:
+            return value_dict.get('value', None)
+        else:
+            return None
     ilist = []
     health_indicators = [
             ["Health posts and dispensaries", g("num_level_1_health_facilities")],
@@ -243,6 +248,7 @@ def new_dashboard(request, lga_id):
     def g(slug):
         return lga_data.get(slug, None)
     context.facility_indicators = temp_facility_buildr(lga)
+    print g("mortality_rate_maternal")
     context.mdg_indicators = [
         ("Goal 1: Eradicate extreme poverty and hunger", [
             [None, "Percentage of children under five who are underweight (weight-for-age)", g("prevalence_of_underweight_children_u5")],
@@ -271,7 +277,7 @@ def new_dashboard(request, lga_id):
             [None, "Percentage of children under five years of age with diarrhea who received oral rehydration therapy", g("proportion_of_children_u5_diarrhea_treated_with_ors_med")],
         ]),
         ("Goal 5: Improve maternal health", [
-            [None, "Maternal mortality", "N/A"],
+            [None, "Maternal mortality", g("mortality_rate_maternal")],
             [None, "Percentage of births attended by a skilled birth attendant", g("proportion_of_births_by_skilled_health_personnel")],
             [None, "Percentage of women who attended at least four antenatal visits", g("percent_antenatal_care_four")],
             [None, "Percentage of pregnant women tested for HIV", g("percentage_pregnant_women_tested_for_hiv_during_pregnancy")],
@@ -280,7 +286,7 @@ def new_dashboard(request, lga_id):
             [None, "HIV Prevalence", g("prevalence_of_hiv")],
             [None, "Percentage of men and women ever tested for HIV", g("percentage_of_individuals_tested_for_hiv_ever")],
             [None, "Percentage of children under five sleeping under insecticide-treated bednets", g("proportion_children_u5_sleeping_under_itns")],
-            [None, "Tuberculosis treatment success rate", "N/A"],
+            [None, "Tuberculosis treatment success rate", None],
         ]),
         ("Goal 7: Ensure environmental sustainability", [
             [None, "Percentage of households with access to an improved water source", g("percentage_households_with_access_to_improved_water_sources")],
@@ -307,7 +313,11 @@ def new_dashboard(request, lga_id):
 def tmp_variables_for_sector(sector_slug, lga):
     lga_data = lga.get_latest_data(for_display=True)
     def g(slug):
-        return lga_data.get(slug, None)
+        value_dict = lga_data.get(slug, None)
+        if value_dict:
+            return value_dict.get('value', None)
+        else:
+            return None
     def h(slug1, slug2):
         return "%s/%s" % (g(slug1), g(slug2))
     example = {

@@ -335,7 +335,10 @@ class DictModel(models.Model):
         data_dictionary = Variable.get_full_data_dictionary(as_json=False)
         filtered_data = {}
         for slug, value_dict in data.items():
-            filtered_data[slug] = display_functions[data_dictionary[slug]['data_type']](value_dict['value'])
+            filtered_data[slug] = {
+                'value': display_functions[data_dictionary[slug]['data_type']](value_dict['value']),
+                'source': value_dict['source']
+                }
         return filtered_data
 
     def get_latest_data(self, for_display=False):
@@ -353,19 +356,20 @@ class DictModel(models.Model):
             return None
         records = self._data_record_class.objects.filter(**self._kwargs())
         d = {}
-        for r in records.values('variable_id', 'string_value', 'float_value', 'boolean_value', 'date'):
+        for r in records.values('variable_id', 'string_value', 'float_value', 'boolean_value', 'date', 'source'):
             # todo: test to make sure this sorting is correct
             variable_id = r['variable_id']
             if variable_id not in d or d[variable_id][0] < r['date']:
                 # updates the dict if it's the first record of its type OR
                 # if its date is more recent than the existing record
                 d[variable_id] = \
-                        (r['date'], non_null_value(r))
+                        (r['date'], non_null_value(r), r['source'])
         modd = {}
         for variable, valtup in d.items():
             #strips out the 'date' which was used to get most recent.
             modd[variable] = {
-                'value': valtup[1]
+                'value': valtup[1],
+                'source': valtup[2]
             }
         return modd
 
