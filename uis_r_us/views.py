@@ -94,7 +94,7 @@ def state_data(zone):
 def country_view(context):
     context.site_title = "Nigeria"
     context.breadcrumbs = [
-        ("Nigeria", "/~"),
+        ("Nigeria", "/"),
     ]
     return render_to_response("ui.html", context_instance=context)
 
@@ -102,8 +102,8 @@ def lga_view(context):
     context.site_title = "LGA View"
     context.lga_id = "'%s'" % context.lga.unique_slug
     context.breadcrumbs = [
-        ("Nigeria", "/~"),
-        (context.lga.state.name, "/~"),
+        ("Nigeria", "/"),
+        (context.lga.state.name, "/"),
         (context.lga.name, "/new_dashboard/%s" % context.lga.unique_slug),
         ("Facility Details", "/~%s" % context.lga.unique_slug),
     ]
@@ -287,8 +287,8 @@ def new_dashboard(request, lga_id):
     context.site_title = "LGA Overview"
     context.small_title = "%s, %s" % (lga.state.name, lga.name)
     context.breadcrumbs = [
-        ("Nigeria", "/~"),
-        (lga.state.name, "/~"),
+        ("Nigeria", "/"),
+        (lga.state.name, "/"),
         (lga.name, "/new_dashboard/%s" % lga.unique_slug),
     ]
     context.local_nav_urls = get_nav_urls(lga, mode='lga', sector='overview')
@@ -554,8 +554,8 @@ def new_sector_overview(request, lga_id, sector_slug):
     context.site_title = "%s Overview" % sector_name
     context.small_title = "%s, %s" % (lga.state.name, lga.name)
     context.breadcrumbs = [
-        ("Nigeria", "/~"),
-        (lga.state.name, "/~"),
+        ("Nigeria", "/"),
+        (lga.state.name, "/"),
         (lga.name, "/new_dashboard/%s" % lga.unique_slug),
         (sector_name, "/new_dashboard/%s/%s" % (lga.unique_slug, sector_slug)),
     ]
