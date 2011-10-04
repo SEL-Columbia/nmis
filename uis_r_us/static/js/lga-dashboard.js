@@ -431,6 +431,16 @@ function ensureValidSectorLevel(level, sector) {
             $.cookie('sector', s);
             // if a "leave" function is defined, it is executed and removed
             if(typeof _sectorOnLeave ==='function') {_sectorOnLeave(); _sectorOnLeave = null;}
+            $('ul.nav')
+                .find('.sector')
+                .each(function(){
+                    var $this = $(this);
+                    if($this.data('sector')===s) {
+                        $this.addClass('active');
+                    } else {
+                        $this.removeClass('active');
+                    }
+                });
 
             var nav = getNav();
             nav.find('.active-button.sector-button').removeClass('active-button');

@@ -265,10 +265,17 @@ html .rd-wrap {
     position: static;
 }
 .facility-popup {
-    width: 535px;
+    width: 555px;
     margin: 0;
     background-color: #fff;
     padding: 12px 0;
+}
+.facility-popup table {
+    border: 0 none;
+}
+.facility-popup table td {
+    border: 0 none;
+    padding: 0;
 }
 .facility-popup .title-bar {
     background-color: #eee;

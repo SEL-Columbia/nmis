@@ -275,6 +275,8 @@ def get_nav_urls(lga, mode='lga', sector='overview'):
         if mode == "lga":
             if sector == "overview":
                 return "/new_dashboard/%s" % lga.unique_slug
+            elif sector == None:
+                return "/new_dashboard/%s" % lga.unique_slug
             else:
                 return "/new_dashboard/%s/%s" % (lga.unique_slug, sector)
         else:
