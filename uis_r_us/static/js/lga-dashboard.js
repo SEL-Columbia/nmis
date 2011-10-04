@@ -263,7 +263,7 @@ function loadLgaData(lgaUniqueId, onLoadCallback) {
 			facilityDataARr.push(v);
 		});
 
-        buildLgaProfileBox(lgaData, variableDictionary.profile_variables);
+//        buildLgaProfileBox(lgaData, variableDictionary.profile_variables);
 		processFacilityDataRequests(lgaQ, {
 		    sectors: varDataReq.sectors,
 		    overview: varDataReq.overview,
