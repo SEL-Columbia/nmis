@@ -14,9 +14,10 @@ import json
 def dashboard(request, reqpath):
     if request.method == "POST":
         lgaid = request.POST['lga']
-        if LGA.objects.filter(unique_slug=lgaid).count() > 0:
-            return HttpResponseRedirect("/~%s" % lgaid)
-        else:
+        try:
+            lga = LGA.objects.get(unique_slug=lgaid)
+            return HttpResponseRedirect("/new_dashboard/%s" % lga.unique_slug)
+        except LGA.DoesNotExist, e:
             return HttpResponseRedirect("/~")
     context = RequestContext(request)
     context.data_loading_count = LGA.objects.filter(data_load_in_progress=True).count()
@@ -93,11 +94,20 @@ def state_data(zone):
 
 def country_view(context):
     context.site_title = "Nigeria"
+    context.breadcrumbs = [
+        ("Nigeria", "/"),
+    ]
     return render_to_response("ui.html", context_instance=context)
 
 def lga_view(context):
     context.site_title = "LGA View"
     context.lga_id = "'%s'" % context.lga.unique_slug
+    context.breadcrumbs = [
+        ("Nigeria", "/"),
+        (context.lga.state.name, "/"),
+        (context.lga.name, "/new_dashboard/%s" % context.lga.unique_slug),
+        ("Facility Details", "/~%s" % context.lga.unique_slug),
+    ]
     return render_to_response("ui.html", context_instance=context)
 
 
@@ -238,12 +248,51 @@ def temp_facility_buildr(lga):
     ilist.append(("water", "Water Points", water_indicators, g("num_water_points")))
     return ilist
 
+def get_nav_urls(lga, mode='lga', sector='overview'):
+    d = {}
+    if mode == "lga":
+        d['overview'] = '/new_dashboard/%s' % lga.unique_slug
+    else:
+        d['overview'] = '/~%s' % (lga.unique_slug)
+    def sector_url(sector):
+        if mode == 'lga':
+            return '/new_dashboard/%s/%s' % (lga.unique_slug, sector)
+        else:
+            return '/~%s/%s' % (lga.unique_slug, sector)
+    def mode_url(mode):
+        if mode == "lga":
+            if sector == "overview":
+                return "/new_dashboard/%s" % lga.unique_slug
+            else:
+                return "/new_dashboard/%s/%s" % (lga.unique_slug, sector)
+        else:
+            if sector == "overview":
+                return "/~%s" % lga.unique_slug
+            else:
+                return "/~%s/%s" % (lga.unique_slug, sector)
+    sd = [(s, sector_url(s)) for s in ['health', 'education', 'water']]
+    d.update(dict(sd))
+    d.update(dict([(m, mode_url(m)) for m in ['lga', 'facility']]))
+    return d
+
 def new_dashboard(request, lga_id):
     context = RequestContext(request)
+    context.local_nav = {
+        'mode': {'lga': True},
+        'sector': {'overview': True}
+    }
     try:
         lga = LGA.objects.get(unique_slug=lga_id)
     except:
         return HttpResponseRedirect("/")
+    context.site_title = "LGA Overview"
+    context.small_title = "%s, %s" % (lga.state.name, lga.name)
+    context.breadcrumbs = [
+        ("Nigeria", "/"),
+        (lga.state.name, "/"),
+        (lga.name, "/new_dashboard/%s" % lga.unique_slug),
+    ]
+    context.local_nav_urls = get_nav_urls(lga, mode='lga', sector='overview')
     lga_data = lga.get_latest_data(for_display=True)
     def g(slug):
         return lga_data.get(slug, None)
@@ -501,7 +550,21 @@ def new_sector_overview(request, lga_id, sector_slug):
         return HttpResponseRedirect("/new_dashboard/")
     if sector_slug not in ["education", "health", "water"]:
         return HttpResponseRedirect("/new_dashboard/")
+    sector_name = sector_slug.capitalize()
     context = RequestContext(request)
+    context.site_title = "%s Overview" % sector_name
+    context.small_title = "%s, %s" % (lga.state.name, lga.name)
+    context.breadcrumbs = [
+        ("Nigeria", "/"),
+        (lga.state.name, "/"),
+        (lga.name, "/new_dashboard/%s" % lga.unique_slug),
+        (sector_name, "/new_dashboard/%s/%s" % (lga.unique_slug, sector_slug)),
+    ]
+    context.local_nav = {
+        'mode': {'lga': True},
+        'sector': {sector_slug: True}
+    }
+    context.local_nav_urls = get_nav_urls(lga, mode='lga', sector=sector_slug)
     context.lga = lga
     context.navs = [{ 'url': '/', 'name': 'Home' },
                     { 'url': '/new_dashboard/%s' % lga.unique_slug, 'name': lga.name },

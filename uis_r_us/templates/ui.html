@@ -253,6 +253,8 @@ var modes = {
 		enter: function (){
 //			$('.profile-data-wrap').show();
 			$('#zone-navigation').hide();
+			$('.container')
+				.width('100%');
 			// SetResizer is defiend in application.js
 			//   its purpose is to trigger "full-height" whenever the page is resized.
 			//   it has some weird side-effects on mobile browsers.
@@ -308,7 +310,7 @@ $(function(){
 		this.get(pageRootUrl, function(){
 			$('#map').css({
 				'height': '476px',
-				'position': 'static'
+				'position': 'relative'
 			});
 			setMode('home');
 			setTitle($("<span />", {'text': 'Home'}));
@@ -515,7 +517,7 @@ $(function(){
 				})();
 			});
 		});
-		this.get(pageRootUrl + ":lga", function(){
+		this.get(pageRootUrl + ":lga/?", function(){
 			var lgaId = this.params.lga;
 			$('#zone-navigation').hide();
 			setMode('lga');
@@ -529,6 +531,22 @@ $(function(){
 				setSector('health');
 				setViewMode('facility');
 
+			});
+		});
+		this.get(pageRootUrl + ":lga/:sector", function(){
+			var lgaId = this.params.lga;
+			var sectorId = this.params.sector;
+			$('#zone-navigation').hide();
+			setMode('lga');
+			lga.loadData(lgaId, function(){
+				this.buildTable = true;
+				setTitle(createTitleForLga(this.stateName, this.lgaName));
+				// var curSector = $.cookie('sector') || defaultMode.sector,
+				// 	curLevel = $.cookie('level') || defaultMode.level;
+				// setSector(curSector);
+				// setViewMode(curLevel);
+				setSector(sectorId);
+				setViewMode('facility');
 			});
 		});
 	});

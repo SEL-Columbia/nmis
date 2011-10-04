@@ -1,0 +1,27 @@
+<div class="row">
+	<ul class="nav">
+		<li {% if local_nav.mode.lga %} class="active"{% endif %}>
+			<a href="{{local_nav_urls.lga}}">LGA Summary</a>
+		</li>
+		<li class="small spacer">&nbsp;</li>
+		<li {% if local_nav.mode.facility %} class="active"{% endif %}>
+			<a href="{{local_nav_urls.facility}}">Facility Detail</a>
+		</li>
+		<li class="spacer">&nbsp;</li>
+		<li {% if local_nav.sector.overview %} class="active"{% endif %}>
+			<a href="{{local_nav_urls.overview}}">Overview</a>
+		</li>
+		<li class="small spacer">&nbsp;</li>
+		<li {% if local_nav.sector.health %} class="active"{% endif %}>
+			<a href="{{local_nav_urls.health}}">Health</a>
+		</li>
+		<li class="small spacer">&nbsp;</li>
+		<li {% if local_nav.sector.education %} class="active"{% endif %}>
+			<a href="{{local_nav_urls.education}}">Education</a>
+		</li>
+		<li class="small spacer">&nbsp;</li>
+		<li {% if local_nav.sector.water %} class="active"{% endif %}>
+			<a href="{{local_nav_urls.water}}">Water</a>
+		</li>
+	</ul>
+</div>
