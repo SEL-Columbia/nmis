@@ -14,9 +14,10 @@ import json
 def dashboard(request, reqpath):
     if request.method == "POST":
         lgaid = request.POST['lga']
-        if LGA.objects.filter(unique_slug=lgaid).count() > 0:
-            return HttpResponseRedirect("/~%s" % lgaid)
-        else:
+        try:
+            lga = LGA.objects.get(unique_slug=lgaid)
+            return HttpResponseRedirect("/new_dashboard/%s" % lga.unique_slug)
+        except LGA.DoesNotExist, e:
             return HttpResponseRedirect("/~")
     context = RequestContext(request)
     context.data_loading_count = LGA.objects.filter(data_load_in_progress=True).count()
