@@ -311,7 +311,6 @@ def new_dashboard(request, lga_id):
     def g(slug):
         return lga_data.get(slug, None)
     context.facility_indicators = temp_facility_buildr(lga)
-    print g("mortality_rate_maternal")
     context.mdg_indicators = [
         ("Goal 1: Eradicate extreme poverty and hunger", [
             [None, "Percentage of children under five who are underweight (weight-for-age)", g("prevalence_of_underweight_children_u5")],
