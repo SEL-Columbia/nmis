@@ -30,7 +30,12 @@ def dashboard(request, reqpath):
         mls.append(model_to_dict(map_layer))
     context.layer_details = json.dumps(mls)
     if not reqpath == "":
-        req_lga_id = reqpath.split("/")[0]
+        req_params = reqpath.split("/")
+        req_lga_id = req_params[0]
+        if len(req_params) > 1:
+            context.sector_id = req_params[1]
+        else:
+            context.sector_id = None
         try:
             lga = LGA.objects.get(unique_slug=req_lga_id)
         except:
@@ -100,14 +105,21 @@ def country_view(context):
     return render_to_response("ui.html", context_instance=context)
 
 def lga_view(context):
-    context.site_title = "LGA View"
+    context.site_title = ""
     context.lga_id = "'%s'" % context.lga.unique_slug
     context.breadcrumbs = [
         ("Nigeria", "/"),
         (context.lga.state.name, "/"),
         (context.lga.name, "/new_dashboard/%s" % context.lga.unique_slug),
-        ("Facility Details", "/~%s" % context.lga.unique_slug),
+        ("Facility Detail", "/~%s" % context.lga.unique_slug),
     ]
+    context.local_nav_urls = get_nav_urls(context.lga, mode='facility', sector=context.sector_id)
+    if context.sector_id is None:
+        context.sector_id = 'overview'
+    context.local_nav = {
+        'mode': {'facility': True},
+        'sector': {context.sector_id: True}
+    }
     return render_to_response("ui.html", context_instance=context)
 
 
@@ -277,10 +289,6 @@ def get_nav_urls(lga, mode='lga', sector='overview'):
 
 def new_dashboard(request, lga_id):
     context = RequestContext(request)
-    context.local_nav = {
-        'mode': {'lga': True},
-        'sector': {'overview': True}
-    }
     try:
         lga = LGA.objects.get(unique_slug=lga_id)
     except:
@@ -293,6 +301,10 @@ def new_dashboard(request, lga_id):
         (lga.name, "/new_dashboard/%s" % lga.unique_slug),
     ]
     context.local_nav_urls = get_nav_urls(lga, mode='lga', sector='overview')
+    context.local_nav = {
+        'mode': {'lga': True},
+        'sector': {'overview': True}
+    }
     lga_data = lga.get_latest_data(for_display=True)
     def g(slug):
         return lga_data.get(slug, None)
