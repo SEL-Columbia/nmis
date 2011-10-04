@@ -517,9 +517,21 @@ $(function(){
 				})();
 			});
 		});
-		this.get(pageRootUrl + ":lga/?", function(){
-			var lgaId = this.params.lga;
+		function launchLga(lgaId, sectorId) {
 			$('#zone-navigation').hide();
+			$('#local-nav').css({
+				'position':'fixed',
+				top:80,left:60,
+				'z-index':99999
+			})
+				.find('a')
+				.filter(function(){
+					return !$(this).parents('li').eq(0).hasClass('active');
+				})
+				.css({
+					'background-color':'#fafafa'
+				});
+
 			setMode('lga');
 			lga.loadData(lgaId, function(){
 				this.buildTable = true;
@@ -528,26 +540,18 @@ $(function(){
 				// 	curLevel = $.cookie('level') || defaultMode.level;
 				// setSector(curSector);
 				// setViewMode(curLevel);
-				setSector('health');
+				setSector(sectorId || 'health');
 				setViewMode('facility');
-
 			});
+		}
+		this.get(pageRootUrl + ":lga/?", function(){
+			var lgaId = this.params.lga;
+			launchLga(lgaId);
 		});
 		this.get(pageRootUrl + ":lga/:sector", function(){
 			var lgaId = this.params.lga;
 			var sectorId = this.params.sector;
-			$('#zone-navigation').hide();
-			setMode('lga');
-			lga.loadData(lgaId, function(){
-				this.buildTable = true;
-				setTitle(createTitleForLga(this.stateName, this.lgaName));
-				// var curSector = $.cookie('sector') || defaultMode.sector,
-				// 	curLevel = $.cookie('level') || defaultMode.level;
-				// setSector(curSector);
-				// setViewMode(curLevel);
-				setSector(sectorId);
-				setViewMode('facility');
-			});
+			launchLga(lgaId, sectorId);
 		});
 	});
 	

@@ -40,6 +40,9 @@ html ul.nav li a {
   border-color: #dddddd #aaaaaa #aaaaaa #dddddd;
   padding: 5px 10px 7px;
   color: #444444;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
 }
 html ul.nav li a:hover {
   color: black;
