@@ -7,15 +7,15 @@
 
 {% block content %}
 <div class="row">
-	<div class="span12 offset5" style="margin-top:20px">
-		<div class="alert-message block-message info">
+	<div class="span12 offset3" style="margin-top:20px">
+		<div class="alert-message block-message warning">
 			<a class="close" href="#">×</a>
 			<p>
 				<strong>Notice:</strong>
 			</p>
 			<p>
-				On Monday, October 3, there was an issue with duplicate accounts and we reset the NMIS system.
-				As a result, you may need to register your account once again
+				On Monday, October 3, the NMIS system had a major update.
+				As a result of this system upgrade, you may need to <a href="{% url registration_register %}">register your account once again</a>
 				using your <code style="background-color:rgba(0,0,0,0.1)">mdgs.gov.ng</code> email address.
 			</p>
 			&nbsp;
@@ -28,13 +28,9 @@
 			</p>
 			<div class="alert-actions">
 				<a class="btn small cancel" href="#">Close this message</a> &nbsp; 
-				<a class="btn small" href="{% url registration_register %}">Redirect to the Account Registration Page</a>
+				<a class="btn small" href="{% url registration_register %}">Register an account</a>
 			</div>
 		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="span12 offset5" style="margin-top:20px">
 		<h5>
 			Please login with your username and password below.
 		</h5>
