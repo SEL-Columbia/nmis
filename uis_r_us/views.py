@@ -113,6 +113,11 @@ def lga_view(context):
         (context.lga.name, "/new_dashboard/%s" % context.lga.unique_slug),
         ("Facility Detail", "/~%s" % context.lga.unique_slug),
     ]
+    if context.sector_id is not None:
+        context.breadcrumbs.append((
+            context.sector_id.capitalize(),
+            "/~%s/%s" % (context.lga.unique_slug, context.sector_id),
+        ))
     context.local_nav_urls = get_nav_urls(context.lga, mode='facility', sector=context.sector_id)
     if context.sector_id is None:
         context.sector_id = 'overview'
@@ -571,6 +576,7 @@ def new_sector_overview(request, lga_id, sector_slug):
         ("Nigeria", "/"),
         (lga.state.name, "/"),
         (lga.name, "/new_dashboard/%s" % lga.unique_slug),
+        ("LGA Summary", "/new_dashboard/%s" % lga.unique_slug),
         (sector_name, "/new_dashboard/%s/%s" % (lga.unique_slug, sector_slug)),
     ]
     context.local_nav = {
