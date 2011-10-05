@@ -401,10 +401,6 @@ function ensureValidSectorLevel(level, sector) {
     if(level===undefined || sector === undefined) {
         return false;
     }
-    if(level==="facility" && sector === "overview") {
-        setViewMode("lga");
-        return true;
-    }
 }
 
 (function(){
@@ -860,6 +856,13 @@ function buildFacilityTable(outerWrap, data, sectors, lgaData){
 	        .addClass('lga-widget-content')
 	        .appendTo(outerWrap);
 	var ftabs = lgaContent;
+    var overviewDiv = $('<div />')
+	    .addClass('modeswitch')
+	    .addClass('mode-facility')
+	    .addClass('sector-overview')
+	    .data('sectorSlug', 'overview');
+	overviewDiv.appendTo(ftabs);
+
 	$.each(facilitySectors, function(i, sector){
 	    createTableForSectorWithData(sector, facilityData)
 	        .addClass('modeswitch') //possibly redundant.

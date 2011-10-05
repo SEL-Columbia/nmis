@@ -543,7 +543,7 @@ $(function(){
 		}
 		this.get(pageRootUrl + ":lga/?", function(){
 			var lgaId = this.params.lga;
-			launchLga(lgaId);
+			launchLga(lgaId, 'overview');
 		});
 		this.get(pageRootUrl + ":lga/:sector", function(){
 			var lgaId = this.params.lga;
