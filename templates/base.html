@@ -29,6 +29,16 @@
 						</span>
 						Nigeria MDG Information System
 					</a>
+					<p class="pull-right print-hide-block">
+					{% if user.is_authenticated %}
+						Logged in as {{user.username}}
+							(&nbsp;<a href="{% url auth_logout %}">{% trans "Log out" %}</a>
+			                        | <a href="http://nmis.tenderapp.com/">{% trans "Help" %}</a>&nbsp;)
+					{% else %}
+						<a href="{% url auth_login %}">{% trans "Log in" %}</a>
+		                        | <a href="http://nmis.tenderapp.com/">{% trans "Help" %}</a>
+					{% endif %}
+					</p>
 				</div>
 				<div class="row page-title-row">
 					<p class="bc">
