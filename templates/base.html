@@ -33,7 +33,8 @@
 					{% if user.is_authenticated %}
 						Logged in as {{user.username}}
 							(&nbsp;<a href="{% url auth_logout %}">{% trans "Log out" %}</a>
-			                        | <a href="http://nmis.tenderapp.com/">{% trans "Help" %}</a>&nbsp;)
+                                    | <a href="{% url auth_password_change %}">{% trans "Change password" %}</a>
+                                    | <a href="http://nmis.tenderapp.com/">{% trans "Help" %}</a>&nbsp;)
 					{% else %}
 						<a href="{% url auth_login %}">{% trans "Log in" %}</a>
 		                        | <a href="http://nmis.tenderapp.com/">{% trans "Help" %}</a>
