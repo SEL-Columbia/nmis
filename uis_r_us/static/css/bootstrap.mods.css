@@ -117,3 +117,6 @@ html .container {
 html .content {
     background-color: #fff;
 }
+html .home-map-nav h3 {
+    line-height: 18px;
+}
