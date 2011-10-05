@@ -6,34 +6,67 @@
 {% block account_links %}{% endblock %}
 
 {% block content %}
-<p>
-  Welcome to the Nigeria MDGs Information System!
-</p>
-<p>
-  <font color='red'><b>NOTICE: In order to access the updated site, please re-register with your mdgs.gov.ng email account.</b></font>
-</p>
-<p>
-  Please login with your username and password below. Not registered?
-  Please register
-  <a href="{% url registration_register %}">here</a>.
-</p>
-
-<form method="post" action=".">
-  <table>
-    {{ form.as_table }}
-  </table>
-  {% csrf_token %}
-  <input type="submit" value="{% trans 'Log in' %}" />
-  <input type="hidden" name="next" value="{{ next }}" />
-</form>
-
-<p>
-  If you forget your password you can reset it
-  <a href="{% url auth_password_reset %}">here</a>.
-</p>
-
-<p>
-  If you forget your username please email
-  <a href="mailto:{{user_manager_email}}?subject=Forgot%20Password">OSSAP</a>.
-</p>
+<div class="row">
+	<div class="span12 offset5" style="margin-top:20px">
+		<div class="alert-message block-message info">
+			<a class="close" href="#">×</a>
+			<p>
+				<strong>Notice:</strong>
+			</p>
+			<p>
+				On Monday, October 3, there was an issue with duplicate accounts and we reset the NMIS system.
+				As a result, you may need to register your account once again
+				using your <code style="background-color:rgba(0,0,0,0.1)">mdgs.gov.ng</code> email address.
+			</p>
+			&nbsp;
+			<p>
+				If you have registered again and are still not able to access the system, please contact <a href="mailto:nmis@mdgs.gov.ng">the NMIS support team</a>.
+			</p>
+			&nbsp;
+			<p>
+				We apologize for the inconvenience.
+			</p>
+			<div class="alert-actions">
+				<a class="btn small cancel" href="#">Close this message</a> &nbsp; 
+				<a class="btn small" href="{% url registration_register %}">Redirect to the Account Registration Page</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="span12 offset5" style="margin-top:20px">
+		<h5>
+			Please login with your username and password below.
+		</h5>
+		<form method="post" action=".">
+			<table>
+				{{ form.as_table }}
+			</table>
+			{% csrf_token %}
+			<div class="actions">
+				<input type="submit" value="{% trans 'Log in' %}" class="btn" />
+				<input type="hidden" name="next" value="{{ next }}" />
+			</div>
+		</form>
+		<p>
+			<strong>If you have forgotten your password</strong>, there is a simple process to <a href="{% url auth_password_reset %}">reset your password</a>.
+		</p>
+		<p>
+			<strong>If you have forgotten your username</strong>, please email <a href="mailto:{{user_manager_email}}?subject=Forgot%20username">the site manager</a>.
+		</p>
+		<p>
+			<strong>If you do not have an account</strong>, please create an account on the <a href="{% url registration_register %}">NMIS registration page</a>.
+		</p>
+	</div>
+</div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript" charset="utf-8">
+	
+	$('.alert-message').delegate('a.cancel, a.close', 'click', function(evt){
+		$('.alert-message').hide();
+		evt.preventDefault();
+	});
+	
+</script>
 {% endblock %}
