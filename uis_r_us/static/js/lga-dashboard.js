@@ -861,6 +861,10 @@ function buildFacilityTable(outerWrap, data, sectors, lgaData){
 	    .addClass('mode-facility')
 	    .addClass('sector-overview')
 	    .data('sectorSlug', 'overview');
+
+    $('<h2>').css({'margin':'-1px 0 0 -10px'}).html("<span style='color:#595959'>Health</span> | Education | Water").appendTo(overviewDiv);
+    $('<h2>').css({'position':'absolute', 'left': 384, color: '#c00',top:-6,'line-height':'28px'}).html('(note: they should be<br>(obvious) links)').appendTo(overviewDiv);
+
 	overviewDiv.appendTo(ftabs);
 
 	$.each(facilitySectors, function(i, sector){
