@@ -193,7 +193,11 @@ class Facility(DictModel):
     _data_record_fk = 'facility'
 
     def get_lat_lon(self):
-        return self.facility_id.split()[:2]
+        lat_lon = self.facility_id.split()[:2]
+        if len(lat_lon) == 2:
+            return lat_lon
+        else:
+            return (None, None)
 
     def get_latest_data(self):
         """

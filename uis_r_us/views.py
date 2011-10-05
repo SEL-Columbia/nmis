@@ -113,6 +113,11 @@ def lga_view(context):
         (context.lga.name, "/new_dashboard/%s" % context.lga.unique_slug),
         ("Facility Detail", "/~%s" % context.lga.unique_slug),
     ]
+    if context.sector_id is not None:
+        context.breadcrumbs.append((
+            context.sector_id.capitalize(),
+            "/~%s/%s" % (context.lga.unique_slug, context.sector_id),
+        ))
     context.local_nav_urls = get_nav_urls(context.lga, mode='facility', sector=context.sector_id)
     if context.sector_id is None:
         context.sector_id = 'overview'
@@ -431,12 +436,16 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Percentage of facilities that offer malaria prophylaxis during pregnancy", g("proportion_malaria_prevention_pregnancy"), h("num_malaria_prevention_pregnancy", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities that provide bednets", g("proportion_offer_bednets"), h("num_offer_bednets", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities that do not charge and fees for malaria-related services", g("proportion_no_user_fees_malaria"), h("num_no_user_fees_malaria", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
+                ["Tuberculosis"],
+                ["Percentage of facilities that offer TB treatment", g("proportion_health_facilities_hiv_testing"), h("num_health_facilities_hiv_testing", "num_health_facilities"), None, None],
+                ["Percentage of facilities that offer TB testing", g("proportion_health_facilities_hiv_testing"), h("num_health_facilities_hiv_testing", "num_health_facilities"), None, None],
             ],),
             ('Infrastructure', [
                 ["Percentage of facilities with access to some form of power source", g("proportion_any_power_access"), h("num_any_power_access", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities with access to an improved water source", g("proportion_water_access"), h("num_water_access", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities with functioning improved sanitation", g("proportion_functional_sanitation"), h("num_functional_sanitation", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities with mobile phone coverage somewhere on the premises", g("proportion_mobile_coverage"), h("num_mobile_coverage", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
+                ["Percentage of facilities with waste disposal systems", "N/A", None, None, None],
             ],),
             ('Equipment and Supplies', [
                 ["Percentage of facilities that experienced a stock-out of essential medications in the past 3 months", g("proportion_stockout_essential_meds"), h("num_stockout_essential_meds", "num_health_facilities"), 0, "0%"],
@@ -571,6 +580,7 @@ def new_sector_overview(request, lga_id, sector_slug):
         ("Nigeria", "/"),
         (lga.state.name, "/"),
         (lga.name, "/new_dashboard/%s" % lga.unique_slug),
+        ("LGA Summary", "/new_dashboard/%s" % lga.unique_slug),
         (sector_name, "/new_dashboard/%s/%s" % (lga.unique_slug, sector_slug)),
     ]
     context.local_nav = {

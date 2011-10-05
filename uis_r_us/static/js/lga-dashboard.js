@@ -376,7 +376,8 @@ function getColDataDiv() {
 	var colData,
 	    colDataWrap = $('.widget-outer-wrap').find('div.column-data-wrap');
 	if(colDataWrap.length===0) {
-		colDataWrap = $("<div />", {'class': 'column-data-wrap'});
+		colDataWrap = $("<div />", {'class': 'column-data-wrap'})
+		    .attr('style', 'display:block;position:absolute;bottom:255px;left:0;');
 		$('<a />', {'href': '#', 'class': 'close-col-data'})
 		    .css({'left':"993px"})
 		    .text('X')
@@ -692,7 +693,7 @@ function imageUrls(imageSizes, imgId) {
                     var cdd = getColDataDiv()
                             .html(Mustache.to_html(this.template, data))
                             .css({
-                                height: 110,
+                                height: 218,
                                 width: 1000
                                 });
                     if(hasClickAction(column, 'piechart_true') || hasClickAction(column, 'piechart_false')) {

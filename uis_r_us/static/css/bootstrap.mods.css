@@ -31,6 +31,9 @@ html .topbar a.brand span.logo span {
 html .topbar a.brand:hover span span {
   text-decoration: none;
 }
+html .topbar .pull-right {
+    color: #aaa;
+}
 html ul.nav {
   font-weight: bold;
   margin: 0 28px;
@@ -113,4 +116,7 @@ html .container {
 }
 html .content {
     background-color: #fff;
+}
+html .home-map-nav h3 {
+    line-height: 18px;
 }
