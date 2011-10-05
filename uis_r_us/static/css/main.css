@@ -284,14 +284,14 @@ html .rd-wrap {
 }
 .facility-popup .left-col {
     float: left;
-    border-right: 1px solid #777;
     padding: 8px 12px;
     margin-left: -15px;
-    margin-top: -12px;
+    margin-top: -5px;
     padding-right: 16px;
+    width: 200px;
 }
 .facility-popup .right-col {
-    width: 300px;
+    width: 310px;
     float: left;
     padding: 4px 8px 8px 20px;
     padding-left: 20px;
@@ -303,6 +303,7 @@ html .rd-wrap {
     background-color: #ddd;
 }
 .facility-sector-select-box h2 {
+    /* no h2 there right now */
     margin: 4px 0;
     font-size: 14px;
     color: #002552;
@@ -313,6 +314,10 @@ html .rd-wrap {
 }
 .facility-sector-select-box .select-wrap {
     padding: 4px 3px;
+}
+.facility-popup .right-col select {
+    width: 100%;
+    margin-bottom: 10px;
 }
 .facility-popup .right-col .facility-sector-select-box {
     display: none;

@@ -3,7 +3,10 @@
 		{{#image_url}}
 		<a href="{{image_url}}" target="_BLANK"><img style="width:100%" src="{{image_url}}"></a>
 		{{/image_url}}
-		<hr>
+	</div>
+	<div class="right-col">
+
+
 		<div class="select-wrap">
 			<select>
 				{{#sector_data}}
@@ -11,13 +14,9 @@
 				{{/sector_data}}
 			</select>
 		</div>
-	</div>
-	<div class="right-col">
+
 		{{#sector_data}}
 		<div data-sector-slug="{{slug}}" class="facility-sector-select-box">
-			<h2>
-				{{name}}
-			</h2>
 			<table>
 				<tbody>
 					{{#variables}}

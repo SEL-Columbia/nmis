@@ -73,7 +73,7 @@ class Command(BaseCommand):
         row = [lga.geoid, lga.id, lga.name, lga.state.id, lga.state.name, lga.state.zone.id, lga.state.zone.name]
         for key in self.variables_to_export:
             try:
-                row.append(latest_data[key])
+                row.append(latest_data[key]['value'])
             except KeyError:
                row.append("")
         return ['%s' % element for element in row]
@@ -105,7 +105,7 @@ class Command(BaseCommand):
         row = [facility.id, lat, lon, facility.lga.state.id, facility.lga.state.name, facility.lga.id, facility.lga.name]
         for key in self.sector_variables_to_export:
             try:
-                row.append(latest_data[key])
+                row.append(latest_data[key]['value'])
             except KeyError:
                row.append("")
         return ['%s' % element for element in row]
