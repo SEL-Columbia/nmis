@@ -106,8 +106,11 @@ var launchOpenLayers = (function(_opts){
 //            });
             if(!mapId) {mapId = mapElem.get(0).id= "-openlayers-map-elem"}
             context.map = new OpenLayers.Map(mapId, options);
+            window.__map = context.map;
             var googleSat = new OpenLayers.Layer.Google( "Google", {type: 'satellite'});
-            mapLayerArray.push(googleSat);
+            var googleMap = new OpenLayers.Layer.Google( "Roads", {type: 'roadmap'});
+            //__map.setBaseLayer(_.find(__map.layers, function(m){return m.name==="Roads";}))
+            mapLayerArray.push(googleSat, googleMap);
             context.map.addLayers(mapLayerArray);
             if(opts.defaultLayer==='google') {
                 context.map.setBaseLayer(googleSat);
