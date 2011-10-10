@@ -10,6 +10,9 @@
 	text-align: center;
 }
 </style>
+<script type="text/javascript" charset="utf-8">
+	var lgaId = (function(_){return _})({{lga_id|safe}});
+</script>
 {% endblock %}
 
 {% block lga_nav %}
@@ -546,7 +549,7 @@ $(function(){
 			launchLga(lgaId, 'overview');
 		});
 		this.get(pageRootUrl + ":lga/:sector", function(){
-			var lgaId = this.params.lga;
+			window.lgaId = this.params.lga;
 			var sectorId = this.params.sector;
 			launchLga(lgaId, sectorId);
 		});
