@@ -386,6 +386,7 @@ def tmp_variables_for_sector(sector_slug, lga):
         display_options={
             'num_skilled_health_providers_per_1000': {'decimal_places': 3},
             'num_chews_per_1000': {'decimal_places': 3},
+            'teacher_nonteachingstaff_ratio_lga': {'decimal_places': 3},
         })
     def g(slug):
         value_dict = lga_data.get(slug, None)
