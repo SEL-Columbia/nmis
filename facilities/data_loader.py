@@ -79,12 +79,12 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
 
     @print_time
     def reset_database(self):
+        call_command('syncdb', interactive=False)
+        call_command('migrate')
         if self._kill_db:
             self._drop_database()
         else:
             self._drop_data()
-        call_command('syncdb', interactive=False)
-        call_command('migrate')
 
     def load_system(self):
         self.create_users()
@@ -234,9 +234,12 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
 
         def load_variable_file_with_loader(variable_file, loader):
             file_path = os.path.join(self._data_dir, 'variables', variable_file)
+            load_order = 0
             for d in CsvReader(file_path).iter_dicts():
                 if dict_is_valid_var(d):
+                    d['load_order'] = load_order
                     loader(d)
+                    load_order += 1
 
         def load_lga_variable(d):
             d['origin'] = Variable.get(slug=d['origin'])
