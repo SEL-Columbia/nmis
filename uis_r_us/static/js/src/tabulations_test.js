@@ -58,3 +58,29 @@ test("NMIS Data Validation", function(){
 //     NMIS.FacilityTables.select('health', 'malaria');
 //     equal(this.elem.find('table').length, 1, "There is one table in the element.")
 // })
+
+module("breadcrumbs", {
+    setup: function (){
+        Breadcrumb.clear();
+        Breadcrumb.init('p.bc');
+    },
+    teardown: function (){
+//        Breadcrumb.clear();
+    }
+});
+
+test("can_set_breadcrumb", function(){
+    equal(0, Breadcrumb._levels().length);
+    Breadcrumb.setLevels([
+            ["Country", "/country"],
+            ["State", "/country"],
+            ["District", "/country/district"]
+        ]);
+    equal(3, Breadcrumb._levels().length);
+    Breadcrumb.setLevel(2, ["LGA", "/country/lga"]);
+    equal(3, Breadcrumb._levels().length);
+    //draw is not tested.
+    Breadcrumb.draw();
+});
+
+//test("")
