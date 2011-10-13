@@ -425,7 +425,23 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
     def print_stats(self):
         print json.dumps(self.get_info(), indent=4)
 
+    def _drop_variables(self):
+        variable_classes_to_drop = [
+            Variable,
+            CalculatedVariable,
+            LGAIndicator,
+            GapVariable,
+            PartitionVariable,
+        ]
+        for v in variable_classes_to_drop:
+            try:
+                # this will fail if the table doesn't exist (first import)
+                v.objects.all().delete()
+            except DatabaseError:
+                print "No data deleted for %s" % c
+
     def _drop_data(self):
+        self._drop_variables() # for now get rid of all the variables (may want to split this out)
         classes_with_data_to_drop = [
             Facility,
             FacilityRecord,
