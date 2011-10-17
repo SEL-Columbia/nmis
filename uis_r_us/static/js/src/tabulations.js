@@ -1,5 +1,63 @@
 var debugMode = true;
 
+var Breadcrumb = (function(){
+    var levels = [];
+    var elem;
+    var context = {};
+
+    function init(_elem, _opts) {
+        elem = $(_elem).eq(0);
+        var opts = _.extend({
+            draw: true
+        }, _opts);
+        levels = _.extend(levels, (opts.levels || []));
+        if(!!opts.draw) {
+            draw();
+        }
+    }
+    function clear() {
+        if (elem !== undefined) {
+            elem.empty();
+        }
+        levels = [];
+    }
+    function setLevels(_levels) {
+        levels = _.extend(levels, (_levels || []));
+        draw();
+        return context;
+    }
+    function setLevel(ln, d) {
+        levels[ln] = d;
+        return context;
+    }
+    function draw() {
+        if (elem !== undefined) {
+            elem.empty();
+        }
+        var a;
+        _.each(levels, function(level, i){
+            if(i!==0) {
+                $('<span />')
+                    .text('/')
+                    .appendTo(elem);
+            }
+            a = $('<a />')
+                .text(level[0])
+                .attr('href', level[1]);
+            if(level.length > 2) { a.click(level[2]); }
+            a.appendTo(elem);
+        });
+    }
+    return {
+        init: init,
+        setLevels: setLevels,
+        setLevel: setLevel,
+        draw: draw,
+        _levels: function(){return levels;},
+        clear: clear
+    }
+})();
+
 var Sectors = (function(){
     var sectors;
     function changeKey(o, key) {
