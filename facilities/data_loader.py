@@ -279,8 +279,8 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
                 continue
             if d['_lga_id'] not in self.lga_ids:
                 continue
-            if 'error_lg_slug' in d and d['error_lg_slug']:
-                variables_to_invalidate = d['error_lg_slug'].split()
+            if '_error_ids' in d and d['_error_ids']:
+                variables_to_invalidate = d['_error_ids'].split()
             d['_data_source'] = data_source
             d['_facility_type'] = sector.lower()
             d['sector'] = sector
