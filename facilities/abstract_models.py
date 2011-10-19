@@ -86,7 +86,10 @@ class Variable(models.Model):
             return bool(x)
 
         def get_string(x):
-            return unicode(x)
+            if unicode(x).strip():
+                return unicode(x).strip()
+            else:
+                raise Exception
 
         cast_function = {
             'float': get_float,
@@ -240,10 +243,14 @@ class DictModel(models.Model):
             'source': source,
             'invalid': invalid,
             }
-        d, created = self._data_record_class.objects.get_or_create(**kwargs)
-        d.value = variable.get_casted_value(value)
-        d.save()
-        return d.value
+        potential_value = variable.get_casted_value(value)
+        if potential_value is not None:
+            d, created = self._data_record_class.objects.get_or_create(**kwargs)
+            d.value = potential_value
+            d.save()
+            return d.value
+        else:
+            return potential_value
 
     def get(self, variable):
         return self.get_latest_value_for_variable(variable)
