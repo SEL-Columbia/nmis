@@ -166,6 +166,10 @@ class CalculatedVariable(Variable):
             d[self.slug] = value
 
     def calculate_value(self, d):
+        from collections import defaultdict
+        def _none():
+            return None
+        d = defaultdict(_none, d)
         try:
             return eval(self.formula)
         except:
