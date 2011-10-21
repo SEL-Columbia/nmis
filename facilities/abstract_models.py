@@ -80,10 +80,17 @@ class Variable(models.Model):
             return float(x)
 
         def get_boolean(x):
+            if isinstance(x, bool):
+                return x
             if isinstance(x, basestring):
                 regex = re.compile('(true|t|yes|y|1)', re.IGNORECASE)
-                return regex.search(value) is not None
-            return bool(x)
+                if regex.search(x.strip()) is not None:
+                    return True
+            if isinstance(x, basestring):
+                regex = re.compile('(false|f|no|n|0)', re.IGNORECASE)
+                if regex.search(x.strip()) is not None:
+                    return False
+            raise Exception
 
         def get_string(x):
             if unicode(x).strip():
