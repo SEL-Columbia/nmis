@@ -851,7 +851,9 @@ function buildFacilityTable(outerWrap, data, sectors, lgaData){
 	FACILITY_TABLE_BUILT = true;
 	$('<div />', {'id': 'toggle-updown-bar'}).html($('<span />', {'class':'icon'}))
 	    .appendTo(outerWrap)
-	    .click(function(){ outerWrap.toggleClass('closed'); });
+	    .click(function(){ outerWrap.toggleClass('closed');
+			       getColDataDiv().parents('div.column-data-wrap').css({'bottom': outerWrap.hasClass('closed') ? 20 : 255});
+			     });
 	var lgaContent = $('<div />')
 	        .addClass('lga-widget-content')
 	        .appendTo(outerWrap);
