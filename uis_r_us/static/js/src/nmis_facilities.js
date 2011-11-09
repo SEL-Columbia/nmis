@@ -66,7 +66,7 @@ function prepFacilities(params) {
 	    state: state,
 	    lga: lga,
 	    mode: facilitiesMode,
-	    sector: Sectors.pluck(params.sector) || overviewObj,
+	    sector: Sectors.pluck(params.sector),
 //	    subsector: params.subsector,
 //	    indicator: params.indicator
 	};
@@ -104,7 +104,7 @@ function launchFacilities(lgaData, variableData, params) {
 	var facilities = lgaData.facilities;
 	var sectors = variableData.sectors;
 	var e = {
-	    sector: Sectors.pluck(params.sector) || overviewObj,
+	    sector: Sectors.pluck(params.sector),
 	    subsector: params.subsector,
 	    indicator: params.indicator
 	};
@@ -137,8 +137,7 @@ function launchFacilities(lgaData, variableData, params) {
 	NMIS.IconSwitcher.setCallback('shiftMapItemStatus', function(item, id){
 	    itemStatii[id] = item.status;
 	});
-
-	if(e.sector===overviewObj) {
+	if(e.sector.slug==='overview') {
 	    wElems.elem1content.empty();
 	    NMIS.DisplayWindow.setTempSize("minimized", true);
         var displayTitle = "Facility Detail: "+lga.name+" Overview";

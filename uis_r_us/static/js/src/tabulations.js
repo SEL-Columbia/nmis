@@ -108,7 +108,7 @@ var MapMgr = (function(){
 })();
 
 var Sectors = (function(){
-    var sectors;
+    var sectors, defaultSector;
     function changeKey(o, key) {
         o['_' + key] = o[key];
         delete(o[key]);
@@ -117,16 +117,25 @@ var Sectors = (function(){
     function Sector(d){
         changeKey(d, 'subgroups');
         changeKey(d, 'columns');
+        changeKey(d, 'default');
         $.extend(this, d);
     }
     Sector.prototype.subGroups = function() {
+        if(!this._subgroups) { return []; }
         return this._subgroups;
     }
     Sector.prototype.getColumns = function() {
+        if(!this._columns) { return []; }
         function displayOrderSort(a,b) { return (a.display_order > b.display_order) ? 1 : -1 }
         return this._columns.sort(displayOrderSort);
     }
-    function init(_sectors) {
+    Sector.prototype.isDefault = function() {
+        return !!this._default;
+    }
+    function init(_sectors, opts) {
+        if(!!opts && !!opts.default) {
+            defaultSector = new Sector(_.extend(opts.default, {default: true}));
+        }
         sectors = _(_sectors).chain()
                         .clone()
                         .map(function(s){return new Sector(_.extend({}, s));})
@@ -140,7 +149,7 @@ var Sectors = (function(){
         return _(sectors).chain()
                 .filter(function(s){return s.slug == slug;})
                 .first()
-                .value();
+                .value() || defaultSector;
     }
     function all() {
         return sectors;
@@ -613,8 +622,8 @@ var NMIS = (function(){
     	_(data).each(parseLatLng);
         return true;
     }
-    function loadSectors(_sectors){
-        Sectors.init(_sectors);
+    function loadSectors(_sectors, opts){
+        Sectors.init(_sectors, opts);
     }
     function clear() {
         data = [];

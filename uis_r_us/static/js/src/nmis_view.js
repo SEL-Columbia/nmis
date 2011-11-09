@@ -52,7 +52,11 @@ NMIS.DisplayWindow.init(".content", displayWindowOptions);
 
 var overviewObj = {name: 'Overview', slug: 'overview'};
 
-NMIS.loadSectors(sectorData);
+NMIS.loadSectors(sectorData, {
+    default: {
+        name: 'Overview', slug: 'overview'
+    }
+});
 
 var wElems = NMIS.DisplayWindow.getElems();
 
