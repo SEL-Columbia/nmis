@@ -124,13 +124,51 @@ var Sectors = (function(){
         if(!this._subgroups) { return []; }
         return this._subgroups;
     }
+    Sector.prototype.subSectors = function() {
+        return this.subGroups();
+    }
     Sector.prototype.getColumns = function() {
         if(!this._columns) { return []; }
         function displayOrderSort(a,b) { return (a.display_order > b.display_order) ? 1 : -1 }
         return this._columns.sort(displayOrderSort);
     }
+    Sector.prototype.getIndicators = function() {
+        return this._columns || [];
+    }
     Sector.prototype.isDefault = function() {
         return !!this._default;
+    }
+    Sector.prototype.getSubsector = function(query) {
+        if(!query) { return; }
+        var ssSlug = query.slug || query;
+        var ssI = 0, ss = this.subSectors(), ssL = ss.length;
+        for(;ssI < ssL; ssI++) {
+            if(ss[ssI].slug === ssSlug) {
+                return new SubSector(this, ss[ssI]);
+            }
+        }
+    }
+    Sector.prototype.getIndicator = function(q) {
+        if(!q) { return; }
+        var islug = query.slug || query;
+        var ssI = 0, ss = this.getIndicators(), ssL = ss.length;
+        for(;ssI < ssL; ssI++) {
+            if(ss[ssI].slug === islug) {
+                return new Indicator(this, ss[ssI]);
+            }
+        }
+    }
+    //
+    // The Indicator ans SubSector objects might be unnecessary.
+    // We can see if the provide any benefit at some point down the line.
+    //
+    function SubSector(sector, opts) {
+        this.sector = sector;
+        _.extend(this, opts);
+    }
+    function Indicator(sector, opts) {
+        this.sector = sector;
+        _.extend(this, opts);
     }
     function init(_sectors, opts) {
         if(!!opts && !!opts.default) {

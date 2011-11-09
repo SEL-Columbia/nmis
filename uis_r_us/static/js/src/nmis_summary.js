@@ -13,8 +13,7 @@
                         {state:state,lga:lga});
         NMIS.Breadcrumb.clear();
     	NMIS.Breadcrumb.setLevels(bcValues);
-    	log(_env.sector)
-        NMIS.LocalNav.markActive(["mode:summary", "sector:" + _env.sector.slug]);
+    	NMIS.LocalNav.markActive(["mode:summary", "sector:" + _env.sector.slug]);
         NMIS.LocalNav.iterate(function(sectionType, buttonName, a){
             var env = _.extend({}, _env);
             env[sectionType] = buttonName;

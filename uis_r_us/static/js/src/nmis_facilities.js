@@ -70,8 +70,8 @@ function prepFacilities(params) {
 //	    subsector: params.subsector,
 //	    indicator: params.indicator
 	};
-	e.subsector = params.subsector;
-	e.indicator = params.indicator;
+	e.subsector = e.sector.getSubsector(params.subsector);
+	e.indicator = e.sector.getIndicator(params.indicator);
 	(function(){
         var bcValues = prepBreadcrumbValues(e,
                         "state lga mode sector subsector indicator".split(" "),
@@ -103,11 +103,14 @@ function launchFacilities(lgaData, variableData, params) {
     }
 	var facilities = lgaData.facilities;
 	var sectors = variableData.sectors;
+	var sector = Sectors.pluck(params.sector)
 	var e = {
-	    sector: Sectors.pluck(params.sector),
-	    subsector: params.subsector,
-	    indicator: params.indicator
+	    sector: sector,
+	    subsector: sector.getSubsector(params.subsector),
+	    indicator: sector.getIndicator(params.indicator)
 	};
+	e.subsector = e.sector.getSubsector(params.subsector);
+	e.indicator = e.sector.getIndicator(params.indicator);
 
 	NMIS.init(facilities);
 
