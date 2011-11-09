@@ -66,31 +66,27 @@ function prepFacilities(params) {
 	    state: state,
 	    lga: lga,
 	    mode: facilitiesMode,
-	    sector: params.sector,
+	    sector: Sectors.pluck(params.sector) || overviewObj,
 	    subsector: params.subsector,
 	    indicator: params.indicator
 	};
-	var navSector = e.sector === undefined ? 'overview' : e.sector;
-	var _sector;
-	if(!!e.sector) {
-	    _sector = { name: e.sector, slug: e.sector.toLowerCase() };
-	}
 	(function(){
         var bcValues = prepBreadcrumbValues(e,
                         "state lga mode sector subsector indicator".split(" "),
                         {state:state,lga:lga});
 
-	    NMIS.LocalNav.markActive(["mode:facilities", "sector:" + navSector]);
+	    NMIS.LocalNav.markActive(["mode:facilities", "sector:" + e.sector.slug]);
         NMIS.Breadcrumb.clear();
     	NMIS.Breadcrumb.setLevels(bcValues);
 	})();
     NMIS.LocalNav.iterate(function(sectionType, buttonName, a){
-        var env = {
-            lga: lga,
-            mode: facilitiesMode,
-            state: state,
-            sector: _sector
-        };
+        var env = _.extend({}, e);
+        // var env = {
+        //     lga: lga,
+        //     mode: facilitiesMode,
+        //     state: state,
+        //     sector: _sector
+        // };
         env[sectionType] = buttonName;
         a.attr('href', NMIS.urlFor(env));
     });
@@ -106,13 +102,13 @@ function launchFacilities(lgaData, variableData, params) {
 	var facilities = lgaData.facilities;
 	var sectors = variableData.sectors;
 	var e = {
-	    sector: params.sector,
+	    sector: Sectors.pluck(params.sector) || overviewObj,
 	    subsector: params.subsector,
 	    indicator: params.indicator
 	};
 
 	NMIS.init(facilities);
-	
+
 	var boolMapLoad = true;
 
 	if(boolMapLoad) {
@@ -140,7 +136,7 @@ function launchFacilities(lgaData, variableData, params) {
 	    itemStatii[id] = item.status;
 	});
 
-	if(!e.sector) {
+	if(e.sector===overviewObj) {
 	    wElems.elem1content.empty();
 	    NMIS.DisplayWindow.setTempSize("minimized", true);
         var displayTitle = "Facility Detail: "+lga.name+" Overview";
@@ -150,17 +146,16 @@ function launchFacilities(lgaData, variableData, params) {
         });
     } else {
         NMIS.IconSwitcher.shiftStatus(function(id, item) {
-            if(item.sector.toLowerCase()===e.sector.toLowerCase()) {
-                return "normal";
-            } else {
-                return "inactive";
-            }
+//            if(item.sector===e.sector.slug) {
+//                return "normal";
+//            } else {
+//                return "inactive";
+//            }
         });
-	    var _sector = NMIS.Sectors.pluck(e.sector);
-        var displayTitle = "Facility Detail: "+lga.name+" " + _sector.name;
+        var displayTitle = "Facility Detail: "+lga.name+" " + e.sector.name;
         NMIS.DisplayWindow.setTitle(displayTitle);
         NMIS.DisplayWindow.unsetTempSize(true);
-        var tableElem = FacilityTables.createForSectors([e.sector], {
+        var tableElem = FacilityTables.createForSectors([e.sector.slug], {
             callback: function(div){
                 var pageTitle = $('<h1 />')
                             .addClass('facilities-content-title')

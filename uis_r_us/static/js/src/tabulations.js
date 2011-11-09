@@ -610,8 +610,7 @@ var NMIS = (function(){
     var data;
     function init(_data) {
         data = _.clone(_data);
-	_(data).each(parseLatLng);
-//        Sectors.init(_sectors);
+    	_(data).each(parseLatLng);
         return true;
     }
     function loadSectors(_sectors){
