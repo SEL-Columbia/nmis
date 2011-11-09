@@ -67,9 +67,11 @@ function prepFacilities(params) {
 	    lga: lga,
 	    mode: facilitiesMode,
 	    sector: Sectors.pluck(params.sector) || overviewObj,
-	    subsector: params.subsector,
-	    indicator: params.indicator
+//	    subsector: params.subsector,
+//	    indicator: params.indicator
 	};
+	e.subsector = params.subsector;
+	e.indicator = params.indicator;
 	(function(){
         var bcValues = prepBreadcrumbValues(e,
                         "state lga mode sector subsector indicator".split(" "),

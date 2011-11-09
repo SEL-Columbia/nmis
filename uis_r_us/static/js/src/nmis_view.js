@@ -73,13 +73,6 @@ var dashboard = $.sammy('body');
         ]
     });
 
-    NMIS.Breadcrumb.init("p.bc", {
-        levels: [
-            [state.name, "/nmis~/"],
-            [lga.name, "/nmis~/"+state.slug+"/"+lga.slug+"/"]
-        ]
-    });
-
 	function _pushAsDefined(obj, keyList) {
 	    var key, i, l, arr = [], item;
 	    for(i=0, l=keyList.length; i < l; i++) {
@@ -99,9 +92,16 @@ var dashboard = $.sammy('body');
             root: '/nmis~',
             mode: 'summary'
         }, _o);
-        if(!o.lga || !o.state) return "/error";
+        if(!o.lga || !o.state) return "/nmis~?error";
         return _pushAsDefined(o,
                         ["root", "state", "lga", "mode",
                         "sector", "subsector", "indicator"]).join('/');
     }
+    var env = {root: '/nmis~', state: state, lga: lga};
+    NMIS.Breadcrumb.init("p.bc", {
+        levels: [
+            [state.name, env.root],
+            [lga.name, "/nmis~/"+state.slug+"/"+lga.slug+"/"]
+        ]
+    });
 })();
