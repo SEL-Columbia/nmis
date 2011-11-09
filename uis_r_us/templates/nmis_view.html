@@ -20,6 +20,8 @@
 		lgaUniqueSlug = "{{lga.unique_slug}}";
 </script>
 <script src="/static/js/src/nmis_view.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/src/nmis_facilities.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/src/nmis_summary.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
 	$(function(){ dashboard.run(); });
 </script>
@@ -71,4 +73,14 @@
 </style>
 {% endblock %}
 {% block content %}
+<div id="conditional-content">
+	{% for sector, sfile in include_sectors %}
+	<div class="lga {{sector}}">
+		{% include sfile %}
+	</div>
+	{% endfor %}
+</div>
+<script type="text/javascript" charset="utf-8">
+	document.getElementById('conditional-content').style.display = "none";
+</script>
 {% endblock %}

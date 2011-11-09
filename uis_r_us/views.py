@@ -25,6 +25,7 @@ def nmis_view(request, state_id, lga_id, reqpath):
     context.jsmodules = ['modes', 'tabulations', 'facility_tables']
     context.url_root = "/nmis~/"
     context.reqpath = reqpath
+    context.include_sectors = [(s, "summary_%s.html" % s) for s in ['overview']] #, 'health', 'education', 'water']]
     try:
         context.state = State.objects.get(slug=state_id)
         full_id = '_'.join([state_id, lga_id])
