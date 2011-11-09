@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block js %}
+{% for module in jsmodules %}
+<script src="/static/js/src/{{module}}.js" type="text/javascript" charset="utf-8"></script>
+{% endfor %}
+<script src="/static/js/application.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+	var reqPath = "{{reqpath}}",
+		urlRoot = "{{url_root}}",
+		stateName = "{{state.name}}",
+		state = {
+			name: "{{state.name}}",
+			slug: "{{state.slug}}"
+		},
+		lga = {
+			name: "{{lga.name}}",
+			slug: "{{lga.slug}}"
+		},
+		lgaName = "{{lga.name}}",
+		lgaUniqueSlug = "{{lga.unique_slug}}";
+</script>
+<script src="/static/js/src/nmis_view.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+	$(function(){ dashboard.run(); });
+</script>
+<style type="text/css" media="all">
+	ul.submenu {
+		position: absolute;
+		top: 35px;
+		list-style-type: none;
+		margin: 0;
+		width: 200px;
+	}
+	div.facility-display-wrap {
+		padding: 0 20px;
+	}
+	h3.bar-title {
+		position: absolute;
+		left: 0;
+		top: 0;
+		color: #aaa;
+		font-size: 16px;
+		margin: 5px 20px;
+	}
+	h1.facilities-content-title {
+		color: #444;
+		font-size: 22px;
+		margin: 5px 0;
+	}
+	p.facility-sectors-navigation {
+		margin: 4px 0;
+	}
+	div.content {
+		background-color: #fafafa;
+	}
+	div.display-window-content {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		background-color: #fefefe;
+	}
+	div.display-window-wrap {
+		position: relative;
+	}
+</style>
+<style type="text/css" media="screen">
+	body div.content {
+		overflow: hidden;
+		background-color: #fafafa;
+	}
+</style>
+{% endblock %}
+{% block content %}
+{% endblock %}

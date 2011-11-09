@@ -58,6 +58,55 @@ var Breadcrumb = (function(){
     }
 })();
 
+var MapMgr = (function(){
+    var opts,
+        started = false,
+        callbackStr = "MapMgr.loaded";
+    function init(_opts) {
+        if(started) {
+            return;
+        }
+        opts = _.extend({
+            //defaults
+            launch: true,
+            fake: false,
+            fakeDelay: 3000,
+            elem: 'body',
+            defaultMapType: 'SATELLITE',
+            loadCallbacks: []
+        }, _opts);
+        if(!opts.ll) {
+            if(opts.llString) {
+                var t = opts.llString.split(' ');
+                opts.ll = {
+                    lat: +t[0],
+                    lng: +t[1]
+                };
+            }
+        }
+        started = true;
+        opts.elem = $(opts.elem);
+        if(opts.launch) {
+            $.getScript('http://maps.googleapis.com/maps/api/js?sensor=false&callback='+callbackStr);
+        } else if(opts.fake) {
+            _.delay(loaded, opts.fakeDelay);
+        }
+    }
+    function loaded() {
+        _.each(opts.loadCallbacks, function(cb){
+            cb.call(opts);
+        });
+    }
+    function addLoadCallback(cb) {
+        opts.loadCallbacks.push(cb);
+    }
+    return {
+        init: init,
+        loaded: loaded,
+        addLoadCallback: addLoadCallback
+    }
+})();
+
 var Sectors = (function(){
     var sectors;
     function changeKey(o, key) {
@@ -172,10 +221,381 @@ var Tabulation = (function(){
     };
 })();
 
+
+var DataLoader = (function(){
+    function fetch(url){
+        return $.getJSON(url);
+    }
+    return {
+        fetch: fetch
+    };
+})();
+
+
+var DisplayWindow = (function(){
+    var elem, elem1, elem0, elem1content;
+    var fullHeight;
+    var opts;
+    var hbuttons;
+    var titleElems = {};
+    var curSize;
+    function init(_elem, _opts) {
+        if(opts !== undefined) { clear(); }
+        elem = $(_elem);
+        opts = _.extend({
+            //default options:
+            height: 100,
+            clickSizes: [
+                ['full', 'Hide Map'],
+                ['middle', 'Split'],
+                ['minimized', 'Hide Table']
+            ],
+            size: 'full',
+            sizeCookie: false,
+            callbacks: {},
+            heights: {
+                full: Infinity,
+                middle: 280,
+                minimized: 46
+            },
+            allowHide: true,
+            fullResizer: true,
+            padding: 45
+        }, _opts);
+        elem0 = $('<div />')
+            .appendTo(elem);
+        elem1 = $('<div />')
+            .appendTo(elem);
+        if(opts.sizeCookie) {
+            opts.size = $.cookie("displayWindowSize") || opts.size;
+        }
+
+        if(opts.fullResizer) {
+            var oh = 0;
+            $(opts.offsetElems).each(function(){ oh += $(this).height(); });
+            fullHeight = $(window).height() - oh - opts.padding;
+            elem.height(fullHeight);
+            elem.addClass('display-window-wrap');
+            elem0.height(fullHeight);
+            elem1.addClass('display-window-content');
+        }
+        createHeaderBar()
+            .appendTo(elem1);
+        elem1content = $('<div />')
+            .appendTo(elem1);
+        setSize(opts.size);
+    }
+    function setTitle(t) {
+        _.each(titleElems, function(e){
+            e.text(t);
+        });
+    }
+    var curTitle;
+    function showTitle(i) {
+        curTitle = i;
+        _.each(titleElems, function(e, key){
+            if(key===i) {
+                e.show();
+            } else {
+                e.hide();
+            }
+        });
+    }
+    function addCallback(cbname, cb) {
+        if(opts.callbacks[cbname]===undefined) {
+            opts.callbacks[cbname] = [];
+        }
+        opts.callbacks[cbname].push(cb);
+    }
+    function setBarHeight(h, animate) {
+        if(animate) {
+            elem1.animate({
+                height: h
+            }, 200);
+        } else {
+            elem1.css({
+                height: h
+            });
+        }
+    }
+    var prevSize, sizeTempSet = false;
+    function setTempSize(size, animate) {
+        prevSize = curSize;
+        sizeTempSet = true;
+        setSize(size, animate);
+    }
+    function unsetTempSize(animate) {
+        if(sizeTempSet) {
+            setSize(prevSize, animate);
+            prevSize = undefined;
+            sizeTempSet = false;
+        }
+    }
+    function setSize(_size, animate) {
+        var size;
+        if(opts.heights[_size] !== undefined) {
+            size = opts.heights[_size];
+            if(size === Infinity) {
+                size = fullHeight;
+            }
+            $.cookie("displayWindowSize", _size);
+            setBarHeight(size, animate);
+            curSize = _size;
+        }
+        if(opts.callbacks[_size] !== undefined) {
+            _.each(opts.callbacks[_size], function(cb){
+                cb(animate);
+            });
+        }
+        if(opts.callbacks.resize !== undefined) {
+            _.each(opts.callbacks.resize, function(cb){
+                cb(animate, _size, elem, elem1, elem1content);
+            });
+        }
+        hbuttons.find('.primary')
+            .removeClass('primary');
+        hbuttons.find('.clicksize.'+_size)
+            .addClass('primary');
+    }
+    function addTitle(key, jqElem) {
+        titleElems[key] = jqElem;
+        if(curTitle===key) {
+            showTitle(key);
+        }
+    }
+    function createHeaderBar() {
+        hbuttons = $('<span />'); //.addClass('print-hide-inline');
+        _.each(opts.clickSizes, function(sizeArr){
+            var size = sizeArr[0],
+                desc = sizeArr[1];
+            $('<a />')
+                .attr('class', 'btn small clicksize ' + size)
+                .text(desc)
+                .attr('title', desc)
+                .click(function(){
+                    setSize(size, true)
+                })
+                .appendTo(hbuttons);
+        });
+        titleElems.bar = $('<h3 />').addClass('bar-title').hide();
+        return $('<div />', {'class': 'display-window-bar breadcrumb'})
+            .css({'margin':0})
+            .append(titleElems.bar)
+            .append(hbuttons);
+    }
+    function clear(){
+        elem !== undefined && elem.empty();
+        titleElems = {};
+    }
+    function getElems() {
+        return {
+            wrap: elem,
+            elem0: elem0,
+            elem1: elem1,
+            elem1content: elem1content
+        }
+    }
+    function elem1contentHeight() {
+        var padding = 30;
+        return elem1.height() - hbuttons.height() - padding;
+    }
+    return {
+        init: init,
+        clear: clear,
+        setSize: setSize,
+        setTempSize: setTempSize,
+        unsetTempSize: unsetTempSize,
+        addCallback: addCallback,
+        addTitle: addTitle,
+        setTitle: setTitle,
+        showTitle: showTitle,
+        elem1contentHeight: elem1contentHeight,
+        getElems: getElems
+    };
+})();
+
+var IconSwitcher = (function(){
+    var context = {};
+    var callbacks = ["createMapItem",
+                        "shiftMapItemStatus",
+                        "statusShiftDone",
+                        "hideMapItem",
+                        "showMapItem",
+                        "setMapItemVisibility"];
+    function init(_opts) {
+        var noop = function(){};
+        context = _.extend({
+            items: {}
+        }, _opts);
+        _.each(callbacks, function(cbname){
+            if(context[cbname]===undefined) { context[cbname] = noop; }
+        });
+    }
+    function hideItem(item) {
+        item.hidden = true;
+    }
+    function showItem(item) {
+        item.hidden = false;
+    }
+    function setVisibility(item, tf) {
+        if(!!tf) {
+            if(!item.hidden) {
+                item.hidden = true;
+                context.setMapItemVisibility.call(item, false, item, context.items);
+                return true;
+            }
+        } else {
+            if(!!item.hidden) {
+                item.hidden = false;
+                context.setMapItemVisibility.call(item, true, item, context.items);
+                return true;
+            }
+        }
+        return false;
+    }
+    function iterate(cb) { _.each(context.items, cb); }
+    function shiftStatus(fn) {
+        iterate(function(item, id){
+            var status = fn.call(item, id, item, context.items);
+            var visChange = setVisibility(item, status === false),
+                statusChange = false;
+            if(status === undefined) {
+                //do nothing
+            } else if(status === false) {
+                item.status = undefined;
+            } else if(item.status !== status) {
+                item.status = status;
+                statusChange = true;
+            }
+            if(statusChange || visChange) {
+                context.shiftMapItemStatus(item, id);
+            }
+        });
+        context.statusShiftDone();
+    }
+    function all() { return _.values(context.items); }
+    function setCallback(cbName, cb) {
+        if(callbacks.indexOf(cbName) !== -1) {
+            context[cbName] = cb;
+        }
+    }
+    function filterStatus(status) {
+        return _.filter(context.items, function(item){ return item.status === status; });
+    }
+    function filterStatusNot(status) {
+        return _.filter(context.items, function(item){ return item.status !== status; });
+    }
+    function allShowing() {
+        return filterStatusNot(undefined);
+    }
+    function clear() {
+        context = {};
+    }
+    return {
+        init: init,
+        clear: clear,
+        allShowing: allShowing,
+        filterStatus: filterStatus,
+        filterStatusNot: filterStatusNot,
+        all: all,
+        setCallback: setCallback,
+        shiftStatus: shiftStatus,
+        iterate: iterate
+    }
+})();
+
+var LocalNav = (function(){
+    var elem, wrap, opts;
+    var buttonSections = {};
+    var submenu;
+    function init(selector, _opts) {
+        wrap = $(selector);
+        opts = _.extend({
+            sections: []
+        }, _opts);
+        elem = $('<ul />', {'id': 'local-nav', 'class': 'nav'});
+        wrap = $('<div />', {'class': 'row'})
+                .css({'position':'absolute','top':82,'left':0,'z-index':99})
+                .html(elem);
+        $('.content').eq(0).prepend(wrap);
+        _.each(opts.sections, function(section, i){
+            if(i!==0) {
+                $("<li />", {'class': 'small spacer'})
+                    .html('&nbsp;')
+                    .appendTo(elem);
+            }
+            _.each(section, function(arr){
+                var code = arr[0].split(":");
+                if(buttonSections[code[0]]===undefined) {buttonSections[code[0]] = {};}
+                var a = $('<a />', {'href':arr[2], 'text': arr[1]});
+                buttonSections[code[0]][code[1]] = a;
+                $('<li />').html(a)
+                    .appendTo(elem);
+            });
+        });
+        submenu = $('<ul />')
+            .addClass('submenu')
+//            .html($("<li />").html($("<a />", {'href':'#', 'text':'xxx'})))
+//            .css({'position':'absolute','left':400,top:38})
+            .appendTo(elem);
+    }
+    function getNavLink(code) {
+        var _x = code.split(":"),
+            section = _x[0],
+            name = _x[1];
+        return buttonSections[section][name];
+    }
+    function markActive(codesArray) {
+        wrap.find('.active').removeClass('active');
+        _.each(codesArray, function(code){
+            getNavLink(code).parents('li').eq(0).addClass('active')
+        });
+    }
+    function clear() {
+        wrap.empty();
+        wrap = undefined;
+        elem = undefined;
+        buttonSections = {};
+        submenu = undefined;
+    }
+    function hideSubmenu() {
+        submenu.hide();
+    }
+    function displaySubmenu(nlcode, a, _opts) {
+        var navLink = getNavLink(nlcode);
+        var lpos = navLink.parents('li').eq(0).position().left;
+        submenu.hide()
+                .empty()
+                .css({'left': lpos});
+        _.each(a, function(aa){
+            $('<li />')
+                .html($('<a />', {text: aa[0], 'href': aa[1]}))
+                .appendTo(submenu);
+        });
+        submenu.show();
+    }
+    function iterate(cb) {
+        _.each(buttonSections, function(buttons, sectionName){
+            _.each(buttons, function(button, buttonName){
+                cb.apply(this, [sectionName, buttonName, button])
+            });
+        });
+    }
+    return {
+        init: init,
+        clear: clear,
+        iterate: iterate,
+        displaySubmenu: displaySubmenu,
+        hideSubmenu: hideSubmenu,
+        markActive: markActive
+    }
+})();
+
 var NMIS = (function(){
     var data;
     function init(_data, _sectors) {
         data = _.clone(_data);
+	_(data).each(parseLatLng);
         Sectors.init(_sectors);
         return true;
     }
@@ -200,19 +620,42 @@ var NMIS = (function(){
         _(data).each(ensureLatLng);
         return true;
     }
+    function parseLatLng(datum) {
+	if(datum.gps===undefined) {
+	    datum._ll = false;
+	} else {
+	    var ll = datum.gps.split(' ');
+	    datum._ll = [ll[0], ll[1]];
+	}
+    }
     function dataForSector(sectorSlug) {
         var sector = Sectors.pluck(sectorSlug);
-        return _(data).filter(function(datum){
-            return datum.sector == sector.slug;
+        return _(data).filter(function(datum, id){
+            return datum.sector.toLowerCase() == sector.slug.toLowerCase();
         });
+    }
+    function dataObjForSector(sectorSlug) {
+        var sector = Sectors.pluck(sectorSlug);
+        var o = {};
+        _(data).each(function(datum, id){
+            if(datum.sector.toLowerCase() == sector.slug.toLowerCase()) {
+                o[id] = datum;
+            }
+        });
+        return o;
     }
     return {
         Sectors: Sectors,
         Tabulation: Tabulation,
+        IconSwitcher: IconSwitcher,
+        LocalNav: LocalNav,
+        Breadcrumb: Breadcrumb,
+        DisplayWindow: DisplayWindow,
+        DataLoader: DataLoader,
         data: function(){return data;},
         dataForSector: dataForSector,
+        dataObjForSector: dataObjForSector,
         validateData: validateData,
-//        FacilityTables: FacilityTables,
         init: init,
         clear: clear
     }

@@ -8,7 +8,39 @@ from display_defs.models import FacilityTable, MapLayerDescription
 from nga_districts.models import LGA, Zone, State
 from django.db.models import Count
 import json
+#localhost:8000/nmis~/state1/lga2/
 
+def _get_state_lga_from_first_two_items(arr):
+    try:
+        state = State.objects.get(slug=arr[0])
+        full_id = '_'.join([arr[0], arr[1]])
+        lga = state.lgas.get(unique_slug=full_id)
+    except Exception, e:
+        return (False, False, False)
+    return (state, lga, True)
+
+@login_required
+def nmis_view(request, state_id, lga_id, reqpath):
+    context = RequestContext(request)
+    context.jsmodules = ['modes', 'tabulations', 'facility_tables']
+    context.url_root = "/nmis~/"
+    context.reqpath = reqpath
+    try:
+        context.state = State.objects.get(slug=state_id)
+        full_id = '_'.join([state_id, lga_id])
+        context.lga = context.state.lgas.get(unique_slug=full_id)
+    except Exception, e:
+        return HttpResponseRedirect("/")
+    return render_to_response("nmis_view.html", context_instance=context)
+
+def summary_views(request, lga_id, sector_id=""):
+    context = RequestContext(request)
+    try:
+        lga = LGA.objects.get(unique_slug=lga_id)
+    except Exception, e:
+        return HttpResponseBadRequest("Not cool")
+    context.lga = lga
+    return render_to_response("summary_view.html")
 
 @login_required
 def dashboard(request, reqpath):
