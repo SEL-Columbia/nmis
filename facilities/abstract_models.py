@@ -149,6 +149,28 @@ def sum_non_null_values(d, keys):
     return sum(operands)
 
 
+def or_non_null_values(d, formulas):
+    """
+    Helper function for calculated variables.
+    """
+    def any_operand(d, operands):
+        for op in operands:
+            if eval(op):
+                return True
+        return False
+    # check whether each of the formulas evaluates and
+    # if so, add it to the list to be or'ed together
+    operands = []
+    for f in formulas:
+        try:
+            eval(f)
+            operands.append(f)
+        except:
+            pass
+    if not operands:
+        raise Exception
+    return any_operand(d, operands)
+
 class CalculatedVariable(Variable):
     """
     example formula: d['num_students_total'] / d['num_tchrs_total']
