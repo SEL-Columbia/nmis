@@ -25,7 +25,6 @@
             cc.find('>div').hide();
             cc.find('>div.lga.'+sector.slug).show();
             cc.show();
-//            log("sector", sector, $('.lga.'+sector));
         })(_env.sector);
     }
     dashboard = $.sammy(function(){

@@ -85,7 +85,7 @@ var dashboard = $.sammy('body');
 	    for(i=0, l=keyList.length; i < l; i++) {
 	        key = keyList[i];
 	        item = obj[key];
-            if(item !== undefined) {
+            if(!!item) {
                 if(item===false) { return ["/error"]; }
                 arr.push(item.slug === undefined ? item : item.slug);
 	        } else {

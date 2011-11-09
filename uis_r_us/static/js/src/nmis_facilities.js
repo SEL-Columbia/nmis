@@ -80,7 +80,7 @@ function prepFacilities(params) {
     	NMIS.Breadcrumb.setLevels(bcValues);
 	})();
     NMIS.LocalNav.iterate(function(sectionType, buttonName, a){
-        var env = _.extend({}, e);
+        var env = _.extend({}, e, {subsector: false});
         // var env = {
         //     lga: lga,
         //     mode: facilitiesMode,
