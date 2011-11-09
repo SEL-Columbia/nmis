@@ -405,7 +405,7 @@ class DictModel(models.Model):
         return modd
 
     def get_latest_value_for_variable(self, variable):
-        if type(variable) == str:
+        if isinstance(variable, basestring):
             variable = Variable.get(slug=variable)
         try:
             kwargs = self._kwargs()
