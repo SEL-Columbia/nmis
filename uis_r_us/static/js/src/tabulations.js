@@ -236,6 +236,7 @@ var DisplayWindow = (function(){
     var elem, elem1, elem0, elem1content;
     var fullHeight;
     var opts;
+    var visible;
     var hbuttons;
     var titleElems = {};
     var curSize;
@@ -253,6 +254,7 @@ var DisplayWindow = (function(){
             size: 'full',
             sizeCookie: false,
             callbacks: {},
+            visible: false,
             heights: {
                 full: Infinity,
                 middle: 280,
@@ -266,6 +268,8 @@ var DisplayWindow = (function(){
             .appendTo(elem);
         elem1 = $('<div />')
             .appendTo(elem);
+        visible = !!opts.visible;
+        setVisibility(visible, false);
         if(opts.sizeCookie) {
             opts.size = $.cookie("displayWindowSize") || opts.size;
         }
@@ -357,6 +361,16 @@ var DisplayWindow = (function(){
         hbuttons.find('.clicksize.'+_size)
             .addClass('primary');
     }
+    function setVisibility(tf) {
+        var css = {};
+        if(!tf) {
+            css = {'left': '1000em'};
+        } else {
+            css = {'left': '0'};
+        }
+        elem0.css(css);
+        elem1.css(css);
+    }
     function addTitle(key, jqElem) {
         titleElems[key] = jqElem;
         if(curTitle===key) {
@@ -404,6 +418,7 @@ var DisplayWindow = (function(){
         clear: clear,
         setSize: setSize,
         setTempSize: setTempSize,
+        setVisibility: setVisibility,
         unsetTempSize: unsetTempSize,
         addCallback: addCallback,
         addTitle: addTitle,
@@ -593,11 +608,14 @@ var LocalNav = (function(){
 
 var NMIS = (function(){
     var data;
-    function init(_data, _sectors) {
+    function init(_data) {
         data = _.clone(_data);
 	_(data).each(parseLatLng);
-        Sectors.init(_sectors);
+//        Sectors.init(_sectors);
         return true;
+    }
+    function loadSectors(_sectors){
+        Sectors.init(_sectors);
     }
     function clear() {
         data = [];
@@ -656,6 +674,7 @@ var NMIS = (function(){
         dataForSector: dataForSector,
         dataObjForSector: dataObjForSector,
         validateData: validateData,
+        loadSectors: loadSectors,
         init: init,
         clear: clear
     }

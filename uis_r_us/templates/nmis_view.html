@@ -18,6 +18,8 @@
 		},
 		lgaName = "{{lga.name}}",
 		lgaUniqueSlug = "{{lga.unique_slug}}";
+		
+		var sectorData = {{sector_data|safe}};
 </script>
 <script src="/static/js/src/nmis_view.js" type="text/javascript" charset="utf-8"></script>
 <script src="/static/js/src/nmis_facilities.js" type="text/javascript" charset="utf-8"></script>
@@ -43,6 +45,9 @@
 		color: #aaa;
 		font-size: 16px;
 		margin: 5px 20px;
+	}
+	div.cwrap {
+		padding: 0 20px;
 	}
 	h1.facilities-content-title {
 		color: #444;
@@ -76,7 +81,7 @@
 <div id="conditional-content">
 	{% for sector, sfile in include_sectors %}
 	<div class="lga {{sector}}">
-		{% include sfile %}
+		{% include 'summary_overview.html' %}
 	</div>
 	{% endfor %}
 </div>

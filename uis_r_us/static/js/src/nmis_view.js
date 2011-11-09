@@ -32,8 +32,7 @@ var zz = 0;
 var itemStatii = {};
 var itemzOnMap = {};
 
-
-NMIS.DisplayWindow.init(".content", {
+var displayWindowOptions = {
     offsetElems: '.topbar .fill .container',
     sizeCookie: true,
     callbacks: {
@@ -47,7 +46,10 @@ NMIS.DisplayWindow.init(".content", {
             }
         ]
     }
-});
+};
+
+NMIS.DisplayWindow.init(".content", displayWindowOptions);
+NMIS.loadSectors(sectorData);
 
 var wElems = NMIS.DisplayWindow.getElems();
 

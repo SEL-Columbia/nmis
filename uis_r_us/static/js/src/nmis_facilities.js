@@ -19,14 +19,14 @@ var FacilitySelector = (function(){
 	var variableData = DataLoader.fetch("/facility_variables");
 
     function loadFacilities() {
+        $('#conditional-content').hide();
 	    var params = {};
 	    _.each(this.params, function(param, pname){
-	        if($.type(param)==="string") {
+	        if($.type(param)==="string" && param !== '') {
 	            params[pname] = param.replace('/', '');
 	        }
 	    });
-	    log(params);
-        if(params.sector === undefined) {
+        if(params.sector === 'overview') {
             params.sector = undefined;
         }
 	    prepFacilities(params);
@@ -37,14 +37,30 @@ var FacilitySelector = (function(){
                 launchFacilities(lgaData, variableData, params);
     		});
 	}
-	dashboard.get("/nmis~/:state/:lga/facilities(/:sector)?/?", loadFacilities);
-//    dashboard.get("/nmis~/:state/:lga/facilities/(:sector/)?", loadFacilities);
+	dashboard.get("/nmis~/:state/:lga/facilities/?", loadFacilities);
+	dashboard.get("/nmis~/:state/:lga/facilities/:sector/?", loadFacilities);
     dashboard.get("/nmis~/:state/:lga/facilities/:sector/:subsector/?", loadFacilities);
     dashboard.get("/nmis~/:state/:lga/facilities/:sector/:subsector/:indicator/?", loadFacilities);
 }();
 
+function prepBreadcrumbValues(e, keys, env){
+    var i, l, key, val, name, arr = [];
+    for(i=0, l=keys.length; i < l; i++) {
+        key = keys[i];
+        val = e[key];
+        if(val !== undefined) {
+            name = val.name || val.slug || val;
+            env[key] = val;
+            arr.push([name, NMIS.urlFor(env)])
+        } else {
+            return arr;
+        }
+    }
+    return arr;
+}
 
 function prepFacilities(params) {
+    DisplayWindow.setVisibility(true);
     var facilitiesMode = {name:"Facility Detail", slug:"facilities"};
 	var e = {
 	    state: state,
@@ -60,21 +76,6 @@ function prepFacilities(params) {
 	    _sector = { name: e.sector, slug: e.sector.toLowerCase() };
 	}
 	(function(){
-	    function prepBreadcrumbValues(e, keys, env){
-            var i, l, key, val, name, arr = [];
-            for(i=0, l=keys.length; i < l; i++) {
-                key = keys[i];
-                val = e[key];
-                if(val !== undefined) {
-                    name = val.name || val.slug || val;
-                    env[key] = val;
-                    arr.push([name, NMIS.urlFor(env)])
-                } else {
-                    return arr;
-                }
-            }
-            return arr;
-        }
         var bcValues = prepBreadcrumbValues(e,
                         "state lga mode sector subsector indicator".split(" "),
                         {state:state,lga:lga});
@@ -110,7 +111,7 @@ function launchFacilities(lgaData, variableData, params) {
 	    indicator: params.indicator
 	};
 
-	NMIS.init(facilities, sectors);
+	NMIS.init(facilities);
 	
 	var boolMapLoad = true;
 

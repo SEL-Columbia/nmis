@@ -1,3 +1,18 @@
-<p>
-	Summary {{sector}}
-</p>
+<div class="display-window-bar breadcrumb">
+	<span>
+		<a href="#" class="btn">Spacer</a>
+	</span>
+</div>
+<div class="cwrap">
+	{% if sector == "overview" %}
+	<h1>
+		Overview, my friend!
+	</h1>
+	{% else %}
+	<h1>Summary {{sector}}</h1>
+	{% endif %}
+	<hr>
+	<p>
+		Lorem Ipsum dolorem sit amet sprite coca cola.
+	</p>
+</div>
