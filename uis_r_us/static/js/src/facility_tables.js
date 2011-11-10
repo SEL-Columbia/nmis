@@ -29,7 +29,8 @@ var FacilityTables = (function(){
         var opts = _.extend({
             //default options
             callback: function(){},
-            sectorCallback: function(){}
+            sectorCallback: function(){},
+            indicatorClickCallback: function(){}
         }, _opts);
         if(div===undefined) {
             div = $('<div />').addClass('facility-display-wrap');
@@ -51,9 +52,9 @@ var FacilityTables = (function(){
         }
         div.find('td, th').hide();
         var sectorElem = div.find('.facility-display').filter(function(){
-            return $(this).data('sector') === sector;
+            return $(this).data('sector') === sector.slug;
         }).eq(0);
-        sectorElem.find('.subgroup-all, .subgroup-'+subsector).show();
+        sectorElem.find('.subgroup-all, .subgroup-'+subsector.slug).show();
     }
     function createForSector(s, opts) {
         var tbody = $('<tbody />');
@@ -69,9 +70,10 @@ var FacilityTables = (function(){
             _createRow(facility, cols, fid)
                 .appendTo(tbody);
         });
-        iDiv.append($('<table />')
-            .append(_createHeadRow(sector, cols))
-            .append(tbody));
+        $('<table />')
+            .append(_createHeadRow(sector, cols, opts))
+            .append(tbody)
+            .appendTo(iDiv);
         opts.sectorCallback.call(this, sector, iDiv, _createNavigation, div);
         return iDiv;
     }
@@ -109,23 +111,44 @@ var FacilityTables = (function(){
 	return clss.join(' ');
     }
     function hasClickAction(col, carr) {
-	return !!(!!col.click_actions && col.click_actions.indexOf(col));
+    	return !!(!!col.click_actions && col.click_actions.indexOf(col));
     }
-    function _createHeadRow(sector, cols) {
+    function _createHeadRow(sector, cols, opts) {
         var tr = $('<tr />');
         _.each(cols, function(col, i){
-	    var th = $('<th />', {'class': classesStr(col)});
-	    if (hasClickAction(col, 'piechart_false') || hasClickAction(col, 'piechart_true')) {
-		th.html($('<a />', {href:'#'}).text(col.name).data('col',col));
+	    var th = $('<th />', {'class': classesStr(col)})
+	        .data('col', col);
+	    if (!!col.clickable) {
+    		th.html($('<a />', {href: '#'}).text(col.name).data('col',col));
 	    } else {
-		th.text(col.name);
+    		th.text(col.name);
 	    }
 	    th.appendTo(tr);
         });
-        return tr;
+        tr.delegate('a', 'click', function(evt){
+            opts.indicatorClickCallback.call($(this).data('col'));
+            return false;
+        });
+        return $('<thead />').html(tr);
+    }
+    function highlightColumn(column, _opts) {
+        // var opts = _.extend({
+        //     highlightClass: 'fuchsia'
+        // }, _opts);
+        div.find('.highlighted').removeClass('highlighted');
+        var th = div.find('th').filter(function(){
+            return ($(this).data('col').slug === column.slug)
+        }).eq(0);
+        var table = th.parents('table').eq(0);
+        var ind = th.index();
+        table.find('tr').each(function(){
+            $(this).children().eq(ind).addClass('highlighted');
+        });
+//        log(column, '.subgroup-'+column.slug, );
     }
     return {
         createForSectors: createForSectors,
+        highlightColumn: highlightColumn,
         select: select
     };
 })();

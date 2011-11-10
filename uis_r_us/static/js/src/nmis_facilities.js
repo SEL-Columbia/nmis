@@ -83,12 +83,6 @@ function prepFacilities(params) {
 	})();
     NMIS.LocalNav.iterate(function(sectionType, buttonName, a){
         var env = _.extend({}, e, {subsector: false});
-        // var env = {
-        //     lga: lga,
-        //     mode: facilitiesMode,
-        //     state: state,
-        //     sector: _sector
-        // };
         env[sectionType] = buttonName;
         a.attr('href', NMIS.urlFor(env));
     });
@@ -105,14 +99,16 @@ function launchFacilities(lgaData, variableData, params) {
 	var sectors = variableData.sectors;
 	var sector = Sectors.pluck(params.sector)
 	var e = {
+	    state: state.slug,
+        lga: lga.slug,
+        mode: 'facilities',
 	    sector: sector,
 	    subsector: sector.getSubsector(params.subsector),
 	    indicator: sector.getIndicator(params.indicator)
 	};
-	e.subsector = e.sector.getSubsector(params.subsector);
-	e.indicator = e.sector.getIndicator(params.indicator);
 
 	NMIS.init(facilities);
+
 
 	var boolMapLoad = true;
 
@@ -130,16 +126,6 @@ function launchFacilities(lgaData, variableData, params) {
 	    });
 	}
 
-	if(!_tIconSwitchedOn) {
-	    _tIconSwitchedOn = true;
-	    NMIS.IconSwitcher.init({
-    	    items: facilities
-    	});
-        MapLoader.init();
-	}
-	NMIS.IconSwitcher.setCallback('shiftMapItemStatus', function(item, id){
-	    itemStatii[id] = item.status;
-	});
 	if(e.sector.slug==='overview') {
 	    wElems.elem1content.empty();
 	    NMIS.DisplayWindow.setTempSize("minimized", true);
@@ -150,11 +136,7 @@ function launchFacilities(lgaData, variableData, params) {
         });
     } else {
         NMIS.IconSwitcher.shiftStatus(function(id, item) {
-//            if(item.sector===e.sector.slug) {
-//                return "normal";
-//            } else {
-//                return "inactive";
-//            }
+            return item.sector === e.sector ? "normal" : "inactive";
         });
         var displayTitle = "Facility Detail: "+lga.name+" " + e.sector.name;
         NMIS.DisplayWindow.setTitle(displayTitle);
@@ -178,12 +160,31 @@ function launchFacilities(lgaData, variableData, params) {
                         subsector: sg.slug
                     });
                 }).prependTo(div);
+            },
+            indicatorClickCallback: function() {
+                if(!!this.clickable) {
+                    var clickUrl = NMIS.urlFor(_.extend({}, e, {
+                        indicator: this.slug
+                    }));
+                    dashboard.setLocation(clickUrl);
+                }
             }
         });
-        tableElem.delegate('tr', 'click', function(){
+        tableElem.find('tbody').delegate('tr', 'click', function(){
             FacilitySelector({id: $(this).data('facilityId')});
         });
         tableElem.appendTo(wElems.elem1content);
         if(!!e.subsector) FacilityTables.select(e.sector, e.subsector);
+        if(!!e.indicator) (function(){
+            $('.indicator-feature').remove();
+            var obj = {
+                name: e.indicator.name
+            };
+            $(mustachify('indicator-feature', obj)).prependTo('.facility-display');
+            FacilityTables.highlightColumn(e.indicator);
+        })();
 	}
+}
+function mustachify(id, obj) {
+    return Mustache.to_html($('#'+id).eq(0).html().replace(/<{/g, '{{').replace(/\}>/g, '}}'), obj);
 }

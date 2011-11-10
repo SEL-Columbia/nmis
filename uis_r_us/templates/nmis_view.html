@@ -27,6 +27,23 @@
 <script type="text/javascript" charset="utf-8">
 	$(function(){ dashboard.run(); });
 </script>
+<script type="text/x-mustache-template" id="indicator-feature">
+	<div class="indicator-feature">
+		<div class="overlay">
+			<h3>
+				Indicator: <{name}>
+			</h3>
+			<p>
+				num, <{num}>
+			</p>
+		</div>
+		<div class="embedded">
+			<h3>
+				Indicator: <{name}>
+			</h3>
+		</div>
+	</div>
+</script>
 <style type="text/css" media="all">
 	ul.submenu {
 		position: absolute;
@@ -37,6 +54,9 @@
 	}
 	div.facility-display-wrap {
 		padding: 0 20px;
+	}
+	td.highlighted, th.highlighted {
+		background-color: rgba(0,0,0,0.05);
 	}
 	h3.bar-title {
 		position: absolute;
@@ -68,6 +88,26 @@
 	}
 	div.display-window-wrap {
 		position: relative;
+	}
+/*	body div.size-minimized div.overlay,
+		body div.size-middle div.overlay,
+		body div.size-full div.embedded {
+			display: block;
+		} */
+	div.embedded, div.overlay {
+		display: none;
+	}
+	div.indicator-feature div.overlay {
+		position: absolute;
+		height: 140px;
+		width: 500px;
+		top: -158px;
+		background-color: #fff;
+		border: 1px solid black;
+	}
+	div.indicator-feature div.embedded {
+		margin: 12px 0 12px;
+		border: 1px solid black;
 	}
 </style>
 <style type="text/css" media="screen">

@@ -78,10 +78,7 @@ var MapMgr = (function(){
         if(!opts.ll) {
             if(opts.llString) {
                 var t = opts.llString.split(' ');
-                opts.ll = {
-                    lat: +t[0],
-                    lng: +t[1]
-                };
+                opts.ll = { lat: +t[0], lng: +t[1] };
             }
         }
         started = true;
@@ -148,8 +145,8 @@ var Sectors = (function(){
             }
         }
     }
-    Sector.prototype.getIndicator = function(q) {
-        if(!q) { return; }
+    Sector.prototype.getIndicator = function(query) {
+        if(!query) { return; }
         var islug = query.slug || query;
         var ssI = 0, ss = this.getIndicators(), ssL = ss.length;
         for(;ssI < ssL; ssI++) {
@@ -358,15 +355,19 @@ var DisplayWindow = (function(){
         }
         opts.callbacks[cbname].push(cb);
     }
-    function setBarHeight(h, animate) {
+    function setBarHeight(h, animate, cb) {
         if(animate) {
             elem1.animate({
                 height: h
-            }, 200);
+            }, {
+                duration: 200,
+                complete: cb
+            });
         } else {
             elem1.css({
                 height: h
             });
+            (cb || function(){})();
         }
     }
     var prevSize, sizeTempSet = false;
@@ -390,7 +391,10 @@ var DisplayWindow = (function(){
                 size = fullHeight;
             }
             $.cookie("displayWindowSize", _size);
-            setBarHeight(size, animate);
+            setBarHeight(size, false, function(){
+                if(!!curSize) elem1.removeClass('size-'+curSize);
+                elem1.addClass('size-'+_size);
+            });
             curSize = _size;
         }
         if(opts.callbacks[_size] !== undefined) {
@@ -486,9 +490,11 @@ var IconSwitcher = (function(){
                         "setMapItemVisibility"];
     function init(_opts) {
         var noop = function(){};
+        var items = {};
         context = _.extend({
             items: {}
         }, _opts);
+        log("initting icon switcher");
         _.each(callbacks, function(cbname){
             if(context[cbname]===undefined) { context[cbname] = noop; }
         });
@@ -654,10 +660,31 @@ var LocalNav = (function(){
 })();
 
 var NMIS = (function(){
-    var data;
-    function init(_data) {
-        data = _.clone(_data);
-    	_(data).each(parseLatLng);
+    var data, opts;
+    function init(_data, _opts) {
+        opts = _.extend({
+            iconSwitcher: true
+        }, _opts);
+        data = {};
+        _.each(_data, function(val, key){
+            data[key] = cloneParse(val);
+        });
+    	if(opts.iconSwitcher) {
+            NMIS.IconSwitcher.init({
+        	    items: data,
+        	    statusShiftDone: function(){
+        	        var tally = {};
+    	            _.each(this.items, function(item){
+    	                if(!tally[item.status]) {
+    	                    tally[item.status]=0;
+    	                }
+    	                tally[item.status]++;
+    	            });
+    	            log(JSON.stringify(tally));
+//        	        log("shift done", this, arguments);
+        	    }
+        	});
+        }
         return true;
     }
     function loadSectors(_sectors, opts){
@@ -684,25 +711,29 @@ var NMIS = (function(){
         _(data).each(ensureLatLng);
         return true;
     }
-    function parseLatLng(datum) {
-	if(datum.gps===undefined) {
-	    datum._ll = false;
-	} else {
-	    var ll = datum.gps.split(' ');
-	    datum._ll = [ll[0], ll[1]];
-	}
+    function cloneParse(d) {
+        var datum = _.clone(d);
+    	if(datum.gps===undefined) {
+    	    datum._ll = false;
+    	} else {
+    	    var ll = datum.gps.split(' ');
+    	    datum._ll = [ll[0], ll[1]];
+    	}
+    	var sslug = datum.sector.toLowerCase();
+    	datum.sector = Sectors.pluck(sslug);
+    	return datum;
     }
     function dataForSector(sectorSlug) {
         var sector = Sectors.pluck(sectorSlug);
         return _(data).filter(function(datum, id){
-            return datum.sector.toLowerCase() == sector.slug.toLowerCase();
+            return datum.sector.slug === sector.slug;
         });
     }
     function dataObjForSector(sectorSlug) {
         var sector = Sectors.pluck(sectorSlug);
         var o = {};
         _(data).each(function(datum, id){
-            if(datum.sector.toLowerCase() == sector.slug.toLowerCase()) {
+            if(datum.sector.slug === sector.slug) {
                 o[id] = datum;
             }
         });
