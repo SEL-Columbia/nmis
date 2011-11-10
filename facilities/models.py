@@ -20,7 +20,7 @@ class FacilityRecord(DataRecord):
         result = infinite_dict()
         for d in records:
             variable = Variable.get(d['variable'])
-            value = '%s_value' % variable.data_type
+            value = variable.value_field()
             if d[value] in result[d['facility__sector']][d['variable']]:
                 result[d['facility__sector']][d['variable']][d[value]] += 1
             else:
@@ -39,7 +39,7 @@ class FacilityRecord(DataRecord):
 
     @classmethod
     def count_by_lga(cls, variable):
-        value = '%s_value' % variable.data_type
+        value = variable.value_field()
         records = cls.objects.filter(variable=variable, invalid=False).values('facility__lga', 'facility', value).annotate(Max('date')).distinct()
         result = defaultdict(dict)
         for d in records:
