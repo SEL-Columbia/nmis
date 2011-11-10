@@ -301,7 +301,10 @@ class DictModel(models.Model):
                         pass
                 else:
                     invalid = True if variable.slug in invalid_vars else False
-                    d[key] = self.set(variable, value, None, source, invalid)
+                    v = self.set(variable, value, None, source, invalid)
+                    d[key] = v if not invalid else None
+        # clean up d by removing None and invalid values before we calculate anything
+        d = dict([(key, value) for key, value in d.iteritems() if value is not None])
         if and_calculate:
             self.add_calculated_values(d, source, only_for_missing, invalid_vars)
 
@@ -403,7 +406,8 @@ class DictModel(models.Model):
                 if t[val_k] is not None:
                     return t[val_k]
             return None
-        records = self._data_record_class.objects.filter(**self._kwargs())
+        kwargs = dict(self._kwargs(), **{'invalid': False})
+        records = self._data_record_class.objects.filter(**kwargs)
         d = {}
         for r in records.values('variable_id', 'string_value', 'float_value', 'boolean_value', 'date', 'source'):
             # todo: test to make sure this sorting is correct

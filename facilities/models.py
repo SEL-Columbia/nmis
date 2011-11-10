@@ -14,7 +14,7 @@ class FacilityRecord(DataRecord):
 
     @classmethod
     def counts_by_variable(cls, lga):
-        records = cls.objects.filter(facility__lga=lga).values('facility', 'variable', 'float_value', 'boolean_value', 'string_value', 'facility__sector').annotate(Max('date')).distinct()
+        records = cls.objects.filter(facility__lga=lga, invalid=False).values('facility', 'variable', 'float_value', 'boolean_value', 'string_value', 'facility__sector').annotate(Max('date')).distinct()
         def infinite_dict():
             return defaultdict(infinite_dict)
         result = infinite_dict()
@@ -40,7 +40,7 @@ class FacilityRecord(DataRecord):
     @classmethod
     def count_by_lga(cls, variable):
         value = '%s_value' % variable.data_type
-        records = cls.objects.filter(variable=variable).values('facility__lga', 'facility', value).annotate(Max('date')).distinct()
+        records = cls.objects.filter(variable=variable, invalid=False).values('facility__lga', 'facility', value).annotate(Max('date')).distinct()
         result = defaultdict(dict)
         for d in records:
             try:
@@ -85,7 +85,7 @@ class LGAIndicator(Variable):
 
     def count_boolean(self):
         assert self.origin.data_type == 'boolean', 'Assertion failed: %s (%s) is not a boolean' % (self.origin.slug, self.origin.data_type)
-        records = FacilityRecord.objects.filter(variable=self.origin, facility__sector=self.sector).values('facility', 'facility__lga', 'boolean_value').annotate(Max('date')).distinct()
+        records = FacilityRecord.objects.filter(variable=self.origin, facility__sector=self.sector, invalid=False).values('facility', 'facility__lga', 'boolean_value').annotate(Max('date')).distinct()
         result = dict([(record['facility__lga'], {'true': 0.0, 'false': 0.0, 'true_and_false': 0.0}) for record in records])
         for d in records:
             if d['boolean_value'] == True:
@@ -104,7 +104,7 @@ class LGAIndicator(Variable):
 
     def stats(self):
         assert self.origin.data_type in ['float', 'percent', 'proportion'], 'Assertion failed: %s (%s) is not a float' % (self.origin.slug, self.origin.data_type)
-        records = FacilityRecord.objects.filter(variable=self.origin, facility__sector=self.sector).values('facility', 'facility__lga', 'float_value').annotate(Max('date')).distinct()
+        records = FacilityRecord.objects.filter(variable=self.origin, facility__sector=self.sector, invalid=False).values('facility', 'facility__lga', 'float_value').annotate(Max('date')).distinct()
         result = dict([(record['facility__lga'], {'avg': 0.0, 'count': 0.0, 'sum': 0.0}) for record in records])
         for d in records:
             i = result[d['facility__lga']]['count']
@@ -214,7 +214,7 @@ class Facility(DictModel):
     def get_latest_data_by_lga(cls, lga):
         d = defaultdict(dict)
 #        records = FacilityRecord.objects.filter(facility__lga=lga).order_by('variable__slug', '-date')
-        records = FacilityRecord.objects.filter(facility__lga=lga).order_by('-date')
+        records = FacilityRecord.objects.filter(facility__lga=lga, invalid=False).order_by('-date')
         for r in records:
             # todo: test to make sure this sorting is correct
 #            if r.variable.slug not in d[r.facility.id]:
@@ -228,7 +228,7 @@ class Facility(DictModel):
         if self.data_type == "string":
             return None
         else:
-            records = FacilityRecord.objects.filter(variable=self, facility__lga=lga)
+            records = FacilityRecord.objects.filter(variable=self, facility__lga=lga, invalid=False)
             tot = 0
             for record in records:
                 tot += record.value
@@ -239,7 +239,7 @@ class Facility(DictModel):
         if self.data_type == "string":
             return None
         else:
-            records = FacilityRecord.objects.filter(variable=self, facility__lga=lga)
+            records = FacilityRecord.objects.filter(variable=self, facility__lga=lga, invalid=False)
             count = records.count()
             if count == 0:
                 return 0
