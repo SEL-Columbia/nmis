@@ -61,6 +61,7 @@ var Breadcrumb = (function(){
 var MapMgr = (function(){
     var opts,
         started = false,
+        finished = false,
         callbackStr = "MapMgr.loaded";
     function init(_opts) {
         if(started) {
@@ -83,13 +84,15 @@ var MapMgr = (function(){
         }
         started = true;
         opts.elem = $(opts.elem);
-        if(opts.launch) {
+        if(!opts.fake) {
             $.getScript('http://maps.googleapis.com/maps/api/js?sensor=false&callback='+callbackStr);
-        } else if(opts.fake) {
+        } else {
             _.delay(loaded, opts.fakeDelay);
         }
+        return true;
     }
     function loaded() {
+        finished = true;
         _.each(opts.loadCallbacks, function(cb){
             cb.call(opts);
         });
@@ -97,9 +100,13 @@ var MapMgr = (function(){
     function addLoadCallback(cb) {
         opts.loadCallbacks.push(cb);
     }
+    function isLoaded() {
+        return finished;
+    }
     return {
         init: init,
         loaded: loaded,
+        isLoaded: isLoaded,
         addLoadCallback: addLoadCallback
     }
 })();

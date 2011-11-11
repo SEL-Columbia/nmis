@@ -289,3 +289,40 @@ test("build_for_health", function(){
     FacilityTables.select('health', 'ss2');
     equal(this.elem.find('table').length, 1, "There is one table in the element.")
 });
+
+module("map_mgr", {});
+
+asyncTest("mapmgr", function(){
+    var loaded = false;
+    ok(MapMgr.init({
+        fake: true,
+        fakeDelay: 0,
+        loadCallbacks: [
+            function(){
+                ok(MapMgr.isLoaded(), "MapMgr is now loaded.");
+                start();
+            }
+        ]
+    }), "MapMgr is initted");
+    ok(!MapMgr.isLoaded(), "MapMgr is not initially loaded.")
+});
+
+selfRemovingModule("sector_navigation", {
+    setup: function(){
+        NMIS.init(data, {
+            iconSwitcher: false,
+            sectors: sectors
+        });
+    },
+    teardown: function(){
+        NMIS.clear();
+    }
+})
+
+test("sector_clicking_doesnt_reload_map", function(){
+    log(this.elem.text("X"));
+    FacilityTables.createForSectors(['education'])
+        .appendTo(this.elem);
+    FacilityTables.select('health', 'ss2');
+    equal(this.elem.find('table').length, 1, "There is one table in the element.")
+});
