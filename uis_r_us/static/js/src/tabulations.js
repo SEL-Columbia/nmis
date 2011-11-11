@@ -228,6 +228,7 @@ var Tabulation = (function(){
         return true;
     }
     function filterBySector (sector) {
+        var sector = Sectors.pluck(sector);
         return _.filter(NMIS.data(), function(d){
             return d.sector == sector;
         })
@@ -494,7 +495,6 @@ var IconSwitcher = (function(){
         context = _.extend({
             items: {}
         }, _opts);
-        log("initting icon switcher");
         _.each(callbacks, function(cbname){
             if(context[cbname]===undefined) { context[cbname] = noop; }
         });
@@ -663,9 +663,13 @@ var NMIS = (function(){
     var data, opts;
     function init(_data, _opts) {
         opts = _.extend({
-            iconSwitcher: true
+            iconSwitcher: true,
+            sectors: false
         }, _opts);
         data = {};
+        if(!!opts.sectors) {
+            loadSectors(opts.sectors);
+        }
         _.each(_data, function(val, key){
             data[key] = cloneParse(val);
         });

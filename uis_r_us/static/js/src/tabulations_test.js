@@ -20,16 +20,22 @@ function selfRemovingModule(str, obj) {
     module(str, o);
 }
 
+var sectors2 = sampleData.facility_variables.sectors;
+
+var sl = sectors2.length, sli = 0;
 var data2 = _.map(sampleData.data.facilities, function(i, key){
     return _.extend({}, i, {
-        '_uid': key
+        '_uid': key,
+        'sector': sectors2[sli++ % sl].slug
     });
 });
-var sectors2 = sampleData.facility_variables.sectors;
 
 module("nmis", {
     setup: function(){
-        NMIS.init(data, sectors);
+        NMIS.init(data, {
+            iconSwitcher: false,
+            sectors: sectors
+        });
     },
     teardown: function(){
         NMIS.clear();
@@ -37,7 +43,10 @@ module("nmis", {
 });
 
 test("nmis", function(){
-    ok(NMIS.init(data2, sectors2), "NMIS.init() works");
+    ok(NMIS.init(data2, {
+        iconSwitcher: false,
+        sectors: sectors2
+    }), "NMIS.init() works");
     ok(NMIS.Tabulation !== undefined, "Tabulation exists");
 });
 
@@ -75,17 +84,13 @@ module("nmis_data", {
 });
 
 test("nmis_data_validation", function(){
-    NMIS.init(data2, sectors2);
+    NMIS.init(data2, {
+        iconSwitcher: false,
+        sectors: sectors2
+    });
     ok(NMIS.validateData(), "Data is validated");
     equal(NMIS.dataForSector('health').length, 10, "Data for health has a length of x");
 });
-
-// test("something", function(){
-//     NMIS.FacilityTables.createForSectors(['health'])
-//         .appendTo(this.elem);
-//     NMIS.FacilityTables.select('health', 'malaria');
-//     equal(this.elem.find('table').length, 1, "There is one table in the element.")
-// })
 
 module("breadcrumbs", {
     setup: function (){
@@ -249,7 +254,10 @@ test("icon_manager_callbacks", function(){
 
 selfRemovingModule("map_icons_with_real_data", {
     setup: function(){
-        NMIS.init(data2, sectors2);
+        NMIS.init(data2, {
+            iconSwitcher: false,
+            sectors: sectors2
+        });
         IconSwitcher.init({ items: data2 });
     },
     teardown: function(){
@@ -265,7 +273,10 @@ test("icon_manager2", function(){
 
 selfRemovingModule("table_builder", {
     setup: function(){
-        NMIS.init(data2, sectors2);
+        NMIS.init(data, {
+            iconSwitcher: false,
+            sectors: sectors
+        });
     },
     teardown: function(){
         NMIS.clear();
