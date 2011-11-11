@@ -466,8 +466,8 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Percentage of facilities that provide bednets", g("proportion_offer_bednets"), h("num_offer_bednets", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities that do not charge and fees for malaria-related services", g("proportion_no_user_fees_malaria"), h("num_no_user_fees_malaria", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Tuberculosis"],
-                ["Percentage of facilities that offer TB treatment", g("proportion_health_facilities_hiv_testing"), h("num_health_facilities_hiv_testing", "num_health_facilities"), None, None],
-                ["Percentage of facilities that offer TB testing", g("proportion_health_facilities_hiv_testing"), h("num_health_facilities_hiv_testing", "num_health_facilities"), None, None],
+                ["Percentage of facilities that offer TB treatment", g("proportion_health_facilities_tb_treatment"), h("num_health_facilities_tb_treatment", "num_health_facilities"), None, None],
+                ["Percentage of facilities that offer TB testing", g("proportion_health_facilities_tb_testing"), h("num_health_facilities_tb_testing", "num_health_facilities"), None, None],
             ],),
             ('Infrastructure', [
                 ["Percentage of facilities with access to some form of power source", g("proportion_any_power_access"), h("num_any_power_access", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
