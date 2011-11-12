@@ -72,6 +72,9 @@ var MapMgr = (function(){
             launch: true,
             fake: false,
             fakeDelay: 3000,
+            mapLoadFn: function(){
+                $.getScript('http://maps.googleapis.com/maps/api/js?sensor=false&callback='+callbackStr);
+            },
             elem: 'body',
             defaultMapType: 'SATELLITE',
             loadCallbacks: []
@@ -85,7 +88,7 @@ var MapMgr = (function(){
         started = true;
         opts.elem = $(opts.elem);
         if(!opts.fake) {
-            $.getScript('http://maps.googleapis.com/maps/api/js?sensor=false&callback='+callbackStr);
+            opts.mapLoadFn();
         } else {
             _.delay(loaded, opts.fakeDelay);
         }
@@ -103,8 +106,12 @@ var MapMgr = (function(){
     function isLoaded() {
         return finished;
     }
+    function clear() {
+        started = finished = false;
+    }
     return {
         init: init,
+        clear: clear,
         loaded: loaded,
         isLoaded: isLoaded,
         addLoadCallback: addLoadCallback

@@ -290,21 +290,51 @@ test("build_for_health", function(){
     equal(this.elem.find('table').length, 1, "There is one table in the element.")
 });
 
-module("map_mgr", {});
+/*
+
+Scenarios in the facility view:
+
+1. Items are available, map is not.
+   =items can be assigned status.
+   (map loads)
+   =items are added to the map
+> *click to new section*
+   Items are available, map is available.
+
+*/
+
+module("map_mgr", {
+    setup: function(){
+        this.mInit = MapMgr.init({
+            fake: true,
+            fakeDelay: 0,
+            loadCallbacks: [
+                function(){
+                    ok(MapMgr.isLoaded(), "MapMgr is now loaded.");
+                    start();
+                }
+            ]
+        });
+    },
+    teardown: function(){
+        MapMgr.clear();
+    }
+});
 
 asyncTest("mapmgr", function(){
-    var loaded = false;
+    ok(this.mInit, "MapMgr is initted");
+    ok(!MapMgr.isLoaded(), "MapMgr is not initially loaded.")
+});
+
+test("mapmgr_loaded_twice", function(){
     ok(MapMgr.init({
         fake: true,
-        fakeDelay: 0,
-        loadCallbacks: [
-            function(){
-                ok(MapMgr.isLoaded(), "MapMgr is now loaded.");
-                start();
-            }
-        ]
+        fakeDelay: 0
     }), "MapMgr is initted");
-    ok(!MapMgr.isLoaded(), "MapMgr is not initially loaded.")
+    ok(MapMgr.init({
+        fake: true,
+        fakeDelay: 0
+    }), "MapMgr is initted twice.");
 });
 
 selfRemovingModule("sector_navigation", {
