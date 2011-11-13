@@ -410,7 +410,6 @@ def tmp_variables_for_sector(sector_slug, lga):
             indicator = LGAIndicator.objects.get(slug=slug1)
             count = 0
             records = record_counts[indicator.sector.slug][indicator.origin.slug]
-            print records
             for k, v in records.items():
                 count += v
         except:
@@ -435,7 +434,7 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Total number of nurses in the LGA", g("num_nurses"), None, g("target_num_nurses"), None],
                 ["Total number of CHEWs (Jr. and Sr.) in the LGA", g("num_chews"), None, g("target_num_chews"), None],
                 ["Total number of laboratory technicians in the LGA", g("num_lab_techs"), None, g("target_num_lab_techs"), None],
-                ["Number of health providers per 1,000 population", g("num_skilled_health_providers_per_1000"), None, None, None],
+                ["Number of skilled health providers per 1,000 population", g("num_skilled_health_providers_per_1000"), None, None, None],
                 ["Number of CHEWs per 1,000 population", g("num_chews_per_1000"), None, None, None],
                 ["Number of facilities where all salaried staff were paid during the last pay period", g("proportion_staff_paid"), h("num_staff_paid", "staff_paid_lastmth_yn"), g("target_total_health_facilities"), "100%"],
             ],),
@@ -458,7 +457,7 @@ def tmp_variables_for_sector(sector_slug, lga):
             ('HIV/AIDS, Malaria and other Diseases', [
                 ["HIV/AIDS"],
                 ["Percentage of facilities that offer HIV testing", g("proportion_health_facilities_hiv_testing"), h("num_health_facilities_hiv_testing", "num_health_facilities"), None, None],
-                ["Percentage of facilities that offer ART treatment", g("proportion_health_facilities_hiv_testing"), h("num_health_facilities_hiv_testing", "num_health_facilities"), None, None],
+                ["Percentage of facilities that offer ART treatment", g("proportion_health_facilities_art_treatment"), h("num_health_facilities_art_treatment", "num_health_facilities"), None, None],
                 ["Malaria"],
                 ["Percentage of facilities that offer malaria testing (RDT or microscopy)", g("proportion_malaria_testing"), h("num_malaria_testing", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities that offer ACT-based treatment for malaria", g("proportion_act_treatment_for_malaria"), h("num_act_treatment_for_malaria", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
@@ -466,8 +465,8 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Percentage of facilities that provide bednets", g("proportion_offer_bednets"), h("num_offer_bednets", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities that do not charge and fees for malaria-related services", g("proportion_no_user_fees_malaria"), h("num_no_user_fees_malaria", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Tuberculosis"],
-                ["Percentage of facilities that offer TB treatment", g("proportion_health_facilities_hiv_testing"), h("num_health_facilities_hiv_testing", "num_health_facilities"), None, None],
-                ["Percentage of facilities that offer TB testing", g("proportion_health_facilities_hiv_testing"), h("num_health_facilities_hiv_testing", "num_health_facilities"), None, None],
+                ["Percentage of facilities that offer TB treatment", g("proportion_health_facilities_tb_treatment"), h("num_health_facilities_tb_treatment", "num_health_facilities"), None, None],
+                ["Percentage of facilities that offer TB testing", g("proportion_health_facilities_tb_testing"), h("num_health_facilities_tb_testing", "num_health_facilities"), None, None],
             ],),
             ('Infrastructure', [
                 ["Percentage of facilities with access to some form of power source", g("proportion_any_power_access"), h("num_any_power_access", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
