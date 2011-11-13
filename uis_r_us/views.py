@@ -550,7 +550,11 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Junior secondary school pupil to teacher ratio", g("junior_secondary_school_pupil_teachers_ratio_lga"), None, "&#8804; 35"],
                 ["Teaching to non-teaching staff ratio", g("teacher_nonteachingstaff_ratio_lga"), None, "N/A"],
                 ["Percentage of qualified teachers (with NCE)", g("proportion_teachers_nce"), i("num_teachers_nce", "num_teachers"), "100%", g("target_num_teachers")],
+                ["Percentage of primary school qualified teachers (with NCE)", g("proportion_teachers_nce_primary"), i("num_primary_school_teachers_nce", "num_primary_school_teachers"), "100%", g("target_num_teachers")],
+                ["Percentage of junior secondary qualified teachers (with NCE)", g("proportion_teachers_nce_juniorsec"), i("num_junior_secondary_school_teachers_nce", "num_junior_secondary_school_teachers"), "100%", g("target_num_teachers")],
                 ["Percentage of teachers who participated in training in the past 12 months", g("proportion_teachers_training_last_year"), i("num_teachers_training_last_year", "num_teachers"), "100%", g("target_num_teachers")],
+                ["Percentage of primary school teachers who participated in training in the past 12 months", g("proportion_teachers_training_last_year_primary"), i("num_teachers_with_training_primary", "num_primary_school_teachers"), "100%", g("target_num_teachers")],
+                ["Percentage of junior secondary school teachers who participated in training in the past 12 months", g("proportion_teachers_training_last_year_juniorsec"), i("num_teachers_with_training_juniorsec", "num_junior_secondary_teachers"), "100%", g("target_num_teachers")],
 	    ],),
 	    ('Institutional Development',[
                 ["Percentage of primary schools that have delayed teacher payments in the past 12 months", g("proportion_schools_delay_pay_primary"), h("num_schools_delay_pay", "num_primary_schools"), "0%", "0"],
@@ -560,6 +564,8 @@ def tmp_variables_for_sector(sector_slug, lga):
             ],),
             ('Curriculum Issues', [
                 ["Textbook to pupil ratio", g("num_textbooks_per_pupil"), None, "4"],
+                ["Textbook to pupil ratio (primary)", g("num_textbooks_per_pupil_primary"), None, "4"],
+                ["Textbook to pupil ratio (junior secondary)", g("num_textbooks_per_pupil_juniorsec"), None, "4"],
                 ["Percentage of primary schools where exercise books are provided to students", g("proportion_provide_exercise_books_primary"), h("num_provide_exercise_books_primary", "num_primary_schools"), "100%", g("target_num_schools")],
                 ["Percentage of junior secondary schools where exercise books are provided to students", g("proportion_provide_exercise_books_juniorsec"), h("num_provide_exercise_books_juniorsec", "num_juniorsec_schools"), "100%", g("target_num_schools")],
                 ["Percentage of primary schools where pens/pencils are provided to students", g("proportion_provide_pens_pencils_primary"), h("num_provide_pens_pencils_primary", "num_primary_schools"), "100%", g("target_num_schools")],
