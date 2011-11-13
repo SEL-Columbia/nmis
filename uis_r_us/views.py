@@ -492,9 +492,13 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Primary net intake rate (NIR) for girls", "N/A", None, "N/A"],
                 ["Junior secondary net intake rate (NIR) for boys", "N/A", None, "N/A"],
                 ["Junior Secondary net intake rate (NIR) for girls", "N/A", None, "N/A"],
-                ["Percentage of schools farther than 1km from catchement area", g("proportion_schools_1kmplus_catchment"), h("num_schools_1kmplus_catchment", "num_schools"), "0%", "0"],
+                ["Percentage of primary schools farther than 1km from catchement area", g("proportion_schools_1kmplus_catchment_primary"), h("num_schools_1kmplus_catchment_primary", "num_primary_schools"), "0%", "0"],
+                ["Percentage of junior secondary schools farther than 1km from catchement area", g("proportion_schools_1kmplus_catchment_juniorsec"), h("num_schools_1kmplus_catchment_juniorsec", "num_junior_secondary_schools"), "0%", "0"],
+
                 ["Percentage of primary schools farther than 1km from nearest secondary school", g("proportion_primary_schools_1kmplus_ss"), i("num_primary_schools_1kmplus_ss", "num_primary_schools"), "0%", "0"],
-                ["Percentage of schools with students living farther than 3km", g("proportion_students_3kmplus"), h("num_students_3kmplus", "students_living_3kmplus_school"), "0%", "0"],
+
+                ["Percentage of primary schools with students living farther than 3km", g("proportion_students_3kmplus_primary"), h("num_students_3kmplus_primary", "students_living_3kmplus_school_primary"), "0%", "0"],
+                ["Percentage of junior secondary schools with students living farther than 3km", g("proportion_students_3kmplus_juniorsec"), h("num_students_3kmplus_juniorsec", "students_living_3kmplus_school_juniorsec"), "0%", "0"],
             ],),
             ('Participation', [
                 ["Primary net enrollment rate (NER) for boys", g("net_enrollment_rate_boys_primary"), None, "100%"],
@@ -506,9 +510,12 @@ def tmp_variables_for_sector(sector_slug, lga):
             ],),
             ('Infrastructure', [
                 ["Water & Santation"],
-                ["Percentage of schools with access to potable water", g("proportion_schools_potable_water"), h("num_schools_potable_water", "num_schools"), "100%", g("target_num_schools")],
-                ["Percentage of schools with improved sanitation/toilet", g("proportion_schools_improved_sanitation"), h("num_schools_improved_sanitation", "num_schools"), "100%", g("target_num_schools")],
-                ["Percentage of schools with gender-separated toilets", g("proportion_schools_gender_sep_toilet"), h("num_schools_gender_sep_toilet", "num_schools"), "100%", g("target_num_schools")],
+                ["Percentage of primary schools with access to potable water", g("proportion_schools_potable_water_primary"), h("num_schools_potable_water_primary", "num_primary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of junior secondary schools with access to potable water", g("proportion_schools_potable_water_juniorsec"), h("num_schools_potable_water_juniorsec", "num_junior_secondary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of primary schools with improved sanitation/toilet", g("proportion_schools_improved_sanitation_primary"), h("num_schools_improved_sanitation_primary", "num_primary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of junior secondary schools with improved sanitation/toilet", g("proportion_schools_improved_sanitation_juniorsec"), h("num_schools_improved_sanitation_juniorsec", "num_junior_secondary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of primary schools with gender-separated toilets", g("proportion_schools_gender_sep_toilet_primary"), h("num_schools_gender_sep_toilet_primary", "num_primary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of junior secondary schools with gender-separated toilets", g("proportion_schools_gender_sep_toilet_juniorsec"), h("num_schools_gender_sep_toilet_juniorsec", "num_juniorsec_schools"), "100%", g("target_num_schools")],
                 ["Pupil to toilet ratio", g("pupil_toilet_ratio"), None, "35"],
                 ["Building Structure"],
                 ["Percentage of schools with access to power", g("proportion_schools_power_access"), h("num_schools_power_access", "num_schools"), "100%", g("target_num_schools")],
