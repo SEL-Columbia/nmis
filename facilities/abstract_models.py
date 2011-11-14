@@ -63,6 +63,9 @@ class Variable(models.Model):
     # little loose right now.
     _cache = {}
 
+    class CalculationError(Exception):
+        pass
+
     @classmethod
     def get(cls, slug):
         if slug not in cls._cache:
@@ -76,27 +79,41 @@ class Variable(models.Model):
         """
         Takes a Variable and a value and casts it to the appropriate Variable.data_type.
         """
+        def test_na(x):
+            if isinstance(x, basestring):
+                regex = re.compile('^n/a$|^none$', re.IGNORECASE)
+                if regex.search(x.strip()) is not None:
+                    return True
+            return False
+
         def get_float(x):
-            return float(x)
+            if test_na(x): raise self.CalculationError
+            try:
+                return float(x)
+            except ValueError:
+                raise self.CalculationError
+            raise self.CalculationError
+
 
         def get_boolean(x):
+            if test_na(x): raise self.CalculationError
             if isinstance(x, bool):
                 return x
             if isinstance(x, basestring):
-                regex = re.compile('(true|t|yes|y|1)', re.IGNORECASE)
+                regex = re.compile('^(true|t|yes|y|1)$', re.IGNORECASE)
                 if regex.search(x.strip()) is not None:
                     return True
             if isinstance(x, basestring):
-                regex = re.compile('(false|f|no|n|0)', re.IGNORECASE)
+                regex = re.compile('^(false|f|no|n|0)$', re.IGNORECASE)
                 if regex.search(x.strip()) is not None:
                     return False
-            raise Exception
+            raise self.CalculationError
 
         def get_string(x):
+            if test_na(x): raise self.CalculationError
             if unicode(x).strip():
                 return unicode(x).strip()
-            else:
-                raise Exception
+            raise self.CalculationError
 
         cast_function = {
             'float': get_float,
@@ -110,8 +127,10 @@ class Variable(models.Model):
                 % self.__unicode__())
         try:
             value = cast_function[self.data_type](value)
-        except:
+        except self.CalculationError:
             value = None
+        except:
+            raise
         return value
 
     def to_dict(self):
