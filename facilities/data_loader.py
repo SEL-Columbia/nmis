@@ -14,9 +14,11 @@ from utils.csv_reader import CsvReader
 from utils.timing import print_time
 from django.conf import settings
 import codecs
+from django.db.models.query import QuerySet
 
 from django.core.mail import mail_admins
 import sys
+
 
 class DataLoader(object):
 
@@ -435,6 +437,21 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
     def print_stats(self):
         print json.dumps(self.get_info(), indent=4)
 
+    def delete_queryset(self, cls, chunk_size=1000):
+        '''''
+        Iterate over a Django Queryset.
+
+        This method loads a maximum of chunksize (default: 100) rows in
+        its memory at the same time while django normally would load all
+        rows in its memory. Using the iterator() method only causes it to
+        not preload all the classes.
+        '''
+        qs = cls.objects.all()[:chunk_size]
+        while len(qs) > 0:
+            for i in qs:
+                i.delete()
+            qs = cls.objects.all()[:chunk_size]
+
     def _drop_variables(self):
         variable_classes_to_drop = [
             Variable,
@@ -446,7 +463,7 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
         for v in variable_classes_to_drop:
             try:
                 # this will fail if the table doesn't exist (first import)
-                v.objects.all().delete()
+                self.delete_queryset(v)
             except DatabaseError:
                 print "No data deleted for %s" % c
 
@@ -465,7 +482,7 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
         for c in classes_with_data_to_drop:
             try:
                 # this will fail if the table doesn't exist (first import)
-                c.objects.all().delete()
+                self.delete_queryset(c)
             except DatabaseError:
                 print "No data deleted for %s" % c
 
