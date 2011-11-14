@@ -494,8 +494,8 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
 
         def drop_sqlite_database():
             try:
-                os.remove('db.sqlite3')
-                print 'removed db.sqlite3'
+                os.remove(settings.DATABASES['default']['NAME'])
+                print 'removed %s' % settings.DATABASES['default']['NAME']
             except OSError:
                 pass
 
