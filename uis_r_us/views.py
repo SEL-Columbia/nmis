@@ -517,7 +517,7 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Percentage of junior secondary schools with gender-separated toilets", g("proportion_schools_gender_sep_toilet_juniorsec"), h("num_schools_gender_sep_toilet_juniorsec", "num_juniorsec_schools"), "100%", g("target_num_schools")],
                 ["Pupil to toilet ratio", g("pupil_toilet_ratio"), None, "35"],
                 ["Pupil to toilet ratio (primary)", g("pupil_toilet_ratio_primary"), None, "35"],
-                ["Pupil to toilet ratio (junior secondary)", g("pupil_toilet_ratio_juniorsec"), None, "35"],
+                ["Pupil to toilet ratio (junior secondary)", g("pupil_toilet_ratio_secondary"), None, "35"],
                 ["Building Structure"],
                 ["Percentage of primary schools with access to power", g("proportion_schools_power_access_primary"), h("num_schools_power_access_primary", "num_primary_schools"), "100%", g("target_num_schools")],
                 ["Percentage of junior secondary schools with access to power", g("proportion_schools_power_access_juniorsec"), h("num_schools_power_access_juniorsec", "num_juniorsec_schools"), "100%", g("target_num_schools")],
