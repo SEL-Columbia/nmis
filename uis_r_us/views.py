@@ -436,7 +436,7 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Total number of laboratory technicians in the LGA", g("num_lab_techs"), None, g("target_num_lab_techs"), None],
                 ["Number of skilled health providers per 1,000 population", g("num_skilled_health_providers_per_1000"), None, None, None],
                 ["Number of CHEWs per 1,000 population", g("num_chews_per_1000"), None, None, None],
-                ["Number of facilities where all salaried staff were paid during the last pay period", g("proportion_staff_paid"), h("num_staff_paid", "staff_paid_lastmth_yn"), g("target_total_health_facilities"), "100%"],
+                ["Percentage of facilities where all salaried staff were paid during the last pay period", g("proportion_staff_paid"), h("num_staff_paid", "staff_paid_lastmth_yn"), g("target_total_health_facilities"), "100%"],
             ],),
             ('Child Health', [
                 ["Percentage of facilities that offer routine immunization", g("proportion_health_facilities_routine_immunization"), h("num_health_facilities_routine_immunization", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
