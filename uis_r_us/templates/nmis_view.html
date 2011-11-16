@@ -121,7 +121,18 @@
 <div id="conditional-content">
 	{% for sector, sfile in include_sectors %}
 	<div class="lga {{sector}}">
-		{% include 'summary_overview.html' %}
+		<div class="display-window-bar breadcrumb">
+			<span>
+				<a href="#" class="btn">Spacer</a>
+			</span>
+		</div>
+		<div class="cwrap">
+			{% if sector == "overview" %}
+				{% include 'nmis_overview.html' %}
+			{% else %}
+				{% include 'nmis_summary.html' %}
+			{% endif %}
+		</div>
 	</div>
 	{% endfor %}
 </div>
