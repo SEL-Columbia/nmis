@@ -303,18 +303,10 @@ Scenarios in the facility view:
 
 */
 
+var mmgrDefaultOpts = {fake: true, fakeDelay: 0};
 module("map_mgr", {
     setup: function(){
-        this.mInit = MapMgr.init({
-            fake: true,
-            fakeDelay: 0,
-            loadCallbacks: [
-                function(){
-                    ok(MapMgr.isLoaded(), "MapMgr is now loaded.");
-                    start();
-                }
-            ]
-        });
+        this.mInit = MapMgr.init(mmgrDefaultOpts);
     },
     teardown: function(){
         MapMgr.clear();
@@ -322,19 +314,37 @@ module("map_mgr", {
 });
 
 asyncTest("mapmgr", function(){
+    MapMgr.addLoadCallback(function(){
+        start();
+    });
     ok(this.mInit, "MapMgr is initted");
     ok(!MapMgr.isLoaded(), "MapMgr is not initially loaded.")
 });
 
 test("mapmgr_loaded_twice", function(){
-    ok(MapMgr.init({
-        fake: true,
-        fakeDelay: 0
-    }), "MapMgr is initted");
-    ok(MapMgr.init({
-        fake: true,
-        fakeDelay: 0
-    }), "MapMgr is initted twice.");
+    ok(MapMgr.init(mmgrDefaultOpts), "MapMgr is initted twice.");
+    ok(MapMgr.init(mmgrDefaultOpts), "MapMgr is initted three times.");
+});
+
+module("nosetup", {});
+
+test("mapmgr_plays_nicely_with_other_modules", function(){
+    var value = 0;
+    equals(value, 0, "Value starts at zero");
+    MapMgr.init({
+        fake: true, fakeDelay: 0,
+        loadCallbacks: [
+            function(){
+                value++;
+                log("value", value)
+            }
+        ]
+    });
+    
+    //deferred until after everything else has run.
+    window.setTimeout(function(){
+        equals(value, 1, "Value increments");
+    }, 0);
 });
 
 selfRemovingModule("sector_navigation", {
@@ -350,7 +360,6 @@ selfRemovingModule("sector_navigation", {
 })
 
 test("sector_clicking_doesnt_reload_map", function(){
-    log(this.elem.text("X"));
     FacilityTables.createForSectors(['education'])
         .appendTo(this.elem);
     FacilityTables.select('health', 'ss2');

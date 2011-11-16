@@ -88,6 +88,8 @@ function prepFacilities(params) {
     });
 }
 
+NMIS.init();
+
 function launchFacilities(lgaData, variableData, params) {
     if(lgaData.profileData===undefined) { lgaData.profileData = {}; }
     if(lgaData.profileData.gps === undefined) {
@@ -106,10 +108,7 @@ function launchFacilities(lgaData, variableData, params) {
 	    subsector: sector.getSubsector(params.subsector),
 	    indicator: sector.getIndicator(params.indicator)
 	};
-
-	NMIS.init(facilities);
-
-
+	NMIS.loadFacilities(facilities);
 	var boolMapLoad = true;
 
 	if(boolMapLoad) {

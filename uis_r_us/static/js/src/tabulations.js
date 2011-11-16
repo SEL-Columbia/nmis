@@ -64,8 +64,9 @@ var MapMgr = (function(){
         finished = false,
         callbackStr = "MapMgr.loaded";
     function init(_opts) {
+        log("MapMgr initting");
         if(started) {
-            return;
+            return true;
         }
         opts = _.extend({
             //defaults
@@ -95,6 +96,7 @@ var MapMgr = (function(){
         return true;
     }
     function loaded() {
+        log("MapMgr has finished loading");
         finished = true;
         _.each(opts.loadCallbacks, function(cb){
             cb.call(opts);
@@ -504,6 +506,7 @@ var IconSwitcher = (function(){
                         "showMapItem",
                         "setMapItemVisibility"];
     function init(_opts) {
+        log("IconSwitcher initting");
         var noop = function(){};
         var items = {};
         context = _.extend({
@@ -684,9 +687,7 @@ var NMIS = (function(){
         if(!!opts.sectors) {
             loadSectors(opts.sectors);
         }
-        _.each(_data, function(val, key){
-            data[key] = cloneParse(val);
-        });
+        loadFacilities(_data);
     	if(opts.iconSwitcher) {
             NMIS.IconSwitcher.init({
         	    items: data,
@@ -707,6 +708,11 @@ var NMIS = (function(){
     }
     function loadSectors(_sectors, opts){
         Sectors.init(_sectors, opts);
+    }
+    function loadFacilities(_data, opts) {
+        _.each(_data, function(val, key){
+            data[key] = cloneParse(val);
+        });
     }
     function clear() {
         data = [];
@@ -770,6 +776,7 @@ var NMIS = (function(){
         dataObjForSector: dataObjForSector,
         validateData: validateData,
         loadSectors: loadSectors,
+        loadFacilities: loadFacilities,
         init: init,
         clear: clear
     }

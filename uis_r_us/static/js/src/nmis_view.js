@@ -29,9 +29,7 @@ var MapLoader = (function(){
 })();
 */
 
-//var _tIconSwitchedOn = false;
 var zz = 0;
-//var itemStatii = {};
 var itemzOnMap = {};
 
 var displayWindowOptions = {
