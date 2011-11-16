@@ -67,28 +67,21 @@ function prepFacilities(params) {
 	    lga: lga,
 	    mode: facilitiesMode,
 	    sector: Sectors.pluck(params.sector),
-//	    subsector: params.subsector,
-//	    indicator: params.indicator
 	};
 	e.subsector = e.sector.getSubsector(params.subsector);
 	e.indicator = e.sector.getIndicator(params.indicator);
-	(function(){
-        var bcValues = prepBreadcrumbValues(e,
-                        "state lga mode sector subsector indicator".split(" "),
-                        {state:state,lga:lga});
-
-	    NMIS.LocalNav.markActive(["mode:facilities", "sector:" + e.sector.slug]);
-        NMIS.Breadcrumb.clear();
-    	NMIS.Breadcrumb.setLevels(bcValues);
-	})();
+    var bcValues = prepBreadcrumbValues(e,
+                    "state lga mode sector subsector indicator".split(" "),
+                    {state:state,lga:lga});
+    NMIS.LocalNav.markActive(["mode:facilities", "sector:" + e.sector.slug]);
+    NMIS.Breadcrumb.clear();
+	NMIS.Breadcrumb.setLevels(bcValues);
     NMIS.LocalNav.iterate(function(sectionType, buttonName, a){
         var env = _.extend({}, e, {subsector: false});
         env[sectionType] = buttonName;
         a.attr('href', NMIS.urlFor(env));
     });
 }
-
-NMIS.init();
 
 function launchFacilities(lgaData, variableData, params) {
     if(lgaData.profileData===undefined) { lgaData.profileData = {}; }

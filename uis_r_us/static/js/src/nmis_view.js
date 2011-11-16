@@ -64,6 +64,7 @@ var wElems = NMIS.DisplayWindow.getElems();
 
 var dashboard = $.sammy('body');
 (function(){
+    NMIS.init();
     NMIS.LocalNav.init(wElems.wrap, {
         sections: [
             [
@@ -79,20 +80,7 @@ var dashboard = $.sammy('body');
         ]
     });
 
-	function _pushAsDefined(obj, keyList) {
-	    var key, i, l, arr = [], item;
-	    for(i=0, l=keyList.length; i < l; i++) {
-	        key = keyList[i];
-	        item = obj[key];
-            if(!!item) {
-                if(item===false) { return ["/error"]; }
-                arr.push(item.slug === undefined ? item : item.slug);
-	        } else {
-	            return arr;
-	        }
-	    }
-	    return arr;
-	}
+
 	NMIS.urlFor = function(_o){
         var o = _.extend({
             //defaults
@@ -100,8 +88,20 @@ var dashboard = $.sammy('body');
             mode: 'summary'
         }, _o);
         if(!o.lga || !o.state) return "/nmis~?error";
-        return _pushAsDefined(o,
-                        ["root", "state", "lga", "mode",
+        return (function _pushAsDefined(obj, keyList) {
+    	    var key, i, l, arr = [], item;
+    	    for(i=0, l=keyList.length; i < l; i++) {
+    	        key = keyList[i];
+    	        item = obj[key];
+                if(!!item) {
+                    if(item===false) { return ["/error"]; }
+                    arr.push(item.slug === undefined ? item : item.slug);
+    	        } else {
+    	            return arr;
+    	        }
+    	    }
+    	    return arr;
+    	})(o, ["root", "state", "lga", "mode",
                         "sector", "subsector", "indicator"]).join('/');
     }
     $('.url-for').each(function(){
