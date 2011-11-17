@@ -494,7 +494,7 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Percentage of primary schools farther than 1km from catchement area", g("proportion_schools_1kmplus_catchment_primary"), h("num_schools_1kmplus_catchment_primary", "num_primary_schools"), "0%", "0"],
                 ["Percentage of junior secondary schools farther than 1km from catchement area", g("proportion_schools_1kmplus_catchment_juniorsec"), h("num_schools_1kmplus_catchment_juniorsec", "num_junior_secondary_schools"), "0%", "0"],
 
-                ["Percentage of primary schools farther than 1km from nearest secondary school", g("proportion_primary_schools_1kmplus_ss"), i("num_primary_schools_1kmplus_ss", "num_primary_schools"), "0%", "0"],
+                ["Percentage of primary schools farther than 1km from nearest secondary school", g("proportion_schools_1kmplus_ss"), h("num_primary_schools_1kmplus_ss", "num_primary_schools"), "0%", "0"],
 
                 ["Percentage of primary schools with students living farther than 3km", g("proportion_students_3kmplus_primary"), h("num_students_3kmplus_primary", "students_living_3kmplus_school_primary"), "0%", "0"],
                 ["Percentage of junior secondary schools with students living farther than 3km", g("proportion_students_3kmplus_juniorsec"), h("num_students_3kmplus_juniorsec", "students_living_3kmplus_school_juniorsec"), "0%", "0"],
