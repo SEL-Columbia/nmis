@@ -470,7 +470,7 @@ def tmp_variables_for_sector(sector_slug, lga):
             ],),
             ('Infrastructure', [
                 ["Percentage of facilities with access to some form of power source", g("proportion_any_power_access"), h("num_any_power_access", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
-                ["Percentage of facilities with access to an improved water source", g("proportion_water_access"), h("num_water_access", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
+                ["Percentage of facilities with access to an improved water source", g("proportion_improved_water_source"), h("num_improved_water_source", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities with functioning improved sanitation", g("proportion_functional_sanitation"), h("num_functional_sanitation", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities with mobile phone coverage somewhere on the premises", g("proportion_mobile_coverage"), h("num_mobile_coverage", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities that separate medical waste from other forms of waste", g("proportion_health_facilities_med_waste_separated"), h("num_health_facilities_med_waste_separated", "num_health_facilities"), None, None],
