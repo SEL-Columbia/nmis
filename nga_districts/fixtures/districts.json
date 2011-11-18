@@ -7201,7 +7201,7 @@
         "pk": 402, 
         "model": "nga_districts.lga", 
         "fields": {
-            "name": "kaita", 
+            "name": "Kaita", 
             "scale_up": true, 
             "geoid": 121402, 
             "afr_id": "AFRNGA020018", 
