@@ -111,8 +111,11 @@ class Variable(models.Model):
 
         def get_string(x):
             if test_na(x): raise self.CalculationError
-            if unicode(x).strip():
-                return unicode(x).strip()
+            try:
+                if unicode(x).strip():
+                    return unicode(x).strip()
+            except UnicodeDecodeError:
+                print "*** UnicodeDecodeError for: %s ***" % x
             raise self.CalculationError
 
         cast_function = {
@@ -158,13 +161,15 @@ def sum_non_null_values(d, keys):
     """
     # loop through the keys and get the values to sum from d
     # if the key is not in d, add it to d with a value of 0
-    operands = [0]
+    operands = []
     for key in keys:
         try:
             if d[key] is not None:
                 operands.append(d[key])
         except:
             pass
+    if not operands:
+        raise Variable.CalculationError
     return sum(operands)
 
 
@@ -187,7 +192,7 @@ def or_non_null_values(d, formulas):
         except:
             pass
     if not operands:
-        raise Exception
+        raise Variable.CalculationError
     return any_operand(d, operands)
 
 class CalculatedVariable(Variable):
