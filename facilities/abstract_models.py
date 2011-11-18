@@ -111,8 +111,11 @@ class Variable(models.Model):
 
         def get_string(x):
             if test_na(x): raise self.CalculationError
-            if unicode(x).strip():
-                return unicode(x).strip()
+            try:
+                if unicode(x).strip():
+                    return unicode(x).strip()
+            except UnicodeDecodeError:
+                print "*** UnicodeDecodeError for: %s ***" % x
             raise self.CalculationError
 
         cast_function = {
