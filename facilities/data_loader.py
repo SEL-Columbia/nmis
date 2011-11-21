@@ -52,6 +52,7 @@ class DataLoader(object):
         for lga in lgas:
             self.lga_ids = [str(lga.id)]
             if self._debug:
+                print "===== %s / %s (%s) =====" % (lga.state.name, lga.name, lga.id)
                 self.load_data()
                 self.load_calculations()
                 lga.data_load_in_progress = False
@@ -59,6 +60,7 @@ class DataLoader(object):
                 lga.save()
                 continue
             try:
+                print "===== %s / %s (%s) =====" % (lga.state.name, lga.name, lga.id)
                 self.load_data()
                 self.load_calculations()
                 lga.data_load_in_progress = False

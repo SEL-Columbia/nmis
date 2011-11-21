@@ -470,7 +470,7 @@ def tmp_variables_for_sector(sector_slug, lga):
             ],),
             ('Infrastructure', [
                 ["Percentage of facilities with access to some form of power source", g("proportion_any_power_access"), h("num_any_power_access", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
-                ["Percentage of facilities with access to an improved water source", g("proportion_water_access"), h("num_water_access", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
+                ["Percentage of facilities with access to an improved water source", g("proportion_improved_water_source"), h("num_improved_water_source", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities with functioning improved sanitation", g("proportion_functional_sanitation"), h("num_functional_sanitation", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities with mobile phone coverage somewhere on the premises", g("proportion_mobile_coverage"), h("num_mobile_coverage", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities that separate medical waste from other forms of waste", g("proportion_health_facilities_med_waste_separated"), h("num_health_facilities_med_waste_separated", "num_health_facilities"), None, None],
@@ -494,7 +494,7 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Percentage of primary schools farther than 1km from catchement area", g("proportion_schools_1kmplus_catchment_primary"), h("num_schools_1kmplus_catchment_primary", "num_primary_schools"), "0%", "0"],
                 ["Percentage of junior secondary schools farther than 1km from catchement area", g("proportion_schools_1kmplus_catchment_juniorsec"), h("num_schools_1kmplus_catchment_juniorsec", "num_junior_secondary_schools"), "0%", "0"],
 
-                ["Percentage of primary schools farther than 1km from nearest secondary school", g("proportion_primary_schools_1kmplus_ss"), i("num_primary_schools_1kmplus_ss", "num_primary_schools"), "0%", "0"],
+                ["Percentage of primary schools farther than 1km from nearest secondary school", g("proportion_schools_1kmplus_ss"), h("num_primary_schools_1kmplus_ss", "num_primary_schools"), "0%", "0"],
 
                 ["Percentage of primary schools with students living farther than 3km", g("proportion_students_3kmplus_primary"), h("num_students_3kmplus_primary", "students_living_3kmplus_school_primary"), "0%", "0"],
                 ["Percentage of junior secondary schools with students living farther than 3km", g("proportion_students_3kmplus_juniorsec"), h("num_students_3kmplus_juniorsec", "students_living_3kmplus_school_juniorsec"), "0%", "0"],
@@ -562,7 +562,7 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Percentage of junior secondary school teachers who participated in training in the past 12 months", g("proportion_teachers_training_last_year_juniorsec"), i("num_teachers_with_training_juniorsec", "num_junior_secondary_school_teachers"), "100%", g("target_num_teachers")],
 	    ],),
 	    ('Institutional Development',[
-                ["Percentage of primary schools that have delayed teacher payments in the past 12 months", g("proportion_schools_delay_pay_primary"), h("num_schools_delay_pay", "num_primary_schools"), "0%", "0"],
+                ["Percentage of primary schools that have delayed teacher payments in the past 12 months", g("proportion_schools_delay_pay_primary"), h("num_schools_delay_pay_primary", "num_primary_schools_primary"), "0%", "0"],
                 ["Percentage of junior secondary schools that have delayed teacher payments in the past 12 months", g("proportion_schools_delay_pay_juniorsec"), h("num_schools_delay_pay_juniorsec", "num_junior_secondary_schools"), "0%", "0"],
                 ["Percentage of primary schools that have missed teacher payments in the past 12 months", g("proportion_schools_missed_pay_primary"), h("num_schools_missed_pay_primary", "num_primary_schools)"), "0%", "0"],
                 ["Percentage of junior secondary schools that have missed teacher payments in the past 12 months", g("proportion_schools_missed_pay_juniorsec"), h("num_schools_missed_pay_juniorsec", "num_junior_secondary_schools)"), "0%", "0"],
