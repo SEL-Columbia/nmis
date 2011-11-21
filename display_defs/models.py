@@ -14,12 +14,17 @@ class FacilityTable(models.Model):
             'slug': self.slug,
             'columns': column_variables,
             'subgroups': [{'name': s.name,
-                'slug': s.slug} for s in self.subgroups.all()]
+                'slug': s.slug, 'display_order': s.display_order} for s in self.subgroups.order_by('display_order').all()]
         }
-    
+
     def add_column(self, data):
-        ColumnCategory.objects.get_or_create(table=self, slug=data['slug'], name=data['name'])
-    
+        cci = ColumnCategory.objects.count()
+        (cc, created) = ColumnCategory.objects.get_or_create(table=self, slug=data['slug'],
+                name=data['name'])
+        if created:
+            cc.display_order = cci
+            cc.save()
+
     def add_variable(self, variable_data):
         variable_data['facility_table'] = self
         TableColumn.objects.get_or_create(**variable_data)
@@ -99,6 +104,7 @@ class TableColumn(models.Model):
 class ColumnCategory(models.Model):
     name = models.CharField(max_length=64)
     slug = models.CharField(max_length=64)
+    display_order = models.PositiveIntegerField(null=True)
     table = models.ForeignKey(FacilityTable, related_name='subgroups')
 
 class MapLayerDescription(models.Model):
