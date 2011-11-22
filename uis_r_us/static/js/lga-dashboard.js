@@ -263,7 +263,22 @@ function loadLgaData(lgaUniqueId, onLoadCallback) {
 			facilityDataARr.push(v);
 		});
 
-//        buildLgaProfileBox(lgaData, variableDictionary.profile_variables);
+		(function(){
+		    $('.replace-data').each(function(){
+		        var result = lgaData.profileData[$(this).data().lgaVariable],
+		            value = result.value || "&nbsp;";
+		        $(this).text(value);
+        	});
+        	$('.replace-counts').each(function(){
+        	    var countSlug = $(this).data('countSlug');
+        	    if(countSlug==="facilities") {
+        	        $(this).text('('+ facilityDataARr.length + ')')
+        	    } else if(countSlug.indexOf('sector:')!==-1) {
+        	        var sectorSlug = countSlug.replace('sector:', '');
+        	    }
+        	});
+		})();
+//        buildLgaProfileBox(lgaData, profile_variables);
 		processFacilityDataRequests(lgaQ, {
 		    sectors: varDataReq.sectors,
 		    overview: varDataReq.overview,
@@ -869,8 +884,9 @@ function buildFacilityTable(outerWrap, data, sectors, lgaData){
 	    .addClass('sector-overview')
 	    .data('sectorSlug', 'overview');
 
-
-    $('<h2>').css({'margin':'-1px 0 0 -10px'}).html("<span style='color:#595959'>Health | Education | Water</span>").appendTo(overviewDiv);
+    var oc = $('.overview-content').html();
+    $('.overview-content').remove();
+    overviewDiv.html(oc);
 
 	overviewDiv.appendTo(ftabs);
 

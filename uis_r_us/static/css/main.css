@@ -1375,3 +1375,42 @@ div.lr-cols hr {
 	font-weight: bold;
 	margin: 2px 0;
 }
+
+/*--
+Styling for the Facilities > Overview section.
+--*/
+a.sector-btn {
+    margin-top: 9px;
+}
+a.sector-btn span.sector-icon {
+	display: inline-block;
+	width: 30px;
+	height: 20px;
+	margin-right: 3px;
+	opacity: 0.8;
+}
+a.sector-btn span.sector-icon.education {
+	background-image: url('/static/images/icons/school_w.png');
+}
+a.sector-btn span.sector-icon.health {
+	background-image: url('/static/images/icons/clinic_s.png');
+}
+a.sector-btn span.sector-icon.water {
+	background-image: url('/static/images/icons/water_small.png');
+}
+#lga-widget-wrap table.simple-lines {
+/*		border: 0 none;*/
+    margin-top: 8px;
+}
+#lga-widget-wrap table.simple-lines td {
+	padding: 5px;
+	border: 0 none;
+	text-align: left;
+/*		border-bottom: 1px solid #ddd;*/
+}
+#lga-widget-wrap table.simple-lines td.header {
+    text-align: left;
+/*  border-bottom: 2px solid #666;*/
+	font-size: 16px;
+	font-weight: bold;
+}

@@ -122,6 +122,32 @@ def lga_view(context):
     context.local_nav_urls = get_nav_urls(context.lga, mode='facility', sector=context.sector_id)
     if context.sector_id is None:
         context.sector_id = 'overview'
+    context.overview_sectors = [
+        {
+            'name': "Health",
+            'slug': 'health',
+            'count': 50
+        },
+        {
+            'name': "Education",
+            'slug': 'education',
+            'count': 25
+        },
+        {
+            'name': "Water",
+            'slug': 'water',
+            'count': 25
+        },
+    ]
+
+    context.facilities_count = 100
+    context.profile_variables = [
+        ["LGA Chairman", "chairman_name"],
+        ["LGA Secretary", "secretary_name"],
+        ["Population (2006)", "pop_population"],
+        ["Area (square km)", "area_sq_km"],
+        ["Distance from capital (km)", "state_capital_distance"],
+    ]
     context.local_nav = {
         'mode': {'facility': True},
         'sector': {context.sector_id: True}
