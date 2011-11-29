@@ -102,13 +102,12 @@ function launchFacilities(lgaData, variableData, params) {
 	    indicator: sector.getIndicator(params.indicator)
 	};
 	NMIS.loadFacilities(facilities);
-	var boolMapLoad = true;
 
-	if(boolMapLoad) {
-	    MapMgr.init({
-	        llString: lgaData.profileData.gps.value,
-	        elem: wElems.elem0
-	    });
+    var MapMgr_opts = {
+        llString: lgaData.profileData.gps.value,
+        elem: wElems.elem0
+    };
+	if(!MapMgr.init(MapMgr_opts)) {
 	    MapMgr.addLoadCallback(function(){
             this.map = new google.maps.Map(this.elem.get(0), {
                 zoom: 8,

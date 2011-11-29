@@ -64,10 +64,10 @@ var MapMgr = (function(){
         finished = false,
         callbackStr = "MapMgr.loaded";
     function init(_opts) {
-        log("MapMgr initting");
         if(started) {
             return true;
         }
+        log("MapMgr initting");
         opts = _.extend({
             //defaults
             launch: true,
@@ -93,7 +93,7 @@ var MapMgr = (function(){
         } else {
             _.delay(loaded, opts.fakeDelay);
         }
-        return true;
+        return false;
     }
     function loaded() {
         log("MapMgr has finished loading");
