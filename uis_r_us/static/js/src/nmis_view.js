@@ -1,7 +1,7 @@
 $('.page-header').remove();
 
-var zz = 0;
-var itemzOnMap = {};
+//var zz = 0;
+//var itemzOnMap = {};
 
 var displayWindowOptions = {
     offsetElems: '.topbar .fill .container',
