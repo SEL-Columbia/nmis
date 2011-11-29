@@ -1,34 +1,5 @@
 $('.page-header').remove();
 
-// MapLoader will probably end up with all the other modules.
-/*
-var MapLoader = (function(){
-    var maploaded = false, cbs = [];
-    function init(_opts) {
-        log("started map load");
-    }
-    function loaded() {
-        log("Finished map load");
-        maploaded = true;
-        _.each(cbs, function(cb){
-            cb();
-        });
-    }
-    function addOnload(cb) {
-        if(maploaded) {
-            cb();
-        } else {
-            cbs.push(cb);
-        }
-    }
-    return {
-        init: init,
-        loaded: loaded,
-        addOnload: addOnload
-    }
-})();
-*/
-
 var zz = 0;
 var itemzOnMap = {};
 
@@ -60,11 +31,12 @@ NMIS.loadSectors(sectorData, {
     }
 });
 
+NMIS.init();
+
 var wElems = NMIS.DisplayWindow.getElems();
 
 var dashboard = $.sammy('body');
 (function(){
-    NMIS.init();
     NMIS.LocalNav.init(wElems.wrap, {
         sections: [
             [
@@ -111,7 +83,6 @@ var dashboard = $.sammy('body');
             state: state.slug
         }, d)));
     });
-//    log(.eq(0).data('urlFor'))
     var env = {root: '/nmis~', state: state, lga: lga};
     NMIS.Breadcrumb.init("p.bc", {
         levels: [
