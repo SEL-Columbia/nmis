@@ -265,9 +265,10 @@ function loadLgaData(lgaUniqueId, onLoadCallback) {
 
 		(function(){
 		    $('.replace-data').each(function(){
-		        var result = lgaData.profileData[$(this).data().lgaVariable],
-		            value = result.value || "&nbsp;";
-		        $(this).text(value);
+		        var result = lgaData.profileData[$(this).data().lgaVariable];
+		        if(!!result) {
+    		        $(this).text(result.value || "&nbsp;");
+		        }
         	});
         	$('.replace-counts').each(function(){
         	    var countSlug = $(this).data('countSlug');
