@@ -573,6 +573,9 @@ var IconSwitcher = (function(){
     function allShowing() {
         return filterStatusNot(undefined);
     }
+    function createAll() {
+        iterate(context.createMapItem);
+    }
     function clear() {
         context = {};
     }
@@ -580,6 +583,7 @@ var IconSwitcher = (function(){
         init: init,
         clear: clear,
         allShowing: allShowing,
+        createAll: createAll,
         filterStatus: filterStatus,
         filterStatusNot: filterStatusNot,
         all: all,

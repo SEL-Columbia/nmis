@@ -109,11 +109,46 @@ function launchFacilities(lgaData, variableData, params) {
     };
 	if(!MapMgr.init(MapMgr_opts)) {
 	    MapMgr.addLoadCallback(function(){
-            this.map = new google.maps.Map(this.elem.get(0), {
+            var map = new google.maps.Map(this.elem.get(0), {
                 zoom: 8,
                 center: new google.maps.LatLng(this.ll.lat, this.ll.lng),
                 mapTypeId: google.maps.MapTypeId[this.defaultMapType]
             });
+            this.map = map;
+            NMIS.IconSwitcher.setCallback('createMapItem', function(item, id, itemList){
+                if(!!item._ll) {
+                    var iconData = (function iconDataForItem(i){
+                        var iconSlug = i.iconType || i.sector.slug;
+                        var iconFiles = {
+                            education: "school_w.png",
+                            health: "clinic_s.png",
+                            default: "book_green_wb.png"
+                        };
+                        var iconId = iconFiles[iconSlug] || iconFiles['default'];
+                        return {
+                            width: 34,
+                            height: 20,
+                            url: "/static/images/icons/" + iconId
+                        }
+                    })(item);
+
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(item._ll[0], item._ll[1]),
+                        map: map,
+                        icon: new google.maps.MarkerImage(
+                            // url
+                            iconData.url,
+                            // size
+                            new google.maps.Size(iconData.width, iconData.height),
+                            // origin
+                            new google.maps.Point(10, 10)
+                            // anchor
+//                            new google.maps.Point(5, 5)
+                            )
+                    });
+                }
+            });
+            NMIS.IconSwitcher.createAll();
 	    });
 	}
 
