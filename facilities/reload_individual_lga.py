@@ -16,7 +16,14 @@ def reload_individual_lga(lga):
     
     The site should only be *down* for a minute or two.
     """
+    _delete_individual_lga_records(lga)
+
+    # (re)load
     d = data_loader.DataLoader()
     d.load([lga.id])
     lga.data_loaded = True
     lga.save()
+
+def _delete_individual_lga_records(lga):
+    # delete any existing data records for the LGA:
+    lga.facilities.all().delete()
