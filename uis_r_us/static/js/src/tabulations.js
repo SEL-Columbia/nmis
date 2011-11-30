@@ -67,7 +67,7 @@ var MapMgr = (function(){
         if(started) {
             return true;
         }
-        log("MapMgr initting");
+        //log("MapMgr initting");
         opts = _.extend({
             //defaults
             launch: true,
@@ -96,7 +96,7 @@ var MapMgr = (function(){
         return false;
     }
     function loaded() {
-        log("MapMgr has finished loading");
+        //log("MapMgr has finished loading");
         finished = true;
         _.each(opts.loadCallbacks, function(cb){
             cb.call(opts);
@@ -506,7 +506,7 @@ var IconSwitcher = (function(){
                         "showMapItem",
                         "setMapItemVisibility"];
     function init(_opts) {
-        log("IconSwitcher initting");
+        //log("IconSwitcher initting");
         var noop = function(){};
         var items = {};
         context = _.extend({
