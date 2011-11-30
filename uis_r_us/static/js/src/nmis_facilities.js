@@ -102,6 +102,9 @@ function launchFacilities(lgaData, variableData, params) {
 	    indicator: sector.getIndicator(params.indicator)
 	};
 	NMIS.loadFacilities(facilities);
+	if(e.sector !== undefined && e.subsector === undefined) {
+	    e.subsector = _.first(e.sector.subGroups());
+	}
 
     var MapMgr_opts = {
         llString: lgaData.profileData.gps.value,
@@ -115,6 +118,7 @@ function launchFacilities(lgaData, variableData, params) {
                 mapTypeId: google.maps.MapTypeId[this.defaultMapType]
             });
             this.map = map;
+            var bounds = new google.maps.LatLngBounds();
             NMIS.IconSwitcher.setCallback('createMapItem', function(item, id, itemList){
                 if(!!item._ll) {
                     var iconData = (function iconDataForItem(i){
@@ -122,6 +126,7 @@ function launchFacilities(lgaData, variableData, params) {
                         var iconFiles = {
                             education: "school_w.png",
                             health: "clinic_s.png",
+                            water: "water_small.png",
                             default: "book_green_wb.png"
                         };
                         var iconId = iconFiles[iconSlug] || iconFiles['default'];
@@ -132,23 +137,26 @@ function launchFacilities(lgaData, variableData, params) {
                         }
                     })(item);
 
-                    var marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(item._ll[0], item._ll[1]),
+                    var latlng = new google.maps.LatLng(item._ll[0], item._ll[1]),
+                        marker = new google.maps.Marker({
+                        position: latlng,
                         map: map,
                         icon: new google.maps.MarkerImage(
                             // url
                             iconData.url,
                             // size
-                            new google.maps.Size(iconData.width, iconData.height),
+                            new google.maps.Size(iconData.width, iconData.height)//,
                             // origin
-                            new google.maps.Point(10, 10)
+//                            new google.maps.Point(10, 10)
                             // anchor
 //                            new google.maps.Point(5, 5)
                             )
                     });
+                    bounds.extend(latlng);
                 }
             });
             NMIS.IconSwitcher.createAll();
+            map.fitBounds(bounds);
 	    });
 	}
 
