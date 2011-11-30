@@ -115,8 +115,27 @@ function launchFacilities(lgaData, variableData, params) {
             var map = new google.maps.Map(this.elem.get(0), {
                 zoom: 8,
                 center: new google.maps.LatLng(this.ll.lat, this.ll.lng),
+                streetViewControl: false,
+                panControl: false,
+                zoomControlOptions: {
+                    position: new google.maps.ControlPosition()
+                },
+                mapTypeControlOptions: {
+                    mapTypeIds: ["roadmap", "satellite", "terrain", "OSM"]
+                },
                 mapTypeId: google.maps.MapTypeId[this.defaultMapType]
             });
+            // OSM google maps layer code from:
+            // http://wiki.openstreetmap.org/wiki/Google_Maps_Example#Example_Using_Google_Maps_API_V3
+            map.mapTypes.set("OSM", new google.maps.ImageMapType({
+                getTileUrl: function(coord, zoom) {
+                    return "http://tile.openstreetmap.org/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+                },
+                tileSize: new google.maps.Size(256, 256),
+                name: "OpenStreetMap",
+                maxZoom: 18
+            }));
+
             this.map = map;
             var bounds = new google.maps.LatLngBounds();
             NMIS.IconSwitcher.setCallback('createMapItem', function(item, id, itemList){
