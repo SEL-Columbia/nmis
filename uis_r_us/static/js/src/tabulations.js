@@ -755,6 +755,14 @@ var NMIS = (function(){
         _(data).each(ensureLatLng);
         return true;
     }
+    var _s;
+    function activeSector(s) {
+        if(s===undefined) {
+            return _s;
+        } else {
+            _s = s;
+        }
+    }
     function cloneParse(d) {
         var datum = _.clone(d);
     	if(datum.gps===undefined) {
@@ -791,6 +799,7 @@ var NMIS = (function(){
         Breadcrumb: Breadcrumb,
         DisplayWindow: DisplayWindow,
         DataLoader: DataLoader,
+        activeSector: activeSector,
         data: function(){return data;},
         dataForSector: dataForSector,
         dataObjForSector: dataObjForSector,

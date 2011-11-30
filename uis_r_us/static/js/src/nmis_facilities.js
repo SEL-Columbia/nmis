@@ -1,17 +1,35 @@
 //FacilitySelector will probably end up in the NMIS object like all the other modules.
 var FacilitySelector = (function(){
-    return function(params){
+    var active = false;
+    function activate(params){
         var fId = params.id;
         NMIS.IconSwitcher.shiftStatus(function(id, item) {
             if(id !== fId) {
                 return "background";
-            } else if(item.status === "highlighted") {
+            } else {
+                active = true;
                 return "normal";
             }
         });
     }
+    function isActive(){
+        return active;
+    }
+    function deselect() {
+        if(active) {
+            var sector = NMIS.activeSector();
+            NMIS.IconSwitcher.shiftStatus(function(id, item) {
+                return item.sector === sector ? "normal" : "background";
+            });
+            active = false;
+        }
+    }
+    return {
+        activate: activate,
+        isActive: isActive,
+        deselect: deselect
+    }
 })();
-
 
 
 +function facilitiesDisplay(){
@@ -101,6 +119,7 @@ function launchFacilities(lgaData, variableData, params) {
 	    subsector: sector.getSubsector(params.subsector),
 	    indicator: sector.getIndicator(params.indicator)
 	};
+	NMIS.activeSector(sector);
 	NMIS.loadFacilities(facilities);
 	if(e.sector !== undefined && e.subsector === undefined) {
 	    e.subsector = _.first(e.sector.subGroups());
@@ -148,7 +167,17 @@ function launchFacilities(lgaData, variableData, params) {
             function iconURLData(slug, status) {
                 return [iconURL(slug, status), 32, 24];
             }
-
+            function markerClick(){
+                if(NMIS.activeSector()==this.nmis.item.sector) {
+                    FacilitySelector.activate({id: this.nmis.id});
+                }
+            }
+            function mapClick() {
+                if(FacilitySelector.isActive()) {
+                    FacilitySelector.deselect();
+                }
+            }
+            google.maps.event.addListener(map, 'click', mapClick);
             NMIS.IconSwitcher.setCallback('createMapItem', function(item, id, itemList){
                 if(!!item._ll && !this.mapItem(id)) {
                     var $gm = google.maps;
@@ -160,17 +189,23 @@ function launchFacilities(lgaData, variableData, params) {
                             size: new $gm.Size(td[1], td[2])
                         };
                     })(item);
-                    var mI = {};
-                    mI.latlng = new $gm
-                                    .LatLng(item._ll[0], item._ll[1]);
-                    mI.icon = new $gm
-                                    .MarkerImage(iconData.url, iconData.size);
+                    var mI = {
+                        latlng: new $gm
+                                    .LatLng(item._ll[0], item._ll[1]),
+                        icon: new $gm
+                                    .MarkerImage(iconData.url, iconData.size)
+                    };
                     mI.marker = new $gm
                                     .Marker({
                                         position: mI.latlng,
                                         map: map,
                                         icon: mI.icon
                                     });
+                    mI.marker.nmis = {
+                        item: item,
+                        id: id
+                    };
+                    google.maps.event.addListener(mI.marker, 'click', markerClick)
                     bounds.extend(mI.latlng);
                     this.mapItem(id, mI);
                 }
@@ -231,7 +266,7 @@ function launchFacilities(lgaData, variableData, params) {
             }
         });
         tableElem.find('tbody').delegate('tr', 'click', function(){
-            FacilitySelector({id: $(this).data('facilityId')});
+            FacilitySelector.activate({id: $(this).data('facilityId')});
         });
         tableElem.appendTo(wElems.elem1content);
         if(!!e.subsector) FacilityTables.select(e.sector, e.subsector);
