@@ -408,7 +408,7 @@ var DisplayWindow = (function(){
                 size = fullHeight;
             }
             $.cookie("displayWindowSize", _size);
-            setBarHeight(size, false, function(){
+            setBarHeight(size, animate, function(){
                 if(!!curSize) elem1.removeClass('size-'+curSize);
                 elem1.addClass('size-'+_size);
             });
@@ -510,11 +510,22 @@ var IconSwitcher = (function(){
         var noop = function(){};
         var items = {};
         context = _.extend({
-            items: {}
+            items: {},
+            mapItem: mapItem
         }, _opts);
         _.each(callbacks, function(cbname){
             if(context[cbname]===undefined) { context[cbname] = noop; }
         });
+    }
+    var mapItems = {};
+    function mapItem(id, value) {
+        if(arguments.length===1) {
+            //get mapItem
+            return mapItems[id];
+        } else if(arguments.length===2) {
+            //set mapItem
+            mapItems[id] = value;
+        }
     }
     function hideItem(item) {
         item.hidden = true;
@@ -538,10 +549,14 @@ var IconSwitcher = (function(){
         }
         return false;
     }
-    function iterate(cb) { _.each(context.items, cb); }
+    function iterate(cb) {
+        _.each(context.items, function(item, id, itemset){
+            cb.apply(context, [item, id, itemset]);
+        });
+    }
     function shiftStatus(fn) {
         iterate(function(item, id){
-            var status = fn.call(item, id, item, context.items);
+            var status = fn.call(context, id, item, context.items);
             var visChange = setVisibility(item, status === false),
                 statusChange = false;
             if(status === undefined) {
@@ -549,6 +564,7 @@ var IconSwitcher = (function(){
             } else if(status === false) {
                 item.status = undefined;
             } else if(item.status !== status) {
+                item._prevStatus = status;
                 item.status = status;
                 statusChange = true;
             }

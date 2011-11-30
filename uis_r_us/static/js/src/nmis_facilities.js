@@ -3,8 +3,8 @@ var FacilitySelector = (function(){
     return function(params){
         var fId = params.id;
         NMIS.IconSwitcher.shiftStatus(function(id, item) {
-            if(id === fId) {
-                return "highlighted";
+            if(id !== fId) {
+                return "background";
             } else if(item.status === "highlighted") {
                 return "normal";
             }
@@ -135,44 +135,54 @@ function launchFacilities(lgaData, variableData, params) {
 
             this.map = map;
             var bounds = new google.maps.LatLngBounds();
-            NMIS.IconSwitcher.setCallback('createMapItem', function(item, id, itemList){
-                if(!!item._ll) {
-                    var iconData = (function iconDataForItem(i){
-                        var iconSlug = i.iconType || i.sector.slug;
-                        var iconFiles = {
-                            education: "school_w.png",
-                            health: "clinic_s.png",
-                            water: "water_small.png",
-                            default: "book_green_wb.png"
-                        };
-                        var iconId = iconFiles[iconSlug] || iconFiles['default'];
-                        return {
-                            width: 34,
-                            height: 20,
-                            url: "/static/images/icons/" + iconId
-                        }
-                    })(item);
+            function iconURL(slug, status) {
+                var iconFiles = {
+                    education: "education.png",
+                    health: "health.png",
+                    water: "water.png",
+                    default: "book_green_wb.png"
+                };
+                var url = "/static/images/icons_f/" + status + "_" + (iconFiles[slug] || iconFiles['default']);
+                return url
+            }
+            function iconURLData(slug, status) {
+                return [iconURL(slug, status), 32, 24];
+            }
 
-                    var latlng = new google.maps.LatLng(item._ll[0], item._ll[1]),
-                        marker = new google.maps.Marker({
-                        position: latlng,
-                        map: map,
-                        icon: new google.maps.MarkerImage(
-                            // url
-                            iconData.url,
-                            // size
-                            new google.maps.Size(iconData.width, iconData.height)//,
-                            // origin
-//                            new google.maps.Point(10, 10)
-                            // anchor
-//                            new google.maps.Point(5, 5)
-                            )
-                    });
-                    bounds.extend(latlng);
+            NMIS.IconSwitcher.setCallback('createMapItem', function(item, id, itemList){
+                if(!!item._ll && !this.mapItem(id)) {
+                    var $gm = google.maps;
+                    var iconData = (function iconDataForItem(i){
+                        i.iconSlug = i.iconType || i.sector.slug;
+                        var td = iconURLData(i.iconSlug, i.status || "normal");
+                        return {
+                            url: td[0],
+                            size: new $gm.Size(td[1], td[2])
+                        };
+                    })(item);
+                    var mI = {};
+                    mI.latlng = new $gm
+                                    .LatLng(item._ll[0], item._ll[1]);
+                    mI.icon = new $gm
+                                    .MarkerImage(iconData.url, iconData.size);
+                    mI.marker = new $gm
+                                    .Marker({
+                                        position: mI.latlng,
+                                        map: map,
+                                        icon: mI.icon
+                                    });
+                    bounds.extend(mI.latlng);
+                    this.mapItem(id, mI);
                 }
             });
             NMIS.IconSwitcher.createAll();
             map.fitBounds(bounds);
+            NMIS.IconSwitcher.setCallback('shiftMapItemStatus', function(item, id){
+                var mapItem = this.mapItem(id);
+                var icon = mapItem.marker.getIcon();
+                icon.url = iconURL(item.sector.slug, item.status);
+                mapItem.marker.setIcon(icon);
+            });
 	    });
 	}
 
@@ -186,7 +196,7 @@ function launchFacilities(lgaData, variableData, params) {
         });
     } else {
         NMIS.IconSwitcher.shiftStatus(function(id, item) {
-            return item.sector === e.sector ? "normal" : "inactive";
+            return item.sector === e.sector ? "normal" : "background";
         });
         var displayTitle = "Facility Detail: "+lga.name+" " + e.sector.name;
         NMIS.DisplayWindow.setTitle(displayTitle);
