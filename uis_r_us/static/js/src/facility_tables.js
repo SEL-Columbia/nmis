@@ -47,7 +47,7 @@ var FacilityTables = (function(){
     function select(sector, subsector) {
         if(sectorNav!==undefined) {
             sectorNav.find('a.active').removeClass('active');
-            sectorNav.find('.sub-sector-link-' + subsector)
+            sectorNav.find('.sub-sector-link-' + subsector.slug)
                 .addClass('active')
         }
         div.find('td, th').hide();
@@ -96,6 +96,7 @@ var FacilityTables = (function(){
             $('<a />', {href: href})
                 .text(sg.name)
                 .data('subsector', sg.slug)
+                .addClass('sub-sector-link')
                 .addClass('sub-sector-link-'+sg.slug)
                 .appendTo(sectorNav);
             if(i < sgl - 1)
@@ -104,11 +105,11 @@ var FacilityTables = (function(){
         return sectorNav;
     }
     function classesStr(col) {
-	var clss = ['data-cell']
+        var clss = ['data-cell'];
         _.each(col.subgroups, function(sg){
-            clss.push('subgroup-'+sg)
+            clss.push('subgroup-'+sg);
         });
-	return clss.join(' ');
+        return clss.join(' ');
     }
     function hasClickAction(col, carr) {
     	return !!(!!col.click_actions && col.click_actions.indexOf(col));

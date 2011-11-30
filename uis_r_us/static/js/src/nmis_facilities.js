@@ -230,9 +230,11 @@ function launchFacilities(lgaData, variableData, params) {
             return "normal";
         });
     } else {
-        NMIS.IconSwitcher.shiftStatus(function(id, item) {
-            return item.sector === e.sector ? "normal" : "background";
-        });
+        if(!FacilitySelector.isActive()) {
+            NMIS.IconSwitcher.shiftStatus(function(id, item) {
+                return item.sector === e.sector ? "normal" : "background";
+            });
+        }
         var displayTitle = "Facility Detail: "+lga.name+" " + e.sector.name;
         NMIS.DisplayWindow.setTitle(displayTitle);
         NMIS.DisplayWindow.unsetTempSize(true);
