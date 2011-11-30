@@ -117,9 +117,6 @@ function launchFacilities(lgaData, variableData, params) {
                 center: new google.maps.LatLng(this.ll.lat, this.ll.lng),
                 streetViewControl: false,
                 panControl: false,
-                zoomControlOptions: {
-                    position: new google.maps.ControlPosition()
-                },
                 mapTypeControlOptions: {
                     mapTypeIds: ["roadmap", "satellite", "terrain", "OSM"]
                 },
@@ -132,7 +129,7 @@ function launchFacilities(lgaData, variableData, params) {
                     return "http://tile.openstreetmap.org/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
                 },
                 tileSize: new google.maps.Size(256, 256),
-                name: "OpenStreetMap",
+                name: "OSM",
                 maxZoom: 18
             }));
 
