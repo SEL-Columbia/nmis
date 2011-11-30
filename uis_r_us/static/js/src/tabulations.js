@@ -350,10 +350,15 @@ var DisplayWindow = (function(){
             .appendTo(elem1);
         setSize(opts.size);
     }
-    function setTitle(t) {
+    function setTitle(t, tt) {
         _.each(titleElems, function(e){
             e.text(t);
         });
+        if(tt!== undefined) {
+            $('head title').text('NMIS: '+ tt);
+        } else {
+            $('head title').text('NMIS: '+ t);
+        }
     }
     var curTitle;
     function showTitle(i) {
