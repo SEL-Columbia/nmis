@@ -24,7 +24,7 @@ class DataLoader(object):
 
     def __init__(self, **kwargs):
         self._debug = kwargs.get('debug', False)
-        self._data_dir = kwargs.get('data_dir', 'data')
+        self._data_dir = kwargs.get('data_dir', settings.DATA_DIR_NAME)
         self._kill_db = kwargs.get('kill_db', False)
         self._load_config_file()
 
