@@ -1,15 +1,17 @@
 from django.core.management.base import BaseCommand
 from optparse import make_option
-from facilities.data_loader import load_lgas
+#from facilities.data_loader import load_lgas
 import os
 import subprocess
+from nga_districts.models import LGA
+from facilities.reload.individual_lga import reload_individual_lga
 
 def _strings_in_list(l):
     #*args list receives a non-string param
     o = []
     for i in l:
-        if isinstance(i, str):
-            o.append(i)
+        if isinstance(i, str) or isinstance(i, int):
+            o.append(str(i))
     return o
 
 class Command(BaseCommand):
@@ -35,8 +37,9 @@ class Command(BaseCommand):
             else:
                 self.handle_in_subprocess(*args)
         else:
-            for lga in _strings_in_list(args):
-                load_lgas([lga])
+            for lga_id in _strings_in_list(args):
+                lga = LGA.objects.get(id=lga_id)
+                reload_individual_lga(lga)
     
     def start_subprocess(*args):
         hup_args = ["nohup", "python", "manage.py", "load_lgas", "--inside-hup-subprocess"] + _strings_in_list(args)
@@ -51,6 +54,8 @@ class Command(BaseCommand):
             f.write(str(pid))
 
     def handle_in_subprocess(*args):
-        load_lgas(_strings_in_list(args))
+        lgas = [LGA.objects.get(id=lid) for lid in _strings_in_list(args)]
+        for lga in lgas:
+            reload_individual_lga(lga)
         os.rename('nohup.out', 'load_script.log')
         os.unlink('load_script.pid')
