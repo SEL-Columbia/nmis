@@ -25,7 +25,6 @@ class DataLoader(object):
     def __init__(self, **kwargs):
         self._debug = kwargs.get('debug', False)
         self._data_dir = kwargs.get('data_dir', settings.DATA_DIR_NAME)
-        self._kill_db = kwargs.get('kill_db', False)
         self._load_config_file()
 
     def _load_config_file(self):
@@ -34,8 +33,14 @@ class DataLoader(object):
             self._config = json.load(f)
 
     def setup(self):
-        self.reset_database()
-        self.load_system()
+        self.create_sectors()
+#        self.create_facility_types()
+#        self.load_lga_districts()
+#        self.load_key_renames()
+#        self.load_variables()
+#        self.load_table_defs()
+#        self.mark_available_lgas()
+        
 
     def load(self, lga_ids=[]):
         self.lga_ids = lga_ids
@@ -92,16 +97,6 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
             call_command('migrate')
             self._drop_data()
 
-    def load_system(self):
-        self.create_users()
-        self.create_sectors()
-        self.create_facility_types()
-        self.load_lga_districts()
-        self.load_key_renames()
-        self.load_variables()
-        self.load_table_defs()
-        self.mark_available_lgas()
-
     @print_time
     def mark_available_lgas(self):
         lga_ids = []
@@ -136,64 +131,37 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
         self.calculate_lga_variables()
 
     @print_time
-    def create_users(self):
-        from django.contrib.auth.models import User
-        admin, created = User.objects.get_or_create(
-            username="admin",
-            email="admin@admin.com",
-            is_staff=True,
-            is_superuser=True
-            )
-        admin.set_password("pass")
-        admin.save()
-        mdg_user, created = User.objects.get_or_create(
-            username="mdg",
-            email="mdg@example.com",
-            is_staff=True,
-            is_superuser=True
-            )
-        mdg_user.set_password("2015")
-        mdg_user.save()
-
-        from django.contrib.sites.models import Site
-        if Site.objects.count() == 1:
-            site = Site.objects.all()[0]
-            site.domain = settings.MAIN_SITE_HOSTNAME
-            site.name = settings.MAIN_SITE_HOSTNAME
-            site.save()
-
-    @print_time
     def create_sectors(self):
         sectors = ['Education', 'Health', 'Water']
         for sector in sectors:
             Sector.objects.get_or_create(slug=sector.lower(), name=sector)
 
-    @print_time
-    def create_facility_types(self):
-        def create_node(d, parent):
-            children = d.pop('children')
-            result = FacilityType.add_root(**d) if parent is None else parent.add_child(**d)
-            for child in children:
-                create_node(child, result)
-            return result
+    # @print_time
+    # def create_facility_types(self):
+    #     def create_node(d, parent):
+    #         children = d.pop('children')
+    #         result = FacilityType.add_root(**d) if parent is None else parent.add_child(**d)
+    #         for child in children:
+    #             create_node(child, result)
+    #         return result
+    # 
+    #     with codecs.open('facilities/fixtures/facility_types.json', 'r', encoding='utf-8') as f:
+    #         facility_types = json.load(f)
+    #         create_node(facility_types, None)
+    # 
+    # @print_time
+    # def load_key_renames(self):
+    #     kwargs = {
+    #         'model': KeyRename,
+    #         'path': os.path.join(self._data_dir, 'variables', 'key_renames.csv')
+    #         }
+    #     self.create_objects_from_csv(**kwargs)
 
-        with codecs.open('facilities/fixtures/facility_types.json', 'r', encoding='utf-8') as f:
-            facility_types = json.load(f)
-            create_node(facility_types, None)
-
-    @print_time
-    def load_key_renames(self):
-        kwargs = {
-            'model': KeyRename,
-            'path': os.path.join(self._data_dir, 'variables', 'key_renames.csv')
-            }
-        self.create_objects_from_csv(**kwargs)
-
-    @print_time
-    def load_lga_districts(self):
-        districts_json_path = os.path.join(self._data_dir, 'districts', 'districts.json')
-        if os.path.exists(districts_json_path):
-            call_command("loaddata", districts_json_path)
+#    @print_time
+#    def load_lga_districts(self):
+#        districts_json_path = os.path.join(self._data_dir, 'districts', 'districts.json')
+#        if os.path.exists(districts_json_path):
+#            call_command("loaddata", districts_json_path)
 
     @print_time
     def create_objects_from_csv(self, model, path):
@@ -488,57 +456,6 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
             except DatabaseError:
                 print "No data deleted for %s" % c
 
-    def _drop_database(self):
-        db_host = settings.DATABASES['default']['HOST'] or 'localhost'
-        db_name = settings.DATABASES['default']['NAME']
-        db_user = settings.DATABASES['default']['USER']
-        db_password = settings.DATABASES['default']['PASSWORD']
-
-        def drop_sqlite_database():
-            try:
-                os.remove(settings.DATABASES['default']['NAME'])
-                print 'removed %s' % settings.DATABASES['default']['NAME']
-            except OSError:
-                pass
-
-        def drop_mysql_database():
-            import MySQLdb
-            conn = MySQLdb.connect(
-                db_host,
-                db_user,
-                db_password,
-                db_name
-            )
-            cursor = conn.cursor()
-            # to start up django the mysql database must exist
-            cursor.execute("DROP DATABASE %s" % db_name)
-            cursor.execute("CREATE DATABASE %s" % db_name)
-            conn.close()
-
-        def drop_postgresql_database():
-            import psycopg2
-            # connect to postgres db to drop and recreate db
-            conn = psycopg2.connect(
-                database='postgres',
-                user=db_user,
-                host=db_host,
-                password=db_password
-            )
-            conn.set_isolation_level(
-                psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
-            cursor = conn.cursor()
-            cursor.execute("DROP DATABASE %s" % db_name)
-            cursor.execute("CREATE DATABASE %s" % db_name)
-            conn.close()
-
-        caller = {
-            'django.db.backends.mysql': drop_mysql_database,
-            'django.db.backends.sqlite3': drop_sqlite_database,
-            'django.db.backends.postgresql_psycopg2': drop_postgresql_database,
-            }
-        drop_function = caller[settings.DATABASES['default']['ENGINE']]
-        drop_function()
-
 def _lga_list_is_all(ll):
     return ll == "all" or isinstance(ll, list) and ll[0] == "all"
 
@@ -555,3 +472,8 @@ def load_lgas(lga_ids, individually=True):
         data_loader.load([lga_id])
         print "Finished loading LGA: %s" % (str(lga_id))
     data_loader.print_stats()
+
+def create_objects_from_csv(model, path):
+    csv_reader = CsvReader(path)
+    for d in csv_reader.iter_dicts():
+        model.objects.get_or_create(**d)

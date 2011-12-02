@@ -18,4 +18,4 @@ def reload_sitewide():
     The site should only be *down* for a minute or two.
     """
     d = data_loader.DataLoader()
-    d.load_system()
+    d.load_variables()
