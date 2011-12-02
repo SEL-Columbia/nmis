@@ -16,10 +16,10 @@
 {% endblock %}
 
 {% block lga_nav %}
+	<!--
 			<form action="/~/" method="POST">
-			<div class="lga-nav">
+			<div class="lga-nav" style="right:-365.7px">
 					<select id="lga-select" name="lga" style="width:280px;" title="Select an LGA">
-						<!-- <option></option> -->
 						{% for statename, lgas in active_districts %}
 						<optgroup label="{{statename}}">
 							{% for lganame, lgaid in lgas %}
@@ -34,11 +34,7 @@
 					  {% csrf_token %}
 					<input type="submit" value="GO">
 			</div>
-<!--			<div class="load-options">
-				<input type="checkbox" id="load-map" name="load-map" />
-				<label for="load-map">Load Map</label>
-			</div> -->
-			</form>
+			</form>-->
 {% endblock %}
 
 {% block content %}

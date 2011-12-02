@@ -39,6 +39,8 @@
 						<a href="{% url auth_login %}">{% trans "Log in" %}</a>
 		                        | <a href="http://nmis.tenderapp.com/">{% trans "Help" %}</a>
 					{% endif %}
+					{% block lga_nav %}
+					{% endblock %}
 					</p>
 				</div>
 				<div class="row page-title-row">
