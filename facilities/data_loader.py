@@ -14,15 +14,17 @@ from utils.csv_reader import CsvReader
 from utils.timing import print_time
 from django.conf import settings
 import codecs
+from django.db.models.query import QuerySet
 
 from django.core.mail import mail_admins
 import sys
+
 
 class DataLoader(object):
 
     def __init__(self, **kwargs):
         self._debug = kwargs.get('debug', False)
-        self._data_dir = kwargs.get('data_dir', 'data')
+        self._data_dir = kwargs.get('data_dir', settings.DATA_DIR_NAME)
         self._kill_db = kwargs.get('kill_db', False)
         self._load_config_file()
 
@@ -50,6 +52,7 @@ class DataLoader(object):
         for lga in lgas:
             self.lga_ids = [str(lga.id)]
             if self._debug:
+                print "===== %s / %s (%s) =====" % (lga.state.name, lga.name, lga.id)
                 self.load_data()
                 self.load_calculations()
                 lga.data_load_in_progress = False
@@ -57,6 +60,7 @@ class DataLoader(object):
                 lga.save()
                 continue
             try:
+                print "===== %s / %s (%s) =====" % (lga.state.name, lga.name, lga.id)
                 self.load_data()
                 self.load_calculations()
                 lga.data_load_in_progress = False
@@ -117,6 +121,8 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
                 lga.data_available=True
                 lga.save()
             except LGA.DoesNotExist, e:
+                print "lga not found: %s" % str(lga_id)
+            except ValueError, e:
                 print "lga not found: %s" % str(lga_id)
         print "%d LGAs have data" % LGA.objects.filter(data_available=True).count()
 
@@ -254,10 +260,10 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
             cls_variable_loader(GapVariable)(d)
 
         variable_loader_methods = {
-            'partition': cls_variable_loader(PartitionVariable),
+            #'partition': cls_variable_loader(PartitionVariable),
             'calculated': cls_variable_loader(CalculatedVariable),
             'lga': load_lga_variable,
-            'gap': gap_loader,
+            #'gap': gap_loader,
             'default': cls_variable_loader(Variable)
         }
         for variable_file_data in self._config['variables']:
@@ -273,15 +279,18 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
     def create_facilities_from_csv(self, sector, data_source, source=None):
         path = os.path.join(self._data_dir, 'facility_csvs', data_source)
         for d in CsvReader(path).iter_dicts():
+            variables_to_invalidate = []
             if '_lga_id' not in d:
                 print "FACILITY MISSING LGA ID"
                 continue
             if d['_lga_id'] not in self.lga_ids:
                 continue
+            if '_error_ids' in d and d['_error_ids']:
+                variables_to_invalidate = d['_error_ids'].split()
             d['_data_source'] = data_source
             d['_facility_type'] = sector.lower()
             d['sector'] = sector
-            facility = FacilityBuilder.create_facility_from_dict(d, source=source)
+            facility = FacilityBuilder.create_facility_from_dict(d, source=source, invalid_vars=variables_to_invalidate)
 
     @print_time
     def load_lga_data(self):
@@ -430,6 +439,21 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
     def print_stats(self):
         print json.dumps(self.get_info(), indent=4)
 
+    def delete_queryset(self, cls, chunk_size=1000):
+        '''''
+        Iterate over a Django Queryset.
+
+        This method loads a maximum of chunksize (default: 100) rows in
+        its memory at the same time while django normally would load all
+        rows in its memory. Using the iterator() method only causes it to
+        not preload all the classes.
+        '''
+        qs = cls.objects.all()[:chunk_size]
+        while len(qs) > 0:
+            for i in qs:
+                i.delete()
+            qs = cls.objects.all()[:chunk_size]
+
     def _drop_variables(self):
         variable_classes_to_drop = [
             Variable,
@@ -441,7 +465,7 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
         for v in variable_classes_to_drop:
             try:
                 # this will fail if the table doesn't exist (first import)
-                v.objects.all().delete()
+                self.delete_queryset(v)
             except DatabaseError:
                 print "No data deleted for %s" % c
 
@@ -455,11 +479,12 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
             TableColumn,
             ColumnCategory,
             MapLayerDescription,
+            KeyRename,
         ]
         for c in classes_with_data_to_drop:
             try:
                 # this will fail if the table doesn't exist (first import)
-                c.objects.all().delete()
+                self.delete_queryset(c)
             except DatabaseError:
                 print "No data deleted for %s" % c
 
@@ -471,8 +496,8 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
 
         def drop_sqlite_database():
             try:
-                os.remove('db.sqlite3')
-                print 'removed db.sqlite3'
+                os.remove(settings.DATABASES['default']['NAME'])
+                print 'removed %s' % settings.DATABASES['default']['NAME']
             except OSError:
                 pass
 

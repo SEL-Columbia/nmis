@@ -8,7 +8,11 @@ from display_defs.models import FacilityTable, MapLayerDescription
 from nga_districts.models import LGA, Zone, State
 from django.db.models import Count
 import json
+<<<<<<< HEAD
 #localhost:8000/nmis~/state1/lga2/
+=======
+from facilities.models import FacilityRecord, Variable, LGAIndicator
+>>>>>>> develop
 
 def _get_state_lga_from_first_two_items(arr):
     try:
@@ -156,6 +160,32 @@ def lga_view(context):
     context.local_nav_urls = get_nav_urls(context.lga, mode='facility', sector=context.sector_id)
     if context.sector_id is None:
         context.sector_id = 'overview'
+    context.overview_sectors = [
+        {
+            'name': "Health",
+            'slug': 'health',
+            'count': 50
+        },
+        {
+            'name': "Education",
+            'slug': 'education',
+            'count': 25
+        },
+        {
+            'name': "Water",
+            'slug': 'water',
+            'count': 25
+        },
+    ]
+
+    context.facilities_count = 100
+    context.profile_variables = [
+        ["LGA Chairman", "chairman_name"],
+        ["LGA Secretary", "secretary_name"],
+        ["Population (2006)", "pop_population"],
+        ["Area (square km)", "area_sq_km"],
+        ["Distance from capital (km)", "state_capital_distance"],
+    ]
     context.local_nav = {
         'mode': {'facility': True},
         'sector': {context.sector_id: True}
@@ -431,16 +461,27 @@ def tmp_variables_for_sector(sector_slug, lga):
             'num_chews_per_1000': {'decimal_places': 3},
             'teacher_nonteachingstaff_ratio_lga': {'decimal_places': 3},
         })
+    record_counts = FacilityRecord.counts_by_variable(lga.id)
     def g(slug):
         value_dict = lga_data.get(slug, None)
         if value_dict:
             return value_dict.get('value', None)
         else:
             return None
-    def h(slug1, slug2):
+    def i(slug1, slug2):
         if g(slug1) == None or g(slug2) == None:
             return None
         return "%s/%s" % (g(slug1), g(slug2))
+    def h(slug1, slug2):
+        try:
+            indicator = LGAIndicator.objects.get(slug=slug1)
+            count = 0
+            records = record_counts[indicator.sector.slug][indicator.origin.slug]
+            for k, v in records.items():
+                count += v
+        except:
+            return None
+        return "%s/%s" % (g(slug1), count)
     example = {
         'health': [
             ('Facilities', [
@@ -460,9 +501,9 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Total number of nurses in the LGA", g("num_nurses"), None, g("target_num_nurses"), None],
                 ["Total number of CHEWs (Jr. and Sr.) in the LGA", g("num_chews"), None, g("target_num_chews"), None],
                 ["Total number of laboratory technicians in the LGA", g("num_lab_techs"), None, g("target_num_lab_techs"), None],
-                ["Number of health providers per 1,000 population", g("num_skilled_health_providers_per_1000"), None, None, None],
+                ["Number of skilled health providers per 1,000 population", g("num_skilled_health_providers_per_1000"), None, None, None],
                 ["Number of CHEWs per 1,000 population", g("num_chews_per_1000"), None, None, None],
-                ["Number of facilities where all salaried staff were paid during the last pay period", g("proportion_staff_paid"), h("num_staff_paid", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
+                ["Percentage of facilities where all salaried staff were paid during the last pay period", g("proportion_staff_paid"), h("num_staff_paid", "staff_paid_lastmth_yn"), g("target_total_health_facilities"), "100%"],
             ],),
             ('Child Health', [
                 ["Percentage of facilities that offer routine immunization", g("proportion_health_facilities_routine_immunization"), h("num_health_facilities_routine_immunization", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
@@ -483,7 +524,7 @@ def tmp_variables_for_sector(sector_slug, lga):
             ('HIV/AIDS, Malaria and other Diseases', [
                 ["HIV/AIDS"],
                 ["Percentage of facilities that offer HIV testing", g("proportion_health_facilities_hiv_testing"), h("num_health_facilities_hiv_testing", "num_health_facilities"), None, None],
-                ["Percentage of facilities that offer ART treatment", g("proportion_health_facilities_hiv_testing"), h("num_health_facilities_hiv_testing", "num_health_facilities"), None, None],
+                ["Percentage of facilities that offer ART treatment", g("proportion_health_facilities_art_treatment"), h("num_health_facilities_art_treatment", "num_health_facilities"), None, None],
                 ["Malaria"],
                 ["Percentage of facilities that offer malaria testing (RDT or microscopy)", g("proportion_malaria_testing"), h("num_malaria_testing", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities that offer ACT-based treatment for malaria", g("proportion_act_treatment_for_malaria"), h("num_act_treatment_for_malaria", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
@@ -491,12 +532,12 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Percentage of facilities that provide bednets", g("proportion_offer_bednets"), h("num_offer_bednets", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities that do not charge and fees for malaria-related services", g("proportion_no_user_fees_malaria"), h("num_no_user_fees_malaria", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Tuberculosis"],
-                ["Percentage of facilities that offer TB treatment", g("proportion_health_facilities_hiv_testing"), h("num_health_facilities_hiv_testing", "num_health_facilities"), None, None],
-                ["Percentage of facilities that offer TB testing", g("proportion_health_facilities_hiv_testing"), h("num_health_facilities_hiv_testing", "num_health_facilities"), None, None],
+                ["Percentage of facilities that offer TB treatment", g("proportion_health_facilities_tb_treatment"), h("num_health_facilities_tb_treatment", "num_health_facilities"), None, None],
+                ["Percentage of facilities that offer TB testing", g("proportion_health_facilities_tb_testing"), h("num_health_facilities_tb_testing", "num_health_facilities"), None, None],
             ],),
             ('Infrastructure', [
                 ["Percentage of facilities with access to some form of power source", g("proportion_any_power_access"), h("num_any_power_access", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
-                ["Percentage of facilities with access to an improved water source", g("proportion_water_access"), h("num_water_access", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
+                ["Percentage of facilities with access to an improved water source", g("proportion_improved_water_source"), h("num_improved_water_source", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities with functioning improved sanitation", g("proportion_functional_sanitation"), h("num_functional_sanitation", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities with mobile phone coverage somewhere on the premises", g("proportion_mobile_coverage"), h("num_mobile_coverage", "num_health_facilities"), g("target_total_health_facilities"), "100%"],
                 ["Percentage of facilities that separate medical waste from other forms of waste", g("proportion_health_facilities_med_waste_separated"), h("num_health_facilities_med_waste_separated", "num_health_facilities"), None, None],
@@ -517,9 +558,13 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Primary net intake rate (NIR) for girls", "N/A", None, "N/A"],
                 ["Junior secondary net intake rate (NIR) for boys", "N/A", None, "N/A"],
                 ["Junior Secondary net intake rate (NIR) for girls", "N/A", None, "N/A"],
-                ["Percentage of schools farther than 1km from catchement area", g("proportion_schools_1kmplus_catchment"), h("num_schools_1kmplus_catchment", "num_schools"), "0%", "0"],
-                ["Percentage of primary schools farther than 1km from nearest secondary school", g("proportion_primary_schools_1kmplus_ss"), h("num_primary_schools_1kmplus_ss", "num_primary_schools"), "0%", "0"],
-                ["Percentage of schools with students living farther than 3km", g("proportion_students_3kmplus"), h("num_students_3kmplus", "num_schools"), "0%", "0"],
+                ["Percentage of primary schools farther than 1km from catchement area", g("proportion_schools_1kmplus_catchment_primary"), h("num_schools_1kmplus_catchment_primary", "num_primary_schools"), "0%", "0"],
+                ["Percentage of junior secondary schools farther than 1km from catchement area", g("proportion_schools_1kmplus_catchment_juniorsec"), h("num_schools_1kmplus_catchment_juniorsec", "num_junior_secondary_schools"), "0%", "0"],
+
+                ["Percentage of primary schools farther than 1km from nearest secondary school", g("proportion_schools_1kmplus_ss"), h("num_primary_schools_1kmplus_ss", "num_primary_schools"), "0%", "0"],
+
+                ["Percentage of primary schools with students living farther than 3km", g("proportion_students_3kmplus_primary"), h("num_students_3kmplus_primary", "students_living_3kmplus_school_primary"), "0%", "0"],
+                ["Percentage of junior secondary schools with students living farther than 3km", g("proportion_students_3kmplus_juniorsec"), h("num_students_3kmplus_juniorsec", "students_living_3kmplus_school_juniorsec"), "0%", "0"],
             ],),
             ('Participation', [
                 ["Primary net enrollment rate (NER) for boys", g("net_enrollment_rate_boys_primary"), None, "100%"],
@@ -531,48 +576,77 @@ def tmp_variables_for_sector(sector_slug, lga):
             ],),
             ('Infrastructure', [
                 ["Water & Santation"],
-                ["Percentage of schools with access to potable water", g("proportion_schools_potable_water"), h("num_schools_potable_water", "num_schools"), "100%", g("target_num_schools")],
-                ["Percentage of schools with improved sanitation/toilet", g("proportion_schools_improved_sanitation"), h("num_schools_improved_sanitation", "num_schools"), "100%", g("target_num_schools")],
-                ["Percentage of schools with gender-separated toilets", g("proportion_schools_gender_sep_toilet"), h("num_schools_gender_sep_toilet", "num_schools"), "100%", g("target_num_schools")],
-                ["Pupil to toilet ratio", g("pupil_toilet_ratio"), None, "35"],
+                ["Percentage of primary schools with access to potable water", g("proportion_schools_potable_water_primary"), h("num_schools_potable_water_primary", "num_primary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of junior secondary schools with access to potable water", g("proportion_schools_potable_water_juniorsec"), h("num_schools_potable_water_juniorsec", "num_junior_secondary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of primary schools with improved sanitation/toilet", g("proportion_schools_improved_sanitation_primary"), h("num_schools_improved_sanitation_primary", "num_primary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of junior secondary schools with improved sanitation/toilet", g("proportion_schools_improved_sanitation_juniorsec"), h("num_schools_improved_sanitation_juniorsec", "num_junior_secondary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of primary schools with gender-separated toilets", g("proportion_schools_gender_sep_toilet_primary"), h("num_schools_gender_sep_toilet_primary", "num_primary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of junior secondary schools with gender-separated toilets", g("proportion_schools_gender_sep_toilet_juniorsec"), h("num_schools_gender_sep_toilet_juniorsec", "num_juniorsec_schools"), "100%", g("target_num_schools")],
+                ["Pupil to toilet ratio (primary)", g("pupil_toilet_ratio_primary"), None, "35"],
+                ["Pupil to toilet ratio (junior secondary)", g("pupil_toilet_ratio_secondary"), None, "35"],
                 ["Building Structure"],
-                ["Percentage of schools with access to power", g("proportion_schools_power_access"), h("num_schools_power_access", "num_schools"), "100%", g("target_num_schools")],
-                ["Percentage of classrooms needing major repair", g("proportion_classrooms_need_major_repair"), h("number_classrooms_need_major_repair", "num_classrooms_lga"), "0%", "0"],
-                ["Percentage of classrooms needing minor repair", g("proportion_classrooms_need_minor_repair"), h("number_classrooms_need_minor_repair", "num_classrooms_lga"), "0%", "0"],
-                ["Percentage of schools with a roof in good condition", g("proportion_schools_covered_roof_good_cond"), h("num_schools_covered_roof_good_cond", "num_schools"), "100%", g("num_schools")],
+                ["Percentage of primary schools with access to power", g("proportion_schools_power_access_primary"), h("num_schools_power_access_primary", "num_primary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of junior secondary schools with access to power", g("proportion_schools_power_access_juniorsec"), h("num_schools_power_access_juniorsec", "num_juniorsec_schools"), "100%", g("target_num_schools")],
+                ["Percentage of primary school classrooms needing major repair", g("proportion_classrooms_need_major_repair_primary"), i("num_primary_classrooms_need_maj_repairs", "num_classrooms_lga_primary"), "0%", "0"],
+                ["Percentage of junior secondary school classrooms needing major repair", g("proportion_classrooms_need_major_repair_juniorsec"), i("num_juniorsec_classrooms_need_maj_repairs", "num_classrooms_lga_juniorsec"), "0%", "0"],
+                ["Percentage of primary school classrooms needing minor repair", g("proportion_classrooms_need_minor_repair_primary"), i("num_primary_classrooms_need_min_repairs", "num_classrooms_lga_primary"), "0%", "0"],
+                ["Percentage of junior secondary school classrooms needing minor repair", g("proportion_classrooms_need_minor_repair_juniorsec"), i("num_juniorsec_classrooms_need_min_repairs", "num_classrooms_lga_juniorsec"), "0%", "0"],
+                ["Percentage of primary schools with a roof in good condition", g("proportion_schools_covered_roof_good_cond_primary"), h("num_schools_covered_roof_good_cond_primary", "num_primary_schools"), "100%", g("num_primary_schools")],
+                ["Percentage of junior secondary schools with a roof in good condition", g("proportion_schools_covered_roof_good_cond_juniorsec"), h("num_schools_covered_roof_good_cond_juniorsec", "num_juniorsec_schools"), "100%", g("num_juniorsec_schools")],
                 ["Health & Safety"],
-                ["Percentage of schools with a dispensary/health clinic", g("proportion_schools_with_clinic_dispensary"), h("num_schools_with_clinic_dispensary", "num_schools"), "100%", g("target_num_schools")],
-                ["Percentage of schools with a first aid kit only (not a health clinic)", g("proportion_schools_with_first_aid_kit"), h("num_schools_with_first_aid_kit", "num_schools"), "100%", g("target_num_schools")],
-                ["Percentage of schools with a wall/fence in good condition", g("proportion_schools_fence_good_cond"), h("num_schools_fence_good_cond", "num_schools"), "100%", g("target_num_schools")],
+                ["Percentage of primary schools with a dispensary/health clinic", g("proportion_schools_with_clinic_dispensary_primary"), h("num_schools_with_clinic_dispensary_primary", "num_primary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of junior secondary schools with a dispensary/health clinic", g("proportion_schools_with_clinic_dispensary_juniorsec"), h("num_schools_with_clinic_dispensary_juniorsec", "num_juniorsec_schools"), "100%", g("target_num_schools")],
+                ["Percentage of primary schools with a first aid kit only (not a health clinic)", g("proportion_schools_with_first_aid_kit_primary"), h("num_schools_with_first_aid_kit_primary", "num_primary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of junior secondary schools with a first aid kit only (not a health clinic)", g("proportion_schools_with_first_aid_kit_juniorsec"), h("num_schools_with_first_aid_kit_juniorsec", "num_juniorsec_schools"), "100%", g("target_num_schools")],
+                ["Percentage of primary schools with a wall/fence in good condition", g("proportion_schools_fence_good_cond_primary"), h("num_schools_fence_good_cond_primary", "num_primary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of junior secondary schools with a wall/fence in good condition", g("proportion_schools_fence_good_cond_juniorsec"), h("num_schools_fence_good_cond_juniorsec", "num_juniorsec_schools"), "100%", g("target_num_schools")],
                 ["Learning Environment"],
-                ["Pupil to classroom ratio", g("student_classroom_ratio_lga"), None, "35"],
-                ["Percentage of schools that teach outside because there are not enough classrooms", g("proportion_schools_hold_classes_outside"), h("num_schools_hold_classes_outside", "num_schools"), "0%", "0"],
-                ["Percentage of schools with double shifts", g("proportion_schools_two_shifts"), h("num_schools_two_shifts", "num_schools"), "0%", "0"],
-                ["Percentage of schools with multi-grade classrooms", g("proportion_schools_multigrade_classrooms"), h("num_schools_multigrade_classrooms", "num_schools"), "0%", "0"],
+                ["Pupil to classroom ratio (primary)", g("student_classroom_ratio_lga_primary"), None, "35"],
+                ["Pupil to classroom ratio (junior secondary)", g("student_classroom_ratio_lga_juniorsec"), None, "35"],
+                ["Percentage of primary schools that teach outside because there are not enough classrooms", g("proportion_schools_hold_classes_outside_primary"), h("num_schools_hold_classes_outside_primary", "num_primary_schools"), "0%", "0"],
+                ["Percentage of junior secondary schools that teach outside because there are not enough classrooms", g("proportion_schools_hold_classes_outside_juniorsec"), h("num_schools_hold_classes_outside_juniorsec", "num_juniorsec_schools"), "0%", "0"],
+                ["Percentage of primary schools with double shifts", g("proportion_schools_two_shifts_primary"), h("num_schools_two_shifts_primary", "num_primary_schools"), "0%", "0"],
+                ["Percentage of junior secondary schools with double shifts", g("proportion_schools_two_shifts_juniorsec"), h("num_schools_two_shifts_juniorsec", "num_juniorsec_schools"), "0%", "0"],
+                ["Percentage of primary schools with multi-grade classrooms", g("proportion_schools_multigrade_classrooms_primary"), h("num_schools_multigrade_classrooms_primary", "num_primary_schools"), "0%", "0"],
+                ["Percentage of junior secondary schools with multi-grade classrooms", g("proportion_schools_multigrade_classrooms_juniorsec"), h("num_schools_multigrade_classrooms_juniorsec", "num_juniorsec_schools"), "0%", "0"],
             ],),
             ('Furniture', [
-                ["Percentage of schools with a chalkboard in every classroom", g("proportion_schools_chalkboard_all_rooms"), h("num_schools_chalkboard_all_rooms", "num_schools"), "100%", g("target_num_schools")],
-                ["Pupil to bench ratio", g("pupil_bench_ratio_lga"), None, "&#8804; 3"],
-                ["Pupil to desk ratio", g("pupil_desk_ratio_lga"), None, "&#8804; 1"],
+                ["Percentage of primary schools with a chalkboard in every classroom", g("proportion_schools_chalkboard_all_rooms_primary"), h("num_schools_chalkboard_all_rooms_primary", "num_primary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of junior secondary schools with a chalkboard in every classroom", g("proportion_schools_chalkboard_all_rooms_juniorsec"), h("num_schools_chalkboard_all_rooms_juniorsec", "num_juniorsec_schools"), "100%", g("target_num_schools")],
+                ["Pupil to bench ratio (primary)", g("pupil_bench_ratio_lga_primary"), None, "&#8804; 3"],
+                ["Pupil to bench ratio (junior secondary)", g("pupil_bench_ratio_lga_juniorsec"), None, "&#8804; 3"],
+                ["Pupil to desk ratio (primary)", g("pupil_desk_ratio_lga_primary"), None, "&#8804; 1"],
+                ["Pupil to desk ratio (junior secondary)", g("pupil_desk_ratio_lga_juniorsec"), None, "&#8804; 1"],
             ],),
             ('Adequacy of Staffing', [
                 ["Primary school pupil to teacher ratio", g("primary_school_pupil_teachers_ratio_lga"), None, "&#8804; 35"],
                 ["Junior secondary school pupil to teacher ratio", g("junior_secondary_school_pupil_teachers_ratio_lga"), None, "&#8804; 35"],
-                ["Teaching to non-teaching staff ratio", g("teacher_nonteachingstaff_ratio_lga"), None, "N/A"],
-                ["Percentage of qualified teachers (with NCE)", g("proportion_teachers_nce"), h("num_teachers_nce", "num_teachers"), "100%", g("target_num_teachers")],
-                ["Percentage of teachers who participated in training in the past 12 months", g("proportion_teachers_training_last_year"), h("num_teachers_training_last_year", "num_teachers"), "100%", g("target_num_teachers")],
+                ["Primary school teaching to non-teaching staff ratio", g("teacher_nonteachingstaff_ratio_lga_primary"), None, "N/A"],
+                ["Junior secondary teaching to non-teaching staff ratio", g("teacher_nonteachingstaff_ratio_lga_juniorsec"), None, "N/A"],
+                ["Percentage of primary school qualified teachers (with NCE)", g("proportion_teachers_nce_primary"), i("num_primary_school_teachers_nce", "num_primary_school_teachers"), "100%", g("target_num_teachers")],
+                ["Percentage of junior secondary qualified teachers (with NCE)", g("proportion_teachers_nce_juniorsec"), i("num_junior_secondary_school_teachers_nce", "num_junior_secondary_school_teachers"), "100%", g("target_num_teachers")],
+                ["Percentage of primary school teachers who participated in training in the past 12 months", g("proportion_teachers_training_last_year_primary"), i("num_teachers_with_training_primary", "num_primary_school_teachers"), "100%", g("target_num_teachers")],
+                ["Percentage of junior secondary school teachers who participated in training in the past 12 months", g("proportion_teachers_training_last_year_juniorsec"), i("num_teachers_with_training_juniorsec", "num_junior_secondary_school_teachers"), "100%", g("target_num_teachers")],
 	    ],),
 	    ('Institutional Development',[
-                ["Percentage of schools that have delayed teacher payments in the past 12 months", g("proportion_schools_delay_pay"), h("num_schools_delay_pay", "num_schools"), "0%", "0"],
-                ["Percentage of schools that have missed teacher payments in the past 12 months", g("proportion_schools_missed_pay"), h("num_schools_missed_pay", "num_schools"), "0%", "0"],
+                ["Percentage of primary schools that have delayed teacher payments in the past 12 months", g("proportion_schools_delay_pay_primary"), h("num_schools_delay_pay_primary", "num_primary_schools_primary"), "0%", "0"],
+                ["Percentage of junior secondary schools that have delayed teacher payments in the past 12 months", g("proportion_schools_delay_pay_juniorsec"), h("num_schools_delay_pay_juniorsec", "num_junior_secondary_schools"), "0%", "0"],
+                ["Percentage of primary schools that have missed teacher payments in the past 12 months", g("proportion_schools_missed_pay_primary"), h("num_schools_missed_pay_primary", "num_primary_schools)"), "0%", "0"],
+                ["Percentage of junior secondary schools that have missed teacher payments in the past 12 months", g("proportion_schools_missed_pay_juniorsec"), h("num_schools_missed_pay_juniorsec", "num_junior_secondary_schools)"), "0%", "0"],
             ],),
             ('Curriculum Issues', [
-                ["Textbook to pupil ratio", g("num_textbooks_per_pupil"), None, "4"],
-                ["Percentage of schools where exercise books are provided to students", g("proportion_provide_exercise_books"), h("num_provide_exercise_books", "num_schools"), "100%", g("target_num_schools")],
-                ["Percentage of schools where pens/pencils are provided to students", g("proportion_provide_pens_pencils"), h("num_provide_pens_pencils", "num_schools"), "100%", g("target_num_schools")],
-                ["Percentage of schools that follow the National UBE Curriculum", g("proportion_natl_curriculum"), h("num_natl_curriculum", "num_schools"), "100%", g("target_num_schools")],
-                ["Percentage of schools where each teacher has a teaching guidebook for every subject", g("proportion_teachers_with_teacher_guide"), h("num_teachers_with_teacher_guide", "num_schools"), "100%", g("target_num_schools")],
-                ["Percentage of schools with a functioning library", g("proportion_schools_functioning_library"), h("num_schools_functioning_library", "num_schools"), "100%", g("target_num_schools")],
+                ["Textbook to pupil ratio (primary)", g("num_textbooks_per_pupil_primary"), None, "4"],
+                ["Textbook to pupil ratio (junior secondary)", g("num_textbooks_per_pupil_juniorsec"), None, "4"],
+                ["Percentage of primary schools where exercise books are provided to students", g("proportion_provide_exercise_books_primary"), h("num_provide_exercise_books_primary", "num_primary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of junior secondary schools where exercise books are provided to students", g("proportion_provide_exercise_books_juniorsec"), h("num_provide_exercise_books_juniorsec", "num_juniorsec_schools"), "100%", g("target_num_schools")],
+                ["Percentage of primary schools where pens/pencils are provided to students", g("proportion_provide_pens_pencils_primary"), h("num_provide_pens_pencils_primary", "num_primary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of junior secondary schools where pens/pencils are provided to students", g("proportion_provide_pens_pencils_juniorsec"), h("num_provide_pens_pencils_juniorsec", "num_juniorsec_schools"), "100%", g("target_num_schools")],
+                ["Percentage of primary schools that follow the National UBE Curriculum", g("proportion_natl_curriculum_primary"), h("num_natl_curriculum_primary", "num_primary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of junior secondary schools that follow the National UBE Curriculum", g("proportion_natl_curriculum_juniorsec"), h("num_natl_curriculum_juniorsec", "num_juniorsec_schools"), "100%", g("target_num_schools")],
+                ["Percentage of primary schools where each teacher has a teaching guidebook for every subject", g("proportion_teachers_with_teacher_guide_primary"), h("num_teachers_with_teacher_guide_primary", "num_primary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of junior secondary schools where each teacher has a teaching guidebook for every subject", g("proportion_teachers_with_teacher_guide_juniorsec"), h("num_teachers_with_teacher_guide_juniorsec", "num_juniorsec_schools"), "100%", g("target_num_schools")],
+                ["Percentage of primary schools with a functioning library", g("proportion_schools_functioning_library_primary"), h("num_schools_functioning_library_primary", "num_primary_schools"), "100%", g("target_num_schools")],
+                ["Percentage of junior secondary schools with a functioning library", g("proportion_schools_functioning_library_juniorsec"), h("num_schools_functioning_library_juniorsec", "num_juniorsec_schools"), "100%", g("target_num_schools")],
             ],),
             ('Efficiency (flow rates)', [
                 ["Drop out rate", "N/A", None, "0%"],
@@ -595,25 +669,25 @@ def tmp_variables_for_sector(sector_slug, lga):
                 ["Total number of water sources", g("num_water_points"), None, ""],
             ],),
             ('Maintenance', [
-                ["Percentage of boreholes, protected or treated sources that are poorly maintained", g("proportion_protected_water_points_non_functional"), h("num_protected_water_sources_non_functional", "num_protected_water_sources"), ""],
+                ["Percentage of boreholes, protected or treated sources that are poorly maintained", g("proportion_protected_water_points_non_functional"), i("num_protected_water_sources_non_functional", "num_protected_water_sources"), ""],
             ]),
             ('Population Served', [
                 ["Population served per well-maintained borehole, protected or treated water source", g("population_served_per_protected_and_functional_water_source"), None, ""],
                 ["Population served per borehole, protected or treated water source (whether or not it is well-maintained)", g("population_served_per_all_water_sources"), None, ""],
             ]),
             ('Lift Mechanisms for Boreholes and Tube Wells', [
-                ["Percentage of boreholes and tube wells with a non-motorized lift (human or animal-powered)", g("proportion_boreholes_tubewells_manual"), h("num_boreholes_tubewells_manual", "num_boreholes_and_tubewells"), ""],
-                ["Percentage of boreholes and tube wells with a motorized lift", g("proportion_boreholes_tubewells_non_manual"), h("num_boreholes_tubewells_non_manual", "num_boreholes_and_tubewells"), ""],
-                ["Percentage of boreholes and tube wells with a diesel lift", g("proportion_boreholes_tubewells_diesel"), h("num_boreholes_tubewells_diesel", "num_boreholes_and_tubewells"), ""],
-                ["Percentage of boreholes and tube wells with an electric motor lift", g("proportion_boreholes_tubewells_electric"), h("num_boreholes_tubewells_electric", "num_boreholes_and_tubewells"), ""],
-                ["Percentage of boreholes and tube wells with a solar lift", g("proportion_boreholes_tubewells_solar"), h("num_boreholes_tubewells_solar", "num_boreholes_and_tubewells"), ""],
+                ["Percentage of boreholes and tube wells with a non-motorized lift (human or animal-powered)", g("proportion_boreholes_tubewells_manual"), i("num_boreholes_tubewells_manual", "num_boreholes_and_tubewells"), ""],
+                ["Percentage of boreholes and tube wells with a motorized lift", g("proportion_boreholes_tubewells_non_manual"), i("num_boreholes_tubewells_non_manual", "num_boreholes_and_tubewells"), ""],
+                ["Percentage of boreholes and tube wells with a diesel lift", g("proportion_boreholes_tubewells_diesel"), i("num_boreholes_tubewells_diesel", "num_boreholes_and_tubewells"), ""],
+                ["Percentage of boreholes and tube wells with an electric motor lift", g("proportion_boreholes_tubewells_electric"), i("num_boreholes_tubewells_electric", "num_boreholes_and_tubewells"), ""],
+                ["Percentage of boreholes and tube wells with a solar lift", g("proportion_boreholes_tubewells_solar"), i("num_boreholes_tubewells_solar", "num_boreholes_and_tubewells"), ""],
             ],),
             ('Poorly Maintained Lift Mechanisms for Boreholes and Tube Wells', [
-                ["Percentage of non-motorized (human or animal-powered) lifts that are poorly maintained", g("proportion_boreholes_tubewells_manual_non_functional"), h("num_boreholes_tubewells_manual_non_functional", "num_boreholes_tubewells_manual"), ""],
-                ["Percentage of all motorized lifts that are poorly maintained", g("proportion_boreholes_tubewells_non_manual_non_functional"), h("num_boreholes_tubewells_non_manual_non_functional", "num_boreholes_tubewells_non_manual"), ""],
-                ["Percentage of diesel-powered lifts that are poorly maintained", g("proportion_boreholes_tubewells_diesel_non_functional"), h("num_boreholes_tubewells_diesel_non_functional", "num_boreholes_tubewells_diesel"), ""],
-                ["Percentage of electrically-powered lifts that are poorly maintained", g("proportion_boreholes_tubewells_electric_non_functional"), h("num_boreholes_tubewells_electric_non_functional", "num_boreholes_tubewells_electric"), ""],
-                ["Percentage of solar-powered lifts that are poorly maintained", g("proportion_boreholes_tubewells_solar_non_functional"), h("num_boreholes_tubewells_solar_non_functional", "num_boreholes_tubewells_solar"), ""],
+                ["Percentage of non-motorized (human or animal-powered) lifts that are poorly maintained", g("proportion_boreholes_tubewells_manual_non_functional"), i("num_boreholes_tubewells_manual_non_functional", "num_boreholes_tubewells_manual"), ""],
+                ["Percentage of all motorized lifts that are poorly maintained", g("proportion_boreholes_tubewells_non_manual_non_functional"), i("num_boreholes_tubewells_non_manual_non_functional", "num_boreholes_tubewells_non_manual"), ""],
+                ["Percentage of diesel-powered lifts that are poorly maintained", g("proportion_boreholes_tubewells_diesel_non_functional"), i("num_boreholes_tubewells_diesel_non_functional", "num_boreholes_tubewells_diesel"), ""],
+                ["Percentage of electrically-powered lifts that are poorly maintained", g("proportion_boreholes_tubewells_electric_non_functional"), i("num_boreholes_tubewells_electric_non_functional", "num_boreholes_tubewells_electric"), ""],
+                ["Percentage of solar-powered lifts that are poorly maintained", g("proportion_boreholes_tubewells_solar_non_functional"), i("num_boreholes_tubewells_solar_non_functional", "num_boreholes_tubewells_solar"), ""],
             ]),
         ],
     }

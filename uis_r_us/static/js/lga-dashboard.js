@@ -263,7 +263,23 @@ function loadLgaData(lgaUniqueId, onLoadCallback) {
 			facilityDataARr.push(v);
 		});
 
-//        buildLgaProfileBox(lgaData, variableDictionary.profile_variables);
+		(function(){
+		    $('.replace-data').each(function(){
+		        var result = lgaData.profileData[$(this).data().lgaVariable];
+		        if(!!result) {
+    		        $(this).text(result.value || "&nbsp;");
+		        }
+        	});
+        	$('.replace-counts').each(function(){
+        	    var countSlug = $(this).data('countSlug');
+        	    if(countSlug==="facilities") {
+        	        $(this).text('('+ facilityDataARr.length + ')')
+        	    } else if(countSlug.indexOf('sector:')!==-1) {
+        	        var sectorSlug = countSlug.replace('sector:', '');
+        	    }
+        	});
+		})();
+//        buildLgaProfileBox(lgaData, profile_variables);
 		processFacilityDataRequests(lgaQ, {
 		    sectors: varDataReq.sectors,
 		    overview: varDataReq.overview,
@@ -695,6 +711,7 @@ function imageUrls(imageSizes, imgId) {
                     if(hasClickAction(column, 'piechart_true') || hasClickAction(column, 'piechart_false')) {
                         var pcWrap = cdd.find('.content').eq(0)
             		        .attr('id', 'pie-chart')
+			        .show()
             		        .empty();
                         if(hasClickAction(column, 'piechart_true')) {
                             var pieChartDisplayDefinitions = [
@@ -707,7 +724,9 @@ function imageUrls(imageSizes, imgId) {
                                 {'legend':'Yes', 'color':'#ff5555', 'key': 'true'},
                                 {'legend':'No','color':'#21c406','key': 'false'},
                                 {'legend':'Undefined','color':'#999','key': 'undefined'}];
-                        }
+                        } else {
+			    pcWrap.find('.content').hide();
+			}
 //                        var tabulations = getTabulations(sector.slug, column.slug, 'true false undefined'.split(' '));
                         var tabulations = Tabulation.sectorSlug(sector.slug, column.slug, 'true false undefined'.split(' '));
             		    createOurGraph(pcWrap,
@@ -719,7 +738,9 @@ function imageUrls(imageSizes, imgId) {
             			if(column.description!==undefined) {
             				cdiv.append($("<h3 />", {'class':'description'}).text(column.description));
             			}
-                    }
+                    } else {
+			cdd.find('.content').eq(0).hide();
+		    }
                 });
     		}
     		var columnMode = "view_column_"+column.slug;
@@ -864,8 +885,9 @@ function buildFacilityTable(outerWrap, data, sectors, lgaData){
 	    .addClass('sector-overview')
 	    .data('sectorSlug', 'overview');
 
-
-    $('<h2>').css({'margin':'-1px 0 0 -10px'}).html("<span style='color:#595959'>Health | Education | Water</span>").appendTo(overviewDiv);
+    var oc = $('.overview-content').html();
+    $('.overview-content').remove();
+    overviewDiv.html(oc);
 
 	overviewDiv.appendTo(ftabs);
 

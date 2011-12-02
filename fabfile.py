@@ -122,7 +122,7 @@ def deploy(deployment_name, reload="none"):
         print "Loading all data in from csvs."
         reload_fixtures("-S")
     elif reload == "limit":
-        reload_fixtures("--limit")
+        reload_fixtures("-lS")
     elif reload == "table_defs":
         reload_fixtures("load_table_defs")
 

@@ -195,8 +195,7 @@ else:
     MEDIA_ROOT  = os.path.join(PROJECT_ROOT, 'static/')
 
 MAIN_SITE_HOSTNAME = "nmis.mdgs.gov.ng"
-
-DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
+DATA_DIR_NAME = 'data'
 
 #If local_settings.py wants to, it can specify extra apps to include
 ADDITIONAL_INSTALLED_APPS = ()
@@ -207,8 +206,9 @@ except ImportError:
     print("You can override the default settings by adding a "
           "local_settings.py file.")
 
+DATA_DIR = os.path.join(PROJECT_ROOT, DATA_DIR_NAME)
 INSTALLED_APPS = tuple(INSTALLED_APPS + ADDITIONAL_INSTALLED_APPS)
 
 # add 'data' to the project if it's a python module
 if os.path.exists(os.path.join(DATA_DIR, '__init__.py')):
-    INSTALLED_APPS = tuple(INSTALLED_APPS + ('data', ))
+    INSTALLED_APPS = tuple(INSTALLED_APPS + (DATA_DIR_NAME, ))

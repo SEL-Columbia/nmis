@@ -92,6 +92,60 @@
 		<div class="clearfix" style="clear:both;">
 		</div>
 	</div>
+	<div class="overview-content" style="display:none">
+		<div class="container no-fill">
+			<div class="span9">
+				<div class="row">
+					<h3 class="span8">
+						Facilities <span class="replace-counts" data-count-slug="facilities"></span>
+					</h3>
+				</div>
+				<div class="row">
+					<div class="span8 offset0">
+						{% for sector in overview_sectors %}
+						<p>
+							<a href="/~{{lga.unique_slug}}/{{sector.slug}}" class="sector-btn btn large" style="display:block" data-sector-id="{{sector.slug}}">
+								<span class="sector-icon {{sector.slug}}">&nbsp;</span>
+								{{sector.name}} <span class="replace-counts" data-count-slug="sector:{{sector.slug}}"></span> &raquo;
+							</a>
+						</p>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			<div class="span9">
+				<div class="row">
+					<!-- <h3 class="span8">
+						Enugu, Isi Uzo
+					</h3> -->
+				</div>
+				<div class="span8">
+					<table class="simple-lines">
+						<tbody>
+							<tr>
+								<td class="header" colspan="2">
+									{{lga.name}}, {{lga.state.name}}
+								</td>
+							</tr>
+							{% for name, value in profile_variables %}
+							<tr>
+								<td>
+									{{name}}
+								</td>
+								<td class="l-align">
+									<span class="replace-data" data-lga-variable="{{value}}">&nbsp;</span>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="span18">
+				<br>
+			</div>
+		</div>
+	</div>
 {% endblock %}
 {% block js %}
 <script src="/static/js/application.js" type="text/javascript" charset="utf-8"></script>
@@ -257,6 +311,9 @@ var modes = {
 //			$('.profile-data-wrap').show();
 			$('#zone-navigation').hide();
 			$('.container')
+				.filter(function(){
+					return !$(this).hasClass('no-fill')
+				})
 				.width('100%');
 			// SetResizer is defiend in application.js
 			//   its purpose is to trigger "full-height" whenever the page is resized.

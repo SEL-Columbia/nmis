@@ -28,6 +28,7 @@ xform_manager_dataset.json
 data
 dropbox
 dropbox_data
+generic
 local_settings.py
 .~lock.*
 *.swp
