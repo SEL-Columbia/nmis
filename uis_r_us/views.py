@@ -8,11 +8,7 @@ from display_defs.models import FacilityTable, MapLayerDescription
 from nga_districts.models import LGA, Zone, State
 from django.db.models import Count
 import json
-<<<<<<< HEAD
-#localhost:8000/nmis~/state1/lga2/
-=======
 from facilities.models import FacilityRecord, Variable, LGAIndicator
->>>>>>> develop
 
 def _get_state_lga_from_first_two_items(arr):
     try:
