@@ -26,4 +26,5 @@ def reload_individual_lga(lga):
 
 def _delete_individual_lga_records(lga):
     # delete any existing data records for the LGA:
+    lga.data_records.all().delete()
     lga.facilities.all().delete()
