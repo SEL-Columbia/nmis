@@ -30,7 +30,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         if len(args) == 0:
-            raise Exception("this management command requires arguments of one or many lga ids")
+            args = ('all', )
+        args = _strings_in_list(args)
+        if args[0] == "all":
+            args = [l['id'] for l in LGA.objects.all().values('id')]
         if not kwargs['no_spawn_process']:
             if not kwargs['_hup_subprocess']:
                 self.start_subprocess(*args)
