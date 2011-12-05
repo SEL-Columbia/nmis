@@ -65,10 +65,10 @@ def backup(deployment_name):
         run("gzip %(database_name)s.sql" % env)
 
 
-def deploy(deployment_name, reload="none"):
+def deploy(deployment_name, reload_lgas="none"):
     """
     Example command line usage:
-    fab deploy:staging,reload=none
+    fab deploy:staging,reload_lgas=none
     """
     _setup_env(deployment_name)
 #    import json
@@ -114,18 +114,6 @@ def deploy(deployment_name, reload="none"):
                 _run_in_virtualenv("python manage.py migrate")
     migrate_database()
 
-    def reload_fixtures(flag=""):
-        with cd(env.code_path):
-            _run_in_virtualenv("python manage.py load_fixtures %s" % flag)
-
-    if reload == "all":
-        print "Loading all data in from csvs."
-        reload_fixtures("-S")
-    elif reload == "limit":
-        reload_fixtures("-lS")
-    elif reload == "table_defs":
-        reload_fixtures("load_table_defs")
-
     def collect_static():
         with cd(env.code_path):
             _run_in_virtualenv("python manage.py collectstatic --noinput")
@@ -138,3 +126,18 @@ def deploy(deployment_name, reload="none"):
         with cd(env.apache_dir):
             run("touch environment.wsgi")
     restart_web_server()
+
+#    def reload_fixtures(flag=""):
+#        with cd(env.code_path):
+#            _run_in_virtualenv("python manage.py load_fixtures %s" % flag)
+#    if reload == "all":
+#        print "Loading all data in from csvs."
+#        reload_fixtures("-S")
+#    elif reload == "limit":
+#        reload_fixtures("-lS")
+#    elif reload == "table_defs":
+#        reload_fixtures("load_table_defs")
+    if reload_lgas !== "none":
+        _run_in_virtualenv("python manage.py reload_variables")
+        _run_in_virtualenv("python manage.py load_table_defs")
+        _run_in_virtualenv("python manage.py load_lgas %s" % reload_lgas)
