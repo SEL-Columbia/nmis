@@ -193,13 +193,18 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
 
         def cls_variable_loader(cls):
             def create_instance_of_cls_with_d(d):
-                if self._debug:
-                    cls.objects.get_or_create(**d)
-                else:
-                    try:
-                        cls.objects.get_or_create(**d)
-                    except:
-                        print "%s import failed for data: %s" % (cls.__name__, str(d))
+                # if self._debug:
+                #     cls.objects.get_or_create(**d)
+                # else:
+                try:
+                    existing = cls.objects.get(slug=d['slug'])
+                    for column, value in d.items():
+                        setattr(existing, column, value)
+                    existing.save()
+                except cls.DoesNotExist, e:
+                    cls.objects.create(**d)
+                except:
+                    print "%s import failed for data: %s" % (cls.__name__, str(d))
             return create_instance_of_cls_with_d
 
         def dict_is_valid_var(d):
