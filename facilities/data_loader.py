@@ -53,6 +53,7 @@ class DataLoader(object):
                 continue
         for lga in lgas:
             lga.data_load_in_progress = True
+            lga.data_loaded = False
             lga.save()
         for lga in lgas:
             self.lga_ids = [str(lga.id)]
