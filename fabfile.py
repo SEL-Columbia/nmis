@@ -139,6 +139,7 @@ def deploy(deployment_name, reload_lgas="none"):
 #    elif reload == "table_defs":
 #        reload_fixtures("load_table_defs")
     if reload_lgas != "none":
+        _run_in_virtualenv("python manage.py load_key_renames")
         _run_in_virtualenv("python manage.py reload_variables")
         _run_in_virtualenv("python manage.py load_table_defs")
         _run_in_virtualenv("python manage.py load_lgas %s" % reload_lgas)
