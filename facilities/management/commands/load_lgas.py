@@ -10,7 +10,7 @@ def _strings_in_list(l):
     #*args list receives a non-string param
     o = []
     for i in l:
-        if isinstance(i, str) or isinstance(i, int):
+        if isinstance(i, (basestring, int, float, long,)):
             o.append(str(i))
     return o
 
