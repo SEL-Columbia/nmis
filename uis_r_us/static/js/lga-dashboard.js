@@ -1172,7 +1172,10 @@ var processFacilityDataRequests = (function(dataReq, passedData){
     } else {
 		var data, sectors, noLatLngs=0;
 		facilitySectorSlugs = [];
-        NMIS.init(passedData.data, passedData.sectors);
+        NMIS.init(passedData.data, {
+            iconSwitcher: false,
+            sectors: passedData.sectors
+        });
 
 		passedData === undefined && warn("No data was passed to the page", passedData);
 
