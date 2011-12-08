@@ -40,9 +40,10 @@
 		                        | <a href="http://nmis.tenderapp.com/">{% trans "Help" %}</a>
 					{% endif %}
 					</p>
+					<div style="" class="lga-nav">
 					<form action="/~/" method="POST">
-						<div class="lga-nav" style="right:-365.7px">
-							<select id="lga-select" name="lga" style="width:280px;" title="Select an LGA">
+						<div>
+							<select id="lga-select" name="lga" title="Select an LGA">
 								{% for statename, lgas in active_districts %}
 								<optgroup label="{{statename}}">
 									{% for lganame, lgaid in lgas %}
@@ -58,6 +59,7 @@
 							<input type="submit" value="GO">
 						</div>
 					</form>
+					</div>
 				</div>
 				<div class="row page-title-row">
 					<p class="bc">
@@ -118,6 +120,8 @@
     <script src="/static/js/libs/raphael-min.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/js/g.raphael-min.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/js/g.pie-min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+</script>
 	{% block scripts %}{% endblock %}
 	{% block js %}
 	<!-- js block is for scripts that should be loaded at the end of the page -->

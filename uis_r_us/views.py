@@ -73,6 +73,7 @@ def dashboard(request, reqpath):
             context.sector_id = None
         try:
             lga = LGA.objects.get(unique_slug=req_lga_id)
+            context.lga_id = "'%s'" % lga.unique_slug
         except:
             lga = None
         if lga == None:
@@ -81,6 +82,7 @@ def dashboard(request, reqpath):
         return country_view(context)
     else:
         context.lga = lga
+        context.lga_id = "'%s'" % context.lga.unique_slug
         return lga_view(context)
 
 def get_nav_zones(filter_active=False):
@@ -715,6 +717,7 @@ def new_sector_overview(request, lga_id, sector_slug):
     }
     context.local_nav_urls = get_nav_urls(lga, mode='lga', sector=sector_slug)
     context.lga = lga
+    context.lga_id = "'%s'" % context.lga.unique_slug
     context.navs = [{ 'url': '/', 'name': 'Home' },
                     { 'url': '/new_dashboard/%s' % lga.unique_slug, 'name': lga.name },
                     { 'url': '/new_dashboard/%s/%s' % (lga.unique_slug, sector_slug),

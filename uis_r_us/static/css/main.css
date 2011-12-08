@@ -21,19 +21,17 @@
     border: 1px solid #bbb;
     background-color: rgba(255,255,255,0.95);
 }
-.load-options, .lga-nav {
-    position: absolute;
-    top: 5px;
-}
 .lga-nav {
     padding: 6px 0;
-    right: 300px;
+    right: 10px;
+    top: 24px;
     width: 320px;
-}
-.lga-nav input {
     position: absolute;
-    right:1px;
-    top: 6px;
+}
+.lga-nav input[type=submit] {
+    position: absolute;
+    right: -50px;
+    top: 3px;
 }
 .load-options {
     right: 500px;
