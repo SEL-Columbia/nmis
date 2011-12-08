@@ -439,6 +439,7 @@ def new_dashboard(request, lga_id):
                         'active': True}]
     #tmp deactivating breadcrumb
     context.navs = False
+    context.active_districts = active_districts()
     context.lga = lga
     context.state = lga.state
     context.profile_variables = [
@@ -698,6 +699,7 @@ def new_sector_overview(request, lga_id, sector_slug):
         return HttpResponseRedirect("/new_dashboard/")
     sector_name = sector_slug.capitalize()
     context = RequestContext(request)
+    context.active_districts = active_districts()
     context.site_title = "%s Overview" % sector_name
     context.small_title = "%s, %s" % (lga.state.name, lga.name)
     context.breadcrumbs = [

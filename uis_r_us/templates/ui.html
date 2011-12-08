@@ -9,32 +9,21 @@
 #lga-widget-wrap table th {
 	text-align: center;
 }
+.topbar div > ul.chzn-results > li {
+	float: none;
+	display: list-item;
+}
+.topbar div > ul.chzn-results {
+	display: block;
+	float: none;
+}
+.topbar div.chzn-drop {
+	z-index: 999;
+}
 </style>
 <script type="text/javascript" charset="utf-8">
 	var lgaId = (function(_){return _})({{lga_id|safe}});
 </script>
-{% endblock %}
-
-{% block lga_nav %}
-	<!--
-			<form action="/~/" method="POST">
-			<div class="lga-nav" style="right:-365.7px">
-					<select id="lga-select" name="lga" style="width:280px;" title="Select an LGA">
-						{% for statename, lgas in active_districts %}
-						<optgroup label="{{statename}}">
-							{% for lganame, lgaid in lgas %}
-								<option value="{{lgaid}}">{{lganame}}</option>
-							{% endfor %}
-						</optgroup>
-						{% endfor %}
-					</select>
-					<script type="text/javascript" charset="utf-8">
-						var lgaId = (function(_){return _})({{lga_id|safe}});
-					</script>
-					  {% csrf_token %}
-					<input type="submit" value="GO">
-			</div>
-			</form>-->
 {% endblock %}
 
 {% block content %}
@@ -578,7 +567,7 @@ $(function(){
 			$('#local-nav').css({
 				'position':'fixed',
 				top:80,left:26,
-				'z-index':99999
+				'z-index':990
 			})
 				.find('a')
 				.filter(function(){

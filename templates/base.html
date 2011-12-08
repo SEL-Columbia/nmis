@@ -39,9 +39,25 @@
 						<a href="{% url auth_login %}">{% trans "Log in" %}</a>
 		                        | <a href="http://nmis.tenderapp.com/">{% trans "Help" %}</a>
 					{% endif %}
-					{% block lga_nav %}
-					{% endblock %}
 					</p>
+					<form action="/~/" method="POST">
+						<div class="lga-nav" style="right:-365.7px">
+							<select id="lga-select" name="lga" style="width:280px;" title="Select an LGA">
+								{% for statename, lgas in active_districts %}
+								<optgroup label="{{statename}}">
+									{% for lganame, lgaid in lgas %}
+										<option value="{{lgaid}}">{{lganame}}</option>
+									{% endfor %}
+								</optgroup>
+								{% endfor %}
+							</select>
+							<script type="text/javascript" charset="utf-8">
+							var lgaId = (function(_){return _})({{lga_id|safe}});
+							</script>
+							 {% csrf_token %}
+							<input type="submit" value="GO">
+						</div>
+					</form>
 				</div>
 				<div class="row page-title-row">
 					<p class="bc">

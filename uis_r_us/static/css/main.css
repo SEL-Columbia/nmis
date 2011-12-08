@@ -1440,3 +1440,14 @@ a.sector-btn span.sector-icon.water {
 	font-size: 16px;
 	font-weight: bold;
 }
+.topbar div > ul.chzn-results > li {
+	float: none;
+	display: list-item;
+}
+.topbar div > ul.chzn-results {
+	display: block;
+	float: none;
+}
+.topbar div.chzn-drop {
+	z-index: 999;
+}
