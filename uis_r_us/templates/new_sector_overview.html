@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="new-dashboard" style="padding: 0 40px 20px;">
-	<div style="position:relative;">
-		<p style="position:absolute; right: 0; top: -55px">
-			<a class="btn large" href="#" id="gap-analysis-activator">
-				Gap Analysis
-			</a>
-		</p>
-	</div>
+    {% if sector == 'health' or sector == 'education' %}
+        <div style="position:relative;">
+            <p style="position:absolute; right: 0; top: -55px">
+                <a class="btn large" href="#" id="gap-analysis-activator">
+                    Switch to Gap Analysis
+                </a>
+            </p>
+        </div>
+    {% endif %}
 	<div id="non-gap">
 	<table class="mdg-table" style="width:100%">
 		<tbody>
@@ -54,41 +56,43 @@
 		</tbody>
 	</table>
 	</div>
-	<div id="gap-analysis">
-		<table class="mdg-table" style="width:100%">
-			<tbody>
-				<tr>
-					<th colspan="2" class="indheader">
-						Topic
-					</th>
-					<th class="indheader mdg_header flush-right">
-						Current
-					</th>
-					<th class="indheader mdg_header flush-right target">
-						Target
-					</th>
-					<th class="indheader mdg_header flush-right gap">
-						Gap
-					</th>
-				</tr>
-				<tr>
-					<td class="empty-first empty bb"></td>
-					<td class="indicator-name bb">
-						Indicator Name
-					</td>
-					<td class="indvalue bb">
-						[Current]
-					</td>
-					<td class="indvalue bb target">
-						[Target]
-					</td>
-					<td class="indvalue bb gap">
-						[Gap]
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+    {% if sector == 'health' or sector == 'education' %}
+        <div id="gap-analysis" data-content-title="{{sector|title}} Gap Analysis">
+            <table class="mdg-table" style="width:100%">
+                <tbody>
+                    <tr>
+                        <th colspan="2" class="indheader">
+                            Topic
+                        </th>
+                        <th class="indheader mdg_header flush-right">
+                            Current
+                        </th>
+                        <th class="indheader mdg_header flush-right target">
+                            Target
+                        </th>
+                        <th class="indheader mdg_header flush-right gap">
+                            Gap
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="empty-first empty bb"></td>
+                        <td class="indicator-name bb">
+                            Indicator Name
+                        </td>
+                        <td class="indvalue bb">
+                            [Current]
+                        </td>
+                        <td class="indvalue bb target">
+                            [Target]
+                        </td>
+                        <td class="indvalue bb gap">
+                            [Gap]
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
 </div>
 
 
@@ -238,24 +242,31 @@ if(typeof lgaId !== 'undefined') {
     $('<li />').html(facTmpLink).appendTo(menu);
 }
 
+{{context}}
+
 $(function(){
 	$('#gap-analysis').hide();
 	var gapIsActive = false;
+    var originalTitleText = $('.page-header h1').html();
+    var originalSmallText = $('.page-header h1 small').html();
 	$('#gap-analysis-activator').click(function(evt){
 		evt.preventDefault();
-		var linkText;
+		var linkText, titleText;
 		if(gapIsActive) {
 			$('#gap-analysis').hide();
 			$('#non-gap').show();
-			linkText = "Gap Analysis";
+			linkText = "Switch to Gap Analysis";
 			gapIsActive = false;
+            titleText = originalTitleText;
 		} else {
 			$('#gap-analysis').show();
 			$('#non-gap').hide();
-			linkText = "Sector Summary";
+			linkText = "Switch to Overview";
 			gapIsActive = true;
+            titleText = $('#gap-analysis').data('contentTitle') + "<small>" + originalSmallText + "</small>";
 		}
-		$(this).text(linkText)
+        $('.page-header h1').html(titleText);
+		$(this).text(linkText);
 	});
 });
 
