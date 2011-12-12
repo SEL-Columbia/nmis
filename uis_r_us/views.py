@@ -692,6 +692,8 @@ def tmp_variables_for_sector(sector_slug, lga):
     }
     return example.pop(sector_slug, [])
 
+from uis_r_us.gap_analysis_indicators import all_gap_indicators
+
 def new_sector_overview(request, lga_id, sector_slug):
     try:
         lga = LGA.objects.get(unique_slug=lga_id)
@@ -727,4 +729,15 @@ def new_sector_overview(request, lga_id, sector_slug):
     context.navs = False
     context.table_data = tmp_variables_for_sector(sector_slug, lga)
     context.sector = sector_slug
+    def g(slug):
+        return 1.23
+    def plug_in_values(row):
+        for key in ['current', 'gap', 'target']:
+            if key in row:
+                row[key] = g(key)
+        return row
+
+    context.gap_indicators = [plug_in_values(r) \
+                    for r in all_gap_indicators().get(sector_slug, [])]
+
     return render_to_response("new_sector_overview.html", context_instance=context)
