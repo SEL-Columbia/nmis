@@ -78,16 +78,30 @@
 						{% else %}
 						<td class="empty-first empty bb"></td>
                         <td class="indicator-name bb">
-							{{gap_indicator_row.name}}
+                            {% if gap_indicator_row.gap != None %}
+                            <strong>
+                            {% endif %}
+                            {% if gap_indicator_row.name != None %}
+							    {{gap_indicator_row.name}}
+                            {% endif %}
+                            {% if gap_indicator_row.gap != None %}
+                            </strong>
+                            {% endif %}
                         </td>
                         <td class="indvalue bb">
-							{{gap_indicator_row.current}}
+                            {% if gap_indicator_row.current != None %}
+							    {{gap_indicator_row.current}}
+                            {% endif %}
                         </td>
                         <td class="indvalue bb target">
-							{{gap_indicator_row.target}}
+                            {% if gap_indicator_row.target != None %}
+							    {{gap_indicator_row.target}}
+                            {% endif %}
                         </td>
                         <td class="indvalue bb gap">
-							{{gap_indicator_row.gap}}
+                            {% if gap_indicator_row.gap != None %}
+							    <strong>{{gap_indicator_row.gap}}</strong>
+                            {% endif %}
                         </td>
 						{% endif %}
 					</tr>
