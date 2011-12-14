@@ -1,9 +1,13 @@
 {% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/nmis-view.css" type="text/css" media="all" charset="utf-8">
+{% endblock %}
 {% block js %}
 {% for module in jsmodules %}
 <script src="/static/js/src/{{module}}.js" type="text/javascript" charset="utf-8"></script>
 {% endfor %}
 <script src="/static/js/application.js" type="text/javascript" charset="utf-8"></script>
+
 <script type="text/javascript" charset="utf-8">
 	var reqPath = "{{reqpath}}",
 		urlRoot = "{{url_root}}",
@@ -21,9 +25,19 @@
 		
 		var sectorData = {{sector_data|safe}};
 </script>
+
+<!--
+nmis_view.js: handles routes and calls functions from nmis_facilities or nmis_summary.
+-->
 <script src="/static/js/src/nmis_view.js" type="text/javascript" charset="utf-8"></script>
+
+<!--
+nmis_facilities.js and nmis_summary.js: sets up the page based on the parameters passed from nmis_view
+	Utilizes the modules that have already been loaded into the page.
+-->
 <script src="/static/js/src/nmis_facilities.js" type="text/javascript" charset="utf-8"></script>
 <script src="/static/js/src/nmis_summary.js" type="text/javascript" charset="utf-8"></script>
+
 <script type="text/javascript" charset="utf-8">
 	$(function(){ dashboard.run(); });
 </script>
@@ -44,83 +58,6 @@
 		</div>
 	</div>
 </script>
-<style type="text/css" media="all">
-	ul.submenu {
-		position: absolute;
-		top: 35px;
-		list-style-type: none;
-		margin: 0;
-		width: 200px;
-	}
-	div.facility-display-wrap {
-		padding: 0 20px;
-	}
-	td.highlighted, th.highlighted {
-		background-color: rgba(0,0,0,0.05);
-	}
-	h3.bar-title {
-		position: absolute;
-		left: 0;
-		top: 0;
-		color: #aaa;
-		font-size: 16px;
-		margin: 5px 20px;
-	}
-	div.cwrap {
-		padding: 0 20px;
-	}
-	h1.facilities-content-title {
-		color: #444;
-		font-size: 22px;
-		margin: 5px 0;
-	}
-	p.facility-sectors-navigation {
-		margin: 4px 0;
-	}
-	div.content {
-		background-color: #fafafa;
-	}
-	div.display-window-content {
-		position: absolute;
-		bottom: 0;
-		width: 100%;
-		background-color: #fefefe;
-	}
-	div.display-window-wrap {
-		position: relative;
-	}
-/*	body div.size-minimized div.overlay,
-		body div.size-middle div.overlay,
-		body div.size-full div.embedded {
-			display: block;
-		} */
-	div.embedded, div.overlay {
-		display: none;
-	}
-	div.indicator-feature div.overlay {
-		position: absolute;
-		height: 140px;
-		width: 500px;
-		top: -158px;
-		background-color: #fff;
-		border: 1px solid black;
-	}
-	div.indicator-feature div.embedded {
-		margin: 12px 0 12px;
-		border: 1px solid black;
-	}
-	p.facility-sectors-navigation {
-		margin: 3px 0 10px;
-	}
-	p.facility-sectors-navigation a.sub-sector-link {
-		padding: 3px 6px;
-		white-space: nowrap;
-	}
-	p.facility-sectors-navigation a.sub-sector-link.active {
-		font-weight: bold;
-		text-decoration: underline;
-	}
-</style>
 <style type="text/css" media="screen">
 	body div.content {
 		overflow: hidden;

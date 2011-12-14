@@ -1,0 +1,70 @@
+ul.submenu {
+	position: absolute;
+	top: 35px;
+	list-style-type: none;
+	margin: 0;
+	width: 200px;
+}
+div.facility-display-wrap {
+	padding: 0 20px;
+}
+td.highlighted, th.highlighted {
+	background-color: rgba(0,0,0,0.05);
+}
+h3.bar-title {
+	position: absolute;
+	left: 0;
+	top: 0;
+	color: #aaa;
+	font-size: 16px;
+	margin: 5px 20px;
+}
+div.cwrap {
+	padding: 0 20px;
+}
+h1.facilities-content-title {
+	color: #444;
+	font-size: 22px;
+	margin: 5px 0;
+}
+p.facility-sectors-navigation {
+	margin: 4px 0;
+}
+div.content {
+	background-color: #fafafa;
+}
+div.display-window-content {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background-color: #fefefe;
+}
+div.display-window-wrap {
+	position: relative;
+}
+div.embedded, div.overlay {
+	display: none;
+}
+div.indicator-feature div.overlay {
+	position: absolute;
+	height: 140px;
+	width: 500px;
+	top: -158px;
+	background-color: #fff;
+	border: 1px solid black;
+}
+div.indicator-feature div.embedded {
+	margin: 12px 0 12px;
+	border: 1px solid black;
+}
+p.facility-sectors-navigation {
+	margin: 3px 0 10px;
+}
+p.facility-sectors-navigation a.sub-sector-link {
+	padding: 3px 6px;
+	white-space: nowrap;
+}
+p.facility-sectors-navigation a.sub-sector-link.active {
+	font-weight: bold;
+	text-decoration: underline;
+}
