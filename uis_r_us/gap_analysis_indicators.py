@@ -163,7 +163,7 @@ def all_gap_indicators():
 	        {
 	            'type': 'other',
 	            'name': 'Gap (existing healthcare facilities requiring malaria treatment)',
-	            'gap': 'new_fac_malaria_tx_gap_g',
+	            'gap': 'existing_fac_malaria_tx_gap_g',
 	        },
 	        {
 	            'type': 'other',
