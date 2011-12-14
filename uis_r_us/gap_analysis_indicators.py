@@ -166,6 +166,11 @@ def all_gap_indicators():
 	            'gap': 'new_fac_malaria_tx_gap_g',
 	        },
 	        {
+	            'type': 'other',
+	            'name': 'Gap (new healthcare facilities requiring malaria treatment)',
+	            'gap': 'new_fac_malaria_tx_gap_g',
+	        },
+	        {
 	            'type': 'title',
 	            'name': 'Vaccines'
 	        },
@@ -273,6 +278,42 @@ def all_gap_indicators():
 	            'type': 'other',
 	            'name': 'Gap (students of age not enrolled in primary school)',
 	            'gap': 'gap_pry_enrollment_g',
+	        },
+	        {
+	            'type': 'other',
+	            'name': 'Gap (students of age not enrolled in junior secondary school)',
+	            'gap': 'gap_js_enrollment_g',
+	        },
+            {
+	            'type': 'title',
+	            'name': 'Facilities per Population'
+	        },
+	        {
+	            'type': 'other',
+	            'name': 'Number of primary and secondary schools',
+	            'current': 'existing_pry_js_sec_schools_g',
+	            'target': 'target_pry_js_sec_g'
+	        },
+	        {
+	            'type': 'other',
+	            'name': 'Gap (schools needing construction)',
+	            'gap': 'gap_pry_js_sec_schools_g',
+	        },
+	        {
+	            'type': 'other',
+	            'name': 'Number of existing classrooms',
+	            'current': 'existing_classroom_g',
+	            'target': 'target_classroom_g'
+	        },
+	        {
+	            'type': 'other',
+	            'name': 'Gap (classrooms needing construction)',
+	            'gap': 'gap_classroom_need_construct_g',
+	        },
+	        {
+	            'type': 'other',
+	            'name': 'Gap (classrooms needing rehabilitation)',
+	            'gap': 'gap_classroom_need_rehab_g',
 	        },
             {
 	            'type': 'title',
