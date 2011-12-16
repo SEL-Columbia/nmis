@@ -276,12 +276,12 @@ def all_gap_indicators():
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Gap (students of age not enrolled in primary school)',
+	            'name': 'Gap (students of age (6 to 11 years) not enrolled in primary school)',
 	            'gap': 'gap_pry_enrollment_g',
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Gap (students of age not enrolled in junior secondary school)',
+	            'name': 'Gap (students of age (12 to 14 years) not enrolled in junior secondary school)',
 	            'gap': 'gap_js_enrollment_g',
 	        },
             {
@@ -290,7 +290,7 @@ def all_gap_indicators():
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Number of primary and secondary schools',
+	            'name': 'Number of primary and junior secondary schools',
 	            'current': 'existing_pry_js_sec_schools_g',
 	            'target': 'target_pry_js_sec_g'
 	        },
@@ -327,22 +327,22 @@ def all_gap_indicators():
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Gap (water sources to be constructed at existing schools)',
+	            'name': 'Gap (potable water sources to be constructed at existing schools)',
 	            'gap': 'gap_water_construct_existing_g',
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Gap (water sources to be constructed at new schools)',
+	            'name': 'Gap (potable water sources to be constructed at new schools)',
 	            'gap': 'gap_water_construct_new_g',
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Gap (water sources to be repaired)',
+	            'name': 'Gap (potable water sources to be repaired)',
 	            'gap': 'water_need_repair_g',
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Schools with improved sanitation/toilet',
+	            'name': 'Sanitation (ex. VIP latrines)',
 	            'current': 'existing_sanitation_g',
 	            'target': 'target_sanitation_g'
 	        },
@@ -367,18 +367,18 @@ def all_gap_indicators():
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Benches and chairs',
+	            'name': 'Benches',
 	            'current': 'existing_benches_g',
 	            'target': 'target_benches_g'
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Gap (bench/chairs to be purchased for existing schools)',
+	            'name': 'Gap (benches to be purchased for existing classrooms)',
 	            'gap': 'gap_benches_purchase_existing_g',
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Gap (bench/chairs to be purchased for new schools)',
+	            'name': 'Gap (benches to be purchased for new classrooms)',
 	            'gap': 'gap_benches_purchase_new_g',
 	        },
 	        {
@@ -389,12 +389,12 @@ def all_gap_indicators():
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Gap (desks to be purchased for existing schools)',
+	            'name': 'Gap (desks to be purchased for existing classrooms)',
 	            'gap': 'gap_desks_purchase_existing_g',
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Gap (desks to be purchased for new schools)',
+	            'name': 'Gap (desks to be purchased for new classrooms)',
 	            'gap': 'gap_desks_purchase_new_g',
 	        },
             {
@@ -409,7 +409,7 @@ def all_gap_indicators():
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Gap (textbooks to be purchased for existing schools)',
+	            'name': 'Gap (textbooks to be purchased for school age children)',
 	            'gap': 'gap_textbooks_g',
 	        },
 	        {
@@ -420,23 +420,23 @@ def all_gap_indicators():
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Gap (exercise books to be purchased for existing schools)',
-	            'gap': 'existing_exercisebooks_g',
+	            'name': 'Gap (exercise books to be purchased for school age children)',
+	            'gap': 'gap_exercisebooks_g',
 	        },
 	        {
 	            'type': 'other',
 	            'name': 'Teaching tool sets',
-	            'current': 'target_teaching_tool_sets_g',
+	            'current': 'existing_teaching_tool_sets_g',
 	            'target': 'target_teaching_tool_sets_g'
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Gap (teaching tool sets to be purchased for existing schools)',
+	            'name': 'Gap (teaching tool sets to be purchased for teachers)',
 	            'gap': 'gap_teaching_tool_sets_existing_g',
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Gap (teaching tool sets to be purchased for new schools)',
+	            'name': 'Gap (teaching tool sets to be purchased for new classrooms)',
 	            'gap': 'gap_teaching_tool_sets_new_g',
 	        },
             {
