@@ -145,7 +145,7 @@ def all_gap_indicators():
 	        },
 	        {
 	            'type': 'other',
-	            'name': 'Number of individuals sleeping under insecticide-treated bed nets',
+	            'name': 'Number of households with at least one insecticide-treated bed net',
 	            'current': 'num_sleeping_under_net_existing_g',
 	            'target': 'num_sleeping_under_net_target_g'
 	        },
