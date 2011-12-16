@@ -212,7 +212,7 @@ def variable_data(request):
     }))
 
 def active_districts():
-    lgas = LGA.objects.filter(data_loaded=True)
+    lgas = LGA.objects.filter(data_loaded=True, data_available=True)
 #    lgas = LGA.objects.annotate(facility_count=Count('facilities')).filter(facility_count__gt=0)
     from collections import defaultdict
     states = defaultdict(list)
