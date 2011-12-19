@@ -217,9 +217,11 @@ function launchFacilities(lgaData, variableData, params) {
             map.fitBounds(bounds);
             NMIS.IconSwitcher.setCallback('shiftMapItemStatus', function(item, id){
                 var mapItem = this.mapItem(id);
-                var icon = mapItem.marker.getIcon();
-                icon.url = iconURL(item.sector.slug, item.status);
-                mapItem.marker.setIcon(icon);
+                if(!!mapItem) {
+                    var icon = mapItem.marker.getIcon();
+                    icon.url = iconURL(item.sector.slug, item.status);
+                    mapItem.marker.setIcon(icon);
+                }
             });
 	    });
 	}
