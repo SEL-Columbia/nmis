@@ -284,7 +284,20 @@ function launchFacilities(lgaData, variableData, params) {
             var obj = {
                 name: e.indicator.name
             };
-            $(mustachify('indicator-feature', obj)).prependTo('.facility-display');
+            var mm = $(mustachify('indicator-feature', obj));
+            mm.find('a.close').click(function(){
+                return false;
+            });
+            (function(rcElem, rtElem){
+                var r = Raphael(rcElem),
+                    r2 = Raphael(rtElem);
+                r.g.txtattr.font = "12px 'Fontin Sans', Fontin-Sans, sans-serif";
+                var pie = r.g.piechart(35, 35, 34, [22,5], {"colors":["#21c406","#ff5555"]});
+                $(rtElem).css({'height':'45px'});
+/*                var pieText = r2.g.piechart(40, 120, 20, [22, 5],
+                        {"colors":["#21c406","#ff5555"],"legend":["%% - Yes (##)","%% - No (##)"],"legendpos":"west"}); */
+            })(mm.find('.raph-circle').get(0), mm.find('.raph-legend').get(0));
+            mm.prependTo('.facility-display');
             FacilityTables.highlightColumn(e.indicator);
         })();
 	}

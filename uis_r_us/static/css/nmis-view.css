@@ -42,20 +42,61 @@ div.display-window-content {
 div.display-window-wrap {
 	position: relative;
 }
-div.embedded, div.overlay {
+/* div.embedded, div.overlay {
 	display: none;
-}
-div.indicator-feature div.overlay {
+} */
+div.indicator-feature div.overlay-wrap {
 	position: absolute;
-	height: 140px;
-	width: 500px;
 	top: -158px;
 	background-color: #fff;
 	border: 1px solid black;
 }
+div.indicator-feature div.overlay-wrap div.overlay {
+    position: relative;
+    padding: 0 20px;
+    height: 134px;
+	width: 284px;
+/*  background-image: url('/static/piechart_tmp.png');*/
+}
+div.indicator-feature h3.overlay-header {
+    width: 320px;
+    font-family: Helvetica;
+    font-size: 18px;
+    color: #606060;
+}
+
+div.indicator-feature div.overlay a.close span {
+    display: none;
+}
+div.indicator-feature div.overlay a.close {
+    opacity: 1;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: block;
+    width: 18px;
+    height: 18px;
+    background-image: url('/static/images/icons/x_close.png');
+}
 div.indicator-feature div.embedded {
 	margin: 12px 0 12px;
 	border: 1px solid black;
+}
+div.raph-text {
+    font-family: Helvetica;
+    position: absolute;
+    top: 38px;
+    left: 92px;
+    width: 229px;
+    height: 94px;
+}
+div.raph-text p {
+    font-size: 12px;
+}
+div.raph-circle {
+    width: 70px;
+    height: 70px;
+    margin: 13px 0 0 -6px;
 }
 p.facility-sectors-navigation {
 	margin: 3px 0 10px;
