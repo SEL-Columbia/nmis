@@ -50,19 +50,26 @@ div.indicator-feature div.overlay-wrap {
 	top: -158px;
 	background-color: #fff;
 	border: 1px solid black;
+	border-radius: 3px;
+	left: 34px;
+	opacity: 0.9;
+	overflow: hidden;
 }
 div.indicator-feature div.overlay-wrap div.overlay {
     position: relative;
     padding: 0 20px;
     height: 134px;
-	width: 284px;
+	width: 294px;
 /*  background-image: url('/static/piechart_tmp.png');*/
 }
 div.indicator-feature h3.overlay-header {
-    width: 320px;
+    width: 282px;
+    border: 1px solid #ddd;
+    border-width: 0 0 1px;
     font-family: Helvetica;
     font-size: 18px;
     color: #606060;
+    line-height: 28px;
 }
 
 div.indicator-feature div.overlay a.close span {
@@ -80,7 +87,7 @@ div.indicator-feature div.overlay a.close {
 }
 div.indicator-feature div.embedded {
 	margin: 12px 0 12px;
-	border: 1px solid black;
+	border: 1px solid #ddd;
 }
 div.raph-text {
     font-family: Helvetica;
@@ -89,8 +96,10 @@ div.raph-text {
     left: 92px;
     width: 229px;
     height: 94px;
+    color: #6a6a6a;
 }
 div.raph-text p {
+    line-height: 14px;
     font-size: 12px;
 }
 div.raph-circle {

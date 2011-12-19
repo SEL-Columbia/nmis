@@ -281,9 +281,7 @@ function launchFacilities(lgaData, variableData, params) {
         if(!!e.subsector) FacilityTables.select(e.sector, e.subsector);
         if(!!e.indicator) (function(){
             $('.indicator-feature').remove();
-            var obj = {
-                name: e.indicator.name
-            };
+            var obj = _.extend({}, e.indicator);
             var mm = $(mustachify('indicator-feature', obj));
             mm.find('a.close').click(function(){
                 return false;

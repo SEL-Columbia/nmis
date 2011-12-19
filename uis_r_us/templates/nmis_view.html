@@ -55,7 +55,7 @@ nmis_facilities.js and nmis_summary.js: sets up the page based on the parameters
 				</div>
 				<div class="raph-text">
 					<p class="descrip">
-						Every classroom at the school has a chalkboard
+						<{description}>
 					</p>
 					<div class="raph-legend">
 					</div>
@@ -63,12 +63,16 @@ nmis_facilities.js and nmis_summary.js: sets up the page based on the parameters
 			</div>
 		</div>
 		<div class="embedded">
-			<h3>
-				Indicator: <{name}>
-			</h3>
-			<p>
-				num, <{num}>
-			</p>
+			<div class="row">
+				<div class="span12" style="padding-left:12px">
+					<h3>
+						<small>Selected Indicator:</small> <{name}>
+					</h3>
+					<p>
+						<{description}>
+					</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </script>
