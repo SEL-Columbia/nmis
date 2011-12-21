@@ -10,6 +10,10 @@ from django.db.models import Count
 import json
 from facilities.models import FacilityRecord, Variable, LGAIndicator
 
+from uis_r_us.indicators.gap_analysis import all_gap_indicators
+from uis_r_us.indicators.overview import tmp_variables_for_sector
+from uis_r_us.indicators.mdg import tmp_get_mdg_indicators
+
 def _get_state_lga_from_first_two_items(arr):
     try:
         state = State.objects.get(slug=arr[0])
@@ -409,10 +413,6 @@ def new_dashboard(request, lga_id):
         ["Distance from capital (km)", g("state_capital_distance")],
     ]
     return render_to_response("new_dashboard.html", context_instance=context)
-
-from uis_r_us.gap_analysis_indicators import all_gap_indicators
-from uis_r_us.overview_indicators import tmp_variables_for_sector
-from uis_r_us.mdg_indicators import tmp_get_mdg_indicators
 
 def new_sector_overview(request, lga_id, sector_slug):
     try:
