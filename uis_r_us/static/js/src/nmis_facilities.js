@@ -284,6 +284,8 @@ function launchFacilities(lgaData, variableData, params) {
             var obj = _.extend({}, e.indicator);
             var mm = $(mustachify('indicator-feature', obj));
             mm.find('a.close').click(function(){
+                var xx = NMIS.urlFor(_.extend({}, e, {indicator: false}));
+                dashboard.setLocation(xx);
                 return false;
             });
             (function(rcElem, rtElem){
