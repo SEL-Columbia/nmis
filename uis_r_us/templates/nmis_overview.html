@@ -6,9 +6,20 @@
 </h1>
 <div class="row">
 	<div class="span9">
-		<p style="font-style:italic;text-align:center">
-			Profile Information
-		</p>
+		<table>
+			<tbody>
+				{% for name, value in profile_data %}
+				<tr>
+					<td>
+						{{name}}
+					</td>
+					<td>
+						{{value.value}}
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 	</div>
 	<div class="span9">
 		<p style="font-style:italic;text-align:center">

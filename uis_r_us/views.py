@@ -30,8 +30,8 @@ def nmis_view(request, state_id, lga_id, reqpath=""):
     context.jsmodules = ['modes', 'tabulations', 'facility_tables']
     context.url_root = "/nmis~/"
     context.reqpath = reqpath
-    context.include_sectors = [(s, "summary_%s.html" % s) for s in
-                ['overview', 'health', 'education', 'water']]
+    context.include_sectors = \
+                ['overview', 'health', 'education', 'water']
     context.sector_data = json.dumps(sector_data())
     try:
         context.state = State.objects.get(slug=state_id)
@@ -39,6 +39,10 @@ def nmis_view(request, state_id, lga_id, reqpath=""):
         context.lga = context.state.lgas.get(unique_slug=full_id)
     except Exception, e:
         return HttpResponseRedirect("/")
+    lga_data = context.lga.get_latest_data(for_display=True)
+    def g(slug):
+        return lga_data.get(slug, None)
+    context.profile_data = _profile_variables(g)
     return render_to_response("nmis_view.html", context_instance=context)
 
 def summary_views(request, lga_id, sector_id=""):
@@ -354,14 +358,17 @@ def new_dashboard(request, lga_id):
     context.active_districts = active_districts()
     context.lga = lga
     context.state = lga.state
-    context.profile_variables = [
+    context.profile_variables = _profile_variables(g)
+    return render_to_response("new_dashboard.html", context_instance=context)
+
+def _profile_variables(g):
+    return [
         ["LGA Chairman", g("chairman_name")],
         ["LGA Secretary", g("secretary_name")],
         ["Population (2006)", g("pop_population")],
         ["Area (square km)", g("area_sq_km")],
         ["Distance from capital (km)", g("state_capital_distance")],
     ]
-    return render_to_response("new_dashboard.html", context_instance=context)
 
 def new_sector_overview(request, lga_id, sector_slug):
     try:
