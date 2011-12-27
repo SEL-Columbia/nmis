@@ -50,6 +50,8 @@ def nmis_view(request, state_id, lga_id, reqpath=""):
     context.profile_data = _profile_variables(g)
     context.facility_indicators = tmp_facility_indicators(context.lga, data_for_display)
     context.mdg_indicators = tmp_get_mdg_indicators(lga_data, g)
+    record_counts = FacilityRecord.counts_by_variable(context.lga.id)
+    context.sectors = [[s, tmp_variables_for_sector(s, lga_data, record_counts)] for s in ['health', 'education', 'water']]
     return render_to_response("nmis_view.html", context_instance=context)
 
 def summary_views(request, lga_id, sector_id=""):

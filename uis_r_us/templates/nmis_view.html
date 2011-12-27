@@ -90,7 +90,17 @@ nmis_facilities.js and nmis_summary.js: sets up the page based on the parameters
 {% endblock %}
 {% block content %}
 <div id="conditional-content">
-	{% for sector in include_sectors %}
+	<div class="lga overview">
+		<div class="display-window-bar breadcrumb">
+			<span>
+				<a href="#" class="btn">Spacer</a>
+			</span>
+		</div>
+		<div class="cwrap">
+			{% include 'nmis_overview.html' %}
+		</div>
+	</div>
+	{% for sector, sector_data in sectors %}
 	<div class="lga {{sector}}">
 		<div class="display-window-bar breadcrumb">
 			<span>
@@ -98,11 +108,7 @@ nmis_facilities.js and nmis_summary.js: sets up the page based on the parameters
 			</span>
 		</div>
 		<div class="cwrap">
-			{% if sector == "overview" %}
-				{% include 'nmis_overview.html' %}
-			{% else %}
-				{% include 'nmis_summary.html' %}
-			{% endif %}
+			{% include 'nmis_summary.html' %}
 		</div>
 	</div>
 	{% endfor %}
