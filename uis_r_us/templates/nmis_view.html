@@ -9,6 +9,11 @@
 <script src="/static/js/application.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript" charset="utf-8">
+	$(function(){
+		// a temporary css edit to allow content to scroll...
+		$('#conditional-content').css({'overflow':'auto'})
+			.height($('.content').height())
+	});
 	var reqPath = "{{reqpath}}",
 		urlRoot = "{{url_root}}",
 		stateName = "{{state.name}}",

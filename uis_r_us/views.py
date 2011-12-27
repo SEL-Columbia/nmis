@@ -40,9 +40,17 @@ def nmis_view(request, state_id, lga_id, reqpath=""):
     except Exception, e:
         return HttpResponseRedirect("/")
     lga_data = context.lga.get_latest_data(for_display=True)
+    data_for_display = context.lga.get_latest_data(for_display=True, display_options={
+                'num_skilled_health_providers_per_1000': {'decimal_places': 3},
+                'num_chews_per_1000': {'decimal_places': 3},
+            })
+
     def g(slug):
         return lga_data.get(slug, None)
     context.profile_data = _profile_variables(g)
+    context.facility_indicators = tmp_facility_indicators(context.lga, data_for_display)
+    context.mdg_indicators = tmp_get_mdg_indicators(lga_data, g)
+    print context.facility_indicators
     return render_to_response("nmis_view.html", context_instance=context)
 
 def summary_views(request, lga_id, sector_id=""):
