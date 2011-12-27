@@ -323,6 +323,7 @@ def new_dashboard(request, lga_id):
         lga = LGA.objects.get(unique_slug=lga_id)
     except:
         return HttpResponseRedirect("/")
+    context.preview_link = "/nmis~/%s" % lga.url_id
     context.site_title = "LGA Overview"
     context.small_title = "%s, %s" % (lga.state.name, lga.name)
     context.breadcrumbs = [

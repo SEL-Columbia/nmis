@@ -29,6 +29,9 @@
 						</span>
 						Nigeria MDG Information System
 					</a>
+					{% if preview_link %}
+					<a href="{{preview_link}}" style="opacity:0.3">*</a>
+					{% endif %}
 					<p class="pull-right print-hide-block">
 					{% if user.is_authenticated %}
 						Logged in as {{user.username}}
