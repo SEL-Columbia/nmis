@@ -46,6 +46,27 @@ nmis_facilities.js and nmis_summary.js: sets up the page based on the parameters
 <script type="text/javascript" charset="utf-8">
 	$(function(){ dashboard.run(); });
 </script>
+<script type="text/x-mustache-template" id="facility-popup">
+	<div class="row" style="width:500px;height:250px;margin-left:-250px;">
+	  <p class="breadcrumb">
+			Facility
+	  </p>
+		<div class="row">
+		  <div class="span3">
+				<ul class="media-grid" style="margin-left:10px">
+				  <li>
+						<a href="<{image_url}>" target="_BLANK" class="lightbox-or-something">
+						  <img src="<{thumbnail_url}>" width="90" height="90">
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="span5">
+			  <hr>
+			</div>
+		</div>
+	</div>
+</script>
 <script type="text/x-mustache-template" id="indicator-feature">
 	<div class="indicator-feature">
 		<div class="overlay-wrap">
