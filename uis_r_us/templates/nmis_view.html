@@ -121,7 +121,7 @@ nmis_facilities.js and nmis_summary.js: sets up the page based on the parameters
 			{% include 'nmis_overview.html' %}
 		</div>
 	</div>
-	{% for sector, sector_data in sectors %}
+	{% for sector, sector_data, gap_indicators in sectors %}
 	<div class="lga {{sector}}">
 		<div class="display-window-bar breadcrumb">
 			<span>
