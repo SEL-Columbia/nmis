@@ -241,8 +241,8 @@ var Sectors = (function(){
         _.extend(this, opts);
     }
     function init(_sectors, opts) {
-        if(!!opts && !!opts.default) {
-            defaultSector = new Sector(_.extend(opts.default, {default: true}));
+        if(!!opts && !!opts['default']) {
+            defaultSector = new Sector(_.extend(opts['default'], {'default': true}));
         }
         sectors = _(_sectors).chain()
                         .clone()

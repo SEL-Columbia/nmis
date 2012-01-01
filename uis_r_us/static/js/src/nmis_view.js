@@ -26,7 +26,7 @@ var overviewObj = {
 };
 
 NMIS.loadSectors(sectorData, {
-    default: {
+    'default': {
         name: 'Overview', slug: 'overview'
     }
 });

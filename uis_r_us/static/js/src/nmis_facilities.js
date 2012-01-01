@@ -160,7 +160,7 @@ function launchFacilities(lgaData, variableData, params) {
                     education: "education.png",
                     health: "health.png",
                     water: "water.png",
-                    default: "book_green_wb.png"
+                    'default': "book_green_wb.png"
                 };
                 var url = "/static/images/icons_f/" + status + "_" + (iconFiles[slug] || iconFiles['default']);
                 return url
