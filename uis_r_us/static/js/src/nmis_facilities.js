@@ -55,10 +55,10 @@ var FacilitySelector = (function(){
                 launchFacilities(lgaData, variableData, params);
     		});
 	}
-	dashboard.get("/nmis~/:state/:lga/facilities/?", loadFacilities);
-	dashboard.get("/nmis~/:state/:lga/facilities/:sector/?", loadFacilities);
-    dashboard.get("/nmis~/:state/:lga/facilities/:sector/:subsector/?", loadFacilities);
-    dashboard.get("/nmis~/:state/:lga/facilities/:sector/:subsector/:indicator/?", loadFacilities);
+	dashboard.get("/nmis~/:state/:lga/facilities/?(#.*)?", loadFacilities);
+	dashboard.get("/nmis~/:state/:lga/facilities/:sector/?(#.*)?", loadFacilities);
+    dashboard.get("/nmis~/:state/:lga/facilities/:sector/:subsector/?(#.*)?", loadFacilities);
+    dashboard.get("/nmis~/:state/:lga/facilities/:sector/:subsector/:indicator/?(#.*)?", loadFacilities);
 }();
 
 function prepBreadcrumbValues(e, keys, env){
@@ -174,6 +174,12 @@ function launchFacilities(lgaData, variableData, params) {
                     FacilitySelector.activate({id: this.nmis.id});
                 }
             }
+            function markerMouseover() {
+                log("marker hover");
+            }
+            function markerMouseout() {
+                log("marker hover");
+            }
             function mapClick() {
                 if(FacilitySelector.isActive()) {
                     FacilitySelector.deselect();
@@ -208,7 +214,9 @@ function launchFacilities(lgaData, variableData, params) {
                         item: item,
                         id: id
                     };
-                    google.maps.event.addListener(mI.marker, 'click', markerClick)
+                    google.maps.event.addListener(mI.marker, 'click', markerClick);
+                    google.maps.event.addListener(mI.marker, 'mouseover', markerMouseover);
+                    google.maps.event.addListener(mI.marker, 'mouseout', markerMouseout);
                     bounds.extend(mI.latlng);
                     this.mapItem(id, mI);
                 }
