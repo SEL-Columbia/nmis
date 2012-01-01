@@ -26,10 +26,8 @@
             cc.show();
         })(_env.sector);
     }
-    dashboard = $.sammy(function(){
-        this.get("/nmis~/:state/:lga/summary/?", loadSummary);
-        this.get("/nmis~/:state/:lga/summary/:sector/?", loadSummary);
-        this.get("/nmis~/:state/:lga/summary/:sector/:subsector/?", loadSummary);
-        this.get("/nmis~/:state/:lga/summary/:sector/:subsector/:indicator/?", loadSummary);
-    });
+    dashboard.get("/nmis~/:state/:lga/summary/?(#.*)?", loadSummary);
+    dashboard.get("/nmis~/:state/:lga/summary/:sector/?(#.*)?", loadSummary);
+    dashboard.get("/nmis~/:state/:lga/summary/:sector/:subsector/?(#.*)?", loadSummary);
+    dashboard.get("/nmis~/:state/:lga/summary/:sector/:subsector/:indicator/?(#.*)?", loadSummary);
 }()
