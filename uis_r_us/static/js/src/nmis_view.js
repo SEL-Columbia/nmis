@@ -35,7 +35,14 @@ NMIS.init();
 
 var wElems = NMIS.DisplayWindow.getElems();
 
-var dashboard = $.sammy('body');
+var dashboard = $.sammy('body', function(){
+    this.get("/nmis~/:state/:lga/?", function(){
+        var defaultUrl = "/nmis~/" + this.params.state +
+                        "/" + this.params.lga +
+                        "/summary/";
+        dashboard.setLocation(defaultUrl);
+    });
+});
 (function(){
     NMIS.LocalNav.init(wElems.wrap, {
         sections: [
