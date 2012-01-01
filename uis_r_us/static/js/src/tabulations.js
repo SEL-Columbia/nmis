@@ -120,6 +120,63 @@ var MapMgr = (function(){
     }
 })();
 
+var S3Photos = (function(){
+    var s3Root = "http://nmisstatic.s3.amazonaws.com/facimg";
+    function url(s3id, size) {
+        if(!size) size = "0";
+        var codes = s3id.split(":");
+        return [s3Root,
+            codes[0],
+            size,
+            codes[1] + ".jpg"].join("/");
+    }
+    return {
+        url: url
+    }
+})();
+
+var HackCaps = (function(){
+    function capitalize(str) {
+        if(!str) {
+            return "";
+        } else {
+            return str[0].toUpperCase() + str.slice(1);
+        }
+    }
+
+    return function(str){
+        return _.map(str.split("_"), capitalize).join(" ");
+    }
+})();
+
+var FacilityPopup = (function(){
+    var div;
+    function make(facility) {
+        if(!!div) {
+            div.remove();
+        }
+        var obj = _.extend({
+            thumbnail_url: function() {
+                return NMIS.S3Photos.url(this.s3_photo_id, 90);
+            },
+            image_url: function() {
+                return NMIS.S3Photos.url(this.s3_photo_id, "0");
+            }
+        }, facility);
+        div = $(Mustache.to_html($('#facility-popup').eq(0).html().replace(/<{/g, '{{').replace(/\}>/g, '}}'), obj));
+        div.css({
+            position: 'absolute',
+            top: '200px',
+            left: '50%',
+            'margin-left': '-200px',
+            'background-color': '#fff'
+        });
+        $('body').append(div);
+        return div;
+    }
+    return make;
+})();
+
 var Sectors = (function(){
     var sectors, defaultSector;
     function changeKey(o, key) {
@@ -804,6 +861,9 @@ var NMIS = (function(){
         Breadcrumb: Breadcrumb,
         DisplayWindow: DisplayWindow,
         DataLoader: DataLoader,
+        FacilityPopup: FacilityPopup,
+        HackCaps: HackCaps,
+        S3Photos: S3Photos,
         activeSector: activeSector,
         data: function(){return data;},
         dataForSector: dataForSector,
