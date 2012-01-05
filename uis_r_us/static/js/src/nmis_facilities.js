@@ -11,6 +11,10 @@ var FacilitySelector = (function(){
                 return "normal";
             }
         });
+        var facility = _.find(NMIS.data(), function(val, key){
+            return key==params.id;
+        });
+        NMIS.FacilityPopup(facility);
     }
     function isActive(){
         return active;
@@ -31,14 +35,15 @@ var FacilitySelector = (function(){
     }
 })();
 
-
 +function facilitiesDisplay(){
     var lgaData = DataLoader.fetch("/facilities/site/" + lgaUniqueSlug);
 	var variableData = DataLoader.fetch("/facility_variables");
-
     function loadFacilities() {
-        $('#conditional-content').hide();
 	    var params = {};
+        if((""+window.location.search).match(/facility=(\d+)/)) {
+            params.facilityId = (""+window.location.search).match(/facility=(\d+)/)[1];
+        }
+        $('#conditional-content').hide();
 	    _.each(this.params, function(param, pname){
 	        if($.type(param)==="string" && param !== '') {
 	            params[pname] = param.replace('/', '');
@@ -117,7 +122,8 @@ function launchFacilities(lgaData, variableData, params) {
         mode: 'facilities',
 	    sector: sector,
 	    subsector: sector.getSubsector(params.subsector),
-	    indicator: sector.getIndicator(params.indicator)
+	    indicator: sector.getIndicator(params.indicator),
+	    facilityId: params.facilityId
 	};
 	NMIS.activeSector(sector);
 	NMIS.loadFacilities(facilities);
@@ -171,7 +177,9 @@ function launchFacilities(lgaData, variableData, params) {
             function markerClick(){
                 var sslug = NMIS.activeSector().slug;
                 if(sslug==this.nmis.item.sector.slug || sslug === "overview") {
-                    FacilitySelector.activate({id: this.nmis.id});
+                    dashboard.setLocation(NMIS.urlFor(_.extend(e, {
+                        facilityId: this.nmis.id
+                    })));
                 }
             }
             function markerMouseover() {
@@ -183,6 +191,9 @@ function launchFacilities(lgaData, variableData, params) {
             function mapClick() {
                 if(FacilitySelector.isActive()) {
                     FacilitySelector.deselect();
+                    dashboard.setLocation(NMIS.urlFor(_.extend(e, {
+                        facilityId: false
+                    })));
                 }
             }
             google.maps.event.addListener(map, 'click', mapClick);
@@ -283,7 +294,9 @@ function launchFacilities(lgaData, variableData, params) {
             }
         });
         tableElem.find('tbody').delegate('tr', 'click', function(){
-            FacilitySelector.activate({id: $(this).data('facilityId')});
+            dashboard.setLocation(NMIS.urlFor(_.extend(e, {
+                facilityId: $(this).data('facilityId')
+            })));
         });
         tableElem.appendTo(wElems.elem1content);
         if(!!e.subsector) FacilityTables.select(e.sector, e.subsector);
@@ -308,6 +321,11 @@ function launchFacilities(lgaData, variableData, params) {
             mm.prependTo('.facility-display');
             FacilityTables.highlightColumn(e.indicator);
         })();
+	}
+	if(!!e.facilityId) {
+	    FacilitySelector.activate({
+	        id: e.facilityId
+	    });
 	}
 }
 function mustachify(id, obj) {

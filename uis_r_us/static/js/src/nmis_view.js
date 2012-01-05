@@ -67,7 +67,7 @@ var dashboard = $.sammy('body', function(){
             mode: 'summary'
         }, _o);
         if(!o.lga || !o.state) return "/nmis~?error";
-        return (function _pushAsDefined(obj, keyList) {
+        var uu = (function _pushAsDefined(obj, keyList) {
     	    var key, i, l, arr = [], item;
     	    for(i=0, l=keyList.length; i < l; i++) {
     	        key = keyList[i];
@@ -82,6 +82,10 @@ var dashboard = $.sammy('body', function(){
     	    return arr;
     	})(o, ["root", "state", "lga", "mode",
                         "sector", "subsector", "indicator"]).join('/');
+        if(!!o.facilityId) {
+            uu += "?facility="+o.facilityId;
+        }
+        return uu;
     }
     $('.url-for').each(function(){
         var d = $(this).data('urlFor');
