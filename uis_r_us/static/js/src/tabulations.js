@@ -365,9 +365,9 @@ var DisplayWindow = (function(){
             //default options:
             height: 100,
             clickSizes: [
-                ['full', 'Hide Map'],
+                ['full', 'Table Only'],
                 ['middle', 'Split'],
-                ['minimized', 'Hide Table']
+                ['minimized', 'Map Only']
             ],
             size: 'full',
             sizeCookie: false,
