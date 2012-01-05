@@ -46,11 +46,11 @@ nmis_facilities.js and nmis_summary.js: sets up the page based on the parameters
 <script type="text/javascript" charset="utf-8">
 	$(function(){ dashboard.run(); });
 </script>
+<!--
+To avoid django/mustache conflicts, I'm using <{x}> instead of double-curly-brackets
+-->
 <script type="text/x-mustache-template" id="facility-popup">
-	<div class="row" style="width:500px;height:250px;margin-left:-250px;">
-	  <p class="breadcrumb">
-			Facility
-	  </p>
+	<div class="row" title="<{name}>">
 		<div class="row">
 		  <div class="span3">
 				<ul class="media-grid" style="margin-left:10px">
@@ -62,7 +62,32 @@ nmis_facilities.js and nmis_summary.js: sets up the page based on the parameters
 				</ul>
 			</div>
 			<div class="span5">
-			  <hr>
+			  <div class="select-wrap">
+				<select>
+					<{#sector_data}>
+					<option value="<{slug}>"><{name}></option>
+					<{/sector_data}>
+				</select>
+			</div>
+
+			<{#sector_data}>
+			<div data-sector-slug="<{slug}>" class="facility-sector-select-box">
+				<table>
+					<tbody>
+						<{#variables}>
+						<tr>
+							<td>
+								<{name}>
+							</td>
+							<td>
+								<{value}>
+							</td>
+						</tr>
+						<{/variables}>
+					</tbody>
+				</table>
+			</div>
+			<{/sector_data}>
 			</div>
 		</div>
 	</div>
