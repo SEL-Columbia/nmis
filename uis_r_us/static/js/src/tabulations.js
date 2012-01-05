@@ -157,21 +157,22 @@ var FacilityPopup = (function(){
         }
         var obj = _.extend({
             thumbnail_url: function() {
-                return NMIS.S3Photos.url(this.s3_photo_id, 90);
+                return NMIS.S3Photos.url(this.s3_photo_id, 200);
             },
             image_url: function() {
                 return NMIS.S3Photos.url(this.s3_photo_id, "0");
-            }
+            },
+            name: facility.name || facility.facility_name || facility.school_name
         }, facility);
         div = $(Mustache.to_html($('#facility-popup').eq(0).html().replace(/<{/g, '{{').replace(/\}>/g, '}}'), obj));
-        div.css({
-            position: 'absolute',
-            top: '200px',
-            left: '50%',
-            'margin-left': '-200px',
-            'background-color': '#fff'
+        div.dialog({
+            width: 500,
+            height: 300,
+            resizable: false,
+            position: ["25%", 306],
+            close: function(){
+            }
         });
-        $('body').append(div);
         return div;
     }
     return make;
