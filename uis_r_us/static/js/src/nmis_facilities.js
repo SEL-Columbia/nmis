@@ -26,6 +26,7 @@ var FacilitySelector = (function(){
                 return item.sector === sector ? "normal" : "background";
             });
             active = false;
+            dashboard.setLocation(NMIS.urlFor(NMIS.Env.extend({facilityId: false})));
         }
     }
     return {
@@ -125,6 +126,7 @@ function launchFacilities(lgaData, variableData, params) {
 	    indicator: sector.getIndicator(params.indicator),
 	    facilityId: params.facilityId
 	};
+	NMIS.Env(e);
 	NMIS.activeSector(sector);
 	NMIS.loadFacilities(facilities);
 	if(e.sector !== undefined && e.subsector === undefined) {

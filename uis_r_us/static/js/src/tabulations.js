@@ -169,13 +169,39 @@ var FacilityPopup = (function(){
             width: 500,
             height: 300,
             resizable: false,
-            position: ["25%", 306],
+//            position: [1, 1],
             close: function(){
+                FacilitySelector.deselect();
             }
         });
         return div;
     }
     return make;
+})();
+
+var Env = (function(){
+    var env = undefined;
+    function EnvAccessor(arg) {
+        if(arg===undefined) {
+            return getEnv();
+        } else {
+            setEnv(arg);
+        }
+    }
+    EnvAccessor.extend = function(o){
+        return _.extend(getEnv(), o);
+    }
+    function setEnv(_env) {
+        env = _.extend({}, _env);
+    }
+    function getEnv() {
+        if(env === undefined) {
+            throw new Error("NMIS.Env is not set");
+        } else {
+            return _.extend({}, env);
+        }
+    }
+    return EnvAccessor;
 })();
 
 var Sectors = (function(){
@@ -864,6 +890,7 @@ var NMIS = (function(){
         DataLoader: DataLoader,
         FacilityPopup: FacilityPopup,
         HackCaps: HackCaps,
+        Env: Env,
         S3Photos: S3Photos,
         activeSector: activeSector,
         data: function(){return data;},
