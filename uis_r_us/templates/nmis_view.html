@@ -3,6 +3,9 @@
 <link rel="stylesheet" href="/static/css/nmis-view.css" type="text/css" media="all" charset="utf-8">
 {% endblock %}
 {% block js %}
+
+{% load compress %}
+{% compress js %}
 {% for module in jsmodules %}
 <script src="/static/js/src/{{module}}.js" type="text/javascript" charset="utf-8"></script>
 {% endfor %}
@@ -42,7 +45,7 @@ nmis_facilities.js and nmis_summary.js: sets up the page based on the parameters
 -->
 <script src="/static/js/src/nmis_facilities.js" type="text/javascript" charset="utf-8"></script>
 <script src="/static/js/src/nmis_summary.js" type="text/javascript" charset="utf-8"></script>
-
+{% endcompress %}
 <script type="text/javascript" charset="utf-8">
 	$(function(){ dashboard.run(); });
 </script>
