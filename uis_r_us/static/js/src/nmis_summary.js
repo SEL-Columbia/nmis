@@ -1,12 +1,12 @@
 +function summaryDisplay(){
     function loadSummary(s){
-        DisplayWindow.setVisibility(false);
+        NMIS.DisplayWindow.setVisibility(false);
         var params = s.params;
         var _env = {
             mode: {name: 'Summary', slug: 'summary'},
             state: state,
             lga: lga,
-            sector: Sectors.pluck(params.sector) || overviewObj
+            sector: NMIS.Sectors.pluck(params.sector) || overviewObj
         };
         var bcValues = prepBreadcrumbValues(_env,
                         "state lga mode sector subsector indicator".split(" "),

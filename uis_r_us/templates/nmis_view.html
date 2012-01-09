@@ -4,8 +4,6 @@
 {% endblock %}
 {% block js %}
 
-{% load compress %}
-{% compress js %}
 {% for module in jsmodules %}
 <script src="/static/js/src/{{module}}.js" type="text/javascript" charset="utf-8"></script>
 {% endfor %}
@@ -45,13 +43,81 @@ nmis_facilities.js and nmis_summary.js: sets up the page based on the parameters
 -->
 <script src="/static/js/src/nmis_facilities.js" type="text/javascript" charset="utf-8"></script>
 <script src="/static/js/src/nmis_summary.js" type="text/javascript" charset="utf-8"></script>
-{% endcompress %}
 <script type="text/javascript" charset="utf-8">
 	$(function(){ dashboard.run(); });
 </script>
+{% block css %}
+<style type="text/css" media="screen">
+	.hover-overlay-wrap {
+	    position: relative;
+	}
+	.hover-overlay {
+		position: absolute;
+		width: 10px;
+		height: 10px;
+	}
+	.hover-overlay.popover .inner {
+		width: 220px;
+	}
+	.hover-overlay.popover {
+		opacity: 1;
+	}
+	.hover-overlay.popover .arrow {
+		border-bottom-color: rgba(0, 0, 0, 0.5);
+	}
+	.hover-overlay.popover .inner {
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+	.hover-overlay.popover .inner .content {
+		padding: 5px;
+		height: 90px;
+		background-color:rgba(255,255,255,0.8);
+		-webkit-border-radius:3px;
+		-moz-border-radius:3px;
+		border-radius:3px;
+		-webkit-background-clip:padding-box;
+		-moz-background-clip:padding-box;
+		background-clip:padding-box;
+	}
+	.hover-overlay.popover div.photothumb {
+		width: 90px;
+		height: 90px;
+		border-radius: 3px;
+		background-color: #eee;
+		border: 1px solid #aaa;
+		float: left;
+		position: relative;
+		overflow: hidden;
+		margin-right: 4px;
+	}
+	.hover-overlay.popover div.photothumb img {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+	}
+</style>
+{% endblock %}
 <!--
 To avoid django/mustache conflicts, I'm using <{x}> instead of double-curly-brackets
 -->
+<script type="text/x-mustache-template" id="facility-hover">
+<div class="popover below fade in hover-overlay" style="display: block; top: <{top}>px; left: <{left}>px;">
+	<div class="arrow" style="left:<{arrowLeft}>px"></div>
+	<div class="inner">
+		<div class="content">
+			<p>
+				<div class="photothumb"></div>
+				<strong><{name}></strong> <em>(<{community}>)</em>
+				<br>
+				<br>
+				<span style="font-size:smaller; line-height:11px">
+				Click the icon to view details
+				</span>
+			</p>
+		</div>
+	</div>
+</div>
+</script>
 <script type="text/x-mustache-template" id="facility-popup">
 	<div class="row" title="<{name}>">
 		<div class="row">

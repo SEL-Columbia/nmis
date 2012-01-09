@@ -1,5 +1,8 @@
 var debugMode = true;
 
+var NMIS = (function(){
+    var data, opts;
+
 var Breadcrumb = (function(){
     var levels = [];
     var elem;
@@ -62,7 +65,7 @@ var MapMgr = (function(){
     var opts,
         started = false,
         finished = false,
-        callbackStr = "MapMgr.loaded";
+        callbackStr = "NMIS.MapMgr.loaded";
     function init(_opts) {
         if(started) {
             return true;
@@ -149,6 +152,106 @@ var HackCaps = (function(){
     }
 })();
 
+var FacilitySelector = (function(){
+    var active = false;
+    function activate(params){
+        log(fId);
+        var fId = params.id;
+        NMIS.IconSwitcher.shiftStatus(function(id, item) {
+            if(id !== fId) {
+                return "background";
+            } else {
+                active = true;
+                return "normal";
+            }
+        });
+        var facility = _.find(NMIS.data(), function(val, key){
+            return key==params.id;
+        });
+        NMIS.FacilityPopup(facility);
+    }
+    function isActive(){
+        return active;
+    }
+    function deselect() {
+        if(active) {
+            var sector = NMIS.activeSector();
+            NMIS.IconSwitcher.shiftStatus(function(id, item) {
+                return item.sector === sector ? "normal" : "background";
+            });
+            active = false;
+            dashboard.setLocation(NMIS.urlFor(NMIS.Env.extend({facilityId: false})));
+        }
+    }
+    return {
+        activate: activate,
+        isActive: isActive,
+        deselect: deselect
+    }
+})();
+var FacilityHover = (function(){
+    var hoverOverlayWrap,
+        hoverOverlay,
+        wh = 90;
+
+    function getPixelOffset(marker, map) {
+        var scale = Math.pow(2, map.getZoom());
+        var nw = new google.maps.LatLng(
+            map.getBounds().getNorthEast().lat(),
+            map.getBounds().getSouthWest().lng()
+        );
+        var worldCoordinateNW = map.getProjection().fromLatLngToPoint(nw);
+        var worldCoordinate = map.getProjection().fromLatLngToPoint(marker.getPosition());
+        return pixelOffset = new google.maps.Point(
+            Math.floor((worldCoordinate.x - worldCoordinateNW.x) * scale),
+            Math.floor((worldCoordinate.y - worldCoordinateNW.y) * scale)
+        );
+    }
+    function show(marker) {
+        var map = marker.map;
+        if(!hoverOverlayWrap) {
+            hoverOverlayWrap = $('<div />').addClass('hover-overlay-wrap');
+            hoverOverlayWrap.insertBefore(map.getDiv());
+        }
+        var pOffset = getPixelOffset(marker, map);
+        var obj = {
+            top: pOffset.y + 10,
+            left: pOffset.x - 25,
+            arrowLeft: 22,
+            name: _getNameFromFacility(marker.nmis.item),
+            community: marker.nmis.item.community,
+            title: marker.nmis.id,
+            img_thumb: NMIS.S3Photos.url(marker.nmis.item.s3_photo_id, 200)
+        };
+        hoverOverlay = $(Mustache.to_html($('#facility-hover').eq(0).html().replace(/<{/g, '{{').replace(/\}>/g, '}}'), obj));
+        var img = $('<img />').load(function(){
+            var $this = $(this);
+            if($this.width() > $this.height()) {
+                $this.width(wh);
+            } else {
+                $this.height(wh);
+            }
+            $this.css({
+                marginTop: -.5*$this.height(),
+                marginLeft: -.5*$this.width()
+            });
+        }).attr('src', NMIS.S3Photos.url(marker.nmis.item.s3_photo_id, 90));
+        hoverOverlay.find('div.photothumb').html(img);
+        hoverOverlayWrap.html(hoverOverlay);
+    }
+    function hide(delay) {
+        if(!!hoverOverlay) {
+            hoverOverlay.hide();
+        }
+    }
+    return {
+        show: show,
+        hide: hide
+    }
+})();
+function _getNameFromFacility(f) {
+    return f.name || f.facility_name || f.school_name
+}
 var FacilityPopup = (function(){
     var div;
     function make(facility) {
@@ -162,14 +265,13 @@ var FacilityPopup = (function(){
             image_url: function() {
                 return NMIS.S3Photos.url(this.s3_photo_id, "0");
             },
-            name: facility.name || facility.facility_name || facility.school_name
+            name: _getNameFromFacility(facility)
         }, facility);
         div = $(Mustache.to_html($('#facility-popup').eq(0).html().replace(/<{/g, '{{').replace(/\}>/g, '}}'), obj));
         div.dialog({
             width: 500,
             height: 300,
             resizable: false,
-//            position: [1, 1],
             close: function(){
                 FacilitySelector.deselect();
             }
@@ -729,8 +831,6 @@ var LocalNav = (function(){
         });
         submenu = $('<ul />')
             .addClass('submenu')
-//            .html($("<li />").html($("<a />", {'href':'#', 'text':'xxx'})))
-//            .css({'position':'absolute','left':400,top:38})
             .appendTo(elem);
     }
     function getNavLink(code) {
@@ -785,8 +885,6 @@ var LocalNav = (function(){
     }
 })();
 
-var NMIS = (function(){
-    var data, opts;
     function init(_data, _opts) {
         opts = _.extend({
             iconSwitcher: true,
@@ -808,8 +906,7 @@ var NMIS = (function(){
     	                }
     	                tally[item.status]++;
     	            });
-    	            log(JSON.stringify(tally));
-//        	        log("shift done", this, arguments);
+//    	            log(JSON.stringify(tally));
         	    }
         	});
         }
@@ -889,7 +986,10 @@ var NMIS = (function(){
         DisplayWindow: DisplayWindow,
         DataLoader: DataLoader,
         FacilityPopup: FacilityPopup,
+        FacilityHover: FacilityHover,
+        FacilitySelector: FacilitySelector,
         HackCaps: HackCaps,
+        MapMgr: MapMgr,
         Env: Env,
         S3Photos: S3Photos,
         activeSector: activeSector,

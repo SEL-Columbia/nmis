@@ -27,7 +27,7 @@ def _get_state_lga_from_first_two_items(arr):
 @login_required
 def nmis_view(request, state_id, lga_id, reqpath=""):
     context = RequestContext(request)
-    context.jsmodules = ['modes', 'tabulations', 'facility_tables']
+    context.jsmodules = ['tabulations', 'facility_tables']
     context.url_root = "/nmis~/"
     context.reqpath = reqpath
     context.include_sectors = \
