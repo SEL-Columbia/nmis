@@ -1,37 +1,39 @@
-<h1>
+<h2 class="some-lpadding">
 	LGA Overview
 	<small>
 		{{lga.name}}, {{state.name}}
 	</small>
-</h1>
+</h2>
 <div class="row">
-	<div class="span8">
-		<table>
-			<tbody>
-				{% for name, value in profile_data %}
-				<tr>
-					<td>
-						{{name}}
-					</td>
-					<td>
-						{{value.value}}
-					</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
-	<div class="span9">
-		<p style="font-style:italic;text-align:center">
-			Map
-		</p>
+	<div class="profile-box">
+		<div class="profile-box-inner">
+			<table>
+				<tbody>
+					{% for name, value in profile_data %}
+					<tr>
+						<td>
+							{{name}}
+						</td>
+						<td>
+							{{value.value}}
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="map">
+			<p class="loading-message">
+				Please be patient while the overview map for {{lga.name}}, {{state.name}} is loading.
+			</p>
+		</div>
 	</div>
 </div>
 <div class="row">
-	<div class="span18">
-		<h1>
+	<div class="span18 some-lpadding">
+		<h2>
 			LGA Overview
-		</h1>
+		</h2>
 		<p style="font-style:italic;">
 			Below are data from the baseline facility surveys.
 		</p>
@@ -39,11 +41,11 @@
 </div>
 <div class="row">
 	{% for slug, name, indicators in facility_indicators %}
-	<div class="span4 offset1">
-		<h3>
+	<div class="span-one-third">
+		<h3 class="mdg-underlined-title">
 			{{name}}
 		</h3>
-		<table>
+		<table class="mdg-table">
 			<tbody>
 				{% for indicator, value in indicators %}
 				<tr>
@@ -61,10 +63,10 @@
 	{% endfor %}
 </div>
 <div class="row">
-	<div class="span18">
-		<h1>
+	<div class="span18 some-lpadding">
+		<h2>
 			MDG Status
-		</h1>
+		</h2>
 		<p style="font-style:italic;">
 			Below are data collected from HNLSS, DHS, and other sources.
 		</p>
