@@ -46,6 +46,8 @@ nmis_facilities.js and nmis_summary.js: sets up the page based on the parameters
 <script type="text/javascript" charset="utf-8">
 	$(function(){ dashboard.run(); });
 </script>
+{% endblock %}
+
 {% block css %}
 <style type="text/css" media="screen">
 	.hover-overlay-wrap {
@@ -100,6 +102,40 @@ nmis_facilities.js and nmis_summary.js: sets up the page based on the parameters
 <!--
 To avoid django/mustache conflicts, I'm using <{x}> instead of double-curly-brackets
 -->
+<style type="text/css" media="screen">
+	body div.content {
+		overflow: hidden;
+		background-color: #fafafa;
+	}
+</style>
+{% block content %}
+<div id="conditional-content">
+	<div class="lga overview">
+		<div class="display-window-bar breadcrumb">
+			<span>
+				<a href="#" class="btn">Spacer</a>
+			</span>
+		</div>
+		<div class="cwrap">
+			{% include 'nmis_overview.html' %}
+		</div>
+	</div>
+	{% for sector, sector_data, gap_indicators in sectors %}
+	<div class="lga {{sector}}">
+		<div class="display-window-bar breadcrumb">
+			<span>
+				<a href="#" class="btn">Spacer</a>
+			</span>
+		</div>
+		<div class="cwrap">
+			{% include 'nmis_summary.html' %}
+		</div>
+	</div>
+	{% endfor %}
+</div>
+<script type="text/javascript" charset="utf-8">
+	document.getElementById('conditional-content').style.display = "none";
+</script>
 <script type="text/x-mustache-template" id="facility-hover">
 <div class="popover below fade in hover-overlay" style="display: block; top: <{top}>px; left: <{left}>px;">
 	<div class="arrow" style="left:<{arrowLeft}>px"></div>
@@ -195,40 +231,5 @@ To avoid django/mustache conflicts, I'm using <{x}> instead of double-curly-brac
 			</div>
 		</div>
 	</div>
-</script>
-<style type="text/css" media="screen">
-	body div.content {
-		overflow: hidden;
-		background-color: #fafafa;
-	}
-</style>
-{% endblock %}
-{% block content %}
-<div id="conditional-content">
-	<div class="lga overview">
-		<div class="display-window-bar breadcrumb">
-			<span>
-				<a href="#" class="btn">Spacer</a>
-			</span>
-		</div>
-		<div class="cwrap">
-			{% include 'nmis_overview.html' %}
-		</div>
-	</div>
-	{% for sector, sector_data, gap_indicators in sectors %}
-	<div class="lga {{sector}}">
-		<div class="display-window-bar breadcrumb">
-			<span>
-				<a href="#" class="btn">Spacer</a>
-			</span>
-		</div>
-		<div class="cwrap">
-			{% include 'nmis_summary.html' %}
-		</div>
-	</div>
-	{% endfor %}
-</div>
-<script type="text/javascript" charset="utf-8">
-	document.getElementById('conditional-content').style.display = "none";
 </script>
 {% endblock %}
