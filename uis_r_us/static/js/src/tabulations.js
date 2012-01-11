@@ -602,8 +602,8 @@ var DisplayWindow = (function(){
             setBarHeight(size, animate, function(){
                 if(!!curSize) elem1.removeClass('size-'+curSize);
                 elem1.addClass('size-'+_size);
+                curSize = _size;
             });
-            curSize = _size;
         }
         if(opts.callbacks[_size] !== undefined) {
             _.each(opts.callbacks[_size], function(cb){

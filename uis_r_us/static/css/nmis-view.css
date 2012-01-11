@@ -5,19 +5,8 @@ ul.submenu {
 	margin: 0;
 	width: 200px;
 }
-div.facility-display-wrap {
-	padding: 0 20px;
-}
 td.highlighted, th.highlighted {
 	background-color: rgba(0,0,0,0.05);
-}
-h3.bar-title {
-	position: absolute;
-	left: 0;
-	top: 0;
-	color: #aaa;
-	font-size: 16px;
-	margin: 5px 20px;
 }
 div.cwrap {
 	padding: 0 20px;
@@ -26,9 +15,6 @@ h1.facilities-content-title {
 	color: #444;
 	font-size: 22px;
 	margin: 5px 0;
-}
-p.facility-sectors-navigation {
-	margin: 4px 0;
 }
 div.content {
 	background-color: #fafafa;
@@ -108,15 +94,4 @@ div.raph-circle {
     width: 70px;
     height: 70px;
     margin: 13px 0 0 -6px;
-}
-p.facility-sectors-navigation {
-	margin: 3px 0 10px;
-}
-p.facility-sectors-navigation a.sub-sector-link {
-	padding: 3px 6px;
-	white-space: nowrap;
-}
-p.facility-sectors-navigation a.sub-sector-link.active {
-	font-weight: bold;
-	text-decoration: underline;
 }

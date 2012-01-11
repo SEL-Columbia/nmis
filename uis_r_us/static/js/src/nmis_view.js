@@ -1,8 +1,5 @@
 $('.page-header').remove();
 
-//var zz = 0;
-//var itemzOnMap = {};
-
 var displayWindowOptions = {
     offsetElems: '.topbar .fill .container',
     sizeCookie: true,
@@ -35,14 +32,31 @@ NMIS.init();
 
 var wElems = NMIS.DisplayWindow.getElems();
 
+/*
+initializing a Sammy.js object, called "dashboard".
+This will route URLs and handle links to pre-routed URLs.
+
+routes are defined in nmis_facilities.js and nmis_summary.js by:
+    dashboard.get("/url/:variable", callback);
+
+URL actions can be triggered by calling:
+    dashboard.setLocation("/url/hello");
+*/
 var dashboard = $.sammy('body', function(){
     this.get("/nmis~/:state/:lga/?", function(){
+        // when user lands at this base page, they will
+        // be redirected to a default section (ie. "summary")
         var defaultUrl = "/nmis~/" + this.params.state +
                         "/" + this.params.lga +
                         "/summary/";
         dashboard.setLocation(defaultUrl);
     });
 });
+
+/*
+NMIS.LocalNav is the navigation element at the top of the page.
+URLs are rebuilt as the user navigates through the page.
+*/
 (function(){
     NMIS.LocalNav.init(wElems.wrap, {
         sections: [
@@ -58,8 +72,6 @@ var dashboard = $.sammy('body', function(){
             ]
         ]
     });
-
-
 	NMIS.urlFor = function(_o){
         var o = _.extend({
             //defaults

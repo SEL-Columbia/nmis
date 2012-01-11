@@ -1,7 +1,4 @@
 {% extends "base.html" %}
-{% block head %}
-<link rel="stylesheet" href="/static/css/nmis-view.css" type="text/css" media="all" charset="utf-8">
-{% endblock %}
 {% block js %}
 
 {% for module in jsmodules %}
@@ -112,9 +109,6 @@ To avoid django/mustache conflicts, I'm using <{x}> instead of double-curly-brac
 <div id="conditional-content">
 	<div class="lga overview">
 		<div class="display-window-bar breadcrumb">
-			<span>
-				<a href="#" class="btn">Spacer</a>
-			</span>
 		</div>
 		<div class="cwrap">
 			{% include 'nmis_overview.html' %}
@@ -123,9 +117,6 @@ To avoid django/mustache conflicts, I'm using <{x}> instead of double-curly-brac
 	{% for sector, sector_data, gap_indicators in sectors %}
 	<div class="lga {{sector}}">
 		<div class="display-window-bar breadcrumb">
-			<span>
-				<a href="#" class="btn">Spacer</a>
-			</span>
 		</div>
 		<div class="cwrap">
 			{% include 'nmis_summary.html' %}

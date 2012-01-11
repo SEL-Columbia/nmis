@@ -11,13 +11,13 @@
 	</title>
 	{% load compress %}
 	{% compress css %}
-    <link rel="stylesheet" href="/static/css/main.css" media="all" type="text/css">
     <link rel="stylesheet" href="/static/bootstrap/bootstrap.css" media="all" type="text/css">
     <link rel="stylesheet" href="/static/css/bootstrap.mods.css" media="all" type="text/css">
 	<link rel="stylesheet" href="/static/css/chosen.css" type="text/css" media="all" charset="utf-8">
 	<link rel="stylesheet" href="/static/jquery-ui/jquery-ui-1.8.7.custom.css" type="text/css" media="screen" title="Sitewide" charset="utf-8" />
 	{% block css %}{% endblock %}
 	{% if not development %}
+    <link rel="stylesheet" href="/static/css/main.css" media="all" type="text/css">
 	<!-- <link rel="stylesheet" href="/static/css/styles.css" type="text/css" media="all" title="no title" charset="utf-8"> -->
 	{% endif %}
 	{% endcompress %}

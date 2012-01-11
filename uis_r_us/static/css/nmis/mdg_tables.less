@@ -13,6 +13,15 @@ table.mdg-table {
 	td {
 		padding: 8px 12px;
 	}
+	.indheader {
+		padding: 12px 6px 4px;
+		border-bottom: 2px solid #666;
+		font-weight: bold;
+		text-align: left;
+	}
+	.flush-right {
+		text-align: right;
+	}
 	td.data {
 		text-align: right;
 	}
@@ -27,14 +36,34 @@ table.mdg-table {
 		font-weight: bold;
 		padding: 12px 6px 4px;
 	}
+	td.bb {
+		border-bottom: 1px solid #eee;
+	}
 	td.empty {
 		border: 0 none;
 	}
 	td.mdg_header.year {
 		text-align: center;
 	}
+	td.empty-first {
+		width: 20px;
+	}
+	td.indvalue {
+		text-align: right;
+		width: 120px;
+	}
 }
 
 table.mdg-table.f {
     margin: 0 auto;
+}
+
+div#mdg-table-wrap {
+    width: 680px;
+    border: 1px solid #999;
+	border: 0 none;
+    padding: 8px 20px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 6px;
 }
