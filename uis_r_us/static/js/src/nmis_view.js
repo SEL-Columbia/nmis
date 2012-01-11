@@ -1,6 +1,9 @@
 $('.page-header').remove();
 
-var displayWindowOptions = {
+/*
+//NMIS.DisplayWindow.showTitle('tables')
+*/
+NMIS.DisplayWindow.init(".content", {
     offsetElems: '.topbar .fill .container',
     sizeCookie: true,
     callbacks: {
@@ -14,9 +17,7 @@ var displayWindowOptions = {
             }
         ]
     }
-};
-
-NMIS.DisplayWindow.init(".content", displayWindowOptions);
+});
 
 var overviewObj = {
     name: 'Overview', slug: 'overview'
