@@ -213,7 +213,7 @@ function launchFacilities(lgaData, variableData, params) {
             });
 	    });
 	}
-
+    NMIS.DisplayWindow.setDWHeight('calculate');
 	if(e.sector.slug==='overview') {
 	    wElems.elem1content.empty();
 	    NMIS.DisplayWindow.setTempSize("minimized", true);

@@ -508,7 +508,6 @@ var DisplayWindow = (function(){
                 minimized: 46
             },
             allowHide: true,
-            fullResizer: true,
             padding: 45
         }, _opts);
         elem0 = $('<div />')
@@ -521,20 +520,27 @@ var DisplayWindow = (function(){
             opts.size = $.cookie("displayWindowSize") || opts.size;
         }
 
-        if(opts.fullResizer) {
-            var oh = 0;
-            $(opts.offsetElems).each(function(){ oh += $(this).height(); });
-            fullHeight = $(window).height() - oh - opts.padding;
-            elem.height(fullHeight);
-            elem.addClass('display-window-wrap');
-            elem0.height(fullHeight);
-            elem1.addClass('display-window-content');
-        }
+        elem.addClass('display-window-wrap');
+        elem1.addClass('display-window-content');
+
         createHeaderBar()
             .appendTo(elem1);
         elem1content = $('<div />')
             .appendTo(elem1);
         setSize(opts.size);
+    }
+    function setDWHeight(height) {
+        if (height===undefined) {
+            height = 'auto';
+        } else if (height === "calculate") {
+            (function(){
+                var oh = 0;
+                $(opts.offsetElems).each(function(){ oh += $(this).height(); });
+                height = $(window).height() - oh - opts.padding;
+            })();
+        }
+        elem.height(height);
+        elem0.height(height);
     }
     function setTitle(t, tt) {
         _.each(titleElems, function(e){
@@ -680,6 +686,7 @@ var DisplayWindow = (function(){
         setVisibility: setVisibility,
         unsetTempSize: unsetTempSize,
         addCallback: addCallback,
+        setDWHeight: setDWHeight,
         addTitle: addTitle,
         setTitle: setTitle,
         showTitle: showTitle,

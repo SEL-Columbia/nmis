@@ -1,6 +1,7 @@
 +function summaryDisplay(){
     function loadSummary(s){
         NMIS.DisplayWindow.setVisibility(false);
+        NMIS.DisplayWindow.setDWHeight();
         var params = s.params;
         var _env = {
             mode: {name: 'Summary', slug: 'summary'},
