@@ -1,4 +1,4 @@
-+function summaryDisplay(){
+(function summaryDisplay(){
     function loadSummary(s){
         NMIS.DisplayWindow.setVisibility(false);
         NMIS.DisplayWindow.setDWHeight();
@@ -31,4 +31,4 @@
     dashboard.get("/nmis~/:state/:lga/summary/:sector/?(#.*)?", loadSummary);
     dashboard.get("/nmis~/:state/:lga/summary/:sector/:subsector/?(#.*)?", loadSummary);
     dashboard.get("/nmis~/:state/:lga/summary/:sector/:subsector/:indicator/?(#.*)?", loadSummary);
-}()
+})();
