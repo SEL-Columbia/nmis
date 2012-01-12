@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.template import RequestContext as OriginalRequestContext
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -7,6 +7,7 @@ from django.forms.models import model_to_dict
 from display_defs.models import FacilityTable, MapLayerDescription
 from nga_districts.models import LGA, Zone, State
 from django.db.models import Count
+from django.conf import settings
 import json
 from facilities.models import FacilityRecord, Variable, LGAIndicator
 
@@ -14,6 +15,11 @@ from uis_r_us.indicators.gap_analysis import all_gap_indicators
 from uis_r_us.indicators.overview import tmp_variables_for_sector
 from uis_r_us.indicators.mdg import tmp_get_mdg_indicators
 from uis_r_us.indicators.facility import tmp_facility_indicators
+
+class RequestContext(OriginalRequestContext):
+    def __init__(self, *args, **kwargs):
+        self.css_debug_mode = settings.CSS_DEBUG_MODE
+        OriginalRequestContext.__init__(self, *args, **kwargs)
 
 def _get_state_lga_from_first_two_items(arr):
     try:
@@ -27,7 +33,6 @@ def _get_state_lga_from_first_two_items(arr):
 @login_required
 def nmis_view(request, state_id, lga_id, reqpath=""):
     context = RequestContext(request)
-    context.dev_mode = False
     context.jsmodules = ['tabulations', 'facility_tables']
     context.url_root = "/nmis~/"
     context.reqpath = reqpath
@@ -216,7 +221,6 @@ def lga_view(context):
 
 from utils.csv_reader import CsvReader
 import os
-from django.conf import settings
 
 def sector_data():
     return [s.display_dict for s in FacilityTable.objects.all()]

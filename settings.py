@@ -76,7 +76,8 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-#COMPRESS_ENABLED = True
+COMPRESS_ENABLED = True
+CSS_DEBUG_MODE = False
 
 # List of finder classes that know how to find static files in
 # various locations.

@@ -16,11 +16,11 @@
 	<link rel="stylesheet" href="/static/css/chosen.css" type="text/css" media="all" charset="utf-8">
 	<link rel="stylesheet" href="/static/jquery-ui/jquery-ui-1.8.7.custom.css" type="text/css" media="screen" title="Sitewide" charset="utf-8" />
 	{% block css %}{% endblock %}
-	{% if not dev_mode %}
+	{% if not css_debug_mode %}
 	<link rel="stylesheet" href="/static/css/styles.css" type="text/css" media="all" title="no title" charset="utf-8">
 	{% endif %}
 	{% endcompress %}
-	{% if dev_mode %}
+	{% if css_debug_mode %}
 	<link rel="stylesheet/less" type="text/css" href="/static/css/styles.less">
 	<script src="/static/js/libs/less.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
