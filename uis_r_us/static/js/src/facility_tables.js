@@ -32,22 +32,17 @@ var SectorDataTable = (function(){
         if(env.subsector===undefined) {
             throw(new Error("Subsector is undefined"));
         }
+        env.subsector = env.sector.getSubsector(env.subsector.slug);
         var columns = env.subsector.columns();
-        var rows = _(_.range(1, 100)).chain().map(function(num){
-            return "Row "+num;
-        }).value();
-        var cols = _(_.range(1, 8)).chain().map(function(num){
-            return "Col "+num;
-        }).value();
         var table = $('<table />')
             .append(_createThead(columns))
             .append(_createTbody(columns, data));
         tableWrap.append(table);
         table.dataTable({
 				"sScrollY": opts.xScroll+"px",
-				/* bscrollcollapse makes the bottom bar float up when only a couple results are showing */
+				//bscrollcollapse makes the bottom bar float up when only a couple results are showing
 				"bScrollCollapse": false,
-                /* bPaginate is sometimes nice, but I don't like it in this scenario */
+                //bPaginate is sometimes nice, but I don't like it in this scenario
 				"bPaginate": false
 			});
 		table.delegate('tr', 'click', function(){
@@ -62,13 +57,16 @@ var SectorDataTable = (function(){
         })
         return $('<thead />').html(row);
     }
+    function nullMarker() {
+        return $('<span />').html('&mdash;').addClass('null-marker');
+    }
     function _createTbody(cols, rows) {
         var tbody = $('<tbody />');
         _.each(rows, function(r){
             var row = $('<tr />').data("row-data", r._id);
             _.each(cols, function(c){
-                var z = r[c.slug];
-                row.append($('<td />').text(z))
+                var z = r[c.slug] || nullMarker();
+                row.append($('<td />').html(z))
             });
             tbody.append(row);
         });
