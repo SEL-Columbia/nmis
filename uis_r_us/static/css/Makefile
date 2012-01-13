@@ -12,7 +12,6 @@ LESS_COMPRESSOR ?= `which lessc`
 build:
 	@@if test ! -z ${LESS_COMPRESSOR}; then \
 		sed -e 's/@VERSION/'"v${VERSION}"'/' -e 's/@DATE/'"${DATE}"'/' <${STYLES_LESS} >${STYLES_LESS}.tmp; \
-		lessc ${STYLES_LESS}.tmp > ${STYLES}; \
 		lessc ${STYLES_LESS}.tmp > ${STYLES_MIN} --compress; \
 		rm -f ${STYLES_LESS}.tmp; \
 		echo "Stylesheets successfully built! - `date`"; \
