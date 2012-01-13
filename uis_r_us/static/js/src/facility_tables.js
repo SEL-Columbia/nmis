@@ -23,6 +23,58 @@ var DisplayValue = (function(){
     };
 })();
 
+var SectorDataTable = (function(){
+    function createIn(tableWrap, env, _opts) {
+        var opts = _.extend({
+            xScroll: 135
+        }, _opts);
+        var rows = _(_.range(1, 100)).chain().map(function(num){
+            return "Row "+num;
+        }).value();
+        var cols = _(_.range(1, 8)).chain().map(function(num){
+            return "Col "+num;
+        }).value();
+        var table = $('<table />')
+            .append(_createThead(cols))
+            .append(_createTbody(cols, rows));
+        tableWrap.append(table);
+        table.dataTable({
+				"sScrollY": opts.xScroll+"px",
+				/* bscrollcollapse makes the bottom bar float up when only a couple results are showing */
+				"bScrollCollapse": false,
+                /* bPaginate is sometimes nice, but I don't like it in this scenario */
+				"bPaginate": false
+			});
+		table.delegate('tr', 'click', function(){
+		    log($(this).data('rowData'))
+		});
+        return table;
+    }
+    function _createThead(cols) {
+        var row = $('<tr />').html($('<td />'));
+        _.each(cols, function(col){
+            row.append($('<th />').text(col));
+        })
+        return $('<thead />').html(row);
+    }
+    function _createTbody(cols, rows) {
+        var tbody = $('<tbody />');
+        _.each(rows, function(r){
+            var row = $('<tr />').data("row-data", r);
+            row.append($('<td />').text(r))
+            _.each(cols, function(c){
+                var z = Math.floor(Math.random()*100);
+                row.append($('<td />').text(z))
+            });
+            tbody.append(row);
+        });
+        return tbody;
+    }
+    return {
+        createIn: createIn
+    }
+})();
+
 var FacilityTables = (function(){
     var div;
     function createForSectors(sArr, _opts) {

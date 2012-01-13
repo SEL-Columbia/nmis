@@ -233,7 +233,11 @@ function launchFacilities(lgaData, variableData, params) {
             NMIS.DisplayWindow.setTitle(displayTitle, displayTitle + " - " + e.subsector.name);
         }
         NMIS.DisplayWindow.unsetTempSize(true);
-        var tableElem = FacilityTables.createForSectors([e.sector.slug], {
+        var subsectorSelectors = $('<p />').text("select subsector here");
+        wElems.elem1content.empty();
+        var twrap = $('<div />', {'class':'facility-table-wrap'}).appendTo(wElems.elem1content);
+        var tableElem = SectorDataTable.createIn(twrap, e, {});
+/*        var tableElem = FacilityTables.createForSectors([e.sector.slug], {
             callback: function(div){
                 var pageTitle = $('<h1 />')
                             .addClass('facilities-content-title')
@@ -267,7 +271,6 @@ function launchFacilities(lgaData, variableData, params) {
                 facilityId: $(this).data('facilityId')
             })));
         });
-        tableElem.appendTo(wElems.elem1content);
         if(!!e.subsector) FacilityTables.select(e.sector, e.subsector);
         if(!!e.indicator) (function(){
             $('.indicator-feature').remove();
@@ -284,11 +287,12 @@ function launchFacilities(lgaData, variableData, params) {
                 r.g.txtattr.font = "12px 'Fontin Sans', Fontin-Sans, sans-serif";
                 var pie = r.g.piechart(35, 35, 34, [22,5], {"colors":["#21c406","#ff5555"]});
                 $(rtElem).css({'height':'45px'});
-/*                var pieText = r2.g.piechart(40, 120, 20, [22, 5],
-                        {"colors":["#21c406","#ff5555"],"legend":["%% - Yes (##)","%% - No (##)"],"legendpos":"west"}); */
+                var pieText = r2.g.piechart(40, 120, 20, [22, 5],
+                        {"colors":["#21c406","#ff5555"],"legend":["%% - Yes (##)","%% - No (##)"],"legendpos":"west"});
             })(mm.find('.raph-circle').get(0), mm.find('.raph-legend').get(0));
             mm.prependTo('.facility-display');
             FacilityTables.highlightColumn(e.indicator);
+            */
         })();
 	}
 	if(!!e.facilityId) {
