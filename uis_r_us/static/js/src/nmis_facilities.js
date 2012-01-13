@@ -292,8 +292,8 @@ function launchFacilities(lgaData, variableData, params) {
             })(mm.find('.raph-circle').get(0), mm.find('.raph-legend').get(0));
             mm.prependTo('.facility-display');
             FacilityTables.highlightColumn(e.indicator);
-            */
         })();
+        */
 	}
 	if(!!e.facilityId) {
 	    NMIS.FacilitySelector.activate({

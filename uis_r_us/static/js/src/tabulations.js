@@ -365,6 +365,12 @@ var Sectors = (function(){
         this.sector = sector;
         _.extend(this, opts);
     }
+    SubSector.prototype.columns = function(){
+        var _ssSlug = this.slug;
+        return _.filter(this.sector.getColumns(), function(t){
+            return !!_.find(t.subgroups, function(tt){return tt==_ssSlug;})
+        });
+    };
     function Indicator(sector, opts) {
         this.sector = sector;
         _.extend(this, opts);

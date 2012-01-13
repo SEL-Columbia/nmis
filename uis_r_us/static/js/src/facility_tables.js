@@ -26,8 +26,13 @@ var DisplayValue = (function(){
 var SectorDataTable = (function(){
     function createIn(tableWrap, env, _opts) {
         var opts = _.extend({
-            xScroll: 135
+            xScroll: 120
         }, _opts);
+        var data = NMIS.dataForSector(env.sector.slug);
+        if(env.subsector===undefined) {
+            throw(new Error("Subsector is undefined"));
+        }
+        var columns = env.subsector.columns();
         var rows = _(_.range(1, 100)).chain().map(function(num){
             return "Row "+num;
         }).value();
@@ -35,8 +40,8 @@ var SectorDataTable = (function(){
             return "Col "+num;
         }).value();
         var table = $('<table />')
-            .append(_createThead(cols))
-            .append(_createTbody(cols, rows));
+            .append(_createThead(columns))
+            .append(_createTbody(columns, data));
         tableWrap.append(table);
         table.dataTable({
 				"sScrollY": opts.xScroll+"px",
@@ -46,24 +51,23 @@ var SectorDataTable = (function(){
 				"bPaginate": false
 			});
 		table.delegate('tr', 'click', function(){
-		    log($(this).data('rowData'))
+		    log($(this).data('rowData'));
 		});
         return table;
     }
     function _createThead(cols) {
-        var row = $('<tr />').html($('<td />'));
+        var row = $('<tr />');
         _.each(cols, function(col){
-            row.append($('<th />').text(col));
+            row.append($('<th />').text(col.name));
         })
         return $('<thead />').html(row);
     }
     function _createTbody(cols, rows) {
         var tbody = $('<tbody />');
         _.each(rows, function(r){
-            var row = $('<tr />').data("row-data", r);
-            row.append($('<td />').text(r))
+            var row = $('<tr />').data("row-data", r._id);
             _.each(cols, function(c){
-                var z = Math.floor(Math.random()*100);
+                var z = r[c.slug];
                 row.append($('<td />').text(z))
             });
             tbody.append(row);

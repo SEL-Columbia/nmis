@@ -394,7 +394,7 @@ div.indicator-feature div.overlay a.close{opacity:1;position:absolute;top:5px;ri
 div.indicator-feature div.embedded{margin:12px 0 12px;border:1px solid #ddd;}
 div.display-window-content{position:absolute;bottom:0;width:100%;background-color:#fefefe;}
 div.display-window-wrap{position:relative;}
-div.dataTables_wrapper div.dataTables_filter{float:right;position:relative;width:290px;height:45px;}div.dataTables_wrapper div.dataTables_filter label{font-style:italic;text-align:left;height:40px;width:290px;margin:0;padding:0;line-height:30px;font-size:16px;}div.dataTables_wrapper div.dataTables_filter label input{position:absolute;right:1px;top:1px;}
+div.dataTables_wrapper div.dataTables_filter{float:right;position:relative;width:290px;height:45px;}div.dataTables_wrapper div.dataTables_filter label{font-style:italic;text-align:left;height:40px;width:290px;margin:0;padding:0;line-height:30px;font-size:13px;}div.dataTables_wrapper div.dataTables_filter label input{position:absolute;right:1px;top:1px;font-size:12px;line-height:12px;height:14px;}
 div.dataTables_wrapper table{font-size:14px;}div.dataTables_wrapper table tbody td{padding:1px 6px;text-align:center;border-bottom:1px dotted #eee;}
 div.dataTables_wrapper table thead th{padding:2px 0;font-weight:bold;color:#656565;}
 div.dataTables_wrapper table thead .sorting_desc{background-color:rgba(20, 20, 20, 0.2);}
