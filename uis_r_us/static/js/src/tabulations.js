@@ -487,7 +487,6 @@ var DataLoader = (function(){
 
 var DisplayWindow = (function(){
     var elem, elem1, elem0, elem1content;
-    var fullHeight;
     var opts;
     var visible;
     var hbuttons;
@@ -532,6 +531,7 @@ var DisplayWindow = (function(){
         createHeaderBar()
             .appendTo(elem1);
         elem1content = $('<div />')
+            .addClass('elem1-content')
             .appendTo(elem1);
         setSize(opts.size);
     }
@@ -539,11 +539,7 @@ var DisplayWindow = (function(){
         if (height===undefined) {
             height = 'auto';
         } else if (height === "calculate") {
-            (function(){
-                var oh = 0;
-                $(opts.offsetElems).each(function(){ oh += $(this).height(); });
-                height = $(window).height() - oh - opts.padding;
-            })();
+            height = fullHeight();
         }
         elem.height(height);
         elem0.height(height);
@@ -608,7 +604,7 @@ var DisplayWindow = (function(){
         if(opts.heights[_size] !== undefined) {
             size = opts.heights[_size];
             if(size === Infinity) {
-                size = fullHeight;
+                size = fullHeight();
             }
             $.cookie("displayWindowSize", _size);
             setBarHeight(size, animate, function(){
@@ -679,6 +675,11 @@ var DisplayWindow = (function(){
             elem1: elem1,
             elem1content: elem1content
         }
+    }
+    function fullHeight() {
+        var oh = 0;
+        $(opts.offsetElems).each(function(){ oh += $(this).height(); });
+        return $(window).height() - oh - opts.padding;
     }
     function elem1contentHeight() {
         var padding = 30;
