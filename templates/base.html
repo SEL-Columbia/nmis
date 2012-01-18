@@ -22,9 +22,15 @@
 	{% endcompress %}
 	{% if css_debug_mode %}
 	<link rel="stylesheet/less" type="text/css" href="/static/css/styles.less">
+	<script type="text/javascript">
+		var less = { poll: 10001, env: "development" };
+	</script>
 	<script src="/static/js/libs/less.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 		less.watch();
+		window.setTimeout(function(){
+			less.unwatch();
+		}, 10 * 60 * 1000);
 	</script>
 	{% endif %}
 	<script src="/static/js/modernizr-2.js" type="text/javascript" charset="utf-8"></script>
