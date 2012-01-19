@@ -143,7 +143,7 @@ function launchFacilities(lgaData, variableData, params) {
             function markerClick(){
                 var sslug = NMIS.activeSector().slug;
                 if(sslug==this.nmis.item.sector.slug || sslug === "overview") {
-                    dashboard.setLocation(NMIS.urlFor(_.extend(e, {
+                    dashboard.setLocation(NMIS.urlFor(_.extend(NMIS.Env(), {
                         facilityId: this.nmis.id
                     })));
                 }
@@ -160,7 +160,7 @@ function launchFacilities(lgaData, variableData, params) {
             function mapClick() {
                 if(NMIS.FacilitySelector.isActive()) {
                     NMIS.FacilitySelector.deselect();
-                    dashboard.setLocation(NMIS.urlFor(_.extend(e, {
+                    dashboard.setLocation(NMIS.urlFor(_.extend(NMIS.Env(), {
                         facilityId: false
                     })));
                 }

@@ -631,9 +631,9 @@ var DisplayWindow = (function(){
     function setVisibility(tf) {
         var css = {};
         if(!tf) {
-            css = {'left': '1000em'};
+            css = {'left': '1000em', display: 'none'};
         } else {
-            css = {'left': '0'};
+            css = {'left': '0', display: 'block'};
         }
         elem0.css(css);
         elem1.css(css);
@@ -998,7 +998,7 @@ var LocalNav = (function(){
         LocalNav: LocalNav,
         Breadcrumb: Breadcrumb,
         DisplayWindow: DisplayWindow,
-        SectorDataTable: SectorDataTable,
+        SectorDataTable: window['SectorDataTable'] || false,
         DataLoader: DataLoader,
         FacilityPopup: FacilityPopup,
         FacilityHover: FacilityHover,
