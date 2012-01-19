@@ -19,6 +19,7 @@ from uis_r_us.indicators.facility import tmp_facility_indicators
 class RequestContext(OriginalRequestContext):
     def __init__(self, *args, **kwargs):
         self.css_debug_mode = settings.CSS_DEBUG_MODE
+        self.active_districts = active_districts()
         OriginalRequestContext.__init__(self, *args, **kwargs)
 
 def _get_state_lga_from_first_two_items(arr):
@@ -86,7 +87,7 @@ def dashboard(request, reqpath):
     context.data_loading_count = LGA.objects.filter(data_load_in_progress=True).count()
     context.site_title = "NMIS Nigeria"
     lga = None
-    context.active_districts = active_districts()
+#    context.active_districts = active_districts()
     context.nav_zones = get_nav_zones(filter_active=True)
     mls = []
     for map_layer in MapLayerDescription.objects.all():
@@ -373,7 +374,7 @@ def new_dashboard(request, lga_id):
                         'active': True}]
     #tmp deactivating breadcrumb
     context.navs = False
-    context.active_districts = active_districts()
+#    context.active_districts = active_districts()
     context.lga = lga
     context.state = lga.state
     context.profile_variables = _profile_variables(g)
@@ -397,7 +398,7 @@ def new_sector_overview(request, lga_id, sector_slug):
         return HttpResponseRedirect("/new_dashboard/")
     sector_name = sector_slug.capitalize()
     context = RequestContext(request)
-    context.active_districts = active_districts()
+#    context.active_districts = active_districts()
     context.site_title = "%s Overview" % sector_name
     context.small_title = "%s, %s" % (lga.state.name, lga.name)
     context.breadcrumbs = [
