@@ -9,6 +9,7 @@ NMIS.DisplayWindow.init(".content", {
     callbacks: {
         resize: [
             function(animate, sizeName){
+                NMIS.SectorDataTable.resizeColumns();
                 if(sizeName==="full") {
                     NMIS.DisplayWindow.showTitle('tables');
                 } else {

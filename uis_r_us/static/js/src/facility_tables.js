@@ -24,6 +24,7 @@ var DisplayValue = (function(){
 })();
 
 var SectorDataTable = (function(){
+    var dt;
     function createIn(tableWrap, env, _opts) {
         var opts = _.extend({
             xScroll: 120
@@ -38,7 +39,7 @@ var SectorDataTable = (function(){
             .append(_createThead(columns))
             .append(_createTbody(columns, data));
         tableWrap.append(table);
-        table.dataTable({
+        dt = table.dataTable({
 				"sScrollY": opts.xScroll+"px",
 				//bscrollcollapse makes the bottom bar float up when only a couple results are showing
 				"bScrollCollapse": false,
@@ -60,6 +61,9 @@ var SectorDataTable = (function(){
     function nullMarker() {
         return $('<span />').html('&mdash;').addClass('null-marker');
     }
+    function resizeColumns() {
+        if(!!dt) dt.fnAdjustColumnSizing();
+    }
     function _createTbody(cols, rows) {
         var tbody = $('<tbody />');
         _.each(rows, function(r){
@@ -73,7 +77,8 @@ var SectorDataTable = (function(){
         return tbody;
     }
     return {
-        createIn: createIn
+        createIn: createIn,
+        resizeColumns: resizeColumns
     }
 })();
 
