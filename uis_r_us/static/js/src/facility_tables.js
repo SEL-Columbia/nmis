@@ -24,10 +24,17 @@ var DisplayValue = (function(){
 })();
 
 var SectorDataTable = (function(){
-    var dt;
+    var dt, table;
+    function dtOpts(_o) {
+        return _.extend({
+            sScrollY: 120,
+            bScrollCollapse: false,
+            bPaginate: false
+        }, _o);
+    }
     function createIn(tableWrap, env, _opts) {
         var opts = _.extend({
-            xScroll: 120
+            sScrollY: 120
         }, _opts);
         var data = NMIS.dataForSector(env.sector.slug);
         if(env.subsector===undefined) {
@@ -35,21 +42,23 @@ var SectorDataTable = (function(){
         }
         env.subsector = env.sector.getSubsector(env.subsector.slug);
         var columns = env.subsector.columns();
-        var table = $('<table />')
+        table = $('<table />')
             .append(_createThead(columns))
             .append(_createTbody(columns, data));
         tableWrap.append(table);
-        dt = table.dataTable({
-				"sScrollY": opts.xScroll+"px",
-				//bscrollcollapse makes the bottom bar float up when only a couple results are showing
-				"bScrollCollapse": false,
-                //bPaginate is sometimes nice, but I don't like it in this scenario
-				"bPaginate": false
-			});
+        dt = table.dataTable(dtOpts({
+            sScrollY: opts.sScrollY
+        }));
 		table.delegate('tr', 'click', function(){
 		    log($(this).data('rowData'));
 		});
         return table;
+    }
+    function updateScrollSize(ss) {
+        dt = table.dataTable(dtOpts({
+            sScrollY: ss,
+            bDestroy: true
+        }));
     }
     function _createThead(cols) {
         var row = $('<tr />');
@@ -78,6 +87,7 @@ var SectorDataTable = (function(){
     }
     return {
         createIn: createIn,
+        updateScrollSize: updateScrollSize,
         resizeColumns: resizeColumns
     }
 })();
