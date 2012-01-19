@@ -55,10 +55,12 @@ var SectorDataTable = (function(){
         return table;
     }
     function updateScrollSize(ss) {
-        dt = table.dataTable(dtOpts({
-            sScrollY: ss,
-            bDestroy: true
-        }));
+        if(!!table) {
+            dt = table.dataTable(dtOpts({
+                sScrollY: ss,
+                bDestroy: true
+            }));
+        }
     }
     function _createThead(cols) {
         var row = $('<tr />');

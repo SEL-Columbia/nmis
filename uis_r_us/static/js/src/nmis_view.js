@@ -12,7 +12,14 @@ NMIS.DisplayWindow.init(".content", {
                 NMIS.SectorDataTable.resizeColumns();
                 if(sizeName==="full") {
                     NMIS.DisplayWindow.showTitle('tables');
-                } else {
+                    // temporarily setting to 400. figure out correct size later.
+                    NMIS.SectorDataTable.updateScrollSize(400);
+                } else if(sizeName==="middle") {
+                    NMIS.SectorDataTable.updateScrollSize(120);
+                    _.delay(function(){
+                        NMIS.DisplayWindow.showTitle('bar');
+                    }, 300);
+                } else if(sizeName==="minimized") {
                     NMIS.DisplayWindow.showTitle('bar');
                 }
             }
