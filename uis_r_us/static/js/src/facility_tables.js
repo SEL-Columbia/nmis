@@ -43,10 +43,12 @@ var SectorDataTable = (function(){
         env.subsector = env.sector.getSubsector(env.subsector.slug);
         var columns = env.subsector.columns();
         table = $('<table />')
+            .addClass('bs')
             .append(_createThead(columns))
             .append(_createTbody(columns, data));
         tableWrap.append(table);
         dt = table.dataTable(dtOpts({
+            "sDom": "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>",
             sScrollY: opts.sScrollY
         }));
 		table.delegate('tr', 'click', function(){
