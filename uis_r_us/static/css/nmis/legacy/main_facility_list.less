@@ -67,3 +67,18 @@ table.facility-list {
 		border-color: #dddddd;
 	}
 }
+
+
+td.data-cell {
+	text-align: center;
+}
+
+div.facility-display table td {
+	&:first-child {
+		text-align: left;
+		min-width: 160px;
+	}
+	&.val-null, &.val-undefined {
+		color: #aaaaaa;
+	}
+}
