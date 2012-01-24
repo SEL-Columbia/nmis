@@ -233,7 +233,6 @@ function launchFacilities(lgaData, variableData, params) {
             NMIS.DisplayWindow.setTitle(displayTitle, displayTitle + " - " + e.subsector.name);
         }
 //        NMIS.DisplayWindow.unsetTempSize(true);
-        var subsectorSelectors = $('<p />').text("select subsector here");
         wElems.elem1content.empty();
         var twrap = $('<div />', {'class':'facility-table-wrap'}).appendTo(wElems.elem1content);
 //        var tableElem = NMIS.SectorDataTable.createIn(twrap, e, {});
