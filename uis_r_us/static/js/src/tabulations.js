@@ -589,19 +589,19 @@ var DisplayWindow = (function(){
             (cb || function(){})();
         }
     }
-    var prevSize, sizeTempSet = false;
-    function setTempSize(size, animate) {
-        prevSize = curSize;
-        sizeTempSet = true;
-        setSize(size, animate);
-    }
-    function unsetTempSize(animate) {
-        if(sizeTempSet) {
-            setSize(prevSize, animate);
-            prevSize = undefined;
-            sizeTempSet = false;
-        }
-    }
+    // var prevSize, sizeTempSet = false;
+    // function setTempSize(size, animate) {
+    //     prevSize = curSize;
+    //     sizeTempSet = true;
+    //     setSize(size, animate);
+    // }
+    // function unsetTempSize(animate) {
+    //     if(sizeTempSet) {
+    //         setSize(prevSize, animate);
+    //         prevSize = undefined;
+    //         sizeTempSet = false;
+    //     }
+    // }
     function setSize(_size, animate) {
         var size;
         if(opts.heights[_size] !== undefined) {
@@ -692,9 +692,9 @@ var DisplayWindow = (function(){
         init: init,
         clear: clear,
         setSize: setSize,
-        setTempSize: setTempSize,
         setVisibility: setVisibility,
-        unsetTempSize: unsetTempSize,
+//        setTempSize: setTempSize,
+//        unsetTempSize: unsetTempSize,
         addCallback: addCallback,
         setDWHeight: setDWHeight,
         addTitle: addTitle,

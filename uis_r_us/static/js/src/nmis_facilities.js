@@ -216,7 +216,7 @@ function launchFacilities(lgaData, variableData, params) {
     NMIS.DisplayWindow.setDWHeight('calculate');
 	if(e.sector.slug==='overview') {
 	    wElems.elem1content.empty();
-	    NMIS.DisplayWindow.setTempSize("minimized", true);
+//	    NMIS.DisplayWindow.setTempSize("minimized", true);
         var displayTitle = "Facility Detail: "+lga.name+" Overview";
         NMIS.DisplayWindow.setTitle(displayTitle);
         NMIS.IconSwitcher.shiftStatus(function(id, item) {
@@ -232,7 +232,7 @@ function launchFacilities(lgaData, variableData, params) {
         if(!!e.subsector) {
             NMIS.DisplayWindow.setTitle(displayTitle, displayTitle + " - " + e.subsector.name);
         }
-        NMIS.DisplayWindow.unsetTempSize(true);
+//        NMIS.DisplayWindow.unsetTempSize(true);
         var subsectorSelectors = $('<p />').text("select subsector here");
         wElems.elem1content.empty();
         var twrap = $('<div />', {'class':'facility-table-wrap'}).appendTo(wElems.elem1content);
