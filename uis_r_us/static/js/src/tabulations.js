@@ -565,6 +565,9 @@ var DisplayWindow = (function(){
             }
         });
     }
+    function showContent(content) {
+        log(content);
+    }
     function addCallback(cbname, cb) {
         if(opts.callbacks[cbname]===undefined) {
             opts.callbacks[cbname] = [];
@@ -697,6 +700,7 @@ var DisplayWindow = (function(){
         addTitle: addTitle,
         setTitle: setTitle,
         showTitle: showTitle,
+        showContent: showContent,
         elem1contentHeight: elem1contentHeight,
         getElems: getElems
     };
@@ -998,7 +1002,7 @@ var LocalNav = (function(){
         LocalNav: LocalNav,
         Breadcrumb: Breadcrumb,
         DisplayWindow: DisplayWindow,
-        SectorDataTable: window['SectorDataTable'] || false,
+        SectorDataTable: SectorDataTable,
         DataLoader: DataLoader,
         FacilityPopup: FacilityPopup,
         FacilityHover: FacilityHover,

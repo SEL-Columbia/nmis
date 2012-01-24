@@ -236,7 +236,7 @@ function launchFacilities(lgaData, variableData, params) {
         var subsectorSelectors = $('<p />').text("select subsector here");
         wElems.elem1content.empty();
         var twrap = $('<div />', {'class':'facility-table-wrap'}).appendTo(wElems.elem1content);
-        var tableElem = NMIS.SectorDataTable.createIn(twrap, e, {});
+//        var tableElem = NMIS.SectorDataTable.createIn(twrap, e, {});
 /*        var tableElem = FacilityTables.createForSectors([e.sector.slug], {
             callback: function(div){
                 var pageTitle = $('<h1 />')

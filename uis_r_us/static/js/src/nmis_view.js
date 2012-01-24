@@ -9,17 +9,17 @@ NMIS.DisplayWindow.init(".content", {
     callbacks: {
         resize: [
             function(animate, sizeName){
-                NMIS.SectorDataTable.resizeColumns();
-                if(sizeName==="full") {
+                switch(sizeName) {
+                case "full":
                     NMIS.DisplayWindow.showTitle('tables');
-                    // temporarily setting to 400. figure out correct size later.
-                    NMIS.SectorDataTable.updateScrollSize(400);
-                } else if(sizeName==="middle") {
-                    NMIS.SectorDataTable.updateScrollSize(120);
-                    _.delay(function(){
-                        NMIS.DisplayWindow.showTitle('bar');
-                    }, 300);
-                } else if(sizeName==="minimized") {
+                    NMIS.DisplayWindow.showContent('dataTables');
+                break;
+                case "middle":
+                    NMIS.DisplayWindow.showContent('tableSummary');
+                    NMIS.DisplayWindow.showTitle('bar');
+                break;
+                case "minimized":
+                    NMIS.DisplayWindow.showContent(false);
                     NMIS.DisplayWindow.showTitle('bar');
                 }
             }
