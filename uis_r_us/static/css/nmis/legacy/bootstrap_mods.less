@@ -2,119 +2,133 @@
 nmis layout specific changes to the bootstrap stylesheet.
 all rules are after "html" so that they override the default rules.
 -*/
-html .topbar .fill {
-  background-color: #545653;
-  background-image: none;
-}
-html .topbar a.brand {
-  position: relative;
-  padding: 8px 20px 8px 120px;
-}
-html .topbar a.brand span.logo {
-  position: absolute;
-  top: -7px;
-  left: 25px;
-  display: inline-block;
-  width: 1px;
-  height: 1px;
-}
-html .topbar a.brand span.logo span {
-  display: block;
-  position: absolute;
-  top: 57px;
-  left: 27px;
-  width: 100px;
-  height: 20px;
-  font-size: 12px;
-  color: #dddddd;
-}
-html .topbar a.brand:hover span span {
-  text-decoration: none;
-}
-html .topbar .pull-right {
-    color: #aaa;
-}
-html ul.nav {
-  font-weight: bold;
-  margin: 0 28px;
-  padding: 0 28px;
-}
-html ul.nav li a {
-  border: 1px solid black;
-  border-color: #dddddd #aaaaaa #aaaaaa #dddddd;
-  padding: 5px 10px 7px;
-  color: #444444;
-  background-color: #fff;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-}
-html ul.nav li a:hover {
-  color: black;
-  background-color: #eeeeee;
-}
-html ul.nav li.active a {
-  color: #cccccc;
-  background-color: #606060;
-}
-html ul.nav li.active a:hover {
-  background-color: #606060;
-}
-html .topbar a.brand:hover span.logo {
-  opacity: 1;
-}
-html .topbar .nav-row {
-  overflow: hidden;
-  padding-left: 80px;
-  margin-top: 0px;
-}
-html .topbar .nav-row ul li a {
-  padding: 5px 10px 6px;
-}
-html ul li.spacer {
-  width: 60px;
-  height: 1px;
-}
-html ul li.spacer.small {
-  width: 6px;
-  height: 1px;
-}
-html .topbar .breadcrumb.grey {
-  margin: 4px 5px 0;
-  padding: 3px 15px;
-  line-height: 18px;
-}
-html .content {
-  padding-top: 78px;
-  background-color: #fff;
-}
-html .breadcrumb.grey {
-  padding: 3px 15px;
-}
-html .breadcrumb.grey a {
-  color: #444444;
-}
-html .breadcrumb.grey span {
-  margin: 0 10px;
-}
-html .page-header {
-	padding: 20px 36px 10px;
-	margin: -9px 0px 0px;
-}
-html .topbar .page-title-row p.bc {
-  padding-left: 104px;
-  padding-bottom: 5px;
-  margin: 0;
-  line-height: 28px;
-  color: #bfbfbf;
-  font-weight: normal;
-}
-html .topbar .page-title-row p.bc a, html .topbar .page-title-row p.bc span {
-  margin: 0 4px 0 0;
-}
-html .container {
-    width: 1100px;
-}
-html .home-map-nav h3 {
-    line-height: 18px;
+html {
+	.topbar {
+		.fill {
+			background-color: #545653;
+			background-image: none;
+		}
+		a.brand {
+			position: relative;
+			padding: 8px 20px 8px 120px;
+		}
+		a.brand:hover {
+			span span {
+				text-decoration: none;
+			}
+			.logo {
+				opacity: 1;
+			}
+		}
+		span.logo {
+			position: absolute;
+			top: -7px;
+			left: 25px;
+			display: inline-block;
+			width: 1px;
+			height: 1px;
+			span {
+				display: block;
+				position: absolute;
+				top: 57px;
+				left: 27px;
+				width: 100px;
+				height: 20px;
+				font-size: 12px;
+				color: #dddddd;
+			}
+		}
+		.pull-right {
+			color: #aaa;
+		}
+		.nav-row {
+			overflow: hidden;
+			padding-left: 80px;
+			margin-top: 0px;
+			ul li a {
+				padding: 5px 10px 6px;
+			}
+		}
+		.page-title-row {
+			p.bc {
+				padding-left: 104px;
+				padding-bottom: 5px;
+				margin: 0;
+				line-height: 28px;
+				color: #bfbfbf;
+				font-weight: normal;
+				a, span {
+					margin: 0 4px 0 0;
+				}
+			}
+		}
+	}
+	ul.nav {
+		font-weight: bold;
+		margin: 0 28px;
+		padding: 0 28px;
+		li {
+			a {
+				border: 1px solid black;
+				border-color: #dddddd #aaaaaa #aaaaaa #dddddd;
+				padding: 5px 10px 7px;
+				color: #444444;
+				background-color: #fff;
+				-moz-border-radius: 3px;
+				-webkit-border-radius: 3px;
+				border-radius: 3px;
+			}
+			a:hover {
+				color: black;
+				background-color: #eeeeee;
+			}
+		}
+		li.active {
+			a {
+				color: #cccccc;
+				background-color: #606060;
+			}
+			a:hover {
+				background-color: #606060;
+			}
+		}
+	}
+	ul {
+		li.spacer {
+			width: 60px;
+			height: 1px;
+		}
+		li.spacer.small {
+			width: 6px;
+			height: 1px;
+		}
+	}
+	.content {
+		padding-top: 78px;
+		background-color: #fff;
+	}
+	.container {
+		width: 1100px;
+	}
+	.page-header {
+		padding: 20px 36px 10px;
+		margin: -9px 0px 0px;
+	}
+	.topbar .breadcrumb.grey {
+		margin: 4px 5px 0;
+		padding: 3px 15px;
+		line-height: 18px;
+	}
+	.breadcrumb.grey {
+		padding: 3px 15px;
+		a {
+			color: #444444;
+		}
+		span {
+			margin: 0 10px;
+		}
+	}
+	.home-map-nav h3 {
+		line-height: 18px;
+	}
 }
