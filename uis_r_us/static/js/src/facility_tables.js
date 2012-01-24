@@ -96,6 +96,16 @@ var SectorDataTable = (function(){
     }
 })();
 
+if(NMIS) {
+    NMIS.SectorDataTable = SectorDataTable;
+} else {
+    $(function(){
+        if(NMIS) {
+            NMIS.SectorDataTable = SectorDataTable;
+        }
+    });
+}
+
 var FacilityTables = (function(){
     var div;
     function createForSectors(sArr, _opts) {

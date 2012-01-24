@@ -1002,7 +1002,7 @@ var LocalNav = (function(){
         LocalNav: LocalNav,
         Breadcrumb: Breadcrumb,
         DisplayWindow: DisplayWindow,
-        SectorDataTable: SectorDataTable,
+//        SectorDataTable: SectorDataTable,
         DataLoader: DataLoader,
         FacilityPopup: FacilityPopup,
         FacilityHover: FacilityHover,
