@@ -301,7 +301,7 @@ var modes = {
 			// SetResizer is defiend in application.js
 			//   its purpose is to trigger "full-height" whenever the page is resized.
 			//   it has some weird side-effects on mobile browsers.
-			SetResizer(jQuery, ".content-inner-wrap", "#header, #menu", 15);
+			SetResizer(jQuery, "body > .container", "#header, #menu", 15);
 //			var mb = mapBar()
 //					.elem.show();
 //					.find('tr').append($('<td />').html($('<a />', {'href':'#'}).text("hi").click(function(){console.log(this); return false;})));
