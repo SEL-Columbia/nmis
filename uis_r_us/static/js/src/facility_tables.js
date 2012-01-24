@@ -96,7 +96,7 @@ var SectorDataTable = (function(){
     }
 })();
 
-if(NMIS) {
+if("undefined" !== typeof NMIS) {
     NMIS.SectorDataTable = SectorDataTable;
 } else {
     $(function(){
