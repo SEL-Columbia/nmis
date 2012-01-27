@@ -252,30 +252,57 @@ var FacilityHover = (function(){
 function _getNameFromFacility(f) {
     return f.name || f.facility_name || f.school_name
 }
+
 var FacilityPopup = (function(){
     var div;
-    function make(facility) {
-        if(!!div) {
-            div.remove();
-        }
+    function make(facility, opts) {
+        if(opts === undefined) { opts = {}; }
+        if(!!div) { div.remove(); }
         var obj = _.extend({
             thumbnail_url: function() {
-                return NMIS.S3Photos.url(this.s3_photo_id, 200);
+                return NMIS.S3Photos.url(this.s3_photo_id || 'none1:none2', 200);
             },
             image_url: function() {
-                return NMIS.S3Photos.url(this.s3_photo_id, "0");
+                return NMIS.S3Photos.url(this.s3_photo_id || 'none1:none2', "0");
             },
             name: _getNameFromFacility(facility)
         }, facility);
         div = $(Mustache.to_html($('#facility-popup').eq(0).html().replace(/<{/g, '{{').replace(/\}>/g, '}}'), obj));
-        div.dialog({
-            width: 500,
-            height: 300,
-            resizable: false,
-            close: function(){
-                FacilitySelector.deselect();
-            }
+        var s = div.find('select');
+        var sdiv = $('<div />');
+        _.each(facility.sector.subGroups(), function(e){
+            s.append($('<option />', {'value': e.slug}).text(e.name));
+            var d = $('<div />').data('sectorSlug', e.slug);
+            var inds = facility.sector.columnsInSubGroup(e.slug);
+            var tbod = $('<tbody />');
+            _.each(inds, function(ind){
+                var tr = $('<tr />').appendTo(tbod);
+                $('<td />').text(ind.name).appendTo(tr);
+                $('<td />').text(ind.slug).appendTo(tr);
+            });
+            d.html($('<table />').html(tbod))
+            d.appendTo(sdiv);
         });
+        s.change(function(){
+            var thisValue = $(this).val();
+            sdiv.find('> div').hide()
+                .filter(function(d, dd){
+                    return $(dd).data('sectorSlug') === thisValue;
+                }).show();
+        });
+        sdiv.appendTo(div.find('select').parents().eq(0));
+        if(!!opts['in']) {
+            opts['in'].append(div);
+        } else {
+            div.dialog({
+                width: 500,
+                height: 300,
+                resizable: false,
+                close: function(){
+                    FacilitySelector.deselect();
+                }
+            });
+        }
         return div;
     }
     return make;
@@ -330,6 +357,11 @@ var Sectors = (function(){
         if(!this._columns) { return []; }
         function displayOrderSort(a,b) { return (a.display_order > b.display_order) ? 1 : -1 }
         return this._columns.sort(displayOrderSort);
+    }
+    Sector.prototype.columnsInSubGroup = function(sgSlug) {
+        return _.filter(this.getColumns(), function(sg){
+            return !!_.find(sg.subgroups, function(f){return f==sgSlug});
+        });
     }
     Sector.prototype.getIndicators = function() {
         return this._columns || [];

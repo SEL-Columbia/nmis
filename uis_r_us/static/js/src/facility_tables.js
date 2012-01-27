@@ -96,16 +96,6 @@ var SectorDataTable = (function(){
     }
 })();
 
-if("undefined" !== typeof NMIS) {
-    NMIS.SectorDataTable = SectorDataTable;
-} else {
-    $(function(){
-        if(NMIS) {
-            NMIS.SectorDataTable = SectorDataTable;
-        }
-    });
-}
-
 var FacilityTables = (function(){
     var div;
     function createForSectors(sArr, _opts) {
@@ -236,3 +226,15 @@ var FacilityTables = (function(){
         select: select
     };
 })();
+
+if("undefined" !== typeof NMIS) {
+    NMIS.SectorDataTable = SectorDataTable;
+    NMIS.FacilityTables = FacilityTables;
+} else {
+    $(function(){
+        if(NMIS) {
+            NMIS.SectorDataTable = SectorDataTable;
+            NMIS.FacilityTables = FacilityTables;
+        }
+    });
+}

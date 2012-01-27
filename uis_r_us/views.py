@@ -302,7 +302,7 @@ def google_help_doc(request):
 def test_module(request, module_id):
     context = RequestContext(request)
     context.module = module_id
-    context.modules = ['modes', 'tabulations', 'facility_tables']
+    context.modules = ['modes', 'facility_tables', 'tabulations']
     if module_id in context.modules:
         return render_to_response("test_module.html", context_instance=context)
     else:

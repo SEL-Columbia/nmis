@@ -47,15 +47,15 @@ test("nmis", function(){
         iconSwitcher: false,
         sectors: sectors2
     }), "NMIS.init() works");
-    ok(NMIS.Tabulation !== undefined, "Tabulation exists");
+    ok(NMIS.Tabulation !== undefined, "NMIS.Tabulation exists");
 });
 
 test("tabulations_work", function(){
-    deepEqual(Tabulation.sectorSlug("education", "something"), {
+    deepEqual(NMIS.Tabulation.sectorSlug("education", "something"), {
         'false': 7,
         'true': 3
-    }, "Tabulation.sectorSlug correctly calculates the tabulations.");
-    deepEqual(Tabulation.sectorSlugAsArray("education", "something"),
+    }, "NMIS.Tabulation.sectorSlug correctly calculates the tabulations.");
+    deepEqual(NMIS.Tabulation.sectorSlugAsArray("education", "something"),
             [
                 {
                     occurrences: 'false',
@@ -65,18 +65,18 @@ test("tabulations_work", function(){
                     occurrences: 'true',
                     value: 3
                 }
-            ], "Tabulation.sectorSlugAsArray (which is used once) maps the tabulations into an array.");
-    deepEqual(Tabulation.sectorSlug("education", "something", ["true", "false", "maybe"]), {
+            ], "NMIS.Tabulation.sectorSlugAsArray (which is used once) maps the tabulations into an array.");
+    deepEqual(NMIS.Tabulation.sectorSlug("education", "something", ["true", "false", "maybe"]), {
         'true': 3,
         'false': 7,
         'maybe': 0
-    }, "Tabulation.sectorSlug can receive a list of keys and will include values as 0 if not found.")
+    }, "NMIS.Tabulation.sectorSlug can receive a list of keys and will include values as 0 if not found.")
 });
 
-test("Sectors", function(){
-    var sectorList = Sectors.all();
+test("NMIS.Sectors", function(){
+    var sectorList = NMIS.Sectors.all();
     equal(sectorList.length, 4);
-    equal(Sectors.pluck('health').slug, 'health', "Sectors.pluck(slug) works.")
+    equal(NMIS.Sectors.pluck('health').slug, 'health', "NMIS.Sectors.pluck(slug) works.")
 });
 
 module("nmis_data", {
@@ -92,28 +92,41 @@ test("nmis_data_validation", function(){
     equal(NMIS.dataForSector('health').length, 10, "Data for health has a length of x");
 });
 
+selfRemovingModule("popup", {});
+
+test("popup_works", function(){
+    NMIS.init(data2, {
+        iconSwitcher: false,
+        sectors: sectors2
+    });
+    var exFacility = NMIS.data()[0];
+    NMIS.FacilityPopup(exFacility, {
+        'in': this.elem
+    });
+});
+
 module("breadcrumbs", {
     setup: function (){
-        Breadcrumb.clear();
-        Breadcrumb.init('p.bc');
+        NMIS.Breadcrumb.clear();
+        NMIS.Breadcrumb.init('p.bc');
     },
     teardown: function (){
-        Breadcrumb.clear();
+        NMIS.Breadcrumb.clear();
     }
 });
 
 test("can_set_breadcrumb", function(){
-    equal(0, Breadcrumb._levels().length);
-    Breadcrumb.setLevels([
+    equal(0, NMIS.Breadcrumb._levels().length);
+    NMIS.Breadcrumb.setLevels([
             ["Country", "/country"],
             ["State", "/country"],
             ["District", "/country/district"]
         ]);
-    equal(3, Breadcrumb._levels().length);
-    Breadcrumb.setLevel(2, ["LGA", "/country/lga"]);
-    equal(3, Breadcrumb._levels().length);
+    equal(3, NMIS.Breadcrumb._levels().length);
+    NMIS.Breadcrumb.setLevel(2, ["LGA", "/country/lga"]);
+    equal(3, NMIS.Breadcrumb._levels().length);
     //draw is not tested.
-    Breadcrumb.draw();
+    NMIS.Breadcrumb.draw();
 });
 
 $('.page-header')
@@ -195,58 +208,58 @@ selfRemovingModule("map_icons", {
 });
 
 test("icon_manager", function(){
-    IconSwitcher.init({ items: this.simpleItems });
+    NMIS.IconSwitcher.init({ items: this.simpleItems });
 
-    equal(IconSwitcher.allShowing().length, 0, "items are hidden by default");
+    equal(NMIS.IconSwitcher.allShowing().length, 0, "items are hidden by default");
 
-    // IconSwitcher.shiftStatus(callback) returns a status string
-    IconSwitcher.shiftStatus(function(id, item) { return "normal"; });
-    equal(IconSwitcher.allShowing().length, 4, "icons are showing");
+    // NMIS.IconSwitcher.shiftStatus(callback) returns a status string
+    NMIS.IconSwitcher.shiftStatus(function(id, item) { return "normal"; });
+    equal(NMIS.IconSwitcher.allShowing().length, 4, "icons are showing");
 
-    // if IconSwitcher.shiftStatus's function returns false, it will hide that item.
-    IconSwitcher.shiftStatus(function(id, item) { return false; });
-    equal(IconSwitcher.allShowing().length, 0, "icon is no longer showing");
+    // if NMIS.IconSwitcher.shiftStatus's function returns false, it will hide that item.
+    NMIS.IconSwitcher.shiftStatus(function(id, item) { return false; });
+    equal(NMIS.IconSwitcher.allShowing().length, 0, "icon is no longer showing");
 
-    equal(IconSwitcher.all().length, 4, "All the items are returned");
-    equal(IconSwitcher.filterStatus('normal').length, 0, "No items are normal");
+    equal(NMIS.IconSwitcher.all().length, 4, "All the items are returned");
+    equal(NMIS.IconSwitcher.filterStatus('normal').length, 0, "No items are normal");
 
-    IconSwitcher.shiftStatus(function() { return "normal"; });
-    equal(IconSwitcher.filterStatus('normal').length, 4, "All items are normal");
+    NMIS.IconSwitcher.shiftStatus(function() { return "normal"; });
+    equal(NMIS.IconSwitcher.filterStatus('normal').length, 4, "All items are normal");
     
     //selectively set status
-    IconSwitcher.shiftStatus(function(id, item) {
+    NMIS.IconSwitcher.shiftStatus(function(id, item) {
         return item.name == "Dispensary" ? "normal" : false;
     });
-    equal(IconSwitcher.filterStatus('normal').length, 1, "Only dispensary has a normal status");
-    equal(IconSwitcher.allShowing().length, 1, "Only dispensary is showing");
+    equal(NMIS.IconSwitcher.filterStatus('normal').length, 1, "Only dispensary has a normal status");
+    equal(NMIS.IconSwitcher.allShowing().length, 1, "Only dispensary is showing");
 
     //selectively set status
-    IconSwitcher.shiftStatus(function(id, item) {
+    NMIS.IconSwitcher.shiftStatus(function(id, item) {
         return item.name !== "Dispensary" ? "normal" : false;
     });
-    equal(IconSwitcher.filterStatus('normal').length, 3, "Only dispensary status !== normal");
-    equal(IconSwitcher.allShowing().length, 3, "Only dispensary is not showing");
+    equal(NMIS.IconSwitcher.filterStatus('normal').length, 3, "Only dispensary status !== normal");
+    equal(NMIS.IconSwitcher.allShowing().length, 3, "Only dispensary is not showing");
 });
 
 test("icon_manager_callbacks", function(){
-    IconSwitcher.init({ items: this.simpleItems });
+    NMIS.IconSwitcher.init({ items: this.simpleItems });
     //reset all status to hidden and status:undefined.
     var newCounter = 0,
         hideCounter = 0;
-    IconSwitcher.setCallback('shiftMapItemStatus', function(){
+    NMIS.IconSwitcher.setCallback('shiftMapItemStatus', function(){
         newCounter++;
     });
-    IconSwitcher.setCallback('setMapItemVisibility', function(tf){
+    NMIS.IconSwitcher.setCallback('setMapItemVisibility', function(tf){
         if(!tf) {
             hideCounter++;
         }
     });
-    IconSwitcher.shiftStatus(function(id, item) {
+    NMIS.IconSwitcher.shiftStatus(function(id, item) {
         return "normal";
     });
     equal(newCounter, 4, "New counter is incremented. (setCallback works)");
     equal(hideCounter, 0, "Hide counter hasn't incremented yet.");
-    IconSwitcher.shiftStatus(function(id, item) {
+    NMIS.IconSwitcher.shiftStatus(function(id, item) {
         return false;
     });
     equal(hideCounter, 4, "Hide counter has incremented.");
@@ -258,17 +271,17 @@ selfRemovingModule("map_icons_with_real_data", {
             iconSwitcher: false,
             sectors: sectors2
         });
-        IconSwitcher.init({ items: data2 });
+        NMIS.IconSwitcher.init({ items: data2 });
     },
     teardown: function(){
-        IconSwitcher.clear();
+        NMIS.IconSwitcher.clear();
         NMIS.clear();
     }
 });
 
 test("icon_manager2", function(){
-    equal(IconSwitcher.all().length, 30, "Sample data has all items");
-    equal(IconSwitcher.allShowing().length, 0, "no icons showing");
+    equal(NMIS.IconSwitcher.all().length, 30, "Sample data has all items");
+    equal(NMIS.IconSwitcher.allShowing().length, 0, "no icons showing");
 });
 
 selfRemovingModule("table_builder", {
@@ -284,10 +297,10 @@ selfRemovingModule("table_builder", {
 });
 
 test("build_for_health", function(){
-    FacilityTables.createForSectors(['education'])
+/*    NMIS.FacilityTables.createForNMIS.Sectors(['education'])
         .appendTo(this.elem);
-    FacilityTables.select('health', 'ss2');
-    equal(this.elem.find('table').length, 1, "There is one table in the element.")
+    NMIS.FacilityTables.select('health', 'ss2');
+    equal(this.elem.find('table').length, 1, "There is one table in the element.") */
 });
 
 /*
@@ -306,24 +319,24 @@ Scenarios in the facility view:
 var mmgrDefaultOpts = {fake: true, fakeDelay: 0};
 module("map_mgr", {
     setup: function(){
-        this.mInit = MapMgr.init(mmgrDefaultOpts);
+        this.mInit = NMIS.MapMgr.init(mmgrDefaultOpts);
     },
     teardown: function(){
-        MapMgr.clear();
+        NMIS.MapMgr.clear();
     }
 });
 
 asyncTest("mapmgr", function(){
-    MapMgr.addLoadCallback(function(){
+    NMIS.MapMgr.addLoadCallback(function(){
         start();
     });
-    ok(this.mInit, "MapMgr is initted");
-    ok(!MapMgr.isLoaded(), "MapMgr is not initially loaded.")
+    ok(this.mInit, "NMIS.MapMgr is initted");
+    ok(!NMIS.MapMgr.isLoaded(), "NMIS.MapMgr is not initially loaded.")
 });
 
 test("mapmgr_loaded_twice", function(){
-    ok(MapMgr.init(mmgrDefaultOpts), "MapMgr is initted twice.");
-    ok(MapMgr.init(mmgrDefaultOpts), "MapMgr is initted three times.");
+    ok(NMIS.MapMgr.init(mmgrDefaultOpts), "NMIS.MapMgr is initted twice.");
+    ok(NMIS.MapMgr.init(mmgrDefaultOpts), "NMIS.MapMgr is initted three times.");
 });
 
 module("nosetup", {});
@@ -331,12 +344,11 @@ module("nosetup", {});
 test("mapmgr_plays_nicely_with_other_modules", function(){
     var value = 0;
     equals(value, 0, "Value starts at zero");
-    MapMgr.init({
+    NMIS.MapMgr.init({
         fake: true, fakeDelay: 0,
         loadCallbacks: [
             function(){
                 value++;
-                log("value", value)
             }
         ]
     });
@@ -360,8 +372,8 @@ selfRemovingModule("sector_navigation", {
 })
 
 test("sector_clicking_doesnt_reload_map", function(){
-    FacilityTables.createForSectors(['education'])
+/*    NMIS.FacilityTables.createForNMIS.Sectors(['education'])
         .appendTo(this.elem);
-    FacilityTables.select('health', 'ss2');
-    equal(this.elem.find('table').length, 1, "There is one table in the element.")
+    NMIS.FacilityTables.select('health', 'ss2');
+    equal(this.elem.find('table').length, 1, "There is one table in the element.") */
 });
