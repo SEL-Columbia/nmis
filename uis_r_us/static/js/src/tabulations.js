@@ -272,7 +272,7 @@ var FacilityPopup = (function(){
         var sdiv = $('<div />');
         _.each(facility.sector.subGroups(), function(e){
             s.append($('<option />', {'value': e.slug}).text(e.name));
-            var d = $('<div />').data('sectorSlug', e.slug);
+            var d = $('<div />', {'class': 'po-fullw'}).data('sectorSlug', e.slug);
             var inds = facility.sector.columnsInSubGroup(e.slug);
             var tbod = $('<tbody />');
             _.each(inds, function(ind){
