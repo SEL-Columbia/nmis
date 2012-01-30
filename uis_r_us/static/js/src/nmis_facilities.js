@@ -102,7 +102,8 @@ function launchFacilities(lgaData, variableData, params) {
         llString: lgaData.profileData.gps.value,
         elem: wElems.elem0
     };
-	if(!NMIS.MapMgr.init(MapMgr_opts)) {
+    NMIS.MapMgr.init(MapMgr_opts);
+	if(!NMIS.MapMgr.isLoaded()) {
 	    NMIS.MapMgr.addLoadCallback(function(){
             var map = new google.maps.Map(this.elem.get(0), {
                 zoom: 8,

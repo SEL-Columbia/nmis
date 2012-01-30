@@ -96,7 +96,7 @@ var MapMgr = (function(){
         } else {
             _.delay(loaded, opts.fakeDelay);
         }
-        return false;
+        return true;
     }
     function loaded() {
         //log("MapMgr has finished loading");
