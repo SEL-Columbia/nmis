@@ -267,28 +267,31 @@ var FacilityPopup = (function(){
             },
             name: _getNameFromFacility(facility)
         }, facility);
-        div = $(Mustache.to_html($('#facility-popup').eq(0).html().replace(/<{/g, '{{').replace(/\}>/g, '}}'), obj));
-        var s = div.find('select');
-        var sdiv = div.find('.fac-content');
-        _.each(facility.sector.subGroups(), function(e){
-            s.append($('<option />', {'value': e.slug}).text(e.name));
-            var d = $('<div />', {'class': 'po-fullw'}).data('sectorSlug', e.slug);
-            var inds = facility.sector.columnsInSubGroup(e.slug);
-            var tbod = $('<tbody />');
-            _.each(inds, function(ind){
-                var tr = $('<tr />').appendTo(tbod);
-                $('<td />').text(ind.name).appendTo(tr);
-                $('<td />').text(ind.slug).appendTo(tr);
+        var subgroups = facility.sector.subGroups(),
+            defaultSubgroup = subgroups[0];
+        obj.sector_data = _.map(subgroups, function (o, i, arr) {
+            return _.extend({}, o, {
+                variables: _.map(facility.sector.columnsInSubGroup(o.slug), function (oo, ii, oiarr) {
+                    return {
+                        name: oo.name,
+                        value: facility[oo.slug]
+                    };
+                })
             });
-            d.html($('<table />').html(tbod))
-            d.appendTo(sdiv);
         });
-        s.change(function(){
-            var thisValue = $(this).val();
+        var tmplHtml = $('#facility-popup').eq(0).html().replace(/<{/g, '{{').replace(/\}>/g, '}}');
+        div = $(Mustache.to_html(tmplHtml, obj));
+        var s = div.find('select'),
+            sdiv = div.find('.fac-content'),
+            showDataForSector = (function (slug) {
             sdiv.find('> div').hide()
                 .filter(function(d, dd){
-                    return $(dd).data('sectorSlug') === thisValue;
+                    return $(dd).data('sectorSlug') === slug;
                 }).show();
+        });
+        showDataForSector(defaultSubgroup.slug);
+        s.change(function(){
+            showDataForSector($(this).val());
         });
         div.addClass('fac-popup');
         div.dialog({
