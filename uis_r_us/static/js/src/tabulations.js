@@ -269,7 +269,7 @@ var FacilityPopup = (function(){
         }, facility);
         div = $(Mustache.to_html($('#facility-popup').eq(0).html().replace(/<{/g, '{{').replace(/\}>/g, '}}'), obj));
         var s = div.find('select');
-        var sdiv = $('<div />');
+        var sdiv = div.find('.fac-content');
         _.each(facility.sector.subGroups(), function(e){
             s.append($('<option />', {'value': e.slug}).text(e.name));
             var d = $('<div />', {'class': 'po-fullw'}).data('sectorSlug', e.slug);
@@ -290,18 +290,17 @@ var FacilityPopup = (function(){
                     return $(dd).data('sectorSlug') === thisValue;
                 }).show();
         });
-        sdiv.appendTo(div.find('select').parents().eq(0));
-        if(!!opts['in']) {
-            opts['in'].append(div);
-        } else {
-            div.dialog({
-                width: 500,
-                height: 300,
-                resizable: false,
-                close: function(){
-                    FacilitySelector.deselect();
-                }
-            });
+        div.addClass('fac-popup');
+        div.dialog({
+            width: 500,
+            height: 300,
+            resizable: false,
+            close: function(){
+                FacilitySelector.deselect();
+            }
+        });
+        if(!!opts.addClass) {
+            div.addClass(opts.addClass);
         }
         return div;
     }

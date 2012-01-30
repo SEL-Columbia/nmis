@@ -14,7 +14,12 @@ function selfRemovingModule(str, obj) {
         },
         teardown: function(){
             teardown.apply(this, arguments);
-            if(!paramHas(str)) { this.elem.remove(); }
+            if(!paramHas(str)) {
+                this.elem.remove();
+                if(!!this.removeClass) {
+                    $('.'+this.removeClass).remove();
+                }
+            }
         }
     });
     module(str, o);
@@ -101,8 +106,9 @@ test("popup_works", function(){
     });
     var exFacility = NMIS.data()[0];
     NMIS.FacilityPopup(exFacility, {
-        'in': this.elem
+        'addClass': 'test-elem'
     });
+    this.removeClass = "test-elem";
 });
 
 module("breadcrumbs", {
