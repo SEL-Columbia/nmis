@@ -43,6 +43,8 @@ div.facility-display-wrap {
 	padding: 0 20px;
 }
 
+@import "nmis/facility_popup.less";
+
 //@import "nmis/facility_tables.less";
 p.facility-sectors-navigation {
 	margin: 3px 0 10px;
@@ -281,40 +283,3 @@ legacy CSS
 
 /* main.css */
 @import "nmis/legacy/main.less";
-
-div.fac-popup {
-  .fac-content {
-    overflow: hidden;
-    border: 1px solid #ccc;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    height: 200px;
-    overflow: auto;
-	  table {
-	    width: 100%;
-	    tr:nth-child(odd) {
-	      background-color: #eee;
-	    }
-	    td {
-	      color: #555;
-	      padding: 5px 10px;
-	      font-size: 13px;
-	    }
-	  }
-  }
-  div.span2-5 {
-    width: 128px;
-    ul.media-grid {
-      a {
-        margin: 10px 0 18px 12px;
-      }
-    }
-  }
-  div.select-wrap {
-    padding: 5px 2px 8px;
-    select {
-      width: 75%;
-    }
-  }
-}
