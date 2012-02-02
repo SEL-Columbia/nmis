@@ -111,6 +111,20 @@ test("popup_works", function(){
     this.removeClass = "test-elem";
 });
 
+test("hover_popup_works", function(){
+    NMIS.init(data2, {
+        iconSwitcher: false,
+        sectors: sectors2
+    });
+    var exFacility = NMIS.data()[0];
+    NMIS.FacilityHover.show(exFacility, {
+        'addClass': 'test-elem',
+        insertBefore: this.elem,
+        pOffset: {x:10, y:10},
+        item: exFacility
+    });
+});
+
 module("breadcrumbs", {
     setup: function (){
         NMIS.Breadcrumb.clear();
@@ -358,7 +372,7 @@ test("mapmgr_plays_nicely_with_other_modules", function(){
             }
         ]
     });
-    
+
     //deferred until after everything else has run.
     window.setTimeout(function(){
         equals(value, 1, "Value increments");

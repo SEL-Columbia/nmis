@@ -207,23 +207,27 @@ var FacilityHover = (function(){
             Math.floor((worldCoordinate.y - worldCoordinateNW.y) * scale)
         );
     }
-    function show(marker) {
+    function show(marker, opts) {
+        if (opts===undefined) { opts = {}; }
         var map = marker.map;
+        if(!opts.insertBefore) { opts.insertBefore = map.getDiv(); }
         if(!hoverOverlayWrap) {
             hoverOverlayWrap = $('<div />').addClass('hover-overlay-wrap');
-            hoverOverlayWrap.insertBefore(map.getDiv());
+            hoverOverlayWrap.insertBefore(opts.insertBefore);
         }
-        var pOffset = getPixelOffset(marker, map);
+        if(!opts.pOffset) { opts.pOffset = getPixelOffset(marker, map); }
+        if(!opts.item) { opts.item = marker.nmis.item; }
         var obj = {
-            top: pOffset.y + 10,
-            left: pOffset.x - 25,
+            top: opts.pOffset.y + 10,
+            left: opts.pOffset.x - 25,
             arrowLeft: 22,
-            name: _getNameFromFacility(marker.nmis.item),
-            community: marker.nmis.item.community,
-            title: marker.nmis.id,
-            img_thumb: NMIS.S3Photos.url(marker.nmis.item.s3_photo_id, 200)
+            name: _getNameFromFacility(opts.item),
+            community: opts.item.community,
+            title: opts.item.id,
+            img_thumb: NMIS.S3Photos.url(opts.item.s3_photo_id, 200)
         };
         hoverOverlay = $(Mustache.to_html($('#facility-hover').eq(0).html().replace(/<{/g, '{{').replace(/\}>/g, '}}'), obj));
+        if(!!opts.addClass) { hoverOverlay.addClass(opts.addClass); }
         var img = $('<img />').load(function(){
             var $this = $(this);
             if($this.width() > $this.height()) {
@@ -235,7 +239,7 @@ var FacilityHover = (function(){
                 marginTop: -.5*$this.height(),
                 marginLeft: -.5*$this.width()
             });
-        }).attr('src', NMIS.S3Photos.url(marker.nmis.item.s3_photo_id, 90));
+        }).attr('src', NMIS.S3Photos.url(opts.item.s3_photo_id, 90));
         hoverOverlay.find('div.photothumb').html(img);
         hoverOverlayWrap.html(hoverOverlay);
     }
