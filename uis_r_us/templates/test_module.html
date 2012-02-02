@@ -41,6 +41,24 @@
 		<div id="qunit-fixture">test markup</div>
 	</div>
 </div>
+<script type="text/x-mustache-template" id="facility-hover">
+<div class="popover below fade in hover-overlay" style="display: block; top: <{top}>px; left: <{left}>px;">
+	<div class="arrow" style="left:<{arrowLeft}>px"></div>
+	<div class="inner">
+		<div class="content">
+			<p>
+				<div class="photothumb"></div>
+				<strong><{name}></strong> <em>(<{community}>)</em>
+				<br>
+				<br>
+				<span style="font-size:smaller; line-height:11px">
+				Click the icon to view details
+				</span>
+			</p>
+		</div>
+	</div>
+</div>
+</script>
 <script type="text/x-mustache-template" id="facility-popup">
 	<div class="row" title="<{name}>">
 		<div class="row">

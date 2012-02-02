@@ -117,6 +117,7 @@ test("hover_popup_works", function(){
         sectors: sectors2
     });
     var exFacility = NMIS.data()[0];
+    this.removeClass = "test-elem";
     NMIS.FacilityHover.show(exFacility, {
         'addClass': 'test-elem',
         insertBefore: this.elem,
