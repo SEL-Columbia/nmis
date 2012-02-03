@@ -236,7 +236,15 @@ function launchFacilities(lgaData, variableData, params) {
 //        NMIS.DisplayWindow.unsetTempSize(true);
         wElems.elem1content.empty();
         var twrap = $('<div />', {'class':'facility-table-wrap'}).appendTo(wElems.elem1content);
-//        var tableElem = NMIS.SectorDataTable.createIn(twrap, e, {});
+        var tableElem = NMIS.SectorDataTable.createIn(twrap, e, {})
+            .addClass('bs');
+        NMIS.DisplayWindow.addCallback('resize', function(tf, size){
+            if(size==="full") {
+                NMIS.SectorDataTable.updateScrollSize($('.display-window-content').height());
+            } else if(size==="middle") {
+                NMIS.SectorDataTable.updateScrollSize($('.display-window-content').height());
+            }
+        });
 /*        var tableElem = FacilityTables.createForSectors([e.sector.slug], {
             callback: function(div){
                 var pageTitle = $('<h1 />')

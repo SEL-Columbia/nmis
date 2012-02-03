@@ -217,7 +217,7 @@ var FacilityHover = (function(){
         }
         if(!opts.pOffset) { opts.pOffset = getPixelOffset(marker, map); }
         if(!opts.item) { opts.item = marker.nmis.item; }
-        opts.item.s3_photo_id = "none:none";
+        if(!opts.item.s3_photo_id) opts.item.s3_photo_id = "none:none";
         var obj = {
             top: opts.pOffset.y + 10,
             left: opts.pOffset.x - 25,
@@ -696,7 +696,7 @@ var DisplayWindow = (function(){
                 .text(desc)
                 .attr('title', desc)
                 .click(function(){
-                    setSize(size, true)
+                    setSize(size, false)
                 })
                 .appendTo(hbuttons);
         });
