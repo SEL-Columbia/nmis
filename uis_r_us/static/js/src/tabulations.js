@@ -148,7 +148,11 @@ var HackCaps = (function(){
     }
 
     return function(str){
-        return _.map(str.split("_"), capitalize).join(" ");
+        if($.type(str)==="string") {
+            return _.map(str.split("_"), capitalize).join(" ");
+        } else {
+            return str;
+        }
     }
 })();
 

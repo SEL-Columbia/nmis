@@ -99,8 +99,20 @@ var SectorDataTable = (function(){
         _.each(rows, function(r){
             var row = $('<tr />').data("row-data", r._id);
             _.each(cols, function(c){
+                // quick fixes in this function scope will need to be redone.
                 var z = r[c.slug] || nullMarker();
-                row.append($('<td />').html(z))
+                var td = $('<td />');
+                /*--
+                TODO: get some way in the table_defs to specify how a column should be formatted
+                if(c.needs_formatting?) {
+                --*/
+                if(!isNaN(+z)) {
+                    z = Math.floor(+z*100)/100;
+                } else {
+                    z = NMIS.HackCaps(z);
+                }
+                td.html(z);
+                row.append(td);
             });
             tbody.append(row);
         });
