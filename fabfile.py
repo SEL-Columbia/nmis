@@ -15,7 +15,7 @@ env.update(
 DEPLOYMENTS = {
     'dev': {
         'folder_name': 'nmis_dev',
-        'host_string': 'wsgi@staging.mvpafrica.org',
+        'host_string': 'wsgi@nmis-dev.mvpafrica.org',
         'branch': 'develop',
         'backup': False,
         },
