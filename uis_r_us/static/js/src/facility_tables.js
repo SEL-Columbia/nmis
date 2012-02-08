@@ -32,6 +32,7 @@ var SectorDataTable = (function(){
             bPaginate: false
         }, _o);
     }
+    var tableSwitcher;
     function createIn(tableWrap, env, _opts) {
         var opts = _.extend({
             sScrollY: 120
@@ -42,6 +43,22 @@ var SectorDataTable = (function(){
         }
         env.subsector = env.sector.getSubsector(env.subsector.slug);
         var columns = env.subsector.columns();
+
+        if(tableSwitcher) {tableSwitcher.remove();}
+        tableSwitcher = $('<select />');
+        _.each(env.sector.subGroups(), function(sg){
+            $('<option />').val(sg.slug).text(sg.name).appendTo(tableSwitcher);
+        });
+        tableSwitcher
+                    .val(env.subsector.slug)
+                    .appendTo(tableWrap)
+                    .change(function(){
+                        var ssSlug = $(this).val();
+                        var nextUrl = NMIS.urlFor(_.extend({},
+                                        env,
+                                        {subsector: env.sector.getSubsector(ssSlug)}));
+                        dashboard.setLocation(nextUrl);
+                    });
         table = $('<table />')
             .addClass('bs')
             .append(_createThead(columns))
