@@ -537,7 +537,7 @@ var DisplayWindow = (function(){
     var curSize;
     function init(_elem, _opts) {
         if(opts !== undefined) { clear(); }
-        elem = $(_elem);
+        elem = $('<div />').appendTo($(_elem));
         opts = _.extend({
             //default options:
             height: 100,
@@ -559,8 +559,10 @@ var DisplayWindow = (function(){
             padding: 45
         }, _opts);
         elem0 = $('<div />')
+            .addClass('elem0')
             .appendTo(elem);
         elem1 = $('<div />')
+            .addClass('elem1')
             .appendTo(elem);
         visible = !!opts.visible;
         setVisibility(visible, false);
