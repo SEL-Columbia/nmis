@@ -81,11 +81,27 @@ var SectorDataTable = (function(){
             }));
         }
     }
+    function handleHeadRowClick() {
+        var column = $(this).data('column');
+        var indicatorSlug = column.slug;
+        if(!!indicatorSlug) {
+            var newEnv = _.extend({}, NMIS.Env(), {
+                indicator: indicatorSlug
+            });
+            if(!newEnv.subsector) {
+                newEnv.subsector = _.first(newEnv.sector.subGroups());
+            }
+            var newUrl = NMIS.urlFor(newEnv);
+            log(newUrl);
+            dashboard.setLocation(newUrl);
+        }
+    }
     function _createThead(cols) {
         var row = $('<tr />');
         _.each(cols, function(col){
-            row.append($('<th />').text(col.name));
-        })
+            row.append($('<th />').text(col.name).data('column', col));
+        });
+        row.delegate('th', 'click', handleHeadRowClick);
         return $('<thead />').html(row);
     }
     function nullMarker() {
@@ -106,7 +122,7 @@ var SectorDataTable = (function(){
                 TODO: get some way in the table_defs to specify how a column should be formatted
                 if(c.needs_formatting?) {
                 --*/
-                if(!isNaN(+z)) {
+                if($.type(z)==="number") {
                     z = Math.floor(+z*100)/100;
                 } else {
                     z = NMIS.HackCaps(z);
