@@ -113,7 +113,7 @@ def tmp_variables_for_sector(sector_slug, lga_data, record_counts):
                 ["Gender parity index (GPI) for junior secondary schools", g("gender_parity_index_js"), None, "1", None],
             ],),
             ('Infrastructure', [
-                ["Water & Santation"],
+                ["Water & Sanitation"],
                 ["Percentage of primary schools with access to potable water", g("proportion_schools_potable_water_primary"), h("num_schools_potable_water_primary", "num_primary_schools"), "100%", g("target_num_schools")],
                 ["Percentage of junior secondary schools with access to potable water", g("proportion_schools_potable_water_juniorsec"), h("num_schools_potable_water_juniorsec", "num_junior_secondary_schools"), "100%", g("target_num_schools")],
                 ["Percentage of primary schools with improved sanitation/toilet", g("proportion_schools_improved_sanitation_primary"), h("num_schools_improved_sanitation_primary", "num_primary_schools"), "100%", g("target_num_schools")],
