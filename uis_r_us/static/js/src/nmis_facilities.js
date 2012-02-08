@@ -198,18 +198,23 @@ function launchFacilities(lgaData, variableData, params) {
 
             this.map = map;
             var bounds = new google.maps.LatLngBounds();
-            function iconURL(slug, status) {
-                var iconFiles = {
-                    education: "education.png",
-                    health: "health.png",
-                    water: "water.png",
-                    'default': "book_green_wb.png"
-                };
-                var url = "/static/images/icons_f/" + status + "_" + (iconFiles[slug] || iconFiles['default']);
-                return url
-            }
-            function iconURLData(slug, status) {
-                return [iconURL(slug, status), 32, 24];
+            function iconURLData(item) {
+                var slug, status = item.status;
+                if(status==="custom") {
+                    return item._custom_png_data;
+                }
+                function sectorIconURL(slug, status) {
+                    var iconFiles = {
+                        education: "education.png",
+                        health: "health.png",
+                        water: "water.png",
+                        'default': "book_green_wb.png"
+                    };
+                    var url = "/static/images/icons_f/" + status + "_" + (iconFiles[slug] || iconFiles['default']);
+                    return url
+                }
+                slug = item.iconSlug || item.sector.slug;
+                return [sectorIconURL(slug, status), 32, 24];
             }
             function markerClick(){
                 var sslug = NMIS.activeSector().slug;
@@ -242,7 +247,7 @@ function launchFacilities(lgaData, variableData, params) {
                     var $gm = google.maps;
                     var iconData = (function iconDataForItem(i){
                         i.iconSlug = i.iconType || i.sector.slug;
-                        var td = iconURLData(i.iconSlug, i.status || "normal");
+                        var td = iconURLData(i);
                         return {
                             url: td[0],
                             size: new $gm.Size(td[1], td[2])
@@ -278,7 +283,7 @@ function launchFacilities(lgaData, variableData, params) {
                 var mapItem = this.mapItem(id);
                 if(!!mapItem) {
                     var icon = mapItem.marker.getIcon();
-                    icon.url = iconURL(item.sector.slug, item.status);
+                    icon.url = iconURLData(item)[0];
                     mapItem.marker.setIcon(icon);
                 }
             });
@@ -352,6 +357,16 @@ function launchFacilities(lgaData, variableData, params) {
         if(!!e.subsector) FacilityTables.select(e.sector, e.subsector);
         */
         if(!!e.indicator) (function(){
+            if(e.indicator.iconify_png_url) {
+                NMIS.IconSwitcher.shiftStatus(function(id, item) {
+                    if(item.sector === e.sector) {
+                        item._custom_png_data = e.indicator.customIconForItem(item)
+                        return "custom";
+                    } else {
+                        return "background";
+                    }
+                });
+            }
             $('.indicator-feature').remove();
             var obj = _.extend({}, e.indicator);
             var mm = $(mustachify('indicator-feature', obj));

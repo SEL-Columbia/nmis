@@ -418,6 +418,9 @@ var Sectors = (function(){
         this.sector = sector;
         _.extend(this, opts);
     }
+    Indicator.prototype.customIconForItem = function(item) {
+        return [this.iconify_png_url+item[this.slug]+".png", 32, 24];
+    }
     function init(_sectors, opts) {
         if(!!opts && !!opts['default']) {
             defaultSector = new Sector(_.extend(opts['default'], {'default': true}));
