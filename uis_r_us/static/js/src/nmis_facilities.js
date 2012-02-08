@@ -3,9 +3,7 @@ var createOurGraph = (function(pieWrap, legend, data, _opts){
     // if we want to customize stuff (ie. have behavior that changes based on
     // different input) then we should work it into the "_opts" parameter.
     var gid = $(pieWrap).get(0).id;
-    log($(pieWrap));
     if(!gid) {$(pieWrap).attr('id', 'pie-wrap'); gid = 'pie-wrap'; }
-    log($(pieWrap).attr('id'));
     var defaultOpts = {
         x: 50,
         y: 40,
@@ -22,7 +20,7 @@ var createOurGraph = (function(pieWrap, legend, data, _opts){
         var values = [];
     	var colors = [];
     	var legend = [];
-    	vals.sort(function(a, b){ log(a, b); return b.value - a.value; });
+    	vals.sort(function(a, b){ return b.value - a.value; });
     	$(vals).each(function(){
     		if(this.value > 0) {
     			values.push(this.value);
@@ -43,9 +41,7 @@ var createOurGraph = (function(pieWrap, legend, data, _opts){
     // here, we will set it to whatever the highest
     // value that we have is
     Raphael.fn.g.colors[0] = pvals.colors[0];
-    log(gid);
     var r = Raphael(gid);
-    log("got to here", pvals);
     r.g.txtattr.font = opts.font;
     var pie = r.g.piechart(opts.x, opts.y, opts.r,
             pvals.values, {
@@ -388,11 +384,8 @@ function launchFacilities(lgaData, variableData, params) {
                                                         {'legend':'Undefined','color':'#999','key': 'undefined'}];
                 }
                 if(!!pieChartDisplayDefinitions) {
-                    log("HERE", piechartTrue, piechartFalse);
-                    window._pcWrap = pcWrap;
-                    window._pieChartDisplayDefinitions = pieChartDisplayDefinitions;
-                    window._tabulations = NMIS.Tabulation.sectorSlug(sector.slug, column.slug, 'true false undefined'.split(' '));
-                    createOurGraph(pcWrap, pieChartDisplayDefinitions, _tabulations, {});
+                    var tabulations = NMIS.Tabulation.sectorSlug(sector.slug, column.slug, 'true false undefined'.split(' '));
+                    createOurGraph(pcWrap, pieChartDisplayDefinitions, tabulations, {});
                 }
             })(mm.find('.raph-circle').get(0));
         })();
