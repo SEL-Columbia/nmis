@@ -1,3 +1,77 @@
+var createOurGraph = (function(pieWrap, legend, data, _opts){
+    //creates a graph with some default options.
+    // if we want to customize stuff (ie. have behavior that changes based on
+    // different input) then we should work it into the "_opts" parameter.
+    var gid = $(pieWrap).get(0).id;
+    log($(pieWrap));
+    if(!gid) {$(pieWrap).attr('id', 'pie-wrap'); gid = 'pie-wrap'; }
+    log($(pieWrap).attr('id'));
+    var defaultOpts = {
+        x: 50,
+        y: 40,
+        r: 35,
+        font: "12px 'Fontin Sans', Fontin-Sans, sans-serif"
+    };
+    var opts = $.extend({}, defaultOpts, _opts);
+    var rearranged_vals = $.map(legend, function(val){
+        return $.extend(val, {
+            value: data[val.key]
+        });
+    });
+    var pvals = (function(vals){
+        var values = [];
+    	var colors = [];
+    	var legend = [];
+    	vals.sort(function(a, b){ log(a, b); return b.value - a.value; });
+    	$(vals).each(function(){
+    		if(this.value > 0) {
+    			values.push(this.value);
+    			colors.push(this.color);
+    			legend.push('%% - ' + this.legend + ' (##)');
+    		}
+    	});
+    	return {
+    		values: values,
+    		colors: colors,
+    		legend: legend
+    	}
+    })(rearranged_vals);
+
+    // NOTE: hack to get around a graphael bug!
+    // if there is only one color the chart will
+    // use the default value (Raphael.fn.g.colors[0])
+    // here, we will set it to whatever the highest
+    // value that we have is
+    Raphael.fn.g.colors[0] = pvals.colors[0];
+    log(gid);
+    var r = Raphael(gid);
+    log("got to here", pvals);
+    r.g.txtattr.font = opts.font;
+    var pie = r.g.piechart(opts.x, opts.y, opts.r,
+            pvals.values, {
+                    colors: pvals.colors,
+                    legend: pvals.legend,
+                    legendpos: "east"
+                });
+    pie.hover(function () {
+        this.sector.stop();
+        this.sector.scale(1.1, 1.1, this.cx, this.cy);
+        if (this.label) {
+            this.label[0].stop();
+            this.label[0].scale(1.4);
+            this.label[1].attr({"font-weight": 800});
+        }
+    }, function () {
+        this.sector.animate({scale: [1, 1, this.cx, this.cy]}, 500, "bounce");
+        if (this.label) {
+            this.label[0].animate({scale: 1}, 500, "bounce");
+            this.label[1].attr({"font-weight": 400});
+        }
+    });
+    return r;
+});
+// END raphael graph wrapper
+
 //FacilitySelector will probably end up in the NMIS object like all the other modules.
 
 +function facilitiesDisplay(){
@@ -280,6 +354,7 @@ function launchFacilities(lgaData, variableData, params) {
             })));
         });
         if(!!e.subsector) FacilityTables.select(e.sector, e.subsector);
+        */
         if(!!e.indicator) (function(){
             $('.indicator-feature').remove();
             var obj = _.extend({}, e.indicator);
@@ -289,19 +364,38 @@ function launchFacilities(lgaData, variableData, params) {
                 dashboard.setLocation(xx);
                 return false;
             });
-            (function(rcElem, rtElem){
-                var r = Raphael(rcElem),
-                    r2 = Raphael(rtElem);
-                r.g.txtattr.font = "12px 'Fontin Sans', Fontin-Sans, sans-serif";
-                var pie = r.g.piechart(35, 35, 34, [22,5], {"colors":["#21c406","#ff5555"]});
-                $(rtElem).css({'height':'45px'});
-                var pieText = r2.g.piechart(40, 120, 20, [22, 5],
-                        {"colors":["#21c406","#ff5555"],"legend":["%% - Yes (##)","%% - No (##)"],"legendpos":"west"});
-            })(mm.find('.raph-circle').get(0), mm.find('.raph-legend').get(0));
-            mm.prependTo('.facility-display');
-            FacilityTables.highlightColumn(e.indicator);
+            mm.prependTo(wElems.elem1content);
+            (function(pcWrap){
+                var sector = e.sector,
+                    column = e.indicator;
+                    // data = {
+                    //     tabulations: tabulations,
+                    //     sectorName: sector.name,
+                    //     name: column.name,
+                    //     descriptive_name: column.descriptive_name,
+                    //     description: column.description
+                    // };
+                var piechartTrue = _.include(column.click_actions, "piechart_true"),
+                    piechartFalse = _.include(column.click_actions, "piechart_false"),
+                    pieChartDisplayDefinitions;
+                if(piechartTrue) {
+                    pieChartDisplayDefinitions = [{'legend':'No', 'color':'#ff5555', 'key': 'false'},
+                                                        {'legend':'Yes','color':'#21c406','key': 'true'},
+                                                        {'legend':'Undefined','color':'#999','key': 'undefined'}];
+                } else if(piechartFalse) {
+                    pieChartDisplayDefinitions = [{'legend':'Yes', 'color':'#ff5555', 'key': 'true'},
+                                                        {'legend':'No','color':'#21c406','key': 'false'},
+                                                        {'legend':'Undefined','color':'#999','key': 'undefined'}];
+                }
+                if(!!pieChartDisplayDefinitions) {
+                    log("HERE", piechartTrue, piechartFalse);
+                    window._pcWrap = pcWrap;
+                    window._pieChartDisplayDefinitions = pieChartDisplayDefinitions;
+                    window._tabulations = NMIS.Tabulation.sectorSlug(sector.slug, column.slug, 'true false undefined'.split(' '));
+                    createOurGraph(pcWrap, pieChartDisplayDefinitions, _tabulations, {});
+                }
+            })(mm.find('.raph-circle').get(0));
         })();
-        */
 	}
 	if(!!e.facilityId) {
 	    NMIS.FacilitySelector.activate({

@@ -92,7 +92,6 @@ var SectorDataTable = (function(){
                 newEnv.subsector = _.first(newEnv.sector.subGroups());
             }
             var newUrl = NMIS.urlFor(newEnv);
-            log(newUrl);
             dashboard.setLocation(newUrl);
         }
     }
