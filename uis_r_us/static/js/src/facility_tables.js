@@ -15,6 +15,8 @@ var DisplayValue = (function(){
     	    return ["No"];
     	} else if (!isNaN(+v)) {
     	    return [roundDown(v)];
+    	} else if ($.type(v) === "string") {
+    	    return [NMIS.HackCaps(v)]
     	}
         return [v];
     }
@@ -48,6 +50,28 @@ var DisplayValue = (function(){
         }
         return o;
     }
+    DisplayInElement.inTdElem = function(facility, indicator, elem) {
+        var vv = facility[indicator.slug],
+            c = Value(vv);
+        var chkY = indicator.display_style === "checkmark_true",
+            chkN = indicator.display_style === "checkmark_false";
+
+        if(chkY || chkN) {
+            var oclasses = "label ";
+            if($.type(vv)==="boolean") {
+                if(vv) {
+                    oclasses += chkY ? "chk-yes" : "chk-no";
+                } else {
+                    oclasses += chkY ? "chk-no" : "chk-yes";
+                }
+            } else {
+                oclasses += "chk-null";
+            }
+            c[0] = $('<span />').addClass(oclasses).html(c[0]);
+        }
+        return elem.html(c[0]);
+    }
+
     return DisplayInElement;
 })();
 
@@ -144,17 +168,7 @@ var SectorDataTable = (function(){
             _.each(cols, function(c){
                 // quick fixes in this function scope will need to be redone.
                 var z = r[c.slug] || nullMarker();
-                var td = $('<td />');
-                /*--
-                TODO: get some way in the table_defs to specify how a column should be formatted
-                if(c.needs_formatting?) {
-                --*/
-                if($.type(z)==="number") {
-                    z = Math.floor(+z*100)/100;
-                } else {
-                    z = NMIS.HackCaps(z);
-                }
-                td.html(z);
+                var td = DisplayValue.inTdElem(r, c, $('<td />'));
                 row.append(td);
             });
             tbody.append(row);
