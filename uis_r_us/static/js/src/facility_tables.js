@@ -1,26 +1,54 @@
 var DisplayValue = (function(){
     function roundDown(v, i) {
-	var c = 2;
-	var d = Math.pow(10, c);
-	return Math.floor(v * d) / d;
+    	var c = 2;
+    	var d = Math.pow(10, c);
+    	return Math.floor(v * d) / d;
     }
-    function Value(v, td) {
+    function Value(v) {
         if(v===undefined) {
-            return td.html("&mdash;").addClass('val-undefined');
-	} else if (v===null) {
-            return td.html("null").addClass('val-null');
+            return ["&mdash;", 'val-undefined'];
+    	} else if (v===null) {
+            return ["null", 'val-null'];
         } else if (v===true) {
-	    return td.html("Yes");
-	} else if (v===false) {
-	    return td.html("No");
-	} else if (!isNaN(+v)) {
-	    return td.html(roundDown(v));
-	}
-        return td.html(v);
+    	    return ["Yes"];
+    	} else if (v===false) {
+    	    return ["No"];
+    	} else if (!isNaN(+v)) {
+    	    return [roundDown(v)];
+    	}
+        return [v];
     }
-    return function(d, td){
-	return Value(d, td);
-    };
+    function DisplayInElement(d, td) {
+        var res = Value(d);
+        if (d[1]!==undefined) td.addClass(res[1]);
+        return td.html(res[0]);
+    }
+    DisplayInElement.raw = Value;
+    DisplayInElement.special = function(v, indicator) {
+        var r = Value(v),
+            o = {name: indicator.name, classes: "", value: r[0]};
+        if(indicator.display_style==="checkmark_true") {
+            o.classes = "label ";
+            if(v===true) {
+                o.classes += "chk-yes";
+            } else if(v===false) {
+                o.classes += "chk-no";
+            } else {
+                o.classes += "chk-null";
+            }
+        } else if(indicator.display_style==="checkmark_false") {
+            o.classes = "label ";
+            if(v===true) {
+                o.classes += "chk-no";
+            } else if(v===false) {
+                o.classes += "chk-yes";
+            } else {
+                o.classes += "chk-null";
+            }
+        }
+        return o;
+    }
+    return DisplayInElement;
 })();
 
 var SectorDataTable = (function(){

@@ -281,10 +281,7 @@ var FacilityPopup = (function(){
         obj.sector_data = _.map(subgroups, function (o, i, arr) {
             return _.extend({}, o, {
                 variables: _.map(facility.sector.columnsInSubGroup(o.slug), function (oo, ii, oiarr) {
-                    return {
-                        name: oo.name,
-                        value: facility[oo.slug]
-                    };
+                    return DisplayValue.special(facility[oo.slug], oo);
                 })
             });
         });
