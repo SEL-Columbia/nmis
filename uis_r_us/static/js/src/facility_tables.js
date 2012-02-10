@@ -149,7 +149,10 @@ var SectorDataTable = (function(){
     }
     function _createThead(cols) {
         var row = $('<tr />');
-        _.each(cols, function(col){
+        _.each(cols, function(col, ii){
+            if(ii===1) {
+                $('<th />').text('Type').appendTo(row);
+            }
             row.append($('<th />').text(col.name).data('column', col));
         });
         row.delegate('th', 'click', handleHeadRowClick);
@@ -165,8 +168,12 @@ var SectorDataTable = (function(){
         var tbody = $('<tbody />');
         _.each(rows, function(r){
             var row = $('<tr />').data("row-data", r._id);
-            _.each(cols, function(c){
+            _.each(cols, function(c, ii){
                 // quick fixes in this function scope will need to be redone.
+                if(ii===1) {
+                    var ftype = r.facility_type || r.education_type || r.water_source_type || "unk";
+                    $('<td />').attr('title', ftype).addClass('type-icon').html($('<span />').addClass('icon').addClass(ftype).html($('<span />').text(ftype))).appendTo(row);
+                }
                 var z = r[c.slug] || nullMarker();
                 var td = DisplayValue.inTdElem(r, c, $('<td />'));
                 row.append(td);
