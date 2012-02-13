@@ -517,17 +517,19 @@ var Tabulation = (function(){
     };
 })();
 
-
 var DataLoader = (function(){
     function fetch(url){
-		var p, data, _data = localStorage.getItem(url);
-		if(_data) {
-			data = JSON.parse(data);
+		var p, data, stringData = localStorage.getItem(url);
+		if(stringData) {
+			data = JSON.parse(stringData);
+			$.getJSON(url).then(function(d){
+				localStorage.setItem(url, JSON.stringify(d));
+			});
 			return $.Deferred().resolve([data]);
 		} else {
 			p = new $.Deferred();
 			$.getJSON(url).then(function(d){
-				localStorage.setItem(url, d)
+				localStorage.setItem(url, JSON.stringify(d));
 				p.resolve([d]);
 			});
 			return p.promise();
