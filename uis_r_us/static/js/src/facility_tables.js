@@ -103,7 +103,6 @@ var SectorDataTable = (function(){
         });
         tableSwitcher
                     .val(env.subsector.slug)
-                    .appendTo(tableWrap)
                     .change(function(){
                         var ssSlug = $(this).val();
                         var nextUrl = NMIS.urlFor(_.extend({},
@@ -112,14 +111,15 @@ var SectorDataTable = (function(){
                         dashboard.setLocation(nextUrl);
                     });
         table = $('<table />')
-            .addClass('bs')
             .append(_createThead(columns))
             .append(_createTbody(columns, data));
         tableWrap.append(table);
-        dt = table.dataTable(dtOpts({
-            "sDom": "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>",
-            sScrollY: opts.sScrollY
-        }));
+        dt = table.dataTable({
+            sScrollY: opts.sScrollY,
+            bScrollCollapse: false,
+            bPaginate: false
+        });
+		$('.dataTables_filter', tableWrap).after($('<div />', {'class': 'dataTables_filter'}).html(tableSwitcher));
 		table.delegate('tr', 'click', function(){
 		    log($(this).data('rowData'));
 		});
