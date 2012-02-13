@@ -520,7 +520,18 @@ var Tabulation = (function(){
 
 var DataLoader = (function(){
     function fetch(url){
-        return $.getJSON(url);
+		var p, data, _data = localStorage.getItem(url);
+		if(_data) {
+			data = JSON.parse(data);
+			return $.Deferred().resolve([data]);
+		} else {
+			p = new $.Deferred();
+			$.getJSON(url).then(function(d){
+				localStorage.setItem(url, d)
+				p.resolve([d]);
+			});
+			return p.promise();
+		}
     }
     return {
         fetch: fetch
