@@ -46,20 +46,19 @@ def nmis_view(request, state_id, lga_id, reqpath=""):
         context.lga = context.state.lgas.get(unique_slug=full_id)
     except Exception, e:
         return HttpResponseRedirect("/")
-    lga_data = context.lga.get_latest_data(for_display=True)
     data_for_display = context.lga.get_latest_data(for_display=True, display_options={
                 'num_skilled_health_providers_per_1000': {'decimal_places': 3},
                 'num_chews_per_1000': {'decimal_places': 3},
             })
 
     def g(slug):
-        return lga_data.get(slug, None)
+        return data_for_display.get(slug, None)
     context.profile_data = _profile_variables(g)
     context.facility_indicators = tmp_facility_indicators(context.lga, data_for_display)
-    context.mdg_indicators = tmp_get_mdg_indicators(lga_data, g)
-    def _gap_variables(sector_slug, lga_data):
+    context.mdg_indicators = tmp_get_mdg_indicators(data_for_display, g)
+    def _gap_variables(sector_slug):
         def j(slug):
-            value_dict = lga_data.get(slug, None)
+            value_dict = data_for_display.get(slug, None)
             if value_dict:
                 return value_dict.get('value', None)
             else:
@@ -72,7 +71,7 @@ def nmis_view(request, state_id, lga_id, reqpath=""):
         return [plug_in_values(r) \
                         for r in all_gap_indicators().get(sector_slug, [])]
     context.sectors = [ \
-        [s, tmp_variables_for_sector(s, lga_data, {}), _gap_variables(s, lga_data)] \
+        [s, tmp_variables_for_sector(s, data_for_display, {}), _gap_variables(s)] \
             for s in ['health', 'education', 'water']]
     return render_to_response("nmis_view.html", context_instance=context)
 
