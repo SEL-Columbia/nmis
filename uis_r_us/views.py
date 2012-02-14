@@ -428,8 +428,7 @@ def new_sector_overview(request, lga_id, sector_slug):
             'num_chews_per_1000': {'decimal_places': 3},
             'teacher_nonteachingstaff_ratio_lga': {'decimal_places': 3},
         })
-    record_counts = FacilityRecord.counts_by_variable(lga.id)
-    context.table_data = tmp_variables_for_sector(sector_slug, lga_data, record_counts)
+    context.table_data = tmp_variables_for_sector(sector_slug, lga_data, {})
     context.sector = sector_slug
     def j(slug):
         value_dict = lga_data.get(slug, None)
