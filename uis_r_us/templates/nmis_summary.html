@@ -1,17 +1,18 @@
 <h2 class="some-lpadding" style="text-transform:capitalize">{{sector}} Overview
 	<small class="conditional-content" data-content="lga.full-name">{{lga.name}}, {{state.name}}</small>
 </h2>
-<div class="" style="">
+<div class="nmis-sector-summary">
 	{% if gap_indicators %}
         <div style="position:relative;">
-            <p style="position:absolute; right: 0; top: -55px">
-                <a class="btn large" href="#" id="gap-analysis-activator">
-                    Switch to Gap Analysis
+            <p style="position:absolute; right: 0; top: -28px">
+                <a class="btn gap-analysis-activator" href="#">
+					<span class="non-gap">Switch to Gap Analysis</span>
+					<span class="gap-analysis">Switch to Overview</span>
                 </a>
             </p>
         </div>
     {% endif %}
-	<div id="non-gap">
+	<div class="non-gap">
 	<table class="mdg-table" style="width:100%">
 		<tbody>
 			{% for sector_name, indicators in sector_data %}
@@ -58,7 +59,7 @@
 	</table>
 	</div>
     {% if gap_indicators %}
-        <div id="gap-analysis" data-content-title="{{sector|title}} Gap Analysis">
+        <div class="gap-analysis" data-content-title="{{sector|title}} Gap Analysis">
             <table class="mdg-table" style="width:100%">
                 <tbody>
 					{% for gap_indicator_row in gap_indicators %}
