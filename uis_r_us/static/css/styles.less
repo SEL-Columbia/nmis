@@ -147,7 +147,7 @@ div.indicator-feature {
     border: 1px solid #ddd;
     border-width: 0 0 1px;
     font-family: Helvetica;
-    font-size: 18px;
+    font-size: 13px;
     color: #606060;
     line-height: 28px;
   }
@@ -292,7 +292,6 @@ div.dataTables_wrapper {
 
 /*--
 twitter bootstrap datatables integration
---*/
 div.dataTables_length label {
     width: 460px;
     float: left;
@@ -317,11 +316,16 @@ div.dataTables_paginate {
     margin: 0;
 }
 
+--*/
 table.bs {
     margin: 1em 0;
     clear: both;
 }
 
+body div.dataTables_scrollHeadInner table thead th {
+  font-weight: normal;
+  font-size: 12px;
+}
 
 /*
 legacy CSS
@@ -347,3 +351,4 @@ legacy CSS
 	  background-color: #eee;
 	}
 }
+
