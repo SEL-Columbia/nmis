@@ -58,8 +58,20 @@ def nmis_view(request, state_id, lga_id, reqpath=""):
     context.facility_indicators = tmp_facility_indicators(context.lga, data_for_display)
     context.mdg_indicators = tmp_get_mdg_indicators(lga_data, g)
     record_counts = FacilityRecord.counts_by_variable(context.lga.id)
-    def _gap_variables(ss, lga_data):
-        return []
+    def _gap_variables(sector_slug, lga_data):
+        def j(slug):
+            value_dict = lga_data.get(slug, None)
+            if value_dict:
+                return value_dict.get('value', None)
+            else:
+                return 'N/A'
+        def plug_in_values(row):
+            for key in ['current', 'gap', 'target']:
+                if key in row:
+                    row[key] = j(row[key])
+            return row
+        return [plug_in_values(r) \
+                        for r in all_gap_indicators().get(sector_slug, [])]
     context.sectors = [ \
         [s, tmp_variables_for_sector(s, lga_data, record_counts), _gap_variables(s, lga_data)] \
             for s in ['health', 'education', 'water']]
