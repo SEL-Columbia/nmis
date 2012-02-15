@@ -77,14 +77,8 @@ var DisplayValue = (function(){
 
 var SectorDataTable = (function(){
     var dt, table;
-    function dtOpts(_o) {
-        return _.extend({
-            sScrollY: 120,
-            bScrollCollapse: false,
-            bPaginate: false
-        }, _o);
-    }
     var tableSwitcher;
+    var dataTableDraw = function(){};
     function createIn(tableWrap, env, _opts) {
         var opts = _.extend({
             sScrollY: 120
@@ -114,14 +108,18 @@ var SectorDataTable = (function(){
             .append(_createThead(columns))
             .append(_createTbody(columns, data));
         tableWrap.append(table);
-        dt = table.dataTable({
-            sScrollY: opts.sScrollY,
-            bScrollCollapse: false,
-            bPaginate: false,
-            fnDrawCallback: function() {
-                $('.dataTables_info', tableWrap).remove();
-            }
-        });
+        dataTableDraw = function(s){
+            dt = table.dataTable({
+                sScrollY: s,
+                bRetrieve: true,
+                bScrollCollapse: false,
+                bPaginate: false,
+                fnDrawCallback: function() {
+                    $('.dataTables_info', tableWrap).remove();
+                }
+            });
+        }
+        dataTableDraw(opts.sScrollY);
 		$('.dataTables_filter', tableWrap).after($('<div />', {'class': 'dataTables_filter left'})
 		                    .html($("<p />").text("Grouping:").append(tableSwitcher)));
 		table.delegate('tr', 'click', function(){
@@ -130,12 +128,7 @@ var SectorDataTable = (function(){
         return table;
     }
     function updateScrollSize(ss) {
-        if(!!table) {
-            dt = table.dataTable(dtOpts({
-                sScrollY: ss,
-                bDestroy: true
-            }));
-        }
+        dataTableDraw(ss);
     }
     function handleHeadRowClick() {
         var column = $(this).data('column');

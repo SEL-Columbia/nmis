@@ -596,11 +596,13 @@ var DisplayWindow = (function(){
         setSize(opts.size);
     }
     var resized = _.throttle(function(){
-        var fh = fullHeight();
-        elem.stop(true, false);
-        elem.animate({height: fh});
-        elem0.stop(true, false);
-        elem0.animate({height: fh});
+        if(curSize!=="full") {
+            var fh = fullHeight();
+            elem.stop(true, false);
+            elem.animate({height: fh});
+            elem0.stop(true, false);
+            elem0.animate({height: fh});
+        }
     }, 1000);
     function setDWHeight(height) {
         if (height===undefined) {
@@ -631,9 +633,6 @@ var DisplayWindow = (function(){
                 e.hide();
             }
         });
-    }
-    function showContent(content) {
-        log(content);
     }
     function addCallback(cbname, cb) {
         if(opts.callbacks[cbname]===undefined) {
@@ -767,7 +766,6 @@ var DisplayWindow = (function(){
         addTitle: addTitle,
         setTitle: setTitle,
         showTitle: showTitle,
-        showContent: showContent,
         elem1contentHeight: elem1contentHeight,
         getElems: getElems
     };

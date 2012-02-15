@@ -12,14 +12,11 @@ NMIS.DisplayWindow.init(".content", {
                 switch(sizeName) {
                 case "full":
                     NMIS.DisplayWindow.showTitle('tables');
-                    NMIS.DisplayWindow.showContent('dataTables');
                 break;
                 case "middle":
-                    NMIS.DisplayWindow.showContent('tableSummary');
                     NMIS.DisplayWindow.showTitle('bar');
                 break;
                 case "minimized":
-                    NMIS.DisplayWindow.showContent(false);
                     NMIS.DisplayWindow.showTitle('bar');
                 }
             }
