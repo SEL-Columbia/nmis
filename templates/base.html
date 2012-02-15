@@ -46,9 +46,6 @@
 						</span>
 						Nigeria MDG Information System
 					</a>
-					{% if preview_link %}
-					<a href="{{preview_link}}" style="opacity:0.3">*</a>
-					{% endif %}
 					<p class="pull-right print-hide-block">
 					{% if user.is_authenticated %}
 						Logged in as {{user.username}}
@@ -145,5 +142,8 @@
 	<script src="/static/js/src/jquery.dataTables.typeFilter.js" type="text/javascript" charset="utf-8"></script>
 
 	{% block footer %}{% endblock %}
+	{% if preview_link %}
+	<a href="{{preview_link}}" class="beta-preview"><span>View Beta Site</span> *</a>
+	{% endif %}
 </body>
 </html>

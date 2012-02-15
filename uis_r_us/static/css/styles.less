@@ -375,3 +375,31 @@ legacy CSS
 	}
 }
 
+a.beta-preview {
+  font-size: 22px;
+  line-height: 1px;
+  display: block;
+  position: fixed;
+  bottom: 4px;
+  right: 4px;
+  background-color: #cfcfcf;
+  border: 2px solid #aaa;
+  padding: 12px 4px 4px;
+  color: #666;
+  border-radius: 8px;
+  text-decoration: none;
+  opacity: 0.5;
+  span {
+    display: none;
+  }
+  &:hover {
+    opacity: 1;
+    font-size: 14px;
+    border-radius: 4px;
+    line-height: 18px;
+    padding: 1px 3px;
+    span {
+      display: inline;
+    }
+  }
+}
