@@ -56,6 +56,7 @@ def nmis_view(request, state_id, lga_id, reqpath=""):
     context.profile_data = _profile_variables(g)
     context.facility_indicators = tmp_facility_indicators(context.lga, data_for_display)
     context.mdg_indicators = tmp_get_mdg_indicators(data_for_display, g)
+    context.lga_latlng = context.lga.latlng_str
     def _gap_variables(sector_slug):
         def j(slug):
             value_dict = data_for_display.get(slug, None)
