@@ -21,7 +21,8 @@ h2.some-lpadding {
 
 @import "nmis/facility_popup.less";
 
-//@import "nmis/facility_tables.less";
+@import "nmis/facility_tables.less";
+
 p.facility-sectors-navigation {
 	margin: 3px 0 10px;
 	a.sub-sector-link {
@@ -184,87 +185,6 @@ div.display-window-wrap {
 	position: relative;
 }
 
-div.dataTables_wrapper {
-  div.dataTables_filter.left {
-    float: left;
-    width: 340px;
-    select {
-      position: static;
-      margin-left: 15px;
-    }
-  }
-	div.dataTables_filter {
-		float: right;
-		position: relative;
-		width: 300px;
-		height: 35px;
-		padding-left: 12px;
-		label, p {
-			font-style: italic;
-			text-align: left;
-			height: 40px;
-			width: 290px;
-			margin: 0;
-			padding: 0;
-			line-height: 30px;
-			font-size: 12px;
-			input, select {
-				position: absolute;
-				right: 1px;
-				top: 1px;
-				font-size: 12px;
-				line-height: 12px;
-				height: 14px;
-			}
-			select {
-			  font-size: 14px;
-			  line-height: 16px;
-			  height: 28px;
-			}
-		}
-	}
-	table {
-		font-size: 14px;
-		tbody {
-			td {
-				padding: 1px 6px;
-				text-align: center;
-				border-bottom: 1px dotted #eee;
-			}
-		}
-		thead {
-			th {
-				padding: 2px 0;
-				font-weight: bold;
-				color: #656565;
-			}
-			.sorting_desc {
-				background-color: rgba(20,20,20,0.2);
-			}
-			.sorting_asc {
-				background-color: rgba(20,20,20,0.1);
-			}
-		}
-		td:first-child {
-			padding: 1px;
-			text-align: left;
-		}
-		td.sorting_1 {
-			background-color: #eee;
-		}
-	}
-	.dataTables_info {
-		color: #555;
-		font-size: 11px;
-		padding: 3px 1px;
-		font-style: italic;
-	}
-}
-.facility-table-wrap {
-	margin: 4px 12px;
-	padding: 5px;
-}
-
 /* mdg legend */
 .mn-legend {
     position: absolute;
@@ -298,58 +218,11 @@ div.dataTables_wrapper {
     display: block;
 }
 
-
-/*--
-twitter bootstrap datatables integration
-div.dataTables_length label {
-    width: 460px;
-    float: left;
-    text-align: left;
-}
-
-div.dataTables_length select {
-    width: 75px;
-}
-
-div.dataTables_info {
-    padding-top: 8px;
-}
-
-div.dataTables_paginate {
-    float: right;
-    margin: 0;
-}
-
---*/
 table.bs {
     margin: 1em 0;
     clear: both;
 }
 
-div.dataTables_scroll {
-  clear: both;
-}
-
-div.dataTables_wrapper {
-  table {
-    margin: 0;
-  }
-}
-body div.dataTables_scrollHeadInner table {
-  thead th {
-    font-weight: normal;
-    font-size: 12px;
-    padding: 1px 0 8px;
-    border-bottom: 1px solid #ddd;
-  }
-}
-div.dataTables_scrollBody thead tr th {
-  &.headerSortDown, &.headerSortUp {
-    &:after {
-      border: 0 none;
-    }
-  }
-}
 /*
 legacy CSS
 */

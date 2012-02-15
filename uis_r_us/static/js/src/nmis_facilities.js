@@ -316,6 +316,7 @@ function launchFacilities(lgaData, variableData, params) {
         NMIS.DisplayWindow.addCallback('resize', function(tf, size){
             if(size==="full") {
                 NMIS.SectorDataTable.updateScrollSize($('.display-window-content').height());
+                wElems.wrap.css({'height':'auto'})
             } else if(size==="middle") {
                 NMIS.SectorDataTable.updateScrollSize($('.display-window-content').height());
             }

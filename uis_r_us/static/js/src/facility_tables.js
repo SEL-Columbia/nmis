@@ -110,6 +110,7 @@ var SectorDataTable = (function(){
                         dashboard.setLocation(nextUrl);
                     });
         table = $('<table />')
+            .addClass('facility-dt')
             .append(_createThead(columns))
             .append(_createTbody(columns, data));
         tableWrap.append(table);
