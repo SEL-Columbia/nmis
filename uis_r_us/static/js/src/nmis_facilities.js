@@ -71,8 +71,8 @@ var createOurGraph = (function(pieWrap, legend, data, _opts){
 //FacilitySelector will probably end up in the NMIS object like all the other modules.
 
 +function facilitiesDisplay(){
-    var lgaData = NMIS.DataLoader.fetch("/facilities/site/" + lgaUniqueSlug);
-	var variableData = NMIS.DataLoader.fetch("/facility_variables");
+    var lgaDataReq = NMIS.DataLoader.fetch("/facilities/site/" + lgaUniqueSlug);
+	var variableDataReq = NMIS.DataLoader.fetch("/facility_variables");
     function loadFacilities() {
 	    var params = {};
         if((""+window.location.search).match(/facility=(\d+)/)) {
@@ -88,7 +88,7 @@ var createOurGraph = (function(pieWrap, legend, data, _opts){
             params.sector = undefined;
         }
 	    prepFacilities(params);
-	    $.when(lgaData, variableData)
+	    $.when(lgaDataReq, variableDataReq)
     		.done(function(req1, req2){
     		    var lgaData = req1[0];
                 var variableData = req2[0];
