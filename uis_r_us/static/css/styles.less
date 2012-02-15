@@ -19,11 +19,6 @@ h2.some-lpadding {
 
 @import "nmis/display_window.less";
 
-div.content {
-  background-color: #fafafa;
-  padding-bottom: 14px;
-}
-
 @import "nmis/facility_popup.less";
 
 //@import "nmis/facility_tables.less";
@@ -190,12 +185,21 @@ div.display-window-wrap {
 }
 
 div.dataTables_wrapper {
+  div.dataTables_filter.left {
+    float: left;
+    width: 340px;
+    select {
+      position: static;
+      margin-left: 15px;
+    }
+  }
 	div.dataTables_filter {
 		float: right;
 		position: relative;
-		width: 290px;
-		height: 45px;
-		label {
+		width: 300px;
+		height: 35px;
+		padding-left: 12px;
+		label, p {
 			font-style: italic;
 			text-align: left;
 			height: 40px;
@@ -203,14 +207,19 @@ div.dataTables_wrapper {
 			margin: 0;
 			padding: 0;
 			line-height: 30px;
-			font-size: 13px;
-			input {
+			font-size: 12px;
+			input, select {
 				position: absolute;
 				right: 1px;
 				top: 1px;
 				font-size: 12px;
 				line-height: 12px;
 				height: 14px;
+			}
+			select {
+			  font-size: 14px;
+			  line-height: 16px;
+			  height: 28px;
 			}
 		}
 	}
@@ -302,11 +311,6 @@ div.dataTables_length select {
     width: 75px;
 }
 
-div.dataTables_filter label {
-    float: right;
-    width: 460px;
-}
-
 div.dataTables_info {
     padding-top: 8px;
 }
@@ -322,11 +326,30 @@ table.bs {
     clear: both;
 }
 
-body div.dataTables_scrollHeadInner table thead th {
-  font-weight: normal;
-  font-size: 12px;
+div.dataTables_scroll {
+  clear: both;
 }
 
+div.dataTables_wrapper {
+  table {
+    margin: 0;
+  }
+}
+body div.dataTables_scrollHeadInner table {
+  thead th {
+    font-weight: normal;
+    font-size: 12px;
+    padding: 1px 0 8px;
+    border-bottom: 1px solid #ddd;
+  }
+}
+div.dataTables_scrollBody thead tr th {
+  &.headerSortDown, &.headerSortUp {
+    &:after {
+      border: 0 none;
+    }
+  }
+}
 /*
 legacy CSS
 */

@@ -101,8 +101,7 @@ var SectorDataTable = (function(){
         _.each(env.sector.subGroups(), function(sg){
             $('<option />').val(sg.slug).text(sg.name).appendTo(tableSwitcher);
         });
-        tableSwitcher
-                    .val(env.subsector.slug)
+        tableSwitcher.val(env.subsector.slug)
                     .change(function(){
                         var ssSlug = $(this).val();
                         var nextUrl = NMIS.urlFor(_.extend({},
@@ -117,9 +116,13 @@ var SectorDataTable = (function(){
         dt = table.dataTable({
             sScrollY: opts.sScrollY,
             bScrollCollapse: false,
-            bPaginate: false
+            bPaginate: false,
+            fnDrawCallback: function() {
+                $('.dataTables_info', tableWrap).remove();
+            }
         });
-		$('.dataTables_filter', tableWrap).after($('<div />', {'class': 'dataTables_filter'}).html(tableSwitcher));
+		$('.dataTables_filter', tableWrap).after($('<div />', {'class': 'dataTables_filter left'})
+		                    .html($("<p />").text("Grouping:").append(tableSwitcher)));
 		table.delegate('tr', 'click', function(){
 		    log($(this).data('rowData'));
 		});
