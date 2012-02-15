@@ -1,3 +1,18 @@
+function activateGapAnalysis(){
+    $('.gap-analysis').hide();
+	$('.gap-analysis-activator').click(function(evt){
+		var par = $(this).parents('.nmis-sector-summary').eq(0).toggleClass('view-gap');
+		if(par.hasClass('view-gap')) {
+			$('.non-gap', par).hide();
+			$('.gap-analysis', par).show();
+		} else {
+			$('.gap-analysis', par).hide();
+			$('.non-gap', par).show();
+		}
+		evt.preventDefault();
+	});
+}
+
 (function summaryDisplay(){
     function loadSummary(s){
         NMIS.DisplayWindow.setVisibility(false);

@@ -37,19 +37,8 @@ nmis_facilities.js and nmis_summary.js: sets up the page based on the parameters
 <script src="/static/js/src/nmis_summary.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
 	$(function(){
-//		$('.non-gap').show();
-		$('.gap-analysis').hide();
-		$('.gap-analysis-activator').click(function(){
-			var par = $(this).parents('.nmis-sector-summary').eq(0).toggleClass('view-gap');
-			if(par.hasClass('view-gap')) {
-				$('.non-gap', par).hide();
-				$('.gap-analysis', par).show();
-			} else {
-				$('.gap-analysis', par).hide();
-				$('.non-gap', par).show();
-			}
-		});
-		dashboard.run();
+      activateGapAnalysis();
+      dashboard.run();
 	});
 </script>
 {% endblock %}
