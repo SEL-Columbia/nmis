@@ -65,48 +65,60 @@ var MapMgr = (function(){
     var opts,
         started = false,
         finished = false,
-        callbackStr = "NMIS.MapMgr.loaded";
+        callbackStr = "NMIS.MapMgr.loaded",
+        elem, fake,
+        loadCallbacks = [];
     function init(_opts) {
         if(started) {
             return true;
         }
         //log("MapMgr initting");
-        opts = _.extend({
-            //defaults
-            launch: true,
-            fake: false,
-            fakeDelay: 3000,
-            mapLoadFn: function(){
-                $.getScript('http://maps.googleapis.com/maps/api/js?sensor=false&callback='+callbackStr);
-            },
-            elem: 'body',
-            defaultMapType: 'SATELLITE',
-            loadCallbacks: []
-        }, _opts);
-        if(!opts.ll) {
-            if(opts.llString) {
-                var t = opts.llString.split(' ');
-                opts.ll = { lat: +t[0], lng: +t[1] };
+        if(_opts!==undefined) {
+            opts = _.extend({
+                //defaults
+                launch: true,
+                fake: false,
+                fakeDelay: 3000,
+                mapLoadFn: false,
+                elem: 'body',
+                defaultMapType: 'SATELLITE',
+                loadCallbacks: []
+            }, _opts);
+            loadCallbacks = Array.prototype.concat.apply(loadCallbacks, opts.loadCallbacks);
+            if(!opts.ll) {
+                if(opts.llString) {
+                    var t = opts.llString.split(' ');
+                    opts.ll = { lat: +t[0], lng: +t[1] };
+                }
             }
+            elem = $(opts.elem);
+            fake = opts.fake;
+            if(opts.mapLoadFn) {
+                mapLoadFn = opts.mapLoadFn;
+            }
+        } else {
+            fake = false;
         }
         started = true;
-        opts.elem = $(opts.elem);
-        if(!opts.fake) {
-            opts.mapLoadFn();
+        if(!fake) {
+            mapLoadFn();
         } else {
             _.delay(loaded, opts.fakeDelay);
         }
         return true;
     }
+    var mapLoadFn = function() {
+        $.getScript('http://maps.googleapis.com/maps/api/js?sensor=false&callback='+callbackStr)
+    }
     function loaded() {
-        //log("MapMgr has finished loading");
+        var cb;
         finished = true;
-        _.each(opts.loadCallbacks, function(cb){
+        while(cb = loadCallbacks.pop()) {
             cb.call(opts);
-        });
+        }
     }
     function addLoadCallback(cb) {
-        opts.loadCallbacks.push(cb);
+        loadCallbacks.push(cb);
     }
     function isLoaded() {
         return finished;
@@ -159,7 +171,6 @@ var HackCaps = (function(){
 var FacilitySelector = (function(){
     var active = false;
     function activate(params){
-        log(fId);
         var fId = params.id;
         NMIS.IconSwitcher.shiftStatus(function(id, item) {
             if(id !== fId) {

@@ -15,6 +15,30 @@ function activateGapAnalysis(){
 
 (function summaryDisplay(){
     function loadSummary(s){
+        function initSummaryMap() {
+            var $mapDiv = $('.profile-box .map').eq(0),
+                mapDiv = $mapDiv.get(0),
+                summaryMap;
+            if(mapDiv) {
+                var ll = _.map(lga.latLng.split(','), function(x){return +x});
+                summaryMap = new google.maps.Map(mapDiv, {
+                    zoom: 8,
+                    center: new google.maps.LatLng(ll[0], ll[1]),
+                    streetViewControl: false,
+                    panControl: false,
+                    mapTypeControlOptions: {
+                      mapTypeIds: ["roadmap", "satellite", "terrain", "OSM"]
+                    },
+                    mapTypeId: google.maps.MapTypeId.HYBRID
+                });
+            }
+        }
+        if(NMIS.MapMgr.isLoaded()) {
+            initSummaryMap();
+        } else {
+            NMIS.MapMgr.addLoadCallback(initSummaryMap);
+            NMIS.MapMgr.init();
+        }
         NMIS.DisplayWindow.setVisibility(false);
         NMIS.DisplayWindow.setDWHeight();
         var params = s.params;

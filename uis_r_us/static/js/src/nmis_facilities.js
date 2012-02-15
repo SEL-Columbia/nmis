@@ -141,6 +141,7 @@ function prepFacilities(params) {
     });
 }
 
+var facilitiesMapCreated;
 function launchFacilities(lgaData, variableData, params) {
     if(lgaData.profileData===undefined) { lgaData.profileData = {}; }
     if(lgaData.profileData.gps === undefined) {
@@ -172,123 +173,129 @@ function launchFacilities(lgaData, variableData, params) {
         llString: lgaData.profileData.gps.value,
         elem: wElems.elem0
     };
-    NMIS.MapMgr.init(MapMgr_opts);
-	if(!NMIS.MapMgr.isLoaded()) {
-	    NMIS.MapMgr.addLoadCallback(function(){
-            var map = new google.maps.Map(this.elem.get(0), {
-                zoom: 8,
-                center: new google.maps.LatLng(this.ll.lat, this.ll.lng),
-                streetViewControl: false,
-                panControl: false,
-                mapTypeControlOptions: {
-                    mapTypeIds: ["roadmap", "satellite", "terrain", "OSM"]
-                },
-                mapTypeId: google.maps.MapTypeId[this.defaultMapType]
-            });
-            // OSM google maps layer code from:
-            // http://wiki.openstreetmap.org/wiki/Google_Maps_Example#Example_Using_Google_Maps_API_V3
-            map.mapTypes.set("OSM", new google.maps.ImageMapType({
-                getTileUrl: function(coord, zoom) {
-                    return "http://tile.openstreetmap.org/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
-                },
-                tileSize: new google.maps.Size(256, 256),
-                name: "OSM",
-                maxZoom: 18
-            }));
+    function createFacilitiesMap() {
+        var map = new google.maps.Map(this.elem.get(0), {
+            zoom: 8,
+            center: new google.maps.LatLng(this.ll.lat, this.ll.lng),
+            streetViewControl: false,
+            panControl: false,
+            mapTypeControlOptions: {
+                mapTypeIds: ["roadmap", "satellite", "terrain", "OSM"]
+            },
+            mapTypeId: google.maps.MapTypeId[this.defaultMapType]
+        });
+        // OSM google maps layer code from:
+        // http://wiki.openstreetmap.org/wiki/Google_Maps_Example#Example_Using_Google_Maps_API_V3
+        map.mapTypes.set("OSM", new google.maps.ImageMapType({
+            getTileUrl: function(coord, zoom) {
+                return "http://tile.openstreetmap.org/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+            },
+            tileSize: new google.maps.Size(256, 256),
+            name: "OSM",
+            maxZoom: 18
+        }));
 
-            this.map = map;
-            var bounds = new google.maps.LatLngBounds();
-            function iconURLData(item) {
-                var slug, status = item.status;
-                if(status==="custom") {
-                    return item._custom_png_data;
-                }
-                function sectorIconURL(slug, status) {
-                    var iconFiles = {
-                        education: "education.png",
-                        health: "health.png",
-                        water: "water.png",
-                        'default': "book_green_wb.png"
+        this.map = map;
+        var bounds = new google.maps.LatLngBounds();
+        function iconURLData(item) {
+            var slug, status = item.status;
+            if(status==="custom") {
+                return item._custom_png_data;
+            }
+            function sectorIconURL(slug, status) {
+                var iconFiles = {
+                    education: "education.png",
+                    health: "health.png",
+                    water: "water.png",
+                    'default': "book_green_wb.png"
+                };
+                var url = "/static/images/icons_f/" + status + "_" + (iconFiles[slug] || iconFiles['default']);
+                return url
+            }
+            slug = item.iconSlug || item.sector.slug;
+            return [sectorIconURL(slug, status), 32, 24];
+        }
+        function markerClick(){
+            var sslug = NMIS.activeSector().slug;
+            if(sslug==this.nmis.item.sector.slug || sslug === "overview") {
+                dashboard.setLocation(NMIS.urlFor(_.extend(NMIS.Env(), {
+                    facilityId: this.nmis.id
+                })));
+            }
+        }
+        function markerMouseover() {
+            var sslug = NMIS.activeSector().slug;
+            if(this.nmis.item.sector.slug === sslug || sslug === "overview") {
+                NMIS.FacilityHover.show(this);
+            }
+        }
+        function markerMouseout() {
+            NMIS.FacilityHover.hide();
+        }
+        function mapClick() {
+            if(NMIS.FacilitySelector.isActive()) {
+                NMIS.FacilitySelector.deselect();
+                dashboard.setLocation(NMIS.urlFor(_.extend(NMIS.Env(), {
+                    facilityId: false
+                })));
+            }
+        }
+        google.maps.event.addListener(map, 'click', mapClick);
+        NMIS.IconSwitcher.setCallback('createMapItem', function(item, id, itemList){
+            if(!!item._ll && !this.mapItem(id)) {
+                var $gm = google.maps;
+                var iconData = (function iconDataForItem(i){
+                    i.iconSlug = i.iconType || i.sector.slug;
+                    var td = iconURLData(i);
+                    return {
+                        url: td[0],
+                        size: new $gm.Size(td[1], td[2])
                     };
-                    var url = "/static/images/icons_f/" + status + "_" + (iconFiles[slug] || iconFiles['default']);
-                    return url
-                }
-                slug = item.iconSlug || item.sector.slug;
-                return [sectorIconURL(slug, status), 32, 24];
+                })(item);
+                var mI = {
+                    latlng: new $gm
+                                .LatLng(item._ll[0], item._ll[1]),
+                    icon: new $gm
+                                .MarkerImage(iconData.url, iconData.size)
+                };
+                mI.marker = new $gm
+                                .Marker({
+                                    position: mI.latlng,
+                                    map: map,
+                                    icon: mI.icon
+                                });
+                mI.marker.setZIndex(item.status === "normal" ? 99: 11);
+                mI.marker.nmis = {
+                    item: item,
+                    id: id
+                };
+                google.maps.event.addListener(mI.marker, 'click', markerClick);
+                google.maps.event.addListener(mI.marker, 'mouseover', markerMouseover);
+                google.maps.event.addListener(mI.marker, 'mouseout', markerMouseout);
+                bounds.extend(mI.latlng);
+                this.mapItem(id, mI);
             }
-            function markerClick(){
-                var sslug = NMIS.activeSector().slug;
-                if(sslug==this.nmis.item.sector.slug || sslug === "overview") {
-                    dashboard.setLocation(NMIS.urlFor(_.extend(NMIS.Env(), {
-                        facilityId: this.nmis.id
-                    })));
-                }
+        });
+        NMIS.IconSwitcher.createAll();
+        map.fitBounds(bounds);
+        NMIS.IconSwitcher.setCallback('shiftMapItemStatus', function(item, id){
+            var mapItem = this.mapItem(id);
+            if(!!mapItem) {
+                var icon = mapItem.marker.getIcon();
+                icon.url = iconURLData(item)[0];
+                mapItem.marker.setIcon(icon);
             }
-            function markerMouseover() {
-                var sslug = NMIS.activeSector().slug;
-                if(this.nmis.item.sector.slug === sslug || sslug === "overview") {
-                    NMIS.FacilityHover.show(this);
-                }
-            }
-            function markerMouseout() {
-                NMIS.FacilityHover.hide();
-            }
-            function mapClick() {
-                if(NMIS.FacilitySelector.isActive()) {
-                    NMIS.FacilitySelector.deselect();
-                    dashboard.setLocation(NMIS.urlFor(_.extend(NMIS.Env(), {
-                        facilityId: false
-                    })));
-                }
-            }
-            google.maps.event.addListener(map, 'click', mapClick);
-            NMIS.IconSwitcher.setCallback('createMapItem', function(item, id, itemList){
-                if(!!item._ll && !this.mapItem(id)) {
-                    var $gm = google.maps;
-                    var iconData = (function iconDataForItem(i){
-                        i.iconSlug = i.iconType || i.sector.slug;
-                        var td = iconURLData(i);
-                        return {
-                            url: td[0],
-                            size: new $gm.Size(td[1], td[2])
-                        };
-                    })(item);
-                    var mI = {
-                        latlng: new $gm
-                                    .LatLng(item._ll[0], item._ll[1]),
-                        icon: new $gm
-                                    .MarkerImage(iconData.url, iconData.size)
-                    };
-                    mI.marker = new $gm
-                                    .Marker({
-                                        position: mI.latlng,
-                                        map: map,
-                                        icon: mI.icon
-                                    });
-                    mI.marker.setZIndex(item.status === "normal" ? 99: 11);
-                    mI.marker.nmis = {
-                        item: item,
-                        id: id
-                    };
-                    google.maps.event.addListener(mI.marker, 'click', markerClick);
-                    google.maps.event.addListener(mI.marker, 'mouseover', markerMouseover);
-                    google.maps.event.addListener(mI.marker, 'mouseout', markerMouseout);
-                    bounds.extend(mI.latlng);
-                    this.mapItem(id, mI);
-                }
-            });
-            NMIS.IconSwitcher.createAll();
-            map.fitBounds(bounds);
-            NMIS.IconSwitcher.setCallback('shiftMapItemStatus', function(item, id){
-                var mapItem = this.mapItem(id);
-                if(!!mapItem) {
-                    var icon = mapItem.marker.getIcon();
-                    icon.url = iconURLData(item)[0];
-                    mapItem.marker.setIcon(icon);
-                }
-            });
-	    });
-	}
+        });
+    }
+    if(!facilitiesMapCreated) {
+        if(NMIS.MapMgr.isLoaded()) {
+            createFacilitiesMap()
+        } else {
+            NMIS.MapMgr.addLoadCallback(createFacilitiesMap);
+            NMIS.MapMgr.init(MapMgr_opts);
+        }
+        facilitiesMapCreated = true;
+    }
     NMIS.DisplayWindow.setDWHeight('calculate');
 	if(e.sector.slug==='overview') {
 	    wElems.elem1content.empty();
