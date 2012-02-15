@@ -31,10 +31,33 @@ install the requirements
 
     ln -s ~/Dropbox/NMIS\ -\ Nigeria/NMIS\ Data/final_cleaned_data/csv/ data
 
-5. Run load_fixtures management command
+5. Run a series of management commands
 
-    python manage.py load_fixtures
+    # sync, migrate db and add default users
+    python manage.py bootstrap
 
+    # load sectors
+    python manage.py load_sectors
+
+    # load districts
+    python manage.py load_districts
+
+    # go through the data repo and mark lgas that have data available
+    python manage.py mark_available_lgas
+
+    # load key renames
+    python manage.py load_key_renames
+
+    # load in variables
+    python manage.py reload_variables
+
+    # load in lga data for all lgas
+    python manage.py load_lgas
+    # nb: individual lgas can be loaded as well, eg:
+    # python manage.py load_lgas 366
+
+    # load table definitions
+    python manage.py load_table_defs
 
 * Alternatively, if you have the keys set up you can pull from the nmis_data private repo:
 
