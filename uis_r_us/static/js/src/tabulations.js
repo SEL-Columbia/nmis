@@ -548,8 +548,10 @@ var DisplayWindow = (function(){
     var hbuttons;
     var titleElems = {};
     var curSize;
+    var resizerSet;
     function init(_elem, _opts) {
         if(opts !== undefined) { clear(); }
+        if(!resizerSet) {resizerSet=true; $(window).resize(resized);}
         elem = $('<div />').appendTo($(_elem));
         opts = _.extend({
             //default options:
@@ -569,7 +571,7 @@ var DisplayWindow = (function(){
                 minimized: 46
             },
             allowHide: true,
-            padding: 45
+            padding: 10
         }, _opts);
         elem0 = $('<div />')
             .addClass('elem0')
@@ -593,6 +595,13 @@ var DisplayWindow = (function(){
             .appendTo(elem1);
         setSize(opts.size);
     }
+    var resized = _.throttle(function(){
+        var fh = fullHeight();
+        elem.stop(true, false);
+        elem.animate({height: fh});
+        elem0.stop(true, false);
+        elem0.animate({height: fh});
+    }, 1000);
     function setDWHeight(height) {
         if (height===undefined) {
             height = 'auto';
