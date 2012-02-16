@@ -771,6 +771,7 @@ var DisplayWindow = (function(){
         init: init,
         clear: clear,
         setSize: setSize,
+        getSize: function(){return curSize},
         setVisibility: setVisibility,
 //        setTempSize: setTempSize,
 //        unsetTempSize: unsetTempSize,

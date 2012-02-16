@@ -161,6 +161,7 @@ function launchFacilities(lgaData, variableData, params) {
 	    indicator: sector.getIndicator(params.indicator),
 	    facilityId: params.facilityId
 	};
+	var dTableHeight;
 	NMIS.Env(e);
 	NMIS.activeSector(sector);
 	NMIS.loadFacilities(facilities);
@@ -296,7 +297,23 @@ function launchFacilities(lgaData, variableData, params) {
         }
         facilitiesMapCreated = true;
     }
+    function resizeDataTable(size) {
+        var availH = $('.display-window-content').height();
+        if(size==="full") {
+            wElems.wrap.css({'height':'auto'});
+            availH = $('.display-window-content').height();
+            NMIS.SectorDataTable.updateScrollSize(availH);
+            dTableHeight = availH;
+            log("Setting to full ", availH);
+        } else if(size==="middle") {
+            NMIS.SectorDataTable.updateScrollSize(availH-154);
+        }
+    }
+    NMIS.DisplayWindow.addCallback('resize', function(tf, size){
+        resizeDataTable(size)
+    });
     NMIS.DisplayWindow.setDWHeight('calculate');
+    resizeDataTable(NMIS.DisplayWindow.getSize());
 	if(e.sector.slug==='overview') {
 	    wElems.elem1content.empty();
 //	    NMIS.DisplayWindow.setTempSize("minimized", true);
@@ -317,20 +334,11 @@ function launchFacilities(lgaData, variableData, params) {
         }
 //        NMIS.DisplayWindow.unsetTempSize(true);
         wElems.elem1content.empty();
-        var twrap = $('<div />', {'class':'facility-table-wrap'}).appendTo(wElems.elem1content);
+        var twrap = $('<div />', {'class':'facility-table-wrap'}).append($('<div />').attr('class', 'clearfix').html('&nbsp;')).appendTo(wElems.elem1content);
         var tableElem = NMIS.SectorDataTable.createIn(twrap, e, {
-            sScrollY: 146
+            sScrollY: dTableHeight || 146
         })
             .addClass('bs');
-        NMIS.DisplayWindow.addCallback('resize', function(tf, size){
-            var availH = $('.display-window-content').height()-154;
-            if(size==="full") {
-                NMIS.SectorDataTable.updateScrollSize(availH);
-                wElems.wrap.css({'height':'auto'});
-            } else if(size==="middle") {
-                NMIS.SectorDataTable.updateScrollSize(availH);
-            }
-        });
         if(!!e.indicator) (function(){
             if(e.indicator.iconify_png_url) {
                 NMIS.IconSwitcher.shiftStatus(function(id, item) {
