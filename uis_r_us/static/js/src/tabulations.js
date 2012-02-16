@@ -529,11 +529,12 @@ var Tabulation = (function(){
 })();
 
 var DataLoader = (function(){
-    function fetch(url){
+    function fetchLocalStorage(url){
 		var p, data, stringData = localStorage.getItem(url);
 		if(stringData) {
 			data = JSON.parse(stringData);
 			$.getJSON(url).then(function(d){
+			    localStorage.removeItem(url)
 				localStorage.setItem(url, JSON.stringify(d));
 			});
 			return $.Deferred().resolve([data]);
@@ -545,6 +546,9 @@ var DataLoader = (function(){
 			});
 			return p.promise();
 		}
+    }
+    function fetch(url) {
+        return $.getJSON(url);
     }
     return {
         fetch: fetch
