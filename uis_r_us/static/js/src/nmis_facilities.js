@@ -323,7 +323,7 @@ function launchFacilities(lgaData, variableData, params) {
         })
             .addClass('bs');
         NMIS.DisplayWindow.addCallback('resize', function(tf, size){
-            var availH = $('.display-window-content').height()-134;
+            var availH = $('.display-window-content').height()-154;
             if(size==="full") {
                 NMIS.SectorDataTable.updateScrollSize(availH);
                 wElems.wrap.css({'height':'auto'});
