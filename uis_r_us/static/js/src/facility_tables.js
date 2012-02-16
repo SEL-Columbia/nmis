@@ -95,14 +95,6 @@ var SectorDataTable = (function(){
         _.each(env.sector.subGroups(), function(sg){
             $('<option />').val(sg.slug).text(sg.name).appendTo(tableSwitcher);
         });
-        tableSwitcher.val(env.subsector.slug)
-                    .change(function(){
-                        var ssSlug = $(this).val();
-                        var nextUrl = NMIS.urlFor(_.extend({},
-                                        env,
-                                        {subsector: env.sector.getSubsector(ssSlug)}));
-                        dashboard.setLocation(nextUrl);
-                    });
         table = $('<table />')
             .addClass('facility-dt')
             .append(_createThead(columns))
@@ -115,20 +107,50 @@ var SectorDataTable = (function(){
                 bScrollCollapse: false,
                 bPaginate: false,
                 fnDrawCallback: function() {
+                    var newSelectDiv, ts;
                     $('.dataTables_info', tableWrap).remove();
+                    if($('.dtSelect', tableWrap).get(0)===undefined) {
+                        ts = getSelect();
+                        newSelectDiv = $('<div />', {'class': 'dataTables_filter dtSelect left'})
+                                            .html($('<p />').text("Grouping:").append(ts));
+                        $('.dataTables_filter', tableWrap).parents().eq(0)
+                                .prepend(newSelectDiv);
+                        ts.val(env.subsector.slug);
+                        ts.change(function(){
+                            var ssSlug = $(this).val();
+                            var nextUrl = NMIS.urlFor(_.extend({},
+                                            env,
+                                            {subsector: env.sector.getSubsector(ssSlug)}));
+                            dashboard.setLocation(nextUrl);
+                        });
+                    }
                 }
             });
+            return tableWrap;
         }
         dataTableDraw(opts.sScrollY);
-		$('.dataTables_filter', tableWrap).after($('<div />', {'class': 'dataTables_filter left'})
-		                    .html($("<p />").text("Grouping:").append(tableSwitcher)));
 		table.delegate('tr', 'click', function(){
 		    log($(this).data('rowData'));
 		});
         return table;
     }
-    function updateScrollSize(ss) {
+    function getSelect() {
+        return tableSwitcher.clone();
+    }
+    function setDtMaxHeight(ss) {
+        var tw, h1, h2;
+        tw = dataTableDraw(ss);
+        // console.group("heights");
+        // log("DEST: ", ss);
+        h1 = $('.dataTables_scrollHead', tw).height();
+        // log(".dataTables_scrollHead: ", h);
+        h2 = $('.dataTables_filter', tw).height();
+        // log(".dataTables_filter: ", h2);
+        ss = ss - (h1 + h2);
+        // log("sScrollY: ", ss);
         dataTableDraw(ss);
+        // log(".dataTables_wrapper: ", $('.dataTables_wrapper').height());
+        // console.groupEnd();
     }
     function handleHeadRowClick() {
         var column = $(this).data('column');
@@ -181,7 +203,8 @@ var SectorDataTable = (function(){
     }
     return {
         createIn: createIn,
-        updateScrollSize: updateScrollSize,
+        setDtMaxHeight: setDtMaxHeight,
+        getSelect: getSelect,
         resizeColumns: resizeColumns
     }
 })();

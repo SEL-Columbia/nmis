@@ -620,7 +620,6 @@ var DisplayWindow = (function(){
             height = 'auto';
         } else if (height === "calculate") {
             height = fullHeight();
-            log("Setting height to ", height);
         }
         elem.height(height);
         elem0.height(height);

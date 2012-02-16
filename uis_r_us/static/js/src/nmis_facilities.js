@@ -117,6 +117,14 @@ function prepBreadcrumbValues(e, keys, env){
     return arr;
 }
 
+function resizeDisplayWindowAndFacilityTable() {
+    log("Setting");
+    var ah = wElems.elem1.height(),
+        bar = $('.display-window-bar', wElems.elem1).outerHeight(),
+        cf = $('.clearfix', wElems.elem1).eq(0).height();
+    NMIS.SectorDataTable.setDtMaxHeight(ah - bar - cf - 18);
+}
+
 function prepFacilities(params) {
     NMIS.DisplayWindow.setVisibility(true);
     var facilitiesMode = {name:"Facility Detail", slug:"facilities"};
@@ -297,23 +305,26 @@ function launchFacilities(lgaData, variableData, params) {
         }
         facilitiesMapCreated = true;
     }
-    function resizeDataTable(size) {
-        var availH = $('.display-window-content').height();
-        if(size==="full") {
-            wElems.wrap.css({'height':'auto'});
-            availH = $('.display-window-content').height();
-            NMIS.SectorDataTable.updateScrollSize(availH);
-            dTableHeight = availH;
-            log("Setting to full ", availH);
-        } else if(size==="middle") {
-            NMIS.SectorDataTable.updateScrollSize(availH-154);
-        }
+    // function resizeDataTable(size) {
+    //     // var availH = $('.display-window-content').height();
+    //     // if(size==="full") {
+    //     //     wElems.wrap.css({'height':'auto'});
+    //     //     availH = $('.display-window-content').height() - $('.dataTables_scrollHead').height();
+    //     //     NMIS.SectorDataTable.updateScrollSize(availH);
+    //     //     dTableHeight = availH;
+    //     //     log("Setting to full ", availH);
+    //     // } else if(size==="middle") {
+    //     //     NMIS.SectorDataTable.updateScrollSize(availH-$('.dataTables_scrollHead').height()-115);
+    //     // }
+    // }
+    if(window.dwResizeSet===undefined) {
+        window.dwResizeSet = true;
+        NMIS.DisplayWindow.addCallback('resize', function(tf, size){
+            if(size==="middle" || size==="full") resizeDisplayWindowAndFacilityTable()
+        });
     }
-    NMIS.DisplayWindow.addCallback('resize', function(tf, size){
-        resizeDataTable(size)
-    });
     NMIS.DisplayWindow.setDWHeight('calculate');
-    resizeDataTable(NMIS.DisplayWindow.getSize());
+    // resizeDataTable(NMIS.DisplayWindow.getSize());
 	if(e.sector.slug==='overview') {
 	    wElems.elem1content.empty();
 //	    NMIS.DisplayWindow.setTempSize("minimized", true);
@@ -336,7 +347,7 @@ function launchFacilities(lgaData, variableData, params) {
         wElems.elem1content.empty();
         var twrap = $('<div />', {'class':'facility-table-wrap'}).append($('<div />').attr('class', 'clearfix').html('&nbsp;')).appendTo(wElems.elem1content);
         var tableElem = NMIS.SectorDataTable.createIn(twrap, e, {
-            sScrollY: dTableHeight || 146
+            sScrollY: 1000
         })
             .addClass('bs');
         if(!!e.indicator) (function(){
@@ -381,6 +392,7 @@ function launchFacilities(lgaData, variableData, params) {
             })(mm.find('.raph-circle').get(0));
         })();
 	}
+	resizeDisplayWindowAndFacilityTable();
 	if(!!e.facilityId) {
 	    NMIS.FacilitySelector.activate({
 	        id: e.facilityId
