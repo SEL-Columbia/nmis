@@ -111,7 +111,7 @@ var SectorDataTable = (function(){
         dataTableDraw = function(s){
             dt = table.dataTable({
                 sScrollY: s,
-                bRetrieve: true,
+                bDestroy: true,
                 bScrollCollapse: false,
                 bPaginate: false,
                 fnDrawCallback: function() {
