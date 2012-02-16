@@ -620,6 +620,7 @@ var DisplayWindow = (function(){
             height = 'auto';
         } else if (height === "calculate") {
             height = fullHeight();
+            log("Setting height to ", height);
         }
         elem.height(height);
         elem0.height(height);
@@ -757,6 +758,7 @@ var DisplayWindow = (function(){
         }
     }
     function fullHeight() {
+        // gets the available height of the DisplayWindow wrap (everything except the header.)
         var oh = 0;
         $(opts.offsetElems).each(function(){ oh += $(this).height(); });
         return $(window).height() - oh - opts.padding;

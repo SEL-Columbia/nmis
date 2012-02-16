@@ -331,42 +331,6 @@ function launchFacilities(lgaData, variableData, params) {
                 NMIS.SectorDataTable.updateScrollSize(availH);
             }
         });
-/*        var tableElem = FacilityTables.createForSectors([e.sector.slug], {
-            callback: function(div){
-                var pageTitle = $('<h1 />')
-                            .addClass('facilities-content-title')
-                            .hide()
-                            .text(displayTitle);
-                div.prepend(pageTitle);
-                NMIS.DisplayWindow.addTitle('tables', pageTitle);
-            },
-            sectorCallback: function(sector, div, createNav, odiv) {
-                createNav(sector, function(sg){
-                    return NMIS.urlFor({
-                        state: state.slug,
-                        lga: lga.slug,
-                        mode: 'facilities',
-                        sector: sector.slug,
-                        subsector: sg.slug
-                    });
-                }).prependTo(div);
-            },
-            indicatorClickCallback: function() {
-                if(!!this.clickable) {
-                    var clickUrl = NMIS.urlFor(_.extend({}, e, {
-                        indicator: this.slug
-                    }));
-                    dashboard.setLocation(clickUrl);
-                }
-            }
-        });
-        tableElem.find('tbody').delegate('tr', 'click', function(){
-            dashboard.setLocation(NMIS.urlFor(_.extend(e, {
-                facilityId: $(this).data('facilityId')
-            })));
-        });
-        if(!!e.subsector) FacilityTables.select(e.sector, e.subsector);
-        */
         if(!!e.indicator) (function(){
             if(e.indicator.iconify_png_url) {
                 NMIS.IconSwitcher.shiftStatus(function(id, item) {
@@ -390,13 +354,6 @@ function launchFacilities(lgaData, variableData, params) {
             (function(pcWrap){
                 var sector = e.sector,
                     column = e.indicator;
-                    // data = {
-                    //     tabulations: tabulations,
-                    //     sectorName: sector.name,
-                    //     name: column.name,
-                    //     descriptive_name: column.descriptive_name,
-                    //     description: column.description
-                    // };
                 var piechartTrue = _.include(column.click_actions, "piechart_true"),
                     piechartFalse = _.include(column.click_actions, "piechart_false"),
                     pieChartDisplayDefinitions;
