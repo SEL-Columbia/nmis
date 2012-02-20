@@ -119,6 +119,7 @@
       [
         {
           "name": "Number of primary schools (preprimary, primary, preprimary/primary, primary/js)",
+          "description": "all schools in the LGA (public, private, religious, nomadic)",
           "value": "g::num_primary_schools"
         },
         {
@@ -140,6 +141,7 @@
       [
         {
           "name": "Primary net intake rate (NIR) for boys",
+          "description": "number of children entering school at the appropriate starting age",
           "value": "N/A"
         },
         {
@@ -155,8 +157,9 @@
           "value": "N/A"
         },
         {
-          "col_2": "h::num_schools_1kmplus_catchment_primary,num_primary_schools",
           "name": "Percentage of primary schools farther than 1km from catchement area",
+          "description": "Primary schools located farther than 1km from the population they are meant to serve",
+          "col_2": "h::num_schools_1kmplus_catchment_primary,num_primary_schools",
           "value": "g::proportion_schools_1kmplus_catchment_primary"
         },
         {
@@ -186,6 +189,7 @@
       [
         {
           "name": "Primary net enrollment rate (NER) for boys",
+          "description": "percent of children age 6-11 enrolled in primary school",
           "value": "g::net_enrollment_rate_boys_primary"
         },
         {
@@ -220,6 +224,7 @@
         {
           "col_2": "h::num_schools_potable_water_primary,num_primary_schools",
           "name": "Percentage of primary schools with access to potable water",
+          "description": "schools with access to clean drinking water from safe water source",
           "value": "g::proportion_schools_potable_water_primary"
         },
         {
@@ -230,6 +235,7 @@
         {
           "col_2": "h::num_schools_improved_sanitation_primary,num_primary_schools",
           "name": "Percentage of primary schools with improved sanitation/toilet",
+          "description": "schools with a ventilated pit latrine (VIP)",
           "value": "g::proportion_schools_improved_sanitation_primary"
         },
         {
@@ -240,6 +246,7 @@
         {
           "col_2": "h::num_schools_gender_sep_toilet_primary,num_primary_schools",
           "name": "Percentage of primary schools with gender-separated toilets",
+          "description": "separate toilet facilities for boys and girls",
           "value": "g::proportion_schools_gender_sep_toilet_primary"
         },
         {
@@ -249,6 +256,7 @@
         },
         {
           "name": "Pupil to toilet ratio (primary)",
+          "description": "number of pupils on average who use one toilet",
           "value": "g::pupil_toilet_ratio_primary"
         },
         {
@@ -270,7 +278,7 @@
           "value": "g::proportion_schools_power_access_juniorsec"
         },
         {
-          "col_2": "xxg::num_primary_classrooms_need_maj_repairs/g::num_classrooms_lga_primary",
+          "col_2": "g_fraction::num_primary_classrooms_need_maj_repairs,num_classrooms_lga_primary",
           "name": "Percentage of primary school classrooms needing major repair",
           "value": "g::proportion_classrooms_need_major_repair_primary"
         },
