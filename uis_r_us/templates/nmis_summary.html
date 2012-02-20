@@ -28,28 +28,41 @@
 				</th>
 			</tr>
 			{% for indicator in indicators %}
-            {% if indicator|length_is:"1" %}
+            {% if indicator.section_header %}
             <tr>
 				<td class="empty-first empty bb"></td>
                 <td class="empty indheader mdg_header" >
-					{{indicator.0}}
+					{{indicator.name}}
                 </td>
             </tr>
             {% else %}
 			<tr>
 				<td class="empty-first empty bb"></td>
 				<td class="indicator-name bb">
-					{{indicator.0}}
+					  {% if indicator.description %}
+					  <a href="#" rel="popover" data-placement="right" data-content="{{indicator.description}}" title="{{indicator.name}}">
+					   {{indicator.name}}
+					  </a>
+					  {% else %}
+  				    {{indicator.name}}
+				    {% endif %}
 				</td>
 				<td class="indvalue bb">
-                    {% if indicator.1 == None %}
-                        N/A
+                    {% if indicator.value == None %}
+                      N/A
                     {% else %}
-					    {{indicator.1|safe}}{% if indicator.2 != None %}&nbsp;({{indicator.2|safe}}){% endif %}
+        					    {{indicator.value|safe}}
+        					    {% if 'col_2' in indicator.keys %}
+      					        ({{indicator.col_2}})
+        					    {% endif %}
+        					    {% if indicator.col_2 != None %}
+        					    {% endif %}
                     {% endif %}
-				</td>
-				<td class="indvalue bb target" style="display:none">
-					{{indicator.3|safe}}{% if indicator.4 != None %}&nbsp;({{indicator.4|safe}}){% endif %}
+                    {% if indicator.tooltip %}
+                    <p>
+                      {{indicator.tooltip}}
+                    </p>
+                    {% endif %}
 				</td>
 			</tr>
             {% endif %}

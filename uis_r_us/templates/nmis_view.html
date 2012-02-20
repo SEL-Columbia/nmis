@@ -23,6 +23,10 @@
 		lgaUniqueSlug = "{{lga.unique_slug}}";
 		
 		var sectorData = {{sector_data|safe}};
+
+		$(function(){
+		  $('a[rel=popover]').popover();
+		})
 </script>
 
 <!--
