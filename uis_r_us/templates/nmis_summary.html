@@ -79,7 +79,7 @@
 					<tr>
 						{% if gap_indicator_row.type == "title" %}
 						<th colspan="2" class="indheader">
-							{{gap_indicator_row.name}}
+						  {{gap_indicator_row.name}}
 						</th>
 						<th class="indheader mdg_header flush-right">
 							Current
@@ -96,8 +96,17 @@
                             {% if gap_indicator_row.gap != None %}
                             <strong>
                             {% endif %}
+
                             {% if gap_indicator_row.name != None %}
-							    {{gap_indicator_row.name}}
+
+                              {% if gap_indicator_row.description %}
+                              <a href="#" rel="popover" data-placement="right" data-content="{{gap_indicator_row.description}}" title="{{gap_indicator_row.name}}">
+                                {{gap_indicator_row.name}}
+                              </a>
+                              {% else %}
+                                {{gap_indicator_row.name}}
+                              {% endif %}
+
                             {% endif %}
                             {% if gap_indicator_row.gap != None %}
                             </strong>
