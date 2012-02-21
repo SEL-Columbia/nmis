@@ -576,7 +576,7 @@ var DisplayWindow = (function(){
                 ['middle', 'Split'],
                 ['minimized', 'Map Only']
             ],
-            size: 'full',
+            size: 'middle',
             sizeCookie: false,
             callbacks: {},
             visible: false,
