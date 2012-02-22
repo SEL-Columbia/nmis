@@ -62,7 +62,7 @@ var Breadcrumb = (function(){
 })();
 
 var MapMgr = (function(){
-    var opts,
+    var opts = {},
         started = false,
         finished = false,
         callbackStr = "NMIS.MapMgr.loaded",
@@ -85,13 +85,6 @@ var MapMgr = (function(){
                 loadCallbacks: []
             }, _opts);
             loadCallbacks = Array.prototype.concat.apply(loadCallbacks, opts.loadCallbacks);
-            if(!opts.ll) {
-                if(opts.llString) {
-                    var t = opts.llString.split(' ');
-                    opts.ll = { lat: +t[0], lng: +t[1] };
-                }
-            }
-            elem = $(opts.elem);
             fake = opts.fake;
             if(opts.mapLoadFn) {
                 mapLoadFn = opts.mapLoadFn;

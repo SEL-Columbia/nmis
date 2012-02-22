@@ -183,15 +183,23 @@ function launchFacilities(lgaData, variableData, params) {
         elem: wElems.elem0
     };
     function createFacilitiesMap() {
-        var map = new google.maps.Map(this.elem.get(0), {
+        var ll = (function(latlng){
+            var llArr = latlng.split(" ");
+            return {
+                lat: llArr[0],
+                lng: llArr[1]
+            };
+        })(lgaData.profileData.gps.value);
+        log(ll);
+        var map = new google.maps.Map(wElems.elem0.get(0), {
             zoom: 8,
-            center: new google.maps.LatLng(this.ll.lat, this.ll.lng),
+            center: new google.maps.LatLng(ll.lat, ll.lng),
             streetViewControl: false,
             panControl: false,
             mapTypeControlOptions: {
                 mapTypeIds: ["roadmap", "satellite", "terrain", "OSM"]
             },
-            mapTypeId: google.maps.MapTypeId[this.defaultMapType]
+            mapTypeId: google.maps.MapTypeId['SATELLITE']
         });
         // OSM google maps layer code from:
         // http://wiki.openstreetmap.org/wiki/Google_Maps_Example#Example_Using_Google_Maps_API_V3
@@ -203,8 +211,7 @@ function launchFacilities(lgaData, variableData, params) {
             name: "OSM",
             maxZoom: 18
         }));
-
-        this.map = map;
+//        this.map = map;
         var bounds = new google.maps.LatLngBounds();
         function iconURLData(item) {
             var slug, status = item.status;
@@ -301,7 +308,7 @@ function launchFacilities(lgaData, variableData, params) {
             createFacilitiesMap()
         } else {
             NMIS.MapMgr.addLoadCallback(createFacilitiesMap);
-            NMIS.MapMgr.init(MapMgr_opts);
+            NMIS.MapMgr.init();
         }
         facilitiesMapCreated = true;
     }
