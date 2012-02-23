@@ -118,7 +118,6 @@ function prepBreadcrumbValues(e, keys, env){
 }
 
 function resizeDisplayWindowAndFacilityTable() {
-    // log("Setting");
     var ah = wElems.elem1.height(),
         bar = $('.display-window-bar', wElems.elem1).outerHeight(),
         cf = $('.clearfix', wElems.elem1).eq(0).height();
@@ -192,7 +191,13 @@ function launchFacilities(lgaData, variableData, params) {
                 lng: llArr[1]
             };
         })(lgaData.profileData.gps.value);
-        if(!facilitiesMap) {
+        if(!!facilitiesMap) {
+            _.delay(function(){
+                facilitiesMap.setCenter(new google.maps.LatLng(ll.lat, ll.lng));
+                google.maps.event.trigger(facilitiesMap, 'resize');
+            }, 1);
+            return;
+        } else {
             facilitiesMap = new google.maps.Map(wElems.elem0.get(0), {
                 zoom: mapZoom,
                 center: new google.maps.LatLng(ll.lat, ll.lng),
@@ -203,8 +208,9 @@ function launchFacilities(lgaData, variableData, params) {
                 },
                 mapTypeId: google.maps.MapTypeId['SATELLITE']
             });
-        } else {
-            facilitiesMap.setCenter(new google.maps.LatLng(ll.lat, ll.lng), mapZoom);
+            // _.delay(function(){
+            //     facilitiesMap.setCenter(new google.maps.LatLng(ll.lat, ll.lng));
+            // }, 1);
         }
         // OSM google maps layer code from:
         // http://wiki.openstreetmap.org/wiki/Google_Maps_Example#Example_Using_Google_Maps_API_V3
@@ -216,7 +222,6 @@ function launchFacilities(lgaData, variableData, params) {
             name: "OSM",
             maxZoom: 18
         }));
-//        this.map = map;
         var bounds = new google.maps.LatLngBounds();
         function iconURLData(item) {
             var slug, status = item.status;
@@ -298,7 +303,10 @@ function launchFacilities(lgaData, variableData, params) {
             }
         });
         NMIS.IconSwitcher.createAll();
-        facilitiesMap.fitBounds(bounds);
+        _.delay(function(){
+            google.maps.event.trigger(facilitiesMap, 'resize');
+            facilitiesMap.fitBounds(bounds);
+        }, 1);
         NMIS.IconSwitcher.setCallback('shiftMapItemStatus', function(item, id){
             var mapItem = this.mapItem(id);
             if(!!mapItem) {
@@ -308,27 +316,13 @@ function launchFacilities(lgaData, variableData, params) {
             }
         });
     }
-    if(!facilitiesMapCreated) {
-        if(NMIS.MapMgr.isLoaded()) {
-            createFacilitiesMap()
-        } else {
-            NMIS.MapMgr.addLoadCallback(createFacilitiesMap);
-            NMIS.MapMgr.init();
-        }
-        facilitiesMapCreated = true;
+    if(NMIS.MapMgr.isLoaded()) {
+        createFacilitiesMap()
+    } else {
+        NMIS.MapMgr.addLoadCallback(createFacilitiesMap);
+        NMIS.MapMgr.init();
     }
-    // function resizeDataTable(size) {
-    //     // var availH = $('.display-window-content').height();
-    //     // if(size==="full") {
-    //     //     wElems.wrap.css({'height':'auto'});
-    //     //     availH = $('.display-window-content').height() - $('.dataTables_scrollHead').height();
-    //     //     NMIS.SectorDataTable.updateScrollSize(availH);
-    //     //     dTableHeight = availH;
-    //     //     log("Setting to full ", availH);
-    //     // } else if(size==="middle") {
-    //     //     NMIS.SectorDataTable.updateScrollSize(availH-$('.dataTables_scrollHead').height()-115);
-    //     // }
-    // }
+
     if(window.dwResizeSet===undefined) {
         window.dwResizeSet = true;
         NMIS.DisplayWindow.addCallback('resize', function(tf, size){
