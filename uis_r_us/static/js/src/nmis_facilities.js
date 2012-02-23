@@ -32,7 +32,7 @@ var createOurGraph = (function(pieWrap, legend, data, _opts){
     		values: values,
     		colors: colors,
     		legend: legend
-    	}
+    	};
     })(rearranged_vals);
 
     // NOTE: hack to get around a graphael bug!
@@ -118,7 +118,7 @@ function prepBreadcrumbValues(e, keys, env){
 }
 
 function resizeDisplayWindowAndFacilityTable() {
-    log("Setting");
+    // log("Setting");
     var ah = wElems.elem1.height(),
         bar = $('.display-window-bar', wElems.elem1).outerHeight(),
         cf = $('.clearfix', wElems.elem1).eq(0).height();
@@ -149,7 +149,8 @@ function prepFacilities(params) {
     });
 }
 
-var facilitiesMapCreated;
+var facilitiesMapCreated,
+    facilitiesMap;
 function launchFacilities(lgaData, variableData, params) {
     if(lgaData.profileData===undefined) { lgaData.profileData = {}; }
     if(lgaData.profileData.gps === undefined) {
@@ -190,20 +191,21 @@ function launchFacilities(lgaData, variableData, params) {
                 lng: llArr[1]
             };
         })(lgaData.profileData.gps.value);
-        log(ll);
-        var map = new google.maps.Map(wElems.elem0.get(0), {
-            zoom: 8,
-            center: new google.maps.LatLng(ll.lat, ll.lng),
-            streetViewControl: false,
-            panControl: false,
-            mapTypeControlOptions: {
-                mapTypeIds: ["roadmap", "satellite", "terrain", "OSM"]
-            },
-            mapTypeId: google.maps.MapTypeId['SATELLITE']
-        });
+        if(!facilitiesMap) {
+            facilitiesMap = new google.maps.Map(wElems.elem0.get(0), {
+                zoom: 8,
+                center: new google.maps.LatLng(ll.lat, ll.lng),
+                streetViewControl: false,
+                panControl: false,
+                mapTypeControlOptions: {
+                    mapTypeIds: ["roadmap", "satellite", "terrain", "OSM"]
+                },
+                mapTypeId: google.maps.MapTypeId['SATELLITE']
+            });
+        }
         // OSM google maps layer code from:
         // http://wiki.openstreetmap.org/wiki/Google_Maps_Example#Example_Using_Google_Maps_API_V3
-        map.mapTypes.set("OSM", new google.maps.ImageMapType({
+        facilitiesMap.mapTypes.set("OSM", new google.maps.ImageMapType({
             getTileUrl: function(coord, zoom) {
                 return "http://tile.openstreetmap.org/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
             },
@@ -256,7 +258,7 @@ function launchFacilities(lgaData, variableData, params) {
                 })));
             }
         }
-        google.maps.event.addListener(map, 'click', mapClick);
+        google.maps.event.addListener(facilitiesMap, 'click', mapClick);
         NMIS.IconSwitcher.setCallback('createMapItem', function(item, id, itemList){
             if(!!item._ll && !this.mapItem(id)) {
                 var $gm = google.maps;
@@ -277,7 +279,7 @@ function launchFacilities(lgaData, variableData, params) {
                 mI.marker = new $gm
                                 .Marker({
                                     position: mI.latlng,
-                                    map: map,
+                                    map: facilitiesMap,
                                     icon: mI.icon
                                 });
                 mI.marker.setZIndex(item.status === "normal" ? 99: 11);
@@ -293,7 +295,7 @@ function launchFacilities(lgaData, variableData, params) {
             }
         });
         NMIS.IconSwitcher.createAll();
-        map.fitBounds(bounds);
+        facilitiesMap.fitBounds(bounds);
         NMIS.IconSwitcher.setCallback('shiftMapItemStatus', function(item, id){
             var mapItem = this.mapItem(id);
             if(!!mapItem) {
