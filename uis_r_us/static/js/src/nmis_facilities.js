@@ -208,9 +208,6 @@ function launchFacilities(lgaData, variableData, params) {
                 },
                 mapTypeId: google.maps.MapTypeId['SATELLITE']
             });
-            // _.delay(function(){
-            //     facilitiesMap.setCenter(new google.maps.LatLng(ll.lat, ll.lng));
-            // }, 1);
         }
         // OSM google maps layer code from:
         // http://wiki.openstreetmap.org/wiki/Google_Maps_Example#Example_Using_Google_Maps_API_V3
