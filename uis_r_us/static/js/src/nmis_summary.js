@@ -14,23 +14,30 @@ function activateGapAnalysis(){
 }
 
 (function summaryDisplay(){
+    var summaryMap;
     function loadSummary(s){
         function initSummaryMap() {
             var $mapDiv = $('.profile-box .map').eq(0),
                 mapDiv = $mapDiv.get(0),
-                summaryMap;
+                ll = _.map(lga.latLng.split(','), function(x){return +x}),
+                mapZoom = 8;
             if(mapDiv) {
-                var ll = _.map(lga.latLng.split(','), function(x){return +x});
-                summaryMap = new google.maps.Map(mapDiv, {
-                    zoom: 8,
-                    center: new google.maps.LatLng(ll[0], ll[1]),
-                    streetViewControl: false,
-                    panControl: false,
-                    mapTypeControlOptions: {
-                      mapTypeIds: ["roadmap", "satellite", "terrain", "OSM"]
-                    },
-                    mapTypeId: google.maps.MapTypeId.HYBRID
-                });
+                if(!summaryMap) {
+                    summaryMap = new google.maps.Map(mapDiv, {
+                        zoom: mapZoom,
+                        center: new google.maps.LatLng(ll[0], ll[1]),
+                        streetViewControl: false,
+                        panControl: false,
+                        mapTypeControlOptions: {
+                          mapTypeIds: ["roadmap", "satellite", "terrain", "OSM"]
+                        },
+                        mapTypeId: google.maps.MapTypeId.HYBRID
+                    });
+                }
+                _.delay(function(){
+                    google.maps.event.trigger(summaryMap, 'resize');
+                    summaryMap.setCenter(new google.maps.LatLng(ll[0], ll[1]), mapZoom);
+                }, 1);
             }
         }
         if(NMIS.MapMgr.isLoaded()) {

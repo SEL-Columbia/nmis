@@ -183,6 +183,7 @@ function launchFacilities(lgaData, variableData, params) {
         llString: lgaData.profileData.gps.value,
         elem: wElems.elem0
     };
+    var mapZoom = 8;
     function createFacilitiesMap() {
         var ll = (function(latlng){
             var llArr = latlng.split(" ");
@@ -193,7 +194,7 @@ function launchFacilities(lgaData, variableData, params) {
         })(lgaData.profileData.gps.value);
         if(!facilitiesMap) {
             facilitiesMap = new google.maps.Map(wElems.elem0.get(0), {
-                zoom: 8,
+                zoom: mapZoom,
                 center: new google.maps.LatLng(ll.lat, ll.lng),
                 streetViewControl: false,
                 panControl: false,
@@ -202,6 +203,8 @@ function launchFacilities(lgaData, variableData, params) {
                 },
                 mapTypeId: google.maps.MapTypeId['SATELLITE']
             });
+        } else {
+            facilitiesMap.setCenter(new google.maps.LatLng(ll.lat, ll.lng), mapZoom);
         }
         // OSM google maps layer code from:
         // http://wiki.openstreetmap.org/wiki/Google_Maps_Example#Example_Using_Google_Maps_API_V3
