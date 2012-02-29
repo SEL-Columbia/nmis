@@ -91,7 +91,7 @@ def dashboard(request, reqpath):
         lgaid = request.POST['lga']
         try:
             lga = LGA.objects.get(unique_slug=lgaid)
-            return HttpResponseRedirect("/new_dashboard/%s" % lga.unique_slug)
+            return HttpResponseRedirect("/nmis~/%s" % lga.url_id)
         except LGA.DoesNotExist, e:
             return HttpResponseRedirect("/~")
     context = RequestContext(request)
