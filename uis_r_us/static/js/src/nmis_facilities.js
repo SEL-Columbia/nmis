@@ -184,23 +184,21 @@ function launchFacilities(lgaData, variableData, params) {
     };
     var mapZoom = 8;
     function createFacilitiesMap() {
-        var ll = (function(latlng){
-            var llArr = latlng.split(" ");
-            return {
-                lat: llArr[0],
-                lng: llArr[1]
-            };
-        })(lgaData.profileData.gps.value);
+        var ll = _.map(lga.latLng.split(','), function(x){return +x});
         if(!!facilitiesMap) {
             _.delay(function(){
-                facilitiesMap.setCenter(new google.maps.LatLng(ll.lat, ll.lng));
+                if(lga.bounds) {
+                    facilitiesMap.fitBounds(lga.bounds);
+                } else {
+                    facilitiesMap.setCenter(new google.maps.LatLng(ll[0], ll[1]));
+                }
                 google.maps.event.trigger(facilitiesMap, 'resize');
             }, 1);
             return;
         } else {
             facilitiesMap = new google.maps.Map(wElems.elem0.get(0), {
                 zoom: mapZoom,
-                center: new google.maps.LatLng(ll.lat, ll.lng),
+                center: new google.maps.LatLng(ll[0], ll[1]),
                 streetViewControl: false,
                 panControl: false,
                 mapTypeControlOptions: {
@@ -300,6 +298,7 @@ function launchFacilities(lgaData, variableData, params) {
             }
         });
         NMIS.IconSwitcher.createAll();
+        lga.bounds = bounds;
         _.delay(function(){
             google.maps.event.trigger(facilitiesMap, 'resize');
             facilitiesMap.fitBounds(bounds);
