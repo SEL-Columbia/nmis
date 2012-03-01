@@ -353,45 +353,50 @@ function launchFacilities(lgaData, variableData, params) {
         })
             .addClass('bs');
         if(!!e.indicator) (function(){
-            if(e.indicator.iconify_png_url) {
-                NMIS.IconSwitcher.shiftStatus(function(id, item) {
-                    if(item.sector === e.sector) {
-                        item._custom_png_data = e.indicator.customIconForItem(item)
-                        return "custom";
-                    } else {
-                        return "background";
-                    }
+            clickPopup: {
+                if(e.indicator.iconify_png_url) {
+                    NMIS.IconSwitcher.shiftStatus(function(id, item) {
+                        if(item.sector === e.sector) {
+                            item._custom_png_data = e.indicator.customIconForItem(item)
+                            return "custom";
+                        } else {
+                            return "background";
+                        }
+                    });
+                }
+                if(e.indicator.click_actions.length==0) {
+                    break clickPopup;
+                }
+                $('.indicator-feature').remove();
+                var obj = _.extend({}, e.indicator);
+                var mm = $(mustachify('indicator-feature', obj));
+                mm.find('a.close').click(function(){
+                    var xx = NMIS.urlFor(_.extend({}, e, {indicator: false}));
+                    dashboard.setLocation(xx);
+                    return false;
                 });
+                mm.prependTo(wElems.elem1content);
+                (function(pcWrap){
+                    var sector = e.sector,
+                        column = e.indicator;
+                    var piechartTrue = _.include(column.click_actions, "piechart_true"),
+                        piechartFalse = _.include(column.click_actions, "piechart_false"),
+                        pieChartDisplayDefinitions;
+                    if(piechartTrue) {
+                        pieChartDisplayDefinitions = [{'legend':'No', 'color':'#ff5555', 'key': 'false'},
+                                                            {'legend':'Yes','color':'#21c406','key': 'true'},
+                                                            {'legend':'Undefined','color':'#999','key': 'undefined'}];
+                    } else if(piechartFalse) {
+                        pieChartDisplayDefinitions = [{'legend':'Yes', 'color':'#ff5555', 'key': 'true'},
+                                                            {'legend':'No','color':'#21c406','key': 'false'},
+                                                            {'legend':'Undefined','color':'#999','key': 'undefined'}];
+                    }
+                    if(!!pieChartDisplayDefinitions) {
+                        var tabulations = NMIS.Tabulation.sectorSlug(sector.slug, column.slug, 'true false undefined'.split(' '));
+                        createOurGraph(pcWrap, pieChartDisplayDefinitions, tabulations, {});
+                    }
+                })(mm.find('.raph-circle').get(0));
             }
-            $('.indicator-feature').remove();
-            var obj = _.extend({}, e.indicator);
-            var mm = $(mustachify('indicator-feature', obj));
-            mm.find('a.close').click(function(){
-                var xx = NMIS.urlFor(_.extend({}, e, {indicator: false}));
-                dashboard.setLocation(xx);
-                return false;
-            });
-            mm.prependTo(wElems.elem1content);
-            (function(pcWrap){
-                var sector = e.sector,
-                    column = e.indicator;
-                var piechartTrue = _.include(column.click_actions, "piechart_true"),
-                    piechartFalse = _.include(column.click_actions, "piechart_false"),
-                    pieChartDisplayDefinitions;
-                if(piechartTrue) {
-                    pieChartDisplayDefinitions = [{'legend':'No', 'color':'#ff5555', 'key': 'false'},
-                                                        {'legend':'Yes','color':'#21c406','key': 'true'},
-                                                        {'legend':'Undefined','color':'#999','key': 'undefined'}];
-                } else if(piechartFalse) {
-                    pieChartDisplayDefinitions = [{'legend':'Yes', 'color':'#ff5555', 'key': 'true'},
-                                                        {'legend':'No','color':'#21c406','key': 'false'},
-                                                        {'legend':'Undefined','color':'#999','key': 'undefined'}];
-                }
-                if(!!pieChartDisplayDefinitions) {
-                    var tabulations = NMIS.Tabulation.sectorSlug(sector.slug, column.slug, 'true false undefined'.split(' '));
-                    createOurGraph(pcWrap, pieChartDisplayDefinitions, tabulations, {});
-                }
-            })(mm.find('.raph-circle').get(0));
         })();
 	}
 	resizeDisplayWindowAndFacilityTable();
