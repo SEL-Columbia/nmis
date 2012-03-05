@@ -54,6 +54,7 @@ def nmis_view(request, state_id, lga_id, reqpath=""):
     def g(slug):
         return data_for_display.get(slug, None)
     context.profile_data = _profile_variables(g)
+    context.profile_data_json = json.dumps(context.profile_data)
     context.facility_indicators = tmp_facility_indicators(context.lga, data_for_display)
     context.mdg_indicators = tmp_get_mdg_indicators(data_for_display, g)
     context.lga_latlng = context.lga.latlng_str
@@ -389,6 +390,7 @@ def new_dashboard(request, lga_id):
     context.lga = lga
     context.state = lga.state
     context.profile_variables = _profile_variables(g)
+    context.profile_variables_json = json.dumps(context.profile_variables)
     return render_to_response("new_dashboard.html", context_instance=context)
 
 def _profile_variables(g):

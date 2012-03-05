@@ -19,6 +19,7 @@
 			slug: "{{lga.slug}}",
 			latLng: "{{lga_latlng}}"
 		},
+		profileData = {{profile_data_json|safe}},
 		lgaName = "{{lga.name}}",
 		lgaUniqueSlug = "{{lga.unique_slug}}";
 		
@@ -169,5 +170,53 @@ To avoid django/mustache conflicts, I'm using <{x}> instead of double-curly-brac
 			</div>
 		</div>
 	</div>
+</script>
+<script type="text/x-mustache-template" id="facilities-overview">
+<div class="container no-fill">
+	<div class="span9">
+		<div class="row">
+			<h3 class="span8">
+				Facilities <span class="replace-counts" data-count-slug="facilities">(<{facCount}>)</span>
+			</h3>
+		</div>
+		<div class="row">
+			<div class="span8 offset0">
+			 <{#overviewSectors}>
+			 <p>
+			    <a href="<{url}>" class="sector-btn btn large" style="display:block">
+			      <span class="sector-icon <{slug}>">&nbsp;</span>
+			      <{name}>
+			      <{counts}> &raquo;
+			    </a>
+			 </p>
+			 <{/overviewSectors}>
+			</div>
+		</div>
+	</div>
+	<div class="span9">
+		<div class="span8">
+			<table class="simple-lines">
+				<tbody>
+					<tr>
+						<td class="header" colspan="2">
+							<{lgaName}>
+						</td>
+					</tr>
+					<{#profileData}>
+					<tr>
+					  <td><{name}></td>
+					  <td class="l-align">
+							<span class="replace-data" data-lga-variable="<{value}>"><{value}></span>
+						</td>
+					</tr>
+					<{/profileData}>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="span18">
+		<br>
+	</div>
+</div>
 </script>
 {% endblock %}

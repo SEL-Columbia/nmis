@@ -333,12 +333,41 @@ function launchFacilities(lgaData, variableData, params) {
     // resizeDataTable(NMIS.DisplayWindow.getSize());
 	if(e.sector.slug==='overview') {
 	    wElems.elem1content.empty();
-//	    NMIS.DisplayWindow.setTempSize("minimized", true);
         var displayTitle = "Facility Detail: "+lga.name+" Overview";
         NMIS.DisplayWindow.setTitle(displayTitle);
         NMIS.IconSwitcher.shiftStatus(function(id, item) {
             return "normal";
         });
+        var obj = {
+            facCount: "15",
+            lgaName: '' + lga.name + ', ' + state.name,
+            overviewSectors: [],
+            profileData: _.map(profileData, function(d){
+                var val = '';
+                if(d[1] === null || d[1] === undefined) {
+                    val = DisplayValue.raw(null)[0];
+                } else if(d[1].value !== undefined) {
+                    val = DisplayValue.raw(d[1].value)[0];
+                } else {
+                    val = DisplayValue.raw(null);
+                }
+                return {
+                    name: d[0],
+                    value: val
+                }
+            })
+        };
+        _.each(NMIS.Sectors.all(), function(s){
+            var c = 0;
+            _.each(NMIS.data(), function(d){ if(d.sector == s) c++; });
+            obj.overviewSectors.push({
+                name: s.name,
+                slug: s.slug,
+                url: '#',
+                counts: c
+            });
+        });
+        wElems.elem1content.html(mustachify("facilities-overview", obj));
     } else {
         if(!!e.subsectorUndefined || !NMIS.FacilitySelector.isActive()) {
             NMIS.IconSwitcher.shiftStatus(function(id, item) {
