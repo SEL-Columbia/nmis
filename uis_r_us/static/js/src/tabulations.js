@@ -110,6 +110,28 @@ var MapMgr = (function(){
             cb.call(opts);
         }
     }
+    function mapboxLayer(options) {
+        if(typeof google ==="undefined") {
+            throw(new Error("Google Maps has not yet loaded into the page."));
+        }
+	    return new google.maps.ImageMapType({
+	        getTileUrl: function(coord, z) {
+	        // Y coordinate is flipped in Mapbox, compared to Google
+	        // Simplistic predictable hashing
+	        return 'http://tilestream.openmangrove.org/1.0.0/'
+	            + options.tileset
+	            + '/' + z
+	            + '/' + coord.x
+	            + '/' + Math.abs(coord.y - (Math.pow(2, z) - 1)) + '.png';
+	        },
+	        name: options.name,
+	        alt: options.name,
+	        tileSize: new google.maps.Size(256, 256),
+	        isPng: true,
+	        minZoom: 0,
+	        maxZoom: options.maxZoom || 17
+	    });
+    }
     function addLoadCallback(cb) {
         loadCallbacks.push(cb);
     }
@@ -124,6 +146,7 @@ var MapMgr = (function(){
         clear: clear,
         loaded: loaded,
         isLoaded: isLoaded,
+        mapboxLayer: mapboxLayer,
         addLoadCallback: addLoadCallback
     }
 })();

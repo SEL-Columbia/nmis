@@ -21,6 +21,7 @@ function activateGapAnalysis(){
                 mapDiv = $mapDiv.get(0),
                 ll = _.map(lga.latLng.split(','), function(x){return +x}),
                 mapZoom = 8;
+
             if(mapDiv) {
                 if(!summaryMap) {
                     summaryMap = new google.maps.Map(mapDiv, {
@@ -28,11 +29,14 @@ function activateGapAnalysis(){
                         center: new google.maps.LatLng(ll[0], ll[1]),
                         streetViewControl: false,
                         panControl: false,
-                        mapTypeControlOptions: {
-                          mapTypeIds: ["roadmap", "satellite", "terrain", "OSM"]
-                        },
+                        mapTypeControl: false,
                         mapTypeId: google.maps.MapTypeId.HYBRID
                     });
+                    summaryMap.mapTypes.set('ng_base_map', NMIS.MapMgr.mapboxLayer({
+            			tileset: 'nigeria_base',
+            			name: 'Nigeria'
+            		}));
+            		summaryMap.setMapTypeId('ng_base_map');
                 }
                 _.delay(function(){
                     google.maps.event.trigger(summaryMap, 'resize');
