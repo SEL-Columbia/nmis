@@ -19,7 +19,7 @@
 			slug: "{{lga.slug}}",
 			latLng: "{{lga_latlng}}"
 		},
-		profileData = {{profile_data_json|safe}},
+		profileData = [{{profile_data_json|safe}}][0],
 		lgaName = "{{lga.name}}",
 		lgaUniqueSlug = "{{lga.unique_slug}}";
 		
