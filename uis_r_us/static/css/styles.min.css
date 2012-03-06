@@ -391,6 +391,7 @@ div.display-window-wrap{position:relative;}
 div.display-window-content{position:absolute;bottom:0;width:100%;background-color:#fefefe;}
 div.display-window-content.size-minimized div.facility-table-wrap{display:none;}
 div.facility-display-wrap{padding:0 20px;}
+div.elem1-content{background-color:#fff;}
 div.fac-popup .fac-content{overflow:hidden;border:1px solid #ccc;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;height:200px;overflow:auto;}div.fac-popup .fac-content table{width:100%;}div.fac-popup .fac-content table tr:nth-child(odd){background-color:#eee;}
 div.fac-popup .fac-content table td{color:#555;padding:5px 10px;font-size:13px;}
 div.fac-popup .fac-content table td:first-child{width:60%;}
@@ -410,7 +411,7 @@ div.dataTables_wrapper .dataTables_info{color:#555;font-size:11px;padding:3px 1p
 table.facility-dt td{font-size:13px;}
 div.dataTables_scroll{clear:both;}
 div.dataTables_wrapper table{margin:0;}
-body div.dataTables_scrollHeadInner table thead th{font-weight:normal;font-size:12px;padding:1px 0 8px;border-bottom:1px solid #ddd;}
+body div.dataTables_scrollHeadInner table thead th{font-weight:normal;font-size:12px;padding:1px 0 8px;border-bottom:1px solid #ddd;text-align:center;}
 body div.dataTables_scrollBody thead tr th.header::after{height:0px;border:0 none;margin:0;}
 body div.dataTables_scrollBody thead tr th.headerSortDown:after,body div.dataTables_scrollBody thead tr th.headerSortUp:after{border:0 none;}
 p.facility-sectors-navigation{margin:3px 0 10px;}p.facility-sectors-navigation a.sub-sector-link{padding:3px 6px;white-space:nowrap;}
@@ -687,9 +688,9 @@ div.lr-cols{padding-left:320px;position:relative;}div.lr-cols hr{border-color:#c
 .r-col{padding:4px;}.r-col .r-sect{border:1px solid #dddddd;padding:5px;margin:0 0 4px;}.r-col .r-sect .rs-title{font-size:16px;font-weight:bold;margin:2px 0;}
 #display-window-wrap{border:1px solid #999999;}
 .display-window-bar{margin:0;text-align:right;}.display-window-bar a.clicksize{border:1px solid #999999;margin:0 10px 0 0;}.display-window-bar a.clicksize span{display:none;}
-a.sector-btn{margin-top:9px;}a.sector-btn span.sector-icon{display:inline-block;width:30px;height:20px;margin-right:3px;opacity:0.8;}a.sector-btn span.sector-icon.education{background-image:url("/static/images/icons/school_w.png");}
-a.sector-btn span.sector-icon.health{background-image:url("/static/images/icons/clinic_s.png");}
-a.sector-btn span.sector-icon.water{background-image:url("/static/images/icons/water_small.png");}
+a.sector-btn{margin-top:9px;}a.sector-btn span.sector-icon{display:inline-block;width:30px;height:20px;margin-right:3px;opacity:0.8;}a.sector-btn span.sector-icon.education{background-image:url("/static/images/icons_f/normal_education.png");}
+a.sector-btn span.sector-icon.health{background-image:url("/static/images/icons_f/normal_health.png");}
+a.sector-btn span.sector-icon.water{background-image:url("/static/images/icons_f/normal_water.png");}
 #lga-widget-wrap table.simple-lines{margin-top:8px;}#lga-widget-wrap table.simple-lines td{padding:5px;border:0 none;text-align:left;}#lga-widget-wrap table.simple-lines td.header{text-align:left;font-size:16px;font-weight:bold;}
 .topbar div>ul.chzn-results{display:block;float:none;}.topbar div>ul.chzn-results>li{float:none;display:list-item;}
 .topbar div.chzn-drop{z-index:999;}
