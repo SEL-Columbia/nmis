@@ -26,7 +26,7 @@ function activateGapAnalysis(){
                 if(!summaryMap) {
                     summaryMap = new google.maps.Map(mapDiv, {
                         zoom: mapZoom,
-                        center: new google.maps.LatLng(ll[0], ll[1]),
+                        center: new google.maps.LatLng(ll[1], ll[0]),
                         streetViewControl: false,
                         panControl: false,
                         mapTypeControl: false,
@@ -40,7 +40,7 @@ function activateGapAnalysis(){
                 }
                 _.delay(function(){
                     google.maps.event.trigger(summaryMap, 'resize');
-                    summaryMap.setCenter(new google.maps.LatLng(ll[0], ll[1]), mapZoom);
+                    summaryMap.setCenter(new google.maps.LatLng(ll[1], ll[0]), mapZoom);
                 }, 1);
             }
         }
