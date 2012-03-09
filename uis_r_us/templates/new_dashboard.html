@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+<script type="text/javascript" charset="utf-8">
+  var lgaLatLngStr = "{{lga.latlng_str}}";
+</script>
 <div class="new-dashboard">
 	<div class="header">
 		<div class="profile-box">
@@ -290,7 +293,7 @@ var DisplayMap = (function(){
 	};
 })();
 
-DisplayMap.init('#profile-map', "{{lga.latlng_str}}");
+DisplayMap.init('#profile-map', lgaLatLngStr);
 var menu = $('<ul />', {id:'menu'});
 
 $('#content').before(menu);
