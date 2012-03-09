@@ -7,24 +7,6 @@
 <script src="/static/js/application.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript" charset="utf-8">
-	var reqPath = "{{reqpath}}",
-		urlRoot = "{{url_root}}",
-		stateName = "{{state.name}}",
-		state = {
-			name: "{{state.name}}",
-			slug: "{{state.slug}}"
-		},
-		lga = {
-			name: "{{lga.name}}",
-			slug: "{{lga.slug}}",
-			latLng: "{{lga_latlng}}"
-		},
-		profileData = [{{profile_data_json|safe}}][0],
-		lgaName = "{{lga.name}}",
-		lgaUniqueSlug = "{{lga.unique_slug}}";
-		
-		var sectorData = {{sector_data|safe}};
-
 		$(function(){
 		  $('a[rel=popover]').popover();
 		})
@@ -53,6 +35,25 @@ nmis_facilities.js and nmis_summary.js: sets up the page based on the parameters
 To avoid django/mustache conflicts, I'm using <{x}> instead of double-curly-brackets
 -->
 {% block content %}
+<script type="text/javascript" charset="utf-8">
+  var reqPath = "{{reqpath}}",
+		urlRoot = "{{url_root}}",
+		stateName = "{{state.name}}",
+		state = {
+			name: "{{state.name}}",
+			slug: "{{state.slug}}"
+		},
+		lga = {
+			name: "{{lga.name}}",
+			slug: "{{lga.slug}}",
+			latLng: "{{latlng_str}}"
+		},
+		profileData = [{{profile_data_json|safe}}][0],
+		lgaName = "{{lga.name}}",
+		lgaUniqueSlug = "{{lga.unique_slug}}";
+
+		var sectorData = {{sector_data|safe}};
+</script>
 <div id="conditional-content">
 	<div class="lga overview">
 		<div class="display-window-bar breadcrumb">
