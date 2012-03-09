@@ -53,7 +53,9 @@
                     {% else %}
         					    {{indicator.value|safe}}
         					    {% if 'col_2' in indicator.keys %}
-      					        ({{indicator.col_2}})
+          					    {% if indicator.col_2 != None %}
+        					        ({{indicator.col_2}})
+      					        {% endif %}
         					    {% endif %}
         					    {% if indicator.col_2 != None %}
         					    {% endif %}
