@@ -20,7 +20,7 @@ function activateGapAnalysis(){
             var $mapDiv = $('.profile-box .map').eq(0),
                 mapDiv = $mapDiv.get(0),
                 ll = _.map(lga.latLng.split(','), function(x){return +x}),
-                mapZoom = 8;
+                mapZoom = 9;
 
             if(mapDiv) {
                 if(!summaryMap) {
