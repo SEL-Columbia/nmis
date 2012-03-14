@@ -65,7 +65,8 @@ def nmis_view(request, state_id, lga_id, reqpath=""):
                 return value_dict.get('value', None)
             else:
                 return 'N/A'
-        def plug_in_values(row):
+        def plug_in_values(original_row):
+            row = original_row.copy()
             for key in ['current', 'gap', 'target']:
                 if key in row:
                     row[key] = j(row[key])
@@ -449,7 +450,8 @@ def new_sector_overview(request, lga_id, sector_slug):
             return value_dict.get('value', None)
         else:
             return 'N/A'
-    def plug_in_values(row):
+    def plug_in_values(original_row):
+        row = original_row.copy()
         for key in ['current', 'gap', 'target']:
             if key in row:
                 row[key] = j(row[key])
