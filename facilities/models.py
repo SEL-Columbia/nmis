@@ -15,12 +15,12 @@ class FacilityRecord(DataRecord):
     @classmethod
     def counts_by_variable(cls, lga):
         records = cls.objects.filter(facility__lga=lga, invalid=False).values('facility', 'variable', 'float_value', 'boolean_value', 'string_value', 'facility__sector').annotate(Max('date')).distinct()
+        variables = dict([(x['slug'], x['data_type']) for x in list(Variable.objects.all().values('slug', 'data_type'))])
         def infinite_dict():
             return defaultdict(infinite_dict)
         result = infinite_dict()
         for d in records:
-            variable = Variable.get(d['variable'])
-            value = variable.value_field()
+            value = Variable.value_field_for_data_type(variables[d['variable']])
             if d[value] in result[d['facility__sector']][d['variable']]:
                 result[d['facility__sector']][d['variable']][d[value]] += 1
             else:

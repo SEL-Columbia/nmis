@@ -52,13 +52,6 @@
                       N/A
                     {% else %}
         					    {{indicator.value|safe}}
-        					    {% if 'col_2' in indicator.keys %}
-          					    {% if indicator.col_2 != None %}
-        					        ({{indicator.col_2}})
-      					        {% endif %}
-        					    {% endif %}
-        					    {% if indicator.col_2 != None %}
-        					    {% endif %}
                     {% endif %}
                     {% if indicator.tooltip %}
                     <p>

@@ -2,6 +2,8 @@ import json
 import re
 import os
 from django.conf import settings
+from facilities.models import LGAIndicator
+
 
 def tmp_variables_for_sector(sector_slug, lga_data, record_counts):
     def g(slug):
