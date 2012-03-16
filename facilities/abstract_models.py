@@ -151,6 +151,10 @@ class Variable(models.Model):
         """
         return self.PRIMITIVE_MAP[self.data_type] + '_value'
 
+    @classmethod
+    def value_field_for_data_type(cls, data_type):
+        return cls.PRIMITIVE_MAP[data_type] + '_value'
+
     def __unicode__(self):
         return json.dumps(self.to_dict(), indent=4)
 
