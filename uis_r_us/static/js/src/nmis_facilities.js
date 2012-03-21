@@ -363,7 +363,10 @@ function launchFacilities(lgaData, variableData, params) {
             obj.overviewSectors.push({
                 name: s.name,
                 slug: s.slug,
-                url: '#',
+                url: NMIS.urlFor(_.extend(NMIS.Env(), {
+                    sector: s,
+                    subsector: false
+                })),
                 counts: c
             });
         });
