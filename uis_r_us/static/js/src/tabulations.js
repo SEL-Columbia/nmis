@@ -1033,7 +1033,8 @@ var LocalNav = (function(){
     }
     function loadFacilities(_data, opts) {
         _.each(_data, function(val, key){
-            data[key] = cloneParse(val);
+            var id = val._id || key;
+            data[id] = cloneParse(val);
         });
     }
     function clear() {
