@@ -129,9 +129,9 @@ var SectorDataTable = (function(){
             return tableWrap;
         }
         dataTableDraw(opts.sScrollY);
-		table.delegate('tr', 'click', function(){
-		    log($(this).data('rowData'));
-		});
+        // table.delegate('tr', 'click', function(){
+        //     dashboard.setLocation(NMIS.urlFor(_.extend({}, NMIS.Env(), {facilityId: $(this).data('rowData')})));
+        // });
         return table;
     }
     function getSelect() {
