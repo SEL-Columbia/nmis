@@ -169,7 +169,6 @@ var SectorDataTable = (function(){
     function _createThead(cols) {
         var row = $('<tr />');
         var startsWithType = cols[0].name=="Type";
-        log(startsWithType);
         _.each(cols, function(col, ii){
             if(ii===1 && !startsWithType) {
                 $('<th />').text('Type').appendTo(row);
