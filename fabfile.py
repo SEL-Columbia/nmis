@@ -86,7 +86,12 @@ def deploy(deployment_name, reload_lgas="none"):
         with cd(env.code_path):
             run("git pull origin %(branch)s" % env)
     pull_code()
-    
+   
+    def remove_pyc():
+        with cd(env.code_path):
+            run('find . -name "*.pyc" -exec rm -rf {} \;')
+    remove_pyc()
+
     def pull_data():
         with cd(os.path.join(env.code_path, 'data')):
             run("git pull origin master")
