@@ -19,5 +19,4 @@ def reload_sitewide():
     The site should only be *down* for a minute or two.
     """
     d = data_loader.DataLoader()
-    Variable.objects.all().delete()
     d.load_variables()
