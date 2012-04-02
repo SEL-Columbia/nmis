@@ -14,7 +14,7 @@ python manage.py load_districts
 python manage.py mark_available_lgas
     "Iterates through the CSVs and sets certain LGAs as available"
 
-python manage.py load_key_renames
+python manage.py reload_key_renames
     "Important to have this before loading data from CSVs"
 
 python manage.py reload_variables
@@ -22,13 +22,13 @@ python manage.py reload_variables
     "This takes the site down momentarily for ALL lgas"
     "Runs 'facilities.reload.sitewide.reload_sitewide()'."
 
+python manage.py reload_table_defs
+    "This takes the site down momentarily for ALL LGAS"
+    "Reloads the table_defs from the data repo"
+
 python manage.py load_lgas
     "FOR PRODUCTION"
     "This takes the site down for ONE LGA AT A TIME"
     "Runs 'facilities.reload.individual_lga.reload_individual_lga(x)' for each argument"
-
-python manage.py load_table_defs
-    "This takes the site down momentarily for ALL LGAS"
-    "Reloads the table_defs from the data repo"
 
 """

@@ -119,7 +119,6 @@
       [
         {
           "name": "Number of primary schools (preprimary, primary, preprimary/primary, primary/js)",
-          "description": "all schools in the LGA (public, private, religious, nomadic)",
           "value": "g::num_primary_schools"
         },
         {
@@ -132,6 +131,7 @@
         },
         {
           "name": "Total number of schools",
+          "description": "all schools in the LGA (public, private, religious, nomadic)",
           "value": "g::num_schools"
         }
       ]
@@ -141,19 +141,22 @@
       [
         {
           "name": "Primary net intake rate (NIR) for boys",
-          "description": "number of children entering school at the appropriate starting age",
+          "description": "Number of 6 year old boys entering the first grade of primary education, expressed as a percentage of the population of the same age.",
           "value": "N/A"
         },
         {
           "name": "Primary net intake rate (NIR) for girls",
+          "description": "Number of 6 year old girls entering the first grade of primary education, expressed as a percentage of the population of the same age.",
           "value": "N/A"
         },
         {
           "name": "Junior secondary net intake rate (NIR) for boys",
+          "description": "Number of 12 year old boys entering the first grade of junior secondary education, expressed as a percentage of the population of the same age.",
           "value": "N/A"
         },
         {
           "name": "Junior Secondary net intake rate (NIR) for girls",
+          "description": "Number of 12 year old girls entering the first grade of junior secondary education, expressed as a percentage of the population of the same age.",
           "value": "N/A"
         },
         {
@@ -165,6 +168,7 @@
         {
           "col_2": "h::num_schools_1kmplus_catchment_juniorsec,num_junior_secondary_schools",
           "name": "Percentage of junior secondary schools farther than 1km from catchement area",
+          "description": "Junior secondary schools located farther than 1km from the population they are meant to serve",
           "value": "g::proportion_schools_1kmplus_catchment_juniorsec"
         },
         {
@@ -189,27 +193,32 @@
       [
         {
           "name": "Primary net enrollment rate (NER) for boys",
-          "description": "percent of children age 6-11 enrolled in primary school",
+          "description": "percent of boys aged 6-11 enrolled in primary school",
           "value": "g::net_enrollment_rate_boys_primary"
         },
         {
           "name": "Primary net enrollment rate (NER) for girls",
+          "description": "percent of girls aged 6-11 enrolled in primary school",
           "value": "g::net_enrollment_rate_girls_primary"
         },
         {
           "name": "Junior secondary net enrollment rate (NER) for boys",
+          "description": "percent of boys aged 12-14 enrolled in junior secondary school",
           "value": "g::net_enrollment_rate_boys_js"
         },
         {
           "name": "Junior secondary net enrollment rate (NER) for girls",
+          "description": "percent of girls aged 12-14 enrolled in junior secondary school",
           "value": "g::net_enrollment_rate_girls_js"
         },
         {
           "name": "Gender parity index (GPI) for primary schools",
+          "description": "Primary gross enrollment ratio for girls, divided by the primary gross enrollment ratio for boys.",
           "value": "g::gender_parity_index_primary"
         },
         {
           "name": "Gender parity index (GPI) for junior secondary schools",
+          "description": "Junior secondary gross enrollment ratio for girls, divided by the junior secondary gross enrollment ratio for boys.",
           "value": "g::gender_parity_index_js"
         }
       ]
@@ -224,29 +233,30 @@
         {
           "col_2": "h::num_schools_potable_water_primary,num_primary_schools",
           "name": "Percentage of primary schools with access to potable water",
-          "description": "schools with access to clean drinking water from safe water source",
+          "description": "Schools that have not been with out clean safe water from an improved water source (pipe water, borehole/tubewell,protected well)  for more than 7 days in the past month.",
           "value": "g::proportion_schools_potable_water_primary"
         },
         {
           "col_2": "h::num_schools_potable_water_juniorsec,num_junior_secondary_schools",
           "name": "Percentage of junior secondary schools with access to potable water",
+          "description": "Schools that have not been with out clean safe water from an improved water source (pipe water, borehole/tubewell,protected well)  for more than 7 days in the past month.",
           "value": "g::proportion_schools_potable_water_juniorsec"
         },
         {
           "col_2": "h::num_schools_improved_sanitation_primary,num_primary_schools",
           "name": "Percentage of primary schools with improved sanitation/toilet",
-          "description": "schools with a ventilated pit latrine (VIP)",
+          "description": "Schools are defined to have access to improved sanitation if that have toilet that flush/pour flush that drain to \"improved\" system, ventilated improved toilet or if they have pit latrine with slab.",
           "value": "g::proportion_schools_improved_sanitation_primary"
         },
         {
           "col_2": "h::num_schools_improved_sanitation_juniorsec,num_junior_secondary_schools",
           "name": "Percentage of junior secondary schools with improved sanitation/toilet",
+          "description": "Schools are defined to have access to improved sanitation if that have toilet that flush/pour flush that drain to \"improved\" system, ventilated improved toilet or if they have pit latrine with slab.",
           "value": "g::proportion_schools_improved_sanitation_juniorsec"
         },
         {
           "col_2": "h::num_schools_gender_sep_toilet_primary,num_primary_schools",
           "name": "Percentage of primary schools with gender-separated toilets",
-          "description": "separate toilet facilities for boys and girls",
           "value": "g::proportion_schools_gender_sep_toilet_primary"
         },
         {
@@ -256,11 +266,12 @@
         },
         {
           "name": "Pupil to toilet ratio (primary)",
-          "description": "number of pupils on average who use one toilet",
+          "description": "number of pupils on average per toilet (target is 35 students to 1 toilet)",
           "value": "g::pupil_toilet_ratio_primary"
         },
         {
           "name": "Pupil to toilet ratio (junior secondary)",
+          "description": "number of pupils on average per toilet (target is 35 students to 1 toilet)",
           "value": "g::pupil_toilet_ratio_secondary"
         },
         {
@@ -270,11 +281,13 @@
         {
           "col_2": "h::num_schools_power_access_primary,num_primary_schools",
           "name": "Percentage of primary schools with access to power",
+          "description": " Schools with access to either functional generator, power solar system or power grid connection are defined to have access to power.",
           "value": "g::proportion_schools_power_access_primary"
         },
         {
           "col_2": "h::num_schools_power_access_juniorsec,num_juniorsec_schools",
           "name": "Percentage of junior secondary schools with access to power",
+          "description": " Schools with access to either functional generator, power solar system or power grid connection are defined to have access to power.",
           "value": "g::proportion_schools_power_access_juniorsec"
         },
         {
@@ -347,10 +360,12 @@
         },
         {
           "name": "Pupil to classroom ratio (primary)",
+          "description": "Average number of pupils per classroom for primary schools",
           "value": "g::student_classroom_ratio_lga_primary"
         },
         {
           "name": "Pupil to classroom ratio (junior secondary)",
+          "description": "Average number of pupils per classroom for junior secondary schools",
           "value": "g::student_classroom_ratio_lga_juniorsec"
         },
         {
@@ -366,21 +381,25 @@
         {
           "col_2": "h::num_schools_two_shifts_primary,num_primary_schools",
           "name": "Percentage of primary schools with double shifts",
+          "description": "Percentage of schools which operate in separate morning and afternoon shifts to accommodate more students.",
           "value": "g::proportion_schools_two_shifts_primary"
         },
         {
           "col_2": "h::num_schools_two_shifts_juniorsec,num_juniorsec_schools",
           "name": "Percentage of junior secondary schools with double shifts",
+          "description": "Percentage of schools which operate in separate morning and afternoon shifts to accommodate more students.",
           "value": "g::proportion_schools_two_shifts_juniorsec"
         },
         {
           "col_2": "h::num_schools_multigrade_classrooms_primary,num_primary_schools",
           "name": "Percentage of primary schools with multi-grade classrooms",
+          "description": "Schools in which more than one classes are being taught within one classroom by the same teacher",
           "value": "g::proportion_schools_multigrade_classrooms_primary"
         },
         {
           "col_2": "h::num_schools_multigrade_classrooms_juniorsec,num_juniorsec_schools",
           "name": "Percentage of junior secondary schools with multi-grade classrooms",
+          "description": "Schools in which multiple grades are being taught within one classroom by the same teacher",
           "value": "g::proportion_schools_multigrade_classrooms_juniorsec"
         }
       ]
@@ -400,18 +419,22 @@
         },
         {
           "name": "Pupil to bench ratio (primary)",
+          "description": "Average number of pupils per bench for primary schools",
           "value": "g::pupil_bench_ratio_lga_primary"
         },
         {
           "name": "Pupil to bench ratio (junior secondary)",
+          "description": "Average number of pupils per bench for junior secondary schools",
           "value": "g::pupil_bench_ratio_lga_juniorsec"
         },
         {
           "name": "Pupil to desk ratio (primary)",
+          "description": "Average number of pupils per desk for primary schools",
           "value": "g::pupil_desk_ratio_lga_primary"
         },
         {
           "name": "Pupil to desk ratio (junior secondary)",
+          "description": "Average number of pupils per desk for junior secondary schools",
           "value": "g::pupil_desk_ratio_lga_juniorsec"
         }
       ]
@@ -421,28 +444,34 @@
       [
         {
           "name": "Primary school pupil to teacher ratio",
+          "description": "Average number of pupils to one teacher in primary schools in the LGA",
           "value": "g::primary_school_pupil_teachers_ratio_lga"
         },
         {
           "name": "Junior secondary school pupil to teacher ratio",
+          "description": "Average number of pupils to one teacher in junior secondary schools in the LGA",
           "value": "g::junior_secondary_school_pupil_teachers_ratio_lga"
         },
         {
           "name": "Primary school teaching to non-teaching staff ratio",
+          "description": "Average number of teachers for every non-teaching staff in primary schools",
           "value": "g::teacher_nonteachingstaff_ratio_lga_primary"
         },
         {
           "name": "Junior secondary teaching to non-teaching staff ratio",
+          "description": "Average number of teachers for every non-teaching staff in junior secondary schools",
           "value": "g::teacher_nonteachingstaff_ratio_lga_juniorsec"
         },
         {
           "col_2": "g_fraction::num_primary_school_teachers_nce,num_primary_school_teachers",
           "name": "Percentage of primary school qualified teachers (with NCE)",
+          "description": "Percentage of primary school teachers with the minimum requirement for teaching in Nigeria (Nigeria Certificate in Education, NCE)",
           "value": "g::proportion_teachers_nce_primary"
         },
         {
           "col_2": "g_fraction::num_junior_secondary_school_teachers_nce,num_junior_secondary_school_teachers",
           "name": "Percentage of junior secondary qualified teachers (with NCE)",
+          "description": "Percentage of junior secondary school teachers with the minimum requirement for teaching in Nigeria (Nigeria Certificate in Education, NCE)",
           "value": "g::proportion_teachers_nce_juniorsec"
         },
         {
@@ -463,21 +492,25 @@
         {
           "col_2": "h::num_schools_delay_pay_primary,num_primary_schools_primary",
           "name": "Percentage of primary schools that have delayed teacher payments in the past 12 months",
+          "description": "Schools in which teachers were paid later than their scheduled pay day.",
           "value": "g::proportion_schools_delay_pay_primary"
         },
         {
           "col_2": "h::num_schools_delay_pay_juniorsec,num_junior_secondary_schools",
           "name": "Percentage of junior secondary schools that have delayed teacher payments in the past 12 months",
+          "description": "Schools in which teachers were paid later than their scheduled pay day.",
           "value": "g::proportion_schools_delay_pay_juniorsec"
         },
         {
           "col_2": "h::num_schools_missed_pay_primary,num_primary_schools)",
           "name": "Percentage of primary schools that have missed teacher payments in the past 12 months",
+          "description": "Schools in which teachers did not receive pay at least once during the previous 12 months.",
           "value": "g::proportion_schools_missed_pay_primary"
         },
         {
           "col_2": "h::num_schools_missed_pay_juniorsec,num_junior_secondary_schools)",
           "name": "Percentage of junior secondary schools that have missed teacher payments in the past 12 months",
+          "description": "Schools in which teachers did not receive pay at least once during the previous 12 months.",
           "value": "g::proportion_schools_missed_pay_juniorsec"
         }
       ]
@@ -487,10 +520,12 @@
       [
         {
           "name": "Textbook to pupil ratio (primary)",
+          "description": "Average number of textbooks per pupil in schools in the LGA. Target minimum textbooks per pupil should be 4.",
           "value": "g::num_textbooks_per_pupil_primary"
         },
         {
           "name": "Textbook to pupil ratio (junior secondary)",
+          "description": "Average number of textbooks per pupil in schools in the LGA. Target minimum textbooks per pupil should be 4.",
           "value": "g::num_textbooks_per_pupil_juniorsec"
         },
         {
@@ -554,18 +589,22 @@
         },
         {
           "name": "Transition rate (primary to junior secondary) for boys",
+          "description": "Number of boys entering the first grade of junior secondary school divided by the number of boys enrolled in the last grade of primary school.",
           "value": "g::transition_rate_primary_to_js1_male"
         },
         {
           "name": "Transition rate (primary to junior secondary) for girls",
+          "description": "Number of girls entering the first grade of junior secondary school divided by the number of boys enrolled in the last grade of primary school.",
           "value": "g::transition_rate_primary_to_js1_female"
         },
         {
           "name": "Repetition rate (primary) for boys",
+          "description": "Percentage of boys who repeat a grade during primary school because they did not pass the year before",
           "value": "g::repetition_rate_primary_male"
         },
         {
           "name": "Repetition rate (primary) for girls",
+          "description": "Percentage of girls who repeat a grade during primary school because they did not pass the year before",
           "value": "g::repetition_rate_primary_female"
         }
       ]
@@ -575,6 +614,7 @@
       [
         {
           "name": "Literacy rate of 15-24 year olds (men and women)",
+          "description": "Literacy rate of 15–24 year-olds, or the youth literacy rate, is the percentage of the population aged 15–24 years who can both read and write.",
           "value": "g::literacy_rate"
         }
       ]

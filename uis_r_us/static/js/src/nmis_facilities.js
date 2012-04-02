@@ -345,11 +345,11 @@ function launchFacilities(lgaData, variableData, params) {
             profileData: _.map(profileData, function(d){
                 var val = '';
                 if(d[1] === null || d[1] === undefined) {
-                    val = DisplayValue.raw(null)[0];
+                    val = DisplayValue.raw('--')[0];
                 } else if(d[1].value !== undefined) {
                     val = DisplayValue.raw(d[1].value)[0];
                 } else {
-                    val = DisplayValue.raw(null);
+                    val = DisplayValue.raw('--');
                 }
                 return {
                     name: d[0],

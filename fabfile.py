@@ -86,7 +86,12 @@ def deploy(deployment_name, reload_lgas="none"):
         with cd(env.code_path):
             run("git pull origin %(branch)s" % env)
     pull_code()
-    
+   
+    def remove_pyc():
+        with cd(env.code_path):
+            run('find . -name "*.pyc" -exec rm -rf {} \;')
+    remove_pyc()
+
     def pull_data():
         with cd(os.path.join(env.code_path, 'data')):
             run("git pull origin master")
@@ -140,7 +145,7 @@ def deploy(deployment_name, reload_lgas="none"):
 #        reload_fixtures("load_table_defs")
     if reload_lgas != "none":
         _run_in_virtualenv("python manage.py mark_available_lgas")
-        _run_in_virtualenv("python manage.py load_key_renames")
+        _run_in_virtualenv("python manage.py reload_key_renames")
         _run_in_virtualenv("python manage.py reload_variables")
-        _run_in_virtualenv("python manage.py load_table_defs")
+        _run_in_virtualenv("python manage.py reload_table_defs")
         _run_in_virtualenv("python manage.py load_lgas %s" % reload_lgas)
