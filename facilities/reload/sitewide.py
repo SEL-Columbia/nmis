@@ -8,6 +8,7 @@ This script might be obsolete. But, it might also prove useful down the line if 
 """
 
 from facilities import data_loader
+from facilities.models import Variable
 
 def reload_sitewide():
     """
@@ -18,4 +19,5 @@ def reload_sitewide():
     The site should only be *down* for a minute or two.
     """
     d = data_loader.DataLoader()
+    Variable.objects.all().delete()
     d.load_variables()
