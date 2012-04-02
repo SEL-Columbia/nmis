@@ -64,7 +64,7 @@
 						<ul class="lga-list">
 							{% for lga in state.lgas %}
 							<li>
-								<a href="{% url uis_r_us.views.new_dashboard lga.unique_slug %}">
+							  <a href="{% url uis_r_us.views.nmis_view state.slug, lga.slug %}">
 									{{lga.name}}
 								</a>
 							</li>

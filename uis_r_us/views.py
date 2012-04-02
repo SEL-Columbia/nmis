@@ -135,11 +135,11 @@ def get_nav_zones(filter_active=False):
         zone['states'] = []
         zones[zid] = zone
 
-    state_list = State.objects.all().values('id', 'zone_id', 'name')
+    state_list = State.objects.all().values('id', 'zone_id', 'name', 'slug')
     if filter_active:
         lga_list = LGA.objects.annotate(facility_count=Count('facilities')). \
                         filter(facility_count__gt=0). \
-                        values('unique_slug', 'name', 'state_id')
+                        values('unique_slug', 'name', 'state_id', 'slug')
     else:
         lga_list = LGA.objects.all().values('unique_slug', 'name', 'state_id')
     states = {}
