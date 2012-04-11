@@ -927,7 +927,7 @@ var LocalNav = (function(){
         }, _opts);
         elem = $('<ul />', {'id': 'local-nav', 'class': 'nav'});
         wrap = $('<div />', {'class': 'row ln-wrap'})
-                .css({'position':'absolute','top':82,'left':0,'z-index':99})
+                .css({'position':'absolute','top':82,'left':56,'z-index':99})
                 .html(elem);
         $('.content').eq(0).prepend(wrap);
         _.each(opts.sections, function(section, i){

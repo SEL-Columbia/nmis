@@ -464,7 +464,7 @@ html .topbar span.logo{position:absolute;top:-7px;left:25px;display:inline-block
 html .topbar .pull-right{color:#aaa;}
 html .topbar .nav-row{overflow:hidden;padding-left:80px;margin-top:0px;}html .topbar .nav-row ul li a{padding:5px 10px 6px;}
 html .topbar .page-title-row p.bc{padding-left:104px;padding-bottom:5px;margin:0;line-height:28px;color:#bfbfbf;font-weight:normal;}html .topbar .page-title-row p.bc a,html .topbar .page-title-row p.bc span{margin:0 4px 0 0;}
-html ul.nav{font-weight:bold;margin:0 28px;padding:0 28px;}html ul.nav li a{border:1px solid black;border-color:#dddddd #aaaaaa #aaaaaa #dddddd;padding:5px 10px 7px;color:#444444;background-color:#fff;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
+html ul.nav{font-weight:bold;margin:0;padding:0;}html ul.nav li a{border:1px solid black;border-color:#dddddd #aaaaaa #aaaaaa #dddddd;padding:5px 10px 7px;color:#444444;background-color:#fff;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
 html ul.nav li a:hover{color:black;background-color:#eeeeee;}
 html ul.nav li.active a{color:#cccccc;background-color:#606060;}
 html ul.nav li.active a:hover{background-color:#606060;}
