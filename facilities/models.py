@@ -276,11 +276,12 @@ class Facility(DictModel):
         """
         s3_variable, created = Variable.objects.get_or_create(name="S3 Photo ID",
                         slug="s3_photo_id", data_type="string")
-        try:
-            s3_photo_id_record = FacilityRecord.objects.get(variable=s3_variable, facility=self)
-            return s3_photo_id_record.value
-        except FacilityRecord.DoesNotExist, e:
+
+        s3_photo_id_records = FacilityRecord.objects.filter(variable=s3_variable, facility=self)
+        if len(s3_photo_id_records)==0:
             s3_photo_id_record = False
+        else:
+            return s3_photo_id_records[0].value
 
         try:
             photo = FacilityRecord.objects.get(variable="photo", facility=self)
