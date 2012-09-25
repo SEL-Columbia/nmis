@@ -11,7 +11,7 @@ var launchOpenLayers = (function(_opts){
               lng: 0.000083908685869343
         },
         olImgPath: "/static/openlayers/default/img/",
-        tileUrl: "http://tilestream.openmangrove.org/",
+        tileUrl: "http://b.tiles.mapbox.com/modilabs/",
         layers: [
             ["Nigeria", "nigeria_base"]
         ],

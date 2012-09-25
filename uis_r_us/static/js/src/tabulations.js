@@ -118,7 +118,7 @@ var MapMgr = (function(){
 	        getTileUrl: function(coord, z) {
 	        // Y coordinate is flipped in Mapbox, compared to Google
 	        // Simplistic predictable hashing
-	        return 'http://tilestream.openmangrove.org/1.0.0/'
+	        return 'http://b.tiles.mapbox.com/modilabs/'
 	            + options.tileset
 	            + '/' + z
 	            + '/' + coord.x
