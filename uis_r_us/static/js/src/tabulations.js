@@ -118,11 +118,11 @@ var MapMgr = (function(){
 	        getTileUrl: function(coord, z) {
 	        // Y coordinate is flipped in Mapbox, compared to Google
 	        // Simplistic predictable hashing
-	        return 'http://b.tiles.mapbox.com/modilabs/'
+	        return 'http://b.tiles.mapbox.com/v3/modilabs.'
 	            + options.tileset
 	            + '/' + z
 	            + '/' + coord.x
-	            + '/' + Math.abs(coord.y - (Math.pow(2, z) - 1)) + '.png';
+	            + '/' + coord.y + '.png?updated=1331159407403';
 	        },
 	        name: options.name,
 	        alt: options.name,
