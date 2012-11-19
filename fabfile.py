@@ -27,7 +27,7 @@ DEPLOYMENTS = {
         },
     'production': {
         'folder_name': 'nmis_production',
-        'host_string': 'wsgi@nmis-dev.mdgs.gov.ng',
+        'host_string': 'wsgi@nmis.mdgs.gov.ng',
         'branch': 'develop',
         'backup': True,
         'database_name': 'nmis_production',
