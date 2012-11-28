@@ -187,7 +187,12 @@ var SectorDataTable = (function(){
     function _createTbody(cols, rows) {
         var tbody = $('<tbody />');
         _.each(rows, function(r){
-            var row = $('<tr />').data("row-data", r._id);
+            var row = $('<tr />');
+            if (r._id === undefined) {
+              console.error("Facility does not have '_id' defined:", r);
+            } else {
+              row.data("row-data", r._id);
+            }
             var startsWithType = cols[0].name=="Type";
             _.each(cols, function(c, ii){
                 // quick fixes in this function scope will need to be redone.
