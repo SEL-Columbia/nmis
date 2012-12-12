@@ -189,7 +189,7 @@ var SectorDataTable = (function(){
         _.each(rows, function(r){
             var row = $('<tr />');
             if (r._id === undefined) {
-              console.error("Facility does not have '_id' defined:", r);
+              window.console && window.console.error && window.console.error("Facility does not have '_id' defined:", r);
             } else {
               row.data("row-data", r._id);
             }
