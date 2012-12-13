@@ -156,13 +156,11 @@ def tmp_facility_indicators(lga, lga_data):
     ilist.append(("education", "Schools", education_indicators, g("num_schools")))
 
     water_indicators = [
-            ["Developed/treated spring and surface water", g("num_developed_and_treated_or_protected_surface_or_spring_water")],
-            ["Protected dug wells", g("num_protected_dug_wells")],
-            ["Boreholes and tube wells", g("num_boreholes_and_tubewells")],
-            ["Boreholes and tube wells with non-motorized lift/pump mechanisms", g("num_boreholes_tubewells_manual")],
-            ["Boreholes and tube wells with motorized lift/pump mechanisms", g("num_boreholes_tubewells_non_manual")],
-            ["Well-maintained boreholes, protected and treated water sources", g("num_protected_water_sources_functional")],
-            ["Population served per well-maintained borehole, protected or treated water source", g("population_served_per_protected_and_functional_water_source")],
+            ["Improved water points", g("num_improved_water_points")],
+            ["Taps", g("num_taps")],
+            ["Hand pumps", g("num_handpumps")],
+            ["Percentage of improved water points that are functional", g("percentage_functional_improved")],
+            ["Percentage of population served by improved water points that are functional", g("percentage_population_improved_functional")],
         ]
     ilist.append(("water", "Water Points", water_indicators, g("num_water_points")))
     return ilist

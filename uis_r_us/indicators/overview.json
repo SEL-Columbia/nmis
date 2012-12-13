@@ -1,41 +1,44 @@
 {
   "water": [
     [
-      "Type",
+      "Water Point Type",
       [
         {
-          "name": "Number of boreholes and tube wells",
-          "value": "g::num_boreholes_and_tubewells"
+          "name": "Number of improved water points",
+          "value": "g::num_improved_water_points"
         },
         {
-          "name": "Number of developed and treated spring and surface water",
-          "value": "g::num_developed_and_treated_or_protected_surface_or_spring_water"
+          "name": "Number of taps",
+          "value": "g::num_taps"
         },
         {
-          "name": "Number of protected dug wells",
-          "value": "g::num_protected_dug_wells"
+          "name": "Number of hand pumps",
+          "value": "g::num_handpumps"
         },
         {
-          "name": "Number of other types of protected water sources",
-          "value": "g::num_other_protected_sources"
+          "name": "Number of unimproved water points",
+          "value": "g::num_unimproved_points"
         },
         {
-          "name": "Number of assessed unprotected water sources",
-          "value": "g::num_mapped_unprotected_sources"
-        },
-        {
-          "name": "Total number of water sources",
-          "value": "g::num_water_points"
+          "name": "Total number of water points",
+          "value": "g::num_total_water_points"
         }
       ]
     ],
     [
-      "Maintenance",
+      "Functionality",
       [
         {
-          "col_2": "g_fraction::num_protected_water_sources_non_functional,num_protected_water_sources",
-          "name": "Percentage of boreholes, protected or treated sources that are poorly maintained",
-          "value": "g::proportion_protected_water_points_non_functional"
+          "name": "Percentage of improved water points that are functional",
+          "value": "g::percentage_functional_improved"
+        },
+        {
+          "name": "Percentage of taps that are functional",
+          "value": "g::percentage_functional_taps"
+        },
+        {
+          "name": "Percentage of hand pumps that are functional",
+          "value": "g::percentage_functional_handpumps"
         }
       ]
     ],
@@ -43,72 +46,73 @@
       "Population Served",
       [
         {
-          "name": "Population served per well-maintained borehole, protected or treated water source",
-          "value": "g::population_served_per_protected_and_functional_water_source"
+          "name": "Population served by improved water points",
+          "value": "g::population_improved_water_points"
         },
         {
-          "name": "Population served per borehole, protected or treated water source (whether or not it is well-maintained)",
-          "value": "g::population_served_per_all_water_sources"
+          "name": "Population served by improved water points that are functional",
+          "value": "g::population_improved_functional_water_points"
+        },
+        {
+          "name": "Percentage of population served by improved water points",
+          "value": "g::percentage_population_improved"
+        },
+        {
+          "name": "Percentage of population served by improved water points that are functional",
+          "value": "g::percentage_population_improved_functional"
         }
       ]
     ],
     [
-      "Lift Mechanisms for Boreholes and Tube Wells",
+      "Lift Mechanism Analysis",
       [
         {
-          "col_2": "g_fraction::num_boreholes_tubewells_manual,num_boreholes_and_tubewells",
-          "name": "Percentage of boreholes and tube wells with a non-motorized lift (human or animal-powered)",
-          "value": "g::proportion_boreholes_tubewells_manual"
+          "name": "Diesel",
+          "section_header": true
         },
         {
-          "col_2": "g_fraction::num_boreholes_tubewells_non_manual,num_boreholes_and_tubewells",
-          "name": "Percentage of boreholes and tube wells with a motorized lift",
-          "value": "g::proportion_boreholes_tubewells_non_manual"
+          "name": "Number",
+          "value": "g::num_diesel"
         },
         {
-          "col_2": "g_fraction::num_boreholes_tubewells_diesel,num_boreholes_and_tubewells",
-          "name": "Percentage of boreholes and tube wells with a diesel lift",
-          "value": "g::proportion_boreholes_tubewells_diesel"
+          "name": "Percentage functional",
+          "value": "g::percentage_diesel_functional"
         },
         {
-          "col_2": "g_fraction::num_boreholes_tubewells_electric,num_boreholes_and_tubewells",
-          "name": "Percentage of boreholes and tube wells with an electric motor lift",
-          "value": "g::proportion_boreholes_tubewells_electric"
+          "name": "Electric",
+          "section_header": true
         },
         {
-          "col_2": "g_fraction::num_boreholes_tubewells_solar,num_boreholes_and_tubewells",
-          "name": "Percentage of boreholes and tube wells with a solar lift",
-          "value": "g::proportion_boreholes_tubewells_solar"
-        }
-      ]
-    ],
-    [
-      "Poorly Maintained Lift Mechanisms for Boreholes and Tube Wells",
-      [
-        {
-          "col_2": "g_fraction::num_boreholes_tubewells_manual_non_functional,num_boreholes_tubewells_manual",
-          "name": "Percentage of non-motorized (human or animal-powered) lifts that are poorly maintained",
-          "value": "g::proportion_boreholes_tubewells_manual_non_functional"
+          "name": "Number",
+          "value": "g::num_electric"
         },
         {
-          "col_2": "g_fraction::num_boreholes_tubewells_non_manual_non_functional,num_boreholes_tubewells_non_manual",
-          "name": "Percentage of all motorized lifts that are poorly maintained",
-          "value": "g::proportion_boreholes_tubewells_non_manual_non_functional"
+          "name": "Percentage functional",
+          "value": "g::percentage_electric_functional"
         },
         {
-          "col_2": "g_fraction::num_boreholes_tubewells_diesel_non_functional,num_boreholes_tubewells_diesel",
-          "name": "Percentage of diesel-powered lifts that are poorly maintained",
-          "value": "g::proportion_boreholes_tubewells_diesel_non_functional"
+          "name": "Solar",
+          "section_header": true
         },
         {
-          "col_2": "g_fraction::num_boreholes_tubewells_electric_non_functional,num_boreholes_tubewells_electric",
-          "name": "Percentage of electrically-powered lifts that are poorly maintained",
-          "value": "g::proportion_boreholes_tubewells_electric_non_functional"
+          "name": "Number",
+          "value": "g::num_solar"
         },
         {
-          "col_2": "g_fraction::num_boreholes_tubewells_solar_non_functional,num_boreholes_tubewells_solar",
-          "name": "Percentage of solar-powered lifts that are poorly maintained",
-          "value": "g::proportion_boreholes_tubewells_solar_non_functional"
+          "name": "Percentage functional",
+          "value": "g::percentage_solar_functional"
+        },
+        {
+          "name": "Hand pumps",
+          "section_header": true
+        },
+        {
+          "name": "Number",
+          "value": "g::num_handpumps"
+        },
+        {
+          "name": "Percentage functional",
+          "value": "g::percentage_functional_handpumps"
         }
       ]
     ]
