@@ -73,6 +73,7 @@ def nmis_view(request, state_id, lga_id, reqpath=""):
             return row
         return [plug_in_values(r) \
                         for r in all_gap_indicators().get(sector_slug, [])]
+    context.lga_id = "'%s'" % context.lga.unique_slug
     context.sectors = [ \
         [s, tmp_variables_for_sector(s, data_for_display, {}), _gap_variables(s)] \
             for s in ['health', 'education', 'water']]
