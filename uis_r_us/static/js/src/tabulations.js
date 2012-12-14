@@ -256,7 +256,7 @@ var FacilityHover = (function(){
             name: _getNameFromFacility(opts.item),
             community: opts.item.community,
             title: opts.item.id,
-            img_thumb: NMIS.S3Photos.url(opts.item.s3_photo_id, 200)
+            img_thumb: NMIS.S3orFormhubPhotoUrl(opts.item, 200)
         };
         hoverOverlay = $(Mustache.to_html($('#facility-hover').eq(0).html().replace(/<{/g, '{{').replace(/\}>/g, '}}'), obj));
         if(!!opts.addClass) { hoverOverlay.addClass(opts.addClass); }
@@ -271,7 +271,7 @@ var FacilityHover = (function(){
                 marginTop: -.5*$this.height(),
                 marginLeft: -.5*$this.width()
             });
-        }).attr('src', NMIS.S3Photos.url(opts.item.s3_photo_id, 90));
+        }).attr('src', NMIS.S3orFormhubPhotoUrl(opts.item, 90));
         hoverOverlay.find('div.photothumb').html(img);
         hoverOverlayWrap.html(hoverOverlay);
     }
@@ -289,6 +289,25 @@ function _getNameFromFacility(f) {
     return f.name || f.facility_name || f.school_name
 }
 
+NMIS.S3orFormhubPhotoUrl = function(item, size_code) {
+  var photo_url,
+    sizes = {
+    "90": "-small",
+    "200": "-medium"
+  };
+  if(item.s3_photo_id) {
+    photo_url = NMIS.S3Photos.url(item.s3_photo_id || 'none1:none2', size_code);
+  } else if (item.formhub_photo_id) {
+    photo_url = "https://formhub.s3.amazonaws.com/ossap/attachments/";
+    if(size_code in sizes) {
+      photo_url += item.formhub_photo_id.replace(".jpg", sizes[size_code] + ".jpg");
+    } else {
+      photo_url += item.formhub_photo_id;
+    }
+  }
+  return photo_url;
+}
+
 var FacilityPopup = (function(){
     var div;
     function make(facility, opts) {
@@ -296,10 +315,10 @@ var FacilityPopup = (function(){
         if(!!div) { div.remove(); }
         var obj = _.extend({
             thumbnail_url: function() {
-                return NMIS.S3Photos.url(this.s3_photo_id || 'none1:none2', 200);
+              return NMIS.S3orFormhubPhotoUrl(this, 200);
             },
             image_url: function() {
-                return NMIS.S3Photos.url(this.s3_photo_id || 'none1:none2', "0");
+              return NMIS.S3orFormhubPhotoUrl(this, 0);
             },
             name: _getNameFromFacility(facility)
         }, facility);
