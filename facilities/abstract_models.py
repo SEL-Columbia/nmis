@@ -81,7 +81,7 @@ class Variable(models.Model):
         """
         def test_na(x):
             if isinstance(x, basestring):
-                regex = re.compile('^n/a$|^none$', re.IGNORECASE)
+                regex = re.compile('^n/a$|^none$|inf', re.IGNORECASE)
                 if regex.search(x.strip()) is not None:
                     return True
             return False
