@@ -295,9 +295,9 @@ var S3orFormhubPhotoUrl = function(item, size_code) {
     "90": "-small",
     "200": "-medium"
   };
-  if(item.s3_photo_id) {
+  if(item.formhub_photo_id) {
     photo_url = NMIS.S3Photos.url(item.s3_photo_id || 'none1:none2', size_code);
-  } else if (item.formhub_photo_id) {
+  } else if(item.s3_photo_id) {
     photo_url = "https://formhub.s3.amazonaws.com/ossap/attachments/";
     if(size_code in sizes) {
       photo_url += item.formhub_photo_id.replace(".jpg", sizes[size_code] + ".jpg");
