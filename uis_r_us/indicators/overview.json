@@ -809,7 +809,7 @@
         },
         {
           "col_2": "h::num_no_user_fees_malaria,num_health_facilities",
-          "name": "Percentage of facilities that do not charge and fees for malaria-related services",
+          "name": "Percentage of facilities that do not charge fees for malaria-related services",
           "value": "g::proportion_no_user_fees_malaria"
         },
         {
