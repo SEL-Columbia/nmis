@@ -289,7 +289,7 @@ function _getNameFromFacility(f) {
     return f.name || f.facility_name || f.school_name
 }
 
-NMIS.S3orFormhubPhotoUrl = function(item, size_code) {
+var S3orFormhubPhotoUrl = function(item, size_code) {
   var photo_url,
     sizes = {
     "90": "-small",
@@ -1129,6 +1129,7 @@ var LocalNav = (function(){
         MapMgr: MapMgr,
         Env: Env,
         S3Photos: S3Photos,
+        S3orFormhubPhotoUrl: S3orFormhubPhotoUrl,
         activeSector: activeSector,
         data: function(){return data;},
         dataForSector: dataForSector,
