@@ -43,27 +43,6 @@
       ]
     ],
     [
-      "Population Served",
-      [
-        {
-          "name": "Population served by improved water points",
-          "value": "g::population_improved_water_points"
-        },
-        {
-          "name": "Population served by improved water points that are functional",
-          "value": "g::population_improved_functional_water_points"
-        },
-        {
-          "name": "Percentage of population served by improved water points",
-          "value": "g::percentage_population_improved"
-        },
-        {
-          "name": "Percentage of population served by improved water points that are functional",
-          "value": "g::percentage_population_improved_functional"
-        }
-      ]
-    ],
-    [
       "Lift Mechanism Analysis",
       [
         {
