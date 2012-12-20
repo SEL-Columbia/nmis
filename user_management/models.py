@@ -10,7 +10,7 @@ from django.db import models
 
 class UserRequest(models.Model):
     user = models.ForeignKey(User)
-    path = models.CharField(max_length=64)
+    path = models.CharField(max_length=256)
     date_time = models.DateTimeField(auto_now_add=True)
 
     def process_request(self, request):
