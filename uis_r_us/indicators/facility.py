@@ -160,7 +160,6 @@ def tmp_facility_indicators(lga, lga_data):
             ["Taps", g("num_taps")],
             ["Hand pumps", g("num_handpumps")],
             ["Percentage of improved water points that are functional", g("percentage_functional_improved")],
-            ["Percentage of population served by improved water points that are functional", g("percentage_population_improved_functional")],
         ]
     ilist.append(("water", "Water Points", water_indicators, g("num_water_points")))
     return ilist
