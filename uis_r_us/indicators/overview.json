@@ -8,11 +8,15 @@
           "value": "g::num_improved_water_points"
         },
         {
-          "name": "Number of taps",
+          "name": "- Overhead tanks",
+          "value": "g::num_overhead_tanks"
+        },
+        {
+          "name": "- Taps",
           "value": "g::num_taps"
         },
         {
-          "name": "Number of hand pumps",
+          "name": "- Hand pumps",
           "value": "g::num_handpumps"
         },
         {
