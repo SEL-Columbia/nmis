@@ -26,6 +26,10 @@ class Command(BaseCommand):
                     dest="no_spawn_process",
                     default=False,
                     action="store_true"),
+        make_option('-s', '--skip-calculations',
+                    dest='skip_calculations',
+                    default=False,
+                    action='store_true')
     )
 
     def handle(self, *args, **kwargs):
@@ -36,16 +40,18 @@ class Command(BaseCommand):
             args = [l['id'] for l in LGA.objects.all().values('id')]
         if not kwargs['no_spawn_process']:
             if not kwargs['_hup_subprocess']:
-                self.start_subprocess(*args)
+                self.start_subprocess(*args, skip_calculations=kwargs['skip_calculations'])
             else:
-                self.handle_in_subprocess(*args)
+                self.handle_in_subprocess(*args, skip_calculations=kwargs['skip_calculations'])
         else:
             for lga_id in _strings_in_list(args):
                 lga = LGA.objects.get(id=lga_id)
-                reload_individual_lga(lga)
+                reload_individual_lga(lga, skip_calculations=kwargs['skip_calculations'])
     
-    def start_subprocess(*args):
+    def start_subprocess(*args, **kwargs):
         hup_args = ["nohup", "python", "manage.py", "load_lgas", "--inside-hup-subprocess"] + _strings_in_list(args)
+        if kwargs.get('skip_calculations'):
+            hup_args.append('-s')
         if os.path.exists('nohup.out'):
             raise Exception("nohup.out exists. Is the load already running?")
         if os.path.exists('load_script.pid'):
@@ -56,9 +62,10 @@ class Command(BaseCommand):
         with open('load_script.pid', 'w') as f:
             f.write(str(pid))
 
-    def handle_in_subprocess(*args):
+    def handle_in_subprocess(*args, **kwargs):
+        skip_calculations = kwargs.get('skip_calculations', False)
         lgas = [LGA.objects.get(id=lid) for lid in _strings_in_list(args)]
         for lga in lgas:
-            reload_individual_lga(lga)
+            reload_individual_lga(lga, skip_calculations)
         os.rename('nohup.out', 'load_script.log')
         os.unlink('load_script.pid')

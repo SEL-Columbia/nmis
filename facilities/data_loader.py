@@ -42,7 +42,7 @@ class DataLoader(object):
 #        self.mark_available_lgas()
         
 
-    def load(self, lga_ids=[]):
+    def load(self, lga_ids=[], skip_calculations=False):
         self.lga_ids = lga_ids
 
         lgas = []
@@ -63,7 +63,11 @@ class DataLoader(object):
             if self._debug:
                 print "===== %s / %s (%s) =====" % (lga.state.name, lga.name, lga.id)
                 self.load_data()
-                self.load_calculations()
+                if not skip_calculations:
+                    print 'running calculations'
+                    self.load_calculations()
+                else:
+                    print 'skipping calculations'
                 lga.data_load_in_progress = False
                 lga.data_loaded = True
                 lga.save()
@@ -71,7 +75,11 @@ class DataLoader(object):
             try:
                 print "===== %s / %s (%s) =====" % (lga.state.name, lga.name, lga.id)
                 self.load_data()
-                self.load_calculations()
+                if not skip_calculations:
+                    print 'running calculations'
+                    self.load_calculations()
+                else:
+                    print 'skipping calculations'
                 lga.data_load_in_progress = False
                 lga.data_loaded = True
                 lga.save()

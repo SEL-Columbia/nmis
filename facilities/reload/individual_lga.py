@@ -8,7 +8,7 @@ This script might be obsolete. But, it might also prove useful down the line if 
 
 from facilities import data_loader
 
-def reload_individual_lga(lga):
+def reload_individual_lga(lga, skip_calculations=False):
     """
     This method will delete all variables in the database (but not any data records)
     
@@ -20,7 +20,7 @@ def reload_individual_lga(lga):
 
     # (re)load
     d = data_loader.DataLoader()
-    d.load([lga.id])
+    d.load([lga.id], skip_calculations=skip_calculations)
     lga.data_loaded = True
     lga.save()
 
