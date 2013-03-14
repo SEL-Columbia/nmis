@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% include "dashboard_subtemplates.html" %}
+{% endblock %}
+
+{% block js %}
+  <script src="/static/nmis_ui/build/javascripts/nmis.js"></script>
+  <script src="/static/dashboard.js"></script>
+{% endblock %}
