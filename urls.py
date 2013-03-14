@@ -9,12 +9,15 @@ OPT_GROUP_REGEX = "((?P<group_name>[^/]+)/)?"
 
 from main import views as main_views
 
+from dashboard import views as dashboard_views
+
 from uis_r_us import views as ui
 from survey_photos.views import photo_redirect
 
+
 urlpatterns = patterns('',
     url(r'^~(?P<reqpath>\S*)', ui.dashboard),
-    url(r'^$', main_views.index),
+    url(r'^$', dashboard_views.render_dashboard),
 
     url(r"^%sformList$" % OPT_GROUP_REGEX, xform_manager_views.formList),
     url(r"^%ssubmission$" % OPT_GROUP_REGEX, xform_manager_views.submission),
@@ -40,4 +43,6 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^data/(?P<data_path>\S+)$', dashboard_views.serve_data),
+    url(r'^.*$', dashboard_views.render_dashboard),
 )

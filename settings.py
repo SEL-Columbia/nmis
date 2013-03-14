@@ -143,6 +143,7 @@ INSTALLED_APPS = (
     'compressor',
     'main',
     'uis_r_us',
+    'dashboard',
     'display_defs',
     'xform_manager',
     'nga_districts',
