@@ -31,11 +31,13 @@
               <a href="#" class="state-link" data-lga-count="3">
 
                 <{= state.label }>
-                <span class="lga-count"> (<{= state.districts.length }>)</span>
+                <span class="lga-count">
+                  (<span title="Active districts"><{= state.activeDistrictsCount() }></span>/<span title="Total districts"><{= state.districts.length }></span>)
+                </span>
               </a>
               <ul class="lga-list">
                 <{ _.each(state.districts, function(district){ }>
-                  <li>
+                  <li title="<{= district.active ? 'active' : 'inactive' }>" >
                     <a href="<{= district.defaultSammyUrl() }>">
                     <{= district.name }>
                     </a>
