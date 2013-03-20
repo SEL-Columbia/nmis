@@ -7,6 +7,10 @@ making quick changes.
 (function() {
   var data_src, overviewObj, wElems;
 
+  NMIS.settings = {
+     openLayersRoot: "/static/js/libs/OpenLayers.js"
+  };
+
   NMIS.url_root = (function() {
     var url_root;
     url_root = "" + window.location.pathname;
