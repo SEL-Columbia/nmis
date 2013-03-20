@@ -16,7 +16,6 @@ from survey_photos.views import photo_redirect
 
 
 urlpatterns = patterns('',
-    url(r'^~(?P<reqpath>\S*)', ui.dashboard),
     url(r'^$', dashboard_views.render_dashboard),
 
     url(r"^%sformList$" % OPT_GROUP_REGEX, xform_manager_views.formList),
@@ -44,5 +43,4 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^data/(?P<data_path>\S+)$', dashboard_views.serve_data),
-    url(r'^.*$', dashboard_views.render_dashboard),
 )
