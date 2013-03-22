@@ -8,7 +8,8 @@ making quick changes.
   var data_src, overviewObj, wElems;
 
   NMIS.settings = {
-     openLayersRoot: "/static/js/libs/OpenLayers.js"
+     openLayersRoot: "/static/js/libs/OpenLayers.js",
+     pathToMapIcons: "/static/images"
   };
 
   NMIS.url_root = (function() {
