@@ -213,3 +213,148 @@
 	</div>
 </div>
 </script>
+
+<script type="text/x-mustache-template" id="facility-hover">
+  <div class="popover below fade in hover-overlay" style="display: block; top: <{top}>px; left: <{left}>px;">
+  	<div class="arrow" style="left:<{arrowLeft}>px"></div>
+  	<div class="inner">
+  		<div class="content">
+  			<p>
+  				<div class="photothumb"></div>
+  				<strong><{name}></strong> <em>(<{community}>)</em>
+  				<br>
+  				<br>
+  				<span style="font-size:smaller; line-height:11px">
+    				Click the icon to view details
+  				</span>
+  			</p>
+  		</div>
+  	</div>
+  </div>
+</script>
+
+<script type="text/underscore-template" id="facility-popup">
+	<div class="row" title="<{= name }>">
+		<div class="row">
+		  <div class="span2-5">
+				<ul class="media-grid" style="margin-left:10px">
+				  <li>
+						<a href="<{= image_url() }>" target="_BLANK" class="lightbox-or-something">
+						  <img src="<{= thumbnail_url() }>" width="90" height="90">
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="span6">
+			  <div class="select-wrap">
+				<select>
+				  <{ _.each(sector_data, function(s){ }>
+				    <option value="<{= s.slug }>"><{= s.name}></option>
+				  <{ }); }>
+				</select>
+				</div>
+				<div class="fac-content">
+				  <{ _.each(sector_data, function(s){ }>
+				    <div data-sector-slug="<{= s.slug }>" class="facility-sector-select-box">
+				      <table>
+				        <tbody>
+				          <{ _.each(s.variables, function(v){ }>
+				            <tr>
+				              <td>
+				                <{= v.name }>
+				              </td>
+				              <td>
+				                <{= v.value }>
+				              </td>
+				            </tr>
+				          <{ }); }>
+				        </tbody>
+				      </table>
+				    </div>
+				  <{ }); }>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/x-mustache-template" id="indicator-feature">
+	<div class="indicator-feature">
+		<div class="overlay-wrap print-hide-block">
+			<div class="overlay">
+				<div class="row">
+					<h3 class="span6 overlay-header">
+						<{= name }>
+					</h3>
+					<a href="#x" class="close"><span>[X]</span></a>
+				</div>
+				<div class="raph-circle">
+				</div>
+				<div class="raph-text">
+					<p class="descrip">
+						<{= description }>
+					</p>
+					<div class="raph-legend">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="embedded" style="display:none">
+			<div class="row">
+				<div class="span12" style="padding-left:12px">
+					<h3>
+						<small>Selected Indicator:</small> <{= name }>
+					</h3>
+					<p>
+						<{= description }>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/underscore-template" id="facilities-overview">
+<div class="container no-fill row" id="lga-widget-wrap">
+	<div class="span9">
+		<div class="row">
+			<div class="span8 offset1">
+  			<h3>
+  				Facilities <span class="replace-counts">(<{= facCount }>)</span>
+  			</h3>
+  			<{ _.each(overviewSectors, function(s){ }>
+  				<p>
+   			    <a href="<{= s.url }>" class="sector-btn btn large" style="display:block">
+   			      <span class="sector-icon <{= s.slug }>"> &nbsp;. </span>
+   			      <{= s.name }>
+   			      (<{= s.counts }>) &raquo;
+   			    </a>
+  				</p>
+  			<{ }); }>
+			</div>
+		</div>
+	</div>
+	<div class="span8">
+		<table class="simple-lines">
+			<tbody>
+				<tr>
+					<td class="header" colspan="2">
+						<{= lgaName }>
+					</td>
+				</tr>
+				<{ _.each(profileData, function(d){ }>
+				<tr>
+				  <td><{= d.name }></td>
+				  <td class="l-align">
+						<{= d.value }>
+					</td>
+				</tr>
+        <{ }); }>
+			</tbody>
+		</table>
+	</div>
+	<div class="span18">
+		<br>
+	</div>
+</div>
+</script>
