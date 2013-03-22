@@ -200,6 +200,7 @@ else:
 
 MAIN_SITE_HOSTNAME = "nmis.mdgs.gov.ng"
 DATA_DIR_NAME = 'data'
+PROTECTED_DATA_DIR = os.path.join('dashboard', 'protected_data')
 
 #If local_settings.py wants to, it can specify extra apps to include
 ADDITIONAL_INSTALLED_APPS = ()
