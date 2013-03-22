@@ -43,12 +43,17 @@ class Command(BaseCommand):
 
         return data
 
-    def _parse_lgas(self, ids):
+    def _parse_lgas(self, args):
+        if not len(args) == 1:
+            raise CommandError(
+                'LGA list must be comma-separated list of integer ids.')
+
+        ids = args[0].split(',')
         lgas = []
 
         for id in ids:
             try:
-                lgas.append(int(id.replace(',', '')))
+                lgas.append(int(id))
             except ValueError:
                 raise CommandError('Invalid lga id (%s).' % id)
         if len(lgas) == 0:
