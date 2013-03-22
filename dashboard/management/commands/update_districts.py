@@ -44,6 +44,9 @@ class Command(BaseCommand):
         return data
 
     def _parse_lgas(self, args):
+        if len(args) == 0:
+            return 'all'
+
         if not len(args) == 1:
             raise CommandError(
                 'LGA list must be comma-separated list of integer ids.')
@@ -56,8 +59,6 @@ class Command(BaseCommand):
                 lgas.append(int(id))
             except ValueError:
                 raise CommandError('Invalid lga id (%s).' % id)
-        if len(lgas) == 0:
-            lgas = 'all'
 
         return lgas
 
