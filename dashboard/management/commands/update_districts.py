@@ -89,7 +89,7 @@ class Command(BaseCommand):
     def _write_districts_file(self, new_districts):
         try:
             with open(self.DISTRICTS_FILE, 'wb') as f:
-                f.write(json.dumps(new_districts))
+                f.write(json.dumps(new_districts, indent=4, sort_keys=True))
         except IOError:
             raise CommandError('File: %s is not writable.' %\
                 self.DISTRICTS_FILE)
