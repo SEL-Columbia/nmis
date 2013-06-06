@@ -138,9 +138,10 @@ PS. some exception data: %s""" % (str(lga.id), str(e)))
         self.load_lga_data()
 
     def load_calculations(self):
-        self.calculate_lga_indicators()
-        self.calculate_lga_gaps()
-        self.calculate_lga_variables()
+        pass
+        #self.calculate_lga_indicators()
+        #self.calculate_lga_gaps()
+        #self.calculate_lga_variables()
 
     @print_time
     def create_sectors(self):
