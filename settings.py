@@ -12,8 +12,9 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
-MANAGERS = ADMINS
+BAMBOO_HASH = {"Water_LGA": {"bamboo_id": "054e8a076aa9406bb3cc59f147518830", "filename": "Water_LGA.csv"}, "Education_LGA": {"bamboo_id": "bc8f8b7498404c5283c1df12582e020e", "filename": "Education_LGA.csv"}, "Water_Facilities": {"bamboo_id": "5cc8282a27e14242993b7da1b959fafe", "filename": "Water_Facilities.csv"}, "Health_LGA": {"bamboo_id": "b742ecaf1c394e1daee51618eececcf0", "filename": "Health_LGA.csv"}, "Health_Facilities": {"bamboo_id": "75b30d16f2f64fb0be2982e42992cd0a", "filename": "Health_Facilities.csv"}, "Education_Facilities": {"bamboo_id": "672531aa89484a7486ca776e0bd963ce", "filename": "Education_Facilities.csv"}}
 
+MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.

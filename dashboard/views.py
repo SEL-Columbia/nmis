@@ -16,18 +16,23 @@ def render_dashboard(request):
 
 @login_required
 def serve_data(request, data_path):
-    req_filename = os.path.join(settings.PROJECT_ROOT, 'dashboard', 'protected_data', data_path)
-    if os.path.exists(req_filename):
-        ffdata = ""
-        with open(req_filename, 'r') as f:
-            ffdata = f.read()
-        return HttpResponse(ffdata)
-    return HttpResponseBadRequest("Bad request: %s" % data_path)
+    print "the current data_path is %s " % data_path
+    reg_string = r'districts/([a-z_]+)/data/([a-z_]+).(csv|json)'
+    reg_match = re.match(reg_string, data_path)
+    if reg_match:
+        print "im here!!!!!"
+        state_lga, sector, ext = reg_match.groups()
+        print "lga: %s, sector: %s, ext: %s" % (state_lga, sector, ext)
 
-@login_required
-def serve_data_from_bamboo(request, data_path):
-    # data_path looks like: districts/abia_uka_east/data/education.csv 
-    state_lga, sector, ext = re.match(r'districts/([a-z_]+)/data/([a-z]+).(csv|json)',
-            data_path).groups()
+        return HttpResponse('hello')
+    else:
+        print "i failed the reg test :("
+        req_filename = os.path.join(settings.PROJECT_ROOT, 'dashboard', 'protected_data', data_path)
+        if os.path.exists(req_filename):
+            ffdata = ""
+            with open(req_filename, 'r') as f:
+                ffdata = f.read()
+            return HttpResponse(ffdata)
+        return HttpResponseBadRequest("Bad request: %s" % data_path)
 
 
