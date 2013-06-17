@@ -17,10 +17,11 @@ def render_dashboard(request):
 @login_required
 def serve_data(request, data_path):
     print "the current data_path is %s " % data_path
-    reg_string = r'districts/([a-z_]+)/data/([a-z_]+).(csv|json)'
+    #reg_string = r'districts/([a-z_]+)/data/([a-z_]+).(csv|json)'
+    reg_string = r'districts/([a-z_]+)/data/(education|health|water).(csv|json)'
     reg_match = re.match(reg_string, data_path)
     if reg_match:
-        print "im here!!!!!"
+        print "i passed!!!!!"
         state_lga, sector, ext = reg_match.groups()
         print "lga: %s, sector: %s, ext: %s" % (state_lga, sector, ext)
 
