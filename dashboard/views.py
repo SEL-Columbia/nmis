@@ -24,6 +24,7 @@ def serve_data(request, data_path):
         print "i passed!!!!!"
         state_lga, sector, ext = reg_match.groups()
         print "lga: %s, sector: %s, ext: %s" % (state_lga, sector, ext)
+        water_id = settings.BAMBOO_HASH['Water_LGA']['bamboo_id']
 
         return HttpResponse('hello')
     else:

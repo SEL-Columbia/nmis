@@ -12,7 +12,7 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
-BAMBOO_HASH = {"Water_LGA": {"bamboo_id": "054e8a076aa9406bb3cc59f147518830", "filename": "Water_LGA.csv"}, "Education_LGA": {"bamboo_id": "bc8f8b7498404c5283c1df12582e020e", "filename": "Education_LGA.csv"}, "Water_Facilities": {"bamboo_id": "5cc8282a27e14242993b7da1b959fafe", "filename": "Water_Facilities.csv"}, "Health_LGA": {"bamboo_id": "b742ecaf1c394e1daee51618eececcf0", "filename": "Health_LGA.csv"}, "Health_Facilities": {"bamboo_id": "75b30d16f2f64fb0be2982e42992cd0a", "filename": "Health_Facilities.csv"}, "Education_Facilities": {"bamboo_id": "672531aa89484a7486ca776e0bd963ce", "filename": "Education_Facilities.csv"}}
+BAMBOO_HASH = {"Water_LGA": {"bamboo_id": "1a2f23ac0e1f493dbd2868c876cd4aa9", "filename": "Water_LGA.csv"}, "Education_LGA": {"bamboo_id": "1d2068d5c3f1426f9a0ba7a265e2c972", "filename": "Education_LGA.csv"}, "Water_Facilities": {"bamboo_id": "4ada692a30c742408ae71b1f99547d68", "filename": "Water_Facilities.csv"}, "Health_LGA": {"bamboo_id": "56adff8933e340bc9832c27bca04f795", "filename": "Health_LGA.csv"}, "Health_Facilities": {"bamboo_id": "87db3faaec7d440e82f16e90c85a4dce", "filename": "Health_Facilities.csv"}, "Education_Facilities": {"bamboo_id": "839851bc24894029b38ed756ad59b532", "filename": "Education_Facilities.csv"}}
 
 MANAGERS = ADMINS
 DATABASES = {
