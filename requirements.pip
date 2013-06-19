@@ -16,4 +16,4 @@ BeautifulSoup==3.2.1
 https://bitbucket.org/ubernostrum/django-registration/get/fad7080fe769.tar.gz
 
 #pybamboo
-pybamboo==0.5.8.1
+pybamboo==0.6.1.1
