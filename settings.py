@@ -12,8 +12,6 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
-BAMBOO_HASH = {"Water_LGA": {"bamboo_id": "1a2f23ac0e1f493dbd2868c876cd4aa9", "filename": "Water_LGA.csv"}, "Education_LGA": {"bamboo_id": "1d2068d5c3f1426f9a0ba7a265e2c972", "filename": "Education_LGA.csv"}, "Water_Facilities": {"bamboo_id": "4ada692a30c742408ae71b1f99547d68", "filename": "Water_Facilities.csv"}, "Health_LGA": {"bamboo_id": "56adff8933e340bc9832c27bca04f795", "filename": "Health_LGA.csv"}, "Health_Facilities": {"bamboo_id": "87db3faaec7d440e82f16e90c85a4dce", "filename": "Health_Facilities.csv"}, "Education_Facilities": {"bamboo_id": "839851bc24894029b38ed756ad59b532", "filename": "Education_Facilities.csv"}}
-
 MANAGERS = ADMINS
 DATABASES = {
     'default': {
