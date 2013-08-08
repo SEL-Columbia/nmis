@@ -60,7 +60,7 @@ STATIC_URL = '/static/'
 
 # Login URLs
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/~'
+LOGIN_REDIRECT_URL = '/'
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
@@ -140,14 +140,14 @@ INSTALLED_APPS = (
     'registration',
     'south',
     'compressor',
-    'main',
-    'uis_r_us',
+    #'main',
+    #'uis_r_us',
     'dashboard',
-    'display_defs',
-    'xform_manager',
-    'nga_districts',
-    'facilities',
-    'user_management',
+    #'display_defs',
+    #'xform_manager',
+    #'nga_districts',
+    #'facilities',
+    #'user_management',
 )
 COMPRESS = True
 

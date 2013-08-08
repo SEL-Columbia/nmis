@@ -67,4 +67,24 @@ def serve_data(request, data_path):
             return HttpResponse(ffdata)
         return HttpResponseBadRequest("Bad request: %s" % data_path)
 
+@login_required
+def serve_data_with_files(request, data_path):
+    req_filename = os.path.join(settings.PROJECT_ROOT, 'dashboard', 'protected_data', data_path)
+    if os.path.exists(req_filename):
+        ffdata = ""
+        with open(req_filename, 'r') as f:
+            ffdata = f.read()
+        return HttpResponse(ffdata)
+    return HttpResponseBadRequest("Bad request: %s" % data_path)
+
+@login_required
+def serve_pdf(request, pdf_path):
+    print "the pdf_path is %s" % pdf_path
+    req_filename = os.path.join(settings.PROJECT_ROOT, 'dashboard', 'static', 'gap_sheet', pdf_path)
+    if os.path.exists(req_filename):
+        ffdata = ""
+        with open(req_filename, 'r') as f:
+            ffdata = f.read()
+        return HttpResponse(content=ffdata, mimetype='application/pdf')
+    return HttpResponseBadRequest("Bad request: %s" % pdf_path)
 

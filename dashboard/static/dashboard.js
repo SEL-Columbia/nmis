@@ -131,10 +131,21 @@ making quick changes.
     levels: []
   });
 
+//  (function() {
+//    dashboard.get(""+NMIS.url_root+'accounts/logout/', function(){
+//      //this.swap('please refresh your page');
+//      return dashboard.setLocation(NMIS.url_root = "accounts/logout/")
+//    });
+//  })();
+
+
   (function() {
-    dashboard.get(NMIS.url_root, NMIS.CountryView);
-    return dashboard.get("" + NMIS.url_root + "#/", NMIS.CountryView);
+    dashboard.get(NMIS.url_root, function(){
+        NMIS.CountryView();
+        });
+    //return dashboard.get("" + NMIS.url_root + "#/", NMIS.CountryView);
   })();
+
 
   (function() {
     dashboard.get("" + NMIS.url_root + "#/:state/:lga/facilities/?(#.*)?", NMIS.launch_facilities);
@@ -149,6 +160,7 @@ making quick changes.
     dashboard.get("" + NMIS.url_root + "#/:state/:lga/summary/:sector/:subsector/?(#.*)?", NMIS.loadSummary);
     return dashboard.get("" + NMIS.url_root + "#/:state/:lga/summary/:sector/:subsector/:indicator/?(#.*)?", NMIS.loadSummary);
   })();
+
 
   (function() {
     /*
