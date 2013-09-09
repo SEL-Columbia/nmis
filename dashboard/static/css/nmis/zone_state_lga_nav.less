@@ -1,0 +1,87 @@
+#zone-navigation {
+    width: 90%;
+    margin: 0 auto;
+    padding: 0 0 12px;
+	.zl-wrap {
+		width: 16.6%;
+		float: left;
+	}
+	.zone-list {
+		padding: 0 3px;
+		h2 {
+			margin: 6px 0 3px;
+			padding: 0 5px;
+			text-transform: uppercase;
+			color: #444;
+			font-size: 14px;
+		}
+	}
+	.lga-count {
+		color: #444;
+		font-weight: normal;
+		font-size: 11px;
+		margin-left: 6px;
+	}
+	.lga-count.zero {
+		color: #aaa;
+	}
+	ul {
+		border: 1px solid #aaa;
+		ul {
+			border: 0 none;
+			li a {
+				background-color: #fafafa;
+				color: #555;
+				border-color: #ddd;
+				font-weight: normal;
+				padding-left: 18px;
+			}
+			li a:before {
+				content: '»';
+				color: #bbb;
+			}
+		}
+		li a {
+			display: block;
+			padding: 5px 12px;
+			background-color: #eee;
+			text-decoration: none;
+			color: #333;
+			font-weight: bold;
+			border-bottom: 1px solid #ccc;
+			cursor: pointer;
+			opacity: 0.8;
+		}
+		li a:hover {
+			opacity: 1;
+		}
+	}
+	ul, ul li {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+	ul.lga-list {
+		display: none;
+	}
+	ul.lga-list.showing {
+		display: block;
+	}
+}
+
+
+/* map navigation select box
+*/
+.mn-iiwrap {
+    height: 426px;
+    padding: 25px 20px 25px 40px;
+    width: 375px;
+    position: absolute;
+    right: 1px;
+    background-image: url('/static/images/homeshade.png');
+    background-position: left center;
+    background-repeat: repeat-y;
+	select {
+		width: 300px;
+	}
+}

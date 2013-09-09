@@ -9,7 +9,7 @@ making quick changes.
 
   NMIS.settings = {
      openLayersRoot: "/static/openlayers/",
-     pathToMapIcons: "/static"
+     pathToMapIcons: "/static/images"
   };
 
   NMIS.url_root = (function() {

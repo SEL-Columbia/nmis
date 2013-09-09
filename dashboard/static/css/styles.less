@@ -1,0 +1,312 @@
+@import "nmis/nmis_variables.less";
+@import "bootstrap/lib/bootstrap.less";
+@import "nmis/mdg_tables.less";
+@import "nmis/lga_profiles.less";
+@import "nmis/hover_overlay.less";
+
+body {
+	background-image: url('/static/images/bg-shade-repeat.png');
+}
+div.container {
+	position: relative;
+}
+h2.some-lpadding {
+	padding: 0 0 0 12px;
+}
+
+
+@import "nmis/header.less";
+
+@import "nmis/display_window.less";
+
+@import "nmis/facility_popup.less";
+
+@import "nmis/facility_tables.less";
+
+p.facility-sectors-navigation {
+	margin: 3px 0 10px;
+	a.sub-sector-link {
+		padding: 3px 6px;
+		white-space: nowrap;
+	}
+	a.sub-sector-link.active {
+		font-weight: bold;
+		text-decoration: underline;
+	}
+}
+
+td.type-icon {
+  span.icon {
+    display: block;
+    width: 15px;
+    height: 15px;
+    margin: 1px 0 0 1px;
+    float: left;
+    background-image: url('/static/images/type_icons/question_mark.png');
+    background-repeat: no-repeat;
+    &.healthpost {
+      background-image: url('/static/images/type_icons/healthpost.png');
+    }
+    &.primaryhealthcarecentre {
+      background-image: url('/static/images/type_icons/primaryhealthcarecenter.png');
+    }
+    &.formal {
+      background-image: url('/static/images/type_icons/formal.png');
+    }
+    &.integrated {
+      background-image: url('/static/images/type_icons/integrated.png');
+    }
+    &.other_unprotected {
+      background-image: url('/static/images/type_icons/other_unprotected.png');
+    }
+    &.protected_dug_well {
+      background-image: url('/static/images/type_icons/protected.png');
+    }
+    &.tube_well {
+      background-image: url('/static/images/type_icons/tube_well.png');
+    }
+    &.rainwater_harvesting_scheme {
+      background-image: url('/static/images/type_icons/rainwater_harvesting_scheme.png');
+    }
+    &.cottagehospital {
+      background-image: url('/static/images/type_icons/cottagehospital.png');
+    }
+    &.dispensary {
+      background-image: url('/static/images/type_icons/dispensary.png');
+    }
+    &.maternity {
+      background-image: url('/static/images/type_icons/maternity.png');
+    }
+    &.primaryhealthclinic {
+      background-image: url('/static/images/type_icons/primaryhealthclinic.png');
+    }
+    &.wardmodelprimaryhealthcarecentre {
+      background-image: url('/static/images/type_icons/wardmodelprimaryhealthcarecentre.png');
+    }
+    &.primary, &.primary_only, &.preprimary_and_primary {
+        background-image: url('/static/images/type_icons/letters/p.png');
+    }
+    &.junior_sec, &.juniors_sec_only {
+        background-image: url('/static/images/type_icons/letters/j.png');
+    }
+    &.senior_sec, &.senior_sec_only {
+        background-image: url('/static/images/type_icons/letters/s.png');
+    }
+    &.primary_and_junior_sec {
+        background-image: url('/static/images/type_icons/letters/pj.png');
+    }
+    &.primary_junior_and_senior_sec {
+        background-image: url('/static/images/type_icons/letters/pjs.png');
+    }
+    &.junior_and_senior_sec {
+        background-image: url('/static/images/type_icons/letters/js.png');
+    }
+    &.other, &.preprimary_only, &.science_technical, &.vocational {
+        background-image: url('/static/images/type_icons/letters/o.png');
+    }
+    span {
+      display: none;
+    }
+  }
+}
+
+div.cwrap {
+	padding: 0 20px;
+}
+
+/* indicator feature (popup with pie chart, etc)
+*/
+div.indicator-feature {
+  div.overlay-wrap {
+    position: absolute;
+    top: -158px;
+    background-color: #fff;
+    border: 1px solid #444;
+    border-radius: 3px;
+    left: 34px;
+    opacity: 0.93;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+    div.overlay {
+      position: relative;
+      padding: 0 20px;
+      height: 134px;
+      width: 400px;
+      .raph-circle {
+        margin-left: -17px;
+        width: 230px;
+      }
+      .raph-text {
+        position: absolute;
+        overflow: auto;
+        top: 35px;
+        right: 6px;
+        width: 200px;
+        height: 92px;
+      }
+      a.close {
+        opacity: 1;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        display: block;
+        width: 18px;
+        height: 18px;
+        background-image: url('/static/images/icons/x_close.png');
+        span {
+          display: none;
+        }
+      }
+    }
+  }
+  h3.overlay-header {
+    width: 400px;
+    border: 1px solid #ddd;
+    border-width: 0 0 1px;
+    font-family: Helvetica;
+    font-size: 13px;
+    color: #606060;
+    line-height: 28px;
+  }
+  div.embedded {
+    margin: 12px 0 12px;
+    border: 1px solid #ddd;
+  }
+}
+
+/*
+  main page zone / state / lga navigation
+*/
+@import "nmis/zone_state_lga_nav.less";
+
+/*
+Map loading message
+*/
+.map-loading-message {
+	position: absolute;
+	top: 100px;
+	left: 100px;
+	width: 300px;
+	border: 1px solid #aaa;
+	padding: 4px 9px;
+	border-radius: 6px;
+	background-color: #fafafa;
+}
+
+/*
+   review below:
+*/
+div.display-window-content {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background-color: #fefefe;
+}
+div.display-window-wrap {
+	position: relative;
+}
+
+/* mdg legend */
+.mn-legend {
+    position: absolute;
+    bottom: 10px;
+    left: -106px;
+    width: 96px;
+    background-color: #fff;
+    border: 1px solid #555;
+    border-radius: 3px;
+    padding: 2px 4px;
+    display: none;
+	p {
+		margin: 0;
+	    font-size: 11px;
+	    color: #333;
+	}
+	span.color-span {
+	    display: block;
+	    width: 30px;
+	}
+	table {
+	    border: 0 none;
+	    margin: 0;
+		td {
+		    border: 0 none;
+		    padding: 2px 1px;
+		}
+	}
+}
+.mn-legend.open {
+    display: block;
+}
+
+table.bs {
+    margin: 1em 0;
+    clear: both;
+}
+
+/*
+legacy CSS
+*/
+
+/* bootstrap mods */
+@import "nmis/legacy/bootstrap_mods.less";
+
+/* main.css */
+@import "nmis/legacy/main.less";
+
+.label {
+  &.chk-yes, &.chk-no, &.chk-null {
+    color: #555;
+  }
+	&.chk-yes {
+	  background-color: #bcdba2;
+	}
+	&.chk-no {
+	  background-color: #e6bdbd;
+	}
+	&.chk-null {
+	  background-color: #eee;
+	}
+}
+
+a.beta-preview {
+  font-size: 22px;
+  line-height: 1px;
+  display: block;
+  position: fixed;
+  bottom: 4px;
+  right: 4px;
+  background-color: #cfcfcf;
+  border: 2px solid #aaa;
+  padding: 12px 4px 4px;
+  color: #666;
+  border-radius: 8px;
+  text-decoration: none;
+  opacity: 0.5;
+  span {
+    display: none;
+  }
+  &:hover {
+    opacity: 1;
+    font-size: 14px;
+    border-radius: 4px;
+    line-height: 18px;
+    padding: 1px 3px;
+    span {
+      display: inline;
+    }
+  }
+}
+
+a[rel=popover] {
+  color: #666;
+  text-decoration: underline;
+}
+
+div.dataTables_wrapper div.dataTables_scrollBody {
+  .facility-dt {
+    td:first-child {
+      text-align: left;
+    }
+  }
+}
