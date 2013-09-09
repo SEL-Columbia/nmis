@@ -271,16 +271,20 @@ class NMIS.District
                   val = parsedMatch
             datum[key] = val
         datum.id = fac._id or fac.X_id or facKey  unless datum.id
-
+        unless datum.sector
+          log "No sector for datum", datum
         clonedFacilitiesById[datum.id] = datum
       clonedFacilitiesById
 
   facilityDataForSector: (sectorSlug)->
+    facilities = []
     for own facId, fac of @facilityData
       if fac.sector is undefined
-        console.error("Facility does not have a sector:", fac)
+        log "No sector:", fac
+        throw new Error("Facility does not have a sector")
       else if fac.sector.slug is sectorSlug
-        fac
+        facilities.push fac
+    facilities
 
   loadData: ()->
     @_fetchModuleOnce "lga_data", "data/lga_data", (results)=>
