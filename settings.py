@@ -75,7 +75,7 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = not DEBUG
 CSS_DEBUG_MODE = False
 
 COMPRESS_PRECOMPILERS = (

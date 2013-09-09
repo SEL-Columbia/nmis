@@ -10,13 +10,11 @@
 	  {{ site_title|default:"Nigeria MDG Information System" }}
 	</title>
 	{% load compress %}
+	<link rel="stylesheet" href="/static/css/screen.css" type="text/css" media="all" charset="utf-8">
 	{% compress css %}
 	<link rel="stylesheet" href="/static/css/chosen.css" type="text/css" media="all" charset="utf-8">
-	{% block css %}{% endblock %}
-	{% if not css_debug_mode %}
-	<link rel="stylesheet" type="text/css" href="/static/css/screen.css" media="all" charset="utf-8">
-	{% endif %}
 	{% endcompress %}
+	{% block css %}{% endblock %}
 	{% if css_debug_mode %}
 	<link rel="stylesheet/less" type="text/css" href="/static/css/styles.less">
 	<script type="text/javascript">
@@ -121,17 +119,17 @@
 	<script type="text/javascript" src="/static/js/libs/sammy.js"></script>
 	<script src="/static/js/libs/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="/static/js/libs/jquery.chosen.min.js"></script>
+	<script type="text/javascript" src="/static/js/libs/jquery.inDom.js"></script>
+	{% endcompress %}
+	{% compress js %}
 	<script type="text/coffeescript" src="/static/coffee/jquery_underscore_templates.coffee"></script>
 	<script type="text/coffeescript" src="/static/coffee/jquery-when_O.coffee"></script>
-	<script type="text/javascript" src="/static/js/libs/jquery.inDom.js"></script>
 	<script type="text/coffeescript" src="/static/coffee/csv.coffee"></script>
 	<script type="text/coffeescript" src="/static/coffee/debug.coffee"></script>
 	<script type="text/javascript" src="/static/js/libs/raphael/graphael.min.js" charset="utf-8"></script>
 	<script type="text/javascript" src="/static/js/libs/raphael/graphael.pie.min.js" charset="utf-8"></script>
-	{% block js %}
-	<!-- js block is for scripts that should be loaded at the end of the page -->
-	{% endblock %}
 	{% endcompress %}
+	{% block js %}{% endblock %}
 	{% block scripts %}{% endblock %}
 	<script src="/static/js/libs/jquery.dataTables.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/static/js/libs/jquery.dataTables.typeFilter.js" type="text/javascript" charset="utf-8"></script>
