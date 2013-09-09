@@ -8,8 +8,8 @@ making quick changes.
   var data_src, overviewObj, wElems;
 
   NMIS.settings = {
-     openLayersRoot: "/static/nmis_ui/openlayers/",
-     pathToMapIcons: "/static/nmis_ui/images"
+     openLayersRoot: "/static/openlayers/",
+     pathToMapIcons: "/static"
   };
 
   NMIS.url_root = (function() {
@@ -186,7 +186,7 @@ making quick changes.
     }
   })();
 
-  data_src = "/data/"
+  data_src = "/static/protected_data/"
 
   NMIS._data_src_root_url = data_src;
 
