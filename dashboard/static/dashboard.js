@@ -131,19 +131,11 @@ making quick changes.
     levels: []
   });
 
-//  (function() {
-//    dashboard.get(""+NMIS.url_root+'accounts/logout/', function(){
-//      //this.swap('please refresh your page');
-//      return dashboard.setLocation(NMIS.url_root = "accounts/logout/")
-//    });
-//  })();
-
+  Sammy.Application.prototype.raise_errors = true;
 
   (function() {
-    dashboard.get(NMIS.url_root, function(){
-        NMIS.CountryView();
-        });
-    //return dashboard.get("" + NMIS.url_root + "#/", NMIS.CountryView);
+    dashboard.get(new RegExp(NMIS.url_root + "$"), NMIS.CountryView);
+    return dashboard.get("" + NMIS.url_root + "#/", NMIS.CountryView);
   })();
 
 
