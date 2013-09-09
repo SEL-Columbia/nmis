@@ -12,10 +12,9 @@
 	{% load compress %}
 	{% compress css %}
 	<link rel="stylesheet" href="/static/css/chosen.css" type="text/css" media="all" charset="utf-8">
-	<link rel="stylesheet" href="/static/jquery-ui/jquery-ui-1.8.7.custom.css" type="text/css" media="screen" title="Sitewide" charset="utf-8" />
 	{% block css %}{% endblock %}
 	{% if not css_debug_mode %}
-	<link rel="stylesheet" href="/static/css/styles.min.css" type="text/css" media="all" />
+	<link rel="stylesheet" type="text/css" href="/static/css/screen.css" media="all" charset="utf-8">
 	{% endif %}
 	{% endcompress %}
 	{% if css_debug_mode %}
@@ -31,7 +30,7 @@
 		}, 10 * 60 * 1000);
 	</script>
 	{% endif %}
-	<script src="/static/js/modernizr-2.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/libs/modernizr.min.js" type="text/javascript" charset="utf-8"></script>
 	{% block head %}{% endblock %}
 </head>
 <body class="nmis home">
@@ -115,33 +114,27 @@
 		var siteTitle = "{{site_title}}";
 	</script>
 	{% endif %}
-    <script src="/static/js/libs/raphael-min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/libs/raphael/raphael.min.js" type="text/javascript" charset="utf-8"></script>
 	{% compress js %}
 	<script src="/static/js/libs/jquery-1.7.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/static/js/underscore.min.js"></script>
+	<script src="/static/js/libs/underscore.min.js"></script>
 	<script type="text/javascript" src="/static/js/libs/sammy.js"></script>
 	<script src="/static/js/libs/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" src="/static/js/libs/mustache.js"></script>
-	<script type="text/javascript" src="/static/jquery-ui/jquery-ui-1.8.7.custom.min.js"></script>
-	<script type="text/javascript" src="/static/js/libs/chosen.jquery.min.js"></script>
-	<script src="/static/js/src/activate-chosen.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" src="/static/js/libs/color.js"></script>
-	<script type="text/javascript" src="/static/js/jquery.offline.js"></script>
-	<script type="text/javascript" src="/static/nmis_ui/javascripts/libraries/jquery_underscore_templates.js"></script>
-	<script type="text/javascript" src="/static/nmis_ui/javascripts/libraries/jquery-when_O.js"></script>
-	<script type="text/javascript" src="/static/nmis_ui/javascripts/libraries/jquery.inDom.js"></script>
-	<script type="text/javascript" src="/static/nmis_ui/javascripts/libraries/csv.js"></script>
-	<script type="text/javascript" src="/static/nmis_ui/javascripts/main/debug.js"></script>
-    <script src="/static/js/g.raphael-min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/static/js/g.pie-min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/static/js/libs/bootstrap-twipsy.js" type="text/javascript" charset="utf-8"></script>
-	{% block scripts %}{% endblock %}
+	<script type="text/javascript" src="/static/js/libs/jquery.chosen.min.js"></script>
+	<script type="text/coffeescript" src="/static/coffee/jquery_underscore_templates.coffee"></script>
+	<script type="text/coffeescript" src="/static/coffee/jquery-when_O.coffee"></script>
+	<script type="text/javascript" src="/static/js/libs/jquery.inDom.js"></script>
+	<script type="text/coffeescript" src="/static/coffee/csv.coffee"></script>
+	<script type="text/coffeescript" src="/static/coffee/debug.coffee"></script>
+	<script type="text/javascript" src="/static/js/libs/raphael/graphael.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/static/js/libs/raphael/graphael.pie.min.js" charset="utf-8"></script>
 	{% block js %}
 	<!-- js block is for scripts that should be loaded at the end of the page -->
 	{% endblock %}
 	{% endcompress %}
-	<script src="/static/js/libs/data-tables/jquery.dataTables.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/static/js/src/jquery.dataTables.typeFilter.js" type="text/javascript" charset="utf-8"></script>
+	{% block scripts %}{% endblock %}
+	<script src="/static/js/libs/jquery.dataTables.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/libs/jquery.dataTables.typeFilter.js" type="text/javascript" charset="utf-8"></script>
 
 	{% block footer %}{% endblock %}
 	{% if preview_link %}

@@ -78,6 +78,10 @@ STATICFILES_DIRS = (
 COMPRESS_ENABLED = True
 CSS_DEBUG_MODE = False
 
+COMPRESS_PRECOMPILERS = (
+    ('text/coffeescript', 'coffee --compile --stdio'),
+)
+
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
