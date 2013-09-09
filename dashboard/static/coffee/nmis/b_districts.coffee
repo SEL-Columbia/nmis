@@ -276,8 +276,11 @@ class NMIS.District
       clonedFacilitiesById
 
   facilityDataForSector: (sectorSlug)->
-    for own facId, fac of @facilityData when fac.sector.slug is sectorSlug
-      fac
+    for own facId, fac of @facilityData
+      if fac.sector is undefined
+        console.error("Facility does not have a sector:", fac)
+      else if fac.sector.slug is sectorSlug
+        fac
 
   loadData: ()->
     @_fetchModuleOnce "lga_data", "data/lga_data", (results)=>
