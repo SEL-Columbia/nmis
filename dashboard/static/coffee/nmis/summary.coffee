@@ -1,3 +1,5 @@
+# begin summary.coffee
+
 do ->
   ###
   When "summary" is activated/deactivated, the open/close callbacks are called

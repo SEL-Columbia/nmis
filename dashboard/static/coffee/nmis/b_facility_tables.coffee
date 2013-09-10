@@ -1,3 +1,5 @@
+# begin b_facility_tables.coffee
+
 do ->
   NMIS.SectorDataTable = do ->
     ###

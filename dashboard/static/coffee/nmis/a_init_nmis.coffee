@@ -1,3 +1,5 @@
+#begin a_init_nmis.coffee
+
 ###
 This file is meant to initialize the NMIS object which includes
 independently testable modules.
@@ -8,12 +10,14 @@ unless @NMIS.settings
     openLayersRoot: "./openlayers/"
     pathToMapIcons: "./images"
 
-NMIS.expected_modules = ["Tabulation","clear","Sectors","validateData","data","FacilityPopup","Breadcrumb","IconSwitcher","MapMgr","FacilityHover"]
+do ->
 
-_.templateSettings =
-  escape: /<{-([\s\S]+?)}>/g
-  evaluate: /<{([\s\S]+?)}>/g
-  interpolate: /<{=([\s\S]+?)}>/g
+  NMIS.expected_modules = ["Tabulation","clear","Sectors","validateData","data","FacilityPopup","Breadcrumb","IconSwitcher","MapMgr","FacilityHover"]
+
+  _.templateSettings =
+    escape: /<{-([\s\S]+?)}>/g
+    evaluate: /<{([\s\S]+?)}>/g
+    interpolate: /<{=([\s\S]+?)}>/g
 
 do ->
   ###
@@ -61,6 +65,7 @@ do ->
         sslug = datum.sector.toLowerCase()
         datum.sector = NMIS.Sectors.pluck(sslug)
     datum
+
   NMIS.loadFacilities = (_data, opts) ->
     _.each _data, (val, key) ->
       val.id = val.uuid

@@ -1,3 +1,4 @@
+# begin a_nmis.coffee
 ###
 I'm moving modules into this file wrapped in "do ->" (self-executing functions)
 until they play well together (and I ensure they don't over-depend on other modules.)
@@ -704,5 +705,3 @@ do ->
     showTitle: showTitle
     elem1contentHeight: elem1contentHeight
     getElems: getElems
-
-#
