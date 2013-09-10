@@ -2890,7 +2890,7 @@ do ->
     dashboard.get "" + NMIS.url_root + "#/:state/:lga/summary/:sector/:subsector/?(#.*)?", NMIS.loadSummary
     dashboard.get "" + NMIS.url_root + "#/:state/:lga/summary/:sector/:subsector/:indicator/?(#.*)?", NMIS.loadSummary
 
-  data_src = "/static/protected_data/"
+  data_src = "/protected_data/"
   NMIS._data_src_root_url = data_src
 
   $ ->
