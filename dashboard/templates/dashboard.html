@@ -5,21 +5,21 @@
 {% endblock %}
 
 {% block js %}
-	{% load compress %}
-	{% compress js %}
+  {% load compress %}
+  {% compress js %}
 
-		<script type="text/coffeescript" src="/static/coffee/nmis/a_init_nmis.coffee" charset="utf-8"></script>
-		<script type="text/coffeescript" src="/static/coffee/nmis/a_nmis.coffee" charset="utf-8"></script>
-		<script type="text/coffeescript" src="/static/coffee/nmis/b_country_view.coffee" charset="utf-8"></script>
-		<script type="text/coffeescript" src="/static/coffee/nmis/b_districts.coffee" charset="utf-8"></script>
-		<script type="text/coffeescript" src="/static/coffee/nmis/b_facility_tables.coffee" charset="utf-8"></script>
-		<script type="text/coffeescript" src="/static/coffee/nmis/b_sectors.coffee" charset="utf-8"></script>
-		<script type="text/coffeescript" src="/static/coffee/nmis/c_launch_open_layers.coffee" charset="utf-8"></script>
-		<script type="text/coffeescript" src="/static/coffee/nmis/c_variables.coffee" charset="utf-8"></script>
-		<script type="text/coffeescript" src="/static/coffee/nmis/facilities.coffee" charset="utf-8"></script>
-		<script type="text/coffeescript" src="/static/coffee/nmis/popups_and_hovers.coffee" charset="utf-8"></script>
-		<script type="text/coffeescript" src="/static/coffee/nmis/summary.coffee" charset="utf-8"></script>
+  <script type="text/coffeescript" src="/static/coffee/nmis/a_init_nmis.coffee" charset="utf-8"></script>
+  <script type="text/coffeescript" src="/static/coffee/nmis/a_nmis.coffee" charset="utf-8"></script>
+  <script type="text/coffeescript" src="/static/coffee/nmis/b_country_view.coffee" charset="utf-8"></script>
+  <script type="text/coffeescript" src="/static/coffee/nmis/b_districts.coffee" charset="utf-8"></script>
+  <script type="text/coffeescript" src="/static/coffee/nmis/b_facility_tables.coffee" charset="utf-8"></script>
+  <script type="text/coffeescript" src="/static/coffee/nmis/b_sectors.coffee" charset="utf-8"></script>
+  <script type="text/coffeescript" src="/static/coffee/nmis/c_launch_open_layers.coffee" charset="utf-8"></script>
+  <script type="text/coffeescript" src="/static/coffee/nmis/c_variables.coffee" charset="utf-8"></script>
+  <script type="text/coffeescript" src="/static/coffee/nmis/facilities.coffee" charset="utf-8"></script>
+  <script type="text/coffeescript" src="/static/coffee/nmis/popups_and_hovers.coffee" charset="utf-8"></script>
+  <script type="text/coffeescript" src="/static/coffee/nmis/summary.coffee" charset="utf-8"></script>
+  <script type="text/coffeescript" src="/static/coffee/dashboard.coffee" charset="utf-8"></script>
 
-	{% endcompress %}
-	<script src="/static/dashboard.js"></script>
+  {% endcompress %}
 {% endblock %}
