@@ -1,33 +1,40 @@
 #begin a_init_nmis.coffee
 
-###
-This file is meant to initialize the NMIS object which includes
-independently testable modules.
-###
-@NMIS = {} unless @NMIS?
-unless @NMIS.settings
-  @NMIS.settings =
+# All the NMIS Modules interact with each other via the globally
+# accessible NMIS object. This is why the modules are wrapped in
+# a "do->" closure scope-- to ensure that there are no hidden
+# references to distant parts of the NMIS codebase.
+@NMIS = NMIS = {}
+
+# There are a handful of NMIS.settings values which can be set
+# to influence which URLs the application uses to look for things.
+unless NMIS.settings
+  NMIS.settings =
     openLayersRoot: "./openlayers/"
     pathToMapIcons: "./images"
 
-do ->
-
-  NMIS.expected_modules = ["Tabulation","clear","Sectors","validateData","data","FacilityPopup","Breadcrumb","IconSwitcher","MapMgr","FacilityHover"]
-
+  # in this app, underscore templates use a different syntax to avoid
+  # conflicts with django and erb
   _.templateSettings =
     escape: /<{-([\s\S]+?)}>/g
     evaluate: /<{([\s\S]+?)}>/g
     interpolate: /<{=([\s\S]+?)}>/g
 
 do ->
-  ###
-  This is the abdomen of the NMIS code. NMIS.init() initializes "data" and "opts"
-  which were used a lot in the early versions.
+  # NMIS.expected_modules was used in nmis_ui tests to ensure that
+  # all of the necessary modules (and files) had been loaded in.
+  # This is less important if everything is in one file.
+  NMIS.expected_modules = ["Tabulation","clear","Sectors","validateData","data","FacilityPopup","Breadcrumb","IconSwitcher","MapMgr","FacilityHover"]
 
-  Many modules still access [facility-]data through NMIS.data()
+do ->
 
-  opts has more-or-less been replaced by NMIS.Env()
-  ###
+  # This is the abdomen of the NMIS code. NMIS.init() initializes "data" and "opts"
+  # which were used a lot in the early versions.
+
+  # Many modules still access [facility-]data through NMIS.data()
+
+  # opts has more-or-less been replaced by NMIS.Env()
+
   data = false
   opts = false
 
@@ -44,7 +51,7 @@ do ->
         items: data
         statusShiftDone: ->
           tally = {}
-          _.each @items, (item) ->
+          for item in @items
             tally[item.status] = 0  unless tally[item.status]
             tally[item.status]++
     true
@@ -97,33 +104,32 @@ do ->
 
 
   #uses: NMIS.Sectors, data
-  NMIS.dataObjForSector = (sectorSlug) ->
-    sector = NMIS.Sectors.pluck(sectorSlug)
-    o = {}
-    _(data).each (datum, id) ->
-      o[id] = datum  if datum.sector.slug is sector.slug
-    o
+  # NMIS.dataObjForSector = (sectorSlug) ->
+  #   sector = NMIS.Sectors.pluck(sectorSlug)
+  #   o = {}
+  #   _(data).each (datum, id) ->
+  #     o[id] = datum  if datum.sector.slug is sector.slug
+  #   o
 
-  #uses: data
+  # This is how other modules access the data that has been loaded into NMIS.
   NMIS.data = -> data
 
 do ->
-  ###
-  the internal "value" function takes a value and returns a 1-2 item list:
-  The second returned item (when present) is a class name that should be added
-  to the display element.
+  # the internal "value" function takes a value and returns a 1-2 item list:
+  # The second returned item (when present) is a class name that should be added
+  # to the display element.
 
-    examples:
+  #   examples:
   
-    value(null)
-    //  ["--", "val-null"]
+  #   value(null)
+  #   //  ["--", "val-null"]
   
-    value(0)
-    //  ["0"]
+  #   value(0)
+  #   //  ["0"]
   
-    value(true)
-    //  ["Yes"]
-  ###
+  #   value(true)
+  #   //  ["Yes"]
+
   value = (v, variable={}) ->
     r = [v]
     if v is `undefined`
@@ -140,10 +146,8 @@ do ->
       r = [NMIS.HackCaps(v)] 
     r
 
-  ###
-  The main function, "NMIS.DisplayValue" receives an element
-  and displays the appropriate value.
-  ###
+  # The main function, "NMIS.DisplayValue" receives an element
+  # and displays the appropriate value.
   DisplayValue = (d, element) ->
     res = value(d)
     element.addClass res[1]  if res[1]?
@@ -206,57 +210,64 @@ do ->
 
 error = (message, opts={})-> log.error message
 NMIS.error = error
+
 # begin a_nmis.coffee
-###
-I'm moving modules into this file wrapped in "do ->" (self-executing functions)
-until they play well together (and I ensure they don't over-depend on other modules.)
-..doing this instead of splitting them into individual files.
-###
 
-do ->
-  Breadcrumb = do ->
+# NMIS.Breadcrumb--
+#   init # set the elem that the breadcrumb will build into
+NMIS.Breadcrumb = do ->
+  levels = []
+  elem = false
+  context = {}
+
+  init = (_elem, opts={}) ->
+    # NMIS.Breadcrumb.init
+    # set the elem that the breadcrumb will build into
+    elem = $(_elem).eq(0)
+
+    opts.draw = true  unless opts.draw?
+    setLevels opts.levels, false  if opts.levels?
+    draw()  unless not opts.draw
+  clear = ->
+    # NMIS.Breadcrumb.clear
+    # Empty the existing breadcrumb elem and clear out set values.
+    elem.empty()  if elem
     levels = []
-    elem = false
-    context = {}
+  setLevels = (new_levels=[], needs_draw=true) ->
+    # NMIS.Breadcrumb.setLevels
+    # Pass an array of levels of objects which will be built into
+    # the breadcrumb elem.
+    levels[i] = level for level, i in new_levels when level?
+    draw()  if needs_draw
+    context
+  setLevel = (ln, d) ->
+    # pass 2 arguments: an index number and a value.
+    levels[ln] = d
+    context
+  draw = ->
+    # Draws the breadcrumb with the most recently assigned values.
+    throw new Error "Breadcrumb: elem is undefined" unless elem?
+    elem.empty()
+    splitter = $("<span>").text("/")
+    for [txt, href, fn], i in levels
+      splitter.clone().appendTo elem  if i isnt 0
+      a = $("<a>").text(txt).attr("href", href)
+      a.click fn if fn?
+      a.appendTo elem
+    elem
 
-    init = (_elem, opts={}) ->
-      elem = $(_elem).eq(0)
-
-      opts.draw = true  unless opts.draw?
-      setLevels opts.levels, false  if opts.levels?
-      draw()  unless not opts.draw
-    clear = ->
-      elem.empty()  if elem
-      levels = []
-    setLevels = (new_levels=[], needs_draw=true) ->
-      levels[i] = level for level, i in new_levels when level?
-      draw()  if needs_draw
-      context
-    setLevel = (ln, d) ->
-      levels[ln] = d
-      context
-    draw = ->
-      throw new Error "Breadcrumb: elem is undefined" unless elem?
-      elem.empty()
-      splitter = $("<span>").text("/")
-      for [txt, href, fn], i in levels
-        splitter.clone().appendTo elem  if i isnt 0
-        a = $("<a>").text(txt).attr("href", href)
-        a.click fn if fn?
-        a.appendTo elem
-      elem
-
-    init: init
-    setLevels: setLevels
-    setLevel: setLevel
-    draw: draw
-    _levels: -> levels
-    clear: clear
-
-  NMIS.Breadcrumb = Breadcrumb
+  init: init
+  setLevels: setLevels
+  setLevel: setLevel
+  draw: draw
+  _levels: -> levels
+  clear: clear
 
 
 do ->
+  # A consistent way to handle the URL naming of photos which are
+  # stored in the items and in different places (of Amazon S3 accounts)
+  # depending on the item.
   NMIS.S3Photos = do ->
     s3Root = "http://nmisstatic.s3.amazonaws.com/facimg"
     url: (s3id, size=0)->
@@ -275,13 +286,18 @@ do ->
     else if item.s3_photo_id
       NMIS.S3Photos.url item.s3_photo_id, size_code
 
-do ->
+# Sometimes, when we want to turn a_slug_with_underscores into a
+# pretty name, we can use this function to turn it in to
+# "A Slug With Underscores". However this is not recommended because
+# it restricts what we use as slugs and forces us away from using
+# a proper name attribute with proper capitalization and punctuation.
+
+NMIS.HackCaps = do ->
+
   capitalize = (str) ->
-    unless str
-      ""
-    else
-      str[0].toUpperCase() + str.slice(1)
-  NMIS.HackCaps = (str)->
+    if str then (str[0].toUpperCase() + str.slice(1)) else ""
+
+  (str)->
     if $.type(str) is "string"
       output = []
       for section in str.split "_"
@@ -290,94 +306,104 @@ do ->
     else
       str
 
-do ->
-  NMIS.IconSwitcher = do ->
-    context = {}
-    callbacks = ["createMapItem", "shiftMapItemStatus", "statusShiftDone", "hideMapItem", "showMapItem", "setMapItemVisibility"]
-    mapItems = {}
+# NMIS.IconSwitcher provides a way to iterate over a set of icons from
+# different parts of the application (and before the icons have been created)
+# and define callbacks which will do things like change the icons as the
+# state of the map changes.
+NMIS.IconSwitcher = do ->
+  context = {}
+  callbacks = ["createMapItem", "shiftMapItemStatus", "statusShiftDone", "hideMapItem", "showMapItem", "setMapItemVisibility"]
+  mapItems = {}
 
-    init = (_opts) ->
-      noop = ->
-      items = {}
-      context = _.extend(
-        items: {}
-        mapItem: mapItem
-      , _opts)
-      _.each callbacks, (cbname) ->
-        context[cbname] = noop  if context[cbname] is `undefined`
+  init = (_opts) ->
+    noop = ->
+    items = {}
+    context = _.extend(items: {}, mapItem: mapItem, _opts)
+    for cbname in callbacks
+      context[cbname] = noop  if context[cbname] is `undefined`
+    true
 
-    mapItem = (id, value) ->
-      if !value?
-        mapItems[id]
-      else
-        mapItems[id] = value
-    hideItem = (item) ->
-      item.hidden = true
-    showItem = (item) ->
-      item.hidden = false
-    setVisibility = (item, tf) ->
-      unless not tf
-        unless item.hidden
-          item.hidden = true
-          context.setMapItemVisibility.call item, false, item, context.items
-          return true
-      else
-        unless not item.hidden
-          item.hidden = false
-          context.setMapItemVisibility.call item, true, item, context.items
-          return true
-      false
-    iterate = (cb) ->
-      _.each context.items, (item, id, itemset) ->
-        cb.apply context, [item, id, itemset]
+  mapItem = (id, value) ->
+    if !value?
+      mapItems[id]
+    else
+      mapItems[id] = value
 
-    shiftStatus = (fn) ->
-      iterate (item, id) ->
-        status = fn.call(context, id, item, context.items)
-        visChange = setVisibility(item, status is false)
-        statusChange = false
-        if status is `undefined`
-          #do nothing
-        else if status is false
-          item.status = `undefined`
-        else if item.status isnt status
-          item._prevStatus = status
-          item.status = status
-          statusChange = true
-        context.shiftMapItemStatus item, id  if statusChange or visChange
+  # these aren't used, but they give an idea of how the hidden attribute changes the visibility.
+  hideItem = (item) -> item.hidden = true
+  showItem = (item) -> item.hidden = false
 
-      context.statusShiftDone()
-    all = ->
-      _.values context.items
-    setCallback = (cbName, cb) ->
-      context[cbName] = cb  if callbacks.indexOf(cbName) isnt -1
-    filterStatus = (status) ->
-      _.filter context.items, (item) ->
-        item.status is status
+  # set an items visibility to true or false
+  # returns true if visibility has changed
+  setVisibility = (item, tf) ->
+    unless not tf
+      unless item.hidden
+        item.hidden = true
+        context.setMapItemVisibility.call item, false, item, context.items
+        return true
+    else
+      unless not item.hidden
+        item.hidden = false
+        context.setMapItemVisibility.call item, true, item, context.items
+        return true
+    false
 
-    filterStatusNot = (status) ->
-      _.filter context.items, (item) ->
-        item.status isnt status
+  # run a callback on each icon in the set.
+  iterate = (cb) ->
+    _.each context.items, (item, id, itemset) ->
+      cb.apply context, [item, id, itemset]
 
-    allShowing = ->
-      filterStatusNot `undefined`
-    createAll = ->
-      iterate context.createMapItem
-    clear = ->
-      log "Clearing IconSwitcher"
-      context = {}
+  # run a callback on each icon in the set and pass the item / icon as parameters to
+  # the callback
+  shiftStatus = (fn) ->
+    iterate (item, id) ->
+      status = fn.call(context, id, item, context.items)
+      visChange = setVisibility(item, status is false)
+      statusChange = false
+      if status is `undefined`
+        #do nothing
+      else if status is false
+        item.status = `undefined`
+      else if item.status isnt status
+        item._prevStatus = status
+        item.status = status
+        statusChange = true
+      context.shiftMapItemStatus item, id  if statusChange or visChange
+    context.statusShiftDone()
 
-    # Externally callable functions:
-    init: init
-    clear: clear
-    allShowing: allShowing
-    createAll: createAll
-    filterStatus: filterStatus
-    filterStatusNot: filterStatusNot
-    all: all
-    setCallback: setCallback
-    shiftStatus: shiftStatus
-    iterate: iterate
+  all = -> _.values context.items
+
+  # Set a given callback for NMIS.IconSwitcher
+  setCallback = (cbName, cb) ->
+    context[cbName] = cb  if callbacks.indexOf(cbName) isnt -1
+
+  # Filter all the icons of items with a given status
+  filterStatus = (status) ->
+    _.filter context.items, (item) ->
+      item.status is status
+
+  # filter all the icons of items without a given status
+  filterStatusNot = (status) ->
+    _.filter context.items, (item) ->
+      item.status isnt status
+
+  allShowing = -> filterStatusNot `undefined`
+
+  createAll = -> iterate context.createMapItem
+
+  clear = -> context = {}
+
+  # NMIS.IconSwitcher:
+  init: init
+  clear: clear
+  allShowing: allShowing
+  createAll: createAll
+  filterStatus: filterStatus
+  filterStatusNot: filterStatusNot
+  all: all
+  setCallback: setCallback
+  shiftStatus: shiftStatus
+  iterate: iterate
 
 NMIS.FacilitySelector = do->
   ###
@@ -418,134 +444,126 @@ NMIS.FacilitySelector = do->
   isActive: isActive
   deselect: deselect
 
-do ->
-  NMIS.DataLoader = do ->
-    ajaxJsonQuery = (url, cache=true)->
-      $.ajax(url: url, dataType: "json", cache: cache)
-    fetchLocalStorage = (url) ->
-      p     =!1
-      data  =!1
-      stringData = localStorage.getItem(url)
-      if stringData
-        data = JSON.parse(stringData)
-        ajaxJsonQuery(url).then (d)->
-          localStorage.removeItem url
-          localStorage.setItem url, JSON.stringify(d)
+# All JSON Queries are done through NMIS.DataLoader
+# This ensures that we are using a consistent way to access the data
+# repository.
+NMIS.DataLoader = do ->
+  ajaxJsonQuery = (url, cache=true)->
+    $.ajax(url: url, dataType: "json", cache: cache)
+  fetchLocalStorage = (url) ->
+    p     =!1
+    data  =!1
+    stringData = localStorage.getItem(url)
+    if stringData
+      data = JSON.parse(stringData)
+      ajaxJsonQuery(url).then (d)->
+        localStorage.removeItem url
+        localStorage.setItem url, JSON.stringify(d)
 
-        $.Deferred().resolve [data]
-      else
-        p = new $.Deferred()
-        ajaxJsonQuery(url).then (d)->
-          localStorage.setItem url, JSON.stringify(d)
-          p.resolve [d]
-        p.promise()
+      $.Deferred().resolve [data]
+    else
+      p = new $.Deferred()
+      ajaxJsonQuery(url).then (d)->
+        localStorage.setItem url, JSON.stringify(d)
+        p.resolve [d]
+      p.promise()
 
-    fetch = (url) -> ajaxJsonQuery url, false
-    # Until localStorage fecthing works, just use $.getJSON
-    fetch: fetch
+  fetch = (url) -> ajaxJsonQuery url, false
+  # Until localStorage fecthing works, just use $.getJSON
+  fetch: fetch
 
-do ->
-  NMIS.LocalNav = do ->
-    ###
-    NMIS.LocalNav is the navigation boxes that shows up on top of the map.
-    > It has "buttonSections", each with buttons inside. These buttons are defined
-      when they are passed as arguments to NMIS.LocalNav.init(...)
+NMIS.LocalNav = do ->
+  # NMIS.LocalNav is the navigation boxes that shows up on top of the map.
+  # > It has "buttonSections", each with buttons inside. These buttons are defined
+  #   when they are passed as arguments to NMIS.LocalNav.init(...)
+  #
+  # > It is structured to make it easy to assign the buttons to point to URLs
+  #   relative to the active LGA. It is also meant to be easy to change which
+  #   buttons are active by passing values to NMIS.LocalNav.markActive(...)
+  #
+  #   An example value passed to markActive:
+  #     NMIS.LocalNav.markActive(["mode:facilities", "sector:health"])
+  #       ** this would "select" facilities and health **
+  #
+  # > You can also run NMIS.LocalNav.iterate to run through each button, changing
+  #   the href to something appropriate given the current page state.
+  # [wrapper element className: ".local-nav"]
+  elem = undefined
+  wrap = undefined
+  opts = undefined
+  buttonSections = {}
+  submenu = undefined
 
-    > It is structured to make it easy to assign the buttons to point to URLs
-      relative to the active LGA. It is also meant to be easy to change which
-      buttons are active by passing values to NMIS.LocalNav.markActive(...)
+  init = (selector, _opts) ->
+    wrap = $(selector)
+    opts = _.extend sections: [], _opts
+    elem = $ "<ul />", id: "local-nav", class: "nav"
+    wrap = $("<div />", class: "row ln-wrap")
+      .css(position: "absolute", top: 82, left: 56, "z-index": 99)
+      .html(elem)
+    $(".content").eq(0).prepend wrap
+    spacer = $("<li>", {class: "small spacer", html: "&nbsp;"})
+    for section, i in opts.sections
+      spacer.clone().appendTo(elem)  if i isnt 0
+      for [id, text, url] in section
+        arr = [id, text, url]
+        [section_code, section_id] = id.split ":"
+        buttonSections[section_code] = {} if buttonSections[section_code] is undefined
+        a = $("<a>", href:url, text:text)
+        buttonSections[section_code][section_id] = a
+        $("<li>", html: a).appendTo(elem)
+    submenu = $("<ul>", class: "submenu").appendTo(elem)
 
-      An example value passed to markActive:
-        NMIS.LocalNav.markActive(["mode:facilities", "sector:health"])
-          ** this would "select" facilities and health **
+  hide = ()->
+    wrap.detach()
 
-    > You can also run NMIS.LocalNav.iterate to run through each button, changing
-      the href to something appropriate given the current page state.
-
-    [wrapper element className: ".local-nav"]
-    ###
-    elem = undefined
-    wrap = undefined
-    opts = undefined
-    buttonSections = {}
-    submenu = undefined
-
-    init = (selector, _opts) ->
-      wrap = $(selector)
-      opts = _.extend(
-        sections: []
-      , _opts)
-      elem = $ "<ul />", id: "local-nav", class: "nav"
-      wrap = $("<div />", class: "row ln-wrap")
-        .css(
-          position: "absolute"
-          top: 82
-          left: 56
-          "z-index": 99
-        ).html(elem)
+  show = ()->
+    if wrap.closest("html").length is 0
       $(".content").eq(0).prepend wrap
-      spacer = $("<li>", {class: "small spacer", html: "&nbsp;"})
-      for section, i in opts.sections
-        spacer.clone().appendTo(elem)  if i isnt 0
-        for [id, text, url] in section
-          arr = [id, text, url]
-          [section_code, section_id] = id.split ":"
-          buttonSections[section_code] = {} if buttonSections[section_code] is undefined
-          a = $("<a>", href:url, text:text)
-          buttonSections[section_code][section_id] = a
-          $("<li>", html: a).appendTo(elem)
-      submenu = $("<ul>", class: "submenu").appendTo(elem)
 
-    hide = ()->
-      wrap.detach()
+  getNavLink = (code) ->
+    _x = code.split(":")
+    section = _x[0]
+    name = _x[1]
+    buttonSections[section][name]
+  markActive = (codesArray) ->
+    wrap.find(".active").removeClass "active"
+    _.each codesArray, (code) ->
+      getNavLink(code).parents("li").eq(0).addClass "active"
 
-    show = ()->
-      if wrap.closest("html").length is 0
-        $(".content").eq(0).prepend wrap
+  clear = ->
+    wrap.empty()
+    wrap = `undefined`
+    elem = `undefined`
+    buttonSections = {}
+    submenu = `undefined`
+  hideSubmenu = ->
+    submenu.hide()
+  displaySubmenu = (nlcode, a, _opts) ->
+    navLink = getNavLink(nlcode)
+    lpos = navLink.parents("li").eq(0).position().left
+    submenu.hide().empty().css left: lpos
+    _.each a, (aa) ->
+      $("<li />").html($("<a />",
+        text: aa[0]
+        href: aa[1]
+      )).appendTo submenu
 
-    getNavLink = (code) ->
-      _x = code.split(":")
-      section = _x[0]
-      name = _x[1]
-      buttonSections[section][name]
-    markActive = (codesArray) ->
-      wrap.find(".active").removeClass "active"
-      _.each codesArray, (code) ->
-        getNavLink(code).parents("li").eq(0).addClass "active"
+    submenu.show()
+  iterate = (cb) ->
+    _.each buttonSections, (buttons, sectionName) ->
+      _.each buttons, (button, buttonName) ->
+        cb.apply this, [sectionName, buttonName, button]
 
-    clear = ->
-      wrap.empty()
-      wrap = `undefined`
-      elem = `undefined`
-      buttonSections = {}
-      submenu = `undefined`
-    hideSubmenu = ->
-      submenu.hide()
-    displaySubmenu = (nlcode, a, _opts) ->
-      navLink = getNavLink(nlcode)
-      lpos = navLink.parents("li").eq(0).position().left
-      submenu.hide().empty().css left: lpos
-      _.each a, (aa) ->
-        $("<li />").html($("<a />",
-          text: aa[0]
-          href: aa[1]
-        )).appendTo submenu
-
-      submenu.show()
-    iterate = (cb) ->
-      _.each buttonSections, (buttons, sectionName) ->
-        _.each buttons, (button, buttonName) ->
-          cb.apply this, [sectionName, buttonName, button]
-
-
-    init: init
-    clear: clear
-    iterate: iterate
-    hide: hide
-    show: show
-    displaySubmenu: displaySubmenu
-    hideSubmenu: hideSubmenu
-    markActive: markActive
+  # NMIS.LocalNav:
+  init: init
+  clear: clear
+  iterate: iterate
+  hide: hide
+  show: show
+  displaySubmenu: displaySubmenu
+  hideSubmenu: hideSubmenu
+  markActive: markActive
 
 do ->
   NMIS.Tabulation = do ->
@@ -582,88 +600,83 @@ do ->
     sectorSlug: sectorSlug
     sectorSlugAsArray: sectorSlugAsArray
 
-do ->
-  NMIS.Env = do ->
-    ###
-    NMIS.Env() gets-or-sets the page state.
+NMIS.Env = do ->
+  # NMIS.Env() gets-or-sets the page state.
+  #
+  # It also provides the option to trigger callbacks which are run in a
+  # special context upon each change of the page-state (each time NMIS.Env() is set)
+  env = false
+  changeCbs = []
+  _latestChangeDeferred = false
 
-    It also provides the option to trigger callbacks which are run in a
-    special context upon each change of the page-state (each time NMIS.Env() is set)
-    ###
-    env = false
-    changeCbs = []
-    _latestChangeDeferred = false
+  class EnvContext
+    constructor: (@next, @prev)->
+      # note: a promise object called "@change" will be assigned to each
+      # EnvContext after it is created.
 
-    class EnvContext
-      constructor: (@next, @prev)->
-        # note: a promise object called "@change" will be assigned to each
-        # EnvContext after it is created.
+    usingSlug: (what, whatSlug)->
+      # Usage: env.usingSlug("mode", "facilities") runs if the next env matches
+      #        "mode:facilities"
+      @_matchingSlug what, whatSlug
 
-      usingSlug: (what, whatSlug)->
-        # Usage: env.usingSlug("mode", "facilities") runs if the next env matches
-        #        "mode:facilities"
-        @_matchingSlug what, whatSlug
+    changingToSlug: (what, whatSlug)->
+      # Usage: env.changingToSlug("mode", "facilities") only runs if the previous env
+      #        did not have "mode" match "facilities" but the next one does.
+      # Output is equivalent to:
+      #   @changing(what) and @usingSlug(what, whatSlug)
+      !@_matchingSlug(what, whatSlug, false) and @_matchingSlug(what, whatSlug)
 
-      changingToSlug: (what, whatSlug)->
-        # Usage: env.changingToSlug("mode", "facilities") only runs if the previous env
-        #        did not have "mode" match "facilities" but the next one does.
-        # Output is equivalent to:
-        #   @changing(what) and @usingSlug(what, whatSlug)
-        !@_matchingSlug(what, whatSlug, false) and @_matchingSlug(what, whatSlug)
+    changing: (what)->
+      @_getSlug(what) isnt @_getSlug(what, false)
 
-      changing: (what)->
-        @_getSlug(what) isnt @_getSlug(what, false)
+    changeDone: ()-> @_deferred?.resolve(@next)
 
-      changeDone: ()-> @_deferred?.resolve(@next)
+    _matchingSlug: (what, whatSlug, checkNext=true)->
+      # returns boolean of whether the environment matches a value
+      @_getSlug(what, checkNext) is whatSlug
 
-      _matchingSlug: (what, whatSlug, checkNext=true)->
-        # returns boolean of whether the environment matches a value
-        @_getSlug(what, checkNext) is whatSlug
+    _getSlug: (what, checkNext=true)->
+      # returns a string that hopefully represents the slug of the environment variable
+      checkEnv = if checkNext then @next else @prev
+      obj = checkEnv[what]
+      "#{if obj and obj.slug then obj.slug else obj}"
 
-      _getSlug: (what, checkNext=true)->
-        # returns a string that hopefully represents the slug of the environment variable
-        checkEnv = if checkNext then @next else @prev
-        obj = checkEnv[what]
-        "#{if obj and obj.slug then obj.slug else obj}"
+  env_accessor = (arg)->
+    if arg?
+      set_env arg
+    else
+      get_env()
 
-    env_accessor = (arg)->
-      if arg?
-        set_env arg
-      else
-        get_env()
+  get_env = ()->
+    if env
+      _.extend {}, env
+    else
+      null
 
-    get_env = ()->
-      if env
-        _.extend {}, env
-      else
-        null
+  set_env = (_env)->
+    context = new EnvContext(_.extend({}, _env), env)
+    context._deferred = _latestChangeDeferred = $.Deferred()
+    context.change = _latestChangeDeferred.promise()
+    env = context.next
+    changeCb.call context, context.next, context.prev  for changeCb in changeCbs
 
-    set_env = (_env)->
-      context = new EnvContext(_.extend({}, _env), env)
-      context._deferred = _latestChangeDeferred = $.Deferred()
-      context.change = _latestChangeDeferred.promise()
-      env = context.next
-      changeCb.call context, context.next, context.prev  for changeCb in changeCbs
+  env_accessor.extend = (o)->
+    e = if env then env else {}
+    _.extend({}, e, o)
 
-    env_accessor.extend = (o)->
-      e = if env then env else {}
-      _.extend({}, e, o)
+  env_accessor.onChange = (cb)->
+    changeCbs.push cb
 
-    env_accessor.onChange = (cb)->
-      changeCbs.push cb
+  env_accessor.changeDone = ()->
+    # Use this (NMIS.Env.changeDone()) to resolve the most recent promise object
+    _latestChangeDeferred.resolve env  if _latestChangeDeferred
 
-    env_accessor.changeDone = ()->
-      # Use this (NMIS.Env.changeDone()) to resolve the most recent promise object
-      _latestChangeDeferred.resolve env  if _latestChangeDeferred
-
-    env_accessor
-
+  # NMIS.Env:
+  env_accessor
 
 NMIS.panels = do ->
-  ###
-  NMIS.panels provides a basic way to define HTML DOM-related behavior when navigating from
-  one section of the site to another. (e.g. "summary" to "facilities".)
-  ###
+  # NMIS.panels provides a basic way to define HTML DOM-related behavior when navigating from
+  # one section of the site to another. (e.g. "summary" to "facilities".)
   panels = {}
   currentPanel = false
 
@@ -2890,7 +2903,7 @@ do ->
     dashboard.get "" + NMIS.url_root + "#/:state/:lga/summary/:sector/:subsector/?(#.*)?", NMIS.loadSummary
     dashboard.get "" + NMIS.url_root + "#/:state/:lga/summary/:sector/:subsector/:indicator/?(#.*)?", NMIS.loadSummary
 
-  data_src = "/protected_data/"
+  data_src = "/data/"
   NMIS._data_src_root_url = data_src
 
   $ ->
