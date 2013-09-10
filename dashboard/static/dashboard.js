@@ -178,7 +178,7 @@ making quick changes.
     }
   })();
 
-  data_src = "/static/protected_data/"
+  data_src = "/data/"
 
   NMIS._data_src_root_url = data_src;
 
