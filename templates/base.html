@@ -13,6 +13,7 @@
 	{% compress css %}
 	<link rel="stylesheet" href="/static/css/chosen.css" type="text/css" media="all" charset="utf-8">
 	{% endcompress %}
+	<link rel="stylesheet" href="/static/css/jquery-ui.custom.css" type="text/css" media="all" charset="utf-8">
 	{% block css %}{% endblock %}
 	{% if css_debug_mode %}
 	<script type="text/javascript">
@@ -107,6 +108,7 @@
     <script src="/static/js/libs/raphael/raphael.min.js" type="text/javascript" charset="utf-8"></script>
 	{% compress js %}
 	<script src="/static/js/libs/jquery-1.7.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/libs/jquery.ui-custom.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/static/js/libs/underscore.min.js"></script>
 	<script type="text/javascript" src="/static/js/libs/sammy.js"></script>
 	<script src="/static/js/libs/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
