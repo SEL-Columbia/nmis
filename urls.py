@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^data/(?P<data_path>\S+)$', dashboard_views.serve_data),
+    #url(r'^data/(?P<data_path>\S+)$', dashboard_views.serve_data),
+    url(r'^data/(?P<data_path>\S+)$', dashboard_views.serve_data_with_files),
     url(r'^gap_sheet/(?P<pdf_path>[^/]+)$', dashboard_views.serve_pdf),
 )
