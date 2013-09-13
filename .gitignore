@@ -40,3 +40,6 @@ test_static
 
 load_script.logs
 load_script.pid
+
+# node dependencies
+node_modules
