@@ -2,43 +2,39 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseBadRequest,\
      HttpResponseRedirect
-from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 import json
 import os
 import re
-from pybamboo.connection import Connection
-from pybamboo.dataset import Dataset
+from pymongo import MongoClient
 
 @login_required
 def render_dashboard(request):
     ci = RequestContext(request)
     return render_to_response("dashboard.html", context_instance=ci)
 
-
 @login_required
-def serve_data(request, data_path):
-    # TODO: cleanup/refactor this function
-    #print "the current data_path is %s " % data_path
-    #reg_string = r'districts/([a-z_]+)/data/([a-z_]+).(csv|json)'
+def serve_data_with_mongo(request, data_path):
     reg_string = r'districts/([a-z_]+)/data/(education|health|water|lga_data).(csv|json)'
     reg_match = re.match(reg_string, data_path)
     if reg_match:
+        client = MongoClient('localhost', 27017)
+        db = client.nmis
         print "i passed!!!!!"
         state_lga, sector, ext = reg_match.groups()
         print "lga: %s, sector: %s, ext: %s" % (state_lga, sector, ext)
         if sector == 'water':
-            bamboo_id = settings.BAMBOO_HASH['Water_Facilities']['bamboo_id']
+            col = db.water_facilities
         if sector == 'education':
-            bamboo_id = settings.BAMBOO_HASH['Education_Facilities']['bamboo_id']
+            col = db.education_facilities
         if sector == 'health':
-            bamboo_id = settings.BAMBOO_HASH['Health_Facilities']['bamboo_id']
+            col = db.health_facilities
         if sector == 'lga_data':
-            bamboo_id = settings.BAMBOO_HASH['LGA_Data']['bamboo_id']
-        print 'bamboo_id = %s' % bamboo_id
-        bamboo_ds = Dataset(dataset_id=bamboo_id)
+            col = db.lga_data
+        print 'mongo collection is = %s' % col
         print 'created dataset, getting data'
+        import ipdb; ipdb.set_trace()
         ffdata = bamboo_ds.get_data(query={'unique_lga': state_lga}, format=ext)
         if sector == 'lga_data':
             ffdata = ffdata[0]
