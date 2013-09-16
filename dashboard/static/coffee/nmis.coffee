@@ -11,6 +11,7 @@
 unless NMIS.settings
   NMIS.settings =
     openLayersRoot: "./openlayers/"
+    leafletRoot: "./leaflet/"
     pathToMapIcons: "./images"
 
   # in this app, underscore templates use a different syntax to avoid
@@ -143,7 +144,7 @@ do ->
     else unless isNaN(+v)
       r = [round_down(v, variable.precision)]
     else if $.type(v) is "string"
-      r = [NMIS.HackCaps(v)] 
+      r = [NMIS.HackCaps(v)]
     r
 
   # The main function, "NMIS.DisplayValue" receives an element
@@ -984,7 +985,7 @@ do ->
       $elem = $(eselector).css width: 680, height: 476, position: 'absolute'
       launcher = NMIS.loadOpenLayers()
       launcher.done ()->
-        OpenLayers._getScriptLocation = ()-> NMIS.settings.openLayersRoot
+        #OpenLayers._getScriptLocation = ()-> NMIS.settings.openLayersRoot
         $(".map-loading-message").hide()
         elem = $elem.get(0)
         mapId = "nmis-ol-country-map"
@@ -992,20 +993,27 @@ do ->
         [reA, reB, reC, reD] = [-4783.9396188051, 463514.13943762, 1707405.4936624, 1625356.9691642]
         [meA, meB, meC, meD] = [-20037500, -20037500, 20037500, 20037500]
 
-        #OpenLayers.ImgPath = "theme/default/img/"
-        OpenLayers.ImgPath = "#{NMIS.settings.openLayersRoot}theme/default/img/"
-        OpenLayers.IMAGE_RELOAD_ATTEMPTS = 0
+        #OpenLayers.ImgPath = "#{NMIS.settings.openLayersRoot}theme/default/img/"
+        #XXX
+        L.ImgPath = "#{NMIS.settings.openLayersRoot}theme/default/img/"
 
-        googProj = new OpenLayers.Projection("EPSG:900913")
-        dispProj = new OpenLayers.Projection("EPSG:4326")
+        #OpenLayers.IMAGE_RELOAD_ATTEMPTS = 0
+        #XXX
+        L.IMAGE_RELOAD_ATTEMPTS = 0
 
+        #googProj = new OpenLayers.Projection("EPSG:900913")
+        googProj = new L.Projection.SphericalMercator
+        #dispProj = new OpenLayers.Projection("EPSG:4326")
+        dispProj = new L.Projection.SphericalMercator
         options =
           projection: googProj
           displayProjection: dispProj
           units: "m"
           maxResolution: 156543.0339
-          restrictedExtent: new OpenLayers.Bounds(reA, reB, reC, reD)
-          maxExtent: new OpenLayers.Bounds(meA, meB, meC, meD)
+          #restrictedExtent: new OpenLayers.Bounds(reA, reB, reC, reD)
+          restrictedExtent: new L.Bounds(reA, reB, reC, reD)
+          #maxExtent: new OpenLayers.Bounds(meA, meB, meC, meD)
+          maxExtent: new L.Bounds(meA, meB, meC, meD)
           numZoomLevels: 11
 
 
@@ -1013,20 +1021,29 @@ do ->
           lat: 649256.11813719
           lng: 738031.10112355
 
-        options.centroid = new OpenLayers.LonLat centroid.lng, centroid.lat
+        #options.centroid = new OpenLayers.LonLat centroid.lng, centroid.lat
+        options.centroid = new L.LatLng centroid.lat, centroid.lng
         zoom = 6
         options.zoom = zoom
 
         overlays = [["Boundaries", "nigeria_base"]]
-        map = new OpenLayers.Map mapId, options
+        #map = new OpenLayers.Map mapId, options
+        map = new L.Map mapId, options
         mapserver = ["http://b.tiles.mapbox.com/modilabs/"]
         mapLayers = {}
+#        mapLayerArray = for [layerName, layerId] in overlays
+#          mapLayers[layerId] = new OpenLayers.Layer.TMS layerName, mapserver,
+#            layername: layerId
+#            type: "png"
+#            transparent: "true"
+#            isBaseLayer: false
         mapLayerArray = for [layerName, layerId] in overlays
-          mapLayers[layerId] = new OpenLayers.Layer.TMS layerName, mapserver,
+          mapLayers[layerId] = new L.tileLayer mapserver,
             layername: layerId
             type: "png"
             transparent: "true"
             isBaseLayer: false
+            tms: true
         for mdgL in mdgLayers
           do ->
             curMdgL = mdgL
@@ -1041,7 +1058,8 @@ do ->
         map.addLayers mapLayerArray
         map.setBaseLayer mapLayers.nigeria_base
 
-        map.setCenter new OpenLayers.LonLat(options.centroid.lng, options.centroid.lat), zoom
+        #map.setCenter new OpenLayers.LonLat(options.centroid.lng, options.centroid.lat), zoom
+        map.setCenter new L.LatLon(options.centroid.lat, options.centroid.lng), zoom
         map.addControl new OpenLayers.Control.LayerSwitcher()
 
       launcher.fail ()->
