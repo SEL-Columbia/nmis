@@ -1,3 +1,0 @@
-[submodule "dashboard/static/nmis_ui"]
-	path = dashboard/static/nmis_ui
-	url = git://github.com/modilabs/nmis_ui

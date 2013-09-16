@@ -13,7 +13,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -61,7 +60,7 @@ STATIC_URL = '/static/'
 
 # Login URLs
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/~'
+LOGIN_REDIRECT_URL = '/'
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
@@ -70,14 +69,19 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    ('survey_photos', os.path.join(PROJECT_ROOT, 'survey_photos', 'img_storage')),
+    #('survey_photos', os.path.join(PROJECT_ROOT, 'survey_photos', 'img_storage')),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
 
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = not DEBUG
 CSS_DEBUG_MODE = False
+
+COMPRESS_PRECOMPILERS = (
+    ('text/coffeescript', 'node_modules/coffee-script/bin/coffee --compile --stdio'),
+    ('text/less', 'node_modules/less/bin/lessc {infile} {outfile}'),
+)
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -141,12 +145,13 @@ INSTALLED_APPS = (
     'registration',
     'south',
     'compressor',
-    'main',
-    'uis_r_us',
-    'display_defs',
-    'xform_manager',
-    'nga_districts',
-    'facilities',
+    #'main',
+    #'uis_r_us',
+    'dashboard',
+    #'display_defs',
+    #'xform_manager',
+    #'nga_districts',
+    #'facilities',
     'user_management',
 )
 COMPRESS = True
@@ -199,6 +204,7 @@ else:
 
 MAIN_SITE_HOSTNAME = "nmis.mdgs.gov.ng"
 DATA_DIR_NAME = 'data'
+PROTECTED_DATA_DIR = os.path.join('dashboard', 'protected_data')
 
 #If local_settings.py wants to, it can specify extra apps to include
 ADDITIONAL_INSTALLED_APPS = ()

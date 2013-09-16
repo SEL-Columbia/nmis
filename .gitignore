@@ -27,6 +27,7 @@ csvs
 xform_manager_dataset.json
 
 data
+dashboard/protected_data
 dropbox
 dropbox_data
 generic
@@ -39,3 +40,6 @@ test_static
 
 load_script.logs
 load_script.pid
+
+# node dependencies
+node_modules

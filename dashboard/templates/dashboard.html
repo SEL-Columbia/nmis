@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% include "dashboard_subtemplates.html" %}
+{% endblock %}
+
+{% block js %}
+	{% load compress %}
+	{% compress js %}
+		<script type="text/coffeescript" src="/static/coffee/nmis.coffee" charset="utf-8"></script>
+	{% endcompress %}
+{% endblock %}
