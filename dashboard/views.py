@@ -2,6 +2,7 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseBadRequest,\
      HttpResponseRedirect
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 import json
@@ -34,8 +35,7 @@ def serve_data_with_mongo(request, data_path):
             col = db.lga_data
         print 'mongo collection is = %s' % col
         print 'created dataset, getting data'
-        import ipdb; ipdb.set_trace()
-        ffdata = bamboo_ds.get_data(query={'unique_lga': state_lga}, format=ext)
+        ffdata = [ cur for cur in col.find({'unique_lga': state_lga})]
         if sector == 'lga_data':
             ffdata = ffdata[0]
             ffdata = {'data': [{'id': str(key), 'value': str(value)}\
@@ -43,6 +43,9 @@ def serve_data_with_mongo(request, data_path):
             ffdata = json.dumps(ffdata)
             # TODO: decide if we want to change the format in the UI
             # TODO: figure out how to get source for data points
+        if ext == 'csv':
+          #TODO convert json to csv
+          pass
         response = HttpResponse(ffdata)
         response['Content-type'] = "application/%s" % ext
         print "data is %s and it is %s long" % (type(ffdata), len(ffdata))
@@ -52,7 +55,7 @@ def serve_data_with_mongo(request, data_path):
 #        print 'the redirect url is %s' % bamboo_url
 #        return HttpResponseRedirect(bamboo_url)
     else:
-        #print "i failed the reg test :("
+        print "i failed the reg test :("
         req_filename = os.path.join(settings.PROJECT_ROOT, 'dashboard', 'protected_data', data_path)
         if os.path.exists(req_filename):
             ffdata = ""
