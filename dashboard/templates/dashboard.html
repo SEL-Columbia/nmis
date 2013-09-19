@@ -3,7 +3,9 @@
 {% block content %}
   {% include "dashboard_subtemplates.html" %}
 {% endblock %}
-
+{% block head %}
+  <link href="/static/leaflet/leaflet.css" media="all" rel="stylesheet" type="text/css">
+{% endblock %}
 {% block js %}
 	{% load compress %}
 	{% compress js %}
