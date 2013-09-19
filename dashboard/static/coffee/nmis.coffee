@@ -998,8 +998,7 @@ do ->
           minZoom: 6
           maxBounds: country_bounds
         ).setView [centroid.lat, centroid.lng], 6
-        window.lmap = lmap
-        attribution = '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        attribution = '&copy; <a href="http://modilabs.org">modilabs</a>'
         baseLayer = L.tileLayer("http://b.tiles.mapbox.com/v3/modilabs.nigeria_base/{z}/{x}/{y}.png",attribution: attribution).addTo lmap
         mapLayers = {}
         for mdgL in mdgLayers
