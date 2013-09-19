@@ -990,7 +990,7 @@ do ->
         centroid =
           lat: 9.16718
           lng: 7.53662
-        lmap = L.map(mapId).setView [centroid.lat, centroid.lng], 6
+        lmap = L.map(mapId, maxZoom:11, minZoom:6).setView [centroid.lat, centroid.lng], 6
         attribution = '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         baseLayer = L.tileLayer("http://b.tiles.mapbox.com/v3/modilabs.nigeria_base/{z}/{x}/{y}.png",attribution: attribution).addTo lmap
         mapLayers = {}
