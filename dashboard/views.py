@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import cStringIO as StringIO
+import csv
 from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseBadRequest,\
      HttpResponseRedirect
@@ -45,7 +47,17 @@ def serve_data_with_mongo(request, data_path):
             # TODO: figure out how to get source for data points
         if ext == 'csv':
           #TODO convert json to csv
-          pass
+          if len(ffdata) is not 0:
+            csv_io = StringIO.StringIO()
+            fields = ffdata[0].keys()
+            writer = csv.DictWriter(csv_io, fields)
+            writer.writeheader()
+            writer.writerows(ffdata)
+            ffdata = csv_io.getvalue()
+            print "csv data is %s and it is %s long" % (type(ffdata), len(ffdata))
+            csv_io.close()
+          else:
+            ffdata = ''
         response = HttpResponse(ffdata)
         response['Content-type'] = "application/%s" % ext
         print "data is %s and it is %s long" % (type(ffdata), len(ffdata))
