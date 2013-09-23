@@ -11,6 +11,7 @@
 unless NMIS.settings
   NMIS.settings =
     openLayersRoot: "./openlayers/"
+    leafletRoot: "./leaflet/"
     pathToMapIcons: "./images"
 
   # in this app, underscore templates use a different syntax to avoid
@@ -143,7 +144,7 @@ do ->
     else unless isNaN(+v)
       r = [round_down(v, variable.precision)]
     else if $.type(v) is "string"
-      r = [NMIS.HackCaps(v)] 
+      r = [NMIS.HackCaps(v)]
     r
 
   # The main function, "NMIS.DisplayValue" receives an element
@@ -975,75 +976,44 @@ do ->
 
   NMIS.MainMdgMap = do ->
     mdgLayers = []
-
-    changeLayer = (slug)->
-      log "change ", slug
+    baseLayer = false
 
     launchCountryMapInElem = (eselector)->
       layerIdsAndNames = []
       $elem = $(eselector).css width: 680, height: 476, position: 'absolute'
-      launcher = NMIS.loadOpenLayers()
+      launcher = NMIS.loadLeaflet()
       launcher.done ()->
-        OpenLayers._getScriptLocation = ()-> NMIS.settings.openLayersRoot        
         $(".map-loading-message").hide()
         elem = $elem.get(0)
         mapId = "nmis-ol-country-map"
         $elem.prop 'id', mapId
-        [reA, reB, reC, reD] = [-4783.9396188051, 463514.13943762, 1707405.4936624, 1625356.9691642]
-        [meA, meB, meC, meD] = [-20037500, -20037500, 20037500, 20037500]
-
-        #OpenLayers.ImgPath = "theme/default/img/"
-        OpenLayers.ImgPath = "#{NMIS.settings.openLayersRoot}theme/default/img/"
-        OpenLayers.IMAGE_RELOAD_ATTEMPTS = 0
-
-        googProj = new OpenLayers.Projection("EPSG:900913")
-        dispProj = new OpenLayers.Projection("EPSG:4326")
-
-        options =
-          projection: googProj
-          displayProjection: dispProj
-          units: "m"
-          maxResolution: 156543.0339
-          restrictedExtent: new OpenLayers.Bounds(reA, reB, reC, reD)
-          maxExtent: new OpenLayers.Bounds(meA, meB, meC, meD)
-          numZoomLevels: 11
-
-
         centroid =
-          lat: 649256.11813719
-          lng: 738031.10112355
-
-        options.centroid = new OpenLayers.LonLat centroid.lng, centroid.lat
-        zoom = 6
-        options.zoom = zoom
-
-        overlays = [["Boundaries", "nigeria_base"]]
-        map = new OpenLayers.Map mapId, options
-        mapserver = ["http://b.tiles.mapbox.com/modilabs/"]
+          lat: 9.16718
+          lng: 7.53662
+        sw = new L.LatLng 3.9738609758391017, 0.06591796875
+        ne = new L.LatLng 14.28567730018259, 15.00732421875
+        country_bounds = new L.LatLngBounds sw, ne
+        lmap = L.map(mapId,
+          maxZoom: 11
+          minZoom: 6
+          maxBounds: country_bounds
+        ).setView [centroid.lat, centroid.lng], 6
+        attribution = '&copy; <a href="http://modilabs.org">modilabs</a>'
+        baseLayer = L.tileLayer("http://b.tiles.mapbox.com/v3/modilabs.nigeria_base/{z}/{x}/{y}.png",attribution: attribution).addTo lmap
         mapLayers = {}
-        mapLayerArray = for [layerName, layerId] in overlays
-          mapLayers[layerId] = new OpenLayers.Layer.TMS layerName, mapserver,
-            layername: layerId
-            type: "png"
-            transparent: "true"
-            isBaseLayer: false
         for mdgL in mdgLayers
           do ->
             curMdgL = mdgL
-            mlx = new OpenLayers.Layer.TMS curMdgL.name, mapserver,
-              layername: curMdgL.slug
-              type: "png"
-            mapLayerArray.push mlx
+            tileset = mdgL.slug
+            attribution = "modilabs"
+            ml = L.tileLayer "http://a.tiles.mapbox.com/v3/modilabs.{tileset}/{z}/{x}/{y}.png",
+                attribution: attribution
+                tileset: mdgL.slug
+
             curMdgL.onSelect = ()->
-              map.setBaseLayer mlx
+              lmap.removeLayer baseLayer
+              lmap.addLayer(ml)
               @show_description()
-
-        map.addLayers mapLayerArray
-        map.setBaseLayer mapLayers.nigeria_base
-
-        map.setCenter new OpenLayers.LonLat(options.centroid.lng, options.centroid.lat), zoom
-        map.addControl new OpenLayers.Control.LayerSwitcher()
-
       launcher.fail ()->
         log "LAUNCHER FAIL! Scripts not loaded"
 
@@ -1761,6 +1731,7 @@ do ->
     all: all
     validate: validate
     clear: clear
+
 # begin c_launch_open_layers.coffee
 do ->
   NMIS.loadGoogleMaps = do ->
@@ -1785,6 +1756,10 @@ do ->
     url = "#{NMIS.settings.openLayersRoot}OpenLayers.js" if !url and NMIS.settings.openLayersRoot
     $.ajax url: url, dataType: "script", cache: false
 
+  NMIS.loadLeaflet = (url)->
+    url = "#{NMIS.settings.leafletRoot}leaflet.js" if !url and NMIS.settings.leafletRoot
+    $.ajax url: url, dataType: "script", cache: false
+
   NMIS.loadGmapsAndOpenlayers = do ->
     launchDfd = $.Deferred()
     scriptsStarted = false
@@ -1800,112 +1775,21 @@ do ->
         gmLoad.fail (o, err, message)-> launchDfd.reject o, err, message
       launchDfd.promise()
 
-  NMIS.launchOpenLayers = do ->
+  NMIS.loadGmapsAndLeaflet = do ->
     launchDfd = $.Deferred()
-
     scriptsStarted = false
-    scriptsFinished = false
-    mapElem = undefined
-    opts = undefined
-    context = {}
-    loadingMessageElement = false
-    defaultOpts =
-      elem: "#map"
-      centroid:
-        lat: 0.000068698255561324
-        lng: 0.000083908685869343
-
-      olImgPath: "/static/openlayers/default/img/"
-      tileUrl: "http://b.tiles.mapbox.com/modilabs/"
-      layers: [["Nigeria", "nigeria_base"]]
-      overlays: []
-      defaultLayer: "google"
-      layerSwitcher: true
-      loadingElem: false
-      loadingMessage: "Please be patient while this map loads..."
-      zoom: 6
-      maxExtent: [-20037500, -20037500, 20037500, 20037500]
-      restrictedExtent: [-4783.9396188051, 463514.13943762, 1707405.4936624, 1625356.9691642]
-
-    scriptsAreLoaded = ->
-      ifDefined = (str) ->
-        if str is "" or str is `undefined`
-          `undefined`
-        else
-          str
-      loadingMessageElement.hide()  unless not loadingMessageElement
-      OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3
-      OpenLayers.ImgPath = opts.olImgPath
-      ob = opts.maxExtent
-      re = opts.restrictedExtent
-      options =
-        projection: new OpenLayers.Projection("EPSG:900913")
-        displayProjection: new OpenLayers.Projection("EPSG:4326")
-        units: "m"
-        maxResolution: 156543.0339
-        restrictedExtent: new OpenLayers.Bounds(re[0], re[1], re[2], re[3])
-        maxExtent: new OpenLayers.Bounds(ob[0], ob[1], ob[2], ob[3])
-
-      mapId = mapElem.get(0).id
-      mapserver = opts.tileUrl
-      mapLayerArray = []
-      context.mapLayers = {}
-      $.each opts.overlays, (k, ldata) ->
-        ml = new OpenLayers.Layer.TMS(ldata[0], [mapserver],
-          layername: ldata[1]
-          type: "png"
-          transparent: "true"
-          isBaseLayer: false
-        )
-        mapLayerArray.push ml
-        context.mapLayers[ldata[1]] = ml
-
-      $.each opts.layers, (k, ldata) ->
-        ml = new OpenLayers.Layer.TMS(ldata[0], [mapserver],
-          layername: ldata[1]
-          type: "png"
-        )
-        mapLayerArray.push ml
-        context.mapLayers[ldata[1]] = ml
-
-      context.waxLayerDict = {}
-      context.activeWax
-      mapId = mapElem.get(0).id = "-openlayers-map-elem"  unless mapId
-      context.map = new OpenLayers.Map(mapId, options)
-      window.__map = context.map
-      googleSat = new OpenLayers.Layer.Google("Google",
-        type: "satellite"
-      )
-      googleMap = new OpenLayers.Layer.Google("Roads",
-        type: "roadmap"
-      )
-      mapLayerArray.push googleSat, googleMap
-      context.map.addLayers mapLayerArray
-      context.map.setBaseLayer googleSat  if opts.defaultLayer is "google"
-      context.map.addControl new OpenLayers.Control.LayerSwitcher()  if opts.layerSwitcher
-      scriptsFinished = true
-
-    # the launch function is returned
-    launch = (_opts) ->
-      opts = $.extend({}, defaultOpts, _opts)  if opts is `undefined`
-      mapElem = $(opts.elem)  if mapElem is `undefined`
-      loadingMessageElement = $(opts.loadingElem).text(opts.loadingMessage).show()  if !!opts.loadingElem and !!opts.loadingMessage
+    () ->
       unless scriptsStarted
         scriptsStarted = true
         gmLoad = NMIS.loadGoogleMaps()
         gmLoad.done (gmaps)->
-          olLoad = NMIS.loadOpenLayers()
-          olLoad.done (ol)->
-            scriptsAreLoaded()
+          llLoad = NMIS.loadLeaflet()
+          llLoad.done (ol)->
             launchDfd.resolve()
-
-          olLoad.fail (o, err, message)->
-            launchDfd.reject o, err, message
-
-        gmLoad.fail (o, err, message)->
-          launchDfd.reject o, err, message
-
+          lllLoad.fail (l, err, message)-> launchDfd.reject l, err, message
+        gmLoad.fail (o, err, message)-> launchDfd.reject o, err, message
       launchDfd.promise()
+
 # begin c_variables.coffee
 do ->
   variablesById = {}
@@ -2674,7 +2558,7 @@ do ->
       summaryMap.setMapTypeId "ng_base_map"
       _rDelay 1, ->
         google.maps.event.trigger summaryMap, "resize"
-        summaryMap.setCenter new google.maps.LatLng(ll[1], ll[0]), mapZoom
+        summaryMap.setCenter new google.maps.LatLng(ll[0], ll[1]), mapZoom
 
   launch_summary = (params, state, lga, query_results={})->
     relevant_data = lga.ssData.relevant_data
@@ -2793,6 +2677,7 @@ do ->
 
   NMIS.settings =
     openLayersRoot: "/static/openlayers/"
+    leafletRoot: "/static/leaflet/"
     pathToMapIcons: "/static/images"
 
   NMIS.url_root = do ->
