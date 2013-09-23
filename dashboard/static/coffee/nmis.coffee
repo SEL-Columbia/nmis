@@ -994,22 +994,25 @@ do ->
         ne = new L.LatLng 14.28567730018259, 15.00732421875
         country_bounds = new L.LatLngBounds sw, ne
         lmap = L.map(mapId,
-          maxZoom: 11
-          minZoom: 6
           maxBounds: country_bounds
         ).setView [centroid.lat, centroid.lng], 6
         attribution = '&copy; <a href="http://modilabs.org">modilabs</a>'
-        baseLayer = L.tileLayer("http://b.tiles.mapbox.com/v3/modilabs.nigeria_base/{z}/{x}/{y}.png",attribution: attribution).addTo lmap
+        baseLayer = L.tileLayer("http://b.tiles.mapbox.com/v3/modilabs.nigeria_base/{z}/{x}/{y}.png",
+          attribution: attribution
+          maxZoom: 11
+          minZoom: 6
+        ).addTo lmap
         mapLayers = {}
         for mdgL in mdgLayers
           do ->
             curMdgL = mdgL
             tileset = mdgL.slug
-            attribution = "modilabs"
+            attribution = '&copy; <a href="http://modilabs.org">modilabs</a>'
             ml = L.tileLayer "http://a.tiles.mapbox.com/v3/modilabs.{tileset}/{z}/{x}/{y}.png",
-                attribution: attribution
-                tileset: mdgL.slug
-
+              attribution: attribution
+              tileset: mdgL.slug
+              maxZoom: 9
+              minZoom: 6
             curMdgL.onSelect = ()->
               lmap.removeLayer baseLayer
               lmap.addLayer(ml)
