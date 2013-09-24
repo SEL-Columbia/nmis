@@ -25,7 +25,7 @@ do ->
   # NMIS.expected_modules was used in nmis_ui tests to ensure that
   # all of the necessary modules (and files) had been loaded in.
   # This is less important if everything is in one file.
-  NMIS.expected_modules = ["Tabulation","clear","Sectors","validateData","data","FacilityPopup","Breadcrumb","IconSwitcher","MapMgr","FacilityHover"]
+  NMIS.expected_modules = ["Tabulation","clear","Sectors","validateData","data","FacilityPopup","IconSwitcher","MapMgr","FacilityHover"]
 
 do ->
 
@@ -213,57 +213,6 @@ error = (message, opts={})-> log.error message
 NMIS.error = error
 
 # begin a_nmis.coffee
-
-# NMIS.Breadcrumb--
-#   init # set the elem that the breadcrumb will build into
-NMIS.Breadcrumb = do ->
-  levels = []
-  elem = false
-  context = {}
-
-  init = (_elem, opts={}) ->
-    # NMIS.Breadcrumb.init
-    # set the elem that the breadcrumb will build into
-    elem = $(_elem).eq(0)
-
-    opts.draw = true  unless opts.draw?
-    setLevels opts.levels, false  if opts.levels?
-    draw()  unless not opts.draw
-  clear = ->
-    # NMIS.Breadcrumb.clear
-    # Empty the existing breadcrumb elem and clear out set values.
-    elem.empty()  if elem
-    levels = []
-  setLevels = (new_levels=[], needs_draw=true) ->
-    # NMIS.Breadcrumb.setLevels
-    # Pass an array of levels of objects which will be built into
-    # the breadcrumb elem.
-    levels[i] = level for level, i in new_levels when level?
-    draw()  if needs_draw
-    context
-  setLevel = (ln, d) ->
-    # pass 2 arguments: an index number and a value.
-    levels[ln] = d
-    context
-  draw = ->
-    # Draws the breadcrumb with the most recently assigned values.
-    throw new Error "Breadcrumb: elem is undefined" unless elem?
-    elem.empty()
-    splitter = $("<span>").text("/")
-    for [txt, href, fn], i in levels
-      splitter.clone().appendTo elem  if i isnt 0
-      a = $("<a>").text(txt).attr("href", href)
-      a.click fn if fn?
-      a.appendTo elem
-    elem
-
-  init: init
-  setLevels: setLevels
-  setLevel: setLevel
-  draw: draw
-  _levels: -> levels
-  clear: clear
-
 
 do ->
   # A consistent way to handle the URL naming of photos which are
@@ -961,8 +910,6 @@ do ->
 
     panelOpen = ()->
       NMIS.LocalNav.hide()
-      NMIS.Breadcrumb.clear()
-      NMIS.Breadcrumb.setLevels [["Country View", "/"]]
       data =
         title: "Nigeria"
         zones: NMIS._zones_
@@ -1880,8 +1827,6 @@ do ->
       # This runs when the upcoming environment matches "mode" of "facilities"
       NMIS.LocalNav.markActive ["mode:facilities", "sector:#{next.sector.slug}"]
 
-      NMIS.Breadcrumb.clear()
-      NMIS.Breadcrumb.setLevels NMIS._prepBreadcrumbValues next, _standardBcSlugs, state: next.state, lga: next.lga
 
       # Not sure how NMIS.activeSector is used.
       # Potentially could be removed in favor of NMIS.Env().sector
@@ -2473,9 +2418,7 @@ do ->
 
     if @usingSlug "mode", "summary"
       # This runs when the upcoming environment matches "mode" of "facilities"
-      NMIS.Breadcrumb.clear()
 
-      NMIS.Breadcrumb.setLevels NMIS._prepBreadcrumbValues next, _bcKeys, state: next.state, lga: next.lga
       NMIS.LocalNav.markActive ["mode:summary", "sector:#{next.sector.slug}"]
       NMIS.LocalNav.iterate (sectionType, buttonName, a) ->
         o = {}
@@ -2752,24 +2695,6 @@ do ->
 
     NMIS.urlFor = urlFor
 
-
-  NMIS._prepBreadcrumbValues = (e, keys, env) ->
-    arr = []
-    i = 0
-    l = keys.length
-    while i < l
-      key = keys[i]
-      val = e[key]
-      if val isnt `undefined`
-        name = val.name or val.label or val.slug or val
-        env[key] = val
-        arr.push [name, NMIS.urlFor(env)]
-      else
-        return arr
-      i++
-    arr
-
-  NMIS.Breadcrumb.init "p.bc", levels: []
 
   Sammy.Application::raise_errors = true
 
