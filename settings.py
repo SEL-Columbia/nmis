@@ -148,6 +148,7 @@ INSTALLED_APPS = (
     #'main',
     #'uis_r_us',
     'dashboard',
+    'main',
     #'display_defs',
     #'xform_manager',
     #'nga_districts',
