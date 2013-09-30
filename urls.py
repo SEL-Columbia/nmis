@@ -9,6 +9,7 @@ admin.autodiscover()
 
 
 from dashboard import views as dashboard_views
+from main import views as main_views
 
 #from uis_r_us import views as ui
 #from survey_photos.views import photo_redirect
