@@ -1,16 +1,13 @@
-<!doctype html>
-<html>
-<head>
+{% extends "base.html" %}
+{% block head %}
 <meta charset="UTF-8">
 <title>Nigeria MDG Information System</title>
-<link rel="stylesheet" type="text/css" href="/static/css/homepage.css" media="screen" />
 	
 
 
-</head>
+{% endblock %}
 
-<body>
-
+{% block content %}
 <div id="bckImage"><img src="/static/images/NMIS_hero.png" width="1100" height="742" alt="Map of Abeokuta North, Ogun"/></div>
 <div id="content">
 	<div class="intro">
@@ -25,7 +22,6 @@
 </div>
 
 <div id="partnerLogos"><div class="logo"><img src="/static/images/mdgs_logo.png" alt="Nigeria MDGs Logo"/></div><div class="logo"><img src="/static/images/ei_logo.png" alt="Earth Institute Logo"/></div><div class="logo"><img src="/static/images/dfid_logo.png" alt="DFID Logo"/></div></div>
+<link rel="stylesheet" type="text/css" href="/static/css/homepage.css" media="screen" />
 
-
-</body>
-</html>
+{% endblock %}
