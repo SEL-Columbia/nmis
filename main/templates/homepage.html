@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Nigeria MDG Information System</title>
-<link rel="stylesheet" type="text/css" href="static/style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="static/homepage.css" media="screen" />
 	
 
 
@@ -19,7 +19,7 @@
     
 <div id="contentButton">
   <div class="buttonOrange"><a href="{% url dashboard.views.render_dashboard %}" class="buttontext">Explore Facilities</a></div>
-	<div class="buttonGray"><a href="/download" class="buttontext">Download Data</a></div>
+  <div class="buttonGray"><a href="{% url main.views.download %}" class="buttontext">Download Data</a></div>
 </div>
     <div class="caption"><p>Abeokuta North, Ogun</p></div>
 </div>
