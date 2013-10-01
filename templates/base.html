@@ -42,7 +42,6 @@
 					<a class="brand" href="/">
 						<span class="logo">
 							<img src="/static/images/nmis_pilot.png">
-							<span>HOME</span>
 						</span>
 						Nigeria MDG Information System
 					</a>
@@ -78,11 +77,13 @@
 					</form>
 					</div>
 				</div>
-				<div class="row page-title-row">
-					<p>
-						&nbsp;
-					</p>
+				<div class="nav">
+					<a class="{% block nav_about %}{% endblock %}" href="/about">About</a>
+					<a class="{% block nav_dashboard %}{% endblock %}" href="/dashboard">Explore Facilities</a>
+					<a class="{% block nav_download %}{% endblock %}" href="/download">Download Data</a>
+					<a class="{% block nav_mdgs %}{% endblock %}" href="/mdgs">MDGs in Nigeria</a>
 				</div>
+				<div style="clear:both"></div>
 			</div>
 		</div>
 	</div>
