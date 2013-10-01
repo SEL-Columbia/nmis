@@ -1,62 +1,62 @@
-<html lang="en">
-<head>
+{% extends "base.html" %}
+
+{% block head %}
   <meta charset="utf-8" />
   <title>Download Data</title>
-  <link rel="stylesheet" type="text/css" href="static/download.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="/static/css/download.css" media="screen" />
+{% endblock %}
 
-</head>
-<body>
- 
-<div id="pagecontainer">
+{% block content %}
+
+  <div id="pagecontainer">
   <h2>Download Data</h2>
   <div>
-  <div>
-    <p class="toptext">
-    The NMIS Nigeria Facility Inventory dataset provides atrributes and location information for all XXXXXX health, education and water facilities recorded on NMIS. The data was collected through a single enumeration effort in 20XX.
-  </p>
-</div>
-  <div id="contentButton">
-    <div class="buttonGreen"><a href="http://starscream.modilabs.org:8080" class="buttontext">Download NMIS Dataset</a></div>
-    <div style="clear:both;"></div>
-    <div style="margin-top:10px">Permanent URL: <a href="#">http://nmis.sdlkjds.gov.ng/fileblah.csv</a></div>
+    <div>
+      <p class="toptext">
+      The NMIS Nigeria Facility Inventory dataset provides atrributes and location information for all XXXXXX health, education and water facilities recorded on NMIS. The data was collected through a single enumeration effort in 20XX.
+    </p>
   </div>
-  <div>
-      <h3>About the Dataset</h3>
-      <table>
-      <tr>
-        <td><strong>File size</strong>
-        </td>
-        <td>50.5 MB
-        </td>
-      </tr>
-      <tr>
-        <td><strong>File Format</strong></td>
-        <td>CSV (<a href="#">Simple Data Format</a>)</td>
-      </tr>
-      <tr>
-        <td><strong>Version</strong></td>
-        <td>1.0</td>
-      </tr>
-      <tr>
-        <td><strong>Created</strong></td>
-        <td>October 12, 2013</td>
-      </tr>
-      <tr>
-        <td class="firstcol"><strong>Last Updated</strong></td>
-        <td>October 12, 2013</td>
-      </tr>
-      <tr>
-        <td><strong>Attribution</strong></td>
-        <td>Data provided by <a href="3">OSSAP</a></td>
-      </tr>
-      <tr>
-        <td><strong>Licensing</strong></td>
-        <td>ODbL</td>
-      </tr>
-  </div>
+    <div id="contentButton">
+      <div class="buttonGreen"><a href="http://starscream.modilabs.org:8080" class="buttontext">Download NMIS Dataset</a></div>
+      <div style="clear:both;"></div>
+      <div style="margin-top:10px">Permanent URL: <a href="#">http://nmis.sdlkjds.gov.ng/fileblah.csv</a></div>
+    </div>
+    <div>
+        <h3>About the Dataset</h3>
+        <table>
+        <tr>
+          <td><strong>File size</strong>
+          </td>
+          <td>50.5 MB
+          </td>
+        </tr>
+        <tr>
+          <td><strong>File Format</strong></td>
+          <td>CSV (<a href="#">Simple Data Format</a>)</td>
+        </tr>
+        <tr>
+          <td><strong>Version</strong></td>
+          <td>1.0</td>
+        </tr>
+        <tr>
+          <td><strong>Created</strong></td>
+          <td>October 12, 2013</td>
+        </tr>
+        <tr>
+          <td class="firstcol"><strong>Last Updated</strong></td>
+          <td>October 12, 2013</td>
+        </tr>
+        <tr>
+          <td><strong>Attribution</strong></td>
+          <td>Data provided by <a href="3">OSSAP</a></td>
+        </tr>
+        <tr>
+          <td><strong>Licensing</strong></td>
+          <td>ODbL</td>
+        </tr>
+    </div>
 
-  </div>
+    </div>
 
+{% endblock %}
 
-</body>
-</html>
