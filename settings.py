@@ -145,14 +145,6 @@ INSTALLED_APPS = (
     'registration',
     'south',
     'compressor',
-    #'main',
-    #'uis_r_us',
-    'dashboard',
-    'main',
-    #'display_defs',
-    #'xform_manager',
-    #'nga_districts',
-    #'facilities',
     'user_management',
 )
 COMPRESS = True
@@ -205,7 +197,6 @@ else:
 
 MAIN_SITE_HOSTNAME = "nmis.mdgs.gov.ng"
 DATA_DIR_NAME = 'data'
-PROTECTED_DATA_DIR = os.path.join('dashboard', 'protected_data')
 
 #If local_settings.py wants to, it can specify extra apps to include
 ADDITIONAL_INSTALLED_APPS = ()

@@ -11,6 +11,26 @@ import re
 from pybamboo.connection import Connection
 from pybamboo.dataset import Dataset
 
+
+
+def homepage(request):
+    return render_to_response('homepage.html',{
+                            },
+                            context_instance=RequestContext(request))
+
+
+def download(request):
+    return render_to_response('data_download.html',{
+                            },
+                            context_instance=RequestContext(request))
+
+
+def about(request):
+    return render_to_response('about2.html',{
+                            },
+                            context_instance=RequestContext(request))
+
+
 @login_required
 def render_dashboard(request):
     ci = RequestContext(request)
@@ -57,7 +77,7 @@ def serve_data(request, data_path):
 #        return HttpResponseRedirect(bamboo_url)
     else:
         #print "i failed the reg test :("
-        req_filename = os.path.join(settings.PROJECT_ROOT, 'dashboard', 'protected_data', data_path)
+        req_filename = os.path.join(settings.PROJECT_ROOT, 'protected_data', data_path)
         if os.path.exists(req_filename):
             ffdata = ""
             with open(req_filename, 'r') as f:
@@ -67,7 +87,7 @@ def serve_data(request, data_path):
 
 @login_required
 def serve_data_with_files(request, data_path):
-    req_filename = os.path.join(settings.PROJECT_ROOT, 'dashboard', 'protected_data', data_path)
+    req_filename = os.path.join(settings.PROJECT_ROOT, 'protected_data', data_path)
     if os.path.exists(req_filename):
         ffdata = ""
         with open(req_filename, 'r') as f:

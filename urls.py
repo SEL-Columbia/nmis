@@ -8,23 +8,21 @@ admin.autodiscover()
 #OPT_GROUP_REGEX = "((?P<group_name>[^/]+)/)?"
 
 
-from dashboard import views as dashboard_views
-from main import views as main_views
+import views
 
 #from uis_r_us import views as ui
 #from survey_photos.views import photo_redirect
 
 
 urlpatterns = patterns('',
-    url(r'^$', dashboard_views.render_dashboard),
-
+    url(r'^$', views.render_dashboard),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^home', main_views.homepage),
-    url(r'^download', main_views.download),
-    url(r'^about', main_views.about),
-    #url(r'^data/(?P<data_path>\S+)$', dashboard_views.serve_data),
-    url(r'^data/(?P<data_path>\S+)$', dashboard_views.serve_data_with_files),
-    url(r'^gap_sheet/(?P<pdf_path>[^/]+)$', dashboard_views.serve_pdf),
+    url(r'^home', views.homepage),
+    url(r'^download', views.download),
+    url(r'^about', views.about),
+    #url(r'^data/(?P<data_path>\S+)$', views.serve_data),
+    url(r'^data/(?P<data_path>\S+)$', views.serve_data_with_files),
+    url(r'^gap_sheet/(?P<pdf_path>[^/]+)$', views.serve_pdf),
 )
