@@ -15,7 +15,8 @@ import views
 
 
 urlpatterns = patterns('',
-    url(r'^$', views.render_dashboard),
+    url(r'^$', views.homepage),
+    url(r'^dashboard', views.dashboard),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

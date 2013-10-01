@@ -26,13 +26,13 @@ def download(request):
 
 
 def about(request):
-    return render_to_response('about2.html',{
+    return render_to_response('about.html',{
                             },
                             context_instance=RequestContext(request))
 
 
 @login_required
-def render_dashboard(request):
+def dashboard(request):
     ci = RequestContext(request)
     return render_to_response("dashboard.html", context_instance=ci)
 
