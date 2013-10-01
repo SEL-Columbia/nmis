@@ -2482,7 +2482,7 @@ do ->
         @change.done (env)->
           # This callback is triggered when NMIS.Env.changeDone()
           # is called (in this case, after google maps script has loaded)
-          launchGoogleMapSummaryView env.lga
+          launchLeafletMapSummaryView env.lga
 
 
   NMIS.loadSummary = (s) ->
@@ -2496,7 +2496,7 @@ do ->
 
     fetchers = {}
 
-    googleMapsLoad = NMIS.loadGoogleMaps()
+    leafletMapsLoad = NMIS.loadLeaflet()
 
     if lga.has_data_module("presentation/summary_sectors")
       fetchers.summary_sectors = lga.loadSummarySectors()
@@ -2525,7 +2525,7 @@ do ->
 
     $.when_O(fetchers).done (results)->
       launch_summary s.params, state, lga, results
-      googleMapsLoad.done ->
+      leafletMapsLoad.done ->
         NMIS.Env.changeDone()
 
   launchGoogleMapSummaryView = (lga)->
@@ -2559,6 +2559,20 @@ do ->
       _rDelay 1, ->
         google.maps.event.trigger summaryMap, "resize"
         summaryMap.setCenter new google.maps.LatLng(ll[0], ll[1]), mapZoom
+
+  launchLeafletMapSummaryView = (lga)->
+    $mapDiv = $(".profile-box .map").eq(0)
+    mapDiv = $mapDiv.get(0)
+    ll = (+x for x in lga.latLng.split(","))
+    mapZoom = lga.zoomLevel || 9
+    summaryMap = L.map(mapDiv, {}).setView(ll, mapZoom)
+
+    tileset = "nigeria_base"
+    maxZoom = 17
+    L.tileLayer("http://{s}.tiles.mapbox.com/v3/modilabs.#{tileset}/{z}/{x}/{y}.png", {
+      minZoom: 0
+      maxZoom: maxZoom
+    }).addTo(summaryMap);
 
   launch_summary = (params, state, lga, query_results={})->
     relevant_data = lga.ssData.relevant_data
