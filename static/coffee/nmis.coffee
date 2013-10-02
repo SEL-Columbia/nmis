@@ -10,7 +10,6 @@
 # to influence which URLs the application uses to look for things.
 unless NMIS.settings
   NMIS.settings =
-    openLayersRoot: "./openlayers/"
     leafletRoot: "./leaflet/"
     pathToMapIcons: "./images"
 
@@ -1702,28 +1701,9 @@ do ->
         document.body.appendChild s
       googleMapsDfd.promise()
 
-  NMIS.loadOpenLayers = (url)->
-    url = "#{NMIS.settings.openLayersRoot}OpenLayers.js" if !url and NMIS.settings.openLayersRoot
-    $.ajax url: url, dataType: "script", cache: false
-
   NMIS.loadLeaflet = (url)->
     url = "#{NMIS.settings.leafletRoot}leaflet.js" if !url and NMIS.settings.leafletRoot
     $.ajax url: url, dataType: "script", cache: false
-
-  NMIS.loadGmapsAndOpenlayers = do ->
-    launchDfd = $.Deferred()
-    scriptsStarted = false
-    () ->
-      unless scriptsStarted
-        scriptsStarted = true
-        gmLoad = NMIS.loadGoogleMaps()
-        gmLoad.done (gmaps)->
-          olLoad = NMIS.loadOpenLayers()
-          olLoad.done (ol)->
-            launchDfd.resolve()
-          olLoad.fail (o, err, message)-> launchDfd.reject o, err, message
-        gmLoad.fail (o, err, message)-> launchDfd.reject o, err, message
-      launchDfd.promise()
 
   NMIS.loadGmapsAndLeaflet = do ->
     launchDfd = $.Deferred()
@@ -2636,7 +2616,6 @@ do ->
   #    
 
   NMIS.settings =
-    openLayersRoot: "/static/openlayers/"
     leafletRoot: "/static/leaflet/"
     pathToMapIcons: "/static/images"
 
