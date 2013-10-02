@@ -82,6 +82,7 @@ COMPRESS_PRECOMPILERS = (
     ('text/coffeescript', 'node_modules/coffee-script/bin/coffee --compile --stdio'),
     ('text/less', 'node_modules/less/bin/lessc {infile} {outfile}'),
 )
+COMPRESS = True
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -147,7 +148,6 @@ INSTALLED_APPS = (
     'compressor',
     'user_management',
 )
-COMPRESS = True
 
 # Settings for Django Registration
 ACCOUNT_ACTIVATION_DAYS = 1
