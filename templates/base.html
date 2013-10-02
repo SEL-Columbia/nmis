@@ -11,26 +11,12 @@
 	</title>
 	{% load compress %}
 	{% compress css %}
-	<link rel="stylesheet" href="/static/css/chosen.css" type="text/css" media="all" charset="utf-8">
+		<link rel="stylesheet" type="text/less" href="/static/css/bootstrap.css">
+		<link rel="stylesheet" type="text/less" href="/static/css/base.css">
+		<link rel="stylesheet" href="/static/css/chosen.css" type="text/css" media="all" charset="utf-8">
+		<link rel="stylesheet" href="/static/css/jquery-ui.custom.css" type="text/css" media="all" charset="utf-8">
 	{% endcompress %}
-	<link rel="stylesheet" href="/static/css/jquery-ui.custom.css" type="text/css" media="all" charset="utf-8">
 	{% block css %}{% endblock %}
-	{% if css_debug_mode %}
-	<script type="text/javascript">
-		var less = { poll: 10001, env: "development" };
-	</script>
-	<script src="/static/js/libs/less.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" charset="utf-8">
-		less.watch();
-		window.setTimeout(function(){
-			less.unwatch();
-		}, 10 * 60 * 1000);
-	</script>
-	{% else %}
-		{% compress css %}
-		<link rel="stylesheet" type="text/less" href="/static/css/styles.less">
-		{% endcompress %}
-	{% endif %}
 	<script src="/static/js/libs/modernizr.min.js" type="text/javascript" charset="utf-8"></script>
 	{% block head %}{% endblock %}
 </head>
@@ -42,7 +28,6 @@
 					<a class="brand" href="/">
 						<span class="logo">
 							<img src="/static/images/nmis_pilot.png">
-							<span>HOME</span>
 						</span>
 						Nigeria MDG Information System
 					</a>
@@ -78,25 +63,18 @@
 					</form>
 					</div>
 				</div>
-				<div class="row page-title-row">
-					<p class="bc">
-						{% for bc, link in breadcrumbs %}
-						<a href="{{link}}">{{bc}}</a>
-							{% if not forloop.last %}
-							<span> / </span>
-							{% endif %}
-						{% endfor %}
-						&nbsp;
-					</p>
+				<div class="nav">
+					<a class="{% block nav_about %}{% endblock %}" href="/about">About</a>
+					<a class="{% block nav_dashboard %}{% endblock %}" href="/dashboard">Explore Facilities</a>
+					<a class="{% block nav_download %}{% endblock %}" href="/download">Download Data</a>
+					<a class="{% block nav_mdgs %}{% endblock %}" href="/mdgs">MDGs in Nigeria</a>
 				</div>
+				<div style="clear:both"></div>
 			</div>
 		</div>
 	</div>
 	<div class="container">
 		<div class="content">
-			{% if local_nav %}
-				{% include 'local_nav.html' %}
-			{% endif %}
 			{% block content %}{% endblock %}
 		</div>
 	</div> <!-- /container -->

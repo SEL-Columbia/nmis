@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/about.css" media="all" />
+{% endblock %}
+
+
+{% block js %}
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script>
+        $(function() {    
+            $( "#accordion" ).accordion({
+                heightStyle: "content"
+            });
+
+            var icons = {
+                header: "ui-icon-bigclose",
+                activeHeader: "ui-icon-bigplus"
+            };
+            
+            $( "#accordion" ).accordion({
+              icons: icons
+            });
+
+            $( "#accordion" ).accordion({
+              collapsible: true
+            });
+        });
+    </script>
+{% endblock %}
+
+
+{% block nav_about %}active{% endblock %}
+
+
+{% block content %}
+    <div id="accordionContainer">
+    <div id="accordion">
+      <h2>Vision</h2>
+      <div>
+      <div>
+        <p>
+        As part of their mandate to monitor progress towards meeting the Millennium Development Goals, Nigeria’s Office of the Senior Special Assistant to the President on the Millennium Development Goals has developed an online data portal. This public portal, the Nigeria MDG Information System, houses much of the nation’s health, education and water facility information and is designed to be used by planners, researchers and the broader global development community. This database is the result of an initial baseline facility inventory carried out by OSSAP-MDGs in 2010-12.</p>
+    <p>However, the world is not static and so this website needs continued contributions from stakeholders around the country and the globe to maintain a high level of accuracy and thoroughness. This website therefore asks for the global community to participate in keeping this key national asset up to date with the latest health, education and water facility information.</p>
+      </div>
+      </div>
+      <h3>Partners</h3>
+      <div>  
+      <img src="/static/images/mdgs_logo.png" alt="Nigeria MDG Logo">
+      <h3><strong>Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs)</strong></h3>
+        <p>Created in 2005, the Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs) acts as the Secretariat to the Presidential Committee on the Assessment and Monitoring of the MDGs. In this role it provides guidance, coordination and oversight of the debt-relief gains (DRGs) while working alongside partners and other actors.</p>
+
+        <p>The Senior Special Assistant to the President is supported by a Director and Heads of Desks, who are in charge of supervision and policy formulation and implementation of various initiatives and programmes designed to achieve the MDGs.<br><br></p>
+
+
+    <img src="/static/images/ei_logo.png" alt="Earth Institute Logo">
+    <h3><strong>The Earth Institute at Columbia University</strong></h3>
+
+    <p>The Earth Institute, located at Columbia University in New York City, comprises more than 30 research centers and some 850 scientists, postdoctoral fellows, staff and students worldwide. Working across many disciplines, we study and create solutions for problems in public health, poverty, energy, ecosystems, climate, natural hazards and urbanization. Earth Institute experts work hand-in-hand with academia, corporations, government agencies, nonprofits and individuals. They advise national governments and the United Nations on issues related to sustainable development and the Millennium Development Goals. They are educating the next generation of leaders in basic sciences and sustainable development.</p>
+
+    <p>The Earth Institute at Columbia University was engaged by OSSAP-MDGs to provide leading international expertise on the design and implementation of the Conditional Grants Scheme to Local Governments, as well as to provide the technical support for the creation of the Nigeria MDG Information System (NMIS).<br><br></p>
+
+
+    <img src="/static/images/dfid_logo.png" alt="DFID Logo">
+    <h3><strong>Department for International Development (DFID)</strong></h3>
+
+    <p>The United Kingdom Department for International Development (DFID) has been partnering with Nigeria, making vital contributions in the progress towards the MDGs. In August 2008, the Nigerian and UK Governments set up a partnership - the State Partnership for Accountability, Responsiveness and Capability (SPARC). SPARC has worked with the Nigeria OSSAP-MDGs to improve the criteria for selection of projects, assisting with the evaluation process, and in the design and coordination of the Conditional Grants Schemes Local Governments.</p>
+
+    <p>SPARC is one of the four of State-Led Programmes (SLPs) developed by DFID which include Strengthening Accountability and Voice Initiative (SAVI), Girls' Education Project (GEP) and Education Sector Support Programme in Nigeria (ESSPIN). The programmes seek to contribute to the effective and efficient use of Nigeria's resources to achieve the MDGs. Other MDGs related projects of DFID include the Partnership for Transforming Health Systems Phase II (PATHS2), Enhancing Nigeria's Response to HIV and AIDS (ENR) and the Support to the National Malaria Programme (SuNMap), a £50 million launched in 2008 to support the distribution of two million long-lasting insecticidal nets to households in six Nigerian states.</p>
+      </div>
+      <h3>FAQ</h3>
+      <div> 
+       <h3><strong>Why make this data public?</strong></h3>
+    <p>Meeting the MDGs is a national and global priority and providing a transparent and collaborative platform to view and contribute to this unique dataset is in a great step in the right direction. In time, this platform may become the warehouse for multiple public datasets, all of which help to guide the discussion and lead to Nigeria’s and therefore Africa’s achievement of the MDGs.</p>
+
+    <h3><strong>What data is available?</strong>
+    <p>Baseline facility inventory data for health, education and water facilities across the country. The data is derived from a 2010-12 survey carried out by Nigeria’s Office of the Senior Special Assistant to the President on the MDGs.</p>
+
+    <h3><strong>Who can use this data?</strong></h3>
+    <p>This data is open to the broader public for general planning purposes.</p>
+
+    <h3><strong>What if I find missing or incorrect data?</strong></h3>
+    <p>The purpose of this dataset is to provide broad access to MDG-related data that can help planners at multiple levels. This dataset reflects a static point in time and requires constant updating to provide near real-time information. Should you find missing facilities or incorrect data about a specific facility, please contact OSSAP-MDGs at contact_nmis@mdg.ng.gov.</p>
+      </div>
+    </div>
+     </div>
+{% endblock %}
