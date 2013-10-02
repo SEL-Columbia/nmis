@@ -1,0 +1,123 @@
+body {
+  font-family: Proxima Nova, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+	}
+p
+{
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  border: 0;
+}
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+h1 {
+	font-size: 40px;
+	font-weight:bold;
+	line-height: 38px;
+}
+
+
+h3 {
+	font-size: 18px;
+	font-weight:300 !important;
+	line-height: 20px;
+}
+
+.buttontext {
+	text-transform:uppercase;
+	text-decoration: none;
+	font-size: 13px;
+	color:#FFF;
+}
+
+a:hover {
+	color:#000;
+}
+
+
+#bckImage {
+	position:fixed;
+	margin: 0px;
+  	padding: 0px;
+	z-index: 0;
+}
+
+#partnerLogos {
+	position: absolute;
+	height: 118px;
+	width: 1100px;
+	background-color:#FFF;
+	margin: 742px 0px 0px 0px;
+	padding: 0px 0px 0px 80px;
+	z-index: 0;
+}
+
+#content {
+	position: absolute;
+	margin: 180px 0px 0px 80px;
+  	padding: 0px;
+	z-index: 1;
+}
+
+#contentButton {
+	position: relative;
+	margin:0px;
+  	padding: 0px;
+	z-index: 1;
+}
+
+.intro {
+	display:block;
+	width:380px;
+	color: #FFF;
+}
+
+.buttonOrange {
+	display:inline;
+	float:left;
+  	padding: 7px 2px 2px 2px;
+	float: left;
+	text-align:center;
+	width: 160px;
+	height: 22px;
+	background-color:#F90;
+	border-radius: 4px;
+	border: 0;
+	cursor: pointer;
+}
+
+.buttonGray {
+	display:inline;
+	margin: 0px 0px 0px 8px;
+  	padding: 7px 2px 2px 2px;
+	float: left;
+	width: 160px;
+	height: 22px;
+	text-align:center;
+	background-color:#999;
+	border-radius: 4px;
+	border: 0;
+	cursor: pointer;
+}
+
+
+.caption {
+	position:relative;
+	margin: 200px 0px 0px 0px;
+	font-weight: 300;
+	color: #FFF;
+	font-size: 12px;
+	font-style:italic;
+}
+
+.logo {
+	display:inline;
+	float:left;
+	margin: 20px 40px 0px 0px;
+}
+
