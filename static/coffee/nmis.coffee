@@ -1052,7 +1052,6 @@ do ->
       else if what is "nav"
         if !nav
           nav = $('.lga-nav').on 'submit', 'form', (evt)->
-            NMIS.clear()
             d = NMIS.findDistrictById nav.find('select').val()
             dashboard.setLocation NMIS.urlFor.extendEnv state: d.group, lga: d
             evt.preventDefault()
