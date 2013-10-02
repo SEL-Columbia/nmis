@@ -1827,6 +1827,7 @@ do ->
       if @changing("lga") or @changingToSlug("mode", "facilities")
         repositionMapToDistrictBounds = true
         addIcons = true
+        createMap = true
       if @changing("sector")
         if next.sector.slug is "overview"
           featureAllIcons = true
@@ -1849,6 +1850,7 @@ do ->
           displayFacilitySector(next.lga, NMIS.Env())
 
         withFacilityMapDrawnForDistrict(next.lga).done (nmisMapContext)->
+          nmisMapContext.createMap() if createMap
           nmisMapContext.fitDistrictBounds(next.lga)  if repositionMapToDistrictBounds
           nmisMapContext.addIcons()  if addIcons
           nmisMapContext.featureAllIcons()  if featureAllIcons
