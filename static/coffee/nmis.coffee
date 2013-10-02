@@ -2494,11 +2494,12 @@ do ->
     summaryMap = L.map(mapDiv, {}).setView(ll, mapZoom)
 
     tileset = "nigeria_base"
-    maxZoom = 17
+    maxZoom = 11
+    minZoom = 6
     L.tileLayer("http://{s}.tiles.mapbox.com/v3/modilabs.#{tileset}/{z}/{x}/{y}.png", {
-      minZoom: 0
+      minZoom: minZoom
       maxZoom: maxZoom
-    }).addTo(summaryMap);
+    }).addTo(summaryMap)
 
   launch_summary = (params, state, lga, query_results={})->
     relevant_data = lga.ssData.relevant_data
