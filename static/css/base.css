@@ -16,21 +16,22 @@ h2.some-lpadding {
 
 /* Bootstrap Mods
 =================================*/
-html .topbar .fill {
+.topbar .fill,
+.topbar .brand:hover {
   background-color: #545653;
   background-image: none;
 }
-html .topbar a.brand {
+.topbar a.brand {
   position: relative;
   padding: 8px 20px 8px 120px;
 }
-html .topbar a.brand:hover span span {
+.topbar a.brand:hover span span {
   text-decoration: none;
 }
-html .topbar a.brand:hover .logo {
+.topbar a.brand:hover .logo {
   opacity: 1;
 }
-html .topbar span.logo {
+.topbar span.logo {
   position: absolute;
   top: -7px;
   left: 25px;
@@ -38,7 +39,7 @@ html .topbar span.logo {
   width: 1px;
   height: 1px;
 }
-html .topbar span.logo span {
+.topbar span.logo span {
   display: block;
   position: absolute;
   top: 57px;
@@ -48,18 +49,18 @@ html .topbar span.logo span {
   font-size: 12px;
   color: #dddddd;
 }
-html .topbar .pull-right {
+.topbar .pull-right {
   color: #aaa;
 }
-html .topbar .nav-row {
+.topbar .nav-row {
   overflow: hidden;
   padding-left: 80px;
   margin-top: 0px;
 }
-html .topbar .nav-row ul li a {
+.topbar .nav-row ul li a {
   padding: 5px 10px 6px;
 }
-html .topbar .page-title-row p.bc {
+.topbar .page-title-row p.bc {
   padding-left: 104px;
   padding-bottom: 5px;
   margin: 0;
@@ -67,16 +68,16 @@ html .topbar .page-title-row p.bc {
   color: #bfbfbf;
   font-weight: normal;
 }
-html .topbar .page-title-row p.bc a,
-html .topbar .page-title-row p.bc span {
+.topbar .page-title-row p.bc a,
+.topbar .page-title-row p.bc span {
   margin: 0 4px 0 0;
 }
-html ul.nav {
+ul.nav {
   font-weight: bold;
   margin: 0;
   padding: 0;
 }
-html ul.nav li a {
+ul.nav li a {
   border: 1px solid black;
   border-color: #dddddd #aaaaaa #aaaaaa #dddddd;
   padding: 5px 10px 7px;
@@ -86,54 +87,54 @@ html ul.nav li a {
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
-html ul.nav li a:hover {
+ul.nav li a:hover {
   color: black;
   background-color: #eeeeee;
 }
-html ul.nav li.active a {
+ul.nav li.active a {
   color: #cccccc;
   background-color: #606060;
 }
-html ul.nav li.active a:hover {
+ul.nav li.active a:hover {
   background-color: #606060;
 }
-html ul li.spacer {
+ul li.spacer {
   width: 60px;
   height: 1px;
 }
-html ul li.spacer.small {
+ul li.spacer.small {
   width: 6px;
   height: 1px;
 }
-html .content {
+.content {
   background-color: #fff;
   background-color: #fafafa;
 }
-html .container {
+.container {
   width: 1100px;
 }
-html .page-header {
+.page-header {
   padding: 20px 36px 10px;
   margin: -9px 0px 0px;
 }
-html .topbar .breadcrumb.grey {
+.topbar .breadcrumb.grey {
   margin: 4px 5px 0;
   padding: 3px 15px;
   line-height: 18px;
 }
-html .breadcrumb.grey {
+.breadcrumb.grey {
   padding: 3px 15px;
 }
-html .breadcrumb.grey a {
+.breadcrumb.grey a {
   color: #444444;
 }
-html .breadcrumb.grey span {
+.breadcrumb.grey span {
   margin: 0 10px;
 }
-html .home-map-nav h3 {
+.home-map-nav h3 {
   line-height: 18px;
 }
-html .bootstrap-content {
+.bootstrap-content {
   padding: 0 20px;
 }
 
