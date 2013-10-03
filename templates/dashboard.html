@@ -299,7 +299,7 @@
 
 	<script type="text/template" class="display-panel" data-module="overview_and_map">
 		<h2 class="some-lpadding">
-			LGA Overview
+			<{= lga.name }>, <{= lga.group.name }> Overview
 			<small>
 				<{= lga.label }>
 			</small>
@@ -327,8 +327,7 @@
 
 	<script type="text/template" class="display-panel" data-module="sector_overview">
 		<h2 class="some-lpadding">
-			<{= view_panel.name }> Overview
-			<small class="conditional-content"><{= lga.name }>, <{= lga.group.name }></small>
+			<{= lga.name }>, <{= lga.group.name }> <{= view_panel.name }>
 		</h2>
 		<{ if(lga.sector_gap_sheets && lga.sector_gap_sheets[view_panel.id]) { }>
 			<a href="<{= lga.sector_gap_sheets[view_panel.id] }>" class="btn">Download Gap Sheet</a>
