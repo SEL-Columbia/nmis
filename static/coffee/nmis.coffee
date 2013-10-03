@@ -1001,6 +1001,7 @@ do ->
 
       createSelectBox = ->
         sb = $ "<select>", title: plsSelectMsg, style: "width:100%", change: selectBoxChange
+        sb.append $ '<option>', value:""
         for mdg in mdgs.sort() when mdg?
           sb.append og = $ "<optgroup>", label: "MDG #{mdg}"
           og.append layer.$option()  for layer in layersByMdg[mdg]
@@ -1105,6 +1106,7 @@ do ->
       NMIS._states_ = states.sort (a, b)-> a.label > b.label if b?
 
       new_select = $ '<select>', id: 'lga-select', title: 'Select a district'
+      new_select.append $ '<option>', value:""
       for group in groups
         optgroup = $ '<optgroup>', label: group.label
         optgroup.append $ '<option>', d.html_params for d in group.districts
