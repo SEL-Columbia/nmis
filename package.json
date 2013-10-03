@@ -1,7 +1,6 @@
 {
     "name": "nmis",
     "dependencies": {
-        "coffee-script": "*",
-        "less": "1.4.2"
+        "coffee-script": "*"
     }
 }
