@@ -80,7 +80,6 @@ CSS_DEBUG_MODE = False
 
 COMPRESS_PRECOMPILERS = (
     ('text/coffeescript', 'node_modules/coffee-script/bin/coffee --compile --stdio'),
-    ('text/less', 'node_modules/less/bin/lessc {infile} {outfile}'),
 )
 COMPRESS = True
 
