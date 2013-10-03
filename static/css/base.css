@@ -7,6 +7,9 @@ div.container {
 h2.some-lpadding {
   padding: 0 0 0 12px;
 }
+#content {
+  padding-top: 130px;
+}
 
 
 
@@ -103,7 +106,6 @@ html ul li.spacer.small {
   height: 1px;
 }
 html .content {
-  padding-top: 78px;
   background-color: #fff;
   background-color: #fafafa;
 }
@@ -491,7 +493,6 @@ div.display-window-bar {
 /* Facility PopUp
 =================================*/
 div.fac-popup .fac-content {
-  overflow: hidden;
   border: 1px solid #ccc;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;

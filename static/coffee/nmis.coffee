@@ -448,7 +448,7 @@ NMIS.LocalNav = do ->
     opts = _.extend sections: [], _opts
     elem = $ "<ul />", id: "local-nav", class: "nav"
     wrap = $("<div />", class: "row ln-wrap")
-      .css(position: "absolute", top: 82, left: 56, "z-index": 99)
+      .css(position: "absolute", top: 110, left: 56, "z-index": 99)
       .html(elem)
     $(".content").eq(0).prepend wrap
     spacer = $("<li>", {class: "small spacer", html: "&nbsp;"})
@@ -2332,6 +2332,8 @@ do ->
 
         name: _getNameFromFacility(facility)
       , facility)
+
+      console.log(facility)
       subgroups = facility.sector.subGroups()
       defaultSubgroup = subgroups[0]
       obj.sector_data = _.map(subgroups, (o, i, arr) ->
