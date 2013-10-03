@@ -12,9 +12,9 @@
 	{% load compress %}
 	{% compress css %}
 		<link rel="stylesheet" type="text/less" href="/static/css/bootstrap.css">
+		<link rel="stylesheet" href="/static/css/jquery-ui.custom.css" type="text/css" media="all" charset="utf-8">
 		<link rel="stylesheet" type="text/less" href="/static/css/base.css">
 		<link rel="stylesheet" href="/static/css/chosen.css" type="text/css" media="all" charset="utf-8">
-		<link rel="stylesheet" href="/static/css/jquery-ui.custom.css" type="text/css" media="all" charset="utf-8">
 	{% endcompress %}
 	{% block css %}{% endblock %}
 	<script src="/static/js/libs/modernizr.min.js" type="text/javascript" charset="utf-8"></script>
@@ -73,11 +73,11 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
+	<div id="content" class="container">
 		<div class="content">
 			{% block content %}{% endblock %}
 		</div>
-	</div> <!-- /container -->
+	</div>
 	{% if site_title %}
 	<script type="text/javascript" charset="utf-8">
 		var siteTitle = "{{site_title}}";
