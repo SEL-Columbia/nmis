@@ -448,7 +448,7 @@ NMIS.LocalNav = do ->
     opts = _.extend sections: [], _opts
     elem = $ "<ul />", id: "local-nav", class: "nav"
     wrap = $("<div />", class: "row ln-wrap")
-      .css(position: "absolute", top: 82, left: 56, "z-index": 99)
+      .css(position: "absolute", top: 110, left: 56, "z-index": 99)
       .html(elem)
     $(".content").eq(0).prepend wrap
     spacer = $("<li>", {class: "small spacer", html: "&nbsp;"})
@@ -1001,6 +1001,7 @@ do ->
 
       createSelectBox = ->
         sb = $ "<select>", title: plsSelectMsg, style: "width:100%", change: selectBoxChange
+        sb.append $ '<option>', value:""
         for mdg in mdgs.sort() when mdg?
           sb.append og = $ "<optgroup>", label: "MDG #{mdg}"
           og.append layer.$option()  for layer in layersByMdg[mdg]
@@ -1105,6 +1106,7 @@ do ->
       NMIS._states_ = states.sort (a, b)-> a.label > b.label if b?
 
       new_select = $ '<select>', id: 'lga-select', title: 'Select a district'
+      new_select.append $ '<option>', value:""
       for group in groups
         optgroup = $ '<optgroup>', label: group.label
         optgroup.append $ '<option>', d.html_params for d in group.districts
@@ -1827,6 +1829,7 @@ do ->
       if @changing("lga") or @changingToSlug("mode", "facilities")
         repositionMapToDistrictBounds = true
         addIcons = true
+        createMap = true
       if @changing("sector")
         if next.sector.slug is "overview"
           featureAllIcons = true
@@ -1849,6 +1852,7 @@ do ->
           displayFacilitySector(next.lga, NMIS.Env())
 
         withFacilityMapDrawnForDistrict(next.lga).done (nmisMapContext)->
+          nmisMapContext.createMap() if createMap
           nmisMapContext.fitDistrictBounds(next.lga)  if repositionMapToDistrictBounds
           nmisMapContext.addIcons()  if addIcons
           nmisMapContext.featureAllIcons()  if featureAllIcons
@@ -2330,6 +2334,8 @@ do ->
 
         name: _getNameFromFacility(facility)
       , facility)
+
+      console.log(facility)
       subgroups = facility.sector.subGroups()
       defaultSubgroup = subgroups[0]
       obj.sector_data = _.map(subgroups, (o, i, arr) ->
