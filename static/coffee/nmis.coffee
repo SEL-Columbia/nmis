@@ -948,33 +948,30 @@ do ->
           maxZoom: 11
           minZoom: 6
         ).addTo lmap
-        mapLayers = {}
         currentLeafletLayer = false
-        for mdgL in mdgLayers
-          do ->
-            curMdgL = mdgL
-            tileset = mdgL.slug
-            attribution = '&copy; <a href="http://modilabs.org">modilabs</a>'
-            ml = L.tileLayer "http://a.tiles.mapbox.com/v3/modilabs.{tileset}/{z}/{x}/{y}.png",
-              attribution: attribution
-              tileset: mdgL.slug
-              maxZoom: 9
-              minZoom: 6
-            if "mdg" of mdgL
-              curMdgL.onSelect = ()->
-                lmap.addLayer(ml)
-                lmap.removeLayer baseLayer
-                lmap.removeLayer(currentLeafletLayer)  if currentLeafletLayer
-                currentLeafletLayer = ml
-                @show_description()
-                @show_legend()
-            else
-              curMdgL.onSelect = ->
-                lmap.addLayer baseLayer
-                lmap.removeLayer(currentLeafletLayer)  if currentLeafletLayer
-                currentLeafletLayer = false
-                @hide_legend()
-                @hide_description()
+        _.each mdgLayers, (mdgL)->
+          ml = L.tileLayer "http://a.tiles.mapbox.com/v3/modilabs.#{mdgL.slug}/{z}/{x}/{y}.png",
+            attribution: attribution
+            maxZoom: 9
+            minZoom: 6
+          if "mdg" of mdgL
+            # when selected in the dropdown, display the MDG and indicator info
+            mdgL.onSelect = ()->
+              lmap.addLayer(ml)
+              lmap.removeLayer baseLayer
+              lmap.removeLayer(currentLeafletLayer)  if currentLeafletLayer
+              currentLeafletLayer = ml
+              @show_description()
+              @show_legend()
+          else
+            # when "nigeria_base" is selected in the dropdown, hide legend and
+            # remove mdg map layer
+            mdgL.onSelect = ->
+              lmap.addLayer baseLayer
+              lmap.removeLayer(currentLeafletLayer)  if currentLeafletLayer
+              currentLeafletLayer = false
+              @hide_legend()
+              @hide_description()
 
       launcher.fail ()->
         log "LAUNCHER FAIL! Scripts not loaded"
