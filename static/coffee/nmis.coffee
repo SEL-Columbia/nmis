@@ -949,6 +949,7 @@ do ->
           minZoom: 6
         ).addTo lmap
         mapLayers = {}
+        currentLeafletLayer = false
         for mdgL in mdgLayers
           do ->
             curMdgL = mdgL
@@ -959,11 +960,22 @@ do ->
               tileset: mdgL.slug
               maxZoom: 9
               minZoom: 6
-            curMdgL.onSelect = ()->
-              lmap.removeLayer baseLayer
-              lmap.addLayer(ml)
-              @show_description()
-              @show_legend()
+            if "mdg" of mdgL
+              curMdgL.onSelect = ()->
+                lmap.addLayer(ml)
+                lmap.removeLayer baseLayer
+                lmap.removeLayer(currentLeafletLayer)  if currentLeafletLayer
+                currentLeafletLayer = ml
+                @show_description()
+                @show_legend()
+            else
+              curMdgL.onSelect = ->
+                lmap.addLayer baseLayer
+                lmap.removeLayer(currentLeafletLayer)  if currentLeafletLayer
+                currentLeafletLayer = false
+                @hide_legend()
+                @hide_description()
+
       launcher.fail ()->
         log "LAUNCHER FAIL! Scripts not loaded"
 
@@ -988,11 +1000,18 @@ do ->
           else
             layersWitoutMdg.push @
 
+        hide_description: ->
+          descWrap = $(".mn-iiwrap")
+          descWrap.find(".mdg-display").text "Nigeria Base Map"
+          descWrap.find("div.layer-description").empty()
+
         show_description: ->
           descWrap = $(".mn-iiwrap")
           goalText = NMIS.mdgGoalText(@mdg)
           descWrap.find(".mdg-display").html goalText
           descWrap.find("div.layer-description").html $("<p>", text: @description)
+        hide_legend: ->
+          $(".mn-legend").removeClass("open")
         show_legend: ->
           legendData = for lrow in @legend_data.split(";")
             [value, opacity, color] = lrow.split(",")
@@ -1017,12 +1036,14 @@ do ->
           $ "<option>", value: @slug, text: @name
 
       onSelect: ()->
+
       selectBoxChange = ()->
         layersBySlug[$(@).val()].onSelect()
 
       createSelectBox = ->
         sb = $ "<select>", title: plsSelectMsg, style: "width:100%", change: selectBoxChange
         sb.append $ '<option>', value:""
+        sb.append $ '<option>', value:"nigeria_base", text: "Nigeria Base Map"
         for mdg in mdgs.sort() when mdg?
           sb.append og = $ "<optgroup>", label: "MDG #{mdg}"
           og.append layer.$option()  for layer in layersByMdg[mdg]
