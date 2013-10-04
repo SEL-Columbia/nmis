@@ -963,6 +963,7 @@ do ->
               lmap.removeLayer baseLayer
               lmap.addLayer(ml)
               @show_description()
+              @show_legend()
       launcher.fail ()->
         log "LAUNCHER FAIL! Scripts not loaded"
 
@@ -992,6 +993,26 @@ do ->
           goalText = NMIS.mdgGoalText(@mdg)
           descWrap.find(".mdg-display").html goalText
           descWrap.find("div.layer-description").html $("<p>", text: @description)
+        show_legend: ->
+          legendData = for lrow in @legend_data.split(";")
+            [value, opacity, color] = lrow.split(",")
+            value: value
+            opacity: opacity
+            color: color
+
+          legendHtml = do ->
+            tbody = $("<tbody />")
+            for i, lv of legendData
+              tr = $("<tr />")
+              styl = "background-color": lv.color
+              styl.opacity = lv.opacity  if lv.opacity isnt `undefined`
+              colorSpan = $("<span />").addClass("color-span").css(styl).html("&nbsp;")
+              tr.append $("<td />").html(colorSpan)
+              tr.append $("<td />").html($("<p />").text(lv.value))
+              tbody.append tr
+            $("<table />").html tbody
+
+          $(".mn-legend").addClass("open").html legendHtml
         $option: ->
           $ "<option>", value: @slug, text: @name
 
