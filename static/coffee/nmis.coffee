@@ -1868,6 +1868,7 @@ do ->
       if @changing("lga") or @changingToSlug("mode", "facilities")
         repositionMapToDistrictBounds = true
         addIcons = true
+      if @changing "lga"
         createMap = true
       if @changing("sector")
         if next.sector.slug is "overview"
