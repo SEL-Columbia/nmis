@@ -786,7 +786,10 @@ div.indicator-feature div.embedded {
 ================================================================================
 ================================================================================
 ================================================================================*/
-/* mdg legend */
+/* mdg map view and legend */
+.mdg-display {
+    margin: 20px 0;
+}
 .mn-legend {
     position: absolute;
     bottom: 26px;
@@ -2118,8 +2121,3 @@ div.dataTables_wrapper div.dataTables_scrollBody .facility-dt td:first-child {
 div.profile-box .map {
     height: 180px;
 }
-
-
-
-
-
