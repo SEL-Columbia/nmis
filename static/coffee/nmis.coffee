@@ -948,21 +948,31 @@ do ->
           maxZoom: 11
           minZoom: 6
         ).addTo lmap
-        mapLayers = {}
-        for mdgL in mdgLayers
-          do ->
-            curMdgL = mdgL
-            tileset = mdgL.slug
-            attribution = '&copy; <a href="http://modilabs.org">modilabs</a>'
-            ml = L.tileLayer "http://a.tiles.mapbox.com/v3/modilabs.{tileset}/{z}/{x}/{y}.png",
-              attribution: attribution
-              tileset: mdgL.slug
-              maxZoom: 9
-              minZoom: 6
-            curMdgL.onSelect = ()->
-              lmap.removeLayer baseLayer
+        currentLeafletLayer = false
+        _.each mdgLayers, (mdgL)->
+          ml = L.tileLayer "http://a.tiles.mapbox.com/v3/modilabs.#{mdgL.slug}/{z}/{x}/{y}.png",
+            attribution: attribution
+            maxZoom: 9
+            minZoom: 6
+          if "mdg" of mdgL
+            # when selected in the dropdown, display the MDG and indicator info
+            mdgL.onSelect = ()->
               lmap.addLayer(ml)
+              lmap.removeLayer baseLayer
+              lmap.removeLayer(currentLeafletLayer)  if currentLeafletLayer
+              currentLeafletLayer = ml
               @show_description()
+              @show_legend()
+          else
+            # when "nigeria_base" is selected in the dropdown, hide legend and
+            # remove mdg map layer
+            mdgL.onSelect = ->
+              lmap.addLayer baseLayer
+              lmap.removeLayer(currentLeafletLayer)  if currentLeafletLayer
+              currentLeafletLayer = false
+              @hide_legend()
+              @hide_description()
+
       launcher.fail ()->
         log "LAUNCHER FAIL! Scripts not loaded"
 
@@ -987,21 +997,50 @@ do ->
           else
             layersWitoutMdg.push @
 
+        hide_description: ->
+          descWrap = $(".mn-iiwrap")
+          descWrap.find(".mdg-display").text "Nigeria Base Map"
+          descWrap.find("div.layer-description").empty()
+
         show_description: ->
           descWrap = $(".mn-iiwrap")
           goalText = NMIS.mdgGoalText(@mdg)
           descWrap.find(".mdg-display").html goalText
           descWrap.find("div.layer-description").html $("<p>", text: @description)
+        hide_legend: ->
+          $(".mn-legend").removeClass("open")
+        show_legend: ->
+          legendData = for lrow in @legend_data.split(";")
+            [value, opacity, color] = lrow.split(",")
+            value: value
+            opacity: opacity
+            color: color
+
+          legendHtml = do ->
+            tbody = $("<tbody />")
+            for i, lv of legendData
+              tr = $("<tr />")
+              styl = "background-color": lv.color
+              styl.opacity = lv.opacity  if lv.opacity isnt `undefined`
+              colorSpan = $("<span />").addClass("color-span").css(styl).html("&nbsp;")
+              tr.append $("<td />").html(colorSpan)
+              tr.append $("<td />").html($("<p />").text(lv.value))
+              tbody.append tr
+            $("<table />").html tbody
+
+          $(".mn-legend").addClass("open").html legendHtml
         $option: ->
           $ "<option>", value: @slug, text: @name
 
       onSelect: ()->
+
       selectBoxChange = ()->
         layersBySlug[$(@).val()].onSelect()
 
       createSelectBox = ->
         sb = $ "<select>", title: plsSelectMsg, style: "width:100%", change: selectBoxChange
         sb.append $ '<option>', value:""
+        sb.append $ '<option>', value:"nigeria_base", text: "Nigeria Base Map"
         for mdg in mdgs.sort() when mdg?
           sb.append og = $ "<optgroup>", label: "MDG #{mdg}"
           og.append layer.$option()  for layer in layersByMdg[mdg]
