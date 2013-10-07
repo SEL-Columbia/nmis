@@ -37,6 +37,10 @@ def dashboard(request):
     return render_to_response("dashboard.html", context_instance=ci)
 
 
+def dashboard2(request):
+    return render_to_response('dashboard2.html', context_instance=RequestContext(request))
+
+
 @login_required
 def serve_data(request, data_path):
     # TODO: cleanup/refactor this function

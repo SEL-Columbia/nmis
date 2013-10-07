@@ -16,6 +16,7 @@ import views
 
 urlpatterns = patterns('',
     url(r'^$', views.homepage),
+    url(r'^dashboard2', views.dashboard2),
     url(r'^dashboard', views.dashboard),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', include(admin.site.urls)),
