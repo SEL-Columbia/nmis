@@ -38,7 +38,14 @@ def dashboard(request):
 
 
 def dashboard2(request):
-    return render_to_response('dashboard2.html', context_instance=RequestContext(request))
+    cwd = os.path.dirname(os.path.abspath(__file__))
+    zones_path = os.path.join(cwd, 'protected_data', 'geo', 'zones.json')
+    with open(zones_path, 'r') as f:
+        zones = f.read()
+
+    return render_to_response('dashboard2.html',
+        {'zones': zones},
+        context_instance=RequestContext(request))
 
 
 @login_required

@@ -15,6 +15,44 @@
 
 
 {% block content %}
-	
+	<script>
+		var ZONES = {{ zones|safe }};
+	</script>
+	<script id="country_view_tmpl" type="text/template">
+		<div class="page-header">
+			<h1>Nigeria</h1>
+		</div>
+		<div class="zone_nav">
+			<% _.each(zones, function(zone){ %>
+				<div class="zl-wrap">
+					<div class="zone-list">
+						<h2 class="zone-title">
+							<%= zone[0] %>
+						</h2>
+						<ul>
+							<% _.each(zone[1], function(state){ %>
+								<li>
+									<a href="#" class="state-link" data-lga-count="3">
+										<%= state[0] %>
+									</a>
+									<ul class="lga-list">
+										<% _.each(state[1], function(lga){ %>
+											<li>
+												<a href="#<%= lga[1] %>">
+													<%= lga[0] %>
+												</a>
+											</li>
+										<% }); %>
+									</ul>
+								</li>
+							<% }); %>
+						</ul>
+					</div>
+				</div>
+			<% }); %>
+			<div class="clearfix"></div>
+		</div>
+	</script>
 {% endblock %}
+
 
