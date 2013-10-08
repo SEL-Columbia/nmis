@@ -10,6 +10,8 @@
 	  {{ site_title|default:"Nigeria MDG Information System" }}
 	</title>
 	{% load compress %}
+	{% block js %}{% endblock %}
+	{% block scripts %}{% endblock %}
 	{% compress css %}
 		<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
 		<link rel="stylesheet" href="/static/css/jquery-ui.custom.css" type="text/css" media="all" charset="utf-8">
@@ -78,14 +80,6 @@
 			{% block content %}{% endblock %}
 		</div>
 	</div>
-	{% if site_title %}
-	<script type="text/javascript" charset="utf-8">
-		var siteTitle = "{{site_title}}";
-	</script>
-	{% endif %}
-
-	{% block js %}{% endblock %}
-	{% block scripts %}{% endblock %}
 
 	{% block footer %}{% endblock %}
 	{% if preview_link %}
