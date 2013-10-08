@@ -7,6 +7,30 @@
 
 {% block js %}
 	{% load compress %}
+
+    <script src="/static/js/libs/raphael/raphael.min.js" type="text/javascript" charset="utf-8"></script>
+	{% compress js %}
+	<script src="/static/js/libs/jquery-1.7.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/libs/jquery.ui-custom.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/libs/underscore.min.js"></script>
+	<script type="text/javascript" src="/static/js/libs/sammy.js"></script>
+	<script src="/static/js/libs/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="/static/js/libs/jquery.chosen.min.js"></script>
+	<script type="text/javascript" src="/static/js/libs/jquery.inDom.js"></script>
+	{% endcompress %}
+
+	<script src="/static/js/libs/jquery.dataTables.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/libs/jquery.dataTables.typeFilter.js" type="text/javascript" charset="utf-8"></script>
+
+	{% compress js %}
+	<script type="text/coffeescript" src="/static/coffee/jquery_underscore_templates.coffee"></script>
+	<script type="text/coffeescript" src="/static/coffee/jquery-when_O.coffee"></script>
+	<script type="text/coffeescript" src="/static/coffee/csv.coffee"></script>
+	<script type="text/coffeescript" src="/static/coffee/debug.coffee"></script>
+	<script type="text/javascript" src="/static/js/libs/raphael/graphael.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/static/js/libs/raphael/graphael.pie.min.js" charset="utf-8"></script>
+	{% endcompress %}
+
 	{% compress js %}
 		<script type="text/coffeescript" src="/static/coffee/nmis.coffee" charset="utf-8"></script>
 	{% endcompress %}
