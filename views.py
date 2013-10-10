@@ -38,27 +38,23 @@ def dashboard(request):
 
 
 def dashboard2(request):
-    cwd = os.path.dirname(os.path.abspath(__file__))
-    path = os.path.join(cwd, 'protected_data', 'new_data')
-    zones_path = os.path.join(path, 'zones.json')
-    with open(zones_path, 'r') as f:
-        zones = f.read()
-
-    p = os.path.join(path, 'indicators.json')
-    with open(p, 'r') as f:
-        indicators = f.read()
-
-    p = os.path.join(path, 'lga_overview.json')
-    with open(p, 'r') as f:
-        lga_overview = f.read()
+    def load_json(name):
+        cwd = os.path.dirname(os.path.abspath(__file__))
+        path = os.path.join(cwd, 'protected_data', 'new_data')
+        file_path = os.path.join(path, name + '.json')
+        with open(file_path, 'r') as f:
+            json = f.read()
+        return json
 
     return render_to_response('dashboard2.html',
         {
-            'zones': zones,
-            'indicators': indicators,
-            'lga_overview': lga_overview
+            'zones': load_json('zones'),
+            'indicators': load_json('indicators'),
+            'lga_overview': load_json('lga_overview'),
+            'lga_sectors': load_json('lga_sectors')
         },
         context_instance=RequestContext(request))
+
 
 
 @login_required
