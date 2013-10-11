@@ -12,9 +12,9 @@
         ':unique_lga/education': route(lga_sector, 'education'),
         ':unique_lga/water': route(lga_sector, 'water'),
         ':unique_lga/facility': route(facility_overview),
-        //':unique_lga/facility_health': facility_health,
-        //':unique_lga/facility_education': facility_education,  
-        //':unique_lga/facility_water': facility_water
+        ':unique_lga/facility_health': route(facility_sector, 'health'),
+        ':unique_lga/facility_education': route(facility_sector, 'education'),  
+        ':unique_lga/facility_water': route(facility_sector, 'water')
       }
     });
     Backbone.history.start();
@@ -42,10 +42,13 @@
   }
 
   function facility_overview(lga){
-    render('#lga_sector_template', {
+    render('#facility_overview', {
       lga: lga.lga_data,
       facilities: facilities
     });
+  }
+
+  function facility_sector(lga){
   }
 
 

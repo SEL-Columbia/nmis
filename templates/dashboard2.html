@@ -216,7 +216,30 @@
       </div>
     </div>
   </script>
-
+	<script id="facilities_overview_template" type="text/html">
+		<div class="container no-fill row" id="lga-widget-wrap">
+			<div class="span9">
+				<div class="row">
+					<div class="span8 offset1">
+						<h3>
+							Facilities <span class="replace-counts">(<%= facilities.length %>)</span>
+						</h3>
+					</div>
+				</div>  
+			</div>
+			<div class="span8">
+				<table class="simple-lines">
+					<tbody>
+						<tr>
+							<td class="header" colspan="2">
+								<%= lga.lga %>, <%= lga.state %>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</script>
 {% endblock %}
 
 
