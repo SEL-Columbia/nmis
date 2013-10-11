@@ -94,7 +94,7 @@
                       + "/{z}/{x}/{y}.png";
     L.tileLayer(tile_server, {
           minZoom: 6,
-          maxZoom: 1
+          maxZoom: 11
         })
       .addTo(summary_map);
   }
