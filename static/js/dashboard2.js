@@ -34,6 +34,10 @@
 
   function index(){
     render('#index_template', {});
+    $('#zone-navigation .state-link').click(function(){
+      $(this).next('.lga-list').toggle();
+      return false;
+    });
   }
 
   function lga_overview(lga){

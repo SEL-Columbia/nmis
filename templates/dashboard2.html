@@ -81,13 +81,13 @@
               <ul>
                 <% _.each(zone[1], function(state){ %>
                   <li>
-                    <a href="#" class="state-link" data-lga-count="3">
+                    <a class="state-link">
                       <%= state[0] %>
                     </a>
                     <ul class="lga-list">
                       <% _.each(state[1], function(lga){ %>
                         <li>
-                          <a href="#<%= lga[1] %>">
+                          <a href="#<%= lga[1] %>/lga_overview">
                             <%= lga[0] %>
                           </a>
                         </li>
