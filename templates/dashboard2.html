@@ -30,26 +30,38 @@
   <div id="lga_nav"></div>
   <div class="content"></div>
 
-  <script id="top_nav_template" type="text/html">
+  <script id="lga_nav_template" type="text/html">
     <ul id="local-nav" class="nav">
       <li>
-        <a href="#">LGA Summary</a>
+        <a href="#<%= lga.unique_lga %>/lga_<%= sector %>" >
+          LGA Summary
+        </a>
       </li>
       <li>
-        <a data-view="facility">Facility Detail</a>
+        <a href="#<%= lga.unique_lga %>/facility_<%= sector %>">
+          Facility Detail
+        </a>
       </li>
       <li class="small spacer">&nbsp;</li>
       <li>
-        <a data-subview="overview">Overview</a>
+        <a href="#<%= lga.unique_lga %>/<%= active_view %>_overview">
+          Overview
+        </a>
       </li>
       <li>
-        <a data-subview="health">Health</a>
+        <a href="#<%= lga.unique_lga %>/<%= active_view %>_health">
+          Health
+        </a>
       </li>
       <li>
-        <a data-subview="education">Education</a>
+        <a href="#<%= lga.unique_lga %>/<%= active_view %>_education">
+          Education
+        </a>
       </li>
       <li>
-        <a data-subview="water">Water</a>
+        <a href="#<%= lga.unique_lga %>/<%= active_view %>_water">
+          Water
+        </a>
       </li>
     </ul>
   </script>
