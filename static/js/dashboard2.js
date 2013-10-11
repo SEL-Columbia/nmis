@@ -21,14 +21,25 @@
   });
   
 
-  // Page Views
+  // Views
   function index(){
     render('#index_template', {});
   }
 
+  function _lga_nav(lga, view, sector){
+    var template = $('#lga_nav_template').html();
+    var html = _.template(template, {
+      lga: lga.unique_lga,
+      view: view,
+      sector: sector
+    });
+    $('#lga_nav').html(html);
+  }
+
+
   function lga_overview(lga){
     render('#lga_overview_template', {
-      lga: lga.lga_data
+      lga: lga
     });
 
     leaflet_overview(lga);
@@ -36,14 +47,14 @@
 
   function lga_sector(lga, sector){
     render('#lga_sector_template', {
-      lga: lga.lga_data,
+      lga: lga,
       sector: sector
     });
   }
 
   function facility_overview(lga){
     render('#facility_overview', {
-      lga: lga.lga_data,
+      lga: lga,
       facilities: facilities
     });
   }
@@ -87,7 +98,7 @@
 
   function leaflet_overview(lga){
     var map_div = $(".map")[0];
-    var lat_lng = new L.LatLng(lga.lga_data.latitude, lga.lga_data.longitude);
+    var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
     var map_zoom = 9;
     var summary_map = L.map(map_div, {})
         .setView(lat_lng, map_zoom);

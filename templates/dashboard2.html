@@ -27,6 +27,33 @@
 
 
 {% block content %}
+  <div id="lga_nav"></div>
+  <div class="content"></div>
+
+  <script id="top_nav_template" type="text/html">
+    <ul id="local-nav" class="nav">
+      <li>
+        <a href="#">LGA Summary</a>
+      </li>
+      <li>
+        <a data-view="facility">Facility Detail</a>
+      </li>
+      <li class="small spacer">&nbsp;</li>
+      <li>
+        <a data-subview="overview">Overview</a>
+      </li>
+      <li>
+        <a data-subview="health">Health</a>
+      </li>
+      <li>
+        <a data-subview="education">Education</a>
+      </li>
+      <li>
+        <a data-subview="water">Water</a>
+      </li>
+    </ul>
+  </script>
+
   <script id="index_template" type="text/html">
     <div id="zone-navigation">
       <div class="page-header">
