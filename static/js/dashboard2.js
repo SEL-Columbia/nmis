@@ -31,8 +31,7 @@
 			lga: lga.lga_data
 		});
 
-		var gps = "11.84769 9.623538".split(' ');
-		leaflet_overview(gps[0], gps[1]);
+		leaflet_overview(lga);
 	}
 
 	function lga_sector(lga, sector){
@@ -83,24 +82,26 @@
 })();
 
 
-function leaflet_overview(latitude, longitude){
-	var map_div = $(".map")[0];
-	var lat_lng = new L.LatLng(latitude, longitude);
-	var map_zoom = 9;
-	var summary_map = L.map(map_div, {})
-	    .setView(lat_lng, map_zoom);
-	var tile_server = 'http://{s}.tiles.mapbox.com/v3/modilabs.nigeria_base'
-	    + '/{z}/{x}/{y}.png';
-	L.tileLayer(tile_server, {
-	  		minZoom: 6,
-	  		maxZoom: 1
-	  	})
-		.addTo(summary_map);
-}
+  function leaflet_overview(lga){
+    var map_div = $(".map")[0];
+    var lat_lng = new L.LatLng(lga.lga_data.latitude, lga.lga_data.longitude);
+    var map_zoom = 9;
+    var summary_map = L.map(map_div, {})
+        .setView(lat_lng, map_zoom);
+    var tileset = "nigeria_base";
+    var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs"
+                      + tileset
+                      + "/{z}/{x}/{y}.png";
+    L.tileLayer(tile_server, {
+          minZoom: 6,
+          maxZoom: 1
+        })
+      .addTo(summary_map);
+  }
 
-function leaflet_countryview(){
-};
+  function leaflet_countryview(){
+  };
 
-function leaflet_facility(){
-};
+  function leaflet_facility(){
+  };
 
