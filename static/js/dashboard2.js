@@ -89,7 +89,7 @@
     var summary_map = L.map(map_div, {})
         .setView(lat_lng, map_zoom);
     var tileset = "nigeria_base";
-    var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs"
+    var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs."
                       + tileset
                       + "/{z}/{x}/{y}.png";
     L.tileLayer(tile_server, {
