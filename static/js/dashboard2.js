@@ -93,10 +93,9 @@
                       + tileset
                       + "/{z}/{x}/{y}.png";
     L.tileLayer(tile_server, {
-          minZoom: 6,
-          maxZoom: 11
-        })
-      .addTo(summary_map);
+      minZoom: 6,
+      maxZoom: 11
+    }).addTo(summary_map);
   }
 
   function leaflet_countryview(){
