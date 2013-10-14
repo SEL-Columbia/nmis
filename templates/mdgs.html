@@ -8,8 +8,17 @@
 
 {% block js %}
   <script src="/static/js/libs/jquery-1.10.2.min.js"></script>
-  <script src="/static/js/libs/underscore-min.js"></script>
   <script src="/static/leaflet/leaflet.js"></script>
+  <script src="/static/js/mdgs.js"></script>
+{% endblock %}
+
 {% block content %}
+    <div class='container'>
+        <div class='left-panel'>
+            <h1>Nigeria's process on the MDGs</h1>
+        </div>
+        <div class='map right-panel'>
+        </div>
+    </div>
 
 {% endblock %}
