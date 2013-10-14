@@ -18,6 +18,10 @@ def load_json(name):
     return json
 
 
+def context_processor(request):
+    return {'zones' : load_json('zones')}
+
+
 def index(request):
     return render_to_response('index.html',
         {}, context_instance=RequestContext(request))
@@ -36,7 +40,6 @@ def about(request):
 def dashboard(request):
     return render_to_response('dashboard.html',
         {
-            'zones': load_json('zones'),
             'indicators': load_json('indicators'),
             'lga_overview': load_json('lga_overview'),
             'lga_sectors': load_json('lga_sectors')
