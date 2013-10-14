@@ -37,16 +37,8 @@ def about(request):
         {}, context_instance=RequestContext(request))
 
 def mdgs(request):
-    def load_json(name):
-        cwd = os.path.dirname(os.path.abspath(__file__))
-        path = os.path.join(cwd, 'protected_data', 'new_data')
-        file_path = os.path.join(path, name + '.json')
-        with open(file_path, 'r') as f:
-            json = f.read()
-        return json
-    return render_to_response('mdgs.html',{
-                            },
-                            context_instance=RequestContext(request))
+    return render_to_response('mdgs.html',
+        {}, context_instance=RequestContext(request))
 
 
 def dashboard(request):
@@ -58,7 +50,6 @@ def dashboard(request):
         },
         context_instance=RequestContext(request))
 
-@login_required
 def serve_data_with_files(request, data_path):
     req_filename = os.path.join(settings.PROJECT_ROOT, 'protected_data', data_path)
     if os.path.exists(req_filename):

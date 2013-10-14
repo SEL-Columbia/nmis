@@ -408,6 +408,15 @@ div.profile-box .map {
     border-radius: 4px;
     background-color: #f6f6f6;
 }
+div.mdg-map {
+    width: 580px;
+    float: left;
+    border: 1px solid #ddd;
+    margin: 6px 0;
+    height: 580px;
+    border-radius: 4px;
+    background-color: #f6f6f6;
+}
 div.profile-box .map p.loading-message {
     font-style: italic;
     line-height: 20px;
