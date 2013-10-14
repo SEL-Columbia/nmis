@@ -6,7 +6,6 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseBadRequest,\
      HttpResponseRedirect
 from django.conf import settings
-from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 
 
@@ -17,6 +16,10 @@ def load_json(name):
     with open(file_path, 'r') as f:
         json = f.read()
     return json
+
+
+def context_processor(request):
+    return {'zones' : load_json('zones')}
 
 
 def index(request):
@@ -46,11 +49,9 @@ def mdgs(request):
                             context_instance=RequestContext(request))
 
 
-@login_required
 def dashboard(request):
     return render_to_response('dashboard.html',
         {
-            'zones': load_json('zones'),
             'indicators': load_json('indicators'),
             'lga_overview': load_json('lga_overview'),
             'lga_sectors': load_json('lga_sectors')

@@ -71,7 +71,7 @@
     return function(unique_lga){
       var lga = NMIS.lgas[unique_lga];
       if (typeof lga === 'undefined'){
-        var url = '/data/new_data/lgas/' + unique_lga + '.json';
+        var url = '/static/lgas/' + unique_lga + '.json';
         $.getJSON(url, function(lga){
           NMIS.lgas[unique_lga] = lga;
           view(lga, sector);
