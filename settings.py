@@ -77,10 +77,6 @@ STATICFILES_DIRS = (
 
 COMPRESS_ENABLED = not DEBUG
 CSS_DEBUG_MODE = False
-
-COMPRESS_PRECOMPILERS = (
-    ('text/coffeescript', 'node_modules/coffee-script/bin/coffee --compile --stdio'),
-)
 COMPRESS = True
 
 # List of finder classes that know how to find static files in

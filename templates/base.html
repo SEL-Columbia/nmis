@@ -1,15 +1,14 @@
-{% load i18n %}
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
-
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <!-- todo: replace site_title with page_title -->
 	<title>
 	  {{ site_title|default:"Nigeria MDG Information System" }}
 	</title>
 	{% load compress %}
+	<script>
+	  NMIS = {};
+      NMIS.zones = {{ zones|safe }};
+    </script>
 	{% block js %}{% endblock %}
 	{% compress css %}
 		<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
@@ -35,12 +34,12 @@
 					<p class="pull-right print-hide-block">
 					{% if user.is_authenticated %}
 						Logged in as {{user.username}}
-							(&nbsp;<a href="{% url auth_logout %}">{% trans "Log out" %}</a>
-                                    | <a href="{% url auth_password_change %}">{% trans "Change password" %}</a>
-                                    | <a href="http://nmis.tenderapp.com/">{% trans "Help" %}</a>&nbsp;)
+							(&nbsp;<a href="{% url auth_logout %}">Log out</a>
+                                    | <a href="{% url auth_password_change %}">Change password</a>
+                                    | <a href="http://nmis.tenderapp.com/">Help</a>&nbsp;)
 					{% else %}
-						<a href="{% url auth_login %}">{% trans "Log in" %}</a>
-		                        | <a href="http://nmis.tenderapp.com/">{% trans "Help" %}</a>
+						<a href="{% url auth_login %}">Log in</a>
+		                        | <a href="http://nmis.tenderapp.com/">Help</a>
 					{% endif %}
 					</p>
 					<div style="" class="lga-nav">
@@ -77,10 +76,6 @@
 	<div id="content" class="container">
 		{% block content %}{% endblock %}
 	</div>
-
 	{% block footer %}{% endblock %}
-	{% if preview_link %}
-	<a href="{{preview_link}}" class="beta-preview"><span>View Beta Site</span> *</a>
-	{% endif %}
 </body>
 </html>

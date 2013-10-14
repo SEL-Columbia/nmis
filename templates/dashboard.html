@@ -5,35 +5,21 @@
   <link href="/static/leaflet/leaflet.css" media="all" rel="stylesheet" type="text/css">
 {% endblock %}
 
+
 {% block js %}
-	{% load compress %}
-
-    <script src="/static/js/libs/raphael/raphael.min.js" type="text/javascript" charset="utf-8"></script>
-	{% compress js %}
-	<script src="/static/js/libs/jquery-1.7.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/static/js/libs/jquery.ui-custom.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/static/js/libs/underscore.min.js"></script>
-	<script type="text/javascript" src="/static/js/libs/sammy.js"></script>
-	<script src="/static/js/libs/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" src="/static/js/libs/jquery.chosen.min.js"></script>
-	<script type="text/javascript" src="/static/js/libs/jquery.inDom.js"></script>
-	{% endcompress %}
-
-	<script src="/static/js/libs/jquery.dataTables.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/static/js/libs/jquery.dataTables.typeFilter.js" type="text/javascript" charset="utf-8"></script>
-
-	{% compress js %}
-	<script type="text/coffeescript" src="/static/coffee/jquery_underscore_templates.coffee"></script>
-	<script type="text/coffeescript" src="/static/coffee/jquery-when_O.coffee"></script>
-	<script type="text/coffeescript" src="/static/coffee/csv.coffee"></script>
-	<script type="text/coffeescript" src="/static/coffee/debug.coffee"></script>
-	<script type="text/javascript" src="/static/js/libs/raphael/graphael.min.js" charset="utf-8"></script>
-	<script type="text/javascript" src="/static/js/libs/raphael/graphael.pie.min.js" charset="utf-8"></script>
-	{% endcompress %}
-
-	{% compress js %}
-		<script type="text/coffeescript" src="/static/coffee/nmis.coffee" charset="utf-8"></script>
-	{% endcompress %}
+  <script src="/static/js/libs/jquery-1.10.2.min.js"></script>
+  <script src="/static/js/libs/underscore-min.js"></script>
+  <script src="/static/js/libs/backbone-min.js"></script>
+  <script src="/static/leaflet/leaflet.js"></script>
+  <script src="/static/leaflet/Google.js"></script>
+  <script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
+  <script src="/static/js/dashboard2.js"></script>
+  <script>
+    NMIS.lgas = {};
+    NMIS.indicators = {{ indicators|safe }};
+    NMIS.lga_overview = {{ lga_overview|safe }};
+    NMIS.lga_sectors = {{ lga_sectors|safe }};
+  </script>
 {% endblock %}
 
 
@@ -41,379 +27,258 @@
 
 
 {% block content %}
-	<script type="text/underscore-template" id="facility-hover">
-		<div class="popover below fade in hover-overlay" style="display: block; top: <{= top }>px; left: <{= left }>px;">
-		  <div class="arrow" style="left:<{= arrowLeft }>px"></div>
-		  <div class="inner">
-		    <div class="content">
-		      <p>
-		        <div class="photothumb"></div>
-		        <strong><{= name }></strong> <em>(<{= community }>)</em>
-		        <br>
-		        <br>
-		        <span style="font-size:smaller; line-height:11px">
-		          Click the icon to view details
-		        </span>
-		      </p>
-		    </div>
-		  </div>
-		</div>
-	</script>
-	<script type="text/underscore-template" id="facility-popup">
-		<div class="row" title="<{= name }>">
-			<div class="row">
-				<div class="span2-5">
-					<ul class="media-grid" style="margin-left:10px">
-						<li>
-							<a href="<{= image_url() }>" target="_BLANK" class="lightbox-or-something">
-								<img src="<{= thumbnail_url() }>" width="90" height="90">
-							</a>
-						</li>
-					</ul>
-				</div>
-				<div class="span6">
-					<div class="select-wrap">
-						<select>
-							<{ _.each(sector_data, function(s){ }>
-								<option value="<{= s.slug }>"><{= s.name}></option>
-								<{ }); }>
-						</select>
-					</div>
-					<div class="fac-content">
-						<{ _.each(sector_data, function(s){ }>
-							<div data-sector-slug="<{= s.slug }>" class="facility-sector-select-box">
-								<table>
-									<tbody>
-										<{ _.each(s.variables, function(v){ }>
-											<tr>
-												<td>
-													<{= v.name }>
-												</td>
-												<td>
-													<{= v.value }>
-												</td>
-											</tr>
-											<{ }); }>
-									</tbody>
-								</table>
-							</div>
-							<{ }); }>
-					</div>
-				</div>
-			</div>
-		</div>
-	</script>
-	<script type="text/x-mustache-template" id="indicator-feature">
-		<div class="indicator-feature">
-			<div class="overlay-wrap print-hide-block">
-				<div class="overlay">
-					<div class="row">
-						<h3 class="span6 overlay-header">
-							<{= name }>
-						</h3>
-						<a href="#x" class="close"><span>[X]</span></a>
-					</div>
-					<div class="raph-circle">
-					</div>
-					<div class="raph-text">
-						<p class="descrip">
-							<{= description }>
-						</p>
-						<div class="raph-legend">
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="embedded" style="display:none">
-				<div class="row">
-					<div class="span12" style="padding-left:12px">
-						<h3>
-							<small>Selected Indicator:</small> <{= name }>
-						</h3>
-						<p>
-							<{= description }>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</script>
-	<script type="text/underscore-template" id="facilities-overview">
+  <div id="lga_nav"></div>
+  <div class="content"></div>
+
+  <script id="lga_nav_template" type="text/html">
+    <ul id="local-nav" class="nav">
+      <li>
+        <a href="#<%= lga.unique_lga %>/lga_<%= sector %>" >
+          LGA Summary
+        </a>
+      </li>
+      <li>
+        <a href="#<%= lga.unique_lga %>/facility_<%= sector %>">
+          Facility Detail
+        </a>
+      </li>
+      <li class="small spacer">&nbsp;</li>
+      <li>
+        <a href="#<%= lga.unique_lga %>/<%= active_view %>_overview">
+          Overview
+        </a>
+      </li>
+      <li>
+        <a href="#<%= lga.unique_lga %>/<%= active_view %>_health">
+          Health
+        </a>
+      </li>
+      <li>
+        <a href="#<%= lga.unique_lga %>/<%= active_view %>_education">
+          Education
+        </a>
+      </li>
+      <li>
+        <a href="#<%= lga.unique_lga %>/<%= active_view %>_water">
+          Water
+        </a>
+      </li>
+    </ul>
+  </script>
+
+  <script id="index_template" type="text/html">
+    <div id="zone-navigation">
+      <div class="page-header">
+        <h1>Nigeria</h1>
+      </div>
+      <div class="zone-nav">
+        <% _.each(NMIS.zones, function(zone){ %>
+          <div class="zl-wrap">
+            <div class="zone-list">
+              <h2 class="zone-title">
+                <%= zone[0] %>
+              </h2>
+              <ul>
+                <% _.each(zone[1], function(state){ %>
+                  <li>
+                    <a class="state-link">
+                      <%= state[0] %>
+                    </a>
+                    <ul class="lga-list">
+                      <% _.each(state[1], function(lga){ %>
+                        <li>
+                          <a href="#<%= lga[1] %>/lga_overview">
+                            <%= lga[0] %>
+                          </a>
+                        </li>
+                      <% }); %>
+                    </ul>
+                  </li>
+                <% }); %>
+              </ul>
+            </div>
+          </div>
+        <% }); %>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </script>
+  <script id="lga_overview_template" type="text/html">
+    <h2 class="some-lpadding">
+      <%= lga.lga %>, <%= lga.state %> Overview
+    </h2>
+    <div class="row">
+      <div class="profile-box">
+        <div class="profile-box-inner">
+          <table data-table-contents="lga-overview">
+            <% _.each(NMIS.lga_overview.overview, function(indicator){ %>
+              <tr>
+                <td>
+                  <%= NMIS.indicators[indicator].name %>
+                </td>
+                <td>
+                  <%= format_value(lga[indicator]) %>
+                </td>
+              </tr>
+            <% }); %>
+          </table>
+        </div>
+        <div class="map"></div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="span18 some-lpadding">
+        <h2>
+          LGA Overview
+        </h2>
+        <p style="font-style:italic;">
+          Below are data from the baseline facility surveys.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <% _.each(NMIS.lga_overview.facility_overview, function(category){ %>
+        <div class="span-one-third">
+          <h3 class="mdg-underlined-title">
+            <%= category.name %>
+          </h3>
+          <table class="mdg-table">
+            <tbody>
+              <% _.each(category.rows, function(indicator){ %>
+                <tr>
+                  <td>
+                    <%= NMIS.indicators[indicator].name %>
+                  </td>
+                  <td>
+                    <%= format_value(lga[indicator]) %>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      <% }); %>
+    </div>
+    <div class="row">
+      <div class="span18 some-lpadding">
+        <h2>
+          MDG Status
+        </h2>
+        <p style="font-style:italic;">
+          Below are data collected from HNLSS, DHS, and other sources.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span18">
+        <div id="mdg-table-wrap">
+          <div class="mdg-tables">
+            <table class="mdg-table">
+              <% _.each(NMIS.lga_overview.mdg_status, function(mdg){ %>
+                <tbody>
+                  <tr>
+                    <td class="mdg_header" colspan="5">
+                      <%= mdg.header %>
+                    </td>
+                  </tr>
+                  <% _.each(mdg.rows, function(indicator){ %>
+                    <tr>
+                      <td class="empty" colspan="2"></td>
+                      <td>
+                        <%= NMIS.indicators[indicator].name %>
+                      </td>
+                      <td class="data">
+                        <%= format_value(lga[indicator]) %>
+                      </td>
+                    </tr>
+                  <% }); %>
+                </tbody>
+              <% }); %>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+  <script id="lga_sector_template" type="text/html">
+    <h2 class="some-lpadding">
+      <%= lga.lga %>, <%= lga.state %> <%= sector[0].toUpperCase() + sector.slice(1) %>
+    </h2>
+    <div class="nmis-sector-summary">
+      <div class="non-gap">
+        <table style="width:100%" class="mdg-table">
+          <tbody>
+            <% _.each(NMIS.lga_sectors[sector], function(section){ %>
+              <tr>
+                <th class="indheader mdg_header" colspan="2">
+                  <%= section.name %>
+                </th>
+                <th class="indheader mdg_header flush-right">
+                  Current
+                </th>
+              </tr>
+              <% _.each(section.rows, function(indicator){ %>
+                <% if (_.isString(indicator)) { %>
+                  <tr>
+                    <td class="empty-first empty bb"></td>
+                    <td class="indicator-name bb">
+                      <%= NMIS.indicators[indicator].name %>
+                    </td>
+                    <td class="indvalue bb">
+                      <%= format_value(lga[indicator]) %>
+                    </td>
+                  </tr>
+                <% } else { %>
+                  <% var sub_section = indicator; %>
+                  <tr>
+                    <td class="empty-first empty bb"></td>
+                    <td class="empty indheader mdg_header">
+                      <%= sub_section.name %>
+                    </td>
+                  </tr>
+                  <% _.each(sub_section.rows, function(indicator){ %>
+                    <tr>
+                      <td class="empty-first empty bb"></td>
+                      <td class="indicator-name bb">
+                        <%= NMIS.indicators[indicator].name %>
+                      </td>
+                      <td class="indvalue bb">
+                        <%= format_value(lga[indicator]) %>
+                      </td>
+                    </tr>
+                  <% }); %>
+                <% } %>
+              <% }); %>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </script>
+	<script id="facility_overview_template" type="text/html">
 		<div class="container no-fill row" id="lga-widget-wrap">
 			<div class="span9">
 				<div class="row">
 					<div class="span8 offset1">
 						<h3>
-							Facilities <span class="replace-counts">(<{= facCount }>)</span>
+							Facilities <span class="replace-counts">(<%= lga.facilities.length %>)</span>
 						</h3>
-						<{ _.each(overviewSectors, function(s){ }>
-							<p>
-								<a href="<{= s.url }>" class="sector-btn btn large" style="display:block">
-									<span class="sector-icon <{= s.slug }>"> &nbsp;. </span>
-									<{= s.name }>
-									(<{= s.counts }>) &raquo;
-								</a>
-							</p>
-							<{ }); }>
 					</div>
-				</div>
+				</div>  
 			</div>
 			<div class="span8">
 				<table class="simple-lines">
 					<tbody>
 						<tr>
 							<td class="header" colspan="2">
-								<{= lgaName }>
+								<%= lga.lga %>, <%= lga.state %>
 							</td>
 						</tr>
-						<{ _.each(profileData, function(d){ }>
-							<tr>
-								<td><{= d.name }></td>
-								<td class="l-align">
-									<{= d.value }>
-								</td>
-							</tr>
-							<{ }); }>
 					</tbody>
 				</table>
 			</div>
-			<div class="span18">
-				<br>
-			</div>
-		</div>
-	</script>
-
-	<script type="text/template" class="display-panel" data-module="overview_facility_overview">
-		<div class="row">
-			<div class="span18 some-lpadding">
-				<h2>
-					LGA Overview
-				</h2>
-				<p style="font-style:italic;">
-					Below are data from the baseline facility surveys.
-				</p>
-			</div>
-		</div>
-		<div class="row">
-			<{ _.each(relevant_data.columns, function(col){ }>
-				<div class="span-one-third">
-					<h3 class="mdg-underlined-title">
-						<{= col.name }>
-					</h3>
-					<table class="mdg-table">
-						<tbody>
-							<{ _.each(col.rows, function(rowId){ }>
-								<tr>
-									<td>
-										<{= lookupName(rowId, relevant_data.context) }>
-									</td>
-									<td>
-										<{= lookupValue(rowId) }>
-									</td>
-								</tr>
-							<{ }); }>
-						</tbody>
-					</table>
-				</div>
-			<{ }); }>
-		</div>
-	</script>
-
-	<script type="text/template" class="display-panel" data-module="overview_mdg_status">
-		<div class="row">
-			<div class="span18 some-lpadding">
-				<h2>
-					MDG Status
-				</h2>
-				<p style="font-style:italic;">
-					Below are data collected from HNLSS, DHS, and other sources.
-				</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="span18">
-				<div id="mdg-table-wrap">
-					<div class="mdg-tables">
-						<table class="mdg-table">
-							<{ _.each(relevant_data, function(mdg_group){ }>
-								<tbody>
-									<tr>
-										<td class="mdg_header" colspan="5">
-											<{= mdg_group.header }>
-										</td>
-									</tr>
-									<{ _.each(mdg_group.rows, function(rowId){ }>
-										<tr>
-											<td class="empty" colspan="2"></td>
-											<td>
-												<{= lookupName(rowId) }>
-												<{ if(false) { }>
-													<br>
-													lookupSource...
-													<em class="source"><{= rowId.source }></em>
-												<{ } }>
-											</td>
-											<td class="data">
-												<{= lookupValue(rowId) }>
-											</td>
-										</tr>
-									<{ }); }>
-								</tbody>
-							<{ }); }>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</script>
-
-	<script type="text/template" id="country-view-tmpl">
-		<div class="page-header">
-			<h1><{= title }></h1>
-		</div>
-		<div id="map" class="resizing-map" style="height: 476px; position: relative;">
-			<div class="home-map"></div>
-			<div class="home-map-nav" style="height: 476px; border: 1px solid rgb(187, 187, 187); padding-left: 685px;">
-				<div class="mn-iiwrap">
-					<div class="mn-iwrap">
-						<div class="layer-nav">
-							<select title="Please select an indicator map..." style="width: 100%;"></select>
-						</div>
-						<h3 class="mdg-display"></h3>
-						<div class="layer-description"></div>
-					</div>
-					<div class="mn-legend"></div>
-				</div>
-			</div>
-			<div class="map-loading-message">Please be patient while this map loads</div>
-		</div>
-		<div id="zone-navigation">
-			<{ _.each(zones, function(zone){ }>
-				<div class="zl-wrap">
-					<div class="zone-list">
-						<h2 class="zone-title"><{= zone.label }></h2>
-						<ul>
-							<{ _.each(zone.children, function(state){ }>
-								<li>
-									<a href="#" class="state-link" data-lga-count="3">
-
-										<{= state.label }>
-										<span class="lga-count">
-											(<span title="Active districts"><{= state.activeDistrictsCount() }></span>/<span title="Total districts"><{= state.districts.length }></span>)
-										</span>
-									</a>
-									<ul class="lga-list">
-										<{ _.each(state.districts, function(district){ }>
-											<li title="<{= district.active ? 'active' : 'inactive' }>" >
-												<a href="<{= district.defaultSammyUrl() }>">
-													<{= district.name }>
-												</a>
-											</li>
-										<{ }); }>
-									</ul>
-								</li>
-							<{ }); }>
-						</ul>
-					</div>
-				</div>
-			<{ }); }>
-			<div class="clearfix" style="clear:both;"></div>
-		</div>
-	</script>
-
-	<script type="text/template" class="display-panel" data-module="overview_and_map">
-		<h2 class="some-lpadding">
-			<{= lga.name }>, <{= lga.group.name }> Overview
-			<small>
-				<{= lga.label }>
-			</small>
-		</h2>
-		<div class="row">
-			<div class="profile-box">
-				<div class="profile-box-inner">
-					<table data-table-contents="lga-overview">
-						<{ _.each(relevant_data.ids, function(rowId){ }>
-							<tr>
-								<td>
-									<{= lookupName(rowId) }>
-								</td>
-								<td>
-									<{= lookupValue(rowId) }>
-								</td>
-							</tr>
-						<{ }); }>
-					</table>
-				</div>
-				<div class="map"></div>
-			</div>
-		</div>
-	</script>
-
-	<script type="text/template" class="display-panel" data-module="sector_overview">
-		<h2 class="some-lpadding">
-			<{= lga.name }>, <{= lga.group.name }> <{= view_panel.name }>
-		</h2>
-		<{ if(lga.sector_gap_sheets && lga.sector_gap_sheets[view_panel.id]) { }>
-			<a href="<{= lga.sector_gap_sheets[view_panel.id] }>" class="btn">Download Gap Sheet</a>
-		<{ } }>
-		<div class="nmis-sector-summary">
-			<div class="non-gap">
-				<table style="width:100%" class="mdg-table">
-					<tbody>
-						<{ _.each(summary_sector, function(igrp){ }>
-							<tr>
-								<th class="indheader mdg_header" colspan="2">
-									<{= igrp.name }>
-								</th>
-								<th class="indheader mdg_header flush-right">
-									Current
-								</th>
-							</tr>
-							<{ _.each(igrp.rows, function(row){ }>
-								<{ if(_.isString(row)) { }>
-								<tr>
-									<td class="empty-first empty bb"></td>
-									<td class="indicator-name bb">
-										<{= lookupName(row, igrp.context) }>
-										<{ if(igrp.context) { print("<span class='tiny-hint' title='"+igrp.context+"'>*</span>")} }>
-									</td>
-									<td class="indvalue bb">
-										<{= lookupValue(row) }>
-									</td>
-								</tr>
-								<{ } else if(row.name && row.rows) { }>
-								<tr>
-									<td class="empty-first empty bb"></td>
-									<td class="empty indheader mdg_header">
-										<{= row.name }>
-									</td>
-								</tr>
-								<{ _.each(row.rows, function(subrow){ }>
-									<tr>
-										<td class="empty-first empty bb"></td>
-										<td class="indicator-name bb">
-											<{= lookupName(subrow, igrp.context) }>
-											<{ if(igrp.context) { print("<span class='tiny-hint' title='"+igrp.context+"'>*</span>")} }>
-										</td>
-										<td class="indvalue bb">
-											<{= lookupValue(subrow) }>
-										</td>
-									</tr>
-								<{ }); }>
-							<{ } }>
-							<{ }); }>
-						<{ }); }>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</script>
-
-	<script type="text/template" class="display-panel" data-module="sector_gap">
-		<div class="panel">
-			<p>
-				<em>Sector Gap</em>
-			</p>
 		</div>
 	</script>
 {% endblock %}
+
+

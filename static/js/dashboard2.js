@@ -34,6 +34,10 @@
 
   function index(){
     render('#index_template', {});
+    $('#zone-navigation .state-link').click(function(){
+      $(this).next('.lga-list').toggle();
+      return false;
+    });
   }
 
   function lga_overview(lga){
@@ -53,10 +57,8 @@
   }
 
   function facility_overview(lga){
-    _lga_nav(lga, 'facility', sector);
-    render('#facility_overview', {
-      lga: lga
-    });
+    _lga_nav(lga, 'facility', 'overview');
+    render('#facility_overview_template', {lga: lga});
   }
 
   function facility_sector(lga){
