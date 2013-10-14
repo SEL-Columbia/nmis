@@ -1,5 +1,4 @@
 (function(){
-  NMIS = {};
   var template_cache = {};
   var views = {};
 
@@ -32,8 +31,32 @@
     $('#lga_nav').html(html);
   }
 
+  function _sorted_zones(){
+    function compare(a, b) {
+      if (a[0] === b[0]) return 0;
+      return a[0] > b[0] ? 1 : -1;
+    }
+
+    var zones = [];
+    _.each(NMIS.zones, function(zone_states, zone){
+      var states = [];
+      _.each(zone_states, function(state_lgas, state){
+        var lgas = [];
+        _.each(state_lgas, function(unique_lga, lga_name){
+          lgas.push([lga_name, unique_lga]);
+        });
+        
+        lgas.sort(compare);
+        states.push([state, lgas]);
+      });
+      states.sort(compare);
+      zones.push([zone, states]);
+    });
+    return zones;
+  }
+
   function index(){
-    render('#index_template', {});
+    render('#index_template', {zones: _sorted_zones()});
     $('#zone-navigation .state-link').click(function(){
       $(this).next('.lga-list').toggle();
       return false;

@@ -2,7 +2,7 @@ import json
 import os
 import re
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.http import HttpResponse, HttpResponseBadRequest,\
      HttpResponseRedirect
 from django.conf import settings
@@ -38,12 +38,11 @@ def about(request):
 
 
 def dashboard(request):
-    return render_to_response('dashboard.html',
+    return render(request, 'dashboard.html',
         {
             'indicators': load_json('indicators'),
             'lga_overview': load_json('lga_overview'),
             'lga_sectors': load_json('lga_sectors')
-        },
-        context_instance=RequestContext(request))
+        })
 
 
