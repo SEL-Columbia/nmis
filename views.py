@@ -6,7 +6,6 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseBadRequest,\
      HttpResponseRedirect
 from django.conf import settings
-from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 
 
@@ -34,7 +33,6 @@ def about(request):
         {}, context_instance=RequestContext(request))
 
 
-@login_required
 def dashboard(request):
     return render_to_response('dashboard.html',
         {
