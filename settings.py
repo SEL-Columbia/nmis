@@ -33,15 +33,15 @@ TIME_ZONE = 'America/Chicago'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
-SITE_ID = 1
+SITE_ID = 2
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = True
+USE_I18N = False
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale
-USE_L10N = True
+USE_L10N = False
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -67,12 +67,16 @@ LOGIN_REDIRECT_URL = '/'
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # Additional locations of static files
 STATICFILES_DIRS = (
     #('survey_photos', os.path.join(PROJECT_ROOT, 'survey_photos', 'img_storage')),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASE_DIR, 'protected_data', 'new_data'),
 )
 
 COMPRESS_ENABLED = not DEBUG
