@@ -42,26 +42,7 @@
 		                        | <a href="http://nmis.tenderapp.com/">Help</a>
 					{% endif %}
 					</p>
-					<div style="" class="lga-nav">
-					<form action="/~/" method="POST">
-						<div>
-							<select id="lga-select" name="lga" title="Select an LGA">
-								{% for statename, lgas in active_districts %}
-								<optgroup label="{{statename}}">
-									{% for lganame, lgaid in lgas %}
-										<option value="{{lgaid}}">{{lganame}}</option>
-									{% endfor %}
-								</optgroup>
-								{% endfor %}
-							</select>
-							<script type="text/javascript" charset="utf-8">
-							var lgaId = (function(_){return _})({{lga_id|safe}});
-							</script>
-							 {% csrf_token %}
-							<input type="submit" value="GO">
-						</div>
-					</form>
-					</div>
+					<div id="lga_search"></div>
 				</div>
 				<div class="nav">
 					<a class="{% block nav_about %}{% endblock %}" href="/about">About</a>
