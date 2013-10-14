@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+  <meta charset="UTF-8">
+  <title>Nigeria MDG Information System</title>
+{% endblock %}
+
+
+{% block content %}
+  <div id="bckImage"><img src="/static/images/NMIS_hero.png" width="1100" height="742" alt="Map of Abeokuta North, Ogun"/></div>
+  <div id="content">
+  	<div class="intro">
+      <h1>Nigeria’s health, water and education facility inventory</h1>
+      <h3>An updatable public portal designed by The Office of The Senior Special Assistant to The President on MDGs to bolster the use of data in informing policy for poverty reduction through local planning.</h3></div>
+      
+  <div id="contentButton">
+    <div class="buttonOrange"><a href="{% url views.dashboard %}" class="buttontext">Explore Facilities</a></div>
+    <div class="buttonGray"><a href="{% url views.download %}" class="buttontext">Download Data</a></div>
+  </div>
+      <div class="caption"><p>Abeokuta North, Ogun</p></div>
+  </div>
+
+  <div id="partnerLogos"><div class="logo"><img src="/static/images/mdgs_logo.png" alt="Nigeria MDGs Logo"/></div><div class="logo"><img src="/static/images/ei_logo.png" alt="Earth Institute Logo"/></div><div class="logo"><img src="/static/images/dfid_logo.png" alt="DFID Logo"/></div></div>
+  <link rel="stylesheet" type="text/css" href="/static/css/homepage.css" media="screen" />
+{% endblock %}
