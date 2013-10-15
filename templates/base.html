@@ -39,17 +39,6 @@
             </span>
             Nigeria MDG Information System
           </a>
-          <p class="pull-right print-hide-block">
-          {% if user.is_authenticated %}
-            Logged in as {{user.username}}
-              (&nbsp;<a href="{% url auth_logout %}">Log out</a> |
-              <a href="{% url auth_password_change %}">Change password</a> |
-              <a href="http://nmis.tenderapp.com/">Help</a>&nbsp;)
-          {% else %}
-            <a href="{% url auth_login %}">Log in</a> |
-            <a href="http://nmis.tenderapp.com/">Help</a>
-          {% endif %}
-          </p>
         </div>
         <select id="lga_search" placeholder="Select LGA">
             <option value="">Select an LGA</option>
