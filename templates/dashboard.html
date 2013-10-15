@@ -7,13 +7,11 @@
 
 
 {% block js %}
-  <script src="/static/js/libs/jquery-1.10.2.min.js"></script>
-  <script src="/static/js/libs/underscore-min.js"></script>
   <script src="/static/js/libs/backbone-min.js"></script>
   <script src="/static/leaflet/leaflet.js"></script>
   <script src="/static/leaflet/Google.js"></script>
   <script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
-  <script src="/static/js/dashboard2.js"></script>
+  <script src="/static/js/dashboard.js"></script>
   <script>
     NMIS.lgas = {};
     NMIS.indicators = {{ indicators|safe }};
@@ -72,7 +70,7 @@
         <h1>Nigeria</h1>
       </div>
       <div class="zone-nav">
-        <% _.each(NMIS.zones, function(zone){ %>
+        <% _.each(zones, function(zone){ %>
           <div class="zl-wrap">
             <div class="zone-list">
               <h2 class="zone-title">

@@ -5,19 +5,43 @@
 	  {{ site_title|default:"Nigeria MDG Information System" }}
 	</title>
 	{% load compress %}
-	<script>
-	  NMIS = {};
-      NMIS.zones = {{ zones|safe }};
-    </script>
-	{% block js %}{% endblock %}
 	{% compress css %}
 		<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
 		<link rel="stylesheet" href="/static/css/jquery-ui.custom.css" type="text/css" media="all" charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="/static/css/base.css">
-		<link rel="stylesheet" href="/static/css/chosen.css" type="text/css" media="all" charset="utf-8">
+		<link rel="stylesheet" href="/static/selectize/dist/css/selectize.bootstrap2.css" type="text/css" media="all" charset="utf-8">
 	{% endcompress %}
 	{% block css %}{% endblock %}
-	<script src="/static/js/libs/modernizr.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/static/js/libs/jquery-1.10.2.min.js"></script>
+  <script src="/static/js/libs/underscore-min.js"></script>  
+	<script type="text/javascript" src="/static/selectize/dist/js/standalone/selectize.min.js"></script>
+	<script>
+	  NMIS = {};
+      NMIS.zones = {{ zones|safe }};
+
+      $(function(){
+        var options = [];
+
+        _.each(NMIS.zones, function(states, zone){
+          _.each(states, function(lgas, state){
+            _.each(lgas, function(unique_lga, lga_name){
+              options.push({
+                value: unique_lga,
+                text: lga_name + ', ' + state
+              });
+            });
+          });
+        });
+
+      	$('#lga_search').selectize({
+          onItemAdd: function(value, $item){
+            alert(value);
+            return false;
+          }  
+        });
+      });
+    </script>
+	{% block js %}{% endblock %}
 	{% block head %}{% endblock %}
 </head>
 <body class="nmis home">
@@ -42,27 +66,23 @@
 		                        | <a href="http://nmis.tenderapp.com/">Help</a>
 					{% endif %}
 					</p>
-					<div style="" class="lga-nav">
-					<form action="/~/" method="POST">
-						<div>
-							<select id="lga-select" name="lga" title="Select an LGA">
-								{% for statename, lgas in active_districts %}
-								<optgroup label="{{statename}}">
-									{% for lganame, lgaid in lgas %}
-										<option value="{{lgaid}}">{{lganame}}</option>
-									{% endfor %}
-								</optgroup>
-								{% endfor %}
-							</select>
-							<script type="text/javascript" charset="utf-8">
-							var lgaId = (function(_){return _})({{lga_id|safe}});
-							</script>
-							 {% csrf_token %}
-							<input type="submit" value="GO">
-						</div>
-					</form>
-					</div>
-				</div>
+					<select id="lga_search" placeholder="Select LGA">
+            <option value="">Select gear...</option>
+              <optgroup label="Climbing">
+                <option value="pitons">Pitons</option>
+                <option value="cams">Cams</option>
+                <option value="nuts">Nuts</option>
+                <option value="bolts">Bolts</option>
+                <option value="stoppers">Stoppers</option>
+                <option value="sling">Sling</option>
+              </optgroup>
+              <optgroup label="Skiing">
+                <option value="skis">Skis</option>
+                <option value="skins">Skins</option>
+                <option value="poles">Poles</option>
+              </optgroup>
+          </select>
+  			</div>
 				<div class="nav">
 					<a class="{% block nav_about %}{% endblock %}" href="/about">About</a>
 					<a class="{% block nav_dashboard %}{% endblock %}" href="/dashboard">Explore Facilities</a>
