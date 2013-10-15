@@ -20,6 +20,7 @@
       $('#lga_search').selectize({
         onItemAdd: function(value){
           location.href = '/dashboard#' + value + '/lga_overview';
+          this.clear();
           return false;
         }  
       });
