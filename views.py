@@ -54,13 +54,12 @@ def dashboard(request):
         sorted_states.sort(key=lambda x: x[0])
         sorted_zones.append((zone, sorted_states))
     sorted_zones.sort(key=lambda x: x[0])
-
-    return render(request, 'dashboard.html',
-        {
-            'zones': json.dumps(sorted_zones),
-            'indicators': load_json('indicators'),
-            'lga_overview': load_json('lga_overview'),
-            'lga_sectors': load_json('lga_sectors')
-        })
+    
+    return render(request, 'dashboard.html', {
+        'zones': json.dumps(sorted_zones),
+        'indicators': load_json('indicators'),
+        'lga_overview': load_json('lga_overview'),
+        'lga_sectors': load_json('lga_sectors')
+    })
 
 
