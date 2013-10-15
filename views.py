@@ -19,22 +19,25 @@ def load_json(name):
 
 
 def context_processor(request):
-    return {'zones' : load_json('zones')}
+    zones = json.loads(load_json('zones'))
+    lgas = [lga
+        for state in zones.values()
+        for lgas in state.values()
+        for lga in lgas.items()]
+    lgas.sort(key=lambda x: x[0])
+    return {'lgas' : lgas}
 
 
 def index(request):
-    return render_to_response('index.html',
-        {}, context_instance=RequestContext(request))
+    return render(request, 'index.html')
 
 
 def download(request):
-    return render_to_response('data_download.html',
-        {}, context_instance=RequestContext(request))
+    return render(request, 'data_download.html')
 
 
 def about(request):
-    return render_to_response('about.html',
-        {}, context_instance=RequestContext(request))
+    return render(request, 'about.html')
 
 def mdgs(request):
     return render_to_response('mdgs.html',
@@ -42,12 +45,23 @@ def mdgs(request):
 
 
 def dashboard(request):
-    return render(request, 'dashboard.html',
-        {
-            'indicators': load_json('indicators'),
-            'lga_overview': load_json('lga_overview'),
-            'lga_sectors': load_json('lga_sectors')
-        })
+    zones = json.loads(load_json('zones'))
+    sorted_zones = []
+    for zone, states in zones.items():
+        sorted_states = []
+        for state, lgas in states.items():
+            lgas = sorted(lgas.items(), key=lambda x: x[0])
+            sorted_states.append((state, lgas))
+        sorted_states.sort(key=lambda x: x[0])
+        sorted_zones.append((zone, sorted_states))
+    sorted_zones.sort(key=lambda x: x[0])
+
+    return render(request, 'dashboard.html', {
+        'zones': json.dumps(sorted_zones),
+        'indicators': load_json('indicators'),
+        'lga_overview': load_json('lga_overview'),
+        'lga_sectors': load_json('lga_sectors')
+    })
 
 def serve_data_with_files(request, data_path):
     req_filename = os.path.join(settings.PROJECT_ROOT, 'protected_data', data_path)

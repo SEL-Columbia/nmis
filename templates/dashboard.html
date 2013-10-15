@@ -13,6 +13,8 @@
   <script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
   <script src="/static/js/dashboard.js"></script>
   <script>
+    NMIS = {};
+    NMIS.zones = {{ zones|safe }};
     NMIS.lgas = {};
     NMIS.indicators = {{ indicators|safe }};
     NMIS.lga_overview = {{ lga_overview|safe }};
@@ -29,9 +31,9 @@
   <div class="content"></div>
 
   <script id="lga_nav_template" type="text/html">
-    <ul id="local-nav" class="nav">
+    <ul class="nav">
       <li>
-        <a href="#<%= lga.unique_lga %>/lga_<%= sector %>" >
+        <a href="#<%= lga.unique_lga %>/lga_<%= sector %>">
           LGA Summary
         </a>
       </li>
@@ -62,6 +64,7 @@
         </a>
       </li>
     </ul>
+    <div style="clear:both"></div>
   </script>
 
   <script id="index_template" type="text/html">
@@ -70,7 +73,7 @@
         <h1>Nigeria</h1>
       </div>
       <div class="zone-nav">
-        <% _.each(zones, function(zone){ %>
+        <% _.each(NMIS.zones, function(zone){ %>
           <div class="zl-wrap">
             <div class="zone-list">
               <h2 class="zone-title">

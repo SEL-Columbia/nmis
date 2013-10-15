@@ -1,101 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>
-	  {{ site_title|default:"Nigeria MDG Information System" }}
-	</title>
-	{% load compress %}
-	{% compress css %}
-		<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
-		<link rel="stylesheet" href="/static/css/jquery-ui.custom.css" type="text/css" media="all" charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="/static/css/base.css">
-		<link rel="stylesheet" href="/static/selectize/selectize.bootstrap2.css" type="text/css" media="all" charset="utf-8">
-	{% endcompress %}
-	{% block css %}{% endblock %}
+  <title>
+    {{ site_title|default:"Nigeria MDG Information System" }}
+  </title>
+  {% load compress %}
+  {% compress css %}
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/jquery-ui.custom.css" type="text/css" media="all" charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/selectize.bootstrap2.css" type="text/css" media="all" charset="utf-8">
+  {% endcompress %}
+  {% block css %}{% endblock %}
   <script src="/static/js/libs/jquery-1.10.2.min.js"></script>
   <script src="/static/js/libs/underscore-min.js"></script>  
-	<script type="text/javascript" src="/static/selectize/selectize.min.js"></script>
-	<script>
-	  NMIS = {};
-      NMIS.zones = {{ zones|safe }};
-
-      $(function(){
-        var options = [];
-
-        _.each(NMIS.zones, function(states, zone){
-          _.each(states, function(lgas, state){
-            _.each(lgas, function(unique_lga, lga_name){
-              options.push({
-                value: unique_lga,
-                text: lga_name + ', ' + state
-              });
-            });
-          });
-        });
-
-      	$('#lga_search').selectize({
-          onItemAdd: function(value, $item){
-            alert(value);
-            return false;
-          }  
-        });
+  <script type="text/javascript" src="/static/js/libs/selectize.min.js"></script>
+  <script>
+    $(function(){
+      $('#lga_search').selectize({
+        onItemAdd: function(value){
+          location.href = '/dashboard#' + value + '/lga_overview';
+          return false;
+        }  
       });
-    </script>
-	{% block js %}{% endblock %}
-	{% block head %}{% endblock %}
+    });
+  </script>
+  {% block js %}{% endblock %}
+  {% block head %}{% endblock %}
 </head>
 <body class="nmis home">
-	<div class="topbar">
-		<div class="fill">
-			<div class="container">
-				<div class="row">
-					<a class="brand" href="/">
-						<span class="logo">
-							<img src="/static/images/nmis_pilot.png">
-						</span>
-						Nigeria MDG Information System
-					</a>
-					<p class="pull-right print-hide-block">
-					{% if user.is_authenticated %}
-						Logged in as {{user.username}}
-							(&nbsp;<a href="{% url auth_logout %}">Log out</a>
-                                    | <a href="{% url auth_password_change %}">Change password</a>
-                                    | <a href="http://nmis.tenderapp.com/">Help</a>&nbsp;)
-					{% else %}
-						<a href="{% url auth_login %}">Log in</a>
-		                        | <a href="http://nmis.tenderapp.com/">Help</a>
-					{% endif %}
-					</p>
-					<select id="lga_search" placeholder="Select LGA">
-            <option value="">Select gear...</option>
-              <optgroup label="Climbing">
-                <option value="pitons">Pitons</option>
-                <option value="cams">Cams</option>
-                <option value="nuts">Nuts</option>
-                <option value="bolts">Bolts</option>
-                <option value="stoppers">Stoppers</option>
-                <option value="sling">Sling</option>
-              </optgroup>
-              <optgroup label="Skiing">
-                <option value="skis">Skis</option>
-                <option value="skins">Skins</option>
-                <option value="poles">Poles</option>
-              </optgroup>
-          </select>
-  			</div>
-				<div class="nav">
-					<a class="{% block nav_about %}{% endblock %}" href="/about">About</a>
-					<a class="{% block nav_dashboard %}{% endblock %}" href="/dashboard">Explore Facilities</a>
-					<a class="{% block nav_download %}{% endblock %}" href="/download">Download Data</a>
-					<a class="{% block nav_mdgs %}{% endblock %}" href="/mdgs">MDGs in Nigeria</a>
-				</div>
-				<div style="clear:both"></div>
-			</div>
-		</div>
-	</div>
-	<div id="content" class="container">
-		{% block content %}{% endblock %}
-	</div>
-	{% block footer %}{% endblock %}
+  <div class="topbar">
+    <div class="fill">
+      <div class="container">
+        <div class="row">
+          <a class="brand" href="/">
+            <span class="logo">
+              <img src="/static/images/nmis_pilot.png">
+            </span>
+            Nigeria MDG Information System
+          </a>
+          <p class="pull-right print-hide-block">
+          {% if user.is_authenticated %}
+            Logged in as {{user.username}}
+              (&nbsp;<a href="{% url auth_logout %}">Log out</a> |
+              <a href="{% url auth_password_change %}">Change password</a> |
+              <a href="http://nmis.tenderapp.com/">Help</a>&nbsp;)
+          {% else %}
+            <a href="{% url auth_login %}">Log in</a> |
+            <a href="http://nmis.tenderapp.com/">Help</a>
+          {% endif %}
+          </p>
+        </div>
+        <select id="lga_search" placeholder="Select LGA">
+            <option value="">Select an LGA</option>
+            {% for lga_name, unique_lga in lgas %}
+              <option value="{{ unique_lga }}">{{ lga_name }}</option>
+            {% endfor %}
+        </select>
+        <div class="nav">
+          <a class="{% block nav_about %}{% endblock %}" href="/about">About</a>
+          <a class="{% block nav_dashboard %}{% endblock %}" href="/dashboard">Explore Facilities</a>
+          <a class="{% block nav_download %}{% endblock %}" href="/download">Download Data</a>
+          <a class="{% block nav_mdgs %}{% endblock %}" href="/mdgs">MDGs in Nigeria</a>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+    </div>
+  </div>
+  <div id="content" class="container">
+    {% block content %}{% endblock %}
+  </div>
+  {% block footer %}{% endblock %}
 </body>
 </html>
