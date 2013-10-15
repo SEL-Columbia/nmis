@@ -14,6 +14,7 @@
   <script src="/static/js/dashboard.js"></script>
   <script>
     NMIS = {};
+    NMIS.zones = {{ zones|safe }};
     NMIS.lgas = {};
     NMIS.indicators = {{ indicators|safe }};
     NMIS.lga_overview = {{ lga_overview|safe }};
