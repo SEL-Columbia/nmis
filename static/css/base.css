@@ -175,6 +175,10 @@ ul#local-nav li.spacer {
 ul#local-nav li {
     margin-right: 6px;
 }
+.selectize-control {
+    width: 200px;
+    float: right;
+}
 
 
 

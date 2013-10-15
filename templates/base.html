@@ -17,22 +17,7 @@
 	<script type="text/javascript" src="/static/selectize/selectize.min.js"></script>
 	<script>
 	  NMIS = {};
-      NMIS.zones = {{ zones|safe }};
-
       $(function(){
-        var options = [];
-
-        _.each(NMIS.zones, function(states, zone){
-          _.each(states, function(lgas, state){
-            _.each(lgas, function(unique_lga, lga_name){
-              options.push({
-                value: unique_lga,
-                text: lga_name + ', ' + state
-              });
-            });
-          });
-        });
-
       	$('#lga_search').selectize({
           onItemAdd: function(value, $item){
             alert(value);
@@ -66,23 +51,13 @@
 		                        | <a href="http://nmis.tenderapp.com/">Help</a>
 					{% endif %}
 					</p>
-					<select id="lga_search" placeholder="Select LGA">
-            <option value="">Select gear...</option>
-              <optgroup label="Climbing">
-                <option value="pitons">Pitons</option>
-                <option value="cams">Cams</option>
-                <option value="nuts">Nuts</option>
-                <option value="bolts">Bolts</option>
-                <option value="stoppers">Stoppers</option>
-                <option value="sling">Sling</option>
-              </optgroup>
-              <optgroup label="Skiing">
-                <option value="skis">Skis</option>
-                <option value="skins">Skins</option>
-                <option value="poles">Poles</option>
-              </optgroup>
-          </select>
   			</div>
+        <select id="lga_search" placeholder="Select LGA">
+            <option value="">Select an LGA</option>
+            {% for lga_name, unique_lga in lgas %}
+              <option value="{{ unique_lga }}">{{ lga_name }}</option>
+            {% endfor %}
+        </select>
 				<div class="nav">
 					<a class="{% block nav_about %}{% endblock %}" href="/about">About</a>
 					<a class="{% block nav_dashboard %}{% endblock %}" href="/dashboard">Explore Facilities</a>
