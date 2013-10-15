@@ -58,7 +58,7 @@
     render('#facility_overview_template', {lga: lga});
   }
 
-  function facility_sector(lga){
+  function facility_sector(lga, sector){
     _lga_nav(lga, 'facility', sector);
   }
 
