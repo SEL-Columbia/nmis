@@ -18,8 +18,8 @@
   <script>
     $(function(){
       $('#lga_search').selectize({
-        onItemAdd: function(value, $item){
-          alert(value);
+        onItemAdd: function(value){
+          location.href = '/dashboard#' + value + '/lga_overview';
           return false;
         }  
       });
