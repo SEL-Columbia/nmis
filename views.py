@@ -29,18 +29,15 @@ def context_processor(request):
 
 
 def index(request):
-    return render_to_response('index.html',
-        {}, context_instance=RequestContext(request))
+    return render(request, 'index.html')
 
 
 def download(request):
-    return render_to_response('data_download.html',
-        {}, context_instance=RequestContext(request))
+    return render(request, 'data_download.html')
 
 
 def about(request):
-    return render_to_response('about.html',
-        {}, context_instance=RequestContext(request))
+    return render(request, 'about.html')
 
 
 def dashboard(request):
@@ -54,7 +51,7 @@ def dashboard(request):
         sorted_states.sort(key=lambda x: x[0])
         sorted_zones.append((zone, sorted_states))
     sorted_zones.sort(key=lambda x: x[0])
-    
+
     return render(request, 'dashboard.html', {
         'zones': json.dumps(sorted_zones),
         'indicators': load_json('indicators'),
