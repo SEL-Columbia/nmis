@@ -116,7 +116,7 @@ function leaflet_overview(lga){
 function leaflet_facility(lga){
   var map_div = $("#facility_overview_map")[0];
   var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
-  var map_zoom = 5; //TODO: adding nw and se for bounding box
+  var map_zoom = 9; //TODO: adding nw and se for bounding box
   var facility_map = L.map(map_div, {})
       .setView(lat_lng, map_zoom);
   var tileset = "nigeria_overlays_white";
@@ -127,13 +127,13 @@ function leaflet_facility(lga){
     minZoom: 6,
     maxZoom: 11
   });
-  lga_layer.addTo(facility_map);
   var osm_server = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
   var osm_layer = new L.TileLayer(osm_server, {
     minZoom: 0,
     maxZoom: 18
   });
   osm_layer.addTo(facility_map);
+  lga_layer.addTo(facility_map);
 
 };
 
