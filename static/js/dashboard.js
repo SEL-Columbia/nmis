@@ -135,5 +135,16 @@ function leaflet_facility(lga){
   osm_layer.addTo(facility_map);
   lga_layer.addTo(facility_map);
 
+  //now we add facilities
+  var facilities = lga.facilities;
+  for (var i = 0; i < facilities.length; i++){
+    if(facilities[i].facility_name){
+      console.log(facilities[i].facility_name);
+    }else{
+      console.log(facilities[i].sector);
+    }
+    
+  }
+
 };
 
