@@ -33,33 +33,39 @@
   <script id="lga_nav_template" type="text/html">
     <ul class="nav">
       <li>
-        <a href="#<%= lga.unique_lga %>/lga_<%= sector %>">
+        <a href="#<%= lga.unique_lga %>/lga_<%= sector %>"
+          <% if (active_view === 'lga'){ %>class="active"<% } %>>
           LGA Summary
         </a>
       </li>
       <li>
-        <a href="#<%= lga.unique_lga %>/facility_<%= sector %>">
+        <a href="#<%= lga.unique_lga %>/facility_<%= sector %>"
+          <% if (active_view === 'facility'){ %>class="active"<% } %>>
           Facility Detail
         </a>
       </li>
       <li class="small spacer">&nbsp;</li>
       <li>
-        <a href="#<%= lga.unique_lga %>/<%= active_view %>_overview">
+        <a href="#<%= lga.unique_lga %>/<%= active_view %>_overview"
+          <% if (sector === 'overview'){ %>class="active"<% } %>>
           Overview
         </a>
       </li>
       <li>
-        <a href="#<%= lga.unique_lga %>/<%= active_view %>_health">
+        <a href="#<%= lga.unique_lga %>/<%= active_view %>_health"
+          <% if (sector === 'health'){ %>class="active"<% } %>>
           Health
         </a>
       </li>
       <li>
-        <a href="#<%= lga.unique_lga %>/<%= active_view %>_education">
+        <a href="#<%= lga.unique_lga %>/<%= active_view %>_education"
+          <% if (sector === 'education'){ %>class="active"<% } %>>
           Education
         </a>
       </li>
       <li>
-        <a href="#<%= lga.unique_lga %>/<%= active_view %>_water">
+        <a href="#<%= lga.unique_lga %>/<%= active_view %>_water"
+          <% if (sector === 'water'){ %>class="active"<% } %>>
           Water
         </a>
       </li>
