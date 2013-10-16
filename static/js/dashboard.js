@@ -112,9 +112,8 @@ function leaflet_overview(lga){
   }).addTo(summary_map);
 }
 
-function leaflet_countryview(){
-};
+function leaflet_facility(lga){
+  var map_div = $("#facility_overview_map")[0];
 
-function leaflet_facility(){
 };
 

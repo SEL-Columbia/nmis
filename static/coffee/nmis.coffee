@@ -973,8 +973,8 @@ do ->
               @hide_legend()
               @hide_description()
 
-      launcher.fail ()->
-        log "LAUNCHER FAIL! Scripts not loaded"
+      launcher.fail (err)->
+        log "LAUNCHER FAIL! Scripts not loaded #{err}"
 
     createLayerSwitcher = do ->
       layersWitoutMdg = []
@@ -1744,22 +1744,25 @@ do ->
 
   NMIS.loadLeaflet = (url)->
     url = "#{NMIS.settings.leafletRoot}leaflet.js" if !url and NMIS.settings.leafletRoot
-    $.ajax url: url, dataType: "script", cache: false
-
-  NMIS.loadGmapsAndLeaflet = do ->
-    launchDfd = $.Deferred()
-    scriptsStarted = false
-    () ->
-      unless scriptsStarted
-        scriptsStarted = true
-        gmLoad = NMIS.loadGoogleMaps()
-        gmLoad.done (gmaps)->
-          llLoad = NMIS.loadLeaflet()
-          llLoad.done (ol)->
-            launchDfd.resolve()
-          lllLoad.fail (l, err, message)-> launchDfd.reject l, err, message
-        gmLoad.fail (o, err, message)-> launchDfd.reject o, err, message
-      launchDfd.promise()
+    $.ajax
+      url: url
+      dataType: "script"
+      cache: false
+      
+  NMIS.loadLeafletWithGmap = (cb)->
+    url = "#{NMIS.settings.leafletRoot}leaflet.js" if NMIS.settings.leafletRoot
+    $.ajax
+      url: url
+      dataType: "script"
+      cache: false
+    .done ->
+      lgmap = "#{NMIS.settings.leafletRoot}Google.js" if !lgmap and NMIS.settings.leafletRoot
+      $.ajax
+        url: lgmap
+        dataType: "script"
+        cache: false
+      .done ->
+        cb()
 
 # begin c_variables.coffee
 do ->
@@ -1963,7 +1966,7 @@ do ->
 
   withFacilityMapDrawnForDistrict = do ->
     # gmap is the persisent link to the google.maps.Map object
-    gmap = false
+    leaflet_map = null
     $elem = elem = false
 
     # in this context, district points to the most recently
@@ -1971,33 +1974,33 @@ do ->
     district = false
 
     _createMap = ()->
-      gmap = new google.maps.Map elem,
-        streetViewControl: false
-        panControl: false
-        mapTypeControlOptions:
-          mapTypeIds: ["roadmap", "satellite", "terrain", "OSM"]
-        mapTypeId: google.maps.MapTypeId["SATELLITE"]
-
-      google.maps.event.addListener gmap, "click", NMIS.mapClick
-
-      gmap.overlayMapTypes.insertAt 0, do ->
-        tileset = "nigeria_overlays_white"
-        name = "Nigeria"
-        maxZoom = 17
-        new google.maps.ImageMapType
-          getTileUrl: (coord, z) -> "http://b.tiles.mapbox.com/v3/modilabs.#{tileset}/#{z}/#{coord.x}/#{coord.y}.png"
-          name: name
-          alt: name
-          tileSize: new google.maps.Size(256, 256)
-          isPng: true
+      if not elem._leaflet
+        osm_attr = '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+        leaflet_map = new L.Map elem
+        mb_tileset = "nigeria_overlays_white"
+        ng_overlay_white = new L.TileLayer "http://{s}.tiles.mapbox.com/v3/modilabs.#{mb_tileset}/{z}/{x}/{y}.png",
           minZoom: 0
-          maxZoom: maxZoom
+          maxZoom: 12
+        .addTo(leaflet_map)
+        
+        osm = new L.TileLayer "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          minZoom: 0
+          maxZoom: 18
+          options:
+            attribution: osm_attr
+        .addTo(leaflet_map)
 
-      gmap.mapTypes.set "OSM", new google.maps.ImageMapType
-        getTileUrl: (c, z) -> "http://tile.openstreetmap.org/#{z}/#{c.x}/#{c.y}.png"
-        tileSize: new google.maps.Size(256, 256)
-        name: "OSM"
-        maxZoom: 18
+        googlemap = new L.Google "SATELLITE",
+          minZoom: 0
+          maxZoom: 18
+        baseLayers =
+          "OSM": osm
+          "google": googlemap
+        ng_overlays =
+          "White": ng_overlay_white
+        leaflet_map.addControl new L.Control.Layers(baseLayers, ng_overlays)
+
+        leaflet_map.on 'click', NMIS.mapClick
 
     _addIconsAndListeners = ()->
       iconURLData = (item) ->
@@ -2024,28 +2027,35 @@ do ->
 
       NMIS.IconSwitcher.setCallback "createMapItem", (item, id, itemList) ->
         if !!item._ll and not @mapItem(id)
-          $gm = google.maps
           item.iconSlug = item.iconType or item.sector?.slug
           item.status = "normal"  unless item.status
           [iurl, iw, ih] = iconURLData(item)
 
-          iconData = url: iurl, size: new $gm.Size(iw, ih)
+          iconData =
+            url: iurl
+            size: L.point(iw, ih)
 
           mI =
-            latlng: new $gm.LatLng(item._ll[0], item._ll[1])
-            icon: new $gm.MarkerImage(iconData.url, iconData.size)
+            latLng: L.latLng(item._ll)
+            icon: L.icon
+              iconUrl: iconData.url
+              iconSize: iconData.size,
 
-          mI.marker = new $gm.Marker
-            position: mI.latlng
-            map: gmap
+          mI.marker = L.marker mI.latLng,
             icon: mI.icon
+            zIndexOffset: (if item.status is "normal" then 99 else 11)
+          .addTo(leaflet_map)
 
-          mI.marker.setZIndex (if item.status is "normal" then 99 else 11)
           mI.marker.nmis = item: item, id: id
 
-          $gm.event.addListener mI.marker, "click", markerClick
-          $gm.event.addListener mI.marker, "mouseover", markerMouseover
-          $gm.event.addListener mI.marker, "mouseout", markerMouseout
+          # method to return icon
+          mI.marker.getIcon = ()->
+            return @options.icon
+
+          mI.marker.on 'click', markerClick
+          mI.marker.on 'mouseover', markerMouseover
+          mI.marker.on 'mouseout', markerMouseout
+
           @mapItem id, mI
 
       NMIS.IconSwitcher.createAll()
@@ -2053,8 +2063,8 @@ do ->
       NMIS.IconSwitcher.setCallback "shiftMapItemStatus", (item, id) ->
         mapItem = @mapItem(id)
         unless not mapItem
-          icon = mapItem.marker.getIcon()
-          icon.url = iconURLData(item)[0]
+          icon = mapItem.marker.options.icon
+          icon.options.iconUrl = iconURLData(item)[0]
           mapItem.marker.setIcon icon
 
     nmisMapContext = do ->
@@ -2064,11 +2074,10 @@ do ->
 
       fitDistrictBounds = (_district=false)->
         district = _district  if _district
-        createMap()  unless gmap
-        throw new Error("Google map [gmap] is not initialized.")  unless gmap
+        createMap()  unless leaflet_map
+        throw new Error("Leaflet map is not initialized.")  unless leaflet_map
         [swLat, swLng, neLat, neLng] = district.latLngBounds()
-        bounds = new google.maps.LatLngBounds new google.maps.LatLng(swLat, swLng), new google.maps.LatLng(neLat, neLng)
-        gmap.fitBounds bounds
+        leaflet_map.fitBounds [[swLat, swLng], [neLat, neLng]]
 
       featureAllIcons = ()->
         NMIS.IconSwitcher.shiftStatus () -> "normal"
@@ -2100,7 +2109,9 @@ do ->
       elem = $elem.get(0)
       existingMapDistrictId = $elem.data("districtId")
 
-      NMIS.loadGoogleMaps().done ()-> dfd.resolve nmisMapContext
+      #NMIS.loadLeaflet().done ()-> dfd.resolve nmisMapContext
+      NMIS.loadLeafletWithGmap ()->
+        dfd.resolve nmisMapContext
 
       dfd.promise()
 
@@ -2315,16 +2326,17 @@ do ->
     wh = 90
 
     getPixelOffset = (marker, map) ->
-      scale = Math.pow(2, map.getZoom())
-      nw = new google.maps.LatLng(map.getBounds().getNorthEast().lat(), map.getBounds().getSouthWest().lng())
-      worldCoordinateNW = map.getProjection().fromLatLngToPoint(nw)
-      worldCoordinate = map.getProjection().fromLatLngToPoint(marker.getPosition())
-      pixelOffset = new google.maps.Point(Math.floor((worldCoordinate.x - worldCoordinateNW.x) * scale), Math.floor((worldCoordinate.y - worldCoordinateNW.y) * scale))
+      scale = 1 #Math.pow(2, map.getZoom())
+      nw = L.latLng(map.getBounds().getNorthEast().lat,  map.getBounds().getSouthWest().lng)
+      worldCoordinateNW = map.latLngToContainerPoint(nw)
+      worldCoordinate = map.latLngToContainerPoint(marker.getLatLng())
+      pixelOffset = L.point(Math.floor((worldCoordinate.x - worldCoordinateNW.x) * scale), Math.floor((worldCoordinate.y - worldCoordinateNW.y) * scale))
+      return pixelOffset
 
     show = (marker, opts) ->
       opts = {}  if opts is `undefined`
-      map = marker.map
-      opts.insertBefore = map.getDiv()  unless opts.insertBefore
+      map = marker._map
+      opts.insertBefore = map.getContainer()  unless opts.insertBefore
       unless hoverOverlayWrap
         hoverOverlayWrap = $("<div />").addClass("hover-overlay-wrap")
         hoverOverlayWrap.insertBefore opts.insertBefore
@@ -2537,15 +2549,15 @@ do ->
     mapDiv = $mapDiv.get(0)
     ll = (+x for x in lga.latLng.split(","))
     mapZoom = lga.zoomLevel || 9
-    summaryMap = L.map(mapDiv, {}).setView(ll, mapZoom)
-
     tileset = "nigeria_base"
     maxZoom = 11
     minZoom = 6
-    L.tileLayer("http://{s}.tiles.mapbox.com/v3/modilabs.#{tileset}/{z}/{x}/{y}.png", {
-      minZoom: minZoom
-      maxZoom: maxZoom
-    }).addTo(summaryMap)
+    if not mapDiv._leaflet
+      summaryMap = new L.map(mapDiv, {}).setView(ll, mapZoom)
+      L.tileLayer("http://{s}.tiles.mapbox.com/v3/modilabs.#{tileset}/{z}/{x}/{y}.png", {
+        minZoom: minZoom
+        maxZoom: maxZoom
+      }).addTo(summaryMap)
 
   launch_summary = (params, state, lga, query_results={})->
     relevant_data = lga.ssData.relevant_data
