@@ -525,6 +525,13 @@ div.fac-popup div.select-wrap select {
 
 
 
+/* Facility Map 
+=================================*/
+#facility_overview_map {
+    height: 200px;
+}
+
+
 
 /* Facility Tables 
 =================================*/
