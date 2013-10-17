@@ -1,12 +1,8 @@
 import json
 import os
-import re
 
-from django.shortcuts import render_to_response, render
-from django.http import HttpResponse, HttpResponseBadRequest,\
-     HttpResponseRedirect
+from django.shortcuts import render
 from django.conf import settings
-from django.template import RequestContext
 
 
 def load_json(name):
@@ -39,9 +35,9 @@ def download(request):
 def about(request):
     return render(request, 'about.html')
 
+
 def mdgs(request):
-    return render_to_response('mdgs.html',
-        {}, context_instance=RequestContext(request))
+    return render(request, 'mdgs.html')
 
 
 def dashboard(request):
@@ -63,11 +59,4 @@ def dashboard(request):
         'lga_sectors': load_json('lga_sectors')
     })
 
-def serve_data_with_files(request, data_path):
-    req_filename = os.path.join(settings.PROJECT_ROOT, 'protected_data', data_path)
-    if os.path.exists(req_filename):
-        ffdata = ""
-        with open(req_filename, 'r') as f:
-            ffdata = f.read()
-        return HttpResponse(ffdata)
-    return HttpResponseBadRequest("Bad request: %s" % data_path)
+
