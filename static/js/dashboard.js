@@ -140,15 +140,17 @@ function leaflet_facility(lga){
         var fac = facilities[i];
         var gps = fac.gps.split(" ");
         var mark = new L.Marker([gps[0], gps[1]]);
-        var popup = {};
-        popup.name = fac.facility_name || 'Water Point';
-        popup.photo = fac.formhub_photo_id;
+        var popup_name = fac.facility_name || 'Water Point';
+        var popup_photo = "https://formhub.org/attachment/" +
+                          "small" +
+                          "?media_file=ossap/attachments/" +
+                          fac.formhub_photo_id; 
+        var popup = "<p>" + popup_name + "</p>" + 
+            "<img src='" + popup_photo + "'>";
 
         mark.on('mouseover', mark.openPopup.bind(mark))
             .on('mouseout', mark.closePopup.bind(mark))
-            .addTo(facility_map).bindPopup(popup.name);
-        
-        
+            .addTo(facility_map).bindPopup(popup);
 
     }
         
