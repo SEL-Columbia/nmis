@@ -56,7 +56,8 @@ def dashboard(request):
         'zones': json.dumps(sorted_zones),
         'indicators': load_json('indicators'),
         'lga_overview': load_json('lga_overview'),
-        'lga_sectors': load_json('lga_sectors')
+        'lga_sectors': load_json('lga_sectors'),
+        'facility_tables': load_json('facility_tables')
     })
 
 
