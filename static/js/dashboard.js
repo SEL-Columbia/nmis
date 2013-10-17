@@ -1,6 +1,5 @@
 (function(){
     var template_cache = {};
-    var views = {};
 
     $(function(){
         new Backbone.Router({
