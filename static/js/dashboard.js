@@ -103,9 +103,9 @@ function leaflet_overview(lga){
     var summary_map = L.map(map_div, {})
             .setView(lat_lng, map_zoom);
     var tileset = "nigeria_base";
-    var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs."
-                      + tileset
-                      + "/{z}/{x}/{y}.png";
+    var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs." +
+                      tileset +
+                      "/{z}/{x}/{y}.png";
     L.tileLayer(tile_server, {
         minZoom: 6,
         maxZoom: 11
@@ -119,9 +119,9 @@ function leaflet_facility(lga){
     var facility_map = L.map(map_div, {})
             .setView(lat_lng, map_zoom);
     var tileset = "nigeria_overlays_white";
-    var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs."
-                      + tileset
-                      + "/{z}/{x}/{y}.png";
+    var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs." +
+                      tileset +
+                      "/{z}/{x}/{y}.png";
     var lga_layer = new L.TileLayer(tile_server, {
         minZoom: 6,
         maxZoom: 11
@@ -137,13 +137,11 @@ function leaflet_facility(lga){
     //now we add facilities
     var facilities = lga.facilities;
     for (var i = 0; i < facilities.length; i++){
-        if(facilities[i].facility_name){
-            console.log(facilities[i].facility_name);
-        }else{
-            console.log(facilities[i].sector);
-        }
-        
+        var gps = facilities[i].gps.split(" ");
+        var mark = new L.Marker([gps[0], gps[1]]);
+        mark.addTo(facility_map);
     }
+        
+        
 
 }
-
