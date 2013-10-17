@@ -19,6 +19,7 @@
         NMIS.indicators = {{ indicators|safe }};
         NMIS.lga_overview = {{ lga_overview|safe }};
         NMIS.lga_sectors = {{ lga_sectors|safe }};
+        NMIS.facility_tables = {{ facility_tables|safe }};
     </script>
 {% endblock %}
 
@@ -260,7 +261,7 @@
             </div>
         </div>
     </script>
-    
+
     <script id="facility_overview_template" type="text/html">
         <div class="container no-fill row" id="lga-widget-wrap">
             <div class="span9">
