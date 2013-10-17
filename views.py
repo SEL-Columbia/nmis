@@ -11,7 +11,7 @@ from django.template import RequestContext
 
 def load_json(name):
     cwd = os.path.dirname(os.path.abspath(__file__))
-    path = os.path.join(cwd, 'protected_data', 'new_data')
+    path = os.path.join(cwd, 'data')
     file_path = os.path.join(path, name + '.json')
     with open(file_path, 'r') as f:
         json = f.read()
