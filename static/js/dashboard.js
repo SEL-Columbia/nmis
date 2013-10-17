@@ -137,9 +137,19 @@ function leaflet_facility(lga){
     //now we add facilities
     var facilities = lga.facilities;
     for (var i = 0; i < facilities.length; i++){
-        var gps = facilities[i].gps.split(" ");
+        var fac = facilities[i];
+        var gps = fac.gps.split(" ");
         var mark = new L.Marker([gps[0], gps[1]]);
-        mark.addTo(facility_map);
+        var popup = {};
+        popup.name = fac.facility_name || 'Water Point';
+        popup.photo = fac.formhub_photo_id;
+
+        mark.on('mouseover', mark.openPopup.bind(mark))
+            .on('mouseout', mark.closePopup.bind(mark))
+            .addTo(facility_map).bindPopup(popup.name);
+        
+        
+
     }
         
         
