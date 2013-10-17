@@ -528,8 +528,9 @@ div.fac-popup div.select-wrap select {
 /* Facility Map 
 =================================*/
 #facility_overview_map {
-    width: 1000px;
+    width: 800px;
     height: 500px;
+    margin-left: 20px;
 }
 
 
