@@ -159,6 +159,8 @@
             }
         });
 
+        console.log(aaData);
+
         $('#facilities_data_table').dataTable({
             aaData: aaData,
             aoColumns: aoColumns
