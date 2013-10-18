@@ -134,11 +134,11 @@
     function facility_sector(lga, sector){
         _lga_nav(lga, 'facility', sector);
         render('#facility_sector_template', {lga: lga});
-        showDataTable(sector, 0, lga.facilities);
+        show_data_table(sector, 0, lga.facilities);
     }
 
 
-    function showDataTable(sector, table_index, facilities){
+    function show_data_table(sector, table_index, facilities){
         var aoColumns = [];
         var table = NMIS.facility_tables[sector][table_index];
 
