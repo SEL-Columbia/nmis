@@ -153,13 +153,11 @@
             if (facility.sector === sector){
                 var facility_data = [];
                 _.each(table.indicators, function(indicator){
-                    facility_data.push(facility[indicator]);
+                    facility_data.push(facility[indicator] || '-');
                 });
                 aaData.push(facility_data);
             }
         });
-
-        console.log(aaData);
 
         $('#facilities_data_table').dataTable({
             aaData: aaData,
