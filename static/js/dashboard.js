@@ -131,7 +131,13 @@ function leaflet_facility(lga){
         minZoom: 0,
         maxZoom: 18
     });
-    osm_layer.addTo(facility_map);
+    var google_layer = new L.Google("SATELLITE", {
+        minZoom: 0,
+        maxZoom: 18
+    });
+
+    //osm_layer.addTo(facility_map);
+    facility_map.addLayer(google_layer);
     lga_layer.addTo(facility_map);
 
     //now we add facilities
