@@ -3,24 +3,27 @@
 {%block nav_mdgs %}active{% endblock %}
 
 {% block head %}
-  <link href="/static/leaflet/leaflet.css" media="all" rel="stylesheet" type="text/css">
+    <meta charset="utf-8" />
+    <title>Download Data</title>
+    <link href="/static/leaflet/leaflet.css" media="all" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block js %}
-  <script src="/static/js/libs/jquery-1.10.2.min.js"></script>
-  <script src="/static/leaflet/leaflet.js"></script>
-  <script src="/static/js/mdgs.js"></script>
+    <script src="/static/js/libs/jquery-1.10.2.min.js"></script>
+    <script src="/static/leaflet/leaflet.js"></script>
+    <script src="/static/js/mdgs.js"></script>
 {% endblock %}
 
 {% block content %}
     <div class='country-view'>
         <div class='left-panel'>
-          <h1>Nigeria's process on the MDGs</h1>
-          <div class='mdg resizing-map'>
-          </div>
+            <h1>Nigeria's process on the MDGs</h1>
+            <div class='mdg-map'>
+            </div>
         </div>
-        <div class='home-map-nav'>
+        <div class='right-panel'>
+            <div class='mdg-map-nav'>
+            </div>
         </div>
     </div>
-
 {% endblock %}

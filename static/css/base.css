@@ -2131,3 +2131,10 @@ div.dataTables_wrapper div.dataTables_scrollBody .facility-dt td:first-child {
 div.profile-box .map {
     height: 180px;
 }
+
+/* mdg map */
+.mdg_map {
+    width: 800px;
+    height: 500px;
+    margin-left: 20px;
+}
