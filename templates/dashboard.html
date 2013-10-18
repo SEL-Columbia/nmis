@@ -2,12 +2,14 @@
 
 
 {% block head %}
+    <link href="/static/datatables/css/jquery.dataTables.css" media="all" rel="stylesheet" type="text/css">
     <link href="/static/leaflet/leaflet.css" media="all" rel="stylesheet" type="text/css">
 {% endblock %}
 
 
 {% block js %}
     <script src="/static/js/libs/backbone-min.js"></script>
+    <script src="/static/datatables/js/jquery.dataTables.min.js"></script>
     <script src="/static/leaflet/leaflet.js"></script>
     <script src="/static/leaflet/Google.js"></script>
     <script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
@@ -285,6 +287,23 @@
                 </table>
             </div>
             <div id="facility_overview_map"></div>
+        </div>
+    </script>
+
+    <script id="facility_sector_template" type="text/html">
+        <div class="container no-fill row" id="lga-widget-wrap">
+            <div class="span8">
+                <table class="simple-lines">
+                    <tbody>
+                        <tr>
+                            <td class="header" colspan="2">
+                                <%= lga.lga %>, <%= lga.state %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <table id="facilities_data_table"></table>
         </div>
     </script>
 {% endblock %}

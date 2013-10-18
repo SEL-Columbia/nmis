@@ -60,6 +60,8 @@
 
     function facility_sector(lga, sector){
         _lga_nav(lga, 'facility', sector);
+        render('#facility_sector_template', {lga: lga});
+        showDataTable(sector, 0, lga.facilities);
     }
 
 
@@ -92,6 +94,34 @@
         if (_.isNumber(value) && value % 1 !== 0)
             return value.toFixed(2);
         return value;
+    }
+
+    function showDataTable(sector, table_index, facilities){
+        var aoColumns = [];
+        var table = NMIS.facility_tables[sector][table_index];
+        console.log(table)
+        _.each(table.indicators, function(indicator){
+            console.log(indicator)
+            aoColumns.push({
+                sTitle: NMIS.indicators[indicator].name
+            });
+        });
+
+        var aaData = [];
+        _.each(facilities, function(facility){
+            if (facility.sector === sector){
+                var facility_data = [];
+                _.each(table.indicators, function(indicator){
+                    facility_data.push(facility[indicator]);
+                });
+                aaData.push(facility_data);
+            }
+        });
+
+        $('#facilities_data_table').dataTable({
+            aaData: aaData,
+            aoColumns: aoColumns
+        });
     }
 })();
 
