@@ -113,8 +113,7 @@
 
         //now we add facilities
         var facilities = lga.facilities;
-        for (var i = 0; i < facilities.length; i++){
-            var fac = facilities[i];
+        _.each(lga.facilities, function(fac){
             var gps = fac.gps.split(" ");
             var mark = new L.Marker([gps[0], gps[1]]);
             var popup_name = fac.facility_name || 'Water Point';
@@ -128,7 +127,7 @@
             mark.on('mouseover', mark.openPopup.bind(mark))
                 .on('mouseout', mark.closePopup.bind(mark))
                 .addTo(facility_map).bindPopup(popup);
-        }
+        });
     }
 
 
