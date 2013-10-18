@@ -1,6 +1,6 @@
 (function(){
     var template_cache = {};
-
+    
     $(function(){
         new Backbone.Router({
             routes: {
@@ -18,8 +18,10 @@
         Backbone.history.start();
     });
     
+    
 
     // Views
+    // ============
     function _lga_nav(lga, active_view, sector){
         var template = $('#lga_nav_template').html();
         var html = _.template(template, {
@@ -30,6 +32,7 @@
         $('#lga_nav').html(html);
     }
 
+
     function index(){
         render('#index_template', {});
         $('#zone-navigation .state-link').click(function(){
@@ -38,11 +41,30 @@
         });
     }
 
+
     function lga_overview(lga){
         _lga_nav(lga, 'lga', 'overview');
         render('#lga_overview_template', {lga: lga});
         leaflet_overview(lga);
     }
+
+
+    function leaflet_overview(lga){
+        var map_div = $('.map')[0];
+        var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
+        var map_zoom = 9;
+        var summary_map = L.map(map_div, {})
+                .setView(lat_lng, map_zoom);
+        var tileset = 'nigeria_base';
+        var tile_server = 'http://{s}.tiles.mapbox.com/v3/modilabs.' +
+                          tileset +
+                          '/{z}/{x}/{y}.png';
+        L.tileLayer(tile_server, {
+            minZoom: 6,
+            maxZoom: 11
+        }).addTo(summary_map);
+    }
+
 
     function lga_sector(lga, sector){
         _lga_nav(lga, 'lga', sector);
@@ -52,11 +74,62 @@
         });
     }
 
+
     function facility_overview(lga){
         _lga_nav(lga, 'facility', 'overview');
         render('#facility_overview_template', {lga: lga});
         leaflet_facility(lga);
     }
+
+
+    function leaflet_facility(lga){
+        var map_div = $("#facility_overview_map")[0];
+        var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
+        var map_zoom = 9; //TODO: adding nw and se for bounding box
+        var facility_map = L.map(map_div, {})
+                .setView(lat_lng, map_zoom);
+        var tileset = "nigeria_overlays_white";
+        var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs." +
+                          tileset +
+                          "/{z}/{x}/{y}.png";
+        var lga_layer = new L.TileLayer(tile_server, {
+            minZoom: 6,
+            maxZoom: 11
+        });
+        var osm_server = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+        var osm_layer = new L.TileLayer(osm_server, {
+            minZoom: 0,
+            maxZoom: 18
+        });
+        var google_layer = new L.Google("SATELLITE", {
+            minZoom: 0,
+            maxZoom: 18
+        });
+
+        //osm_layer.addTo(facility_map);
+        facility_map.addLayer(google_layer);
+        lga_layer.addTo(facility_map);
+
+        //now we add facilities
+        var facilities = lga.facilities;
+        for (var i = 0; i < facilities.length; i++){
+            var fac = facilities[i];
+            var gps = fac.gps.split(" ");
+            var mark = new L.Marker([gps[0], gps[1]]);
+            var popup_name = fac.facility_name || 'Water Point';
+            var popup_photo = "https://formhub.org/attachment/" +
+                              "small" +
+                              "?media_file=ossap/attachments/" +
+                              fac.formhub_photo_id; 
+            var popup = "<p>" + popup_name + "</p>" + 
+                "<img src='" + popup_photo + "'>";
+
+            mark.on('mouseover', mark.openPopup.bind(mark))
+                .on('mouseout', mark.closePopup.bind(mark))
+                .addTo(facility_map).bindPopup(popup);
+        }
+    }
+
 
     function facility_sector(lga, sector){
         _lga_nav(lga, 'facility', sector);
@@ -65,48 +138,16 @@
     }
 
 
-    // Helper Functions
-    function route(view, sector){
-        return function(unique_lga){
-            var lga = NMIS.lgas[unique_lga];
-            if (typeof lga === 'undefined'){
-                var url = '/static/lgas/' + unique_lga + '.json';
-                $.getJSON(url, function(lga){
-                    NMIS.lgas[unique_lga] = lga;
-                    view(lga, sector);
-                });
-            } else {
-                view(lga, sector);
-            }
-        };
-    }
-
-    function render(template_id, context){
-        var template = $(template_id).html();
-        context.NMIS = NMIS;
-        context.format_value = format_value;
-        var html = _.template(template, context);
-        $('#content .content').html(html);
-    }
-
-    function format_value(value){
-        if (typeof value === 'undefined') return '-';
-        if (_.isNumber(value) && value % 1 !== 0)
-            return value.toFixed(2);
-        return value;
-    }
-
     function showDataTable(sector, table_index, facilities){
         var aoColumns = [];
         var table = NMIS.facility_tables[sector][table_index];
-        console.log(table)
+
         _.each(table.indicators, function(indicator){
-            console.log(indicator)
             aoColumns.push({
                 sTitle: NMIS.indicators[indicator].name
             });
         });
-
+        
         var aaData = [];
         _.each(facilities, function(facility){
             if (facility.sector === sector){
@@ -123,73 +164,41 @@
             aoColumns: aoColumns
         });
     }
+
+
+
+    // Helper Functions
+    // ==========================
+    function route(view, sector){
+        return function(unique_lga){
+            var lga = NMIS.lgas[unique_lga];
+            if (typeof lga === 'undefined'){
+                var url = '/static/lgas/' + unique_lga + '.json';
+                $.getJSON(url, function(lga){
+                    NMIS.lgas[unique_lga] = lga;
+                    view(lga, sector);
+                });
+            } else {
+                view(lga, sector);
+            }
+        };
+    }
+
+
+    function render(template_id, context){
+        var template = $(template_id).html();
+        context.NMIS = NMIS;
+        context.format_value = format_value;
+        var html = _.template(template, context);
+        $('#content .content').html(html);
+    }
+
+
+    function format_value(value){
+        if (typeof value === 'undefined') return '-';
+        if (_.isNumber(value) && value % 1 !== 0)
+            return value.toFixed(2);
+        return value;
+    }
 })();
 
-
-function leaflet_overview(lga){
-    var map_div = $(".map")[0];
-    var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
-    var map_zoom = 9;
-    var summary_map = L.map(map_div, {})
-            .setView(lat_lng, map_zoom);
-    var tileset = "nigeria_base";
-    var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs." +
-                      tileset +
-                      "/{z}/{x}/{y}.png";
-    L.tileLayer(tile_server, {
-        minZoom: 6,
-        maxZoom: 11
-    }).addTo(summary_map);
-}
-
-function leaflet_facility(lga){
-    var map_div = $("#facility_overview_map")[0];
-    var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
-    var map_zoom = 9; //TODO: adding nw and se for bounding box
-    var facility_map = L.map(map_div, {})
-            .setView(lat_lng, map_zoom);
-    var tileset = "nigeria_overlays_white";
-    var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs." +
-                      tileset +
-                      "/{z}/{x}/{y}.png";
-    var lga_layer = new L.TileLayer(tile_server, {
-        minZoom: 6,
-        maxZoom: 11
-    });
-    var osm_server = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-    var osm_layer = new L.TileLayer(osm_server, {
-        minZoom: 0,
-        maxZoom: 18
-    });
-    var google_layer = new L.Google("SATELLITE", {
-        minZoom: 0,
-        maxZoom: 18
-    });
-
-    //osm_layer.addTo(facility_map);
-    facility_map.addLayer(google_layer);
-    lga_layer.addTo(facility_map);
-
-    //now we add facilities
-    var facilities = lga.facilities;
-    for (var i = 0; i < facilities.length; i++){
-        var fac = facilities[i];
-        var gps = fac.gps.split(" ");
-        var mark = new L.Marker([gps[0], gps[1]]);
-        var popup_name = fac.facility_name || 'Water Point';
-        var popup_photo = "https://formhub.org/attachment/" +
-                          "small" +
-                          "?media_file=ossap/attachments/" +
-                          fac.formhub_photo_id; 
-        var popup = "<p>" + popup_name + "</p>" + 
-            "<img src='" + popup_photo + "'>";
-
-        mark.on('mouseover', mark.openPopup.bind(mark))
-            .on('mouseout', mark.closePopup.bind(mark))
-            .addTo(facility_map).bindPopup(popup);
-
-    }
-        
-        
-
-}
