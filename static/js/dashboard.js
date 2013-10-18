@@ -101,7 +101,8 @@
             minZoom: 0,
             maxZoom: 18
         });
-        var google_layer = new L.Google("SATELLITE", {
+        //var google_layer = new L.Google("SATELLITE", {
+        var google_layer = new L.Google("HYBRID", {
             minZoom: 0,
             maxZoom: 18
         });
