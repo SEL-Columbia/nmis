@@ -145,14 +145,14 @@
         _lga_nav(lga, 'facility', sector);
         render('#facility_sector_template', {lga: lga, sector: sector});
         $('.facility_table_selector').change(function(){
-            $('#facilities_data_table').dataTable()
-                .fnDestroy();
-            $('#facilities_data_table_wrapper').remove();
-            $('#content .content').append('<div id="#facilities_data_table"></div>');
+            //$('#facilities_data_table').dataTable()
+            //    .fnDestroy();
+            //$('#facilities_data_table_wrapper').remove();
+            //$('#content .content').append('<div id="#facilities_data_table"></div>');
             var index = parseInt(this.value);
             show_data_table(sector, index, lga.facilities);
         });
-        show_data_table(sector, 6, lga.facilities);
+        show_data_table(sector, 0, lga.facilities);
     }
 
 
@@ -178,10 +178,11 @@
             }
         });
 
-        $('#facilities_data_table').dataTable({
+        $('#facilities_data_table').css('width', '100%').dataTable({
             aaData: aaData,
             aoColumns: aoColumns,
-            bPaginate: false
+            bPaginate: false,
+            bDestroy: true
         });
     }
 
