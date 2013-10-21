@@ -85,16 +85,20 @@
     function leaflet_facility(lga){
         var map_div = $("#facility_overview_map")[0];
         var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
-        var map_zoom = 9; //TODO: adding nw and se for bounding box
-        var facility_map = L.map(map_div, {})
-                .setView(lat_lng, map_zoom);
+        var map_zoom = 10; //TODO: adding nw and se for bounding box
+        var facility_map = new L.Map(map_div, {
+            zoomAnimation: false, 
+            fadeAnimation: false,
+            markerZoomAnimation: false
+        })
+            .setView(lat_lng, map_zoom);
         var tileset = "nigeria_overlays_white";
         var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs." +
                           tileset +
                           "/{z}/{x}/{y}.png";
         var lga_layer = new L.TileLayer(tile_server, {
             minZoom: 6,
-            maxZoom: 11
+            maxZoom: 10
         });
         var osm_server = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
         var osm_layer = new L.TileLayer(osm_server, {
@@ -105,8 +109,11 @@
             minZoom: 0,
             maxZoom: 18
         });
+        //var ggl = new L.TileLayer('http://mt0.googleapis.com/vt/lyrs=m@207000000&hl=ru&src=api&x={x}&y={y}&z={z}&s=Galile',{maxZoom: 18,minZoom:3});
+        //ggl.addTo(facility_map);
 
         facility_map.addLayer(google_layer);
+        //osm_layer.addTo(facility_map);
         lga_layer.addTo(facility_map);
 
         var facilities = lga.facilities;
@@ -116,12 +123,12 @@
         _.each(lga.facilities, function(fac){
             var gps = fac.gps.split(" ");
             var sector = fac.sector;
-            var icon = new L.Icon({
-                iconUrl: icons[sector]
-            }); 
+            var icon = new L.Icon({iconUrl: icons[sector]}); 
             var mark = new L.Marker([gps[0], gps[1]], {icon: icon});
             var popup_name = fac.facility_name || 'Water Point';
-            var popup = "<p>" + popup_name + "</p>";
+            var popup = new L.Popup({closeButton: false})
+                .setContent("<p>" + popup_name + "</p>")
+                .setLatLng([gps[0],gps[1]]);
             mark.on('mouseover', mark.openPopup.bind(mark))
                 .on('mouseout', mark.closePopup.bind(mark))
                 .addTo(facility_map).bindPopup(popup);
