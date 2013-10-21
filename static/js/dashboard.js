@@ -101,34 +101,37 @@
             minZoom: 0,
             maxZoom: 18
         });
-        //var google_layer = new L.Google("SATELLITE", {
         var google_layer = new L.Google("HYBRID", {
             minZoom: 0,
             maxZoom: 18
         });
 
-        //osm_layer.addTo(facility_map);
         facility_map.addLayer(google_layer);
         lga_layer.addTo(facility_map);
 
-        //now we add facilities
         var facilities = lga.facilities;
+        var icons= {'water': 'static/images/icons_f/normal_water.png',
+                    'education': 'static/images/icons_f/normal_education.png',
+                    'health': 'static/images/icons_f/normal_health.png'};
         _.each(lga.facilities, function(fac){
             var gps = fac.gps.split(" ");
-            var mark = new L.Marker([gps[0], gps[1]]);
+            var sector = fac.sector;
+            var icon = new L.Icon({
+                iconUrl: icons[sector]
+            }); 
+            var mark = new L.Marker([gps[0], gps[1]], {icon: icon});
             var popup_name = fac.facility_name || 'Water Point';
-            var popup_photo = "https://formhub.org/attachment/" +
-                              "small" +
-                              "?media_file=ossap/attachments/" +
-                              fac.formhub_photo_id; 
-            var popup = "<p>" + popup_name + "</p>" + 
-                "<img src='" + popup_photo + "'>";
-
+            var popup = "<p>" + popup_name + "</p>";
             mark.on('mouseover', mark.openPopup.bind(mark))
                 .on('mouseout', mark.closePopup.bind(mark))
                 .addTo(facility_map).bindPopup(popup);
         });
     }
+//                 + "<img src='" + popup_photo + "'>";
+//            var popup_photo = "https://formhub.org/attachment/" +
+//                              "small" +
+//                              "?media_file=ossap/attachments/" +
+//                              fac.formhub_photo_id; 
 
 
     function facility_sector(lga, sector){
