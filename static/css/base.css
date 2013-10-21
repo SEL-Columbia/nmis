@@ -8,7 +8,7 @@ h2.some-lpadding {
     padding: 0 0 0 12px;
 }
 #content {
-    padding-top: 130px;
+    padding: 130px 0 80px;
 }
 
 
@@ -528,9 +528,7 @@ div.fac-popup div.select-wrap select {
 /* Facility Map 
 =================================*/
 #facility_overview_map {
-    width: 800px;
-    height: 500px;
-    margin-left: 20px;
+    height: 600px;
 }
 
 

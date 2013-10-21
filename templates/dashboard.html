@@ -265,46 +265,14 @@
     </script>
 
     <script id="facility_overview_template" type="text/html">
-        <div class="container no-fill row" id="lga-widget-wrap">
-            <div class="span9">
-                <div class="row">
-                    <div class="span8 offset1">
-                        <h3>
-                            Facilities <span class="replace-counts">(<%= lga.facilities.length %>)</span>
-                        </h3>
-                    </div>
-                </div>  
-            </div>
-            <div class="span8">
-                <table class="simple-lines">
-                    <tbody>
-                        <tr>
-                            <td class="header" colspan="2">
-                                <%= lga.lga %>, <%= lga.state %>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="facility_overview_map"></div>
-        </div>
+        <div id="facility_overview_map"></div>
     </script>
 
     <script id="facility_sector_template" type="text/html">
-        <div class="container no-fill row" id="lga-widget-wrap">
-            <div class="span8">
-                <table class="simple-lines">
-                    <tbody>
-                        <tr>
-                            <td class="header" colspan="2">
-                                <%= lga.lga %>, <%= lga.state %>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <table id="facilities_data_table"></table>
-        </div>
+        <h1>
+            <%= lga.lga %>, <%= lga.state %>
+        </h1>
+        <table id="facilities_data_table"></table>
     </script>
 {% endblock %}
 
