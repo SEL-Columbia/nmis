@@ -161,7 +161,8 @@
 
         $('#facilities_data_table').dataTable({
             aaData: aaData,
-            aoColumns: aoColumns
+            aoColumns: aoColumns,
+            bPaginate: false
         });
     }
 
