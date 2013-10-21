@@ -145,10 +145,6 @@
         _lga_nav(lga, 'facility', sector);
         render('#facility_sector_template', {lga: lga, sector: sector});
         $('.facility_table_selector').change(function(){
-            //$('#facilities_data_table').dataTable()
-            //    .fnDestroy();
-            //$('#facilities_data_table_wrapper').remove();
-            //$('#content .content').append('<div id="#facilities_data_table"></div>');
             var index = parseInt(this.value);
             show_data_table(sector, index, lga.facilities);
         });
@@ -178,12 +174,17 @@
             }
         });
 
-        $('#facilities_data_table').css('width', '100%').dataTable({
-            aaData: aaData,
-            aoColumns: aoColumns,
-            bPaginate: false,
-            bDestroy: true
-        });
+        $('#facilities_data_table')
+            .css('width', '100%') // So that width doesn't change when changing source data
+            .find('thead')
+            .html('') // http://stackoverflow.com/questions/16290987/how-to-clear-all-column-headers-using-datatables
+            .end()
+            .dataTable({
+                aaData: aaData,
+                aoColumns: aoColumns,
+                bPaginate: false,
+                bDestroy: true
+            });
     }
 
 
