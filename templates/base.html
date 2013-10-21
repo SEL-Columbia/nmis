@@ -29,32 +29,30 @@
     {% block js %}{% endblock %}
     {% block head %}{% endblock %}
 </head>
-<body class="nmis home">
+<body>
     <div class="topbar">
-        <div class="fill">
-            <div class="container">
-                <div class="row">
-                    <a class="brand" href="/">
-                        <span class="logo">
-                            <img src="/static/images/nmis_pilot.png">
-                        </span>
-                        Nigeria MDG Information System
-                    </a>
-                </div>
-                <select id="lga_search" placeholder="Select LGA">
-                    <option value="">Select an LGA</option>
-                    {% for lga_name, unique_lga in lgas %}
-                        <option value="{{ unique_lga }}">{{ lga_name }}</option>
-                    {% endfor %}
-                </select>
-                <div class="nav">
-                    <a class="{% block nav_about %}{% endblock %}" href="/about">About</a>
-                    <a class="{% block nav_dashboard %}{% endblock %}" href="/dashboard">Explore Facilities</a>
-                    <a class="{% block nav_download %}{% endblock %}" href="/download">Download Data</a>
-                    <a class="{% block nav_mdgs %}{% endblock %}" href="/mdgs">MDGs in Nigeria</a>
-                </div>
-                <div style="clear:both"></div>
+        <div class="container">
+            <div class="row">
+                <a class="brand" href="/">
+                    <span class="logo">
+                        <img src="/static/images/nmis_pilot.png">
+                    </span>
+                    Nigeria MDG Information System
+                </a>
             </div>
+            <select id="lga_search" placeholder="Select LGA">
+                <option value="">Select an LGA</option>
+                {% for lga_name, unique_lga in lgas %}
+                    <option value="{{ unique_lga }}">{{ lga_name }}</option>
+                {% endfor %}
+            </select>
+            <div class="nav">
+                <a class="{% block nav_about %}{% endblock %}" href="/about">About</a>
+                <a class="{% block nav_dashboard %}{% endblock %}" href="/dashboard">Explore Facilities</a>
+                <a class="{% block nav_download %}{% endblock %}" href="/download">Download Data</a>
+                <a class="{% block nav_mdgs %}{% endblock %}" href="/mdgs">MDGs in Nigeria</a>
+            </div>
+            <div style="clear:both"></div>
         </div>
     </div>
     <div id="content" class="container">

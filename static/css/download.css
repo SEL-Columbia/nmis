@@ -2,7 +2,7 @@ body {
   background-color: #FFF;
   font-family: Proxima Nova, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   color: #545754;
-  },
+}
 
 a:hover {
   color:#000;
@@ -38,13 +38,6 @@ h3 {
   margin:0px;
     padding: 30px 0px 30px 0px;
   z-index: 1;
-}
-
-#pagecontainer {
-  position:absolute;
-  width:760px;'
-  margin: 30px;
-  padding:  0px 0px 0px 80px;
 }
 
 .buttonGreen {
