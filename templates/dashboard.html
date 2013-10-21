@@ -272,6 +272,14 @@
         <h1>
             <%= lga.lga %>, <%= lga.state %>
         </h1>
+        <select class="facility_table_selector">
+            <% _.each(NMIS.facility_tables[sector], function(value, index){ %>
+                <option value="<%= index %>">
+                    <%= value.name %>
+                </option>
+            <% }); %>
+        </select>
+
         <table id="facilities_data_table"></table>
     </script>
 {% endblock %}
