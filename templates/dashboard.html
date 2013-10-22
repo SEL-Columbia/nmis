@@ -252,7 +252,10 @@
     </script>
 
     <script id="facility_overview_template" type="text/html">
-        <div id="facility_overview_map"></div>
+        <h1>
+            <%= lga.lga %>, <%= lga.state %>
+        </h1>
+        <div id="facility_map"></div>
     </script>
 
     <script id="facility_modal_template" type="text/html">
@@ -285,6 +288,7 @@
         <h1>
             <%= lga.lga %>, <%= lga.state %>
         </h1>
+        <div id="facility_map"></div>
         <select class="facilities_table_selector">
             <% _.each(NMIS.facility_tables[sector], function(value, index){ %>
                 <option value="<%= index %>">

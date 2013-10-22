@@ -82,8 +82,8 @@
     }
 
 
-    function leaflet_facility(lga){
-        var map_div = $("#facility_overview_map")[0];
+    function leaflet_facility(lga, current_sector){
+        var map_div = $("#facility_map")[0];
         var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
         var map_zoom = 10; //TODO: adding nw and se for bounding box
         var facility_map = new L.Map(map_div, { })
@@ -115,13 +115,19 @@
         lga_layer.addTo(facility_map);
 
         var facilities = lga.facilities;
-        var icons= {'water': 'static/images/icons_f/normal_water.png',
-                    'education': 'static/images/icons_f/normal_education.png',
-                    'health': 'static/images/icons_f/normal_health.png'};
+        var icon_select = function(sector, current_sec){
+            var state;
+            if (current_sec){
+                state = sector == current_sec ? 'normal' : 'background';
+            } else {
+                state = 'normal';
+            }
+            return 'static/images/icons_f/' + state + '_' + sector + '.png';
+        };
         _.each(lga.facilities, function(fac){
             var gps = fac.gps.split(" ");
             var sector = fac.sector;
-            var icon = new L.Icon({iconUrl: icons[sector]}); 
+            var icon = new L.Icon({iconUrl: icon_select(sector, current_sector)}); 
             var mark = new L.Marker([gps[0], gps[1]], {icon: icon});
             var popup_name = fac.facility_name || 'Water Point';
             var popup = new L.Popup({closeButton: false})
@@ -140,11 +146,13 @@
     function facility_sector(lga, sector){
         _lga_nav(lga, 'facility', sector);
         render('#facility_sector_template', {lga: lga, sector: sector});
+
         $('.facilities_table_selector').change(function(){
-            var index = parseInt(this.value);
+            var index = parseInt(this.value, 10);
             show_facilities_table(sector, index, lga.facilities);
         });
         show_facilities_table(sector, 0, lga.facilities);
+        leaflet_facility(lga, sector);
     }
 
 
@@ -239,7 +247,7 @@
                     view(lga, sector);
                 });
             }
-        }
+        };
     }
 
 
