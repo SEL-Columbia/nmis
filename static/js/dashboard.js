@@ -147,7 +147,7 @@
         _lga_nav(lga, 'facility', sector);
         render('#facility_sector_template', {lga: lga, sector: sector});
         $('.facility_table_selector').change(function(){
-            var index = parseInt(this.value);
+            var index = parseInt(this.value, 10);
             show_facilities_table(sector, index, lga.facilities);
         });
         show_facilities_table(sector, 0, lga.facilities);
@@ -251,7 +251,7 @@
                     view(lga, sector);
                 });
             }
-        }
+        };
     }
 
 
