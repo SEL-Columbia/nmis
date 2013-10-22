@@ -115,31 +115,38 @@
         lga_layer.addTo(facility_map);
 
         var facilities = lga.facilities;
-        var icon_select = function(sector, current_sec){
+        var icon_state = function(sector, current_sec){
             var state;
             if (current_sec){
                 state = sector == current_sec ? 'normal' : 'background';
             } else {
                 state = 'normal';
             }
-            return 'static/images/icons_f/' + state + '_' + sector + '.png';
+            return state;
         };
+        var marker_group = new L.LayerGroup();
         _.each(lga.facilities, function(fac){
             var gps = fac.gps.split(" ");
             var sector = fac.sector;
-            var icon = new L.Icon({iconUrl: icon_select(sector, current_sector)}); 
+            var state = icon_state(sector, current_sector);
+            var icon_url = 'static/images/icons_f/' + 
+                state + '_' + sector + '.png';
+            var icon = new L.Icon({iconUrl: icon_url}); 
             var mark = new L.Marker([gps[0], gps[1]], {icon: icon});
             var popup_name = fac.facility_name || 'Water Point';
             var popup = new L.Popup({closeButton: false})
                 .setContent("<p>" + popup_name + "</p>")
                 .setLatLng([gps[0],gps[1]]);
             mark.on('click', function(){
+                
                 show_facility_modal(fac);
             });
             mark.on('mouseover', mark.openPopup.bind(mark))
                 .on('mouseout', mark.closePopup.bind(mark))
-                .addTo(facility_map).bindPopup(popup);
+                .bindPopup(popup);
+            marker_group.addLayer(mark);
         });
+        marker_group.addTo(facility_map);
     }
 
 
