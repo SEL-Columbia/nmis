@@ -217,7 +217,10 @@
 
 
     function format_value(value){
-        if (typeof value === 'undefined') return '-';
+        if (typeof value === 'undefined' ||
+            value === null) return '-';
+        if (value === true) return 'Yes';
+        if (value === false) return 'No';
         if (_.isNumber(value) && value % 1 !== 0)
             return value.toFixed(2);
         return value;
