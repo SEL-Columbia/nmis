@@ -129,11 +129,6 @@
                 .addTo(facility_map).bindPopup(popup);
         });
     }
-//                 + "<img src='" + popup_photo + "'>";
-//            var popup_photo = "https://formhub.org/attachment/" +
-//                              "small" +
-//                              "?media_file=ossap/attachments/" +
-//                              fac.formhub_photo_id; 
 
 
     function facility_sector(lga, sector){
@@ -141,13 +136,58 @@
         render('#facility_sector_template', {lga: lga, sector: sector});
         $('.facility_table_selector').change(function(){
             var index = parseInt(this.value);
-            show_data_table(sector, index, lga.facilities);
+            show_facilities_table(sector, index, lga.facilities);
         });
-        show_data_table(sector, 0, lga.facilities);
+        show_facilities_table(sector, 0, lga.facilities);
     }
 
 
-    function show_data_table(sector, table_index, facilities){
+    function show_facilities_table(sector, table_index, facilities){
+        var aoColumns = [];
+        var table = NMIS.facility_tables[sector][table_index];
+
+        _.each(table.indicators, function(indicator){
+            aoColumns.push({
+                sTitle: NMIS.indicators[indicator].name
+            });
+        });
+        
+        var aaData = [];
+        _.each(facilities, function(facility){
+            if (facility.sector === sector){
+                var facility_data = [];
+                _.each(table.indicators, function(indicator){
+                    var value = format_value(facility[indicator]);
+                    facility_data.push(value);
+                });
+                aaData.push(facility_data);
+            }
+        });
+
+        $('#facilities_data_table')
+            .css('width', '100%') // So that width doesn't change when changing source data
+            .find('thead')
+            .html('') // http://stackoverflow.com/questions/16290987/how-to-clear-all-column-headers-using-datatables
+            .end()
+            .dataTable({
+                aaData: aaData,
+                aoColumns: aoColumns,
+                bPaginate: false,
+                bDestroy: true
+            });
+    }
+
+
+    function show_facility_modal(facility){
+        var template = $('#facility_modal_template').html();
+        var html = _.template(template, {facility: facility});
+        $('#facility_modal').remove();
+        $('#content').append(html);
+        $('#facility_modal').modal();
+    }
+
+
+    function show_facility_table(facility){
         var aoColumns = [];
         var table = NMIS.facility_tables[sector][table_index];
 
@@ -189,16 +229,16 @@
     function route(view, sector){
         return function(unique_lga){
             var lga = NMIS.lgas[unique_lga];
-            if (typeof lga === 'undefined'){
+            if (lga){
+                view(lga, sector);
+            } else {
                 var url = '/static/lgas/' + unique_lga + '.json';
                 $.getJSON(url, function(lga){
                     NMIS.lgas[unique_lga] = lga;
                     view(lga, sector);
                 });
-            } else {
-                view(lga, sector);
             }
-        };
+        }
     }
 
 
