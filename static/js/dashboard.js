@@ -105,8 +105,11 @@
             minZoom: 0,
             maxZoom: 18
         });
-        var ggl = new L.TileLayer('http://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',{maxZoom:18, minZoom:3});
-
+        var ggl_server = 'http://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}';
+        var ggl = new L.TileLayer( ggl_server, {
+            maxZoom:18, 
+            minZoom:3
+        });
         //facility_map.addLayer(google_layer);
         ggl.addTo(facility_map);
         lga_layer.addTo(facility_map);
@@ -124,6 +127,9 @@
             var popup = new L.Popup({closeButton: false})
                 .setContent("<p>" + popup_name + "</p>")
                 .setLatLng([gps[0],gps[1]]);
+            mark.on('click', function(){
+                console.log(fac.formhub_photo_id);
+            });
             mark.on('mouseover', mark.openPopup.bind(mark))
                 .on('mouseout', mark.closePopup.bind(mark))
                 .addTo(facility_map).bindPopup(popup);
@@ -140,7 +146,7 @@
         _lga_nav(lga, 'facility', sector);
         render('#facility_sector_template', {lga: lga, sector: sector});
         $('.facility_table_selector').change(function(){
-            var index = parseInt(this.value);
+            var index = parseInt(this.value, 10);
             show_data_table(sector, index, lga.facilities);
         });
         show_data_table(sector, 0, lga.facilities);
