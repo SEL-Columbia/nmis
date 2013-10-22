@@ -86,11 +86,7 @@
         var map_div = $("#facility_overview_map")[0];
         var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
         var map_zoom = 10; //TODO: adding nw and se for bounding box
-        var facility_map = new L.Map(map_div, {
-            zoomAnimation: false, 
-            fadeAnimation: false,
-            markerZoomAnimation: false
-        })
+        var facility_map = new L.Map(map_div, { })
             .setView(lat_lng, map_zoom);
         var tileset = "nigeria_overlays_white";
         var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs." +
@@ -109,11 +105,10 @@
             minZoom: 0,
             maxZoom: 18
         });
-        //var ggl = new L.TileLayer('http://mt0.googleapis.com/vt/lyrs=m@207000000&hl=ru&src=api&x={x}&y={y}&z={z}&s=Galile',{maxZoom: 18,minZoom:3});
-        //ggl.addTo(facility_map);
+        var ggl = new L.TileLayer('http://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',{maxZoom:18, minZoom:3});
 
-        facility_map.addLayer(google_layer);
-        //osm_layer.addTo(facility_map);
+        //facility_map.addLayer(google_layer);
+        ggl.addTo(facility_map);
         lga_layer.addTo(facility_map);
 
         var facilities = lga.facilities;
