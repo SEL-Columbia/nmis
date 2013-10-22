@@ -34,41 +34,36 @@
     <div class="content"></div>
 
     <script id="lga_nav_template" type="text/html">
-        <ul class="nav">
-            <li>
-                <a href="#<%= lga.unique_lga %>/lga_<%= sector %>"
-                    <% if (active_view === 'lga'){ %>class="active"<% } %>>
+        <ul class="nav nav-pills">
+            <li <% if (active_view === 'lga'){ %>class="active"<% } %>>
+                <a href="#<%= lga.unique_lga %>/lga_<%= sector %>">
                     LGA Summary
                 </a>
             </li>
-            <li>
-                <a href="#<%= lga.unique_lga %>/facility_<%= sector %>"
-                    <% if (active_view === 'facility'){ %>class="active"<% } %>>
+            <li <% if (active_view === 'facility'){ %>class="active"<% } %>>
+                <a href="#<%= lga.unique_lga %>/facility_<%= sector %>">
                     Facility Detail
                 </a>
             </li>
-            <li class="small spacer">&nbsp;</li>
-            <li>
-                <a href="#<%= lga.unique_lga %>/<%= active_view %>_overview"
-                    <% if (sector === 'overview'){ %>class="active"<% } %>>
+        </ul>
+        <ul class="nav nav-pills nav_sectors">
+            <li <% if (sector === 'overview'){ %>class="active"<% } %>>
+                <a href="#<%= lga.unique_lga %>/<%= active_view %>_overview">
                     Overview
                 </a>
             </li>
-            <li>
-                <a href="#<%= lga.unique_lga %>/<%= active_view %>_health"
-                    <% if (sector === 'health'){ %>class="active"<% } %>>
+            <li <% if (sector === 'health'){ %>class="active"<% } %>>
+                <a href="#<%= lga.unique_lga %>/<%= active_view %>_health">
                     Health
                 </a>
             </li>
-            <li>
-                <a href="#<%= lga.unique_lga %>/<%= active_view %>_education"
-                      <% if (sector === 'education'){ %>class="active"<% } %>>
-                      Education
+            <li <% if (sector === 'education'){ %>class="active"<% } %>>
+                <a href="#<%= lga.unique_lga %>/<%= active_view %>_education">
+                    Education
                 </a>
             </li>
-            <li>
-                <a href="#<%= lga.unique_lga %>/<%= active_view %>_water"
-                    <% if (sector === 'water'){ %>class="active"<% } %>>
+            <li <% if (sector === 'water'){ %>class="active"<% } %>>
+                <a href="#<%= lga.unique_lga %>/<%= active_view %>_water">
                     Water
                 </a>
             </li>
@@ -115,14 +110,41 @@
     </script>
 
     <script id="lga_overview_template" type="text/html">
-        <h2 class="some-lpadding">
+        <h2>
             <%= lga.lga %>, <%= lga.state %> Overview
         </h2>
-        <div class="row">
-            <div class="profile-box">
-                <div class="profile-box-inner">
-                    <table data-table-contents="lga-overview">
-                        <% _.each(NMIS.lga_overview.overview, function(indicator){ %>
+        <div class="profile-box">
+            <div class="profile-box-inner">
+                <table data-table-contents="lga-overview">
+                    <% _.each(NMIS.lga_overview.overview, function(indicator){ %>
+                        <tr>
+                            <td>
+                                <%= NMIS.indicators[indicator].name %>
+                            </td>
+                            <td>
+                                <%= format_value(lga[indicator]) %>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </table>
+            </div>
+            <div class="map"></div>
+        </div>
+
+        <h2>LGA Overview</h2>
+        
+        <p style="font-style:italic;">
+            Below are data from the baseline facility surveys.
+        </p>
+        
+        <% _.each(NMIS.lga_overview.facility_overview, function(category){ %>
+            <div class="span-one-third">
+                <h3 class="mdg-underlined-title">
+                    <%= category.name %>
+                </h3>
+                <table class="mdg-table">
+                    <tbody>
+                        <% _.each(category.rows, function(indicator){ %>
                             <tr>
                                 <td>
                                     <%= NMIS.indicators[indicator].name %>
@@ -132,84 +154,49 @@
                                 </td>
                             </tr>
                         <% }); %>
-                    </table>
-                </div>
-                <div class="map"></div>
+                    </tbody>
+                </table>
             </div>
-        </div>
-        <div class="row">
-            <div class="span18 some-lpadding">
-                <h2>LGA Overview</h2>
-                <p style="font-style:italic;">
-                    Below are data from the baseline facility surveys.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <% _.each(NMIS.lga_overview.facility_overview, function(category){ %>
-                <div class="span-one-third">
-                    <h3 class="mdg-underlined-title">
-                        <%= category.name %>
-                    </h3>
+        <% }); %>
+
+        <h2>MDG Status</h2>
+
+        <p style="font-style:italic;">
+            Below are data collected from HNLSS, DHS, and other sources.
+        </p>
+        
+        <div class="span18">
+            <div id="mdg-table-wrap">
+                <div class="mdg-tables">
                     <table class="mdg-table">
-                        <tbody>
-                            <% _.each(category.rows, function(indicator){ %>
+                        <% _.each(NMIS.lga_overview.mdg_status, function(mdg){ %>
+                            <tbody>
                                 <tr>
-                                    <td>
-                                        <%= NMIS.indicators[indicator].name %>
-                                    </td>
-                                    <td>
-                                        <%= format_value(lga[indicator]) %>
+                                    <td class="mdg_header" colspan="5">
+                                        <%= mdg.header %>
                                     </td>
                                 </tr>
-                            <% }); %>
-                        </tbody>
-                    </table>
-                </div>
-            <% }); %>
-        </div>
-        <div class="row">
-            <div class="span18 some-lpadding">
-                <h2>MDG Status</h2>
-                <p style="font-style:italic;">
-                    Below are data collected from HNLSS, DHS, and other sources.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="span18">
-                <div id="mdg-table-wrap">
-                    <div class="mdg-tables">
-                        <table class="mdg-table">
-                            <% _.each(NMIS.lga_overview.mdg_status, function(mdg){ %>
-                                <tbody>
+                                <% _.each(mdg.rows, function(indicator){ %>
                                     <tr>
-                                        <td class="mdg_header" colspan="5">
-                                            <%= mdg.header %>
+                                        <td class="empty" colspan="2"></td>
+                                        <td>
+                                            <%= NMIS.indicators[indicator].name %>
+                                        </td>
+                                        <td class="data">
+                                            <%= format_value(lga[indicator]) %>
                                         </td>
                                     </tr>
-                                    <% _.each(mdg.rows, function(indicator){ %>
-                                        <tr>
-                                            <td class="empty" colspan="2"></td>
-                                            <td>
-                                                <%= NMIS.indicators[indicator].name %>
-                                            </td>
-                                            <td class="data">
-                                                <%= format_value(lga[indicator]) %>
-                                            </td>
-                                        </tr>
-                                    <% }); %>
-                                </tbody>
-                            <% }); %>
-                        </table>
-                    </div>
+                                <% }); %>
+                            </tbody>
+                        <% }); %>
+                    </table>
                 </div>
             </div>
         </div>
     </script>
 
     <script id="lga_sector_template" type="text/html">
-        <h2 class="some-lpadding">
+        <h2>
             <%= lga.lga %>, <%= lga.state %> <%= sector[0].toUpperCase() + sector.slice(1) %>
         </h2>
         <div class="nmis-sector-summary">

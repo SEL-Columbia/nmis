@@ -6,14 +6,14 @@
     </title>
     {% load compress %}
     {% compress css %}
-        <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
-        <link rel="stylesheet" href="/static/css/jquery-ui.custom.css" type="text/css" media="all" charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="/static/css/base.css">
         <link rel="stylesheet" href="/static/css/selectize.bootstrap2.css" type="text/css" media="all" charset="utf-8">
     {% endcompress %}
     {% block css %}{% endblock %}
     <script src="/static/js/libs/jquery-1.10.2.min.js"></script>
-    <script src="/static/js/libs/underscore-min.js"></script>  
+    <script src="/static/js/libs/underscore-min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/static/js/libs/selectize.min.js"></script>
     <script>
         $(function(){
@@ -32,21 +32,19 @@
 <body>
     <div class="topbar">
         <div class="container">
-            <div class="row">
-                <a class="brand" href="/">
-                    <span class="logo">
-                        <img src="/static/images/nmis_pilot.png">
-                    </span>
-                    Nigeria MDG Information System
-                </a>
-            </div>
+            <a class="brand" href="/">
+                <span class="logo">
+                    <img src="/static/images/nmis_pilot.png">
+                </span>
+                Nigeria MDG Information System
+            </a>
             <select id="lga_search" placeholder="Select LGA">
                 <option value="">Select an LGA</option>
                 {% for lga_name, unique_lga in lgas %}
                     <option value="{{ unique_lga }}">{{ lga_name }}</option>
                 {% endfor %}
             </select>
-            <div class="nav">
+            <div class="pagenav">
                 <a class="{% block nav_about %}{% endblock %}" href="/about">About</a>
                 <a class="{% block nav_dashboard %}{% endblock %}" href="/dashboard">Explore Facilities</a>
                 <a class="{% block nav_download %}{% endblock %}" href="/download">Download Data</a>
@@ -55,8 +53,10 @@
             <div style="clear:both"></div>
         </div>
     </div>
-    <div id="content" class="container">
-        {% block content %}{% endblock %}
+    <div id="content">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
     </div>
     {% block footer %}{% endblock %}
 </body>
