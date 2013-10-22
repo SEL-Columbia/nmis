@@ -265,11 +265,18 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">
-                            <%= facility.facility_name %>
+                            <%= facility.facility_name || 'Water Point' %>
                         </h4>
                     </div>
                     <div class="modal-body">
                         <img src="https://formhub.org/attachment/small?media_file=ossap/attachments/<%= facility.formhub_photo_id %>">
+                        <select class="facility_table_selector">
+                            <% _.each(NMIS.facility_tables[facility.sector], function(value, index){ %>
+                                <option value="<%= index %>">
+                                    <%= value.name %>
+                                </option>
+                            <% }); %>
+                        </select>
                         <table class="facility_table"></table>
                     </div>
                 </div>
@@ -282,7 +289,7 @@
             <%= lga.lga %>, <%= lga.state %>
         </h1>
         <div id="facility_map"></div>
-        <select class="facility_table_selector">
+        <select class="facilities_table_selector">
             <% _.each(NMIS.facility_tables[sector], function(value, index){ %>
                 <option value="<%= index %>">
                     <%= value.name %>

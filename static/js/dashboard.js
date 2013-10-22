@@ -153,7 +153,8 @@
     function facility_sector(lga, sector){
         _lga_nav(lga, 'facility', sector);
         render('#facility_sector_template', {lga: lga, sector: sector});
-        $('.facility_table_selector').change(function(){
+
+        $('.facilities_table_selector').change(function(){
             var index = parseInt(this.value, 10);
             show_facilities_table(sector, index, lga.facilities);
         });
@@ -185,7 +186,6 @@
         });
 
         $('#facilities_data_table')
-            .css('width', '100%') // So that width doesn't change when changing source data
             .find('thead')
             .html('') // http://stackoverflow.com/questions/16290987/how-to-clear-all-column-headers-using-datatables
             .end()
@@ -194,52 +194,48 @@
                 aoColumns: aoColumns,
                 bPaginate: false,
                 bDestroy: true
-            });
+            })
+            .width('100%');
     }
 
 
     function show_facility_modal(facility){
         var template = $('#facility_modal_template').html();
-        var html = _.template(template, {facility: facility});
+        var html = _.template(template, {
+            NMIS: NMIS,
+            facility: facility
+        });
         $('#facility_modal').remove();
         $('#content').append(html);
         $('#facility_modal').modal();
+        $('.facility_table_selector').change(function(){
+            var index = parseInt(this.value);
+            show_facility_table(facility, index);
+        });
+        show_facility_table(facility, 0);
     }
 
 
-    function show_facility_table(facility){
-        var aoColumns = [];
-        var table = NMIS.facility_tables[sector][table_index];
+    function show_facility_table(facility, index){
+        var aoColumns = [{sTitle: 'Indicator'}, {sTitle: 'Value'}];
+        var table = NMIS.facility_tables[facility.sector][index];
+        var aaData = [];
 
         _.each(table.indicators, function(indicator){
-            aoColumns.push({
-                sTitle: NMIS.indicators[indicator].name
-            });
+            aaData.push([
+                NMIS.indicators[indicator].name,
+                format_value(facility[indicator])
+            ]);
         });
         
-        var aaData = [];
-        _.each(facilities, function(facility){
-            if (facility.sector === sector){
-                var facility_data = [];
-                _.each(table.indicators, function(indicator){
-                    var value = format_value(facility[indicator]);
-                    facility_data.push(value);
-                });
-                aaData.push(facility_data);
-            }
-        });
-
-        $('#facilities_data_table')
-            .css('width', '100%') // So that width doesn't change when changing source data
-            .find('thead')
-            .html('') // http://stackoverflow.com/questions/16290987/how-to-clear-all-column-headers-using-datatables
-            .end()
+        $('.facility_table')
             .dataTable({
                 aaData: aaData,
                 aoColumns: aoColumns,
                 bPaginate: false,
                 bDestroy: true
-            });
+            })
+            .width('100%'); 
     }
 
 

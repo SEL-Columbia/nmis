@@ -33,7 +33,7 @@ body {
     top: 0;
     left: 0;
     background: #545653;
-    z-index: 10000;
+    z-index: 100;
 }
 .topbar a.brand {
     position: relative;
