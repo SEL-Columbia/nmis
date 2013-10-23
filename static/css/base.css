@@ -3,8 +3,10 @@ body {
     font-size: 13px;
     background-image: url("/static/images/bg-shade-repeat.png");
 }
+
 #content .container {
     background: #fff;
+    padding: 10px 30px;
     margin-top: 120px;
     margin-bottom: 80px;
 }
