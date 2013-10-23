@@ -4,15 +4,19 @@
     $(function(){
         new Backbone.Router({
             routes: {
-                '': index,
+                '': index_view,
                 ':unique_lga/lga_overview': route(lga_overview),
-                ':unique_lga/lga_health': route(lga_sector, 'health'),              
-                ':unique_lga/lga_education': route(lga_sector, 'education'),
-                ':unique_lga/lga_water': route(lga_sector, 'water'),
-                ':unique_lga/facility_overview': route(facility_overview),
-                ':unique_lga/facility_health': route(facility_sector, 'health'),
-                ':unique_lga/facility_education': route(facility_sector, 'education'),  
-                ':unique_lga/facility_water': route(facility_sector, 'water')
+                ':unique_lga/lga_health': route(lga_view, 'health'),              
+                ':unique_lga/lga_education': route(lga_view, 'education'),
+                ':unique_lga/lga_water': route(lga_view, 'water'),
+                ':unique_lga/map_overview': route(map_view, 'overview'),
+                ':unique_lga/map_health': route(map_view, 'health'),
+                ':unique_lga/map_education': route(map_view, 'education'),  
+                ':unique_lga/map_water': route(map_view, 'water'),  
+                ':unique_lga/table_overview': route(table_view, 'overview'),
+                ':unique_lga/table_health': route(table_view, 'health'),
+                ':unique_lga/table_education': route(table_view, 'education'),
+                ':unique_lga/table_water': route(table_view, 'water')
             }
         });
         Backbone.history.start();
@@ -33,7 +37,7 @@
     }
 
 
-    function index(){
+    function index_view(){
         render('#index_template', {});
         $('#zone-navigation .state-link').click(function(){
             $(this).next('.lga-list').toggle();
@@ -45,20 +49,14 @@
     function lga_overview(lga){
         _lga_nav(lga, 'lga', 'overview');
         render('#lga_overview_template', {lga: lga});
-        leaflet_overview(lga);
-    }
 
-
-    function leaflet_overview(lga){
+        // Leaflet map
         var map_div = $('.map')[0];
         var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
         var map_zoom = 9;
         var summary_map = L.map(map_div, {})
                 .setView(lat_lng, map_zoom);
-        var tileset = 'nigeria_base';
-        var tile_server = 'http://{s}.tiles.mapbox.com/v3/modilabs.' +
-                          tileset +
-                          '/{z}/{x}/{y}.png';
+        var tile_server = 'http://{s}.tiles.mapbox.com/v3/modilabs.nigeria_base/{z}/{x}/{y}.png';
         L.tileLayer(tile_server, {
             minZoom: 6,
             maxZoom: 11
@@ -66,7 +64,7 @@
     }
 
 
-    function lga_sector(lga, sector){
+    function lga_view(lga, sector){
         _lga_nav(lga, 'lga', sector);
         render('#lga_sector_template', {
             lga: lga,
@@ -75,14 +73,14 @@
     }
 
 
-    function facility_overview(lga){
-        _lga_nav(lga, 'facility', 'overview');
-        render('#facility_overview_template', {lga: lga});
-        leaflet_facility(lga);
+    function map_view(lga, sector){
+        _lga_nav(lga, 'map', sector);
+        render('#map_view_template', {lga: lga});
+        facilities_map(lga, sector);
     }
 
 
-    function leaflet_facility(lga, current_sector){
+    function facilities_map(lga, current_sector){
         var map_div = $("#facility_map")[0];
         var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
         var map_zoom = 10; //TODO: adding nw and se for bounding box
@@ -150,20 +148,19 @@
     }
 
 
-    function facility_sector(lga, sector){
-        _lga_nav(lga, 'facility', sector);
-        render('#facility_sector_template', {lga: lga, sector: sector});
+    function table_view(lga, sector){
+        _lga_nav(lga, 'table', sector);
+        render('#table_view_template', {lga: lga, sector: sector});
 
         $('.facilities_table_selector').change(function(){
             var index = parseInt(this.value, 10);
-            show_facilities_table(sector, index, lga.facilities);
+            facilities_table(sector, index, lga.facilities);
         });
-        show_facilities_table(sector, 0, lga.facilities);
-        leaflet_facility(lga, sector);
+        facilities_table(sector, 0, lga.facilities);
     }
 
 
-    function show_facilities_table(sector, table_index, facilities){
+    function facilities_table(sector, table_index, facilities){
         var aoColumns = [];
         var table = NMIS.facility_tables[sector][table_index];
 
@@ -175,7 +172,7 @@
         
         var aaData = [];
         _.each(facilities, function(facility){
-            if (facility.sector === sector){
+            if (facility.sector === sector || sector === 'overview'){
                 var facility_data = [];
                 _.each(table.indicators, function(indicator){
                     var value = format_value(facility[indicator]);

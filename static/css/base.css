@@ -83,7 +83,7 @@ body {
     display: inline-block;
 }
 #lga_nav .nav_sectors {
-    margin-left: 20px;
+    float: right;
 }
 
 #zone-navigation {

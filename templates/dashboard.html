@@ -37,19 +37,24 @@
         <ul class="nav nav-pills">
             <li <% if (active_view === 'lga'){ %>class="active"<% } %>>
                 <a href="#<%= lga.unique_lga %>/lga_<%= sector %>">
-                    LGA Summary
+                    Overview
                 </a>
             </li>
-            <li <% if (active_view === 'facility'){ %>class="active"<% } %>>
-                <a href="#<%= lga.unique_lga %>/facility_<%= sector %>">
-                    Facility Detail
+            <li <% if (active_view === 'map'){ %>class="active"<% } %>>
+                <a href="#<%= lga.unique_lga %>/map_<%= sector %>">
+                    Map View
+                </a>
+            </li>
+            <li <% if (active_view === 'table'){ %>class="active"<% } %>>
+                <a href="#<%= lga.unique_lga %>/table_<%= sector %>">
+                    Table View
                 </a>
             </li>
         </ul>
         <ul class="nav nav-pills nav_sectors">
             <li <% if (sector === 'overview'){ %>class="active"<% } %>>
                 <a href="#<%= lga.unique_lga %>/<%= active_view %>_overview">
-                    Overview
+                    All Sectors
                 </a>
             </li>
             <li <% if (sector === 'health'){ %>class="active"<% } %>>
@@ -251,11 +256,27 @@
         </div>
     </script>
 
-    <script id="facility_overview_template" type="text/html">
+    <script id="map_view_template" type="text/html">
         <h1>
             <%= lga.lga %>, <%= lga.state %>
         </h1>
         <div id="facility_map"></div>
+    </script>
+
+    <script id="table_view_template" type="text/html">
+        <h1>
+            <%= lga.lga %>, <%= lga.state %>
+        </h1>
+
+        <select class="facilities_table_selector">
+            <% _.each(NMIS.facility_tables[sector], function(value, index){ %>
+                <option value="<%= index %>">
+                    <%= value.name %>
+                </option>
+            <% }); %>
+        </select>
+
+        <table id="facilities_data_table"></table>
     </script>
 
     <script id="facility_modal_template" type="text/html">
@@ -282,22 +303,6 @@
                 </div>
             </div>
         </div>
-    </script>
-
-    <script id="facility_sector_template" type="text/html">
-        <h1>
-            <%= lga.lga %>, <%= lga.state %>
-        </h1>
-        <div id="facility_map"></div>
-        <select class="facilities_table_selector">
-            <% _.each(NMIS.facility_tables[sector], function(value, index){ %>
-                <option value="<%= index %>">
-                    <%= value.name %>
-                </option>
-            <% }); %>
-        </select>
-
-        <table id="facilities_data_table"></table>
     </script>
 {% endblock %}
 
