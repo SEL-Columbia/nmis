@@ -77,6 +77,7 @@
         _lga_nav(lga, 'map', sector);
         render('#map_view_template', {lga: lga});
         facilities_map(lga, sector);
+        chart(lga, 'health', 'maternal_health_delivery_services_24_7');
     }
 
 
@@ -137,9 +138,48 @@
     }
 
 
+    function chart(lga, sector, indicator){
+        var trues = 0;
+        var falses = 0;
+        var undefineds = 0;
+        _.each(lga.facilities, function(facility){
+            if (facility.sector === sector){
+                var value = facility[indicator];
+                if (value) trues++;
+                if (value === false) falses++;
+                if (typeof value === 'undefined') undefineds++;
+            }
+        });
+
+        var total = trues + falses + undefineds;
+
+        console.log(total)
+
+        var ctx = $('#pie_chart')[0].getContext('2d');
+        var data = [
+            {
+                value: trues / total * 100,
+                color: 'rgb(68, 167, 0)'
+            },
+            {
+                value : falses / total * 100,
+                color : 'rgb(193, 71, 71)'
+            },
+            {
+                value : undefineds / total * 100,
+                color : '#ddd'
+            }           
+        ];
+        new Chart(ctx).Pie(data, {percentageInnerCutout: 30});
+    }
+
+
     function table_view(lga, sector){
         _lga_nav(lga, 'table', sector);
-        render('#table_view_template', {lga: lga, sector: sector});
+        render('#table_view_template', {
+            lga: lga,
+            tables: NMIS.facility_tables[sector]
+        });
 
         $('.facilities_table_selector').change(function(){
             var index = parseInt(this.value, 10);
@@ -189,7 +229,8 @@
         var template = $('#facility_modal_template').html();
         var html = _.template(template, {
             NMIS: NMIS,
-            facility: facility
+            facility: facility,
+            tables: NMIS.facility_tables[facility.sector]
         });
         $('#facility_modal').remove();
         $('#content').append(html);

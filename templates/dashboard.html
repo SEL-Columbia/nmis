@@ -12,6 +12,7 @@
     <script src="/static/datatables/js/jquery.dataTables.min.js"></script>
     <script src="/static/leaflet/leaflet.js"></script>
     <script src="/static/leaflet/Google.js"></script>
+    <script src="/static/js/libs/Chart.min.js"></script>
     <script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
     <script src="/static/js/dashboard.js"></script>
     <script>
@@ -261,21 +262,22 @@
             <%= lga.lga %>, <%= lga.state %>
         </h1>
         <div id="facility_map"></div>
+        <canvas id="pie_chart" width="80" height="80"></canvas>
     </script>
 
     <script id="table_view_template" type="text/html">
         <h1>
             <%= lga.lga %>, <%= lga.state %>
         </h1>
-
-        <select class="facilities_table_selector">
-            <% _.each(NMIS.facility_tables[sector], function(value, index){ %>
-                <option value="<%= index %>">
-                    <%= value.name %>
-                </option>
-            <% }); %>
-        </select>
-
+        <% if (tables.length > 1){ %>
+            <select class="facilities_table_selector">
+                <% _.each(tables, function(value, index){ %>
+                    <option value="<%= index %>">
+                        <%= value.name %>
+                    </option>
+                <% }); %>
+            </select>
+        <% } %>
         <table id="facilities_data_table"></table>
     </script>
 
@@ -291,13 +293,15 @@
                     </div>
                     <div class="modal-body">
                         <img src="https://formhub.org/attachment/small?media_file=ossap/attachments/<%= facility.formhub_photo_id %>">
-                        <select class="facility_table_selector">
-                            <% _.each(NMIS.facility_tables[facility.sector], function(value, index){ %>
-                                <option value="<%= index %>">
-                                    <%= value.name %>
-                                </option>
-                            <% }); %>
-                        </select>
+                        <% if (tables.length > 1){ %>
+                            <select class="facility_table_selector">
+                                <% _.each(tables, function(value, index){ %>
+                                    <option value="<%= index %>">
+                                        <%= value.name %>
+                                    </option>
+                                <% }); %>
+                            </select>
+                        <% } %>
                         <table class="facility_table"></table>
                     </div>
                 </div>
