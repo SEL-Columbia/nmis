@@ -94,21 +94,11 @@
             minZoom: 6,
             maxZoom: 10
         });
-        var osm_server = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-        var osm_layer = new L.TileLayer(osm_server, {
-            minZoom: 0,
-            maxZoom: 18
-        });
-        var google_layer = new L.Google("HYBRID", {
-            minZoom: 0,
-            maxZoom: 18
-        });
         var ggl_server = 'http://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}';
         var ggl = new L.TileLayer( ggl_server, {
             maxZoom:18, 
             minZoom:3
         });
-        //facility_map.addLayer(google_layer);
         ggl.addTo(facility_map);
         lga_layer.addTo(facility_map);
 
@@ -136,7 +126,6 @@
                 .setContent("<p>" + popup_name + "</p>")
                 .setLatLng([gps[0],gps[1]]);
             mark.on('click', function(){
-                
                 show_facility_modal(fac);
             });
             mark.on('mouseover', mark.openPopup.bind(mark))
