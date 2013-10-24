@@ -115,10 +115,10 @@
         var facilities = lga.facilities;
         var icon_state = function(sector, current_sec){
             var state;
-            if (current_sec){
-                state = sector == current_sec ? 'normal' : 'background';
-            } else {
+            if (current_sec == 'overview'){
                 state = 'normal';
+            } else {
+                state = sector == current_sec ? 'normal' : 'background';
             }
             return state;
         };
