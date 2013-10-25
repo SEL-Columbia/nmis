@@ -210,12 +210,14 @@ body {
 =================================*/
 .map_view_legend {
     position: absolute;
-    right: 10px;
-    top: 10px;
-    background: white;
+    right: 45px;
+    top: 170px;
+    background: #111;
+    background: rgba(0,0,0,0.5);
     width: 200px;
-    height: 80px;
     padding: 10px;
+    z-index: 50;
+    border-radius: 7px;
 }
 .facility_map {
     height: 600px;
