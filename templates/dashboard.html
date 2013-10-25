@@ -123,7 +123,7 @@
         </div>
         <div class="profile-box">
             <div class="profile-box-inner">
-                <table data-table-contents="lga-overview">
+                <table>
                     <% _.each(NMIS.lga_overview.overview, function(indicator){ %>
                         <tr>
                             <td>
@@ -145,27 +145,29 @@
             Below are data from the baseline facility surveys.
         </p>
         
-        <% _.each(NMIS.lga_overview.facility_overview, function(category){ %>
-            <div class="span-one-third">
-                <h3 class="mdg-underlined-title">
-                    <%= category.name %>
-                </h3>
-                <table class="mdg-table">
-                    <tbody>
-                        <% _.each(category.rows, function(indicator){ %>
-                            <tr>
-                                <td>
-                                    <%= indicator_name(indicator) %>
-                                </td>
-                                <td>
-                                    <%= format_value(lga[indicator]) %>
-                                </td>
-                            </tr>
-                        <% }); %>
-                    </tbody>
-                </table>
-            </div>
-        <% }); %>
+        <div class="row">
+            <% _.each(NMIS.lga_overview.facility_overview, function(category){ %>
+                <div class="col-md-4">
+                    <h3 class="mdg-underlined-title">
+                        <%= category.name %>
+                    </h3>
+                    <table class="mdg-table">
+                        <tbody>
+                            <% _.each(category.rows, function(indicator){ %>
+                                <tr>
+                                    <td>
+                                        <%= indicator_name(indicator) %>
+                                    </td>
+                                    <td>
+                                        <%= format_value(lga[indicator]) %>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            <% }); %>
+        </div>
 
         <h3>MDG Status</h3>
 
