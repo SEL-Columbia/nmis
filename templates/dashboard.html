@@ -79,7 +79,7 @@
 
     <script id="index_template" type="text/html">
         <div class="page-header">
-            <h1>Nigeria</h1>
+            <h2>Nigeria</h2>
         </div>
         <div id="zone-navigation">
             <div class="zone-nav">
@@ -116,9 +116,11 @@
     </script>
 
     <script id="lga_overview_template" type="text/html">
-        <h2>
-            <%= lga.lga %>, <%= lga.state %> Overview
-        </h2>
+        <div class="page-header">
+            <h2>
+                <%= lga.lga %>, <%= lga.state %> Overview
+            </h2>
+        </div>
         <div class="profile-box">
             <div class="profile-box-inner">
                 <table data-table-contents="lga-overview">
@@ -137,7 +139,7 @@
             <div class="map"></div>
         </div>
 
-        <h2>LGA Overview</h2>
+        <h3>LGA Overview</h3>
         
         <p style="font-style:italic;">
             Below are data from the baseline facility surveys.
@@ -165,7 +167,7 @@
             </div>
         <% }); %>
 
-        <h2>MDG Status</h2>
+        <h3>MDG Status</h3>
 
         <p style="font-style:italic;">
             Below are data collected from HNLSS, DHS, and other sources.
@@ -202,9 +204,11 @@
     </script>
 
     <script id="lga_sector_template" type="text/html">
-        <h2>
-            <%= lga.lga %>, <%= lga.state %> <%= sector[0].toUpperCase() + sector.slice(1) %>
-        </h2>
+        <div class="page-header">
+            <h2>
+                <%= lga.lga %>, <%= lga.state %> <%= sector[0].toUpperCase() + sector.slice(1) %>
+            </h2>
+        </div>
         <div class="nmis-sector-summary">
             <div class="non-gap">
                 <table style="width:100%" class="mdg-table">
@@ -258,22 +262,26 @@
     </script>
 
     <script id="map_view_template" type="text/html">
-        <h1>
-            <%= lga.lga %>, <%= lga.state %>
-        </h1>
-        <% if (chart_indicators.length > 1){ %>
-            <select class="pie_chart_selector">
-                <% _.each(chart_indicators, function(indicator){ %>
-                    <option value="<%= indicator %>">
-                        <%= indicator_name(indicator) %>
-                    </option>
-                <% }); %>
-            </select>
-        <% } %>
-        <div class="map_view_legend">
-            <canvas width="80" height="80"></canvas>
+        <div class="page-header">
+            <% if (chart_indicators.length > 1){ %>
+                <select class="pie_chart_selector form-control">
+                    <% _.each(chart_indicators, function(indicator){ %>
+                        <option value="<%= indicator %>">
+                            <%= indicator_name(indicator) %>
+                        </option>
+                    <% }); %>
+                </select>
+            <% } %>
+            <h2>
+                <%= lga.lga %>, <%= lga.state %>
+            </h2>
+            <div style="clear:both"></div>
         </div>
-        <div class="facility_map"></div>
+        <div class="facility_map">
+            <div class="map_view_legend">
+                <canvas width="80" height="80"></canvas>
+            </div>
+        </div>
     </script>
 
     <script id="table_view_template" type="text/html">
