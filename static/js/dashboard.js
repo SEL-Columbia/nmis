@@ -154,8 +154,9 @@
                 var popup = new L.Popup({closeButton: false})
                     .setContent(fac.facility_name || 'Water Point')
                     .setLatLng(lat_lng);
-                mark.on('click', function(wat){
+                mark.on('click', function(){
                     //TODO: dim all others
+                    //TODO: mark making popup remain open
                     //marker_highlight()
                     show_facility_modal(fac);
                 });
