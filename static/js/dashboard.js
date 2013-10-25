@@ -82,7 +82,12 @@
         });
         facilities_map(lga, sector);
         $('.pie_chart_selector').change(function(){
-            pie_chart(lga, sector, this.value);
+            if (this.value){
+                $('.map_view_legend').show();
+                pie_chart(lga, sector, this.value);
+            } else {
+                $('.map_view_legend').hide();
+            }
         });
     }
 
