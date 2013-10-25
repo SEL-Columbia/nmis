@@ -90,6 +90,7 @@
     function _chart_indicators(facilities, sector){
         // Iterates through facilities within a sector to find
         // indicators which contain boolean values.
+        // Returns a list of [indicator, indicator_name]
         var indicators = {};
         for (var i=0, facility; facility=facilities[i]; i++){
             if (facility.sector === sector){
@@ -103,10 +104,16 @@
             }
         }
         var chart_indicators = [];
-        for (var indicator in indicators){
-            if (indicators.hasOwnProperty(indicator))
-                chart_indicators.push(indicator);
-        }
+        _.each(_.keys(indicators), function(indicator){
+            chart_indicators.push([
+                indicator, indicator_name(indicator)
+            ]);
+        });
+        chart_indicators.sort(function(a,b){
+            if (a[1] > b[1]) return 1;
+            else if (a[1] < b[1]) return -1;
+            return 0;
+        });
         return chart_indicators;
     }
 

@@ -265,9 +265,11 @@
         <div class="page-header">
             <% if (chart_indicators.length > 1){ %>
                 <select class="pie_chart_selector form-control">
+                    <option value="">Filter by Indicator</option>
                     <% _.each(chart_indicators, function(indicator){ %>
-                        <option value="<%= indicator %>">
-                            <%= indicator_name(indicator) %>
+                        <option value="<%= indicator[0] %>">
+                            <%= indicator[1] %>
+                            <% console.log(indicator); %>
                         </option>
                     <% }); %>
                 </select>
