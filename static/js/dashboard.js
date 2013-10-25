@@ -158,7 +158,7 @@
                     //TODO: dim all others
                     //TODO: mark making popup remain open
                     //marker_highlight()
-                    show_facility_modal(fac);
+                    facility_modal(fac);
                 });
                 mark.on('mouseover', mark.openPopup.bind(mark))
                     .on('mouseout', mark.closePopup.bind(mark))
