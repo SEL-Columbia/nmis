@@ -76,9 +76,38 @@
 
     function map_view(lga, sector){
         _lga_nav(lga, 'map', sector);
-        render('#map_view_template', {lga: lga});
+        render('#map_view_template', {
+            lga: lga,
+            chart_indicators: _chart_indicators(lga.facilities, sector)
+        });
         facilities_map(lga, sector);
-        chart(lga, 'health', 'maternal_health_delivery_services_24_7');
+        $('.pie_chart_selector').change(function(){
+            pie_chart(lga, sector, this.value);
+        });
+    }
+
+
+    function _chart_indicators(facilities, sector){
+        // Iterates through facilities within a sector to find
+        // indicators which contain boolean values.
+        var indicators = {};
+        for (var i=0, facility; facility=facilities[i]; i++){
+            if (facility.sector === sector){
+                for (var indicator in facility){
+                    if (facility.hasOwnProperty(indicator)){
+                        var value = facility[indicator];
+                        if (value === false || value === true)
+                            indicators[indicator] = 1;
+                    }
+                }
+            }
+        }
+        var chart_indicators = [];
+        for (var indicator in indicators){
+            if (indicators.hasOwnProperty(indicator))
+                chart_indicators.push(indicator);
+        }
+        return chart_indicators;
     }
 
 
@@ -136,8 +165,7 @@
     }
 
 
-
-    function chart(lga, sector, indicator){
+    function pie_chart(lga, sector, indicator){
         var trues = 0;
         var falses = 0;
         var undefineds = 0;
@@ -149,7 +177,6 @@
                 if (typeof value === 'undefined') undefineds++;
             }
         });
-
         var total = trues + falses + undefineds;
 
         var ctx = $('#pie_chart')[0].getContext('2d');
@@ -167,7 +194,7 @@
                 color : '#ddd'
             }           
         ];
-        new Chart(ctx).Pie(data, {percentageInnerCutout: 30});
+        new Chart(ctx).Pie(data, {animationEasing: 'easeOutQuart', animationSteps: 15});
     }
 
 

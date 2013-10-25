@@ -262,6 +262,11 @@
             <%= lga.lga %>, <%= lga.state %>
         </h1>
         <div id="facility_map"></div>
+        <select class="pie_chart_selector">
+            <% _.each(chart_indicators, function(indicator){ %>
+                <option value="<%= indicator %>"><%= indicator %></option>
+            <% }); %>
+        </select>
         <canvas id="pie_chart" width="80" height="80"></canvas>
     </script>
 
