@@ -289,18 +289,20 @@
     </script>
 
     <script id="table_view_template" type="text/html">
-        <h1>
-            <%= lga.lga %>, <%= lga.state %>
-        </h1>
-        <% if (tables.length > 1){ %>
-            <select class="facilities_table_selector">
-                <% _.each(tables, function(value, index){ %>
-                    <option value="<%= index %>">
-                        <%= value.name %>
-                    </option>
-                <% }); %>
-            </select>
-        <% } %>
+        <div class="page-header">
+            <% if (tables.length > 1){ %>
+                <select class="facilities_table_selector form-control">
+                    <% _.each(tables, function(value, index){ %>
+                        <option value="<%= index %>">
+                            <%= value.name %>
+                        </option>
+                    <% }); %>
+                </select>
+            <% } %>
+            <h1>
+                <%= lga.lga %>, <%= lga.state %>
+            </h1>
+        </div>
         <table id="facilities_data_table"></table>
     </script>
 

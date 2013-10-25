@@ -206,12 +206,17 @@ body {
 
 
 
-/* Dashboard.html, Map View
+/* Dashboard.html
 =================================*/
-.pie_chart_selector {
+.page-header select {
     float: right;
     width: 250px;
 }
+
+
+
+/* Dashboard.html, Map View
+=================================*/
 .facility_map {
     position: relative;
     height: 600px;
