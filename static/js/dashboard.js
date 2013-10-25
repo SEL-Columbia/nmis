@@ -56,7 +56,8 @@
         var map_zoom = 9;
         var summary_map = L.map(map_div, {})
                 .setView(lat_lng, map_zoom);
-        var tile_server = 'http://{s}.tiles.mapbox.com/v3/modilabs.nigeria_base/{z}/{x}/{y}.png';
+        var tile_server = 'http://{s}.tiles.mapbox.com/v3/' +
+            'modilabs.nigeria_base/{z}/{x}/{y}.png';
         L.tileLayer(tile_server, {
             minZoom: 6,
             maxZoom: 11
@@ -117,8 +118,7 @@
         var facility_map = new L.Map(map_div, { })
             .setView(lat_lng, map_zoom);
         var tileset = "nigeria_overlays_white";
-        var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs." +
-                          tileset +
+        var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs." + tileset +
                           "/{z}/{x}/{y}.png";
         var lga_layer = new L.TileLayer(tile_server, {
             minZoom: 6,
@@ -131,39 +131,37 @@
         });
         ggl.addTo(facility_map);
         lga_layer.addTo(facility_map);
-
-        var facilities = lga.facilities;
-        var icon_state = function(sector, current_sec){
-            var state;
-            if (current_sec == 'overview'){
-                state = 'normal';
-            } else {
-                state = sector == current_sec ? 'normal' : 'background';
-            }
-            return state;
-        };
-        var marker_group = new L.LayerGroup();
-        _.each(lga.facilities, function(fac){
-            var gps = fac.gps.split(" ");
-            var sector = fac.sector;
-            var state = icon_state(sector, current_sector);
-            var icon_url = 'static/images/icons_f/' + 
-                state + '_' + sector + '.png';
-            var icon = new L.Icon({iconUrl: icon_url}); 
-            var mark = new L.Marker([gps[0], gps[1]], {icon: icon});
-            var popup_name = fac.facility_name || 'Water Point';
-            var popup = new L.Popup({closeButton: false})
-                .setContent("<p>" + popup_name + "</p>")
-                .setLatLng([gps[0],gps[1]]);
-            mark.on('click', function(){
-                facility_modal(fac);
-            });
-            mark.on('mouseover', mark.openPopup.bind(mark))
-                .on('mouseout', mark.closePopup.bind(mark))
-                .bindPopup(popup);
-            marker_group.addLayer(mark);
-        });
+        var marker_group = mark_facilities(lga.facilities, current_sector);
         marker_group.addTo(facility_map);
+    }
+
+    function mark_facilities(facilities, current_sector) {
+        var marker_group = new L.LayerGroup();
+        _.each(facilities, function(fac){
+            if (fac.sector === current_sector || current_sector == 'overview') {
+                var lat_lng = fac.gps.split(" ").slice(0,2);
+                var icon_url = 'static/images/icons_f/normal_' + 
+                    fac.sector + '.png';
+                var icon = new L.Icon({iconUrl: icon_url}); 
+                var mark = new L.Marker(lat_lng, {icon: icon});
+                var popup = new L.Popup({closeButton: false})
+                    .setContent(fac.facility_name || 'Water Point')
+                    .setLatLng(lat_lng);
+                mark.on('click', function(wat){
+                    //TODO: dim all others
+                    //marker_highlight()
+                    show_facility_modal(fac);
+                });
+                mark.on('mouseover', mark.openPopup.bind(mark))
+                    .on('mouseout', mark.closePopup.bind(mark))
+                    .bindPopup(popup);
+                marker_group.addLayer(mark);
+            }
+        });
+        return marker_group;
+    }
+
+    function marker_removal(){
     }
 
 
