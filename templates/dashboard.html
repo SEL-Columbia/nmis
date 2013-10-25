@@ -125,7 +125,7 @@
                     <% _.each(NMIS.lga_overview.overview, function(indicator){ %>
                         <tr>
                             <td>
-                                <%= NMIS.indicators[indicator].name %>
+                                <%= indicator_name(indicator) %>
                             </td>
                             <td>
                                 <%= format_value(lga[indicator]) %>
@@ -153,7 +153,7 @@
                         <% _.each(category.rows, function(indicator){ %>
                             <tr>
                                 <td>
-                                    <%= NMIS.indicators[indicator].name %>
+                                    <%= indicator_name(indicator) %>
                                 </td>
                                 <td>
                                     <%= format_value(lga[indicator]) %>
@@ -186,7 +186,7 @@
                                     <tr>
                                         <td class="empty" colspan="2"></td>
                                         <td>
-                                            <%= NMIS.indicators[indicator].name %>
+                                            <%= indicator_name(indicator) %>
                                         </td>
                                         <td class="data">
                                             <%= format_value(lga[indicator]) %>
@@ -223,7 +223,7 @@
                                     <tr>
                                         <td class="empty-first empty bb"></td>
                                         <td class="indicator-name bb">
-                                            <%= NMIS.indicators[indicator].name %>
+                                            <%= indicator_name(indicator) %>
                                         </td>
                                         <td class="indvalue bb">
                                             <%= format_value(lga[indicator]) %>
@@ -241,7 +241,7 @@
                                         <tr>
                                             <td class="empty-first empty bb"></td>
                                             <td class="indicator-name bb">
-                                                <%= NMIS.indicators[indicator].name %>
+                                                <%= indicator_name(indicator) %>
                                             </td>
                                             <td class="indvalue bb">
                                                 <%= format_value(lga[indicator]) %>
@@ -261,13 +261,17 @@
         <h1>
             <%= lga.lga %>, <%= lga.state %>
         </h1>
-        <div id="facility_map"></div>
         <select class="pie_chart_selector">
             <% _.each(chart_indicators, function(indicator){ %>
-                <option value="<%= indicator %>"><%= indicator %></option>
+                <option value="<%= indicator %>">
+                    <%= indicator_name(indicator) %>
+                </option>
             <% }); %>
         </select>
-        <canvas id="pie_chart" width="80" height="80"></canvas>
+        <div class="map_view_legend">
+            <canvas width="80" height="80"></canvas>
+        </div>
+        <div class="facility_map"></div>
     </script>
 
     <script id="table_view_template" type="text/html">

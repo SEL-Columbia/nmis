@@ -111,7 +111,7 @@
 
 
     function facilities_map(lga, current_sector){
-        var map_div = $("#facility_map")[0];
+        var map_div = $(".facility_map")[0];
         var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
         var map_zoom = 10; //TODO: adding nw and se for bounding box
         var facility_map = new L.Map(map_div, { })
@@ -156,7 +156,7 @@
                 .setContent("<p>" + popup_name + "</p>")
                 .setLatLng([gps[0],gps[1]]);
             mark.on('click', function(){
-                show_facility_modal(fac);
+                facility_modal(fac);
             });
             mark.on('mouseover', mark.openPopup.bind(mark))
                 .on('mouseout', mark.closePopup.bind(mark))
@@ -168,6 +168,7 @@
 
 
     function pie_chart(lga, sector, indicator){
+        var ctx = $('.map_view_legend canvas')[0].getContext('2d');        
         var trues = 0;
         var falses = 0;
         var undefineds = 0;
@@ -180,23 +181,22 @@
             }
         });
         var total = trues + falses + undefineds;
-
-        var ctx = $('#pie_chart')[0].getContext('2d');
         var data = [
             {
                 value: trues / total * 100,
                 color: 'rgb(68, 167, 0)'
-            },
-            {
+            }, {
                 value : falses / total * 100,
                 color : 'rgb(193, 71, 71)'
-            },
-            {
+            }, {
                 value : undefineds / total * 100,
                 color : '#ddd'
-            }           
+            }
         ];
-        new Chart(ctx).Pie(data, {animationEasing: 'easeOutQuart', animationSteps: 15});
+        new Chart(ctx).Pie(data, {
+            animationEasing: 'easeOutQuart',
+            animationSteps: 15
+        });
     }
 
 
@@ -221,7 +221,7 @@
 
         _.each(table.indicators, function(indicator){
             aoColumns.push({
-                sTitle: NMIS.indicators[indicator].name
+                sTitle: indicator_name(indicator)
             });
         });
         
@@ -251,7 +251,7 @@
     }
 
 
-    function show_facility_modal(facility){
+    function facility_modal(facility){
         var template = $('#facility_modal_template').html();
         var html = _.template(template, {
             NMIS: NMIS,
@@ -263,20 +263,20 @@
         $('#facility_modal').modal();
         $('.facility_table_selector').change(function(){
             var index = parseInt(this.value);
-            show_facility_table(facility, index);
+            facility_table(facility, index);
         });
-        show_facility_table(facility, 0);
+        facility_table(facility, 0);
     }
 
 
-    function show_facility_table(facility, index){
+    function facility_table(facility, index){
         var aoColumns = [{sTitle: 'Indicator'}, {sTitle: 'Value'}];
         var table = NMIS.facility_tables[facility.sector][index];
         var aaData = [];
 
         _.each(table.indicators, function(indicator){
             aaData.push([
-                NMIS.indicators[indicator].name,
+                indicator_name(indicator),
                 format_value(facility[indicator])
             ]);
         });
@@ -315,19 +315,29 @@
         var template = $(template_id).html();
         context.NMIS = NMIS;
         context.format_value = format_value;
+        context.indicator_name = indicator_name;
         var html = _.template(template, context);
         $('#content .content').html(html);
     }
 
 
     function format_value(value){
+        // Formats indicator values for use in tables
         if (typeof value === 'undefined' ||
             value === null) return '-';
         if (value === true) return 'Yes';
         if (value === false) return 'No';
         if (_.isNumber(value) && value % 1 !== 0)
             return value.toFixed(2);
+        if (_.isString(value))
+            return value[0].toUpperCase() + value.substr(1);
         return value;
+    }
+
+
+    function indicator_name(indicator){
+        var indicator = NMIS.indicators[indicator];
+        return indicator ? indicator.name : indicator;
     }
 })();
 
