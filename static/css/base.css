@@ -11,7 +11,7 @@ body {
     position: relative;
     background: #fff;
     padding: 10px 30px 60px;
-    margin-top: 180px;
+    margin-top: 140px;
     margin-bottom: 80px;
 }
 
@@ -80,6 +80,7 @@ body {
 /* Dashboard.html, LGA & Zone Navigation
 ========================================*/
 .lga_nav {
+    display: none;
     background: #eee;
     padding: 10px;
     border-bottom: 1px solid #ddd;
