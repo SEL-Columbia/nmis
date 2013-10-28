@@ -54,7 +54,7 @@
         var map_div = $('.map')[0];
         var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
         var map_zoom = 9;
-        var summary_map = L.map(map_div, {})
+        var summary_map = L.map(map_div, {scrollWheelZoom: false})
                 .setView(lat_lng, map_zoom);
         var tile_server = 'http://{s}.tiles.mapbox.com/v3/' +
             'modilabs.nigeria_base/{z}/{x}/{y}.png';
@@ -127,7 +127,7 @@
         var map_div = $(".facility_map")[0];
         var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
         var map_zoom = 10; //TODO: adding nw and se for bounding box
-        var facility_map = new L.Map(map_div, { })
+        var facility_map = new L.Map(map_div, {scrollWheelZoom: false})
             .setView(lat_lng, map_zoom);
         var tileset = "nigeria_overlays_white";
         var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs." + tileset +
