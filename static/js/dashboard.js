@@ -84,7 +84,7 @@
         $('.pie_chart_selector').change(function(){
             if (this.value){
                 $('.map_view_legend').show();
-                pie_chart(lga, sector, this.value);
+                map_legend(lga, sector, this.value);
             } else {
                 $('.map_view_legend').hide();
             }
@@ -177,7 +177,7 @@
     }
 
 
-    function pie_chart(lga, sector, indicator){
+    function map_legend(lga, sector, indicator){
         var ctx = $('.map_view_legend canvas')[0].getContext('2d');        
         var trues = 0;
         var falses = 0;
@@ -207,6 +207,11 @@
             animationEasing: 'easeOutQuart',
             animationSteps: 15
         });
+
+        $('.map_view_legend .info').html(
+            '<h4>' + indicator_name(indicator) + 
+            ' (' + trues + '/' + total + ')</h4>'
+            + NMIS.indicators[indicator].description);
     }
 
 
