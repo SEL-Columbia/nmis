@@ -33,7 +33,7 @@
             active_view: active_view,
             sector: sector
         });
-        $('#lga_nav').html(html);
+        $('.lga_nav').html(html);
     }
 
 
