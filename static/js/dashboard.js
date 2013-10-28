@@ -54,7 +54,7 @@
         var map_div = $('.map')[0];
         var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
         var map_zoom = 9;
-        var summary_map = L.map(map_div, {})
+        var summary_map = L.map(map_div, {scrollWheelZoom: false})
                 .setView(lat_lng, map_zoom);
         var tile_server = 'http://{s}.tiles.mapbox.com/v3/' +
             'modilabs.nigeria_base/{z}/{x}/{y}.png';
@@ -82,7 +82,12 @@
         });
         facilities_map(lga, sector);
         $('.pie_chart_selector').change(function(){
-            pie_chart(lga, sector, this.value);
+            if (this.value){
+                $('.map_view_legend').show();
+                pie_chart(lga, sector, this.value);
+            } else {
+                $('.map_view_legend').hide();
+            }
         });
     }
 
@@ -122,7 +127,7 @@
         var map_div = $(".facility_map")[0];
         var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
         var map_zoom = 10; //TODO: adding nw and se for bounding box
-        var facility_map = new L.Map(map_div, { })
+        var facility_map = new L.Map(map_div, {scrollWheelZoom: false})
             .setView(lat_lng, map_zoom);
         var tileset = "nigeria_overlays_white";
         var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs." + tileset +
@@ -154,9 +159,10 @@
                 var popup = new L.Popup({closeButton: false})
                     .setContent(fac.facility_name || 'Water Point')
                     .setLatLng(lat_lng);
-                mark.on('click', function(){
-                    //TODO: mark making popup remain open
-                    //facility_modal(fac);
+                mark.on('click', function(wat){
+                    //TODO: dim all others
+                    //marker_highlight()
+                    facility_modal(fac);
                 });
                 mark.on('mouseover', mark.openPopup.bind(mark))
                     .on('mouseout', mark.closePopup.bind(mark))

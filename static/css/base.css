@@ -10,7 +10,7 @@ body {
 #content .container {
     position: relative;
     background: #fff;
-    padding: 10px 30px;
+    padding: 10px 30px 60px;
     margin-top: 120px;
     margin-bottom: 80px;
 }
@@ -206,17 +206,23 @@ body {
 
 
 
-/* Dashboard.html, Map View
+/* Dashboard.html
 =================================*/
-.pie_chart_selector {
+.page-header select {
     float: right;
     width: 250px;
 }
+
+
+
+/* Dashboard.html, Map View
+=================================*/
 .facility_map {
     position: relative;
     height: 600px;
 }
 .map_view_legend {
+    display: none;
     position: absolute;
     right: 20px;
     top: 20px;
