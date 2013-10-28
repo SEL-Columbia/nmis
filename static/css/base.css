@@ -224,14 +224,23 @@ body {
 .map_view_legend {
     display: none;
     position: absolute;
+    color: white;
     right: 20px;
     top: 20px;
     background: #111;
     background: rgba(0,0,0,0.5);
-    width: 280px;
+    width: 350px;
     padding: 10px;
     z-index: 50;
     border-radius: 7px;
+}
+.map_view_legend canvas {
+    float: left;
+}
+.map_view_legend .info {
+    float: left;
+    margin-left: 15px;
+    width: 235px;
 }
 
 
