@@ -40,6 +40,13 @@
 
 {% block content %}
     <div class="content"></div>
+    <div class="facility_map">
+        <div class="map_view_legend">
+            <canvas width="80" height="80"></canvas>
+            <div class="info"></div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
 
     <script id="lga_nav_template" type="text/html">
         <div class="container">
@@ -288,13 +295,6 @@
                 <%= lga.lga %>, <%= lga.state %>
             </h2>
             <div style="clear:both"></div>
-        </div>
-        <div class="facility_map">
-            <div class="map_view_legend">
-                <canvas width="80" height="80"></canvas>
-                <div class="info"></div>
-                <div style="clear:both"></div>
-            </div>
         </div>
     </script>
 

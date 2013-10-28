@@ -1,5 +1,6 @@
 (function(){
     var template_cache = {};
+    var facility_map_obj = false;
     
     $(function(){
         new Backbone.Router({
@@ -73,6 +74,32 @@
         });
     }
 
+    function facility_map_switcher(lga, sector) {
+        if(!facility_map_obj || facility_map_obj.lga !== lga) { 
+            facility_map_obj = {};
+            facility_map_obj.map = facilities_map(lga); 
+            facility_map_obj.lga = lga;
+            facility_map_obj.markers = {
+                water : mark_facilities(lga.facilities, 'water'),
+                education : mark_facilities(lga.facilities, 'education'),
+                health : mark_facilities(lga.facilities, 'health')
+            };
+            facility_map_obj.clean_layers = function() {
+                _.each(facility_map_obj.markers, function(layer){
+                    facility_map_obj.map.removeLayer(layer);
+                });
+            };
+        }
+        facility_map_obj.clean_layers();
+        if(sector === 'overview') {
+            facility_map_obj.markers.education.addTo(facility_map_obj.map);
+            facility_map_obj.markers.water.addTo(facility_map_obj.map);
+            facility_map_obj.markers.health.addTo(facility_map_obj.map);
+        } else {
+            facility_map_obj.markers[sector].addTo(facility_map_obj.map);
+        }
+    }
+
 
     function map_view(lga, sector){
         _lga_nav(lga, 'map', sector);
@@ -80,15 +107,25 @@
             lga: lga,
             chart_indicators: _chart_indicators(lga.facilities, sector)
         });
-        facilities_map(lga, sector);
+        facility_map_switcher(lga, sector);
         $('.pie_chart_selector').change(function(){
             if (this.value){
                 $('.map_view_legend').show();
                 map_legend(lga, sector, this.value);
+                map_icon_switch(lga, sector, this.value);
             } else {
                 $('.map_view_legend').hide();
+                facility_map_switcher(lga, sector);
+
             }
         });
+    }
+
+    function map_icon_switch(lga, sector, indicator) {
+        facility_map_obj.clean_layers();
+        facility_map_obj.markers.true_false_markers = mark_facilities(lga.facilities, 
+                sector, indicator);
+        facility_map_obj.markers.true_false_markers.addTo(facility_map_obj.map);
     }
 
 
@@ -123,7 +160,7 @@
     }
 
 
-    function facilities_map(lga, current_sector){
+    function facilities_map(lga){
         var map_div = $(".facility_map")[0];
         var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
         var map_zoom = 10; //TODO: adding nw and se for bounding box
@@ -143,23 +180,28 @@
         });
         ggl.addTo(facility_map);
         lga_layer.addTo(facility_map);
-        var marker_group = mark_facilities(lga.facilities, current_sector, facility_map);
-        marker_group.addTo(facility_map);
+        return facility_map;
     }
 
-    function mark_facilities(facilities, current_sector, map) {
+    function mark_facilities(facilities, sector, indicator) {
         var marker_group = new L.LayerGroup();
         _.each(facilities, function(fac){
-            if (fac.sector === current_sector || current_sector == 'overview') {
+            if (fac.sector === sector) {
                 var lat_lng = fac.gps.split(" ").slice(0,2);
-                var icon_url = 'static/images/icons_f/normal_' + 
-                    fac.sector + '.png';
+                var icon_url;
+                if (indicator) {
+                    icon_url = 'static/images/icons_f/' + 
+                        fac[indicator] +'.png';
+                } else {
+                    icon_url = 'static/images/icons_f/normal_' + 
+                        fac.sector + '.png';
+                }
                 var icon = new L.Icon({iconUrl: icon_url}); 
                 var mark = new L.Marker(lat_lng, {icon: icon});
                 var popup = new L.Popup({closeButton: false})
                     .setContent(fac.facility_name || 'Water Point')
                     .setLatLng(lat_lng);
-                mark.on('click', function(wat){
+                mark.on('click', function(){
                     facility_modal(fac);
                 });
                 mark.on('mouseover', mark.openPopup.bind(mark))
@@ -170,10 +212,6 @@
         });
         return marker_group;
     }
-
-    function marker_removal(){
-    }
-
 
     function map_legend(lga, sector, indicator){
         var ctx = $('.map_view_legend canvas')[0].getContext('2d');        
@@ -208,8 +246,8 @@
 
         $('.map_view_legend .info').html(
             '<h4>' + indicator_name(indicator) + 
-            ' (' + trues + '/' + total + ')</h4>'
-            + NMIS.indicators[indicator].description);
+            ' (' + trues + '/' + total + ')</h4>' +
+            NMIS.indicators[indicator].description);
     }
 
 
