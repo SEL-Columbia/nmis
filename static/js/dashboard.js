@@ -160,8 +160,6 @@
                     .setContent(fac.facility_name || 'Water Point')
                     .setLatLng(lat_lng);
                 mark.on('click', function(wat){
-                    //TODO: dim all others
-                    //marker_highlight()
                     facility_modal(fac);
                 });
                 mark.on('mouseover', mark.openPopup.bind(mark))
