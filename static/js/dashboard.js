@@ -138,11 +138,11 @@
         });
         ggl.addTo(facility_map);
         lga_layer.addTo(facility_map);
-        var marker_group = mark_facilities(lga.facilities, current_sector);
+        var marker_group = mark_facilities(lga.facilities, current_sector, facility_map);
         marker_group.addTo(facility_map);
     }
 
-    function mark_facilities(facilities, current_sector) {
+    function mark_facilities(facilities, current_sector, map) {
         var marker_group = new L.LayerGroup();
         _.each(facilities, function(fac){
             if (fac.sector === current_sector || current_sector == 'overview') {
@@ -155,10 +155,8 @@
                     .setContent(fac.facility_name || 'Water Point')
                     .setLatLng(lat_lng);
                 mark.on('click', function(){
-                    //TODO: dim all others
                     //TODO: mark making popup remain open
-                    //marker_highlight()
-                    facility_modal(fac);
+                    //facility_modal(fac);
                 });
                 mark.on('mouseover', mark.openPopup.bind(mark))
                     .on('mouseout', mark.closePopup.bind(mark))
@@ -255,7 +253,6 @@
             })
             .width('100%');
     }
-
 
     function facility_modal(facility){
         var template = $('#facility_modal_template').html();
