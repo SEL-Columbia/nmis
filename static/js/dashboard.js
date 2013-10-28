@@ -297,6 +297,7 @@
             .dataTable({
                 aaData: aaData,
                 aoColumns: aoColumns,
+                bFilter: false,
                 bPaginate: false,
                 bDestroy: true
             })
