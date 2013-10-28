@@ -271,7 +271,6 @@
                     <% _.each(chart_indicators, function(indicator){ %>
                         <option value="<%= indicator[0] %>">
                             <%= indicator[1] %>
-                            <% console.log(indicator); %>
                         </option>
                     <% }); %>
                 </select>
@@ -299,9 +298,9 @@
                     <% }); %>
                 </select>
             <% } %>
-            <h1>
+            <h2>
                 <%= lga.lga %>, <%= lga.state %>
-            </h1>
+            </h2>
         </div>
         <table id="facilities_data_table"></table>
     </script>
