@@ -1,8 +1,7 @@
-// $(function() {   // NON-DEBUGGING
-     var map, tileLayers;
+ $(function() {
+    var map, tileLayers;
     var mapLegend, currentlyDisplayedIndicator;
     
-$(function(){ // DEBUGGING VERSION
     map = newMDGsMap();
     tileLayers = {},
 
@@ -10,8 +9,6 @@ $(function(){ // DEBUGGING VERSION
         ['NMIS_gross_enrollment_ratio_secondary_education',
          'NMIS_percentage_households_with_access_to_improved_sanitation'],
         map);
-}); // DEBUGGING VERSION
-
     
     // Creates a new MDGs map (with nothing but centering information)
     function newMDGsMap() {
@@ -22,19 +19,16 @@ $(function(){ // DEBUGGING VERSION
             center: new L.LatLng(centroid.lat, centroid.lng),
             zoom: mapZoom,
         });
+        L.mapbox.tileLayer('modilabs.nigeria_base').addTo(map);
         mapLegend = L.mapbox.legendControl().addTo(map);
         return map;
     }
 
-    // Adds a tile layer per indicator in indicatorNames, as well as an
-    // extra: nigeria_base
+    // Creates layer per indicatorName and  adds it to tileLayers object
     function initTileLayersFromIndicatorNames(indicatorNames, map) {
-        //var mapboxURL = 'https://{s}.tiles.mapbox.com/v3/{user}.{map}/{z}/{x}/{y}.png';
-        var layers = indicatorNames.concat(['nigeria_base']);
-        layers.forEach(function(layerName) {
-            var thisLayer = L.mapbox.tileLayer('modilabs.' + layerName)
-                            .addTo(map);
-            tileLayers[layerName] = thisLayer;
+        indicatorNames.forEach(function(indicatorName) {
+            var thisLayer = L.mapbox.tileLayer('modilabs.' + indicatorName);
+            tileLayers[indicatorName] = thisLayer;
         });
     }
 
@@ -45,16 +39,16 @@ $(function(){ // DEBUGGING VERSION
 
         // justDisplayedIndicator doesn't exist on first change, no removals necessary
         if (justDisplayedIndicator) {
-            tileLayers[justDisplayedIndicator].bringToBack();
+            map.removeLayer(tileLayers[justDisplayedIndicator]);
             mapLegend.removeLegend(
                 tileLayers[justDisplayedIndicator].options.legend);
         }
 
-        tileLayers[currentlyDisplayedIndicator].bringToFront();
+        tileLayers[currentlyDisplayedIndicator].addTo(map);
         mapLegend.addLegend(
             tileLayers[currentlyDisplayedIndicator].options.legend);
     }
-// }); // NON-DEBUGGING VERSION
+});
 
 
 
