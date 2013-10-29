@@ -12,13 +12,14 @@
     <script src="/static/js/libs/jquery-1.10.2.min.js"></script>
     <script src="/static/leaflet/leaflet.js"></script>
     <script src="/static/js/mdgs.js"></script>
+    <script src="/static/js/libs/mapbox.js"></script>
 {% endblock %}
 
 {% block content %}
     <div class='country-view'>
         <div class='left-panel'>
-            <h1>Nigeria's process on the MDGs</h1>
-            <div class='mdg-map'>
+            <h1>Nigeria's progress on the MDGs</h1>
+            <div class='mdg-map' id='mdg-map'>
             </div>
         </div>
         <div class='right-panel'>

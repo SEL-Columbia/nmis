@@ -1,22 +1,54 @@
-$(function(){
-    leaflet_mdgs();
+ $(function() {
+    var map, tileLayers;
+    var mapLegend, currentlyDisplayedIndicator;
+    
+    map = newMDGsMap();
+    tileLayers = {},
+
+    initTileLayersFromIndicatorNames(
+        ['NMIS_gross_enrollment_ratio_secondary_education',
+         'NMIS_percentage_households_with_access_to_improved_sanitation'],
+        map);
+    
+    // Creates a new MDGs map (with nothing but centering information)
+    function newMDGsMap() {
+        //ex: NMIS_gross_enrollment_ratio_secondary_education
+        var centroid = {lat: 9.16718, lng: 7.53662};
+        var mapZoom = 6;
+        var map = L.map('mdg-map', {
+            center: new L.LatLng(centroid.lat, centroid.lng),
+            zoom: mapZoom,
+        });
+        L.mapbox.tileLayer('modilabs.nigeria_base').addTo(map);
+        mapLegend = L.mapbox.legendControl().addTo(map);
+        return map;
+    }
+
+    // Creates layer per indicatorName and  adds it to tileLayers object
+    function initTileLayersFromIndicatorNames(indicatorNames, map) {
+        indicatorNames.forEach(function(indicatorName) {
+            var thisLayer = L.mapbox.tileLayer('modilabs.' + indicatorName);
+            tileLayers[indicatorName] = thisLayer;
+        });
+    }
+
+    // Change indicator layer
+    function changeIndicator(indicatorName) {
+        var justDisplayedIndicator = currentlyDisplayedIndicator;
+        currentlyDisplayedIndicator = indicatorName;
+
+        // justDisplayedIndicator doesn't exist on first change, no removals necessary
+        if (justDisplayedIndicator) {
+            map.removeLayer(tileLayers[justDisplayedIndicator]);
+            mapLegend.removeLegend(
+                tileLayers[justDisplayedIndicator].options.legend);
+        }
+
+        tileLayers[currentlyDisplayedIndicator].addTo(map);
+        mapLegend.addLegend(
+            tileLayers[currentlyDisplayedIndicator].options.legend);
+    }
 });
 
-centroid = {lat: 9.16718,
-                 lng: 7.53662};
 
-function leaflet_mdgs(){
-    var map_div = $(".mdg-map")[0];
-    var lat_lng = new L.LatLng(centroid.lat, centroid.lng);
-    var map_zoom = 6;
-    var summary_map = L.map(map_div, {})
-            .setView(lat_lng, map_zoom);
-    var tileset = "nigeria_base";
-    var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs." +
-                      tileset +
-                      "/{z}/{x}/{y}.png";
-    L.tileLayer(tile_server, {
-        minZoom: 6,
-        maxZoom: 11
-    }).addTo(summary_map);
-}
+
