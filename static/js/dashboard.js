@@ -190,8 +190,14 @@
                 var lat_lng = fac.gps.split(" ").slice(0,2);
                 var icon_url;
                 if (indicator) {
-                    icon_url = 'static/images/icons_f/' + 
-                        fac[indicator] +'.png';
+                    if (fac[indicator] === true || 
+                        fac[indicator] === false) {
+                        icon_url = 'static/images/icons_f/' + 
+                            fac[indicator] +'.png';
+                    } else {
+                        icon_url = 'static/images/icons_f/' +
+                            'undefined.png';
+                    }
                 } else {
                     icon_url = 'static/images/icons_f/normal_' + 
                         fac.sector + '.png';
