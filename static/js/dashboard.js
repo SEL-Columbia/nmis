@@ -190,8 +190,15 @@ MapView.prototype.chart_indicators = function(facilities, sector){
 
 MapView.prototype.facility_map_switcher = function(lga, sector) {
     if(!facility_map_obj || facility_map_obj.lga !== lga) { 
-        facility_map_obj = {};
-        facility_map_obj.map = this.facilities_map(lga); 
+        if (!facility_map_obj) {
+            facility_map_obj = {};
+            facility_map_obj.map = this.facilities_map(lga);
+        } else {
+            facility_map_obj.clean_layers();
+            var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
+            var map_zoom = 10;
+            facility_map_obj.map.setView(lat_lng, map_zoom);
+        }
         facility_map_obj.lga = lga;
         facility_map_obj.markers = {
             water : this.mark_facilities(lga.facilities, 'water'),
