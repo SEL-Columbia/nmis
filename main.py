@@ -14,8 +14,8 @@ def load_json(name):
     path = os.path.join(cwd, 'static', 'data')
     file_path = os.path.join(path, name + '.json')
     with open(file_path, 'r') as f:
-        json = f.read()
-    return json
+        data = f.read()
+    return data
 
 
 @app.context_processor
