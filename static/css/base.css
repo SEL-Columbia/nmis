@@ -203,7 +203,8 @@ body {
 */
 .mdg-map {
     position: relative;
-    height: 600px;
+    height: 500px;
+    width: 670px;
 }
 .profile-box .map p.loading-message {
     font-style: italic;
