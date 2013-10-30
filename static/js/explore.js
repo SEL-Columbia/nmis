@@ -294,7 +294,7 @@ MapView.facility_modal = function(facility){
     var html = _.template(template, {
         NMIS: NMIS,
         facility: facility,
-        tables: NMIS.facility_tables[facility.sector]
+        tables: NMIS.table_view[facility.sector]
     });
     $('#facility_modal').remove();
     $('#content').append(html);
@@ -308,7 +308,7 @@ MapView.facility_modal = function(facility){
 
 MapView.facility_table = function(facility, index){
     var aoColumns = [{sTitle: 'Indicator'}, {sTitle: 'Value'}];
-    var table = NMIS.facility_tables[facility.sector][index];
+    var table = NMIS.table_view[facility.sector][index];
     var aaData = [];
 
     _.each(table.indicators, function(indicator){
