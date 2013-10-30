@@ -222,7 +222,8 @@
     <script id="lga_sector_template" type="text/html">
         <div class="page-header">
             <h2>
-                <%= lga.lga %>, <%= lga.state %> <%= sector[0].toUpperCase() + sector.slice(1) %>
+                <%= lga.lga %>, <%= lga.state %>
+                <%= sector[0].toUpperCase() + sector.slice(1) %>
             </h2>
         </div>
         <div class="nmis-sector-summary">
@@ -291,6 +292,7 @@
             <% } %>
             <h2>
                 <%= lga.lga %>, <%= lga.state %>
+                <%= sector[0].toUpperCase() + sector.slice(1) %>
             </h2>
             <div style="clear:both"></div>
         </div>
@@ -309,6 +311,7 @@
             <% } %>
             <h2>
                 <%= lga.lga %>, <%= lga.state %>
+                <%= sector[0].toUpperCase() + sector.slice(1) %>
             </h2>
         </div>
         <table id="facilities_data_table"></table>
