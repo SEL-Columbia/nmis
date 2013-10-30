@@ -290,6 +290,7 @@ MapView.mark_facilities = function(facilities, sector, indicator) {
 };
 
 MapView.facility_modal = function(facility){
+    var that = this;
     var template = $('#facility_modal_template').html();
     var html = _.template(template, {
         NMIS: NMIS,
@@ -301,7 +302,7 @@ MapView.facility_modal = function(facility){
     $('#facility_modal').modal();
     $('.facility_table_selector').change(function(){
         var index = parseInt(this.value);
-        this.facility_table(facility, index);
+        that.facility_table(facility, index);
     });
     this.facility_table(facility, 0);
 };
