@@ -25,10 +25,10 @@
         NMIS = {};
         NMIS.lgas = {};
         NMIS.zones = {{ zones|safe }};
-        NMIS.indicators = {{ indicators|safe }};
-        NMIS.lga_overview = {{ lga_overview|safe }};
-        NMIS.lga_sectors = {{ lga_sectors|safe }};
-        NMIS.facility_tables = {{ facility_tables|safe }};
+        NMIS.indicators = {{ load_json('indicators')|safe }};
+        NMIS.lga_overview = {{ load_json('lga_overview')|safe }};
+        NMIS.lga_view = {{ load_json('lga_view')|safe }};
+        NMIS.table_view = {{ load_json('table_view')|safe }};
     </script>
 {% endblock %}
 
@@ -97,7 +97,7 @@
         </div>
         <div id="zone-navigation">
             <div class="zone-nav">
-                <% _.each(NMIS.zones, function(zone){ %>
+                <% _.each(zones, function(zone){ %>
                     <div class="zl-wrap">
                         <div class="zone-list">
                             <h2 class="zone-title">
@@ -138,7 +138,7 @@
         <div class="profile-box">
             <div class="profile-box-inner">
                 <table>
-                    <% _.each(NMIS.lga_overview.overview, function(indicator){ %>
+                    <% _.each(lga_overview.overview, function(indicator){ %>
                         <tr>
                             <td>
                                 <%= indicator_name(indicator) %>
@@ -160,7 +160,7 @@
         </p>
         
         <div class="row">
-            <% _.each(NMIS.lga_overview.facility_overview, function(category){ %>
+            <% _.each(lga_overview.facility_overview, function(category){ %>
                 <div class="col-md-4">
                     <h3 class="mdg-underlined-title">
                         <%= category.name %>
@@ -193,7 +193,7 @@
             <div id="mdg-table-wrap">
                 <div class="mdg-tables">
                     <table class="mdg-table">
-                        <% _.each(NMIS.lga_overview.mdg_status, function(mdg){ %>
+                        <% _.each(lga_overview.mdg_status, function(mdg){ %>
                             <tbody>
                                 <tr>
                                     <td class="mdg_header" colspan="5">
@@ -219,7 +219,7 @@
         </div>
     </script>
 
-    <script id="lga_sector_template" type="text/html">
+    <script id="lga_view_template" type="text/html">
         <div class="page-header">
             <h2>
                 <%= lga.lga %>, <%= lga.state %>
@@ -230,7 +230,7 @@
             <div class="non-gap">
                 <table style="width:100%" class="mdg-table">
                     <tbody>
-                        <% _.each(NMIS.lga_sectors[sector], function(section){ %>
+                        <% _.each(lga_view[sector], function(section){ %>
                             <tr>
                                 <th class="indheader mdg_header" colspan="2">
                                     <%= section.name %>

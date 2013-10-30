@@ -93,7 +93,7 @@ function indicator_name(indicator){
 // Views
 // ============
 function index(){
-    render('#index_template', {});
+    render('#index_template', {zones: NMIS.zones});
     $('#zone-navigation .state-link').click(function(){
         $(this).next('.lga-list').toggle();
         return false;
@@ -107,11 +107,15 @@ LGAView.render = function(lga, sector){
     render_nav(lga, 'lga', sector);
 
     if (sector === 'overview'){
-        render('#lga_overview_template', {lga: lga});
+        render('#lga_overview_template', {
+            lga: lga,
+            lga_overview: NMIS.lga_overview
+        });
         this.overview_map(lga);
     } else {
-        render('#lga_sector_template', {
+        render('#lga_view_template', {
             lga: lga,
+            lga_view: NMIS.lga_view,
             sector: sector
         });
     }
@@ -370,7 +374,7 @@ TableView.render = function(lga, sector){
     render('#table_view_template', {
         lga: lga,
         sector: sector,
-        tables: NMIS.facility_tables[sector]
+        tables: NMIS.table_view[sector]
     });
 
     var that = this;
@@ -383,7 +387,7 @@ TableView.render = function(lga, sector){
 
 TableView.show_table = function(sector, table_index, facilities){
     var aoColumns = [];
-    var table = NMIS.facility_tables[sector][table_index];
+    var table = NMIS.table_view[sector][table_index];
 
     _.each(table.indicators, function(indicator){
         aoColumns.push({

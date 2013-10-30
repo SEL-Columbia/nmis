@@ -64,10 +64,7 @@ def explore():
 
     return flask.render_template('explore.html', 
         zones=json.dumps(sorted_zones),
-        indicators=load_json('indicators'),
-        lga_overview=load_json('lga_overview'),
-        lga_sectors=load_json('lga_sectors'),
-        facility_tables=load_json('facility_tables'))
+        load_json=load_json)
 
 @app.errorhandler(404)
 def not_found(error):
