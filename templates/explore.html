@@ -1,0 +1,349 @@
+{% extends "base.html" %}
+
+
+{% block css %}
+    <link href="/static/datatables/css/jquery.dataTables.css" media="all" rel="stylesheet" type="text/css">
+    <link href="/static/leaflet/leaflet.css" media="all" rel="stylesheet" type="text/css">
+    <style>
+        .lga_nav {
+            display: block;
+        }
+        #content .container {
+            margin-top: 180px;
+        }
+    </style>
+{% endblock %}
+
+
+{% block js %}
+    <script src="/static/js/libs/backbone-min.js"></script>
+    <script src="/static/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="/static/leaflet/leaflet.js"></script>
+    <script src="/static/js/libs/Chart.min.js"></script>
+    <script src="/static/js/explore.js"></script>
+    <script>
+        NMIS = {};
+        NMIS.lgas = {};
+        NMIS.zones = {{ zones|safe }};
+        NMIS.indicators = {{ load_json('indicators')|safe }};
+        NMIS.lga_overview = {{ load_json('lga_overview')|safe }};
+        NMIS.lga_view = {{ load_json('lga_view')|safe }};
+        NMIS.table_view = {{ load_json('table_view')|safe }};
+    </script>
+{% endblock %}
+
+
+{% block nav_explore %}active{% endblock %}
+
+
+{% block content %}
+    <div class="content"></div>
+    <div class="facility_map">
+        <div class="map_view_legend">
+            <canvas width="80" height="80"></canvas>
+            <div class="info"></div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+    <script id="lga_nav_template" type="text/html">
+        <div class="container">
+            <ul class="nav nav-pills">
+                <li <% if (active_view === 'lga'){ %>class="active"<% } %>>
+                    <a href="#<%= lga.unique_lga %>/lga_<%= sector %>">
+                        Overview
+                    </a>
+                </li>
+                <li <% if (active_view === 'map'){ %>class="active"<% } %>>
+                    <a href="#<%= lga.unique_lga %>/map_<%= sector %>">
+                        Map View
+                    </a>
+                </li>
+                <li <% if (active_view === 'table'){ %>class="active"<% } %>>
+                    <a href="#<%= lga.unique_lga %>/table_<%= sector %>">
+                        Table View
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills nav_sectors">
+                <li <% if (sector === 'overview'){ %>class="active"<% } %>>
+                    <a href="#<%= lga.unique_lga %>/<%= active_view %>_overview">
+                        All Sectors
+                    </a>
+                </li>
+                <li <% if (sector === 'health'){ %>class="active"<% } %>>
+                    <a href="#<%= lga.unique_lga %>/<%= active_view %>_health">
+                        Health
+                    </a>
+                </li>
+                <li <% if (sector === 'education'){ %>class="active"<% } %>>
+                    <a href="#<%= lga.unique_lga %>/<%= active_view %>_education">
+                        Education
+                    </a>
+                </li>
+                <li <% if (sector === 'water'){ %>class="active"<% } %>>
+                    <a href="#<%= lga.unique_lga %>/<%= active_view %>_water">
+                        Water
+                    </a>
+                </li>
+            </ul>
+            <div style="clear:both"></div>
+        </div>
+    </script>
+
+    <script id="index_template" type="text/html">
+        <div class="page-header">
+            <h2>Nigeria</h2>
+        </div>
+        <div id="zone-navigation">
+            <div class="zone-nav">
+                <% _.each(zones, function(zone){ %>
+                    <div class="zl-wrap">
+                        <div class="zone-list">
+                            <h2 class="zone-title">
+                                <%= zone[0] %>
+                            </h2>
+                            <ul>
+                                <% _.each(zone[1], function(state){ %>
+                                    <li>
+                                        <a class="state-link">
+                                            <%= state[0] %>
+                                        </a>
+                                        <ul class="lga-list">
+                                            <% _.each(state[1], function(lga){ %>
+                                                <li>
+                                                    <a href="#<%= lga[1] %>/lga_overview">
+                                                        <%= lga[0] %>
+                                                    </a>
+                                                </li>
+                                            <% }); %>
+                                        </ul>
+                                    </li>
+                                <% }); %>
+                            </ul>
+                        </div>
+                    </div>
+                <% }); %>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </script>
+
+    <script id="lga_overview_template" type="text/html">
+        <div class="page-header">
+            <h2>
+                <%= lga.lga %>, <%= lga.state %> Overview
+            </h2>
+        </div>
+        <div class="profile-box">
+            <div class="profile-box-inner">
+                <table>
+                    <% _.each(lga_overview.overview, function(indicator){ %>
+                        <tr>
+                            <td>
+                                <%= indicator_name(indicator) %>
+                            </td>
+                            <td>
+                                <%= format_value(lga[indicator]) %>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </table>
+            </div>
+            <div class="map"></div>
+        </div>
+
+        <h3>LGA Overview</h3>
+        
+        <p style="font-style:italic;">
+            Below are data from the baseline facility surveys.
+        </p>
+        
+        <div class="row">
+            <% _.each(lga_overview.facility_overview, function(category){ %>
+                <div class="col-md-4">
+                    <h3 class="mdg-underlined-title">
+                        <%= category.name %>
+                    </h3>
+                    <table class="mdg-table">
+                        <tbody>
+                            <% _.each(category.rows, function(indicator){ %>
+                                <tr>
+                                    <td>
+                                        <%= indicator_name(indicator) %>
+                                    </td>
+                                    <td>
+                                        <%= format_value(lga[indicator]) %>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            <% }); %>
+        </div>
+
+        <h3>MDG Status</h3>
+
+        <p style="font-style:italic;">
+            Below are data collected from HNLSS, DHS, and other sources.
+        </p>
+        
+        <div class="span18">
+            <div id="mdg-table-wrap">
+                <div class="mdg-tables">
+                    <table class="mdg-table">
+                        <% _.each(lga_overview.mdg_status, function(mdg){ %>
+                            <tbody>
+                                <tr>
+                                    <td class="mdg_header" colspan="5">
+                                        <%= mdg.header %>
+                                    </td>
+                                </tr>
+                                <% _.each(mdg.rows, function(indicator){ %>
+                                    <tr>
+                                        <td class="empty" colspan="2"></td>
+                                        <td>
+                                            <%= indicator_name(indicator) %>
+                                        </td>
+                                        <td class="data">
+                                            <%= format_value(lga[indicator]) %>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        <% }); %>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script id="lga_view_template" type="text/html">
+        <div class="page-header">
+            <h2>
+                <%= lga.lga %>, <%= lga.state %>
+                <%= sector[0].toUpperCase() + sector.slice(1) %>
+            </h2>
+        </div>
+        <div class="nmis-sector-summary">
+            <div class="non-gap">
+                <table style="width:100%" class="mdg-table">
+                    <tbody>
+                        <% _.each(lga_view[sector], function(section){ %>
+                            <tr>
+                                <th class="indheader mdg_header" colspan="2">
+                                    <%= section.name %>
+                                </th>
+                                <th class="indheader mdg_header flush-right">
+                                    Current
+                                </th>
+                            </tr>
+                            <% _.each(section.rows, function(indicator){ %>
+                                <% if (_.isString(indicator)) { %>
+                                    <tr>
+                                        <td class="empty-first empty bb"></td>
+                                        <td class="indicator-name bb">
+                                            <%= indicator_name(indicator) %>
+                                        </td>
+                                        <td class="indvalue bb">
+                                            <%= format_value(lga[indicator]) %>
+                                        </td>
+                                    </tr>
+                                <% } else { %>
+                                    <% var sub_section = indicator; %>
+                                    <tr>
+                                        <td class="empty-first empty bb"></td>
+                                        <td class="empty indheader mdg_header">
+                                            <%= sub_section.name %>
+                                        </td>
+                                    </tr>
+                                    <% _.each(sub_section.rows, function(indicator){ %>
+                                        <tr>
+                                            <td class="empty-first empty bb"></td>
+                                            <td class="indicator-name bb">
+                                                <%= indicator_name(indicator) %>
+                                            </td>
+                                            <td class="indvalue bb">
+                                                <%= format_value(lga[indicator]) %>
+                                            </td>
+                                        </tr>
+                                    <% }); %>
+                                <% } %>
+                            <% }); %>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </script>
+
+    <script id="map_view_template" type="text/html">
+        <div class="page-header">
+            <% if (chart_indicators.length > 1){ %>
+                <select class="pie_chart_selector form-control">
+                    <option value="">Filter by Indicator</option>
+                    <% _.each(chart_indicators, function(indicator){ %>
+                        <option value="<%= indicator[0] %>">
+                            <%= indicator[1] %>
+                        </option>
+                    <% }); %>
+                </select>
+            <% } %>
+            <h2>
+                <%= lga.lga %>, <%= lga.state %>
+                <%= sector[0].toUpperCase() + sector.slice(1) %>
+            </h2>
+            <div style="clear:both"></div>
+        </div>
+    </script>
+
+    <script id="table_view_template" type="text/html">
+        <div class="page-header">
+            <% if (tables.length > 1){ %>
+                <select class="facilities_table_selector form-control">
+                    <% _.each(tables, function(value, index){ %>
+                        <option value="<%= index %>">
+                            <%= value.name %>
+                        </option>
+                    <% }); %>
+                </select>
+            <% } %>
+            <h2>
+                <%= lga.lga %>, <%= lga.state %>
+                <%= sector[0].toUpperCase() + sector.slice(1) %>
+            </h2>
+        </div>
+        <table id="facilities_data_table"></table>
+    </script>
+
+    <script id="facility_modal_template" type="text/html">
+        <div id="facility_modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">
+                            <%= facility.facility_name || 'Water Point' %>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <img src="https://formhub.org/attachment/small?media_file=ossap/attachments/<%= facility.formhub_photo_id %>">
+                        <% if (tables.length > 1){ %>
+                            <select class="facility_table_selector form-control">
+                                <% _.each(tables, function(value, index){ %>
+                                    <option value="<%= index %>">
+                                        <%= value.name %>
+                                    </option>
+                                <% }); %>
+                            </select>
+                        <% } %>
+                        <table class="facility_table"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+{% endblock %}
+
+

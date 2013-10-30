@@ -1,114 +1,63 @@
-{% load i18n %}
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
-
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <!-- todo: replace site_title with page_title -->
-	<title>
-	  {{ site_title|default:"Nigeria MDG Information System" }}
-	</title>
-	{% load compress %}
-	{% compress css %}
-		<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
-		<link rel="stylesheet" href="/static/css/jquery-ui.custom.css" type="text/css" media="all" charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="/static/css/base.css">
-		<link rel="stylesheet" href="/static/css/chosen.css" type="text/css" media="all" charset="utf-8">
-	{% endcompress %}
-	{% block css %}{% endblock %}
-	<script src="/static/js/libs/modernizr.min.js" type="text/javascript" charset="utf-8"></script>
-	{% block head %}{% endblock %}
+    {% block title %}
+        <title>Nigeria MDG Information System</title>
+    {% endblock %}
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/selectize.bootstrap2.css" type="text/css" media="all" charset="utf-8">
+    {% block css %}{% endblock %}
+    <script src="/static/js/libs/jquery-1.10.2.min.js"></script>
+    <script src="/static/js/libs/underscore-min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/libs/selectize.min.js"></script>
+    <script>
+        $(function(){
+            $('#lga_search').selectize({
+                onItemAdd: function(value){
+                    location.href = '/explore#' + value + '/lga_overview';
+                    this.clear();
+                    return false;
+                }  
+            });
+        });
+    </script>
+    {% block js %}{% endblock %}
 </head>
-<body class="nmis home">
-	<div class="topbar">
-		<div class="fill">
-			<div class="container">
-				<div class="row">
-					<a class="brand" href="/">
-						<span class="logo">
-							<img src="/static/images/nmis_pilot.png">
-						</span>
-						Nigeria MDG Information System
-					</a>
-					<p class="pull-right print-hide-block">
-					{% if user.is_authenticated %}
-						Logged in as {{user.username}}
-							(&nbsp;<a href="{% url auth_logout %}">{% trans "Log out" %}</a>
-                                    | <a href="{% url auth_password_change %}">{% trans "Change password" %}</a>
-                                    | <a href="http://nmis.tenderapp.com/">{% trans "Help" %}</a>&nbsp;)
-					{% else %}
-						<a href="{% url auth_login %}">{% trans "Log in" %}</a>
-		                        | <a href="http://nmis.tenderapp.com/">{% trans "Help" %}</a>
-					{% endif %}
-					</p>
-					<div style="" class="lga-nav">
-					<form action="/~/" method="POST">
-						<div>
-							<select id="lga-select" name="lga" title="Select an LGA">
-								{% for statename, lgas in active_districts %}
-								<optgroup label="{{statename}}">
-									{% for lganame, lgaid in lgas %}
-										<option value="{{lgaid}}">{{lganame}}</option>
-									{% endfor %}
-								</optgroup>
-								{% endfor %}
-							</select>
-							<script type="text/javascript" charset="utf-8">
-							var lgaId = (function(_){return _})({{lga_id|safe}});
-							</script>
-							 {% csrf_token %}
-							<input type="submit" value="GO">
-						</div>
-					</form>
-					</div>
-				</div>
-				<div class="nav">
-					<a class="{% block nav_about %}{% endblock %}" href="/about">About</a>
-					<a class="{% block nav_dashboard %}{% endblock %}" href="/dashboard">Explore Facilities</a>
-					<a class="{% block nav_download %}{% endblock %}" href="/download">Download Data</a>
-					<a class="{% block nav_mdgs %}{% endblock %}" href="/mdgs">MDGs in Nigeria</a>
-				</div>
-				<div style="clear:both"></div>
-			</div>
-		</div>
-	</div>
-	<div id="content" class="container">
-		<div class="content">
-			{% block content %}{% endblock %}
-		</div>
-	</div>
-	{% if site_title %}
-	<script type="text/javascript" charset="utf-8">
-		var siteTitle = "{{site_title}}";
-	</script>
-	{% endif %}
-    <script src="/static/js/libs/raphael/raphael.min.js" type="text/javascript" charset="utf-8"></script>
-	{% compress js %}
-	<script src="/static/js/libs/jquery-1.7.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/static/js/libs/jquery.ui-custom.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/static/js/libs/underscore.min.js"></script>
-	<script type="text/javascript" src="/static/js/libs/sammy.js"></script>
-	<script src="/static/js/libs/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" src="/static/js/libs/jquery.chosen.min.js"></script>
-	<script type="text/javascript" src="/static/js/libs/jquery.inDom.js"></script>
-	{% endcompress %}
-	{% compress js %}
-	<script type="text/coffeescript" src="/static/coffee/jquery_underscore_templates.coffee"></script>
-	<script type="text/coffeescript" src="/static/coffee/jquery-when_O.coffee"></script>
-	<script type="text/coffeescript" src="/static/coffee/csv.coffee"></script>
-	<script type="text/coffeescript" src="/static/coffee/debug.coffee"></script>
-	<script type="text/javascript" src="/static/js/libs/raphael/graphael.min.js" charset="utf-8"></script>
-	<script type="text/javascript" src="/static/js/libs/raphael/graphael.pie.min.js" charset="utf-8"></script>
-	{% endcompress %}
-	{% block js %}{% endblock %}
-	{% block scripts %}{% endblock %}
-	<script src="/static/js/libs/jquery.dataTables.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/static/js/libs/jquery.dataTables.typeFilter.js" type="text/javascript" charset="utf-8"></script>
-
-	{% block footer %}{% endblock %}
-	{% if preview_link %}
-	<a href="{{preview_link}}" class="beta-preview"><span>View Beta Site</span> *</a>
-	{% endif %}
+<body>
+    <div class="topbar">
+        <div class="container">
+            <a class="brand" href="/">
+                <span class="logo">
+                    <img src="/static/images/nmis_pilot.png">
+                </span>
+                Nigeria MDG Information System
+            </a>
+            <select id="lga_search" placeholder="Select LGA">
+                <option value="">Select an LGA</option>
+                {% for lga_name, unique_lga in lgas %}
+                    <option value="{{ unique_lga }}">{{ lga_name }}</option>
+                {% endfor %}
+            </select>
+            <div class="pagenav">
+                <a class="{% block nav_about %}{% endblock %}" href="/about">About</a>
+                <a class="{% block nav_explore %}{% endblock %}" href="/explore">Explore Facilities</a>
+                <a class="{% block nav_download %}{% endblock %}" href="/download">Download Data</a>
+                <a class="{% block nav_mdgs %}{% endblock %}" href="/mdgs">MDGs in Nigeria</a>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div class="lga_nav"></div>
+    </div>
+    <div id="content">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    {% block footer %}{% endblock %}
 </body>
 </html>
+
+
+
