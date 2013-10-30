@@ -225,6 +225,10 @@ body {
 
 /* Dashboard.html, Map View
 =================================*/
+.leaflet-top, .leaflet-bottom {
+    z-index: 50 !important;
+}
+
 .facility_map {
     position: relative;
     height: 600px;
