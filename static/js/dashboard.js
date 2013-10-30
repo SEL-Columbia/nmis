@@ -6,18 +6,18 @@ $(function(){
     new Backbone.Router({
         routes: {
             '': index,
-            ':unique_lga/lga_overview': new LGAView('overview'),
-            ':unique_lga/lga_health': new LGAView('health'),              
-            ':unique_lga/lga_education': new LGAView('education'),
-            ':unique_lga/lga_water': new LGAView('water'),
-            ':unique_lga/map_overview': new MapView('overview'),
-            ':unique_lga/map_health': new MapView('health'),
-            ':unique_lga/map_education': new MapView('education'),  
-            ':unique_lga/map_water': new MapView('water'),  
-            ':unique_lga/table_overview': new TableView('overview'),
-            ':unique_lga/table_health': new TableView('health'),
-            ':unique_lga/table_education': new TableView('education'),
-            ':unique_lga/table_water': new TableView('water')
+            ':unique_lga/lga_overview': view(LGAView, 'overview'),
+            ':unique_lga/lga_health': view(LGAView, 'health'),              
+            ':unique_lga/lga_education': view(LGAView, 'education'),
+            ':unique_lga/lga_water': view(LGAView, 'water'),
+            ':unique_lga/map_overview': view(MapView, 'overview'),
+            ':unique_lga/map_health': view(MapView, 'health'),
+            ':unique_lga/map_education': view(MapView, 'education'),  
+            ':unique_lga/map_water': view(MapView, 'water'),  
+            ':unique_lga/table_overview': view(TableView, 'overview'),
+            ':unique_lga/table_health': view(TableView, 'health'),
+            ':unique_lga/table_education': view(TableView, 'education'),
+            ':unique_lga/table_water': view(TableView, 'water')
         }
     });
     Backbone.history.start();
@@ -27,6 +27,23 @@ $(function(){
 
 // Helper Functions
 // =================
+function view(viewObj, sector){
+    // Wrapper for LGA based views. Fetches the appropriate 
+    // LGA JSON data before calling the render() function of a view.
+    return function(unique_lga){
+        var lga = NMIS.lgas[unique_lga];
+        if (lga){
+            viewObj.render(lga, sector);
+        } else {
+            var url = '/static/lgas/' + unique_lga + '.json';
+            $.getJSON(url, function(lga){
+                NMIS.lgas[unique_lga] = lga;
+                viewObj.render(lga, sector);
+            });
+        }
+    }
+}
+
 function render_nav(lga, active_view, sector){
     // Renders the LGA navigation bar
     var template = $('#lga_nav_template').html();
@@ -83,30 +100,8 @@ function index(){
 
 
 
-function View(sector){
-    // Base constructor for LGA based views. Returns a function which
-    // wraps the fetching of LGA JSON data before rendering a view.
-    var that = this;
-    return function(unique_lga){
-        var lga = NMIS.lgas[unique_lga];
-        if (lga){
-            that.render(lga, sector);
-        } else {
-            var url = '/static/lgas/' + unique_lga + '.json';
-            $.getJSON(url, function(lga){
-                NMIS.lgas[unique_lga] = lga;
-                that.render(lga, sector);
-            });
-        }
-    }
-};
-
-
-
-function LGAView(sector){
-    return View.call(this, sector);
-}
-LGAView.prototype.render = function(lga, sector){
+var LGAView = {};
+LGAView.render = function(lga, sector){
     render_nav(lga, 'lga', sector);
 
     if (sector === 'overview'){
@@ -119,7 +114,7 @@ LGAView.prototype.render = function(lga, sector){
         });
     }
 };
-LGAView.prototype.overview_map = function(lga){
+LGAView.overview_map = function(lga){
     var map_div = $('.map')[0];
     var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
     var map_zoom = 9;
@@ -135,10 +130,8 @@ LGAView.prototype.overview_map = function(lga){
 
 
 
-function MapView(sector){
-    return View.call(this, sector);
-}
-MapView.prototype.render = function(lga, sector){
+var MapView = {};
+MapView.render = function(lga, sector){
     var self = this;
     render_nav(lga, 'map', sector);
     render('#map_view_template', {
@@ -158,7 +151,7 @@ MapView.prototype.render = function(lga, sector){
     });
 };
 
-MapView.prototype.chart_indicators = function(facilities, sector){
+MapView.chart_indicators = function(facilities, sector){
     // Iterates through facilities within a sector to find
     // indicators which contain boolean values.
     // Returns a list of [indicator, indicator_name]
@@ -188,7 +181,7 @@ MapView.prototype.chart_indicators = function(facilities, sector){
     return chart_indicators;
 };
 
-MapView.prototype.facility_map_switcher = function(lga, sector) {
+MapView.facility_map_switcher = function(lga, sector) {
     if(!facility_map_obj || facility_map_obj.lga !== lga) { 
         if (!facility_map_obj) {
             facility_map_obj = {};
@@ -221,14 +214,14 @@ MapView.prototype.facility_map_switcher = function(lga, sector) {
     }
 }
 
-MapView.prototype.map_icon_switch = function(lga, sector, indicator) {
+MapView.map_icon_switch = function(lga, sector, indicator) {
     facility_map_obj.clean_layers();
     facility_map_obj.markers.true_false_markers = this.mark_facilities(lga.facilities, 
             sector, indicator);
     facility_map_obj.markers.true_false_markers.addTo(facility_map_obj.map);
 };
 
-MapView.prototype.facilities_map = function(lga){
+MapView.facilities_map = function(lga){
     var map_div = $(".facility_map")[0];
     var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
     var map_zoom = 10; //TODO: adding nw and se for bounding box
@@ -251,7 +244,7 @@ MapView.prototype.facilities_map = function(lga){
     return facility_map;
 };
 
-MapView.prototype.mark_facilities = function(facilities, sector, indicator) {
+MapView.mark_facilities = function(facilities, sector, indicator) {
     var that = this;
     var marker_group = new L.LayerGroup();
     _.each(facilities, function(fac){
@@ -288,7 +281,7 @@ MapView.prototype.mark_facilities = function(facilities, sector, indicator) {
     return marker_group;
 };
 
-MapView.prototype.facility_modal = function(facility){
+MapView.facility_modal = function(facility){
     var template = $('#facility_modal_template').html();
     var html = _.template(template, {
         NMIS: NMIS,
@@ -305,7 +298,7 @@ MapView.prototype.facility_modal = function(facility){
     this.facility_table(facility, 0);
 };
 
-MapView.prototype.facility_table = function(facility, index){
+MapView.facility_table = function(facility, index){
     var aoColumns = [{sTitle: 'Indicator'}, {sTitle: 'Value'}];
     var table = NMIS.facility_tables[facility.sector][index];
     var aaData = [];
@@ -328,7 +321,7 @@ MapView.prototype.facility_table = function(facility, index){
         .width('100%'); 
 };
 
-MapView.prototype.map_legend = function(lga, sector, indicator){
+MapView.map_legend = function(lga, sector, indicator){
     var ctx = $('.map_view_legend canvas')[0].getContext('2d');        
     var trues = 0;
     var falses = 0;
@@ -367,10 +360,8 @@ MapView.prototype.map_legend = function(lga, sector, indicator){
 
 
 
-function TableView(sector){
-    return View.call(this, sector);
-}
-TableView.prototype.render = function(lga, sector){
+var TableView = {};
+TableView.render = function(lga, sector){
     render_nav(lga, 'table', sector);
     render('#table_view_template', {
         lga: lga,
@@ -385,7 +376,7 @@ TableView.prototype.render = function(lga, sector){
     this.show_table(sector, 0, lga.facilities);
 };
 
-TableView.prototype.show_table = function(sector, table_index, facilities){
+TableView.show_table = function(sector, table_index, facilities){
     var aoColumns = [];
     var table = NMIS.facility_tables[sector][table_index];
 
