@@ -33,11 +33,13 @@ function view(viewObj, sector){
     return function(unique_lga){
         var lga = NMIS.lgas[unique_lga];
         if (lga){
+            $('.facility_map').hide();
             viewObj.render(lga, sector);
         } else {
             var url = '/static/data/lgas/' + unique_lga + '.json';
             $.getJSON(url, function(lga){
                 NMIS.lgas[unique_lga] = lga;
+                $('.facility_map').hide();
                 viewObj.render(lga, sector);
             });
         }
@@ -136,8 +138,10 @@ MapView.render = function(lga, sector){
     render_nav(lga, 'map', sector);
     render('#map_view_template', {
         lga: lga,
+        sector: sector,
         chart_indicators: this.chart_indicators(lga.facilities, sector)
     });
+    $('.facility_map').show();
     this.facility_map_switcher(lga, sector);
     $('.pie_chart_selector').change(function(){
         if (this.value){
@@ -365,6 +369,7 @@ TableView.render = function(lga, sector){
     render_nav(lga, 'table', sector);
     render('#table_view_template', {
         lga: lga,
+        sector: sector,
         tables: NMIS.facility_tables[sector]
     });
 
@@ -391,7 +396,10 @@ TableView.show_table = function(sector, table_index, facilities){
         if (facility.sector === sector || sector === 'overview'){
             var facility_data = [];
             _.each(table.indicators, function(indicator){
-                var value = format_value(facility[indicator]);
+                var value = facility[indicator];
+                if (!value && facility.sector === 'water')
+                    value = 'Water Point';
+                value = format_value(value);
                 facility_data.push(value);
             });
             aaData.push(facility_data);
