@@ -1,8 +1,8 @@
 $(function(){
-    map_init();
+    mapInit();
 });
 
-var map_init = function() {
+var mapInit = function() {
     var mapZoom = 6;
     var map_div = $('.mdg-map')[0];
     var lat_lng = new L.LatLng(9.16718, 7.53662);
@@ -10,8 +10,12 @@ var map_init = function() {
     var tileset = "nigeria_base";
     var tileServer = 'http://{s}.tiles.mapbox.com/v3/' +
         'modilabs.nigeria_base/{z}/{x}/{y}.png';
-    L.tileLayer(tileServer, {
+    var baseLayer = new L.TileLayer(tileServer, {
         minZoom: 6,
         maxZoom: 11
-    }).addTo(map);
+    });
+    baseLayer.addTo(map);
+};
+
+var mapLayerSwitcher = function() {
 };
