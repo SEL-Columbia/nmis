@@ -190,6 +190,7 @@ body {
     border-radius: 4px;
     background-color: #f6f6f6;
 }
+/*
 .mdg-map {
     width: 580px;
     float: left;
@@ -198,6 +199,11 @@ body {
     height: 580px;
     border-radius: 4px;
     background-color: #f6f6f6;
+}
+*/
+.mdg-map {
+    position: relative;
+    height: 600px;
 }
 .profile-box .map p.loading-message {
     font-style: italic;
