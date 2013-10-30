@@ -16,7 +16,7 @@
         $(function(){
             $('#lga_search').selectize({
                 onItemAdd: function(value){
-                    location.href = '/dashboard#' + value + '/lga_overview';
+                    location.href = '/explore#' + value + '/lga_overview';
                     this.clear();
                     return false;
                 }  
