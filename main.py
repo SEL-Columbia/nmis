@@ -49,8 +49,8 @@ def mdgs():
     return flask.render_template('mdgs.html')
 
 
-@app.route('/dashboard')
-def dashboard():
+@app.route('/explore')
+def explore():
     zones = json.loads(load_json('zones'))
     sorted_zones = []
     for zone, states in zones.items():
@@ -62,7 +62,7 @@ def dashboard():
         sorted_zones.append((zone, sorted_states))
     sorted_zones.sort(key=lambda x: x[0])
 
-    return flask.render_template('dashboard.html', 
+    return flask.render_template('explore.html', 
         zones=json.dumps(sorted_zones),
         indicators=load_json('indicators'),
         lga_overview=load_json('lga_overview'),
