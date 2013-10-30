@@ -35,7 +35,7 @@ function view(viewObj, sector){
         if (lga){
             viewObj.render(lga, sector);
         } else {
-            var url = '/static/lgas/' + unique_lga + '.json';
+            var url = '/static/data/lgas/' + unique_lga + '.json';
             $.getJSON(url, function(lga){
                 NMIS.lgas[unique_lga] = lga;
                 viewObj.render(lga, sector);

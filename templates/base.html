@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Nigeria MDG Information System</title>
-    {% load compress %}
-    {% compress css %}
-        <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="/static/css/base.css">
-        <link rel="stylesheet" href="/static/css/selectize.bootstrap2.css" type="text/css" media="all" charset="utf-8">
-    {% endcompress %}
+    {% block title %}
+        <title>Nigeria MDG Information System</title>
+    {% endblock %}
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/selectize.bootstrap2.css" type="text/css" media="all" charset="utf-8">
     {% block css %}{% endblock %}
     <script src="/static/js/libs/jquery-1.10.2.min.js"></script>
     <script src="/static/js/libs/underscore-min.js"></script>
@@ -25,7 +24,6 @@
         });
     </script>
     {% block js %}{% endblock %}
-    {% block head %}{% endblock %}
 </head>
 <body>
     <div class="topbar">

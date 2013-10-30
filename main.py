@@ -1,0 +1,78 @@
+import json
+import os
+
+import flask
+
+
+
+app = flask.Flask(__name__)
+app.debug = True
+
+
+def load_json(name):
+    cwd = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(cwd, 'static', 'data')
+    file_path = os.path.join(path, name + '.json')
+    with open(file_path, 'r') as f:
+        json = f.read()
+    return json
+
+
+@app.context_processor
+def lgas():
+    zones = json.loads(load_json('zones'))
+    lgas = [lga
+        for state in zones.values()
+        for lgas in state.values()
+        for lga in lgas.items()]
+    lgas.sort(key=lambda x: x[0])
+    return {'lgas': lgas}
+
+
+@app.route('/')
+def index():
+    return flask.render_template('index.html')
+
+
+@app.route('/download')
+def download():
+    return flask.render_template('data_download.html')
+
+
+@app.route('/about')
+def about():
+    return flask.render_template('about.html')
+
+
+@app.route('/mdgs')
+def mdgs():
+    return flask.render_template('mdgs.html')
+
+
+@app.route('/dashboard')
+def dashboard():
+    zones = json.loads(load_json('zones'))
+    sorted_zones = []
+    for zone, states in zones.items():
+        sorted_states = []
+        for state, lgas in states.items():
+            lgas = sorted(lgas.items(), key=lambda x: x[0])
+            sorted_states.append((state, lgas))
+        sorted_states.sort(key=lambda x: x[0])
+        sorted_zones.append((zone, sorted_states))
+    sorted_zones.sort(key=lambda x: x[0])
+
+    return flask.render_template('dashboard.html', 
+        zones=json.dumps(sorted_zones),
+        indicators=load_json('indicators'),
+        lga_overview=load_json('lga_overview'),
+        lga_sectors=load_json('lga_sectors'),
+        facility_tables=load_json('facility_tables'))
+
+
+
+if __name__ == '__main__':
+    app.run()
+
+
+
