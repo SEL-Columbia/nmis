@@ -69,6 +69,9 @@ def dashboard():
         lga_sectors=load_json('lga_sectors'),
         facility_tables=load_json('facility_tables'))
 
+@app.errorhandler(404)
+def not_found(error):
+    return flask.render_template('error.html'), 404
 
 
 if __name__ == '__main__':
