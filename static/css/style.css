@@ -2,8 +2,7 @@
 ================*/
 
 body {
-    font-family: "Lucida Grande", "Bitstream Vera Sans", Verdana, sans-serif;
-    font-size: 13px;
+    font-size: 16px;
     background-image: url("/static/images/bg-shade-repeat.png");
 }
 
@@ -15,7 +14,7 @@ body {
 #content .container {
     position: relative;
     background: #fff;
-    padding: 10px 30px 60px;
+    padding: 40px 50px;
     margin-top: 140px;
     margin-bottom: 80px;
 }
@@ -27,12 +26,18 @@ body {
     color: #444444;
     background-color: #fff;
     border-radius: 3px;
+    font-size: 15px;
+    margin-right: 3px;
 }
 .nav-pills>li.active>a,
 .nav-pills>li.active>a:hover,
 .nav-pills>li.active>a:focus {
-    color: #cccccc;
+    color: white;
     background-color: #606060;
+}
+
+.page-header {
+    margin-top: 20px;
 }
 
 
@@ -49,7 +54,7 @@ body {
     position: relative;
     padding: 8px 0;
     color: white;
-    font-size: 30px;
+    font-size: 22px;
 }
 .topbar a.brand:hover {
     text-decoration: none;
@@ -86,17 +91,19 @@ body {
 =================*/
 #index_content {
     color: white;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    margin-top: 150px;
 }
 #index_content .intro {
     display: block;
     width: 380px;
 }
+#index_content .intro h1 {
+    line-height: 1.25;
+}
 #index_content .about {
-    color: #FFF;
     font-size: 18px;
-    font-weight: 300;
-    line-height: 20px;
+    margin: 20px 0;
+    line-height: 1.5;
 }
 #index_content .partners {
     height: 118px;
@@ -234,17 +241,6 @@ body {
     border-radius: 4px;
     background-color: #f6f6f6;
 }
-/*
-.mdg-map {
-    width: 580px;
-    float: left;
-    border: 1px solid #ddd;
-    margin: 6px 0;
-    height: 580px;
-    border-radius: 4px;
-    background-color: #f6f6f6;
-}
-*/
 .mdg-map {
     position: relative;
     height: 500px;
@@ -321,6 +317,7 @@ table.mdg-table {
     border: 0 none;
     font-size: 15px;
     line-height: 17px;
+    width: 100%;
 }
 table.mdg-table td {
     padding: 8px 12px;
