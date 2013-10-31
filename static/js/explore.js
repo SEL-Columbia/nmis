@@ -146,6 +146,7 @@ MapView.render = function(lga, sector){
         chart_indicators: this.chart_indicators(lga.facilities, sector)
     });
     $('.facility_map').show();
+    $('.map_view_legend').hide();
     this.facility_map_switcher(lga, sector);
     $('.pie_chart_selector').change(function(){
         if (this.value){
