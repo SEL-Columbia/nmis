@@ -66,6 +66,7 @@ def explore():
         zones=json.dumps(sorted_zones),
         load_json=load_json)
 
+
 @app.errorhandler(404)
 def not_found(error):
     return flask.render_template('error.html'), 404
