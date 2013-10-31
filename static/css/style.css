@@ -49,7 +49,7 @@ body {
     position: relative;
     padding: 8px 0;
     color: white;
-    font-size: 20px;
+    font-size: 30px;
 }
 .topbar a.brand:hover {
     text-decoration: none;
@@ -79,6 +79,50 @@ body {
     width: 200px;
     margin-top: 20px;
 }
+
+
+
+/* Index.html
+=================*/
+#index_content {
+    color: white;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+#index_content .intro {
+    display: block;
+    width: 380px;
+}
+#index_content .about {
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 20px;
+}
+#index_content .partners {
+    height: 118px;
+    width: 1100px;
+    background-color:#FFF;
+}
+#index_content .caption {
+    font-weight: 300;
+    color: #FFF;
+    font-size: 12px;
+    font-style:italic;
+}
+#index_content .logo {
+    float: left;
+    margin: 20px 40px 0px 0px;
+}
+
+
+
+/* About.html
+=================*/
+
+
+/* Download.html
+=================*/
+
 
 
 
@@ -333,6 +377,24 @@ div#mdg-table-wrap {
     background-color: #fff;
     border-radius: 6px;
 }
+
+#facility_modal img {
+    width: 100px;
+    height: 100px;
+}
+
+#facility_modal .info {
+    float: left;
+    margin-left: 30%;
+    width: 70%;
+}
+#facility_modal .dataTables_wrapper,
+#facility_modal .facility_table,
+#facility_modal .dataTables_info {
+    clear: none !important;
+    float: none;
+}
+
 
 
 

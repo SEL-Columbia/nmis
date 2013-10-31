@@ -36,7 +36,7 @@ def index():
 
 @app.route('/download')
 def download():
-    return flask.render_template('data_download.html')
+    return flask.render_template('download.html')
 
 
 @app.route('/about')

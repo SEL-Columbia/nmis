@@ -329,16 +329,19 @@
                     </div>
                     <div class="modal-body">
                         <img src="https://formhub.org/attachment/small?media_file=ossap/attachments/<%= facility.formhub_photo_id %>">
-                        <% if (tables.length > 1){ %>
-                            <select class="facility_table_selector form-control">
-                                <% _.each(tables, function(value, index){ %>
-                                    <option value="<%= index %>">
-                                        <%= value.name %>
-                                    </option>
-                                <% }); %>
-                            </select>
-                        <% } %>
-                        <table class="facility_table"></table>
+                        <div class="info">
+                            <% if (tables.length > 1){ %>
+                                <select class="facility_table_selector form-control">
+                                    <% _.each(tables, function(value, index){ %>
+                                        <option value="<%= index %>">
+                                            <%= value.name %>
+                                        </option>
+                                    <% }); %>
+                                </select>
+                            <% } %>
+                            <table class="facility_table"></table>
+                        </div>
+                        <div style="clear:both"></div>
                     </div>
                 </div>
             </div>
