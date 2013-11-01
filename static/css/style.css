@@ -1,12 +1,11 @@
 /* Base.html 
 ================*/
-
 body {
     font-size: 16px;
     background-image: url("/static/images/bg-shade-repeat.png");
 }
 
-.container{
+.container {
     max-width: none !important;
     width: 1150px;
 }
@@ -95,30 +94,49 @@ body {
 }
 #index_content .intro {
     display: block;
-    width: 380px;
+    width: 330px;
 }
 #index_content .intro h1 {
+    font-size: 32px;
     line-height: 1.25;
 }
 #index_content .about {
     font-size: 18px;
+    font-weight: 200;
     margin: 20px 0;
     line-height: 1.5;
 }
-#index_content .partners {
-    height: 118px;
-    width: 1100px;
-    background-color:#FFF;
+#index_content .btn {
+    color: white;
+    padding: 6px 19px;
+    font-size: 12px;
+    margin-right: 5px;
+    text-transform: uppercase;
+    border: none;
+}
+#index_content .btn.explore {
+    background-color: #f7941e;
+}
+#index_content .btn.download {
+    background-color: #939598;
 }
 #index_content .caption {
     font-weight: 300;
     color: #FFF;
     font-size: 12px;
-    font-style:italic;
+    font-style: italic;
+    margin-top: 153px;
 }
 #index_content .logo {
     float: left;
     margin: 20px 40px 0px 0px;
+}
+#footer .partner_logo {
+    display: inline-block;
+    margin-right: 40px;
+}
+#footer .partner_logo:last-child {
+    margin-right: 0;
 }
 
 
@@ -259,6 +277,77 @@ body {
     opacity: 0.8;
 }
 
+h3.mdg-underlined-title {
+    border-bottom: 1px solid #666666;
+    margin-bottom: 2px;
+    padding: 0 13px;
+    line-height: 25px;
+    font-size: 16px;
+}
+.mdg-table {
+    border: 0 none;
+    font-size: 15px;
+    line-height: 17px;
+    width: 100%;
+}
+.mdg-table td {
+    padding: 8px 12px;
+}
+.mdg-table .indheader {
+    padding: 12px 6px 4px;
+    border-bottom: 1px solid #666666;
+    font-weight: bold;
+    text-align: left;
+}
+.mdg-table .flush-right {
+    text-align: right;
+}
+.mdg-table td.data {
+    text-align: right;
+}
+.mdg-table td.subgoal {
+    color: #666666;
+    text-align: right;
+    font-size: 14px;
+}
+.mdg-table td.mdg_header,
+.mdg-table th.mdg_header {
+    border: 1px solid #666666;
+    border-width: 0 0 1px 0;
+    font-weight: bold;
+    padding: 12px 6px 4px;
+}
+.mdg-table td.bb {
+    border-bottom: 1px solid #eee;
+}
+.mdg-table td.empty {
+    border: 0 none;
+}
+.mdg-table td.mdg_header.year {
+    text-align: center;
+}
+.mdg-table td.empty-first {
+    width: 20px;
+}
+.mdg-table td.indvalue {
+    text-align: right;
+    width: 120px;
+}
+.mdg-table.f {
+    margin: 0 auto;
+}
+
+#mdg-table-wrap {
+    width: 680px;
+    border: 1px solid #999;
+    border: 0 none;
+    padding: 8px 20px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 6px;
+}
+
+
 
 
 /* Dashboard.html
@@ -302,79 +391,6 @@ body {
     width: 235px;
 }
 
-
-
-/* Mdgs.html
-=================================*/
-h3.mdg-underlined-title {
-    border-bottom: 1px solid #666666;
-    margin-bottom: 2px;
-    padding: 0 13px;
-    line-height: 25px;
-    font-size: 16px;
-}
-table.mdg-table {
-    border: 0 none;
-    font-size: 15px;
-    line-height: 17px;
-    width: 100%;
-}
-table.mdg-table td {
-    padding: 8px 12px;
-}
-table.mdg-table .indheader {
-    padding: 12px 6px 4px;
-    border-bottom: 1px solid #666666;
-    font-weight: bold;
-    text-align: left;
-}
-table.mdg-table .flush-right {
-    text-align: right;
-}
-table.mdg-table td.data {
-    text-align: right;
-}
-table.mdg-table td.subgoal {
-    color: #666666;
-    text-align: right;
-    font-size: 14px;
-}
-table.mdg-table td.mdg_header,
-table.mdg-table th.mdg_header {
-    border: 1px solid #666666;
-    border-width: 0 0 1px 0;
-    font-weight: bold;
-    padding: 12px 6px 4px;
-}
-table.mdg-table td.bb {
-    border-bottom: 1px solid #eee;
-}
-table.mdg-table td.empty {
-    border: 0 none;
-}
-table.mdg-table td.mdg_header.year {
-    text-align: center;
-}
-table.mdg-table td.empty-first {
-    width: 20px;
-}
-table.mdg-table td.indvalue {
-    text-align: right;
-    width: 120px;
-}
-table.mdg-table.f {
-    margin: 0 auto;
-}
-div#mdg-table-wrap {
-    width: 680px;
-    border: 1px solid #999;
-    border: 0 none;
-    padding: 8px 20px;
-    margin: 0 auto;
-    background-color: #fff;
-    border-radius: 6px;
-}
-
 #facility_modal img {
     width: 100px;
     height: 100px;
@@ -387,11 +403,11 @@ div#mdg-table-wrap {
 }
 #facility_modal .dataTables_wrapper,
 #facility_modal .facility_table,
-#facility_modal .dataTables_info {
+#facility_modal .dataTables_info,
+#facility_modal .dataTables_wrapper {
     clear: none !important;
     float: none;
 }
-
 
 
 

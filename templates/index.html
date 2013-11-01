@@ -8,7 +8,8 @@
 
 {% block css %}
     <style>
-        #content {
+        #content,
+        #footer {
             width: 1000px;
             margin: auto;
         }
@@ -16,6 +17,13 @@
             background-image: url(/static/images/NMIS_hero.png);
             width: 100%;
             height: 742px;
+            margin: 0;
+        }
+        #footer .container {
+            padding: 20px 40px;
+            background: white;
+            width: 100%;
+            margin-bottom: 100px;
         }
     </style>
 {% endblock %}
@@ -30,17 +38,22 @@
             </div>
         </div>
         <div>
-            <a class="btn btn-lg btn-warning" href="/explore">Explore Facilities</a>
-            <a class="btn btn-lg btn-default" href="/download">Download Data</a>
+            <a class="btn btn-warning explore" href="/explore">Explore Facilities</a>
+            <a class="btn btn-default download" href="/download">Download Data</a>
         </div>
         <div class="caption">
             <p>Abeokuta North, Ogun</p>
         </div>
     </div>
-
-    <div class="partners">
-        <img class="logo" src="/static/images/mdgs_logo.png" alt="Nigeria MDGs Logo">
-        <img class="logo" src="/static/images/ei_logo.png" alt="Earth Institute Logo">
-        <img class="logo" src="/static/images/dfid_logo.png" alt="DFID Logo">
-    </div>
 {% endblock %}
+
+
+{% block footer %}
+    <img class="partner_logo" src="/static/images/mdgs_logo.png" alt="Nigeria MDGs Logo">
+    <img class="partner_logo" src="/static/images/ei_logo.png" alt="Earth Institute Logo">
+    <img class="partner_logo" src="/static/images/dfid_logo.png" alt="DFID Logo">
+{% endblock %}
+
+
+
+
