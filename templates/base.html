@@ -5,8 +5,8 @@
         <title>Nigeria MDG Information System</title>
     {% endblock %}
     <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
     <link rel="stylesheet" href="/static/css/selectize.bootstrap2.css" type="text/css" media="all" charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
     {% block css %}{% endblock %}
     <script src="/static/js/libs/jquery-1.10.2.min.js"></script>
     <script src="/static/js/libs/underscore-min.js"></script>
@@ -55,7 +55,11 @@
             {% block content %}{% endblock %}
         </div>
     </div>
-    {% block footer %}{% endblock %}
+    <div id="footer">
+        <div class="container">
+            {% block footer %}{% endblock %}
+        </div>
+    </div>
 </body>
 </html>
 

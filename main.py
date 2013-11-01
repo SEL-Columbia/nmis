@@ -36,7 +36,7 @@ def index():
 
 @app.route('/download')
 def download():
-    return flask.render_template('data_download.html')
+    return flask.render_template('download.html')
 
 
 @app.route('/about')
@@ -65,6 +65,7 @@ def explore():
     return flask.render_template('explore.html', 
         zones=json.dumps(sorted_zones),
         load_json=load_json)
+
 
 @app.errorhandler(404)
 def not_found(error):

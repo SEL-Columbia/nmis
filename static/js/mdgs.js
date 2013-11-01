@@ -1,13 +1,13 @@
 $(function() {
-    var map, tileLayers;
+    var map;
     var mapLegend, currentlyDisplayedIndicator;
     
     map = newMDGsMap();
-    tileLayers = {};
+    //tileLayers = {};
     var indicatorList = ['NMIS_gross_enrollment_ratio_secondary_education',
          'NMIS_percentage_households_with_access_to_improved_sanitation'];
 
-    initTileLayersFromIndicatorNames(indicatorList, map);
+    //initTileLayersFromIndicatorNames(indicatorList, map);
     
     // Creates a new MDGs map (with nothing but centering information)
     function newMDGsMap() {
@@ -17,10 +17,18 @@ $(function() {
         var sw = new L.LatLng(3.9738609758391017, 0.06591796875);
         var ne = new L.LatLng(14.28567730018259, 15.00732421875);
         var country_bounds = new L.LatLngBounds(sw, ne);
-        var map = L.map('mdg-map', {maxBounds: country_bounds})
+        var map = new L.Map('mdg-map', {maxBounds: country_bounds})
             .setView([centroid.lat, centroid.lng], mapZoom);
-        L.mapbox.tileLayer('modilabs.nigeria_base').addTo(map);
-        mapLegend = L.mapbox.legendControl().addTo(map);
+        //L.mapbox.tileLayer('modilabs.nigeria_base').addTo(map);
+        //mapLegend = L.mapbox.legendControl().addTo(map);
+        var tileset = "nigeria_base";
+        var tileServer = "http://{s}.tiles.mapbox.com/v3/modilabs." +
+           tileset + "/{z}/{x}/{y}.png"; 
+        var baseLayer = new L.TileLayer(tileServer, {
+            maxZoom: 11,
+            minZoom: 6 
+        });
+        baseLayer.addTo(map);
         return map;
     }
 
@@ -33,7 +41,7 @@ $(function() {
     }
 
     // Change indicator layer
-    window.changeIndicator = function(indicatorName) {
+    var changeIndicator = function(indicatorName) {
         var justDisplayedIndicator = currentlyDisplayedIndicator;
         currentlyDisplayedIndicator = indicatorName;
 

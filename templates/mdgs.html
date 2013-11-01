@@ -2,24 +2,20 @@
 
 {%block nav_mdgs %}active{% endblock %}
 
-{% block head %}
-    <meta charset="utf-8" />
-    <title>Millenium Development Goals</title>
+{% block css %}
     <link href="/static/leaflet/leaflet.css" media="all" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block js %}
     <script src="/static/leaflet/leaflet.js"></script>
-    <script src="/static/js/mdgs.js"></script>
-    <script src="/static/js/libs/mapbox.js"></script>
+    <script src="/static/js/new_mdgs.js"></script>
 {% endblock %}
 
 {% block content %}
     <div class='country-view'>
         <div class='left-panel'>
             <h1>Nigeria's progress on the MDGs</h1>
-            <div class='mdg-map' id='mdg-map'>
-            </div>
+            <div class='mdg-map'></div>
         </div>
         <div class='right-panel'>
             <div class='mdg-map-nav'>

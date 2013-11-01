@@ -1,13 +1,11 @@
 /* Base.html 
 ================*/
-
 body {
-    font-family: "Lucida Grande", "Bitstream Vera Sans", Verdana, sans-serif;
-    font-size: 13px;
+    font-size: 16px;
     background-image: url("/static/images/bg-shade-repeat.png");
 }
 
-.container{
+.container {
     max-width: none !important;
     width: 1150px;
 }
@@ -15,7 +13,7 @@ body {
 #content .container {
     position: relative;
     background: #fff;
-    padding: 10px 30px 60px;
+    padding: 40px 50px;
     margin-top: 140px;
     margin-bottom: 80px;
 }
@@ -27,12 +25,18 @@ body {
     color: #444444;
     background-color: #fff;
     border-radius: 3px;
+    font-size: 15px;
+    margin-right: 3px;
 }
 .nav-pills>li.active>a,
 .nav-pills>li.active>a:hover,
 .nav-pills>li.active>a:focus {
-    color: #cccccc;
+    color: white;
     background-color: #606060;
+}
+
+.page-header {
+    margin-top: 20px;
 }
 
 
@@ -49,7 +53,7 @@ body {
     position: relative;
     padding: 8px 0;
     color: white;
-    font-size: 20px;
+    font-size: 22px;
 }
 .topbar a.brand:hover {
     text-decoration: none;
@@ -79,6 +83,71 @@ body {
     width: 200px;
     margin-top: 20px;
 }
+
+
+
+/* Index.html
+=================*/
+#index_content {
+    color: white;
+    margin-top: 150px;
+}
+#index_content .intro {
+    display: block;
+    width: 330px;
+}
+#index_content .intro h1 {
+    font-size: 32px;
+    line-height: 1.25;
+}
+#index_content .about {
+    font-size: 18px;
+    font-weight: 200;
+    margin: 20px 0;
+    line-height: 1.5;
+}
+#index_content .btn {
+    color: white;
+    padding: 6px 19px;
+    font-size: 12px;
+    margin-right: 5px;
+    text-transform: uppercase;
+    border: none;
+}
+#index_content .btn.explore {
+    background-color: #f7941e;
+}
+#index_content .btn.download {
+    background-color: #939598;
+}
+#index_content .caption {
+    font-weight: 300;
+    color: #FFF;
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 153px;
+}
+#index_content .logo {
+    float: left;
+    margin: 20px 40px 0px 0px;
+}
+#footer .partner_logo {
+    display: inline-block;
+    margin-right: 40px;
+}
+#footer .partner_logo:last-child {
+    margin-right: 0;
+}
+
+
+
+/* About.html
+=================*/
+
+
+/* Download.html
+=================*/
+
 
 
 
@@ -191,13 +260,9 @@ body {
     background-color: #f6f6f6;
 }
 .mdg-map {
-    width: 580px;
-    float: left;
-    border: 1px solid #ddd;
-    margin: 6px 0;
-    height: 580px;
-    border-radius: 4px;
-    background-color: #f6f6f6;
+    position: relative;
+    height: 500px;
+    width: 670px;
 }
 .profile-box .map p.loading-message {
     font-style: italic;
@@ -211,6 +276,77 @@ body {
     border-style: solid;
     opacity: 0.8;
 }
+
+h3.mdg-underlined-title {
+    border-bottom: 1px solid #666666;
+    margin-bottom: 2px;
+    padding: 0 13px;
+    line-height: 25px;
+    font-size: 16px;
+}
+.mdg-table {
+    border: 0 none;
+    font-size: 15px;
+    line-height: 17px;
+    width: 100%;
+}
+.mdg-table td {
+    padding: 8px 12px;
+}
+.mdg-table .indheader {
+    padding: 12px 6px 4px;
+    border-bottom: 1px solid #666666;
+    font-weight: bold;
+    text-align: left;
+}
+.mdg-table .flush-right {
+    text-align: right;
+}
+.mdg-table td.data {
+    text-align: right;
+}
+.mdg-table td.subgoal {
+    color: #666666;
+    text-align: right;
+    font-size: 14px;
+}
+.mdg-table td.mdg_header,
+.mdg-table th.mdg_header {
+    border: 1px solid #666666;
+    border-width: 0 0 1px 0;
+    font-weight: bold;
+    padding: 12px 6px 4px;
+}
+.mdg-table td.bb {
+    border-bottom: 1px solid #eee;
+}
+.mdg-table td.empty {
+    border: 0 none;
+}
+.mdg-table td.mdg_header.year {
+    text-align: center;
+}
+.mdg-table td.empty-first {
+    width: 20px;
+}
+.mdg-table td.indvalue {
+    text-align: right;
+    width: 120px;
+}
+.mdg-table.f {
+    margin: 0 auto;
+}
+
+#mdg-table-wrap {
+    width: 680px;
+    border: 1px solid #999;
+    border: 0 none;
+    padding: 8px 20px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 6px;
+}
+
 
 
 
@@ -255,76 +391,22 @@ body {
     width: 235px;
 }
 
+#facility_modal img {
+    width: 100px;
+    height: 100px;
+}
 
-
-/* Mdgs.html
-=================================*/
-h3.mdg-underlined-title {
-    border-bottom: 1px solid #666666;
-    margin-bottom: 2px;
-    padding: 0 13px;
-    line-height: 25px;
-    font-size: 16px;
+#facility_modal .info {
+    float: left;
+    margin-left: 30%;
+    width: 70%;
 }
-table.mdg-table {
-    border: 0 none;
-    font-size: 15px;
-    line-height: 17px;
-}
-table.mdg-table td {
-    padding: 8px 12px;
-}
-table.mdg-table .indheader {
-    padding: 12px 6px 4px;
-    border-bottom: 1px solid #666666;
-    font-weight: bold;
-    text-align: left;
-}
-table.mdg-table .flush-right {
-    text-align: right;
-}
-table.mdg-table td.data {
-    text-align: right;
-}
-table.mdg-table td.subgoal {
-    color: #666666;
-    text-align: right;
-    font-size: 14px;
-}
-table.mdg-table td.mdg_header,
-table.mdg-table th.mdg_header {
-    border: 1px solid #666666;
-    border-width: 0 0 1px 0;
-    font-weight: bold;
-    padding: 12px 6px 4px;
-}
-table.mdg-table td.bb {
-    border-bottom: 1px solid #eee;
-}
-table.mdg-table td.empty {
-    border: 0 none;
-}
-table.mdg-table td.mdg_header.year {
-    text-align: center;
-}
-table.mdg-table td.empty-first {
-    width: 20px;
-}
-table.mdg-table td.indvalue {
-    text-align: right;
-    width: 120px;
-}
-table.mdg-table.f {
-    margin: 0 auto;
-}
-div#mdg-table-wrap {
-    width: 680px;
-    border: 1px solid #999;
-    border: 0 none;
-    padding: 8px 20px;
-    margin: 0 auto;
-    background-color: #fff;
-    border-radius: 6px;
+#facility_modal .dataTables_wrapper,
+#facility_modal .facility_table,
+#facility_modal .dataTables_info,
+#facility_modal .dataTables_wrapper {
+    clear: none !important;
+    float: none;
 }
 
 
