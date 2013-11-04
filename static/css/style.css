@@ -392,23 +392,14 @@ h3.mdg-underlined-title {
 }
 
 #facility_modal img {
-    width: 100px;
-    height: 100px;
+    float: left;
+    width: 25%;
 }
 
 #facility_modal .info {
-    float: left;
-    margin-left: 30%;
+    float: right;
     width: 70%;
 }
-#facility_modal .dataTables_wrapper,
-#facility_modal .facility_table,
-#facility_modal .dataTables_info,
-#facility_modal .dataTables_wrapper {
-    clear: none !important;
-    float: none;
-}
-
 
 
 
