@@ -46,7 +46,7 @@ def about():
 
 @app.route('/mdgs')
 def mdgs():
-    mdg_layers = json.dumps(load_json('mdg_layers'));
+    mdg_layers = json.loads(load_json('mdg_layers'));
     return flask.render_template('mdgs.html',
             mdg_layers=mdg_layers)
             
