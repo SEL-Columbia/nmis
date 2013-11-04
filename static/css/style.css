@@ -377,7 +377,7 @@ h3.mdg-underlined-title {
     top: 20px;
     background: #111;
     background: rgba(0,0,0,0.8);
-    width: 350px;
+    width: 400px;
     padding: 10px;
     z-index: 50;
     border-radius: 7px;
@@ -389,7 +389,7 @@ h3.mdg-underlined-title {
     float: left;
     font-size: 15px;
     margin-left: 15px;
-    width: 235px;
+    width: 285px;
 }
 .map_view_legend .values {
     font-style: italic;
