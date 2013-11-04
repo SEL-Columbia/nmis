@@ -2,9 +2,11 @@ $(function(){
     window.map = mapInit();
     //mapLayerInit(map, ['NMIS_gross_enrollment_ratio_secondary_education']);
     $('#mdg-selector').selectize({
+        /*
         onItemAdd: function(value){
             changeIndicator(value);
         }
+        */
     });
 });
 

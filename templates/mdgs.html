@@ -22,7 +22,7 @@
                 <select id="mdg-selector" placeholder="Please select an MDG goal">
                     <option value="">Please select an MDG goal</option>
                     {% for item in mdg_layers %}
-                        <option value="{{ slug }}">{{ name }}</option>
+                        <option value="{{ item.slug }}">{{ item.name }}</option>
                     {% endfor %}
                 </select>
             </div>
