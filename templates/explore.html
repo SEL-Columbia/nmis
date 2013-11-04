@@ -25,10 +25,10 @@
         NMIS = {};
         NMIS.lgas = {};
         NMIS.zones = {{ zones|safe }};
-        NMIS.indicators = {{ load_static_file('indicators.json')|safe }};
-        NMIS.lga_overview = {{ load_static_file('lga_overview.json')|safe }};
-        NMIS.lga_view = {{ load_static_file('lga_view.json')|safe }};
-        NMIS.table_view = {{ load_static_file('table_view.json')|safe }};
+        NMIS.indicators = {{ load_static_data('indicators.json')|safe }};
+        NMIS.lga_overview = {{ load_static_data('lga_overview.json')|safe }};
+        NMIS.lga_view = {{ load_static_data('lga_view.json')|safe }};
+        NMIS.table_view = {{ load_static_data('table_view.json')|safe }};
     </script>
 {% endblock %}
 
