@@ -8,8 +8,10 @@
 
 {% block js %}
     <script src="/static/leaflet/leaflet.js"></script>
-    <script src="/static/js/libs/mapbox.js"></script>
+    <script src='//api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.js'></script>     
+    <link href='//api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.css' rel='stylesheet' />
     <script src="/static/js/new_mdgs.js"></script>
+
 {% endblock %}
 
 {% block content %}
@@ -20,7 +22,7 @@
         </div>
         <div class='right-panel pull-right'>
             please select your mdg goal
-            <div class='mdg-map pull-right'></div>
+            <div class='mdg-map pull-right' id='mdg-map'></div>
         </div>
     </div>
 {% endblock %}
