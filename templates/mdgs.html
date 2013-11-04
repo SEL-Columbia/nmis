@@ -18,7 +18,14 @@
     <div class='country-view'>
         <div class='left-panel pull-left'>
             <h1>Nigeria's progress on the MDGs</h1>
-            <div class='mdg-map-nav'></div>
+            <div class='mdg-map-nav'>
+                <select id="mdg-selector" placeholder="Please select an MDG goal">
+                    <option value="">Please select an MDG goal</option>
+                    {% for item in mdg_layers %}
+                        <option value="{{ slug }}">{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
         <div class='right-panel pull-right'>
             please select your mdg goal
