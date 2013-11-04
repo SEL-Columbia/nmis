@@ -376,7 +376,7 @@ h3.mdg-underlined-title {
     right: 20px;
     top: 20px;
     background: #111;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.8);
     width: 350px;
     padding: 10px;
     z-index: 50;
@@ -394,6 +394,7 @@ h3.mdg-underlined-title {
 .map_view_legend .values {
     font-style: italic;
     font-size: 13px;
+    margin-top: 5px;
 }
 
 #facility_modal img {
