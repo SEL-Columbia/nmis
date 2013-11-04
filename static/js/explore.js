@@ -335,37 +335,37 @@ MapView.map_legend = function(lga, sector, indicator){
     var ctx = $('.map_view_legend canvas')[0].getContext('2d');        
     var trues = 0;
     var falses = 0;
-    var undefineds = 0;
+    var unknowns = 0;
     _.each(lga.facilities, function(facility){
         if (facility.sector === sector){
             var value = facility[indicator];
             if (value) trues++;
-            if (value === false) falses++;
-            if (typeof value === 'undefined') undefineds++;
+            else if (value === false) falses++;
+            else unknowns++;
         }
     });
-    var total = trues + falses + undefineds;
-    var data = [
-        {
-            value: trues / total * 100,
-            color: 'rgb(68, 167, 0)'
-        }, {
-            value : falses / total * 100,
-            color : 'rgb(193, 71, 71)'
-        }, {
-            value : undefineds / total * 100,
-            color : '#ddd'
-        }
-    ];
+    var total = trues + falses + unknowns;
+    var data = [{
+        value: trues / total * 100,
+        color: 'rgb(68, 167, 0)'
+    }, {
+        value : falses / total * 100,
+        color : 'rgb(193, 71, 71)'
+    }, {
+        value : unknowns / total * 100,
+        color : '#ddd'
+    }];
     new Chart(ctx).Pie(data, {
         animationEasing: 'easeOutQuart',
         animationSteps: 15
     });
-
-    $('.map_view_legend .info').html(
-        '<h4>' + indicator_name(indicator) + 
-        ' (' + trues + '/' + total + ')</h4>' +
-        NMIS.indicators[indicator].description);
+    var html = '<h4>' + indicator_name(indicator) + '</h4>';
+    html += NMIS.indicators[indicator].description;
+    html += '<p class="values">' + trues + ' Yes / ' + falses + ' No';
+    if (unknowns)
+        html += ' / ' + unknowns + ' Unknown';
+    html += '</p>';
+    $('.map_view_legend .info').html(html);
 };
 
 

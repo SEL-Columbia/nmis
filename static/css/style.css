@@ -387,8 +387,13 @@ h3.mdg-underlined-title {
 }
 .map_view_legend .info {
     float: left;
+    font-size: 15px;
     margin-left: 15px;
     width: 235px;
+}
+.map_view_legend .values {
+    font-style: italic;
+    font-size: 13px;
 }
 
 #facility_modal img {
