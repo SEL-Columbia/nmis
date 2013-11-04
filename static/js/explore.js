@@ -30,17 +30,21 @@ $(function(){
 function view(viewObj, sector){
     // Wrapper for LGA based views. Fetches the appropriate 
     // LGA JSON data before calling the render() function of a view.
+    function render(lga, sector){
+        $('.facility_map').hide();
+        $(window).scrollTop(0);
+        viewObj.render(lga, sector);
+    }
+
     return function(unique_lga){
         var lga = NMIS.lgas[unique_lga];
         if (lga){
-            $('.facility_map').hide();
-            viewObj.render(lga, sector);
+            render(lga, sector);
         } else {
             var url = '/static/data/lgas/' + unique_lga + '.json';
             $.getJSON(url, function(lga){
                 NMIS.lgas[unique_lga] = lga;
-                $('.facility_map').hide();
-                viewObj.render(lga, sector);
+                render(lga, sector);
             });
         }
     }
