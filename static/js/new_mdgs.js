@@ -1,10 +1,10 @@
 $(function(){
     var map = mapInit();
     var mapLayers = {};
-    //mapLayerInit(map, ['NMIS_gross_enrollment_ratio_secondary_education']);
+    var currentLayer = {};
     $('#mdg-selector').selectize({
         onItemAdd: function(value){
-            mapLayerInit(map, value);
+            addMapLayer(map, value);
         }
     });
 });
@@ -43,7 +43,10 @@ var mapInit = function() {
     return map;
 };
 
-var mapLayerInit = function(map, layer) {
+var cleanMap = function(map) {
+};
+
+var addMapLayer = function(map, layer) {
     var tempLayer = mapboxLayer(layer, 6, 9);
     var legend = L.mapbox.legendControl();
     tempLayer.on('ready', function(){
