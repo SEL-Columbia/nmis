@@ -86,10 +86,9 @@ function format_value(value){
     return value;
 }
 
-
-function indicator_name(indicator){
-    var indicator = NMIS.indicators[indicator];
-    return indicator ? indicator.name : indicator;
+function indicator_name(slug){
+    var indicator = NMIS.indicators[slug];
+    return indicator ? indicator.name : slug;
 }
 
 
