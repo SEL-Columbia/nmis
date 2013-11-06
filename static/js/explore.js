@@ -96,6 +96,7 @@ function indicator_name(slug){
 // Views
 // ============
 function index(){
+    $('.lga_nav').hide();
     render('#index_template', {zones: NMIS.zones});
     $('#zone-navigation .state-link').click(function(){
         $(this).next('.lga-list').toggle();
