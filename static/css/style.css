@@ -166,7 +166,11 @@ body {
 
 .sorting_asc_disabled { background: url('/static/datatables/images/sort_asc_disabled.png') no-repeat center right; }
 .sorting_desc_disabled { background: url('/static/datatables/images/sort_desc_disabled.png') no-repeat center right; }
- 
+
+.dataTables_info {
+    font-size: 13px;
+}
+
 table thead th:active,
 table thead td:active {
     outline: none;
@@ -413,6 +417,8 @@ h3.mdg-underlined-title {
 #facility_modal img {
     float: left;
     width: 25%;
+    min-height: 100px;
+    background: #eee;
 }
 
 #facility_modal .info {
@@ -421,7 +427,7 @@ h3.mdg-underlined-title {
 }
 
 #facility_modal .dataTables_wrapper {
-    margin-top: 10px;
+    margin-top: 20px;
     max-height: 400px;
     overflow: scroll;
 }
