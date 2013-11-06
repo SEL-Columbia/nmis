@@ -426,8 +426,11 @@ h3.mdg-underlined-title {
     width: 70%;
 }
 
+#facility_modal select {
+    margin-bottom: 20px;
+}
+
 #facility_modal .dataTables_wrapper {
-    margin-top: 20px;
     max-height: 400px;
     overflow: scroll;
 }
