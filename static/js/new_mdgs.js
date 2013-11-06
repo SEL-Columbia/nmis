@@ -1,12 +1,11 @@
 $(function(){
-    window.map = mapInit();
+    var map = mapInit();
+    var mapLayers = {};
     //mapLayerInit(map, ['NMIS_gross_enrollment_ratio_secondary_education']);
     $('#mdg-selector').selectize({
-        /*
         onItemAdd: function(value){
-            changeIndicator(value);
+            mapLayerInit(map, value);
         }
-        */
     });
 });
 
@@ -41,20 +40,16 @@ var mapInit = function() {
         }).setView(lat_lng, mapZoom);
     var baseLayer = mapboxLayer('nigeria_base', 6, 9);
     baseLayer.addTo(map);
-    var expTile = 'NMIS_gross_enrollment_ratio_secondary_education';
-    var expLayer = mapboxLayer(expTile, 6, 9);
-    var legend = L.mapbox.legendControl();
-    expLayer.on('ready', function(){
-        var TileJSON = expLayer.getTileJSON();
-        legend.addLegend(TileJSON.legend);
-        legend.addTo(map);
-    });
-    expLayer.addTo(map);
     return map;
 };
 
-var mapLayerInit = function(map, layers) {
-    _.each(layers, function(layer){
-        var tempLayer = mapboxLayer(layer, 6, 9);
+var mapLayerInit = function(map, layer) {
+    var tempLayer = mapboxLayer(layer, 6, 9);
+    var legend = L.mapbox.legendControl();
+    tempLayer.on('ready', function(){
+        var TileJSON = tempLayer.getTileJSON();
+        legend.addLegend(TileJSON.legend);
+        legend.addTo(map);
     });
+    tempLayer.addTo(map);
 };
