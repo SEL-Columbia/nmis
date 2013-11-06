@@ -420,6 +420,12 @@ h3.mdg-underlined-title {
     width: 70%;
 }
 
+#facility_modal .dataTables_wrapper {
+    margin-top: 10px;
+    max-height: 400px;
+    overflow: scroll;
+}
+
 
 
 /* Dashboard.html, Table View
