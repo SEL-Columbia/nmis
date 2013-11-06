@@ -9,10 +9,10 @@ app = flask.Flask(__name__)
 app.debug = True
 
 
-def load_json(name):
+def load_static_data(file_name):
     cwd = os.path.dirname(os.path.abspath(__file__))
     path = os.path.join(cwd, 'static', 'data')
-    file_path = os.path.join(path, name + '.json')
+    file_path = os.path.join(path, file_name)
     with open(file_path, 'r') as f:
         data = f.read()
     return data
@@ -20,7 +20,7 @@ def load_json(name):
 
 @app.context_processor
 def lgas():
-    zones = json.loads(load_json('zones'))
+    zones = json.loads(load_static_data('zones.json'))
     lgas = [lga
         for state in zones.values()
         for lgas in state.values()
@@ -54,7 +54,7 @@ def mdgs():
 
 @app.route('/explore')
 def explore():
-    zones = json.loads(load_json('zones'))
+    zones = json.loads(load_static_data('zones.json'))
     sorted_zones = []
     for zone, states in zones.items():
         sorted_states = []
@@ -67,7 +67,7 @@ def explore():
 
     return flask.render_template('explore.html', 
         zones=json.dumps(sorted_zones),
-        load_json=load_json)
+        load_static_data=load_static_data)
 
 
 @app.errorhandler(404)

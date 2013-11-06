@@ -9,7 +9,7 @@
             display: block;
         }
         #content .container {
-            margin-top: 180px;
+            margin-top: 150px;
         }
     </style>
 {% endblock %}
@@ -25,10 +25,10 @@
         NMIS = {};
         NMIS.lgas = {};
         NMIS.zones = {{ zones|safe }};
-        NMIS.indicators = {{ load_json('indicators')|safe }};
-        NMIS.lga_overview = {{ load_json('lga_overview')|safe }};
-        NMIS.lga_view = {{ load_json('lga_view')|safe }};
-        NMIS.table_view = {{ load_json('table_view')|safe }};
+        NMIS.indicators = {{ load_static_data('indicators.json')|safe }};
+        NMIS.lga_overview = {{ load_static_data('lga_overview.json')|safe }};
+        NMIS.lga_view = {{ load_static_data('lga_view.json')|safe }};
+        NMIS.table_view = {{ load_static_data('table_view.json')|safe }};
     </script>
 {% endblock %}
 
