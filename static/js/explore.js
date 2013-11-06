@@ -58,7 +58,7 @@ function render_nav(lga, active_view, sector){
         active_view: active_view,
         sector: sector
     });
-    $('.lga_nav').html(html);
+    $('.lga_nav').html(html).show();
 }
 
 
@@ -424,7 +424,8 @@ TableView.show_table = function(sector, table_index, facilities){
             aaData: aaData,
             aoColumns: aoColumns,
             bPaginate: false,
-            bDestroy: true
+            bDestroy: true,
+            bFilter: false
         })
         .width('100%');
 };
