@@ -58,7 +58,7 @@ function render_nav(lga, active_view, sector){
         active_view: active_view,
         sector: sector
     });
-    $('.lga_nav').html(html);
+    $('.lga_nav').html(html).show();
 }
 
 
@@ -86,10 +86,9 @@ function format_value(value){
     return value;
 }
 
-
-function indicator_name(indicator){
-    var indicator = NMIS.indicators[indicator];
-    return indicator ? indicator.name : indicator;
+function indicator_name(slug){
+    var indicator = NMIS.indicators[slug];
+    return indicator ? indicator.name : slug;
 }
 
 
@@ -97,6 +96,7 @@ function indicator_name(indicator){
 // Views
 // ============
 function index(){
+    $('.lga_nav').hide();
     render('#index_template', {zones: NMIS.zones});
     $('#zone-navigation .state-link').click(function(){
         $(this).next('.lga-list').toggle();
@@ -424,7 +424,8 @@ TableView.show_table = function(sector, table_index, facilities){
             aaData: aaData,
             aoColumns: aoColumns,
             bPaginate: false,
-            bDestroy: true
+            bDestroy: true,
+            bFilter: false
         })
         .width('100%');
 };

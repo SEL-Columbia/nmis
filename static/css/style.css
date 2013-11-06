@@ -14,7 +14,7 @@ body {
     position: relative;
     background: #fff;
     padding: 40px 50px;
-    margin-top: 140px;
+    padding-top: 180px;
     margin-bottom: 80px;
 }
 
@@ -148,6 +148,33 @@ body {
 /* Download.html
 =================*/
 
+
+
+
+
+/* Dashboard.html
+=================================*/
+.page-header select {
+    float: right;
+    width: 250px;
+}
+
+/* Datatables */
+.sorting { background: url('/static/datatables/images/sort_both.png') no-repeat center right; }
+.sorting_asc { background: url('/static/datatables/images/sort_asc.png') no-repeat center right; }
+.sorting_desc { background: url('/static/datatables/images/sort_desc.png') no-repeat center right; }
+
+.sorting_asc_disabled { background: url('/static/datatables/images/sort_asc_disabled.png') no-repeat center right; }
+.sorting_desc_disabled { background: url('/static/datatables/images/sort_desc_disabled.png') no-repeat center right; }
+
+.dataTables_info {
+    font-size: 13px;
+}
+
+table thead th:active,
+table thead td:active {
+    outline: none;
+}
 
 
 
@@ -349,16 +376,6 @@ h3.mdg-underlined-title {
 
 
 
-
-/* Dashboard.html
-=================================*/
-.page-header select {
-    float: right;
-    width: 250px;
-}
-
-
-
 /* Dashboard.html, Map View
 =================================*/
 .leaflet-top, .leaflet-bottom {
@@ -400,11 +417,33 @@ h3.mdg-underlined-title {
 #facility_modal img {
     float: left;
     width: 25%;
+    min-height: 100px;
+    background: #eee;
 }
 
 #facility_modal .info {
     float: right;
     width: 70%;
+}
+
+#facility_modal select {
+    margin-bottom: 20px;
+}
+
+#facility_modal .dataTables_wrapper {
+    max-height: 400px;
+    overflow: scroll;
+}
+
+
+
+/* Dashboard.html, Table View
+=================================*/
+.facilities_table_container {
+    overflow: scroll;
+}
+#facilities_data_table {
+    font-size: 14px;
 }
 
 
