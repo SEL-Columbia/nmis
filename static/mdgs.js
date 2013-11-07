@@ -1,55 +1,58 @@
- $(function() {
-    var map, tileLayers;
-    var mapLegend, currentlyDisplayedIndicator;
-    
-    map = newMDGsMap();
-    tileLayers = {},
-
-    initTileLayersFromIndicatorNames(
-        ['NMIS_gross_enrollment_ratio_secondary_education',
-         'NMIS_percentage_households_with_access_to_improved_sanitation'],
-        map);
-    
-    // Creates a new MDGs map (with nothing but centering information)
-    function newMDGsMap() {
-        //ex: NMIS_gross_enrollment_ratio_secondary_education
-        var centroid = {lat: 9.16718, lng: 7.53662};
-        var mapZoom = 6;
-        var mapDiv = $('.mdg-map')[0];
-        var map = L.map(mapDiv, {
-            center: new L.LatLng(centroid.lat, centroid.lng),
-            zoom: mapZoom,
-        });
-        L.mapbox.tileLayer('modilabs.nigeria_base').addTo(map);
-        mapLegend = L.mapbox.legendControl().addTo(map);
-        return map;
-    }
-
-    // Creates layer per indicatorName and  adds it to tileLayers object
-    function initTileLayersFromIndicatorNames(indicatorNames, map) {
-        indicatorNames.forEach(function(indicatorName) {
-            var thisLayer = L.mapbox.tileLayer('modilabs.' + indicatorName);
-            tileLayers[indicatorName] = thisLayer;
-        });
-    }
-
-    // Change indicator layer
-    window.changeIndicator = function(indicatorName) {
-        var justDisplayedIndicator = currentlyDisplayedIndicator;
-        currentlyDisplayedIndicator = indicatorName;
-
-        // justDisplayedIndicator doesn't exist on first change, no removals necessary
-        if (justDisplayedIndicator) {
-            map.removeLayer(tileLayers[justDisplayedIndicator]);
-            mapLegend.removeLegend(
-                tileLayers[justDisplayedIndicator].options.legend);
+$(function(){
+    var map = mapInit();
+    var mapLayers = {};
+    var currentLayer = {};
+    $('#mdg-selector').selectize({
+        onItemAdd: function(value){
+            addMapLayer(map, value);
         }
-
-        tileLayers[currentlyDisplayedIndicator].addTo(map);
-        mapLegend.addLegend(
-            tileLayers[currentlyDisplayedIndicator].options.legend);
-    }
+    });
 });
 
+var mapboxTileLayer = function(indicator, minZoom, maxZoom) {
+    var tileServer = 'http://{s}.tiles.mapbox.com/v3/modilabs.' +
+        indicator + '/{z}/{x}/{y}.png';
+    var tileLayer = new L.TileLayer(tileServer, {
+        minZoom: minZoom,
+        maxZoom: maxZoom
+    });
+    return tileLayer;
+};
 
+var mapboxLayer = function(indicator, minZoom, maxZoom) {
+    var mapboxName = 'modilabs.' + indicator;
+    var tileLayer = new L.mapbox.tileLayer(mapboxName, {
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+    });
+    return tileLayer;
+};
 
+var mapInit = function() {
+    var mapZoom = 6;
+    var map_div = $('.mdg-map')[0];
+    var lat_lng = new L.LatLng(9.16718, 7.53662);
+    var sw = new L.LatLng(4.039617826768437, 0.17578125);
+    var ne = new L.LatLng(14.221788628397572, 14.897460937499998);
+    var country_bounds = new L.LatLngBounds(sw, ne);
+    var map = new L.Map(map_div,{
+            maxBounds: country_bounds
+        }).setView(lat_lng, mapZoom);
+    var baseLayer = mapboxLayer('nigeria_base', 6, 9);
+    baseLayer.addTo(map);
+    return map;
+};
+
+var cleanMap = function(map) {
+};
+
+var addMapLayer = function(map, layer) {
+    var tempLayer = mapboxLayer(layer, 6, 9);
+    var legend = L.mapbox.legendControl();
+    tempLayer.on('ready', function(){
+        var TileJSON = tempLayer.getTileJSON();
+        legend.addLegend(TileJSON.legend);
+        legend.addTo(map);
+    });
+    tempLayer.addTo(map);
+};
