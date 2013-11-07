@@ -1,6 +1,4 @@
 (function(){
-
-var facility_map_obj = false;
     
 $(function(){
     new Backbone.Router({
@@ -202,7 +200,7 @@ MapView.facility_map = function(lga, sector, indicator) {
 
     if (map._facility_layer)
         map.removeLayer(map._facility_layer);
-    
+
     if (map._unique_lga !== lga.unique_lga){
         map._unique_lga = lga.unique_lga;
         map.setView(lat_lng, 10);
