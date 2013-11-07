@@ -415,6 +415,10 @@ h3.mdg-underlined-title {
     z-index: 50;
     border-radius: 7px;
 }
+.map_view_legend .close {
+	color: white;
+	text-shadow: none;
+}
 .map_view_legend canvas {
     float: left;
 }
@@ -422,7 +426,7 @@ h3.mdg-underlined-title {
     float: left;
     font-size: 15px;
     margin-left: 15px;
-    width: 285px;
+    width: 260px;
 }
 .map_view_legend .values {
     font-style: italic;

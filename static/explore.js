@@ -30,6 +30,9 @@ $(function(){
 function view(viewObj, sector){
     // Wrapper for LGA based views. Fetches the appropriate 
     // LGA JSON data before calling the render() function of a view.
+
+    if (viewObj.init) viewObj.init();
+
     function render(lga, sector){
         $('.facility_map').hide();
         $(window).scrollTop(0);
@@ -141,6 +144,13 @@ LGAView.overview_map = function(lga){
 
 
 var MapView = {};
+MapView.init = function(){
+    $('.map_view_legend').on('click', '.close', function(){
+        $(this).parent().hide();
+        return false;
+    });
+};
+
 MapView.render = function(lga, sector){
     var self = this;
     render_nav(lga, 'map', sector);
