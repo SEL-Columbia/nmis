@@ -23,7 +23,6 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 /* Base.html 
 ================*/
 body {
-    font-size: 16px;
     background-image: url("/static/images/bg-shade-repeat.png");
 }
 
@@ -66,6 +65,7 @@ body {
 .topbar {
     position: fixed;
     width: 100%;
+    height: 100px;
     top: 0;
     left: 0;
     background: #545653;
