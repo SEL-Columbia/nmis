@@ -46,7 +46,10 @@ def about():
 
 @app.route('/mdgs')
 def mdgs():
-    return flask.render_template('mdgs.html')
+    mdg_layers = json.loads(load_static_data('mdg_layers.json'));
+    return flask.render_template('mdgs.html',
+            mdg_layers=mdg_layers)
+            
 
 
 @app.route('/explore')
@@ -73,7 +76,7 @@ def not_found(error):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
 
 
 

@@ -307,11 +307,6 @@ table thead td:active {
     border-radius: 4px;
     background-color: #f6f6f6;
 }
-.mdg-map {
-    position: relative;
-    height: 500px;
-    width: 670px;
-}
 .profile-box .map p.loading-message {
     font-style: italic;
     line-height: 20px;
@@ -468,4 +463,14 @@ h3.mdg-underlined-title {
 }
 
 
-
+/* mdgs.html
+=================================*/
+.mdg-map {
+    position: relative;
+    height: 470px;
+    width: 670px;
+}
+.left-panel {
+    position: relative;
+    width: 35%;
+}
