@@ -15,20 +15,20 @@
 {% endblock %}
 
 {% block content %}
-    <div class='country-view'>
+    <div class='country-view row'>
         <div class='left-panel pull-left'>
-            <h1>Nigeria's progress on the MDGs</h1>
-            <div class='mdg-map-nav'>
+            <h2>Nigeria's progress on the MDGs</h2>
+            <div class='mdg-map-nav pull-left'>
                 <select id="mdg-selector" placeholder="Please select an MDG goal">
                     <option value="">Please select an MDG goal</option>
                     {% for item in mdg_layers %}
                         <option value="{{ item.slug }}">{{ item.name }}</option>
                     {% endfor %}
                 </select>
+                <div class='mdg-description'></div>
             </div>
         </div>
         <div class='right-panel pull-right'>
-            please select your mdg goal
             <div class='mdg-map pull-right' id='mdg-map'></div>
         </div>
     </div>
