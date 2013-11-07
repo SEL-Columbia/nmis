@@ -159,19 +159,88 @@ MapView.render = function(lga, sector){
         sector: sector,
         chart_indicators: this.chart_indicators(lga.facilities, sector)
     });
-    $('.facility_map').show();
+
     $('.map_view_legend').hide();
-    this.facility_map_switcher(lga, sector);
+
+    this.facility_map(lga, sector);
+
     $('.pie_chart_selector').change(function(){
         if (this.value){
             $('.map_view_legend').show();
             self.map_legend(lga, sector, this.value);
-            self.map_icon_switch(lga, sector, this.value);
         } else {
             $('.map_view_legend').hide();
-            self.facility_map_switcher(lga, sector);
+        }
+        self.facility_map(lga, sector, this.value);
+    });
+};
+
+MapView.facility_map = function(lga, sector, indicator) {
+    var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
+    var map_zoom = 10;
+    var map_div = $('.facility_map').show()[0];
+    var map = map_div._facility_map;
+
+    if (!map){
+        // Initialize Leaflet
+        map = new L.Map(map_div, {scrollWheelZoom: false})
+            .setView(lat_lng, map_zoom);
+        var lga_layer = new L.TileLayer(
+            'http://{s}.tiles.mapbox.com/v3/modilabs.nigeria_overlays_white/{z}/{x}/{y}.png', {
+                minZoom: 6,
+                maxZoom: 10
+            });
+        var google_layer = new L.TileLayer(
+            'http://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+                maxZoom: 18, 
+                minZoom: 3
+            });
+        google_layer.addTo(map);
+        lga_layer.addTo(map);
+        map_div._facility_map = map;
+    }
+
+    if (map._facility_layer) map.removeLayer(map._facility_layer);
+    map.setView(lat_lng, map_zoom);
+    map._facility_layer = this.facility_layer(lga.facilities, sector, indicator);
+    map._facility_layer.addTo(map);
+};
+
+MapView.facility_layer = function(facilities, sector, indicator) {
+    var that = this;
+    var marker_group = new L.LayerGroup();
+    _.each(facilities, function(fac){
+        if (fac.sector === sector || sector === 'overview') {
+            var lat_lng = fac.gps.split(' ').slice(0,2);
+            var icon_url;
+            if (indicator) {
+                if (fac[indicator] === true || 
+                    fac[indicator] === false) {
+                    icon_url = 'static/images/icons_f/' + 
+                        fac[indicator] +'.png';
+                } else {
+                    icon_url = 'static/images/icons_f/' +
+                        'undefined.png';
+                }
+            } else {
+                icon_url = 'static/images/icons_f/normal_' + 
+                    fac.sector + '.png';
+            }
+            var icon = new L.Icon({iconUrl: icon_url}); 
+            var mark = new L.Marker(lat_lng, {icon: icon});
+            var popup = new L.Popup({closeButton: false})
+                .setContent(fac.facility_name)
+                .setLatLng(lat_lng);
+            mark.on('click', function(){
+                that.facility_modal(fac);
+            });
+            mark.on('mouseover', mark.openPopup.bind(mark))
+                .on('mouseout', mark.closePopup.bind(mark))
+                .bindPopup(popup);
+            marker_group.addLayer(mark);
         }
     });
+    return marker_group;
 };
 
 MapView.chart_indicators = function(facilities, sector){
@@ -202,106 +271,6 @@ MapView.chart_indicators = function(facilities, sector){
         return 0;
     });
     return chart_indicators;
-};
-
-MapView.facility_map_switcher = function(lga, sector) {
-    if(!facility_map_obj || facility_map_obj.lga !== lga) { 
-        if (!facility_map_obj) {
-            facility_map_obj = {};
-            facility_map_obj.map = this.facilities_map(lga);
-        } else {
-            facility_map_obj.clean_layers();
-            var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
-            var map_zoom = 10;
-            facility_map_obj.map.setView(lat_lng, map_zoom);
-        }
-        facility_map_obj.lga = lga;
-        facility_map_obj.markers = {
-            water : this.mark_facilities(lga.facilities, 'water'),
-            education : this.mark_facilities(lga.facilities, 'education'),
-            health : this.mark_facilities(lga.facilities, 'health')
-        };
-        facility_map_obj.clean_layers = function() {
-            _.each(facility_map_obj.markers, function(layer){
-                facility_map_obj.map.removeLayer(layer);
-            });
-        };
-    }
-    facility_map_obj.clean_layers();
-    if(sector === 'overview') {
-        facility_map_obj.markers.education.addTo(facility_map_obj.map);
-        facility_map_obj.markers.water.addTo(facility_map_obj.map);
-        facility_map_obj.markers.health.addTo(facility_map_obj.map);
-    } else {
-        facility_map_obj.markers[sector].addTo(facility_map_obj.map);
-    }
-}
-
-MapView.map_icon_switch = function(lga, sector, indicator) {
-    facility_map_obj.clean_layers();
-    facility_map_obj.markers.true_false_markers = this.mark_facilities(lga.facilities, 
-            sector, indicator);
-    facility_map_obj.markers.true_false_markers.addTo(facility_map_obj.map);
-};
-
-MapView.facilities_map = function(lga){
-    var map_div = $(".facility_map")[0];
-    var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
-    var map_zoom = 10; //TODO: adding nw and se for bounding box
-    var facility_map = new L.Map(map_div, {scrollWheelZoom: false})
-        .setView(lat_lng, map_zoom);
-    var tileset = "nigeria_overlays_white";
-    var tile_server = "http://{s}.tiles.mapbox.com/v3/modilabs." + tileset +
-                      "/{z}/{x}/{y}.png";
-    var lga_layer = new L.TileLayer(tile_server, {
-        minZoom: 6,
-        maxZoom: 10
-    });
-    var ggl_server = 'http://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}';
-    var ggl = new L.TileLayer( ggl_server, {
-        maxZoom:18, 
-        minZoom:3
-    });
-    ggl.addTo(facility_map);
-    lga_layer.addTo(facility_map);
-    return facility_map;
-};
-
-MapView.mark_facilities = function(facilities, sector, indicator) {
-    var that = this;
-    var marker_group = new L.LayerGroup();
-    _.each(facilities, function(fac){
-        if (fac.sector === sector) {
-            var lat_lng = fac.gps.split(" ").slice(0,2);
-            var icon_url;
-            if (indicator) {
-                if (fac[indicator] === true || 
-                    fac[indicator] === false) {
-                    icon_url = 'static/images/icons_f/' + 
-                        fac[indicator] +'.png';
-                } else {
-                    icon_url = 'static/images/icons_f/' +
-                        'undefined.png';
-                }
-            } else {
-                icon_url = 'static/images/icons_f/normal_' + 
-                    fac.sector + '.png';
-            }
-            var icon = new L.Icon({iconUrl: icon_url}); 
-            var mark = new L.Marker(lat_lng, {icon: icon});
-            var popup = new L.Popup({closeButton: false})
-                .setContent(fac.facility_name || 'Water Point')
-                .setLatLng(lat_lng);
-            mark.on('click', function(){
-                that.facility_modal(fac);
-            });
-            mark.on('mouseover', mark.openPopup.bind(mark))
-                .on('mouseout', mark.closePopup.bind(mark))
-                .bindPopup(popup);
-            marker_group.addLayer(mark);
-        }
-    });
-    return marker_group;
 };
 
 MapView.facility_modal = function(facility){
