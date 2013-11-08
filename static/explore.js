@@ -145,6 +145,9 @@ var MapView = {};
 MapView.init = function(){
     $('.map_view_legend').on('click', '.close', function(){
         $(this).parent().hide();
+        $('.pie_chart_selector')
+            .prop('selectedIndex', 0)
+            .change();
         return false;
     });
 };
@@ -249,7 +252,7 @@ MapView.facility_layer = function(facilities, sector, indicator) {
 MapView.chart_indicators = function(facilities, sector){
     // Iterates through facilities within a sector to find
     // indicators which contain boolean values.
-    // Returns a list of [indicator, indicator_name]
+    // Returns a sorted list of [indicator, indicator_name]
     var indicators = {};
     for (var i=0, facility; facility=facilities[i]; i++){
         if (facility.sector === sector){
