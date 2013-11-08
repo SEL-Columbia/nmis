@@ -11,6 +11,7 @@
         NMIS.lga_overview = {{ load_static_data('lga_overview.json')|safe }};
         NMIS.lga_view = {{ load_static_data('lga_view.json')|safe }};
         NMIS.table_view = {{ load_static_data('table_view.json')|safe }};
+        NMIS.mdgs_view = {{ load_static_data('mdgs_view.json')|safe }};
     </script>
 {% endblock %}
 
@@ -329,6 +330,32 @@
                         <div style="clear:both"></div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </script>
+
+    <script id="mdgs_view_template" type="text/html">
+        <div class="country-view row">
+            <div class="left-panel pull-left">
+                <h2>Nigerias progress on the MDGs</h2>
+                <div class="mdg-map-nav pull-left">
+                    <select id="mdg-selector" class="form-control" placeholder="Please select an MDG goal">
+                        <option value="">Select an MDG goal</option>
+                        <% _.each(mdg_goals, function(goal){ %>
+                            <optgroup label="<%= goal.name %>">
+                                <% _.each(goal.indicators, function(indicator){ %>
+                                    <option value="<%= indicator %>">
+                                        <%= indicator_name(indicator) %>
+                                    </option>
+                                <% }); %>
+                            </optgroup>
+                        <% }); %>
+                    </select>
+                    <div class="mdg-description"></div>
+                </div>
+            </div>
+            <div class="right-panel pull-right">
+                <div class="mdg-map pull-right" id="mdg-map"></div>
             </div>
         </div>
     </script>

@@ -1,11 +1,9 @@
 $(function(){
     var map_div = $('.mdg-map')[0];
     mapInit(map_div);
-    $('#mdg-selector').selectize({
-        onItemAdd: function(value){
-            applyMap(map_div, value);
-            applyDescription(value);
-        }
+    $('#mdg-selector').change(function(){
+        applyMap(map_div, this.value);
+        applyDescription(this.value);
     });
 });
 
