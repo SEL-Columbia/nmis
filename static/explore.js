@@ -266,6 +266,11 @@ MapView.facility_map = function(lga, sector, indicator) {
                 minZoom: 6,
                 maxZoom: 10
             });
+        var locality_layer = new L.TileLayer(
+            'http://{s}.tiles.mapbox.com/v3/modilabs.Nigeria_Localities/{z}/{x}/{y}.png', {
+                minZoom: 13,
+                maxZoom: 18
+            });
         var google_layer = new L.TileLayer(
             'http://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
                 maxZoom: 18, 
@@ -273,6 +278,7 @@ MapView.facility_map = function(lga, sector, indicator) {
             });
         google_layer.addTo(map);
         lga_layer.addTo(map);
+        locality_layer.addTo(map);
         map_div._facility_map = map;
         map._unique_lga = lga.unique_lga;
     }
