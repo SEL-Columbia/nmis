@@ -114,6 +114,7 @@ function index(){
 var MDGSView = {};
 MDGSView.render = function(){
     render('#mdgs_view_template', {mdg_goals: NMIS.mdgs_view});
+    $('.lga_nav').hide();
     var self = this;
     var map_div = $('.mdg-map')[0];
     var mapZoom = 6;
