@@ -479,3 +479,22 @@ h3.mdg-underlined-title {
     position: relative;
     width: 35%;
 }
+.left-panel h2 {
+    font-family: Helvetica;
+    font-weight: bold;
+    color: #545653;
+}
+.mdg-title {
+    padding-top: 20px;
+    font-family: Helvetica;
+    font-size: 25px;
+    font-weight: bold;
+    color: #F99B1D;
+    line-height: 90%;
+    
+}
+.mdg-description {
+    padding-top: 10px;
+    font-family: Helvetica;
+    font-size: 17px;
+}

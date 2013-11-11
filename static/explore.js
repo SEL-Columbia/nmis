@@ -116,7 +116,6 @@ MDGSView.render = function(){
     render('#mdgs_view_template', {mdg_goals: NMIS.mdgs_view});
     var self = this;
     var map_div = $('.mdg-map')[0];
-    var desc_div = $('.mdg-description');
     var mapZoom = 6;
     var lat_lng = new L.LatLng(9.16718, 7.53662);
     var sw = new L.LatLng(4.039617826768437, 0.17578125);
@@ -134,7 +133,7 @@ MDGSView.render = function(){
     $('#mdg-selector').change(function(){
         var label = $('#mdg-selector :selected').parent().attr('label');
         self.applyMap(map_div, this.value);
-        self.applyDescription(desc_div, this.value, label);
+        self.applyDescription(this.value, label);
     });
 };
 
@@ -176,9 +175,15 @@ MDGSView.applyMap = function(map_div, value) {
     map_div.mapLayers[value].legend.addTo(map_div.map);
 };
 
-MDGSView.applyDescription = function(desc_div, value, label) {
+MDGSView.applyDescription = function(value, label) {
+    var desc_title = $('.mdg-title');
+    var desc_div = $('.mdg-description');
     var desc = NMIS.indicators[value].description;
-    desc_div.html('<p>' + label + '</p><p>' + desc + '</p>');
+    desc_title.text(label);
+    desc_div.text(desc);
+
+    
+    //desc_div.html('<p>' + label + '</p><p>' + desc + '</p>');
 };
 
 
