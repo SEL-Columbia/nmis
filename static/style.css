@@ -483,6 +483,10 @@ h3.mdg-underlined-title {
     font-family: Helvetica;
     font-weight: bold;
     color: #545653;
+    font-size: 40px;
+}
+.mdg-map-nav {
+    padding-top: 5px;
 }
 .mdg-title {
     padding-top: 20px;
@@ -491,7 +495,6 @@ h3.mdg-underlined-title {
     font-weight: bold;
     color: #F99B1D;
     line-height: 90%;
-    
 }
 .mdg-description {
     padding-top: 10px;
