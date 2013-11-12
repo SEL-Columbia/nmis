@@ -270,7 +270,7 @@ MapView.facility_map = function(lga, sector, indicator) {
         var lga_layer = new L.TileLayer(
             'http://{s}.tiles.mapbox.com/v3/modilabs.nigeria_overlays_white/{z}/{x}/{y}.png', {
                 minZoom: 6,
-                maxZoom: 10
+                maxZoom: 14
             });
         var locality_layer = new L.TileLayer(
             'http://{s}.tiles.mapbox.com/v3/modilabs.Nigeria_Localities/{z}/{x}/{y}.png', {
