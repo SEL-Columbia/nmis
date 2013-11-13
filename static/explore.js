@@ -33,6 +33,9 @@ function view(viewObj, sector){
     if (viewObj.init) viewObj.init();
 
     function render(lga, sector){
+        $('.pagenav a').removeClass('active')
+            .filter('.explore')
+            .addClass('active');
         $('.facility_map').hide();
         $(window).scrollTop(0);
         viewObj.render(lga, sector);
@@ -113,8 +116,13 @@ function index(){
 
 var MDGSView = {};
 MDGSView.render = function(){
-    render('#mdgs_view_template', {mdg_goals: NMIS.mdgs_view});
     $('.lga_nav').hide();
+    $('.pagenav a').removeClass('active')
+        .filter('.mdgs')
+        .addClass('active');
+
+    render('#mdgs_view_template', {mdg_goals: NMIS.mdgs_view});
+
     var self = this;
     var map_div = $('.mdg-map')[0];
     var mapZoom = 6;
