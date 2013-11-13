@@ -44,14 +44,6 @@ def about():
     return flask.render_template('about.html')
 
 
-@app.route('/mdgs')
-def mdgs():
-    mdg_layers = json.loads(load_static_data('mdg_layers.json'));
-    return flask.render_template('mdgs.html',
-            mdg_layers=mdg_layers)
-            
-
-
 @app.route('/explore')
 def explore():
     zones = json.loads(load_static_data('zones.json'))
