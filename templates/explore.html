@@ -20,6 +20,13 @@
 
 
 {% block content %}
+    <select id="lga_search" placeholder="Select LGA">
+        <option value="">Select an LGA</option>
+        {% for lga_name, unique_lga in lgas %}
+            <option value="{{ unique_lga }}">{{ lga_name }}</option>
+        {% endfor %}
+    </select>
+    <div class="lga_nav"></div>
     <div class="content"></div>
     <div class="facility_map">
         <div class="map_view_legend">

@@ -20,20 +20,12 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 /* Base.html 
 ================*/
 body {
-    background-image: url("/static/images/bg-shade-repeat.png");
+    background: rgb(225, 225, 225);
 }
 
 .container {
     max-width: none !important;
     width: 1150px;
-}
-
-#content .container {
-    position: relative;
-    background: #fff;
-    padding: 40px 50px;
-    padding-top: 180px;
-    margin-bottom: 80px;
 }
 
 .nav>li>a {
@@ -58,51 +50,53 @@ body {
 }
 
 
-/* Header */
-.topbar {
+#header {
     position: fixed;
     width: 100%;
-    height: 100px;
     top: 0;
     left: 0;
-    background: #545653;
+    background: white;
     z-index: 100;
 }
-.topbar a.brand {
-    position: relative;
-    padding: 8px 0;
-    color: white;
-    font-size: 22px;
+#header a.logo {
+    display: inline-block;
+    padding: 10px 0;
+    color: #666;
+    font-size: 25px;
+    font-weight: bold;
 }
-.topbar a.brand:hover {
+#header a.logo:hover {
     text-decoration: none;
 }
-.topbar a.brand:hover .logo {
-    opacity: 1;
-}
 
-.pagenav {
-    padding: 5px;
-    padding-left: 88px;
-    margin-top: -10px;
-    margin-bottom: 12px;
+#header .global_nav {
+    padding-left: 150px;
+    background: rgb(50, 138, 57);
 }
-.pagenav a {
-    display: inline-block;
+#header .global_nav a {
+    display: block;
+    float: left;
     color: white;
     font-size: 15px;
-    margin-right: 15px;
+    font-weight: bold;
+    padding: 10px 20px;
+    text-decoration: none;
 }
-.pagenav a:hover,
-.pagenav a.active {
-    color: #f28122;
-}
-.selectize-control {
-    float: right;
-    width: 200px;
-    margin-top: 20px;
+#header .global_nav a:hover,
+#header .global_nav a.active {
+    background: #eee;
+    color: #444;
 }
 
+
+
+#content .container {
+    position: relative;
+    background: #fff;
+    padding: 40px 50px;
+    padding-top: 180px;
+    margin-bottom: 80px;
+}
 
 
 /* Index.html
@@ -134,7 +128,7 @@ body {
     border: none;
 }
 #index_content .btn.explore {
-    background-color: #f7941e;
+    background-color: rgb(50, 138, 57);
 }
 #index_content .btn.download {
     background-color: #939598;
@@ -177,6 +171,12 @@ body {
 
 /* Dashboard.html
 =================================*/
+.selectize-control {
+    float: right;
+    width: 200px;
+    margin-top: 20px;
+}
+
 .page-header select {
     float: right;
     width: 250px;
