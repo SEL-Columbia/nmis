@@ -174,7 +174,6 @@ body {
 .selectize-control {
     float: right;
     width: 200px;
-    margin-top: 20px;
 }
 
 .page-header select {
@@ -204,9 +203,7 @@ table thead td:active {
 ========================================*/
 .lga_nav {
     display: none;
-    background: #eee;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    margin-bottom: 35px;
 }
 .lga_nav .nav {
     display: inline-block;

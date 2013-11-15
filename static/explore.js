@@ -117,7 +117,7 @@ function index(){
 var MDGSView = {};
 MDGSView.render = function(){
     $('.lga_nav').hide();
-    $('.pagenav a').removeClass('active')
+    $('.global_nav a').removeClass('active')
         .filter('.mdgs')
         .addClass('active');
 
