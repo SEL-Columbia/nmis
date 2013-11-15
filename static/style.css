@@ -217,6 +217,9 @@ table thead td:active {
     margin: 0 auto;
     padding: 0 0 12px;
 }
+.zone-img {
+    height: 150px;
+}
 #zone-navigation .zl-wrap {
     width: 16.6%;
     float: left;
