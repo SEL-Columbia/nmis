@@ -20,7 +20,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 /* Base.html 
 ================*/
 body {
-    background-image: url("/static/images/bg-shade-repeat.png");
+    background: rgb(225, 225, 225);
 }
 
 .container {
@@ -59,7 +59,7 @@ body {
     z-index: 100;
 }
 #header a.logo {
-    position: relative;
+    display: inline-block;
     padding: 10px 0;
     color: #666;
     font-size: 25px;
@@ -70,20 +70,22 @@ body {
 }
 
 #header .global_nav {
-    padding: 5px;
-    padding-left: 88px;
+    padding-left: 150px;
     background: rgb(50, 138, 57);
 }
 #header .global_nav a {
-    display: inline-block;
+    display: block;
+    float: left;
     color: white;
     font-size: 15px;
     font-weight: bold;
-    margin-right: 15px;
+    padding: 10px 20px;
+    text-decoration: none;
 }
 #header .global_nav a:hover,
 #header .global_nav a.active {
-    color: #f28122;
+    background: #eee;
+    color: #444;
 }
 
 
@@ -126,7 +128,7 @@ body {
     border: none;
 }
 #index_content .btn.explore {
-    background-color: #f7941e;
+    background-color: rgb(50, 138, 57);
 }
 #index_content .btn.download {
     background-color: #939598;
