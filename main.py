@@ -18,17 +18,6 @@ def load_static_data(file_name):
     return data
 
 
-@app.context_processor
-def lgas():
-    zones = json.loads(load_static_data('zones.json'))
-    lgas = [lga
-        for state in zones.values()
-        for lgas in state.values()
-        for lga in lgas.items()]
-    lgas.sort(key=lambda x: x[0])
-    return {'lgas': lgas}
-
-
 @app.route('/')
 def index():
     return flask.render_template('index.html')
@@ -57,8 +46,15 @@ def explore():
         sorted_zones.append((zone, sorted_states))
     sorted_zones.sort(key=lambda x: x[0])
 
+    sorted_lgas = [lga
+        for state in zones.values()
+        for lgas in state.values()
+        for lga in lgas.items()]
+    sorted_lgas.sort(key=lambda x: x[0])
+
     return flask.render_template('explore.html', 
         zones=json.dumps(sorted_zones),
+        sorted_lgas=sorted_lgas,
         load_static_data=load_static_data)
 
 

@@ -465,7 +465,7 @@ h3.mdg-underlined-title {
 }
 
 
-/* mdgs.html
+/* Dashboard.html, MDGS View
 =================================*/
 .mdg-map {
     position: relative;
@@ -498,3 +498,4 @@ h3.mdg-underlined-title {
     font-family: Helvetica;
     font-size: 17px;
 }
+
