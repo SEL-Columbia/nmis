@@ -21,29 +21,21 @@
     {% block js %}{% endblock %}
 </head>
 <body>
-    <div class="topbar">
+    <div id="header">
         <div class="container">
-            <a class="brand" href="/">
-                <span class="logo">
-                    <img src="/static/images/nmis_pilot.png">
-                </span>
+            <a class="logo" href="/">
+                <img src="/static/images/nmis_pilot.png">
                 Nigeria MDG Information System
             </a>
-            <select id="lga_search" placeholder="Select LGA">
-                <option value="">Select an LGA</option>
-                {% for lga_name, unique_lga in lgas %}
-                    <option value="{{ unique_lga }}">{{ lga_name }}</option>
-                {% endfor %}
-            </select>
-            <div class="pagenav">
+        </div>
+        <div class="global_nav">
+            <div class="container">
                 <a class="{% block nav_about %}{% endblock %}" href="/about">About</a>
                 <a class="{% block nav_explore %}{% endblock %} explore" href="/explore">Explore Facilities</a>
                 <a class="{% block nav_download %}{% endblock %}" href="/download">Download Data</a>
                 <a class="{% block nav_mdgs %}{% endblock %} mdgs" href="/explore#mdgs">MDGs in Nigeria</a>
             </div>
-            <div style="clear:both"></div>
         </div>
-        <div class="lga_nav"></div>
     </div>
     <div id="content">
         <div class="container">

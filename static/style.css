@@ -28,14 +28,6 @@ body {
     width: 1150px;
 }
 
-#content .container {
-    position: relative;
-    background: #fff;
-    padding: 40px 50px;
-    padding-top: 180px;
-    margin-bottom: 80px;
-}
-
 .nav>li>a {
     border: 1px solid black;
     border-color: #dddddd #aaaaaa #aaaaaa #dddddd;
@@ -58,51 +50,51 @@ body {
 }
 
 
-/* Header */
-.topbar {
+#header {
     position: fixed;
     width: 100%;
-    height: 100px;
     top: 0;
     left: 0;
-    background: #545653;
+    background: white;
     z-index: 100;
 }
-.topbar a.brand {
+#header a.logo {
     position: relative;
-    padding: 8px 0;
-    color: white;
-    font-size: 22px;
+    padding: 10px 0;
+    color: #666;
+    font-size: 25px;
+    font-weight: bold;
 }
-.topbar a.brand:hover {
+#header a.logo:hover {
     text-decoration: none;
 }
-.topbar a.brand:hover .logo {
-    opacity: 1;
-}
 
-.pagenav {
+#header .global_nav {
     padding: 5px;
     padding-left: 88px;
-    margin-top: -10px;
-    margin-bottom: 12px;
+    background: rgb(50, 138, 57);
 }
-.pagenav a {
+#header .global_nav a {
     display: inline-block;
     color: white;
     font-size: 15px;
+    font-weight: bold;
     margin-right: 15px;
 }
-.pagenav a:hover,
-.pagenav a.active {
+#header .global_nav a:hover,
+#header .global_nav a.active {
     color: #f28122;
 }
-.selectize-control {
-    float: right;
-    width: 200px;
-    margin-top: 20px;
-}
 
+
+
+#content .container {
+    position: relative;
+    background: #fff;
+    padding: 40px 50px;
+    padding-top: 180px;
+    margin-bottom: 80px;
+}
 
 
 /* Index.html
@@ -177,6 +169,12 @@ body {
 
 /* Dashboard.html
 =================================*/
+.selectize-control {
+    float: right;
+    width: 200px;
+    margin-top: 20px;
+}
+
 .page-header select {
     float: right;
     width: 250px;
