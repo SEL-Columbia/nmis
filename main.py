@@ -9,9 +9,10 @@ app = flask.Flask(__name__)
 app.debug = True
 
 
-def load_static_data(file_name):
+def load_file(file_name):
     cwd = os.path.dirname(os.path.abspath(__file__))
-    path = os.path.join(cwd, 'static', 'data')
+    folder = flask.request.args.get('year', 'data')
+    path = os.path.join(cwd, 'static', folder)
     file_path = os.path.join(path, file_name)
     with open(file_path, 'r') as f:
         data = f.read()
@@ -35,7 +36,8 @@ def about():
 
 @app.route('/explore')
 def explore():
-    zones = json.loads(load_static_data('zones.json'))
+    # Sort zones for navigation
+    zones = json.loads(load_file('zones.json'))
     sorted_zones = []
     for zone, states in zones.items():
         sorted_states = []
@@ -46,6 +48,7 @@ def explore():
         sorted_zones.append((zone, sorted_states))
     sorted_zones.sort(key=lambda x: x[0])
 
+    # Sort LGAs for search box
     sorted_lgas = [lga
         for state in zones.values()
         for lgas in state.values()
@@ -55,7 +58,12 @@ def explore():
     return flask.render_template('explore.html', 
         zones=json.dumps(sorted_zones),
         sorted_lgas=sorted_lgas,
-        load_static_data=load_static_data)
+        load_file=load_file)
+
+
+@app.route('/mdgs')
+def mdgs():
+    return flask.render_template('mdgs.html', load_file=load_file)
 
 
 @app.errorhandler(404)

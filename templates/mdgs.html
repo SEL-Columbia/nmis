@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+
+{% block js %}
+    <script>
+        (function(){
+            NMIS = {};
+            NMIS.indicators = {{ load_file('indicators.json')|safe }};
+            NMIS.mdgs_view = {{ load_file('mdgs_view.json')|safe }};
+
+            
+            $(function(){
+                var template = $('#mdgs_view_template').html();
+                var html = _.template(template, {
+                    mdg_goals: NMIS.mdgs_view,
+                    indicators: NMIS.indicators
+                });
+                $('#content .content').html(html);
+
+                var map_div = $('.mdg-map')[0];
+                var mapZoom = 6;
+                var lat_lng = new L.LatLng(9.16718, 7.53662);
+                var sw = new L.LatLng(4.039617826768437, 0.17578125);
+                var ne = new L.LatLng(14.221788628397572, 14.897460937499998);
+                var country_bounds = new L.LatLngBounds(sw, ne);
+                var map = new L.Map(map_div,{
+                        maxBounds: country_bounds
+                    }).setView(lat_lng, mapZoom);
+                var baseLayer = mapboxLayer('nigeria_base', 6, 9);
+                baseLayer.addTo(map);
+                map_div.map = map;
+                map_div.mapLayers = {};
+                map_div.currentLayer = {};
+
+                $('#mdg-selector').change(function(){
+                    var label = $('#mdg-selector :selected').parent().attr('label');
+                    applyMap(map_div, this.value);
+                    applyDescription(this.value, label);
+                }).change();
+            });
+
+            function mapboxLayer(indicator, minZoom, maxZoom) {
+                var mapboxName = 'modilabs.' + indicator;
+                var tileLayer = new L.mapbox.tileLayer(mapboxName, {
+                    minZoom: minZoom,
+                    maxZoom: maxZoom,
+                });
+                return tileLayer;
+            }
+
+            function cleanMap(map_div) {
+                var currentLayer = map_div.currentLayer;
+                var map = map_div.map;
+                var legend = currentLayer.legend;
+                var layer = currentLayer.layer;
+                legend.removeFrom(map);
+                map.removeLayer(layer);
+            }
+
+            function addMapLayer(map, layer) {
+                var legend = L.mapbox.legendControl();
+                var tempLayer = mapboxLayer(layer, 6, 9);
+                tempLayer.on('ready', function(){
+                    var TileJSON = tempLayer.getTileJSON();
+                    legend.addLegend(TileJSON.legend);
+                });
+                return {layer: tempLayer, legend: legend};
+            };
+
+            function applyMap(map_div, value) {
+                if(!(_.isEmpty(map_div.currentLayer))) { cleanMap(map_div); }
+                if(!(map_div.mapLayers[value])) {
+                    map_div.mapLayers[value] = addMapLayer(map_div.map, value);
+                }
+                map_div.currentLayer = map_div.mapLayers[value];
+                map_div.map.addLayer(map_div.mapLayers[value].layer);
+                map_div.mapLayers[value].legend.addTo(map_div.map);
+            };
+
+            function applyDescription(value, label) {
+                var desc_title = $('.mdg-title');
+                var desc_div = $('.mdg-description');
+                var desc = NMIS.indicators[value].description;
+                desc_title.text(label);
+                desc_div.text(desc);
+            }
+        })();
+    </script>
+{% endblock %}
+
+
+{% block nav_mdgs %}active{% endblock %}
+
+
+{% block content %}
+    <div class="content"></div>
+    <script id="mdgs_view_template" type="text/html">
+        <div class="country-view row">
+            <div class="left-panel pull-left">
+                <h2>Nigeria's progress on the MDGs</h2>
+                <i>Currently Viewing:</i>
+                <div class="mdg-map-nav pull-left">
+                    <select id="mdg-selector" class="form-control" placeholder="Please select an MDG goal">
+                        <% _.each(mdg_goals, function(goal){ %>
+                            <optgroup label="<%= goal.name %>">
+                                <% _.each(goal.indicators, function(indicator){ %>
+                                    <option value="<%= indicator %>">
+                                        <%= indicators[indicator].name %>
+                                    </option>
+                                <% }); %>
+                            </optgroup>
+                        <% }); %>
+                    </select>
+                    <div class="mdg-title"></div>
+                    <div class="mdg-description"></div>
+                </div>
+            </div>
+            <div class="right-panel pull-right">
+                <div class="mdg-map pull-right" id="mdg-map"></div>
+            </div>
+        </div>
+    </script>
+{% endblock %}

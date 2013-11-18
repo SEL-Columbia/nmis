@@ -70,8 +70,10 @@ body {
 }
 
 #header .global_nav {
-    padding-left: 150px;
     background: rgb(50, 138, 57);
+}
+#header .global_nav .container {
+    padding-left: 85px;
 }
 #header .global_nav a {
     display: block;
