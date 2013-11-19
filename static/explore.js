@@ -55,15 +55,15 @@ function view(viewObj, sector){
     }
 }
 
-function render_nav(lga, active_view, sector){
+function render_header(lga, active_view, sector){
     // Renders the LGA navigation bar
-    var template = $('#lga_nav_template').html();
+    var template = $('#explore_header_template').html();
     var html = _.template(template, {
         lga: lga,
         active_view: active_view,
         sector: sector
     });
-    $('.lga_nav').html(html).show();
+    $('#explore_header').html(html).show();
 }
 
 
@@ -101,11 +101,22 @@ function indicator_name(slug){
 // Views
 // ============
 function index(){
-    $('.lga_nav').hide();
-    render('#index_template', {zones: NMIS.zones});
+    $('#explore_header').hide();
+    render('#index_template', {
+        zones: NMIS.zones,
+        sorted_lgas: NMIS.sorted_lgas
+    });
     $('#zone-navigation .state-link').click(function(){
         $(this).next('.lga-list').toggle();
         return false;
+    });
+
+    $('.lga_search').selectize({
+        onItemAdd: function(value){
+            location.href = '/explore#' + value + '/lga_overview';
+            this.clear();
+            return false;
+        }  
     });
 }
 
@@ -113,7 +124,7 @@ function index(){
 
 var LGAView = {};
 LGAView.render = function(lga, sector){
-    render_nav(lga, 'lga', sector);
+    render_header(lga, 'lga', sector);
 
     if (sector === 'overview'){
         render('#lga_overview_template', {
@@ -158,7 +169,7 @@ MapView.init = function(){
 
 MapView.render = function(lga, sector){
     var self = this;
-    render_nav(lga, 'map', sector);
+    render_header(lga, 'map', sector);
     render('#map_view_template', {
         lga: lga,
         sector: sector,
@@ -371,7 +382,7 @@ MapView.map_legend = function(lga, sector, indicator){
 
 var TableView = {};
 TableView.render = function(lga, sector){
-    render_nav(lga, 'table', sector);
+    render_header(lga, 'table', sector);
     render('#table_view_template', {
         lga: lga,
         sector: sector,

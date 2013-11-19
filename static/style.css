@@ -21,6 +21,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 ================*/
 body {
     background: rgb(225, 225, 225);
+    padding-top: 100px;
 }
 
 .container {
@@ -86,17 +87,14 @@ body {
 }
 #header .global_nav a:hover,
 #header .global_nav a.active {
-    background: #eee;
-    color: #444;
+	background: rgb(77, 77, 77);
 }
-
 
 
 #content .container {
     position: relative;
     background: #fff;
     padding: 40px 50px;
-    padding-top: 180px;
     margin-bottom: 80px;
 }
 
@@ -173,14 +171,63 @@ body {
 
 /* Dashboard.html
 =================================*/
-.selectize-control {
-    float: right;
-    width: 200px;
-}
 
-.page-header select {
-    float: right;
-    width: 250px;
+#explore_header {
+	display: none;
+	padding: 20px 0;
+	background: rgb(77, 77, 77);
+	overflow: hidden;
+}
+#explore_header .container {
+	position: relative;
+}
+#explore_header h1 {
+	color: white;
+	font-size: 32px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	display: block;
+}
+#explore_header .nav_views {
+	position: absolute;
+	top: 45px;
+	right: 20px;
+}
+#explore_header .nav_views a {
+	color: white;
+	background: rgb(47, 129, 54);
+	padding: 10px;
+	width: 65px;
+	height: 80px;
+	text-decoration: none;
+	display: inline-block;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 7px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+#explore_header .nav_views .glyphicon {
+	font-size: 26px;
+	display: block;
+	margin-bottom: 10px;
+}
+#explore_header .nav_sectors {
+	color: white;
+}
+#explore_header .nav_sectors a {
+	color: white;
+	font-weight: bold;
+	font-size: 16px;
+	margin: 0 10px;
+	text-decoration: none;
+}
+#explore_header .nav_sectors a:first-child {
+	margin-left: 0;
+}
+#explore_header .nav_sectors a:hover,
+#explore_header .nav_sectors a.active {
+    color: rgb(255, 233, 29);
 }
 
 /* Datatables */
@@ -201,17 +248,11 @@ table thead td:active {
 
 
 
-/* Dashboard.html, LGA & Zone Navigation
+/* Dashboard.html, Index View
 ========================================*/
-.lga_nav {
-    display: none;
-    margin-bottom: 35px;
-}
-.lga_nav .nav {
-    display: inline-block;
-}
-.lga_nav .nav_sectors {
-    margin-left: 30px;
+.selectize-control {
+    width: 300px;
+    margin-bottom: 20px;
 }
 
 #zone-navigation {

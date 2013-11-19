@@ -57,8 +57,11 @@ def explore():
 
     return flask.render_template('explore.html', 
         zones=json.dumps(sorted_zones),
-        sorted_lgas=sorted_lgas,
-        load_file=load_file)
+        sorted_lgas=json.dumps(sorted_lgas),
+        indicators=load_file('indicators.json'),
+        lga_overview=load_file('lga_overview.json'),
+        lga_view=load_file('lga_view.json'),
+        table_view=load_file('table_view.json'))
 
 
 @app.route('/mdgs')

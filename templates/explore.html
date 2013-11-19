@@ -6,11 +6,12 @@
     <script>
         NMIS = {};
         NMIS.lgas = {};
+        NMIS.sorted_lgas = {{ sorted_lgas|safe }};
         NMIS.zones = {{ zones|safe }};
-        NMIS.indicators = {{ load_file('indicators.json')|safe }};
-        NMIS.lga_overview = {{ load_file('lga_overview.json')|safe }};
-        NMIS.lga_view = {{ load_file('lga_view.json')|safe }};
-        NMIS.table_view = {{ load_file('table_view.json')|safe }};
+        NMIS.indicators = {{ indicators|safe }};
+        NMIS.lga_overview = {{ lga_overview|safe }};
+        NMIS.lga_view = {{ lga_view|safe }};
+        NMIS.table_view = {{ table_view|safe }};
     </script>
 {% endblock %}
 
@@ -19,14 +20,6 @@
 
 
 {% block content %}
-    <select id="lga_search" placeholder="Select LGA">
-        <option value="">Select an LGA</option>
-        {% for lga_name, unique_lga in sorted_lgas %}
-            <option value="{{ unique_lga }}">{{ lga_name }}</option>
-        {% endfor %}
-    </select>
-
-    <div class="lga_nav"></div>
     <div class="content"></div>
     <div class="facility_map">
         <div class="map_view_legend">
@@ -37,53 +30,63 @@
         </div>
     </div>
 
-    <script id="lga_nav_template" type="text/html">
-        <ul class="nav nav-pills">
-            <li <% if (active_view === 'lga'){ %>class="active"<% } %>>
-                <a href="#<%= lga.unique_lga %>/lga_<%= sector %>">
+    <script id="explore_header_template" type="text/html">
+        <div class="container">
+            <h1>
+                <%= lga.lga %>, <%= lga.state %>
+            </h1>
+            <div class="nav_views">
+                <a <% if (active_view === 'lga'){ %>class="active"<% } %>
+                    href="#<%= lga.unique_lga %>/lga_<%= sector %>">
+                    <span class="glyphicon glyphicon-home"></span>
                     Overview
                 </a>
-            </li>
-            <li <% if (active_view === 'map'){ %>class="active"<% } %>>
-                <a href="#<%= lga.unique_lga %>/map_<%= sector %>">
-                    Map View
+                <a <% if (active_view === 'map'){ %>class="active"<% } %>
+                    href="#<%= lga.unique_lga %>/map_<%= sector %>">
+                    <span class="glyphicon glyphicon-map-marker"></span>
+                    Map
                 </a>
-            </li>
-            <li <% if (active_view === 'table'){ %>class="active"<% } %>>
-                <a href="#<%= lga.unique_lga %>/table_<%= sector %>">
-                    Table View
+                <a <% if (active_view === 'table'){ %>class="active"<% } %>
+                    href="#<%= lga.unique_lga %>/table_<%= sector %>">
+                    <span class="glyphicon glyphicon-list"></span>
+                    Table
                 </a>
-            </li>
-        </ul>
-        <ul class="nav nav-pills nav_sectors">
-            <li <% if (sector === 'overview'){ %>class="active"<% } %>>
-                <a href="#<%= lga.unique_lga %>/<%= active_view %>_overview">
+            </div>
+            <div class="nav_sectors">
+                <a <% if (sector === 'overview'){ %>class="active"<% } %>
+                    href="#<%= lga.unique_lga %>/<%= active_view %>_overview">
                     All Sectors
                 </a>
-            </li>
-            <li <% if (sector === 'health'){ %>class="active"<% } %>>
-                <a href="#<%= lga.unique_lga %>/<%= active_view %>_health">
+                |
+                <a <% if (sector === 'health'){ %>class="active"<% } %>
+                    href="#<%= lga.unique_lga %>/<%= active_view %>_health">
                     Health
                 </a>
-            </li>
-            <li <% if (sector === 'education'){ %>class="active"<% } %>>
-                <a href="#<%= lga.unique_lga %>/<%= active_view %>_education">
+                |
+                <a <% if (sector === 'education'){ %>class="active"<% } %>
+                    href="#<%= lga.unique_lga %>/<%= active_view %>_education">
                     Education
                 </a>
-            </li>
-            <li <% if (sector === 'water'){ %>class="active"<% } %>>
-                <a href="#<%= lga.unique_lga %>/<%= active_view %>_water">
+                |
+                <a <% if (sector === 'water'){ %>class="active"<% } %>
+                    href="#<%= lga.unique_lga %>/<%= active_view %>_water">
                     Water
                 </a>
-            </li>
-        </ul>
-        <div class="clearfix"></div>
+            </div>
+        </div>
     </script>
 
     <script id="index_template" type="text/html">
         <div class="page-header">
             <h2>Explore facilities by choosing an LGA from it's region below</h2>
         </div>
+        <select class="lga_search" placeholder="Select LGA">
+            <option value="">Select an LGA</option>
+            <% _.each(sorted_lgas, function(lga){ %>
+                <option value="<%= lga[1] %>"><%= lga[0] %></option>
+            <% }); %>
+        </select>
+
         <div id="zone-navigation">
             <div class="zone-nav">
                 <% _.each(zones, function(zone){ %>
@@ -122,11 +125,6 @@
     </script>
 
     <script id="lga_overview_template" type="text/html">
-        <div class="page-header">
-            <h2>
-                <%= lga.lga %>, <%= lga.state %>
-            </h2>
-        </div>
         <div class="profile-box">
             <div class="profile-box-inner">
                 <table>
@@ -212,12 +210,6 @@
     </script>
 
     <script id="lga_view_template" type="text/html">
-        <div class="page-header">
-            <h2>
-                <%= lga.lga %>, <%= lga.state %>
-                <%= sector[0].toUpperCase() + sector.slice(1) %>
-            </h2>
-        </div>
         <div class="nmis-sector-summary">
             <div class="non-gap">
                 <table class="mdg-table">
@@ -271,41 +263,28 @@
     </script>
 
     <script id="map_view_template" type="text/html">
-        <div class="page-header">
-            <% if (chart_indicators.length > 1){ %>
-                <select class="pie_chart_selector form-control">
-                    <option value="">Filter by Indicator</option>
-                    <% _.each(chart_indicators, function(indicator){ %>
-                        <option value="<%= indicator[0] %>">
-                            <%= indicator[1] %>
-                        </option>
-                    <% }); %>
-                </select>
-            <% } %>
-            <h2>
-                <%= lga.lga %>, <%= lga.state %>
-                <%= sector[0].toUpperCase() + sector.slice(1) %>
-            </h2>
-            <div style="clear:both"></div>
-        </div>
+        <% if (chart_indicators.length > 1){ %>
+            <select class="pie_chart_selector form-control">
+                <option value="">Filter by Indicator</option>
+                <% _.each(chart_indicators, function(indicator){ %>
+                    <option value="<%= indicator[0] %>">
+                        <%= indicator[1] %>
+                    </option>
+                <% }); %>
+            </select>
+        <% } %>
     </script>
 
     <script id="table_view_template" type="text/html">
-        <div class="page-header">
-            <% if (tables.length > 1){ %>
-                <select class="facilities_table_selector form-control">
-                    <% _.each(tables, function(value, index){ %>
-                        <option value="<%= index %>">
-                            <%= value.name %>
-                        </option>
-                    <% }); %>
-                </select>
-            <% } %>
-            <h2>
-                <%= lga.lga %>, <%= lga.state %>
-                <%= sector[0].toUpperCase() + sector.slice(1) %>
-            </h2>
-        </div>
+        <% if (tables.length > 1){ %>
+            <select class="facilities_table_selector form-control">
+                <% _.each(tables, function(value, index){ %>
+                    <option value="<%= index %>">
+                        <%= value.name %>
+                    </option>
+                <% }); %>
+            </select>
+        <% } %>
         <div class="facilities_table_container">
             <table id="facilities_data_table" class="table table-striped table-hover table-condensed"></table>
         </div>

@@ -7,17 +7,6 @@
     <link rel="stylesheet" type="text/css" href="/static/style.css">
     {% block css %}{% endblock %}
     <script src="/static/lib.js"></script>
-    <script>
-        $(function(){
-            $('#lga_search').selectize({
-                onItemAdd: function(value){
-                    location.href = '/explore#' + value + '/lga_overview';
-                    this.clear();
-                    return false;
-                }  
-            });
-        });
-    </script>
     {% block js %}{% endblock %}
 </head>
 <body>
@@ -38,6 +27,7 @@
             </div>
         </div>
     </div>
+    <div id="explore_header"></div>
     <div id="content">
         <div class="container">
             {% block content %}{% endblock %}
