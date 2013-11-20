@@ -264,26 +264,32 @@
 
     <script id="map_view_template" type="text/html">
         <% if (chart_indicators.length > 1){ %>
-            <select class="pie_chart_selector form-control">
-                <option value="">Filter by Indicator</option>
-                <% _.each(chart_indicators, function(indicator){ %>
-                    <option value="<%= indicator[0] %>">
-                        <%= indicator[1] %>
-                    </option>
-                <% }); %>
-            </select>
+            <div class="filter">
+                Filter:
+                <select class="pie_chart_selector form-control">
+                    <option value="">Filter by Indicator</option>
+                    <% _.each(chart_indicators, function(indicator){ %>
+                        <option value="<%= indicator[0] %>">
+                            <%= indicator[1] %>
+                        </option>
+                    <% }); %>
+                </select>
+            </div>
         <% } %>
     </script>
 
     <script id="table_view_template" type="text/html">
         <% if (tables.length > 1){ %>
-            <select class="facilities_table_selector form-control">
-                <% _.each(tables, function(value, index){ %>
-                    <option value="<%= index %>">
-                        <%= value.name %>
-                    </option>
-                <% }); %>
-            </select>
+            <div class="filter">
+                Grouping:
+                <select class="facilities_table_selector form-control">
+                    <% _.each(tables, function(value, index){ %>
+                        <option value="<%= index %>">
+                            <%= value.name %>
+                        </option>
+                    <% }); %>
+                </select>
+            </div>
         <% } %>
         <div class="facilities_table_container">
             <table id="facilities_data_table" class="table table-striped table-hover table-condensed"></table>

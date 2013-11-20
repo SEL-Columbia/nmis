@@ -250,6 +250,17 @@ table thead td:active {
     outline: none;
 }
 
+.filter {
+	text-align: right;
+	margin-bottom: 15px;
+	font-style: italic;
+}
+.filter select {
+	width: 200px;
+	display: inline-block;
+	margin-left: 10px;
+}
+
 
 
 /* Dashboard.html, Index View
