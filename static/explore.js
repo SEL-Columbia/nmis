@@ -113,7 +113,7 @@ function index(){
 
     $('.lga_search').selectize({
         onItemAdd: function(value){
-            location.href = '/explore#' + value + '/lga_overview';
+            location.hash = '#' + value + '/lga_overview';
             this.clear();
             return false;
         }  
