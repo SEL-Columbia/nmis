@@ -11,7 +11,7 @@ app.debug = True
 
 def load_file(file_name):
     cwd = os.path.dirname(os.path.abspath(__file__))
-    folder = flask.request.args.get('archive', 'data')
+    folder = flask.request.args.get('data', 'data')
     path = os.path.join(cwd, 'static', folder)
     file_path = os.path.join(path, file_name)
     with open(file_path, 'r') as f:
