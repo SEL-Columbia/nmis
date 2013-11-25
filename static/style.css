@@ -124,9 +124,15 @@ body {
 }
 #index_content .sponsors {
     background: white;
-    padding: 20px;
+    padding: 10px 20px;
 }
-
+#index_content .sponsors img {
+    display: inline-block;
+    margin-right: 70px;
+}
+#index_content .sponsors img:last-child {
+    margin-right: 0;
+}
 #index_content .btn {
     color: white;
     padding: 6px 19px;
@@ -151,13 +157,6 @@ body {
 #index_content .logo {
     float: left;
     margin: 20px 40px 0px 0px;
-}
-#footer .partner_logo {
-    display: inline-block;
-    margin-right: 40px;
-}
-#footer .partner_logo:last-child {
-    margin-right: 0;
 }
 
 
