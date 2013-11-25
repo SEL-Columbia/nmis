@@ -346,7 +346,6 @@ table thead td:active {
 =================================*/
 .profile-box {
     height: 180px;
-    margin: 0 30px;
 }
 .profile-box .profile-box-inner {
     color: #444;
@@ -363,7 +362,7 @@ table thead td:active {
 }
 .profile-box .map {
     width: 580px;
-    float: left;
+    float: right;
     border: 1px solid #ddd;
     margin: 6px 0;
     height: 165px;
