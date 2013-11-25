@@ -8,22 +8,11 @@
 
 {% block css %}
     <style>
-        #content,
-        #footer {
-            width: 1000px;
-            margin: auto;
+        body {
+            background-image: url(/static/images/NMIS_hero.png);
         }
         #content .container {
-            background-image: url(/static/images/NMIS_hero.png);
-            width: 100%;
-            height: 742px;
-            margin: 0;
-        }
-        #footer .container {
-            padding: 20px 40px;
-            background: white;
-            width: 100%;
-            margin-bottom: 100px;
+            background: transparent;
         }
     </style>
 {% endblock %}
@@ -44,16 +33,14 @@
         <div class="caption">
             <p>Abeokuta North, Ogun</p>
         </div>
+
+        <div class="sponsors">
+            <img class="partner_logo" src="/static/images/mdgs_logo.png" alt="Nigeria MDGs Logo">
+            <img class="partner_logo" src="/static/images/ei_logo.png" alt="Earth Institute Logo">
+            <img class="partner_logo" src="/static/images/dfid_logo.png" alt="DFID Logo">
+        </div>
     </div>
 {% endblock %}
-
-
-{% block footer %}
-    <img class="partner_logo" src="/static/images/mdgs_logo.png" alt="Nigeria MDGs Logo">
-    <img class="partner_logo" src="/static/images/ei_logo.png" alt="Earth Institute Logo">
-    <img class="partner_logo" src="/static/images/dfid_logo.png" alt="DFID Logo">
-{% endblock %}
-
 
 
 

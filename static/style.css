@@ -122,6 +122,11 @@ body {
     margin: 20px 0;
     line-height: 1.5;
 }
+#index_content .sponsors {
+    background: white;
+    padding: 20px;
+}
+
 #index_content .btn {
     color: white;
     padding: 6px 19px;
