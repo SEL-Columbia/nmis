@@ -87,40 +87,28 @@
             <% }); %>
         </select>
 
-        <div id="zone-navigation">
-            <div class="zone-nav">
-                <% _.each(zones, function(zone){ %>
-                    <div class="zl-wrap">
-                        <div class="zone-list">
-                            <div class="zone-img">
-                                <img src="static/images/zones/<%= zone[0] %>.png"></img>
-                            </div>
-                            <h2 class="zone-title">
-                                <%= zone[0] %>
-                            </h2>
-                            <ul>
-                                <% _.each(zone[1], function(state){ %>
-                                    <li>
-                                        <a class="state-link">
-                                            <%= state[0] %>
-                                        </a>
-                                        <ul class="lga-list">
-                                            <% _.each(state[1], function(lga){ %>
-                                                <li>
-                                                    <a href="#<%= lga[1] %>/lga_overview">
-                                                        <%= lga[0] %>
-                                                    </a>
-                                                </li>
-                                            <% }); %>
-                                        </ul>
-                                    </li>
+        <div id="zone_nav">
+            <% _.each(zones, function(zone, i){ %>
+                <div class="zone <% if (i == 5){ %>last<% } %>">
+                    <img src="/static/images/zones/<%= zone[0] %>.png">
+                    <h2><%= zone[0] %></h2>
+                    <div class="state">
+                        <% _.each(zone[1], function(state){ %>
+                            <a class="state_title" href="#">
+                                <%= state[0] %>
+                            </a>
+                            <div class="lgas">
+                                <% _.each(state[1], function(lga){ %>
+                                    <a href="#<%= lga[1] %>/lga_overview">
+                                        » <%= lga[0] %>
+                                    </a>
                                 <% }); %>
-                            </ul>
-                        </div>
+                            </div>
+                        <% }); %>
                     </div>
-                <% }); %>
-                <div style="clear:both"></div>
-            </div>
+                </div>
+            <% }); %>
+            <div style="clear:both"></div>
         </div>
     </script>
 

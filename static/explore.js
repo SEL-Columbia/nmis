@@ -3,7 +3,7 @@
 $(function(){
     new Backbone.Router({
         routes: {
-            '': index,
+            '': IndexView,
             ':unique_lga/lga_overview': view(LGAView, 'overview'),
             ':unique_lga/lga_health': view(LGAView, 'health'),              
             ':unique_lga/lga_education': view(LGAView, 'education'),
@@ -100,14 +100,15 @@ function indicator_name(slug){
 
 // Views
 // ============
-function index(){
+function IndexView(){
     $('#explore_header').hide();
     render('#index_template', {
         zones: NMIS.zones,
         sorted_lgas: NMIS.sorted_lgas
     });
-    $('#zone-navigation .state-link').click(function(){
-        $(this).next('.lga-list').toggle();
+
+    $('#zone_nav .state_title').click(function(){
+        $(this).next('.lgas').toggle();
         return false;
     });
 
@@ -118,7 +119,7 @@ function index(){
             return false;
         }  
     });
-}
+};
 
 
 
