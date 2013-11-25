@@ -21,7 +21,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 ================*/
 body {
     background: rgb(225, 225, 225);
-    padding-top: 120px;
+    padding-top: 115px;
 }
 
 .container {
@@ -71,7 +71,7 @@ body {
 }
 
 #header .global_nav {
-    background: rgb(50, 138, 57);
+    background: rgb(0, 152, 72);
 }
 #header .global_nav .container {
     padding-left: 85px;
@@ -82,7 +82,7 @@ body {
     color: white;
     font-size: 15px;
     font-weight: bold;
-    padding: 10px 20px;
+    padding: 6px 20px;
     text-decoration: none;
 }
 #header .global_nav a:hover,
@@ -128,7 +128,7 @@ body {
     border: none;
 }
 #index_content .btn.explore {
-    background-color: rgb(50, 138, 57);
+    background: rgb(0, 152, 72);
 }
 #index_content .btn.download {
     background-color: #939598;
@@ -183,19 +183,19 @@ body {
 }
 #explore_header h1 {
 	color: white;
-	font-size: 32px;
+	font-size: 25px;
 	font-weight: 500;
-	margin-bottom: 20px;
+	margin-bottom: 11px;
 	display: block;
 }
 #explore_header .nav_views {
 	position: absolute;
-	top: 50px;
+	top: 35px;
 	right: 20px;
 }
 #explore_header .nav_views a {
 	color: white;
-	background: rgb(47, 129, 54);
+    background: rgb(0, 152, 72);
 	padding: 10px;
 	width: 75px;
 	height: 70px;
@@ -223,7 +223,7 @@ body {
 #explore_header .nav_sectors a {
 	color: white;
 	font-size: 16px;
-	margin: 0 10px;
+	margin: 0 7px;
 	text-decoration: none;
 }
 #explore_header .nav_sectors a:first-child {
@@ -231,7 +231,7 @@ body {
 }
 #explore_header .nav_sectors a:hover,
 #explore_header .nav_sectors a.active {
-    color: rgb(255, 233, 29);
+    color: rgb(255, 241, 0);
 }
 
 /* Datatables */
