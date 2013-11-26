@@ -19,6 +19,8 @@ $(function(){
         }
     });
     Backbone.history.start();
+
+    render_lga_search(NMIS.sorted_lgas);
 });
 
 
@@ -55,6 +57,7 @@ function view(viewObj, sector){
     }
 }
 
+
 function render_header(lga, active_view, sector){
     // Renders the LGA navigation bar
     var template = $('#explore_header_template').html();
@@ -64,6 +67,24 @@ function render_header(lga, active_view, sector){
         sector: sector
     });
     $('#explore_header').html(html).show();
+}
+
+
+function render_lga_search(sorted_lgas){
+    // Renders the LGA Search box
+    var template = $('#lga_search_template').html();
+    var html = _.template(template, {sorted_lgas: sorted_lgas});
+    $('#lga_search')
+        .html(html)
+        .show()
+        .find('select')
+        .selectize({
+            onItemAdd: function(value){
+                location.hash = '#' + value + '/lga_overview';
+                this.clear();
+                return false;
+            }  
+        });
 }
 
 
@@ -91,6 +112,7 @@ function format_value(value){
     return value;
 }
 
+
 function indicator_name(slug){
     var indicator = NMIS.indicators[slug];
     return indicator ? indicator.name : slug;
@@ -102,22 +124,11 @@ function indicator_name(slug){
 // ============
 function IndexView(){
     $('#explore_header').hide();
-    render('#index_template', {
-        zones: NMIS.zones,
-        sorted_lgas: NMIS.sorted_lgas
-    });
+    render('#index_template', {zones: NMIS.zones});
 
     $('#zone_nav .state_title').click(function(){
         $(this).next('.lgas').toggle();
         return false;
-    });
-
-    $('.lga_search').selectize({
-        onItemAdd: function(value){
-            location.hash = '#' + value + '/lga_overview';
-            this.clear();
-            return false;
-        }  
     });
 };
 

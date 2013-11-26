@@ -73,6 +73,15 @@ body {
     text-decoration: none;
 }
 
+#lga_search {
+	display: none;
+	float: right;
+	margin-top: 24px;
+}
+#lga_search .selectize-control {
+	width: 220px;
+}
+
 #header .global_nav {
     background: rgb(0, 152, 72);
 }

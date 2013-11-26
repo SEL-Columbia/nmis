@@ -76,17 +76,19 @@
         </div>
     </script>
 
-    <script id="index_template" type="text/html">
-        <div class="page-header">
-            <h2>Explore an LGA from the regions below</h2>
-        </div>
-        <select class="lga_search" placeholder="Select LGA">
+    <script id="lga_search_template" type="text/html">
+        <select placeholder="Select an LGA">
             <option value="">Select an LGA</option>
             <% _.each(sorted_lgas, function(lga){ %>
                 <option value="<%= lga[1] %>"><%= lga[0] %></option>
             <% }); %>
         </select>
+    </script>
 
+    <script id="index_template" type="text/html">
+        <div class="page-header">
+            <h2>Explore an LGA from the regions below</h2>
+        </div>
         <div id="zone_nav">
             <% _.each(zones, function(zone, i){ %>
                 <div class="zone <% if (i == 5){ %>last<% } %>">
