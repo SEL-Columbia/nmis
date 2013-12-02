@@ -21,14 +21,6 @@
 
 {% block content %}
     <div class="content"></div>
-    <div class="facility_map">
-        <div class="map_view_legend">
-            <canvas width="80" height="80"></canvas>
-            <button type="button" class="close pull-right">&times;</button>
-            <div class="info"></div>
-            <div style="clear:both"></div>
-        </div>
-    </div>
 
     <script id="explore_header_template" type="text/html">
         <div class="container">
@@ -252,20 +244,25 @@
         </div>
     </script>
 
+    <script id="pie_chart_selector_template" type="text/html">
+        <option value="">Filter by Indicator</option>
+        <% _.each(chart_indicators, function(indicator){ %>
+            <option value="<%= indicator[0] %>">
+                <%= indicator[1] %>
+            </option>
+        <% }); %>
+    </script>
+
     <script id="map_view_template" type="text/html">
-        <% if (chart_indicators.length > 1){ %>
-            <div class="filter">
-                Filter:
-                <select class="pie_chart_selector form-control">
-                    <option value="">Filter by Indicator</option>
-                    <% _.each(chart_indicators, function(indicator){ %>
-                        <option value="<%= indicator[0] %>">
-                            <%= indicator[1] %>
-                        </option>
-                    <% }); %>
-                </select>
+        <div class="map_view">
+            <select class="pie_chart_selector form-control"></select>
+            <div class="map_view_legend">
+                <canvas width="80" height="80"></canvas>
+                <button type="button" class="close pull-right">&times;</button>
+                <div class="info"></div>
+                <div style="clear:both"></div>
             </div>
-        <% } %>
+        </div>
     </script>
 
     <script id="table_view_template" type="text/html">

@@ -31,10 +31,14 @@ function view(viewObj, sector){
     // Wrapper for LGA based views. Fetches the appropriate 
     // LGA JSON data before calling the render() function of a view.
 
-    if (viewObj.init) viewObj.init();
+    if (viewObj.init){
+        viewObj.init();
+        viewObj.init = null;
+    }
 
     function render(lga, sector){
-        $('.facility_map').hide();
+        $('.map_view').hide();
+        $('#content .container').show();
         $(window).scrollTop(0);
         viewObj.render(lga, sector);
     }
@@ -170,6 +174,10 @@ LGAView.overview_map = function(lga){
 
 var MapView = {};
 MapView.init = function(){
+    // Append map outside of .container so it can fill the width of the page
+    $('#content').append(
+        $('#map_view_template').html());
+
     $('.map_view_legend').on('click', '.close', function(){
         $(this).parent().hide();
         $('.pie_chart_selector')
@@ -182,31 +190,40 @@ MapView.init = function(){
 MapView.render = function(lga, sector){
     var self = this;
     render_header(lga, 'map', sector);
-    render('#map_view_template', {
-        lga: lga,
-        sector: sector,
-        chart_indicators: this.chart_indicators(lga.facilities, sector)
-    });
 
+    $('#content .container').hide();
     $('.map_view_legend').hide();
 
     this.facility_map(lga, sector);
 
-    $('.pie_chart_selector').change(function(){
-        if (this.value){
-            $('.map_view_legend').show();
-            self.map_legend(lga, sector, this.value);
-        } else {
-            $('.map_view_legend').hide();
-        }
-        self.facility_map(lga, sector, this.value);
-    });
+    // Render pie chart selector
+    var chart_indicators = this.chart_indicators(lga.facilities, sector);
+    if (chart_indicators.length > 1){
+        var template = $('#pie_chart_selector_template').html();
+        var html = _.template(template, {
+            lga: lga,
+            sector: sector,
+            chart_indicators: chart_indicators
+        });
+        $('.pie_chart_selector')
+            .html(html)
+            .change(function(){
+                if (this.value){
+                    $('.map_view_legend').show();
+                    self.map_legend(lga, sector, this.value);
+                } else {
+                    $('.map_view_legend').hide();
+                }
+                self.facility_map(lga, sector, this.value);
+                return false;
+            });
+    }
 };
 
 MapView.facility_map = function(lga, sector, indicator) {
     var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
-    var map_div = $('.facility_map').show()[0];
-    var map = map_div._facility_map;
+    var map_div = $('.map_view').show()[0];
+    var map = map_div._map;
 
     if (!map){
         // Initialize Leaflet
@@ -230,7 +247,7 @@ MapView.facility_map = function(lga, sector, indicator) {
         google_layer.addTo(map);
         lga_layer.addTo(map);
         locality_layer.addTo(map);
-        map_div._facility_map = map;
+        map_div._map = map;
         map._unique_lga = lga.unique_lga;
     }
 
