@@ -175,6 +175,17 @@ body {
 #accordion {
 	width: 65%;
 }
+#accordion .glyphicon {
+	font-size: 18px;
+	margin-right: 10px;
+}
+#accordion .panel_title {
+	display: block;
+	font-size: 20px;
+	color: #444;
+	text-decoration: none;
+	border-bottom: 1px solid #ddd;
+}
 
 
 
@@ -443,9 +454,18 @@ h3.mdg-underlined-title {
     z-index: 50 !important;
 }
 
-.facility_map {
-    position: relative;
-    height: 600px;
+.map_view {
+	display: none;
+    height: 1000px;
+    width: 100%;
+}
+.pie_chart_selector {
+	margin: auto;
+	width: 250px;
+	position: absolute;
+	top: 10px;
+	left: 60px;
+	z-index: 10;
 }
 .map_view_legend {
     display: none;
