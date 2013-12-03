@@ -20,7 +20,6 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 /* Base.html 
 ================*/
 body {
-    background: rgb(225, 225, 225);
     padding-top: 115px;
 }
 
@@ -201,7 +200,7 @@ body {
 
 #explore_header {
 	display: none;
-	padding: 20px 0;
+	padding: 5px 0 15px;
 	background: rgb(77, 77, 77);
 	overflow: hidden;
 }
@@ -210,15 +209,15 @@ body {
     padding: 0 92px;
 }
 #explore_header h1 {
+	display: block;
 	color: white;
 	font-size: 25px;
 	font-weight: 500;
 	margin-bottom: 11px;
-	display: block;
 }
 #explore_header .nav_views {
 	position: absolute;
-	top: 35px;
+	top: 29px;
 	right: 92px;
 }
 #explore_header .nav_views a {
@@ -531,37 +530,18 @@ h3.mdg-underlined-title {
 }
 
 
-/* Dashboard.html, MDGS View
+/* Mdgs.html
 =================================*/
-.mdg-map {
-    position: relative;
+#mdg_map {
+    float: right;
     height: 470px;
-    width: 670px;
+    width: 60%;
 }
-.left-panel {
-    position: relative;
+.mdg_panel {
     width: 35%;
+    float: left;
 }
-.left-panel h2 {
-    font-family: Helvetica;
-    font-weight: bold;
-    color: #545653;
-    font-size: 40px;
-}
-.mdg-map-nav {
-    padding-top: 5px;
-}
-.mdg-title {
-    padding-top: 20px;
-    font-family: Helvetica;
-    font-size: 25px;
-    font-weight: bold;
-    color: #F99B1D;
-    line-height: 90%;
-}
-.mdg-description {
-    padding-top: 10px;
-    font-family: Helvetica;
-    font-size: 17px;
+.mdg_title {
+    margin: 25px 0 15px;
 }
 
