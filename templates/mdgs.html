@@ -35,7 +35,6 @@
                 });
                 $('#mdg_selector').html(html)
                     .change(function(){
-                        console.log(this);
                         var label = $(this)
                             .find(':selected')
                             .parent()
@@ -79,7 +78,7 @@
                 }
 
                 // Add layer to map
-                currentLayer = mapLayers[value];
+                map_div._currentLayer = mapLayers[value];
                 map.addLayer(mapLayers[value].layer);
                 mapLayers[value].legend.addTo(map);
             }
