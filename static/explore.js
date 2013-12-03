@@ -205,7 +205,7 @@ MapView.render = function(lga, sector){
             sector: sector,
             chart_indicators: chart_indicators
         });
-        $('.pie_chart_selector')
+        var selector = $('.pie_chart_selector')
             .html(html)
             .show()
             .change(function(){
@@ -218,6 +218,9 @@ MapView.render = function(lga, sector){
                 self.facility_map(lga, sector, this.value);
                 return false;
             });
+
+        // Prevent click selection from "falling through" to map
+        L.DomEvent.disableClickPropagation(selector[0]);
     } else {
         $('.pie_chart_selector').hide();
     }
