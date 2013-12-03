@@ -207,6 +207,7 @@ MapView.render = function(lga, sector){
         });
         $('.pie_chart_selector')
             .html(html)
+            .show()
             .change(function(){
                 if (this.value){
                     $('.map_view_legend').show();
@@ -217,6 +218,8 @@ MapView.render = function(lga, sector){
                 self.facility_map(lga, sector, this.value);
                 return false;
             });
+    } else {
+        $('.pie_chart_selector').hide();
     }
 };
 

@@ -29,7 +29,7 @@ body {
     width: 1200px;
 }
 
-.nav>li>a {
+.nav > li > a {
     border: 1px solid black;
     border-color: #dddddd #aaaaaa #aaaaaa #dddddd;
     padding: 5px 10px 7px;
@@ -39,9 +39,9 @@ body {
     font-size: 15px;
     margin-right: 3px;
 }
-.nav-pills>li.active>a,
-.nav-pills>li.active>a:hover,
-.nav-pills>li.active>a:focus {
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
     color: white;
     background-color: #606060;
 }
@@ -460,8 +460,7 @@ h3.mdg-underlined-title {
     width: 100%;
 }
 .pie_chart_selector {
-	margin: auto;
-	width: 250px;
+	width: 300px;
 	position: absolute;
 	top: 10px;
 	left: 60px;
