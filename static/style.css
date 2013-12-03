@@ -20,7 +20,6 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 /* Base.html 
 ================*/
 body {
-    background: rgb(225, 225, 225);
     padding-top: 115px;
 }
 
@@ -201,7 +200,7 @@ body {
 
 #explore_header {
 	display: none;
-	padding: 20px 0;
+	padding: 5px 0 15px;
 	background: rgb(77, 77, 77);
 	overflow: hidden;
 }
@@ -210,15 +209,15 @@ body {
     padding: 0 92px;
 }
 #explore_header h1 {
+	display: block;
 	color: white;
 	font-size: 25px;
 	font-weight: 500;
 	margin-bottom: 11px;
-	display: block;
 }
 #explore_header .nav_views {
 	position: absolute;
-	top: 35px;
+	top: 29px;
 	right: 92px;
 }
 #explore_header .nav_views a {
@@ -531,7 +530,7 @@ h3.mdg-underlined-title {
 }
 
 
-/* Dashboard.html, MDGS View
+/* Mdgs.html
 =================================*/
 .mdg-map {
     position: relative;
