@@ -107,88 +107,80 @@
     </script>
 
     <script id="lga_overview_template" type="text/html">
-        <div class="profile-box">
-            <div class="profile-box-inner">
+        <div class="lga_profile">
+            <div class="map"></div>
+            <table>
+                <% _.each(lga_overview.overview, function(indicator){ %>
+                    <tr>
+                        <td>
+                            <%= indicator_name(indicator) %>
+                        </td>
+                        <td>
+                            <%= format_value(lga[indicator]) %>
+                        </td>
+                    </tr>
+                <% }); %>
+            </table>
+            <div style="clear:both"></div>
+        </div>
+
+        <h2>Sectors</h2>
+        
+        <em>
+            Below are data from the baseline facility surveys.
+        </em>
+        
+        <% _.each(lga_overview.facility_overview, function(category, i){ %>
+            <div class="sector n<%- i %>">
+                <h3>
+                    <%= category.name %>
+                </h3>
                 <table>
-                    <% _.each(lga_overview.overview, function(indicator){ %>
+                    <tbody>
+                        <% _.each(category.rows, function(indicator){ %>
+                            <tr>
+                                <td class="indicator">
+                                    <%= indicator_name(indicator) %>
+                                </td>
+                                <td class="value">
+                                    <%= format_value(lga[indicator]) %>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        <% }); %>
+        <div style="clear:both"></div>
+
+        <h2>MDG Status</h2>
+
+        <em>
+            Below are data collected from HNLSS, DHS, and other sources.
+        </em>
+        
+        <table class="mdgs_table">
+            <% _.each(lga_overview.mdg_status, function(mdg){ %>
+                <tbody>
+                    <tr>
+                        <td colspan="5">
+                            <h3><%= mdg.header %></h3>
+                        </td>
+                    </tr>
+                    <% _.each(mdg.rows, function(indicator){ %>
                         <tr>
+                            <td class="empty" colspan="2"></td>
                             <td>
                                 <%= indicator_name(indicator) %>
                             </td>
-                            <td>
+                            <td class="data">
                                 <%= format_value(lga[indicator]) %>
                             </td>
                         </tr>
                     <% }); %>
-                </table>
-            </div>
-            <div class="map"></div>
-        </div>
-
-        <h3>Sectors</h3>
-        
-        <p style="font-style:italic;">
-            Below are data from the baseline facility surveys.
-        </p>
-        
-        <div class="row">
-            <% _.each(lga_overview.facility_overview, function(category){ %>
-                <div class="col-md-4">
-                    <h3 class="mdg-underlined-title">
-                        <%= category.name %>
-                    </h3>
-                    <table class="mdg-table">
-                        <tbody>
-                            <% _.each(category.rows, function(indicator){ %>
-                                <tr>
-                                    <td>
-                                        <%= indicator_name(indicator) %>
-                                    </td>
-                                    <td>
-                                        <%= format_value(lga[indicator]) %>
-                                    </td>
-                                </tr>
-                            <% }); %>
-                        </tbody>
-                    </table>
-                </div>
+                </tbody>
             <% }); %>
-        </div>
-
-        <h3>MDG Status</h3>
-
-        <p style="font-style:italic;">
-            Below are data collected from HNLSS, DHS, and other sources.
-        </p>
-        
-        <div class="span18">
-            <div id="mdg-table-wrap">
-                <div class="mdg-tables">
-                    <table class="mdg-table">
-                        <% _.each(lga_overview.mdg_status, function(mdg){ %>
-                            <tbody>
-                                <tr>
-                                    <td class="mdg_header" colspan="5">
-                                        <%= mdg.header %>
-                                    </td>
-                                </tr>
-                                <% _.each(mdg.rows, function(indicator){ %>
-                                    <tr>
-                                        <td class="empty" colspan="2"></td>
-                                        <td>
-                                            <%= indicator_name(indicator) %>
-                                        </td>
-                                        <td class="data">
-                                            <%= format_value(lga[indicator]) %>
-                                        </td>
-                                    </tr>
-                                <% }); %>
-                            </tbody>
-                        <% }); %>
-                    </table>
-                </div>
-            </div>
-        </div>
+        </table>
     </script>
 
     <script id="lga_view_template" type="text/html">
