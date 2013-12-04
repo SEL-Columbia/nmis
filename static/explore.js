@@ -38,6 +38,7 @@ function view(viewObj, sector){
 
     function render(lga, sector){
         $('.map_view').hide();
+        $('#content .index').removeClass('index');
         $('#content .container').show();
         $(window).scrollTop(0);
         viewObj.render(lga, sector);
@@ -129,6 +130,8 @@ function indicator_name(slug){
 function IndexView(){
     $('#explore_header').hide();
     render('#index_template', {zones: NMIS.zones});
+
+    $('#content .content').addClass('index');
 
     $('#zone_nav .state_title').click(function(){
         $(this).next('.lgas').toggle();
