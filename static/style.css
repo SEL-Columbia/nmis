@@ -21,6 +21,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 ================*/
 body {
     padding-top: 115px;
+    font-size: 15px;
 }
 
 h1 { font-size: 27px; font-weight: bold; }
@@ -205,6 +206,14 @@ table .value {
 	color: #444;
 	text-decoration: none;
 	border-bottom: 1px solid #ddd;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+}
+#accordion .panel {
+	box-shadow: none;
+}
+#accordion .panel_content {
+	display: none;
 }
 
 

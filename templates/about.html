@@ -8,18 +8,26 @@
     <script>
         $(function(){
             $('#accordion .panel_title').click(function(){
-                var glyphicon = $(this).find('.glyphicon');
-                if (glyphicon.hasClass('glyphicon-chevron-up')){
-                    glyphicon.removeClass('glyphicon-chevron-up')
-                        .addClass('glyphicon-chevron-down');
-                    $(this).
+                $('.panel_content').hide();
+                if ($(this).find('.glyphicon-plus-sign').length){
+                    $('.glyphicon-remove-sign')
+                        .removeClass('glyphicon-remove-sign')
+                        .addClass('glyphicon-plus-sign');
+                    $(this).find('.glyphicon-plus-sign')
+                        .removeClass('glyphicon-plus-sign')
+                        .addClass('glyphicon-remove-sign')
+                        .end()
+                        .next('.panel_content')
+                        .show();
                 } else {
-
+                    $(this).find('.glyphicon-remove-sign')
+                        .removeClass('glyphicon-remove-sign')
+                        .addClass('glyphicon-plus-sign')
+                        .end()
+                        .closest('.panel')
+                        .find('.panel_content')
+                        .hide();
                 }
-                $('#accordion .glyphicon-chevron-down')
-                    .parent('.panel_heading');
-
-
                 return false;
             });
         });
@@ -31,17 +39,17 @@
     <div id="accordion">
         <div class="panel">
             <a class="panel_title" href="#vision">
-                <span class="glyphicon glyphicon-chevron-up"></span>
+                <span class="glyphicon glyphicon-remove-sign"></span>
                 Vision
             </a>
-            <div id="vision" class="panel_content">
+            <div id="vision" class="panel_content" style="display:block">
                 <p>As part of their mandate to monitor progress towards meeting the Millennium Development Goals, Nigeria’s Office of the Senior Special Assistant to the President on the Millennium Development Goals has developed an online data portal. This public portal, the Nigeria MDG Information System, houses much of the nation’s health, education and water facility information and is designed to be used by planners, researchers and the broader global development community. This database is the result of an initial baseline facility inventory carried out by OSSAP-MDGs in 2010-12.</p>
                 <p>However, the world is not static and so this website needs continued contributions from stakeholders around the country and the globe to maintain a high level of accuracy and thoroughness. This website therefore asks for the global community to participate in keeping this key national asset up to date with the latest health, education and water facility information.</p>
             </div>
         </div>
         <div class="panel">
-            <a class="panel-title" href="#partners">
-                <span class="glyphicon glyphicon-chevron-up"></span>
+            <a class="panel_title" href="#partners">
+                <span class="glyphicon glyphicon-plus-sign"></span>
                 Partners
             </a>
             <div id="partners" class="panel_content">
@@ -63,8 +71,8 @@
             </div>
         </div>
         <div class="panel">
-            <a class="panel-title" href="#faq">
-                <span class="glyphicon glyphicon-chevron-up"></span>
+            <a class="panel_title" href="#faq">
+                <span class="glyphicon glyphicon-plus-sign"></span>
                 FAQ
             </a>
             <div id="faq" class="panel_content">
