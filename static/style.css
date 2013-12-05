@@ -29,17 +29,17 @@ h2 { font-size: 22px; }
 h3 { font-size: 17px; margin: 10px 0 4px; }
 
 table {
-	font-size: 15px;
-	margin-bottom: 35px;
+    font-size: 15px;
+    margin-bottom: 35px;
 }
 th, td { padding: 5px 0; }
 th { font-weight: 500; }
 table .name {
-	width: 85%;
-	padding-right: 5%;
+    width: 85%;
+    padding-right: 5%;
 }
 table .value {
-	width: 15%;
+    width: 15%;
 }
 
 
@@ -81,7 +81,7 @@ table .value {
     height: 115px;
 }
 #header .container {
-	padding: 0;
+    padding: 0;
 }
 #header a.logo {
     display: inline-block;
@@ -95,12 +95,12 @@ table .value {
 }
 
 #lga_search {
-	display: none;
-	float: right;
-	margin-top: 24px;
+    display: none;
+    float: right;
+    margin-top: 24px;
 }
 #lga_search .selectize-control {
-	width: 220px;
+    width: 220px;
 }
 
 #header .global_nav {
@@ -120,7 +120,7 @@ table .value {
 }
 #header .global_nav a:hover,
 #header .global_nav a.active {
-	background: rgb(77, 77, 77);
+    background: rgb(77, 77, 77);
 }
 
 
@@ -194,26 +194,26 @@ table .value {
 /* About.html
 =================*/
 #accordion {
-	width: 65%;
+    width: 65%;
 }
 #accordion .glyphicon {
-	font-size: 18px;
-	margin-right: 10px;
+    font-size: 18px;
+    margin-right: 10px;
 }
 #accordion .panel_title {
-	display: block;
-	font-size: 20px;
-	color: #444;
-	text-decoration: none;
-	border-bottom: 1px solid #ddd;
-	padding-bottom: 10px;
-	margin-bottom: 20px;
+    display: block;
+    font-size: 20px;
+    color: #444;
+    text-decoration: none;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 #accordion .panel {
-	box-shadow: none;
+    box-shadow: none;
 }
 #accordion .panel_content {
-	display: none;
+    display: none;
 }
 
 
@@ -228,67 +228,67 @@ table .value {
 /* Dashboard.html
 =================================*/
 #explore_header {
-	display: none;
-	position: fixed;
-	width: 100%;
-	height: 100px;
-	padding: 5px 0 15px;
-	background: rgb(77, 77, 77);
-	overflow: hidden;
-	z-index: 100;
-	border-bottom: 5px solid #fff;
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    padding: 5px 0 15px;
+    background: rgb(77, 77, 77);
+    overflow: hidden;
+    z-index: 100;
+    border-bottom: 5px solid #fff;
 }
 #explore_header .container {
-	position: relative;
+    position: relative;
     padding: 0 92px;
 }
 #explore_header h1 {
-	display: block;
-	color: white;
-	font-size: 25px;
-	font-weight: 500;
-	margin-bottom: 11px;
+    display: block;
+    color: white;
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 11px;
 }
 #explore_header .nav_views {
-	position: absolute;
-	top: 29px;
-	right: 92px;
+    position: absolute;
+    top: 29px;
+    right: 92px;
 }
 #explore_header .nav_views a {
-	color: white;
+    color: white;
     background: rgb(0, 152, 72);
-	padding: 8px 10px;
-	width: 75px;
-	height: 70px;
-	text-decoration: none;
-	display: inline-block;
-	text-align: center;
-	font-size: 11px;
-	border-radius: 7px;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0;
+    padding: 8px 10px;
+    width: 75px;
+    height: 70px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    font-size: 11px;
+    border-radius: 7px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 #explore_header .nav_views a:hover,
 #explore_header .nav_views a.active {
-	background: white;
-	color: #666;
+    background: white;
+    color: #666;
 }
 #explore_header .nav_views .glyphicon {
-	font-size: 20px;
-	display: block;
-	margin-bottom: 10px;
+    font-size: 20px;
+    display: block;
+    margin-bottom: 10px;
 }
 #explore_header .nav_sectors {
-	color: white;
+    color: white;
 }
 #explore_header .nav_sectors a {
-	color: white;
-	font-size: 16px;
-	margin: 0 7px;
-	text-decoration: none;
+    color: white;
+    font-size: 16px;
+    margin: 0 7px;
+    text-decoration: none;
 }
 #explore_header .nav_sectors a:first-child {
-	margin-left: 0;
+    margin-left: 0;
 }
 #explore_header .nav_sectors a:hover,
 #explore_header .nav_sectors a.active {
@@ -297,10 +297,10 @@ table .value {
 
 
 #content .content {
-	margin-top: 120px;
+    margin-top: 120px;
 }
 #content .content.index {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 
@@ -321,14 +321,14 @@ table thead td:active {
 }
 
 .filter {
-	text-align: right;
-	margin-bottom: 15px;
-	font-style: italic;
+    text-align: right;
+    margin-bottom: 15px;
+    font-style: italic;
 }
 .filter select {
-	width: 200px;
-	display: inline-block;
-	margin-left: 10px;
+    width: 200px;
+    display: inline-block;
+    margin-left: 10px;
 }
 
 
@@ -341,12 +341,12 @@ table thead td:active {
 }
 
 #zone_nav .zone {
-	float: left;
-	width: 15%;
-	margin-right: 2%;
+    float: left;
+    width: 15%;
+    margin-right: 2%;
 }
 #zone_nav .zone.last {
-	margin-right: 0;
+    margin-right: 0;
 }
 #zone_nav h2 {
     text-transform: uppercase;
@@ -354,37 +354,37 @@ table thead td:active {
     font-size: 17px;
 }
 #zone_nav a.state_title {
-	display: block;
-	text-decoration: none;
-	color: #666;
-	font-weight: 500;
-	font-size: 16px;
+    display: block;
+    text-decoration: none;
+    color: #666;
+    font-weight: 500;
+    font-size: 16px;
 }
 #zone_nav a.state_title:hover {
-	color: #333;
+    color: #333;
 }
 #zone_nav .lgas {
-	display: none;
-	font-size: 15px;
+    display: none;
+    font-size: 15px;
 }
 #zone_nav .lgas a {
-	display: block;
-	color: #555;
-	padding-left: 5px;
-	text-decoration: none;
+    display: block;
+    color: #555;
+    padding-left: 5px;
+    text-decoration: none;
 }
 #zone_nav .lgas a:hover {
-	color: #333;
+    color: #333;
 }
 
 
 /* Dashboard.html, LGA Overview
 =================================*/
 .sector_header {
-	width: 80%;
-	border-bottom: 1px solid #ddd;
-	padding-bottom: 10px;
-	margin-bottom: 15px;
+    width: 80%;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .lga_profile .map {
@@ -401,12 +401,12 @@ table thead td:active {
 }
 
 .sector {
-	float: left;
-	width: 31.3%;
-	margin-right: 3%;
+    float: left;
+    width: 31.3%;
+    margin-right: 3%;
 }
 .sector.n2 {
-	margin-right: 0;
+    margin-right: 0;
 }
 .sector h3 {
     border-bottom: 1px solid #ddd;
@@ -414,15 +414,15 @@ table thead td:active {
 }
 
 .sector_table {
-	width: 80%;
+    width: 80%;
 }
 .sector_table .subsection {
-	font-size: 14px;
-	font-style: italic;
+    font-size: 14px;
+    font-style: italic;
 }
 
 .mdgs_table {
-	width: 80%;
+    width: 80%;
 }
 
 
@@ -434,17 +434,17 @@ table thead td:active {
 }
 
 .map_view {
-	margin-top: 100px;
-	display: none;
+    margin-top: 100px;
+    display: none;
     height: 1000px;
     width: 100%;
 }
 .pie_chart_selector {
-	width: 300px;
-	position: absolute;
-	top: 10px;
-	left: 60px;
-	z-index: 10;
+    width: 300px;
+    position: absolute;
+    top: 10px;
+    left: 60px;
+    z-index: 10;
 }
 .map_view_legend {
     display: none;
@@ -460,8 +460,8 @@ table thead td:active {
     border-radius: 7px;
 }
 .map_view_legend .close {
-	color: white;
-	text-shadow: none;
+    color: white;
+    text-shadow: none;
 }
 .map_view_legend canvas {
     float: left;
@@ -504,8 +504,8 @@ table thead td:active {
 /* Dashboard.html, Table View
 =================================*/
 .filter_select {
-	width: 320px;
-	margin-bottom: 15px;
+    width: 320px;
+    margin-bottom: 15px;
 }
 .facilities_table_container {
     overflow: scroll;
