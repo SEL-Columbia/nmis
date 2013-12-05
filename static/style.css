@@ -25,7 +25,22 @@ body {
 
 h1 { font-size: 27px; font-weight: bold; }
 h2 { font-size: 22px; }
-h3 { font-size: 17px; }
+h3 { font-size: 17px; margin: 10px 0 4px; }
+
+table {
+	font-size: 15px;
+	margin-bottom: 35px;
+}
+th, td { padding: 5px 0; }
+th { font-weight: 500; }
+table .name {
+	width: 80%;
+	padding-right: 5%;
+}
+table .value {
+	width: 20%;
+}
+
 
 .container {
     max-width: none !important;
@@ -51,6 +66,7 @@ h3 { font-size: 17px; }
 
 .page-header {
     margin-top: 20px;
+    border: none;
 }
 
 
@@ -110,7 +126,7 @@ h3 { font-size: 17px; }
 #content .container {
     position: relative;
     background: #fff;
-    padding: 40px 91px 70px;
+    padding: 30px 91px 70px;
     margin-bottom: 80px;
 }
 
@@ -212,6 +228,7 @@ h3 { font-size: 17px; }
 	background: rgb(77, 77, 77);
 	overflow: hidden;
 	z-index: 100;
+	border-bottom: 5px solid #fff;
 }
 #explore_header .container {
 	position: relative;
@@ -232,7 +249,7 @@ h3 { font-size: 17px; }
 #explore_header .nav_views a {
 	color: white;
     background: rgb(0, 152, 72);
-	padding: 10px;
+	padding: 8px 10px;
 	width: 75px;
 	height: 70px;
 	text-decoration: none;
@@ -355,7 +372,6 @@ table thead td:active {
 
 /* Dashboard.html, LGA Overview
 =================================*/
-
 .lga_profile .map {
     width: 580px;
     float: right;
@@ -365,11 +381,9 @@ table thead td:active {
     border-radius: 4px;
     background-color: #f6f6f6;
 }
-.lga_profile table td {
-    width: 50%;
-    padding-bottom: 6px;
+.lga_profile table {
+    width: 320px;
 }
-
 
 .sector {
 	float: left;
@@ -383,22 +397,17 @@ table thead td:active {
     border-bottom: 1px solid #666666;
     padding-bottom: 12px;
 }
-.sector table {
-	font-size: 15px;
-}
-.sector td {
-    padding: 5px 0;
-}
-.sector .indicator {
+
+.sector_table {
 	width: 80%;
-	padding-right: 5%;
 }
-.sector .values {
-	width: 15%;
+.sector_table .subsection {
+	font-size: 14px;
+	font-style: italic;
 }
 
 .mdgs_table {
-
+	width: 80%;
 }
 
 
@@ -479,6 +488,10 @@ table thead td:active {
 
 /* Dashboard.html, Table View
 =================================*/
+.filter_select {
+	width: 320px;
+	margin-bottom: 15px;
+}
 .facilities_table_container {
     overflow: scroll;
 }

@@ -112,10 +112,10 @@
             <table>
                 <% _.each(lga_overview.overview, function(indicator){ %>
                     <tr>
-                        <td>
+                        <td class="name">
                             <%= indicator_name(indicator) %>
                         </td>
-                        <td>
+                        <td class="value">
                             <%= format_value(lga[indicator]) %>
                         </td>
                     </tr>
@@ -139,7 +139,7 @@
                     <tbody>
                         <% _.each(category.rows, function(indicator){ %>
                             <tr>
-                                <td class="indicator">
+                                <td class="name">
                                     <%= indicator_name(indicator) %>
                                 </td>
                                 <td class="value">
@@ -158,82 +158,63 @@
         <em>
             Below are data collected from HNLSS, DHS, and other sources.
         </em>
-        
-        <table class="mdgs_table">
-            <% _.each(lga_overview.mdg_status, function(mdg){ %>
-                <tbody>
+
+        <% _.each(lga_overview.mdg_status, function(mdg){ %>        
+            <h3>
+                <%= mdg.header %>
+            </h3>
+            <table class="mdgs_table">
+                <% _.each(mdg.rows, function(indicator){ %>
                     <tr>
-                        <td colspan="5">
-                            <h3><%= mdg.header %></h3>
+                        <td class="name">
+                            <%= indicator_name(indicator) %>
+                        </td>
+                        <td class="value">
+                            <%= format_value(lga[indicator]) %>
                         </td>
                     </tr>
-                    <% _.each(mdg.rows, function(indicator){ %>
-                        <tr>
-                            <td class="empty" colspan="2"></td>
-                            <td>
-                                <%= indicator_name(indicator) %>
-                            </td>
-                            <td class="data">
-                                <%= format_value(lga[indicator]) %>
-                            </td>
-                        </tr>
-                    <% }); %>
-                </tbody>
-            <% }); %>
-        </table>
+                <% }); %>
+            </table>
+        <% }); %>
     </script>
 
     <script id="lga_view_template" type="text/html">
-        <div class="nmis-sector-summary">
-            <div class="non-gap">
-                <table class="mdg-table">
-                    <tbody>
-                        <% _.each(lga_view[sector], function(section){ %>
+        <% _.each(lga_view[sector], function(section){ %>
+            <h2>
+                <%= section.name %>
+            </h2>
+            <table class="sector_table">
+                <% _.each(section.rows, function(indicator){ %>
+                    <% if (_.isString(indicator)) { %>
+                        <tr>
+                            <td class="name">
+                                <%= indicator_name(indicator) %>
+                            </td>
+                            <td class="value">
+                                <%= format_value(lga[indicator]) %>
+                            </td>
+                        </tr>
+                    <% } else { %>
+                        <% var subsection = indicator; %>
+                        <tr>
+                            <td colspan="2">
+                                <h3><%= subsection.name %></h3>
+                            </td>
+                        </tr>
+                        <% _.each(subsection.rows, function(indicator){ %>
                             <tr>
-                                <th class="indheader mdg_header" colspan="2">
-                                    <%= section.name %>
-                                </th>
-                                <th class="indheader mdg_header flush-right">
-                                    Current
-                                </th>
+                                <td class="name">
+                                    <%= indicator_name(indicator) %>
+                                </td>
+                                <td class="value">
+                                    <%= format_value(lga[indicator]) %>
+                                </td>
                             </tr>
-                            <% _.each(section.rows, function(indicator){ %>
-                                <% if (_.isString(indicator)) { %>
-                                    <tr>
-                                        <td class="empty-first empty bb"></td>
-                                        <td class="indicator-name bb">
-                                            <%= indicator_name(indicator) %>
-                                        </td>
-                                        <td class="indvalue bb">
-                                            <%= format_value(lga[indicator]) %>
-                                        </td>
-                                    </tr>
-                                <% } else { %>
-                                    <% var sub_section = indicator; %>
-                                    <tr>
-                                        <td class="empty-first empty bb"></td>
-                                        <td class="empty indheader mdg_header">
-                                            <%= sub_section.name %>
-                                        </td>
-                                    </tr>
-                                    <% _.each(sub_section.rows, function(indicator){ %>
-                                        <tr>
-                                            <td class="empty-first empty bb"></td>
-                                            <td class="indicator-name bb">
-                                                <%= indicator_name(indicator) %>
-                                            </td>
-                                            <td class="indvalue bb">
-                                                <%= format_value(lga[indicator]) %>
-                                            </td>
-                                        </tr>
-                                    <% }); %>
-                                <% } %>
-                            <% }); %>
                         <% }); %>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                    <% } %>
+                <% }); %>
+            </table>
+        <% }); %>
     </script>
 
     <script id="pie_chart_selector_template" type="text/html">
@@ -259,16 +240,13 @@
 
     <script id="table_view_template" type="text/html">
         <% if (tables.length > 1){ %>
-            <div class="filter">
-                Grouping:
-                <select class="facilities_table_selector form-control">
-                    <% _.each(tables, function(value, index){ %>
-                        <option value="<%= index %>">
-                            <%= value.name %>
-                        </option>
-                    <% }); %>
-                </select>
-            </div>
+            <select class="filter_select facilities_table_selector form-control">
+                <% _.each(tables, function(value, index){ %>
+                    <option value="<%= index %>">
+                        <%= value.name %>
+                    </option>
+                <% }); %>
+            </select>
         <% } %>
         <div class="facilities_table_container">
             <table id="facilities_data_table" class="table table-striped table-hover table-condensed"></table>
