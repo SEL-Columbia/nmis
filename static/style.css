@@ -508,7 +508,7 @@ table thead td:active {
     margin-bottom: 15px;
 }
 .facilities_table_container {
-    overflow: scroll;
+    overflow-x: scroll;
 }
 #facilities_data_table {
     font-size: 14px;
