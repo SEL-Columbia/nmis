@@ -167,6 +167,7 @@ LGAView.overview_map = function(lga){
             .setView(lat_lng, map_zoom);
     var tile_server = 'http://{s}.tiles.mapbox.com/v3/' +
         'modilabs.nigeria_base/{z}/{x}/{y}.png';
+
     L.tileLayer(tile_server, {
         minZoom: 6,
         maxZoom: 11
@@ -181,7 +182,7 @@ MapView.init = function(){
     $('#content').append(
         $('#map_view_template').html());
 
-    $('.map_view_legend').on('click', '.close', function(){
+    $('.map_legend').on('click', '.close', function(){
         $(this).parent().hide();
         $('.pie_chart_selector')
             .prop('selectedIndex', 0)
@@ -191,42 +192,13 @@ MapView.init = function(){
 };
 
 MapView.render = function(lga, sector){
-    var self = this;
     render_header(lga, 'map', sector);
 
     $('#content .container').hide();
-    $('.map_view_legend').hide();
+    $('.map_legend').hide();
 
     this.facility_map(lga, sector);
-
-    // Render pie chart selector
-    var chart_indicators = this.chart_indicators(lga.facilities, sector);
-    if (chart_indicators.length > 1){
-        var template = $('#pie_chart_selector_template').html();
-        var html = _.template(template, {
-            lga: lga,
-            sector: sector,
-            chart_indicators: chart_indicators
-        });
-        var selector = $('.pie_chart_selector')
-            .html(html)
-            .show()
-            .change(function(){
-                if (this.value){
-                    $('.map_view_legend').show();
-                    self.map_legend(lga, sector, this.value);
-                } else {
-                    $('.map_view_legend').hide();
-                }
-                self.facility_map(lga, sector, this.value);
-                return false;
-            });
-
-        // Prevent click selection from "falling through" to map
-        L.DomEvent.disableClickPropagation(selector[0]);
-    } else {
-        $('.pie_chart_selector').hide();
-    }
+    this.pie_chart_selector(lga, sector);
 };
 
 MapView.facility_map = function(lga, sector, indicator) {
@@ -274,6 +246,7 @@ MapView.facility_map = function(lga, sector, indicator) {
 MapView.facility_layer = function(facilities, sector, indicator) {
     var that = this;
     var marker_group = new L.LayerGroup();
+
     _.each(facilities, function(fac){
         if (fac.sector === sector || sector === 'overview') {
             var lat_lng = fac.gps.split(' ').slice(0,2);
@@ -306,6 +279,38 @@ MapView.facility_layer = function(facilities, sector, indicator) {
         }
     });
     return marker_group;
+};
+
+MapView.pie_chart_selector = function(lga, sector){
+    var self = this;
+    var chart_indicators = this.chart_indicators(lga.facilities, sector);
+    
+    if (chart_indicators.length > 1){
+        var template = $('#pie_chart_selector_template').html();
+        var html = _.template(template, {
+            lga: lga,
+            sector: sector,
+            chart_indicators: chart_indicators
+        });
+        var selector = $('.pie_chart_selector')
+            .html(html)
+            .show()
+            .change(function(){
+                if (this.value){
+                    $('.map_legend').show();
+                    self.map_legend(lga, sector, this.value);
+                } else {
+                    $('.map_legend').hide();
+                }
+                self.facility_map(lga, sector, this.value);
+                return false;
+            });
+
+        // Prevent click selection from "falling through" to map
+        L.DomEvent.disableClickPropagation(selector[0]);
+    } else {
+        $('.pie_chart_selector').hide();
+    }
 };
 
 MapView.chart_indicators = function(facilities, sector){
@@ -380,7 +385,7 @@ MapView.facility_table = function(facility, index){
 };
 
 MapView.map_legend = function(lga, sector, indicator){
-    var ctx = $('.map_view_legend canvas')[0].getContext('2d');        
+    var ctx = $('.map_legend canvas')[0].getContext('2d');        
     var trues = 0;
     var falses = 0;
     var unknowns = 0;
@@ -413,7 +418,7 @@ MapView.map_legend = function(lga, sector, indicator){
     if (unknowns)
         html += ' / ' + unknowns + ' Unknown';
     html += '</p>';
-    $('.map_view_legend .info').html(html);
+    $('.map_legend .info').html(html);
 };
 
 

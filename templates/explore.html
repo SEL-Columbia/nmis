@@ -228,12 +228,14 @@
 
     <script id="map_view_template" type="text/html">
         <div class="map_view">
-            <select class="pie_chart_selector form-control"></select>
-            <div class="map_view_legend">
-                <canvas width="80" height="80"></canvas>
-                <button type="button" class="close pull-right">&times;</button>
-                <div class="info"></div>
-                <div style="clear:both"></div>
+            <div class="map_legend_container">
+                <select class="pie_chart_selector form-control"></select>
+                <div class="map_legend">
+                    <button type="button" class="close">&times;</button>
+                    <canvas width="80" height="80"></canvas>
+                    <div class="info"></div>
+                    <div style="clear:both"></div>
+                </div>
             </div>
         </div>
     </script>

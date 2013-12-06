@@ -127,7 +127,7 @@ table .value {
 #content .container {
     position: relative;
     background: #fff;
-    padding: 30px 91px 70px;
+    padding: 10px 91px 70px;
     margin-bottom: 80px;
 }
 
@@ -433,47 +433,54 @@ table thead td:active {
 .leaflet-top, .leaflet-bottom {
     z-index: 50 !important;
 }
+.leaflet-top .leaflet-control {
+    margin-top: 30px;
+}
+.leaflet-left .leaflet-control {
+    margin-left: 30px;
+}
 
 .map_view {
     margin-top: 100px;
-    display: none;
     height: 1000px;
     width: 100%;
 }
-.pie_chart_selector {
-    width: 300px;
-    position: absolute;
-    top: 10px;
-    left: 60px;
-    z-index: 10;
+.map_legend_container {
+    position: relative;
+    height: 0;
+    z-index: 50;
+    width: 1200px;
+    padding: 30px 91px;
+    overflow: visible;
+    margin: auto;
 }
-.map_view_legend {
+.map_legend {
     display: none;
-    position: absolute;
     color: white;
-    right: 20px;
-    top: 20px;
     background: #111;
     background: rgba(0,0,0,0.8);
     width: 400px;
     padding: 10px;
-    z-index: 50;
     border-radius: 7px;
 }
-.map_view_legend .close {
+.pie_chart_selector {
+    width: 300px;
+    margin-bottom: 10px;
+}
+.map_legend .close {
     color: white;
     text-shadow: none;
 }
-.map_view_legend canvas {
+.map_legend canvas {
     float: left;
 }
-.map_view_legend .info {
+.map_legend .info {
     float: left;
     font-size: 15px;
     margin-left: 15px;
     width: 260px;
 }
-.map_view_legend .values {
+.map_legend .values {
     font-style: italic;
     font-size: 13px;
     margin-top: 5px;
