@@ -155,6 +155,7 @@ table .value {
 #index_content .sponsors {
     background: white;
     padding: 10px 20px;
+    margin-top: 30px;
 }
 #index_content .sponsors img {
     display: inline-block;
