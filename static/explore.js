@@ -212,7 +212,7 @@ MapView.facility_map = function(lga, sector, indicator) {
     if (!map){
         // Initialize Leaflet
         map = new L.Map(map_div, {scrollWheelZoom: false})
-            .setView(lat_lng, 10);
+            .setView(lat_lng, 11);
         var lga_layer = new L.TileLayer(
             'http://{s}.tiles.mapbox.com/v3/modilabs.nigeria_overlays_white/{z}/{x}/{y}.png', {
                 minZoom: 6,
@@ -240,7 +240,7 @@ MapView.facility_map = function(lga, sector, indicator) {
 
     if (map._unique_lga !== lga.unique_lga){
         map._unique_lga = lga.unique_lga;
-        map.setView(lat_lng, 10);
+        map.setView(lat_lng, 11);
     }
     map._facility_layer = this.facility_layer(lga.facilities, sector, indicator);
     map._facility_layer.addTo(map);
