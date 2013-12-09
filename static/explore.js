@@ -15,7 +15,9 @@ $(function(){
             ':unique_lga/table_overview': view(TableView, 'overview'),
             ':unique_lga/table_health': view(TableView, 'health'),
             ':unique_lga/table_education': view(TableView, 'education'),
-            ':unique_lga/table_water': view(TableView, 'water')
+            ':unique_lga/table_water': view(TableView, 'water'),
+            ':unique_lga/gapsheet_education': view(GapSheetView, 'education'),
+            ':unique_lga/gapsheet_health': view(GapSheetView, 'health')
         }
     });
     Backbone.history.start();
@@ -481,6 +483,15 @@ TableView.show_table = function(sector, table_index, facilities){
         })
         .width('100%');
 };
+
+
+
+var GapSheetView = {};
+GapSheetView.render = function(lga, sector){
+    render_header(lga, 'table', sector);
+    
+};
+
 
 
 })();
