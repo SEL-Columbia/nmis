@@ -203,7 +203,10 @@ MapView.render = function(lga, sector){
 
 MapView.facility_map = function(lga, sector, indicator) {
     var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
-    var map_div = $('.map_view').show()[0];
+    var map_height = $(document).height() - $('#header').outerHeight() + 5;
+    var map_div = $('.map_view')
+        .height(map_height)
+        .show()[0];
     var map = map_div._map;
 
     if (!map){
