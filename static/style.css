@@ -154,12 +154,12 @@ table .value {
 }
 #index_content .sponsors {
     background: white;
-    padding: 10px 20px;
+    padding: 10px 0;
     margin-top: 30px;
 }
 #index_content .sponsors img {
     display: inline-block;
-    margin-right: 70px;
+    margin-right: 90px;
 }
 #index_content .sponsors img:last-child {
     margin-right: 0;
