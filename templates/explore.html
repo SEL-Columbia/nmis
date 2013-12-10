@@ -265,7 +265,7 @@
                         </h4>
                     </div>
                     <div class="modal-body">
-                        <img src="https://formhub.org/attachment/small?media_file=ossap/attachments/<%= facility.formhub_photo_id %>">
+                        <a href="<%= facility.photo_url %>" target="_blank"><img src="<%= facility.photo_url_sml %>"></a>
                         <div class="info">
                             <% if (tables.length > 1){ %>
                                 <select class="facility_table_selector form-control">
