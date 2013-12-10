@@ -55,7 +55,8 @@ def explore():
         for lga in lgas.items()]
     sorted_lgas.sort(key=lambda x: x[0])
 
-    return flask.render_template('explore.html', 
+    return flask.render_template('explore.html',
+        data_folder=flask.request.args.get('data', 'data'),
         zones=json.dumps(sorted_zones),
         sorted_lgas=json.dumps(sorted_lgas),
         indicators=load_file('indicators.json'),
