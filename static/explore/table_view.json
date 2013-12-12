@@ -1,0 +1,185 @@
+{
+    "overview": [
+        {
+            "indicators": [
+                "sector", 
+                "facility_name"
+            ], 
+            "name": "General"
+        }
+    ],
+    "education": [
+        {
+            "name": "Snapshot",
+            "indicators": [
+                "facility_name",
+                "facility_type",
+                "improved_water_supply",
+                "improved_sanitation",
+                "chalkboard_each_classroom_yn",
+                "num_tchrs_with_nce",
+                "num_tchrs_total",
+                "num_students_total",
+                "num_classrms_total"
+            ]
+        },
+        {
+            "indicators": [
+                "facility_name", 
+                "school_1kmplus_catchment_area", 
+                "school_1kmplus_secondary_school", 
+                "students_living_3kmplus_school"
+            ], 
+            "name": "Access"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "male_to_female_student_ratio"
+            ], 
+            "name": "Participation"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "potable_water", 
+                "improved_sanitation", 
+                "gender_separated_toilets_yn", 
+                "pupil_toilet_ratio_facility"
+            ], 
+            "name": "Infrastructure: Water and Sanitation"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "power_access", 
+                "num_classrms_need_min_repairs", 
+                "covered_roof_good_condi", 
+                "num_classrms_need_maj_repairs"
+            ], 
+            "name": "Infrastructure: Building Structure"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "access_clinic_dispensary", 
+                "access_first_aid", 
+                "wall_fence_good_condi"
+            ], 
+            "name": "Infrastructure: Health and Safety"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "pupil_classrm_ratio", 
+                "class_held_outside", 
+                "two_shifts_yn", 
+                "multigrade_classrms"
+            ], 
+            "name": "Infrastructure: Learning Environment"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "chalkboard_each_classroom_yn", 
+                "pupil_bench_ratio", 
+                "pupil_desk_ratio"
+            ], 
+            "name": "Furniture"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "pupil_tchr_ratio", 
+                "teacher_nonteachingstaff_ratio", 
+                "num_tchrs_with_nce", 
+                "num_tchrs_attended_training", 
+                "num_tchrs_total"
+            ], 
+            "name": "Adequacy of Staffing"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "tchr_pay_delay", 
+                "tchr_pay_miss"
+            ], 
+            "name": "Institutional Development"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "textbook_to_pupil_ratio", 
+                "provide_exercise_books_yn", 
+                "provide_pens_yn", 
+                "teacher_guide_yn", 
+                "functioning_library_yn"
+            ], 
+            "name": "Curriculum Issues"
+        }
+    ], 
+    "health": [
+        {
+            "name": "Snapshot",
+            "indicators": [
+                "facility_name",
+                "facility_type",
+                "delivery_services", 
+                "emergency_transport",
+                "skilled_birth_attendant",
+                "num_chews_fulltime",
+                "phcn_electricity",
+                "c_section_yn",
+                "measles_yn" 
+            ]
+        },
+        {
+            "name": "Staffing",
+            "indicators": [
+                "facility_name",
+                "facility_type",
+                "num_chews_fulltime", 
+                "num_nurses_fulltime",
+                "num_midwives_fulltime",
+                "num_doctors_fulltime"
+            ]
+        },
+        {
+            "name": "Basic Information",
+            "indicators": [
+                "facility_name",
+                "facility_type",
+                "date_of_survey",
+                "facility_ID",
+                "community",
+                "ward", 
+                "management"
+            ]
+        },
+        {
+            "name": "Infrastructure",
+            "indicators": [
+                "facility_name", 
+                "facility_type", 
+                "improved_water_supply", 
+                "improved_sanitation",
+                "phcn_electricity",
+                "vaccines_fridge_freezer", 
+                "emergency_transport"
+            ]
+        }, 
+        {
+            "name": "Services",
+            "indicators": [
+                "facility_name", 
+                "facility_type", 
+                "delivery_services",
+                "antenatal_care_yn", 
+                "c_section_yn",
+                "measles_yn", 
+                "family_planning_yn", 
+                "malaria_treatment_artemisinin"
+            ]
+        }
+    ]
+}

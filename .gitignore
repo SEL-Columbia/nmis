@@ -12,3 +12,5 @@ protected_data
 local_settings.py
 .~lock.*
 *.swp
+
+static/lgas

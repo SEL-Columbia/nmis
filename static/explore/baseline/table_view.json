@@ -1,0 +1,332 @@
+{
+    "overview": [
+        {
+            "indicators": [
+                "sector", 
+                "facility_name"
+            ], 
+            "name": "General"
+        }
+    ],
+    "water": [
+        {
+            "indicators": [
+                "water_source_type", 
+                "community", 
+                "ward", 
+                "is_improved", 
+                "functional", 
+                "breakdown", 
+                "lift_mechanism", 
+                "pay_for_water_yn", 
+                "distribution_type"
+            ], 
+            "name": "General"
+        }
+    ], 
+    "education": [
+        {
+            "indicators": [
+                "facility_ID",
+                "facility_name",
+                "community",
+                "ward",
+                "facility_type",
+                "education_type",
+                "management",
+                "num_tchrs_total",
+                "num_students_total",
+                "num_classrms_total",
+                "chalkboard_each_classroom_yn",
+                "improved_water_supply",
+                "improved_sanitation",
+                "phcn_electricity"
+            ], 
+            "name": "Snapshot"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "school_1kmplus_catchment_area", 
+                "school_1kmplus_secondary_school", 
+                "students_living_3kmplus_school"
+            ], 
+            "name": "Access"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "male_to_female_student_ratio"
+            ], 
+            "name": "Participation"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "potable_water", 
+                "improved_sanitation", 
+                "gender_separated_toilets_yn", 
+                "pupil_toilet_ratio_facility"
+            ], 
+            "name": "Infrastructure: Water and Sanitation"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "power_access", 
+                "num_classrms_need_min_repairs", 
+                "covered_roof_good_condi", 
+                "num_classrms_need_maj_repairs"
+            ], 
+            "name": "Infrastructure: Building Structure"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "access_clinic_dispensary", 
+                "access_first_aid", 
+                "wall_fence_good_condi"
+            ], 
+            "name": "Infrastructure: Health and Safety"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "pupil_classrm_ratio", 
+                "class_held_outside", 
+                "two_shifts_yn", 
+                "multigrade_classrms"
+            ], 
+            "name": "Infrastructure: Learning Environment"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "chalkboard_each_classroom_yn", 
+                "pupil_bench_ratio", 
+                "pupil_desk_ratio"
+            ], 
+            "name": "Furniture"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "pupil_tchr_ratio", 
+                "teacher_nonteachingstaff_ratio", 
+                "num_tchrs_with_nce", 
+                "num_tchrs_attended_training", 
+                "num_tchrs_total"
+            ], 
+            "name": "Adequacy of Staffing"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "tchr_pay_delay", 
+                "tchr_pay_miss"
+            ], 
+            "name": "Institutional Development"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "textbook_to_pupil_ratio", 
+                "provide_exercise_books_yn", 
+                "provide_pens_yn", 
+                "teacher_guide_yn", 
+                "functioning_library_yn"
+            ], 
+            "name": "Curriculum Issues"
+        }
+    ], 
+    "health": [
+        {
+            "indicators": [
+                "facility_ID",
+                "facility_name",
+                "community",
+                "ward", 
+                "facility_type",
+                "owner_manager",
+                "maternal_health_delivery_services",
+                "skilled_birth_attendant",
+                "num_chews_and_chos",
+                "vaccines_fridge_freezer",
+                "emergency_transport",
+                "improved_water_supply",
+                "improved_sanitation",
+                "phcn_electricity"
+            ], 
+            "name": "Snapshot"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "num_chews_total", 
+                "num_nurses_fulltime", 
+                "num_nursemidwives_fulltime", 
+                "num_doctors_fulltime", 
+                "num_lab_techs_fulltime", 
+                "staff_paid_lastmth_yn"
+            ], 
+            "name": "Staffing"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "sulpha_and_antenatal", 
+                "has_itns", 
+                "medication_iron_tablets", 
+                "medication_folic_acid", 
+                "scale_yn", 
+                "equipment_bp_machine", 
+                "hiv_tx_srvcs_pmtct_services_calc", 
+                "lab_tests_hemoglobin_testing_calc", 
+                "lab_tests_urine_testing_calc"
+            ], 
+            "name": "Maternal Health: Antenatal"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "emergency_transport_currently_functioning", 
+                "mobile_signal_funct_yn", 
+                "iv_antibiotics_yn_calc", 
+                "emoc_vacuum_extractor", 
+                "emoc_forceps", 
+                "power_access_and_functional", 
+                "maternal_health_delivery_services_24_7", 
+                "compr_oc_c_sections"
+            ], 
+            "name": "Maternal Health: Obstetrics (1)"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "uterotonics_yn_calc", 
+                "antishock_garment_yn", 
+                "emoc_parenteral_anticonvulsant", 
+                "skilled_birth_attendant", 
+                "at_least_two_skilled_birth_attendants", 
+                "at_least_three_skilled_birth_attendants", 
+                "at_least_four_skilled_birth_attendants", 
+                "compr_oc_blood_transfusions"
+            ], 
+            "name": "Maternal Health: Obstetrics (2)"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "condoms_yn", 
+                "family_planning_pill_calc_calc", 
+                "family_planning_injectables_calc_calc", 
+                "family_planning_iud_calc", 
+                "family_planning_implants_calc", 
+                "sterilization_yn_calc"
+            ], 
+            "name": "Maternal Health: Family Planning"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "scale_yn", 
+                "child_health_growth_monitor", 
+                "lab_tests_hemoglobin_testing_calc"
+            ], 
+            "name": "Child Nutrition"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "child_health_measles_immun_calc", 
+                "child_health_opv_immuization_calc", 
+                "child_health_dpt_immunization_calc", 
+                "child_health_tetanus_immun_calc", 
+                "child_health_hepb_immunization_calc", 
+                "child_health_bcg_immunization_calc", 
+                "child_health_yellow_fever_immun_calc", 
+                "child_health_csm_immunization_calc", 
+                "vaccines_icepack_calc", 
+                "equipment_refrigerator"
+            ], 
+            "name": "Child Immunization"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "malaria_testing", 
+                "malaria_treatment_artemisinin", 
+                "has_itns", 
+                "malaria_treatment_sulphadoxine", 
+                "paid_services_malaria_treatment"
+            ], 
+            "name": "Malaria"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "medication_anti_malarials", 
+                "oral_antibiotics_calc", 
+                "medication_antihistamines", 
+                "emoc_parenteral_anticonvulsant", 
+                "child_health_mebendazole", 
+                "medication_iron_tablets", 
+                "medication_folic_acid", 
+                "medication_iv_fluid", 
+                "iv_antibiotics_yn_calc", 
+                "uterotonics_yn_calc"
+            ], 
+            "name": "Medicines"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "malaria_testing", 
+                "lab_tests_urine_testing_calc", 
+                "lab_tests_pregnancy_calc", 
+                "lab_tests_stool_calc", 
+                "lab_tests_hemoglobin_testing_calc", 
+                "num_lab_techs_fulltime"
+            ], 
+            "name": "Diagnostics"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "potable_water_access", 
+                "improved_sanitation_and_functional", 
+                "mobile_signal_funct_yn", 
+                "power_access_and_functional"
+            ], 
+            "name": "Infrastructure"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "lab_tests_tb_microscopy_calc", 
+                "tb_treatment_yn"
+            ], 
+            "name": "Tuberculosis"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "lab_tests_hiv_testing_calc", 
+                "hiv_tx_srvcs_pmtct_services_calc", 
+                "hiv_treatment_yn"
+            ], 
+            "name": "HIV"
+        }, 
+        {
+            "indicators": [
+                "facility_name", 
+                "essential_meds_stockout", 
+                "health_no_user_fees", 
+                "iv_medications_yn", 
+                "facility_open_247_yn", 
+                "inpatient_care_yn"
+            ], 
+            "name": "Curative Care"
+        }
+    ]
+}

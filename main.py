@@ -11,8 +11,9 @@ app.debug = True
 
 def load_file(file_name):
     cwd = os.path.dirname(os.path.abspath(__file__))
-    folder = flask.request.args.get('data', 'data')
-    path = os.path.join(cwd, 'static', folder)
+    path = os.path.join(cwd, 'static', 'explore')
+    if flask.request.args.get('baseline', None):
+        path = os.path.join(path, 'baseline')
     file_path = os.path.join(path, file_name)
     with open(file_path, 'r') as f:
         data = f.read()

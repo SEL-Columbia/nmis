@@ -1,0 +1,115 @@
+{
+    "overview": [
+        "chairman_name", 
+        "secretary_name", 
+        "pop_2006", 
+        "area_sq_km"
+    ], 
+    "facility_overview": [
+        {
+            "indicators": [
+                "num_level_1_health_facilities", 
+                "num_level_2_health_facilities", 
+                "num_level_3_health_facilities", 
+                "num_level_4_health_facilities", 
+                "num_level_other_health_facilities", 
+                "num_health_facilities_c_sections", 
+                "num_skilled_health_providers_per_1000", 
+                "num_chews_per_1000"
+            ], 
+            "name": "Health Facilities"
+        }, 
+        {
+            "indicators": [
+                "num_preprimary_level", 
+                "num_preprimary_primary_level", 
+                "num_primary_level", 
+                "num_primary_js_level", 
+                "num_js_level", 
+                "num_js_ss_level", 
+                "num_ss_level", 
+                "num_primary_js_ss_level", 
+                "num_other_level", 
+                "student_teacher_ratio_lga", 
+                "proportion_teachers_nce", 
+                "number_classrooms_need_major_repair"
+            ], 
+            "name": "Schools"
+        }, 
+        {
+            "indicators": [
+                "num_improved_water_points", 
+                "num_overhead_tanks", 
+                "num_taps", 
+                "num_handpumps", 
+                "percentage_functional_improved"
+            ], 
+            "name": "Water Points"
+        }
+    ], 
+    "mdg_status": [
+        {
+            "header": "Goal 1: Eradicate extreme poverty and hunger", 
+            "indicators": [
+                "prevalence_of_underweight_children_u5", 
+                "prevalence_of_stunting_children_u5", 
+                "prevalence_of_wasting_children_u5"
+            ]
+        }, 
+        {
+            "header": "Goal 2: Achieve universal primary education", 
+            "indicators": [
+                "net_enrollment_ratio_primary_education", 
+                "gross_enrollment_rate_primary", 
+                "net_enrollment_ratio_secondary_education", 
+                "gross_enrollment_ratio_secondary_education", 
+                "literacy_rate"
+            ]
+        }, 
+        {
+            "header": "Goal 3: Promote gender equality and empower women", 
+            "indicators": [
+                "girl_boy_ratio_primary", 
+                "girl_boy_ratio_js", 
+                "girl_boy_ratio_secondary_school", 
+                "gender_parity_index_primary", 
+                "gender_parity_index_js"
+            ]
+        }, 
+        {
+            "header": "Goal 4: Reduce child mortality", 
+            "indicators": [
+                "mortality_rate_children_u5", 
+                "mortality_rate_infant", 
+                "immunization_rate_measles", 
+                "immunization_rate_dpt3", 
+                "proportion_of_children_u5_diarrhea_treated_with_ors_med"
+            ]
+        }, 
+        {
+            "header": "Goal 5: Improve maternal health", 
+            "indicators": [
+                "mortality_rate_maternal", 
+                "proportion_of_births_by_skilled_health_personnel", 
+                "percent_antenatal_care_four", 
+                "percentage_pregnant_women_tested_for_hiv_during_pregnancy"
+            ]
+        }, 
+        {
+            "header": "Goal 6: Combat HIV/AIDS, malaria and other diseases", 
+            "indicators": [
+                "prevalence_of_hiv", 
+                "percentage_of_individuals_tested_for_hiv_ever", 
+                "proportion_children_u5_sleeping_under_itns", 
+                "tb_treatment_success_rate"
+            ]
+        }, 
+        {
+            "header": "Goal 7: Ensure environmental sustainability", 
+            "indicators": [
+                "percentage_households_with_access_to_improved_water_sources", 
+                "percentage_households_with_access_to_improved_sanitation"
+            ]
+        }
+    ]
+}

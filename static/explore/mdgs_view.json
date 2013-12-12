@@ -1,0 +1,63 @@
+[
+    {
+        "name" : "MDG 1: Eradicate extreme poverty and hunger",
+        "indicators" : [
+              "prevalence_of_underweight_children_u5",
+              "prevalence_of_stunting_children_u5",
+              "prevalence_of_wasting_children_u5"
+        ]
+    },
+    {
+        "name" : "MDG 2: Achieve universal primary education",
+        "indicators" :[
+              "net_enrollment_rate_pry",
+              "gross_enrollment_rate_pry",
+              "net_enrollment_rate_js",
+              "gross_enrollment_rate_js",
+              "literacy_rate"
+        ]
+    },
+    {
+        "name" : "MDG 3: Promote gender equality and empower women",
+        "indicators" : [
+              "girl_boy_ratio_primary",
+              "girls_boys_ratio_js",
+              "girl_boy_ratio_secondary_school",
+              "gender_parity_index_primary",
+              "gender_parity_index_js"
+        ]
+    },
+    {
+        "name" : "MDG 4: Reduce child mortality rates",
+        "indicators" : [
+              "nga_under5_mortality_rate",
+              "mortality_rate_infant",
+              "nga_proportion_immunized_against_measles",
+              "immunization_rate_dpt3",
+              "proportion_of_children_u5_diarrhea_treated_with_ors_med"
+        ]
+    },
+    {
+        "name" : "MDG 5: Improve maternal health",
+        "indicators" : [
+              "proportion_of_births_by_skilled_health_personnel",
+              "percent_antenatal_care_four",
+              "percentage_pregnant_women_tested_for_hiv_during_pregnancy"
+        ]
+    },
+    {
+        "name" : "MDG 6: Combat HIV/AIDS, malaria, and other diseases",
+        "indicators" : [
+              "prevalence_of_hiv",
+              "percentage_of_individuals_tested_for_hiv_ever",
+              "nga_proportion_u5_children_sleeping_under_bednets"
+        ]
+    },
+    {
+        "name" : "MDG 7: Ensure environmental sustainability",
+        "indicators" : [
+              "nga_pct_hholds_with_access_to_improved_water_sources",
+              "nga_pct_hholds_with_access_to_improved_sanitation"
+        ]
+    }
+]

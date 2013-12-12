@@ -137,7 +137,7 @@
                 </h3>
                 <table>
                     <tbody>
-                        <% _.each(category.rows, function(indicator){ %>
+                        <% _.each(category.indicators, function(indicator){ %>
                             <tr>
                                 <td class="name">
                                     <%= indicator_name(indicator) %>
@@ -164,7 +164,7 @@
                 <%= mdg.header %>
             </h3>
             <table class="mdgs_table">
-                <% _.each(mdg.rows, function(indicator){ %>
+                <% _.each(mdg.indicators, function(indicator){ %>
                     <tr>
                         <td class="name">
                             <%= indicator_name(indicator) %>
@@ -184,7 +184,7 @@
                 <%= section.name %>
             </h2>
             <table class="sector_table">
-                <% _.each(section.rows, function(indicator){ %>
+                <% _.each(section.indicators, function(indicator){ %>
                     <% if (_.isString(indicator)) { %>
                         <tr>
                             <td class="name">
@@ -201,7 +201,7 @@
                                 <h3><%= subsection.name %></h3>
                             </td>
                         </tr>
-                        <% _.each(subsection.rows, function(indicator){ %>
+                        <% _.each(subsection.indicators, function(indicator){ %>
                             <tr>
                                 <td class="name">
                                     <%= indicator_name(indicator) %>
