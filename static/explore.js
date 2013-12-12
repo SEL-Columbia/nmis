@@ -131,6 +131,7 @@ function indicator_name(slug){
 // ============
 function IndexView(){
     $('#explore_header').hide();
+    $('.map_view').hide();
     render('#index_template', {zones: NMIS.zones});
 
     $('#content .content').addClass('index');
