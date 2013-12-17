@@ -22,6 +22,7 @@ $(function(){
     });
     Backbone.history.start();
 
+    MapView.init();
     render_lga_search(NMIS.sorted_lgas);
 });
 
@@ -32,11 +33,6 @@ $(function(){
 function view(viewObj, sector){
     // Wrapper for LGA based views. Fetches the appropriate 
     // LGA JSON data before calling the render() function of a view.
-
-    if (viewObj.init){
-        viewObj.init();
-        viewObj.init = null;
-    }
 
     function render(lga, sector){
         $('.map_view').hide();
@@ -162,6 +158,7 @@ LGAView.render = function(lga, sector){
         });
     }
 };
+
 LGAView.overview_map = function(lga){
     var map_div = $('.map')[0];
     var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
@@ -181,6 +178,7 @@ LGAView.overview_map = function(lga){
 
 var MapView = {};
 MapView.init = function(){
+    // Runs after page load
     // Append map outside of .container so it can fill the width of the page
     $('#content').append(
         $('#map_view_template').html());
