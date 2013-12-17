@@ -10,18 +10,18 @@
             $('#accordion .panel_title').click(function(){
                 $('.panel_content').hide();
                 if ($(this).find('.glyphicon-plus-sign').length){
-                    $('.glyphicon-remove-sign')
-                        .removeClass('glyphicon-remove-sign')
+                    $('.glyphicon-remove-circle')
+                        .removeClass('glyphicon-remove-circle')
                         .addClass('glyphicon-plus-sign');
                     $(this).find('.glyphicon-plus-sign')
                         .removeClass('glyphicon-plus-sign')
-                        .addClass('glyphicon-remove-sign')
+                        .addClass('glyphicon-remove-circle')
                         .end()
                         .next('.panel_content')
                         .show();
                 } else {
-                    $(this).find('.glyphicon-remove-sign')
-                        .removeClass('glyphicon-remove-sign')
+                    $(this).find('.glyphicon-remove-circle')
+                        .removeClass('glyphicon-remove-circle')
                         .addClass('glyphicon-plus-sign')
                         .end()
                         .closest('.panel')
@@ -41,7 +41,7 @@
     <div id="accordion">
         <div class="panel">
             <a class="panel_title" href="#vision">
-                <span class="glyphicon glyphicon-remove-sign"></span>
+                <span class="glyphicon glyphicon-remove-circle"></span>
                 Vision
             </a>
             <div id="vision" class="panel_content" style="display:block">
