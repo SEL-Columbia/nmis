@@ -43,19 +43,15 @@ function view(viewObj, sector){
     }
 
     return function(unique_lga){
-        if (unique_lga){
-            var lga = NMIS.lgas[unique_lga];
-            if (lga){
-                render(lga, sector);
-            } else {
-                var url = '/static/lgas/' + unique_lga + '.json';
-                $.getJSON(url, function(lga){
-                    NMIS.lgas[unique_lga] = lga;
-                    render(lga, sector);
-                });
-            }
+        var lga = NMIS.lgas[unique_lga];
+        if (lga){
+            render(lga, sector);
         } else {
-            render();
+            var url = '/static/lgas/' + unique_lga + '.json';
+            $.getJSON(url, function(lga){
+                NMIS.lgas[unique_lga] = lga;
+                render(lga, sector);
+            });
         }
     }
 }
