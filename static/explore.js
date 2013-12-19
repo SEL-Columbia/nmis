@@ -400,13 +400,13 @@ MapView.map_legend = function(lga, sector, indicator){
     var total = trues + falses + unknowns;
     var data = [{
         value: trues / total * 100,
-        color: 'rgb(68, 167, 0)'
+        color: '#071efb'
     }, {
         value : falses / total * 100,
-        color : 'rgb(193, 71, 71)'
+        color : '#cc0202'
     }, {
         value : unknowns / total * 100,
-        color : '#ddd'
+        color : '#e6e6e6'
     }];
     new Chart(ctx).Pie(data, {
         animationEasing: 'easeOutQuart',
