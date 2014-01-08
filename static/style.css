@@ -485,15 +485,12 @@ table thead td:active {
 
 .map_legend .values .trues {
     font-weight: bold;
-    color:blue; 
 }
 .map_legend .values .falses {
     font-weight: bold;
-    color:red; 
 }
 .map_legend .values .unknowns {
     font-weight: bold;
-    color:grey; 
 }
 #facility_modal img {
     float: left;
