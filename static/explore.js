@@ -417,10 +417,13 @@ MapView.map_legend = function(lga, sector, indicator){
     var yes_icon = '<img src="static/images/icons_f/true.png"></img>';
     var no_icon = '<img src="static/images/icons_f/false.png"></img>';
     var unknow_icon = '<img src="static/images/icons_f/undefined.png"></img>';
-    html += '<p class="values">' + trues + ' Yes ' + yes_icon + ' | ' + falses + ' No ' + no_icon;
+    html += '<p class="values">';
+    html += '<span class="trues">' + yes_icon + trues + ' Yes' + '</span>';
+    html +='<span class="falses">' + no_icon + falses + ' No' + '</span>';
     if (unknowns)
-        html += ' | ' + unknowns + ' Unknown ' + unknow_icon;
+        html += '<span class="unknowns">' + unknow_icon + unknowns + ' Unknown' + '</span>';
     html += '</p>';
+    console.log(html);
     $('.map_legend .info').html(html);
 };
 
