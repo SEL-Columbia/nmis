@@ -13,9 +13,11 @@ def load_file(file_name):
     cwd = os.path.dirname(os.path.abspath(__file__))
     path = os.path.join(cwd, 'static', 'explore')
     if flask.request.args.get('baseline', None):
-        path = os.path.join(path, 'baseline')
-    file_path = os.path.join(path, file_name)
-    with open(file_path, 'r') as f:
+        baseline_path = os.path.join(path, 'baseline', file_name)
+        if os.path.exists(baseline_path):
+            path = os.path.join(path, 'baseline')
+    path = os.path.join(path, file_name)
+    with open(path, 'r') as f:
         data = f.read()
     return data
 
@@ -57,6 +59,7 @@ def explore():
     sorted_lgas.sort(key=lambda x: x[0])
 
     return flask.render_template('explore.html',
+        baseline=flask.request.args.get('baseline', None),
         data_folder=flask.request.args.get('data', 'data'),
         zones=json.dumps(sorted_zones),
         sorted_lgas=json.dumps(sorted_lgas),
