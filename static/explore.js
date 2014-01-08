@@ -122,12 +122,11 @@ function indicator_name(slug){
 // Views
 // ============
 function IndexView(){
-    $('#explore_header').hide();
-    $('.map_view').hide();
     render('#index_template', {zones: NMIS.zones});
 
+    $('#explore_header, .map_view').hide();
     $('#content .content').addClass('index');
-
+    
     $('#zone_nav .state_title').click(function(){
         $(this).next('.lgas').toggle();
         return false;
@@ -178,6 +177,7 @@ MapView.init = function(){
     // Append map outside of .container so it can fill the width of the page
     $('#content').append(
         $('#map_view_template').html());
+    $('.map_view').hide();
 
     $('.map_legend').on('click', '.close', function(){
         $(this).parent().hide();
