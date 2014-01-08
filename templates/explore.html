@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
 
+{% if baseline %}
+    {% set active_page = 'baseline' %}
+{% else %}
+    {% set active_page = 'explore' %}
+{% endif %}
+
+
 {% block js %}
     <script src="/static/explore.js"></script>
     <script>
@@ -16,9 +23,6 @@
         NMIS.gap_sheet_view = {{ gap_sheet_view|safe }};
     </script>
 {% endblock %}
-
-
-{% block nav_explore %}active{% endblock %}
 
 
 {% block content %}

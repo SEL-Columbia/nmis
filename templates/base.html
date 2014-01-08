@@ -21,11 +21,12 @@
         </div>
         <div class="global_nav">
             <div class="container">
-                <a class="{% block nav_explore %}{% endblock %}" href="/explore">Explore Facilities</a>
-                <a class="{% block nav_mdgs %}{% endblock %}" href="/mdgs">MDGs in Nigeria</a>
-                <a class="{% block nav_archive %}{% endblock %}" href="/explore?baseline=1">2012 Baseline Data</a>                
-                <a class="{% block nav_download %}{% endblock %}" href="/download">Download Data</a>
-                <a class="{% block nav_about %}{% endblock %}" href="/about">About</a>
+                {% set active_page = active_page|default(None) %}
+                <a class="{% if active_page == 'explore' %}active{% endif %}" href="/explore">Explore Facilities</a>
+                <a class="{% if active_page == 'mdgs' %}active{% endif %}" href="/mdgs">MDGs in Nigeria</a>
+                <a class="{% if active_page == 'baseline' %}active{% endif %}" href="/explore?baseline=1">2012 Baseline Data</a>                
+                <a class="{% if active_page == 'download' %}active{% endif %}" href="/download">Download Data</a>
+                <a class="{% if active_page == 'about' %}active{% endif %}" href="/about">About</a>
                 <div class="clearfix"></div>
             </div>
         </div>
