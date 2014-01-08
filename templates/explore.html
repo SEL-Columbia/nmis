@@ -13,6 +13,7 @@
         NMIS.lga_overview = {{ lga_overview|safe }};
         NMIS.lga_view = {{ lga_view|safe }};
         NMIS.table_view = {{ table_view|safe }};
+        NMIS.gap_sheet_view = {{ gap_sheet_view|safe }};
     </script>
 {% endblock %}
 
@@ -286,32 +287,96 @@
         </div>
     </script>
 
-    <script id="mdgs_view_template" type="text/html">
-        <div class="country-view row">
-            <div class="left-panel pull-left">
-                <h2>Nigeria's progress on the MDGs</h2>
-                <i>Currently Viewing:</i>
-                <div class="mdg-map-nav pull-left">
-                    <select id="mdg-selector" class="form-control" placeholder="Please select an MDG goal">
-                        <option value="">Select an MDG goal</option>
-                        <% _.each(mdg_goals, function(goal){ %>
-                            <optgroup label="<%= goal.name %>">
-                                <% _.each(goal.indicators, function(indicator){ %>
-                                    <option value="<%= indicator %>">
-                                        <%= indicator_name(indicator) %>
-                                    </option>
-                                <% }); %>
-                            </optgroup>
-                        <% }); %>
-                    </select>
-                    <div class="mdg-title"></div>
-                    <div class="mdg-description"></div>
-                </div>
-            </div>
-            <div class="right-panel pull-right">
-                <div class="mdg-map pull-right" id="mdg-map"></div>
-            </div>
-        </div>
+    <script id="gap_sheet_template" type="text/html">
+        <table class="gap_sheet_overview">
+            <% _.each(gap_sheet.overview, function(indicator){ %>
+                <tr>
+                    <td class="name">
+                        <%= indicator_name(indicator) %>
+                    </td>
+                    <td class="value">
+                        <%= format_value(lga[indicator]) %>
+                    </td>
+                </tr>
+            <% }); %>
+        </table>
+
+        <% _.each(gap_sheet.groups, function(group){ %>
+            <table class="gap_sheet_group">
+                <tr>
+                    <th class="indicator">Indicator</th>
+                    <th class="target">Target / Minimum Standard</th>
+                    <th>Number of Facilities With Input (Numerator)</th>
+                    <th>Total Applicable Facilities (Denominator)</th>
+                    <th>Percentage</th>
+                </tr>
+
+                <% _.each(group.sections, function(section){ %>
+                    <tr>
+                        <td class="title" colspan="5"><%= section.title %></td>
+                    </tr>
+                    <% _.each(section.indicators, function(indicator){ %>
+                        <tr>
+                            <td class="name">
+                                <%= indicator_name(indicator.name) %>
+                            </td>
+                            <td class="target">
+                                <%= indicator.target %>
+                            </td>
+
+                            <% var num_true = num_true_indicator(indicator.name, sector, lga.facilities); %>
+                            <% var tot_fac = num_bool_indicator(indicator.name, sector, lga.facilities); %>
+                            
+                            <td class="num_facilities">
+                                <%= num_true %>
+                            </td>
+                            <td class="tot_facilities">
+                                <%= tot_fac %>
+                            </td>
+                            <td class="value">
+                                <%= num_true / tot_fac * 100 + '%' %>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% }); %>
+            </table>
+
+            <table class="gap_sheet_legend">
+                <tr>
+                    <td>
+                        <div class="green"></div>
+                    </td>
+                    <td>
+                        <%= group.on_track %>
+                    </td>
+                    <td>
+                        On track to achieving target
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="yellow"></div>
+                    </td>
+                    <td>
+                        <%= group.needs_attention %>
+                    </td>
+                    <td>
+                        Needs additional attention
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="red"></div>
+                    </td>
+                    <td>
+                        <%= group.off_track %>
+                    </td>
+                    <td>
+                        Off track and needs urgent attention
+                    </td>
+                </tr>
+            </table>
+        <% }); %>
     </script>
 {% endblock %}
 

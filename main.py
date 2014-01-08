@@ -63,7 +63,8 @@ def explore():
         indicators=load_file('indicators.json'),
         lga_overview=load_file('lga_overview.json'),
         lga_view=load_file('lga_view.json'),
-        table_view=load_file('table_view.json'))
+        table_view=load_file('table_view.json'),
+        gap_sheet_view=load_file('gap_sheet_view.json'))
 
 
 @app.route('/mdgs')

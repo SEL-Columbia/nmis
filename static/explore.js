@@ -16,8 +16,8 @@ $(function(){
             ':unique_lga/table_health': view(TableView, 'health'),
             ':unique_lga/table_education': view(TableView, 'education'),
             ':unique_lga/table_water': view(TableView, 'water'),
-            ':unique_lga/gapsheet_education': view(GapSheetView, 'education'),
-            ':unique_lga/gapsheet_health': view(GapSheetView, 'health')
+            ':unique_lga/gap_sheet_education': view(GapSheetView, 'education'),
+            ':unique_lga/gap_sheet_health': view(GapSheetView, 'health')
         }
     });
     Backbone.history.start();
@@ -126,7 +126,7 @@ function IndexView(){
 
     $('#explore_header, .map_view').hide();
     $('#content .content').addClass('index');
-    
+
     $('#zone_nav .state_title').click(function(){
         $(this).next('.lgas').toggle();
         return false;
@@ -486,8 +486,29 @@ TableView.show_table = function(sector, table_index, facilities){
 
 var GapSheetView = {};
 GapSheetView.render = function(lga, sector){
-    render_header(lga, 'table', sector);
-    
+    render('#gap_sheet_template', {
+        lga: lga,
+        sector: sector,
+        gap_sheet: NMIS.gap_sheet_view[sector],
+        num_true_indicator: this.num_true_indicator,
+        num_bool_indicator: this.num_bool_indicator
+    });
+};
+GapSheetView.num_true_indicator = function(indicator, sector, facilities){
+    var num_true = 0;
+    for (var f, i=0; f=facilities[i]; i++){
+        if (f.sector === sector && f[indicator] === true)
+            num_true += 1;
+    }
+    return num_true;
+};
+GapSheetView.num_bool_indicator = function(indicator, sector, facilities){
+    var num_bool = 0;
+    for (var f, i=0; f=facilities[i]; i++){
+        if (f.sector === sector && typeof f[indicator] === 'boolean')
+            num_bool += 1;
+    }
+    return num_bool;
 };
 
 
