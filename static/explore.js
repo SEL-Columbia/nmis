@@ -414,9 +414,12 @@ MapView.map_legend = function(lga, sector, indicator){
     });
     var html = '<h4>' + indicator_name(indicator) + '</h4>';
     html += NMIS.indicators[indicator].description;
-    html += '<p class="values">' + trues + ' Yes / ' + falses + ' No';
+    var yes_icon = '<img src="static/images/icons_f/true.png"></img>';
+    var no_icon = '<img src="static/images/icons_f/false.png"></img>';
+    var unknow_icon = '<img src="static/images/icons_f/undefined.png"></img>';
+    html += '<p class="values">' + trues + ' Yes ' + yes_icon + ' | ' + falses + ' No ' + no_icon;
     if (unknowns)
-        html += ' / ' + unknowns + ' Unknown';
+        html += ' | ' + unknowns + ' Unknown ' + unknow_icon;
     html += '</p>';
     $('.map_legend .info').html(html);
 };
