@@ -1,58 +1,58 @@
 {
-	"health": {
-		"overview": [
-			"num_total_water_points"
-		],
-		"groups": [
-			{
-				"on_track": "> 90%",
-				"needs_attention": "50 - 90%",
-				"off_track": "< 50%",
-				"sections": [
-					{
-						"title": "Delivery and Neonatal Care",
-						"indicators": [
-							{
-								"name": "child_health_measles_immun_calc",
-								"target": "Put a target here"
-							}
-						]
-					},
-					{
-						"title": "Antenatal Care / Family Planning",
-						"indicators": [
-							{
-								"name": "family_planning_iud_calc",
-								"target": "Put a target here"
-							}
-						]
-					}
-				]
-			}
-		]
-	},
-	"education": {
-		"overview": [
-			
-		],
-		"groups": [
-			{
-				"on_track": "> 90%",
-				"needs_attention": "50 - 90%",
-				"off_track": "< 50%",
-				"sections": [
-					{
-						"title": "Infrastructure",
-						"indicators": [
-							{
-								"name": "improved_water_supply",
-								"target": "At least 1 improved water point per Hospital, PHC or PH Clinic functioning at all times"
-							}
-						]
-					}
-				]
-			}
-		]
-	}
+    "health": {
+        "overview": [
+            "num_total_water_points"
+        ],
+        "groups": [
+            {
+                "on_track": "> 90%",
+                "needs_attention": "50 - 90%",
+                "off_track": "< 50%",
+                "sections": [
+                    {
+                        "title": "Delivery and Neonatal Care",
+                        "indicators": [
+                            {
+                                "name": "child_health_measles_immun_calc",
+                                "target": "Put a target here"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Antenatal Care / Family Planning",
+                        "indicators": [
+                            {
+                                "name": "family_planning_iud_calc",
+                                "target": "Put a target here"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "education": {
+        "overview": [
+            
+        ],
+        "groups": [
+            {
+                "on_track": "> 90%",
+                "needs_attention": "50 - 90%",
+                "off_track": "< 50%",
+                "sections": [
+                    {
+                        "title": "Infrastructure",
+                        "indicators": [
+                            {
+                                "name": "improved_water_supply",
+                                "target": "At least 1 improved water point per Hospital, PHC or PH Clinic functioning at all times"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 }
 
