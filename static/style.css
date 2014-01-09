@@ -530,6 +530,97 @@ table thead td:active {
 }
 
 
+/* Dashboard.html, Gap Sheet View
+=================================*/
+.gap_sheet_group {
+	border-top: 5px solid #444;
+	padding-top: 5px;
+}
+.gap_sheet_group th {
+	text-transform: uppercase;
+	font-weight: 200;
+	font-size: 11px;
+	vertical-align: top;
+	padding-right: 10px;
+	height: 60px;
+}
+.gap_sheet_group td {
+	vertical-align: top;
+}
+.gap_sheet_group .title {
+	background: #ddd;
+	padding: 2px 5px;
+	font-weight: 500;
+	font-size: 13px;
+	color: #444;
+}
+.gap_sheet_group .border td {
+	border-bottom: 1px solid #ddd;
+}
+.gap_sheet_group .border:last-child td {
+	border: none;
+}
+.gap_sheet_group .indicator {
+	width: 45%;
+	font-weight: 500;
+	font-size: 12px;
+	padding-left: 5px;
+}
+.gap_sheet_group .value {
+	width: 15%;
+	font-weight: 200;
+	font-size: 12px;
+}
+.gap_sheet_group .percent {
+	width: 10%;
+	text-align: right;
+	padding-right: 5px;
+}
+.gap_sheet_group .circle {
+	display: inline-block;
+	border-radius: 100px;
+	text-align: center;
+	width: 50px;
+	height: 50px;
+	padding-top: 11px;
+	background: #777;
+	font-size: 17px;
+	font-weight: 500;
+	color: #fff;
+}
+
+.gap_sheet_legend {
+	float: right;
+}
+.gap_sheet_legend td {
+	font-size: 11px;
+	padding: 2px 5px;
+}
+.gap_sheet_legend .circle {
+	width: 14px;
+	height: 14px;
+	background: #eee;
+	border-radius: 100px;
+}
+.gap_sheet_legend .green {
+	background: rgb(154, 196, 124);
+}
+.gap_sheet_legend .yellow {
+	background: rgb(235, 219, 144);
+}
+.gap_sheet_legend .red {
+	background: rgb(234, 135, 129);
+}
+.gap_sheet_legend .percent {
+	font-weight: 500;
+}
+.gap_sheet_legend .description {
+	font-weight: 200;
+	text-transform: uppercase;
+}
+
+
+
 /* Mdgs.html
 =================================*/
 #mdg_map {

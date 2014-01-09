@@ -15,6 +15,10 @@
                             {
                                 "name": "child_health_measles_immun_calc",
                                 "target": "Put a target here"
+                            },
+                            {
+                                "name": "equipment_sterilizer",
+                                "target": "Put a target here"
                             }
                         ]
                     },

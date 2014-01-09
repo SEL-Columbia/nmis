@@ -309,10 +309,10 @@
             <table class="gap_sheet_group">
                 <tr>
                     <th class="indicator">Indicator</th>
-                    <th class="target">Target / Minimum Standard</th>
-                    <th>Number of Facilities With Input (Numerator)</th>
-                    <th>Total Applicable Facilities (Denominator)</th>
-                    <th>Percentage</th>
+                    <th class="value">Target / Minimum Standard</th>
+                    <th class="value">Number of Facilities With Input (Numerator)</th>
+                    <th class="value">Total Applicable Facilities (Denominator)</th>
+                    <th class="percent">Percentage</th>
                 </tr>
 
                 <% _.each(group.sections, function(section){ %>
@@ -320,25 +320,27 @@
                         <td class="title" colspan="5"><%= section.title %></td>
                     </tr>
                     <% _.each(section.indicators, function(indicator){ %>
-                        <tr>
-                            <td class="name">
+                        <tr class="border">
+                            <td class="indicator">
                                 <%= indicator_name(indicator.name) %>
                             </td>
-                            <td class="target">
+                            <td class="value">
                                 <%= indicator.target %>
                             </td>
 
                             <% var num_true = num_true_indicator(indicator.name, sector, lga.facilities); %>
                             <% var tot_fac = num_bool_indicator(indicator.name, sector, lga.facilities); %>
                             
-                            <td class="num_facilities">
+                            <td class="value">
                                 <%= num_true %>
                             </td>
-                            <td class="tot_facilities">
+                            <td class="value">
                                 <%= tot_fac %>
                             </td>
-                            <td class="value">
-                                <%= num_true / tot_fac * 100 + '%' %>
+                            <td class="percent">
+                                <div class="circle">
+                                    <%= Math.round(num_true / tot_fac * 100) + '%' %>
+                                </div>
                             </td>
                         </tr>
                     <% }); %>
@@ -348,34 +350,34 @@
             <table class="gap_sheet_legend">
                 <tr>
                     <td>
-                        <div class="green"></div>
+                        <div class="circle green"></div>
                     </td>
-                    <td>
+                    <td class="percent">
                         <%= group.on_track %>
                     </td>
-                    <td>
+                    <td class="description">
                         On track to achieving target
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div class="yellow"></div>
+                        <div class="circle yellow"></div>
                     </td>
-                    <td>
+                    <td class="percent">
                         <%= group.needs_attention %>
                     </td>
-                    <td>
+                    <td class="description">
                         Needs additional attention
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div class="red"></div>
+                        <div class="circle red"></div>
                     </td>
-                    <td>
+                    <td class="percent">
                         <%= group.off_track %>
                     </td>
-                    <td>
+                    <td class="description">
                         Off track and needs urgent attention
                     </td>
                 </tr>
