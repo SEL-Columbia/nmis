@@ -339,6 +339,21 @@ table thead td:active {
     margin-bottom: 20px;
 }
 
+.explore_title {
+	margin-bottom: 0;
+}
+.explore_info {
+	display: inline-block;
+	color: #888;
+	font-weight: 500;
+	margin: 10px 0 40px;
+}
+.explore_info:hover {
+	color: #555;
+	text-decoration: none;
+}
+
+
 #zone_nav .zone {
     float: left;
     width: 15%;

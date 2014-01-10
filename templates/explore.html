@@ -84,7 +84,12 @@
     </script>
 
     <script id="index_template" type="text/html">
-        <h1>Explore an LGA from the regions below</h1>
+        <h1 class="explore_title">Explore an LGA from the regions below</h1>
+        {% if baseline %}
+            <a class="explore_info" href="/explore?baseline=1">or browse current data</a>
+        {% else %}
+            <a class="explore_info" href="/explore">or browse 2012 data</a>
+        {% endif %}
 
         <div id="zone_nav">
             <% _.each(zones, function(zone, i){ %>
