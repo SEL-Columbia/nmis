@@ -12,23 +12,14 @@
                     {
                         "title": "Delivery and Neonatal Care",
                         "indicators": [
-                            {
-                                "name": "child_health_measles_immun_calc",
-                                "target": "Put a target here"
-                            },
-                            {
-                                "name": "equipment_sterilizer",
-                                "target": "Put a target here"
-                            }
+                            "child_health_measles_immun_calc"
+                            "equipment_sterilizer"
                         ]
                     },
                     {
                         "title": "Antenatal Care / Family Planning",
                         "indicators": [
-                            {
-                                "name": "family_planning_iud_calc",
-                                "target": "Put a target here"
-                            }
+                            "family_planning_iud_calc"
                         ]
                     }
                 ]
@@ -37,7 +28,7 @@
     },
     "education": {
         "overview": [
-            
+            "num_total_water_points"
         ],
         "groups": [
             {
@@ -48,10 +39,7 @@
                     {
                         "title": "Infrastructure",
                         "indicators": [
-                            {
-                                "name": "improved_water_supply",
-                                "target": "At least 1 improved water point per Hospital, PHC or PH Clinic functioning at all times"
-                            }
+                            "improved_water_supply"
                         ]
                     }
                 ]
