@@ -327,24 +327,20 @@
                     <% _.each(section.indicators, function(indicator){ %>
                         <tr class="border">
                             <td class="indicator">
-                                <%= indicator_name(indicator.name) %>
+                                <%= indicator_name(indicator) %>
                             </td>
                             <td class="value">
-                                <%= indicator.target %>
-                            </td>
-
-                            <% var num_true = num_true_indicator(indicator.name, sector, lga.facilities); %>
-                            <% var tot_fac = num_bool_indicator(indicator.name, sector, lga.facilities); %>
-                            
-                            <td class="value">
-                                <%= num_true %>
+                                <%= indicator %>
                             </td>
                             <td class="value">
-                                <%= tot_fac %>
+                                <%= lga[indicator + '_numerator'] %>
+                            </td>
+                            <td class="value">
+                                <%= lga[indicator + '_denominator'] %>
                             </td>
                             <td class="percent">
                                 <div class="circle">
-                                    <%= Math.round(num_true / tot_fac * 100) + '%' %>
+                                    <%= lga[indicator + '_percentage'] + '%' %>
                                 </div>
                             </td>
                         </tr>
