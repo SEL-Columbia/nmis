@@ -12,7 +12,7 @@
                     {
                         "title": "Delivery and Neonatal Care",
                         "indicators": [
-                            "child_health_measles_immun_calc"
+                            "child_health_measles_immun_calc",
                             "equipment_sterilizer"
                         ]
                     },
