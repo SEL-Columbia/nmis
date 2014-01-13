@@ -8,6 +8,22 @@
             "name": "General"
         }
     ],
+    "water": [
+        {
+            "indicators": [
+                "water_source_type", 
+                "community", 
+                "ward", 
+                "is_improved", 
+                "functional", 
+                "breakdown", 
+                "lift_mechanism", 
+                "pay_for_water_yn", 
+                "distribution_type"
+            ], 
+            "name": "General"
+        }
+    ],
     "education": [
         {
             "name": "Snapshot",

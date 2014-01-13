@@ -1,4 +1,58 @@
 {
+    "water": [
+        {
+            "indicators": [
+                "num_improved_water_points", 
+                "num_overhead_tanks", 
+                "num_taps", 
+                "num_handpumps", 
+                "num_unimproved_points", 
+                "num_total_water_points"
+            ], 
+            "name": "Water Point Type"
+        }, 
+        {
+            "indicators": [
+                "percentage_functional_improved", 
+                "percentage_functional_taps", 
+                "percentage_functional_handpumps"
+            ], 
+            "name": "Functionality"
+        }, 
+        {
+            "indicators": [
+                {
+                    "indicators": [
+                        "num_diesel", 
+                        "percentage_diesel_functional"
+                    ], 
+                    "name": "Diesel"
+                }, 
+                {
+                    "indicators": [
+                        "num_electric", 
+                        "percentage_electric_functional"
+                    ], 
+                    "name": "Electric"
+                }, 
+                {
+                    "indicators": [
+                        "num_solar", 
+                        "percentage_solar_functional"
+                    ], 
+                    "name": "Solar"
+                }, 
+                {
+                    "indicators": [
+                        "num_handpumps", 
+                        "percentage_functional_handpumps"
+                    ], 
+                    "name": "Hand pumps"
+                }
+            ], 
+            "name": "Lift Mechanism Analysis"
+        }
+    ],
     "education": [
         {
             "name": "Facilities",
