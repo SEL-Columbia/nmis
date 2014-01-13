@@ -140,6 +140,9 @@ table .value {
 #index_content .intro {
     display: block;
     width: 325px;
+    background: rgba(0,0,0,0.1);
+	box-shadow: 0px 0px 200px 100px rgba(0,0,0,0.1);
+	border-radius: 200px;
 }
 #index_content .intro h1 {
     font-size: 32px;
@@ -343,8 +346,9 @@ table thead td:active {
 }
 .explore_info {
 	display: inline-block;
-	color: #666;
-	margin: 10px 0 40px;
+	color: #888;
+	font-style: italic;
+	margin: 5px 0 40px;
 }
 .explore_info:hover {
 	color: #555;
