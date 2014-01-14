@@ -122,6 +122,15 @@ table .value {
     background: rgb(77, 77, 77);
 }
 
+#header.baseline .global_nav {
+	background: rgb(115, 115, 115);
+}
+#header.baseline .global_nav a:hover,
+#header.baseline .global_nav a.active {
+	color: rgb(77, 77, 77);
+    background: #ddd;
+}
+
 
 #content .container {
     position: relative;
@@ -294,6 +303,7 @@ table .value {
 #explore_header .nav_sectors a.active {
     color: rgb(255, 241, 0);
 }
+
 
 #content .content {
     margin-top: 95px;

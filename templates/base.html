@@ -11,7 +11,8 @@
     {% block js %}{% endblock %}
 </head>
 <body>
-    <div id="header">
+    {% set active_page = active_page|default(None) %}
+    <div id="header" {% if active_page == "baseline" %}class="baseline"{% endif %}>
         <div class="container">
             <a class="logo" href="/">
                 <img src="/static/images/logo_mdgs_nigeria.png">
@@ -21,7 +22,6 @@
         </div>
         <div class="global_nav">
             <div class="container">
-                {% set active_page = active_page|default(None) %}
                 <a class="{% if active_page == 'explore' %}active{% endif %}" href="/explore">Explore Facilities</a>
                 <a class="{% if active_page == 'mdgs' %}active{% endif %}" href="/mdgs">MDGs in Nigeria</a>
                 <a class="{% if active_page == 'baseline' %}active{% endif %}" href="/explore?baseline=1">2012 Baseline Data</a>                
