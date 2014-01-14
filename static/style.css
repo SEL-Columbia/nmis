@@ -354,12 +354,12 @@ table thead td:active {
 }
 .explore_info {
 	display: inline-block;
-	color: #888;
+	color: #666;
 	font-style: italic;
 	margin: 5px 0 40px;
 }
 .explore_info:hover {
-	color: #555;
+	color: #444;
 	text-decoration: none;
 }
 
