@@ -14,3 +14,4 @@ local_settings.py
 *.swp
 
 static/lgas
+static/nmis_data.zip
