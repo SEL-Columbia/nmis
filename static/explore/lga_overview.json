@@ -29,6 +29,16 @@
                 "percent_teachers_nce_primary"
             ], 
             "name": "Education Facilities"
+        },
+        {
+            "indicators": [
+                "num_improved_water_points", 
+                "num_overhead_tanks", 
+                "num_taps", 
+                "num_handpumps", 
+                "percentage_functional_improved"
+            ], 
+            "name": "Water Points"
         }
     ], 
     "mdg_status": [
