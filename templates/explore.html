@@ -75,6 +75,12 @@
     </script>
 
     <script id="lga_search_template" type="text/html">
+        <div class="loading">
+            <div class="loading_bar"></div>
+            <div class="loading_bar"></div>
+            <div class="loading_bar"></div>
+            <div style="clear:both"></div>
+        </div>
         <select placeholder="Select an LGA">
             <option value="">Select an LGA</option>
             <% _.each(sorted_lgas, function(lga){ %>
