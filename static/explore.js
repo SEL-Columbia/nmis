@@ -47,12 +47,10 @@ function view(viewObj, sector){
         if (lga){
             render(lga, sector);
         } else {
-            $('.loading').show();
             var url = '/static/lgas/' + unique_lga + '.json';
             $.getJSON(url, function(lga){
                 NMIS.lgas[unique_lga] = lga;
                 render(lga, sector);
-                $('.loading').hide();
             });
         }
     }

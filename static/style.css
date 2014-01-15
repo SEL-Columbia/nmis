@@ -97,7 +97,6 @@ table .value {
     display: none;
     float: right;
     margin-top: 24px;
-    width: 310px;
 }
 #lga_search .selectize-control {
     width: 220px;
@@ -236,7 +235,7 @@ table .value {
 
 
 
-/* Explore.html
+/* Dashboard.html
 =================================*/
 #explore_header {
     display: none;
@@ -314,32 +313,6 @@ table .value {
 }
 
 
-/* Loading indicator */
-.loading {
-	display: none;
-	float: left;
-    width: 75px;
-	margin: 9px 0;
-}
-.loading_bar {
-    float:left;
-    background: #ddd; 
-    height: 17px;
-    width: 17px;
-    margin-right: 7px;
-    -webkit-animation: 1.7s infinite loading;
-}
-
-.loading_bar:nth-child(2) { -webkit-animation-delay: 0.3s; }
-.loading_bar:nth-child(3) { -webkit-animation-delay: 0.6s; }
- 
-@-webkit-keyframes loading {
-    10% { background: #ccc; }
-    20% { background-color: #bbb; }
-    30% { background-color: #aaa; }
-}
-
-
 /* Datatables */
 .sorting { background: url('/static/lib/datatables/images/sort_both.png') no-repeat center right; }
 .sorting_asc { background: url('/static/lib/datatables/images/sort_asc.png') no-repeat center right; }
@@ -369,10 +342,9 @@ table thead td:active {
 
 
 
-/* Explore.html, Index View
+/* Dashboard.html, Index View
 ========================================*/
 .selectize-control {
-	float: right;
     width: 300px;
     margin-bottom: 20px;
 }
@@ -428,7 +400,7 @@ table thead td:active {
 }
 
 
-/* Explore.html, LGA Overview
+/* Dashboard.html, LGA Overview
 =================================*/
 .sector_header {
     width: 80%;
@@ -477,7 +449,7 @@ table thead td:active {
 
 
 
-/* Explore.html, Map View
+/* Dashboard.html, Map View
 =================================*/
 .leaflet-top, .leaflet-bottom {
     z-index: 50 !important;
@@ -567,7 +539,7 @@ table thead td:active {
 
 
 
-/* Explore.html, Table View
+/* Dashboard.html, Table View
 =================================*/
 .filter_select {
     width: 320px;
@@ -581,7 +553,7 @@ table thead td:active {
 }
 
 
-/* Explore.html, Gap Sheet View
+/* Dashboard.html, Gap Sheet View
 =================================*/
 .gap_sheet_group {
 	border-top: 5px solid #444;
