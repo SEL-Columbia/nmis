@@ -634,11 +634,11 @@ table thead td:active {
 	width: 50px;
 	height: 50px;
 	padding-top: 11px;
-	background: #777;
 	font-size: 17px;
 	font-weight: 500;
 	color: #fff;
 }
+
 
 .gap_sheet_legend {
 	float: right;
@@ -650,16 +650,18 @@ table thead td:active {
 .gap_sheet_legend .circle {
 	width: 14px;
 	height: 14px;
-	background: #eee;
 	border-radius: 100px;
 }
-.gap_sheet_legend .green {
+.gap_sheet_legend .green,
+.gap_sheet_group .green {
 	background: rgb(154, 196, 124);
 }
-.gap_sheet_legend .yellow {
+.gap_sheet_legend .yellow,
+.gap_sheet_group .yellow {
 	background: rgb(235, 219, 144);
 }
-.gap_sheet_legend .red {
+.gap_sheet_legend .red,
+.gap_sheet_group .red {
 	background: rgb(234, 135, 129);
 }
 .gap_sheet_legend .percent {
