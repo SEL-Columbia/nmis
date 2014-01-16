@@ -319,6 +319,9 @@
         </table>
 
         <% _.each(gap_sheet.groups, function(group){ %>
+            <% var on_track = parseInt(group.on_track.replace(/[^\d]/g, '')); %>
+            <% var off_track = parseInt(group.off_track.replace(/[^\d]/g, '')); %>
+
             <table class="gap_sheet_group">
                 <tr>
                     <th class="indicator">Indicator</th>
@@ -347,8 +350,16 @@
                                 <%= lga[indicator + '_denominator'] %>
                             </td>
                             <td class="percent">
-                                <div class="circle">
-                                    <%= lga[indicator + '_percentage'] + '%' %>
+                                <% var percent = lga[indicator + '_percent']; %>
+                                <div class="circle
+                                    <% if (percent > on_track){ %>
+                                        green
+                                    <% } else if (percent < off_track){ %>
+                                        red
+                                    <% } else { %>
+                                        yellow
+                                    <% } %>">
+                                    <%= percent + '%' %>
                                 </div>
                             </td>
                         </tr>
@@ -391,6 +402,7 @@
                     </td>
                 </tr>
             </table>
+            <div style="clear:both"></div>
         <% }); %>
     </script>
 {% endblock %}
