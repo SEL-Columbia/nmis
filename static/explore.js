@@ -20,10 +20,10 @@ $(function(){
             ':unique_lga/gap_sheet_health': view(GapSheetView, 'health')
         }
     });
-    Backbone.history.start();
 
     MapView.init();
     render_lga_search(NMIS.sorted_lgas);
+    Backbone.history.start();
 });
 
 
@@ -34,8 +34,9 @@ function view(viewObj, sector){
     // Wrapper for LGA based views. Fetches the appropriate 
     // LGA JSON data before calling the render() function of a view.
 
-    function render(lga, sector){
-        $('.map_view').hide();
+    function render_wrap(lga, sector){
+        $('.map_view, .loading').hide();
+        $('#content').stop().css('opacity', 1);
         $('#content .index').removeClass('index');
         $('#content .container').show();
         $(window).scrollTop(0);
@@ -45,14 +46,14 @@ function view(viewObj, sector){
     return function(unique_lga){
         var lga = NMIS.lgas[unique_lga];
         if (lga){
-            render(lga, sector);
+            render_wrap(lga, sector);
         } else {
             $('.loading').show();
+            $('#content').fadeTo(100, 0.5);
             var url = '/static/lgas/' + unique_lga + '.json';
             $.getJSON(url, function(lga){
                 NMIS.lgas[unique_lga] = lga;
-                render(lga, sector);
-                $('.loading').hide();
+                render_wrap(lga, sector);
             });
         }
     }
