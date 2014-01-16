@@ -5,44 +5,44 @@
     },
     "net_enrollment_rate_pry": {
         "name": "Net enrollment rate for primary education",
-        "description": "Number of official primary school aged children (6-11 year olds in Nigeria) enrolled in primary school expressed as a percent of the total children of the official school age population (6-11 year olds in Nigeria). "
+        "description": "Number of official primary school aged children (6-11 year olds in Nigeria) enrolled in primary school expressed as a percent of the total children of the official school age population (6-11 year olds in Nigeria). (HNLSS, 2008-2009)"
     },
     "gross_enrollment_rate_pry": {
         "name": "Gross enrollment rate in primary education",
-        "description": "Total enrolment in primary school, regardless of age, expressed as a percentage of the eligible official primary school-age population (6-11 years of age in Nigeria) in a given school year."
+        "description": "Total enrolment in primary school, regardless of age, expressed as a percentage of the eligible official primary school-age population (6-11 years of age in Nigeria) in a given school year. (School Census, 2005 / Population Census, 2006)"
     },
     "girls_boys_ratio_js": {
         "name": "Ratio of girls to boys in junior secondary schools",
-        "description": "Ratio of the number of female students enrolled in junior secondary school to the number of male students enrolled in junior secondary school, regardless of ages."
+        "description": "Ratio of the number of female students enrolled in junior secondary school to the number of male students enrolled in junior secondary school, regardless of ages. (School Census,2005)"
     },
     "nga_under5_mortality_rate": {
         "name": "Under five mortality rate (per 1,000 live births)",
-        "description": "The likelihood of a child dying before reaching five years of age (expressed as number of deaths per 1,000 births)"
+        "description": "The likelihood of a child dying before reaching five years of age (expressed as number of deaths per 1,000 births). (DHS, 2008)"
     },
     "nga_proportion_immunized_against_measles": {
         "name": "Measles immunization rate",
-        "description": "Percentage of one-year old children who received a measles vaccination"
+        "description": "Percentage of one-year old children who received a measles vaccination. (DHS, 2008)"
     },
     "nga_proportion_u5_children_sleeping_under_bednets": {
         "name": "Proportion of children under five sleeping under insecticide-treated bednets",
-        "description": "Percentage of children under five years of age who sleep under an insecticide-treated bednet"
+        "description": "Percentage of children under five years of age who sleep under an insecticide-treated bednet. (DHS, 2008)"
     },
 
     "net_enrollment_rate_js": {
         "name": "Net enrollment rate for junior secondary education",
-        "description": "Number of official junior secondary school aged children (12-14 year olds in Nigeria) enrolled in junior secondary school expressed as a percent of the total children of the official school age population (12-14 year olds in Nigeria). "
+        "description": "Number of official junior secondary school aged children (12-14 year olds in Nigeria) enrolled in junior secondary school expressed as a percent of the total children of the official school age population (12-14 year olds in Nigeria). (HNLSS, 2008-2009)"
     },
     "gross_enrollment_rate_js": {
         "name": "Gross enrollment rate in junior secondary education",
-        "description": "Total enrolment in secondary school, regardless of age, expressed as a percentage of the eligible official secondary school-age population (12-17 years of age in Nigeria) in a given school year."
+        "description": "Total enrolment in secondary school, regardless of age, expressed as a percentage of the eligible official secondary school-age population (12-17 years of age in Nigeria) in a given school year. (HNLSS, 2008-2009)"
     },
     "nga_pct_hholds_with_access_to_improved_water_sources": {
         "name": "Proportion of households with an improved water source",
-        "description": "Ratio of the number of people in urban and rural areas, who use piped water, public tap, borehole or pump, protected well, protected spring or rainwater to the total population, expressed as a percentage. "
+        "description": "Ratio of the number of people in urban and rural areas, who use piped water, public tap, borehole or pump, protected well, protected spring or rainwater to the total population, expressed as a percentage. (HNLSS, 2008-2009)"
     },
     "nga_pct_hholds_with_access_to_improved_sanitation": {
         "name": "Proportion of households with improved sanitation",
-        "description": "Percentage of people in urban or rural areas, out of the total urban or rural population, who have access to access to improved latrines that are not public or shared by many households."
+        "description": "Percentage of people in urban or rural areas, out of the total urban or rural population, who have access to access to improved latrines that are not public or shared by many households. (HNLSS, 2008-2009)"
     },
     "proportion_lift_type_solar": {
         "name": "Variable not found: proportion_lift_type_solar", 
@@ -350,7 +350,7 @@
     }, 
     "prevalence_of_underweight_children_u5": {
         "name": "Percentage of children under five who are underweight (weight-for-age)", 
-        "description": "Percentage of children under five whose weight-for-age is below minus two standard deviations (-2 SD) from the median of the reference population (all children under 5)"
+        "description": "Percentage of children under five whose weight-for-age is below minus two standard deviations (-2 SD) from the median of the reference population (all children under 5)(DHS, 2008)"
     }, 
     "student_classroom_ratio_lga_juniorsec": {
         "name": "Pupil to classroom ratio (junior secondary)", 
@@ -430,7 +430,7 @@
     }, 
     "immunization_rate_dpt3": {
         "name": "DPT 3 immunization rate ", 
-        "description": "Percentage of children aged 12-23 months who received DPT3 immunization any time before the survey"
+        "description": "Percentage of children aged 12-23 months who received DPT3 immunization any time before the survey. (DHS, 2008)"
     }, 
     "distribution_type": {
         "name": "Distribution Type", 
@@ -482,7 +482,7 @@
     }, 
     "prevalence_of_stunting_children_u5": {
         "name": "Percentage of children under five with stunting (height-for-age) ", 
-        "description": "Percentage of children under five whose height-for-age is below minus two standard deviations (-2 SD) from the median of the reference population "
+        "description": "Percentage of children under five whose height-for-age is below minus two standard deviations (-2 SD) from the median of the reference population (DHS, 2008)"
     }, 
     "proportion_water_poor_water_quality": {
         "name": "Proportion of water sources that are not used because of bad water quality", 
@@ -538,7 +538,7 @@
     }, 
     "mortality_rate_infant": {
         "name": "Infant Mortality Rate (per 1,000 live births)", 
-        "description": "Proportion of children out of 1000 live births who would die before reach 1 years of age "
+        "description": "Proportion of children out of 1000 live births who would die before reach 1 years of age. (DHS, 2008)"
     }, 
     "teacher_guide_yn": {
         "name": "Teaching guidebook for every teacher for every subject", 
@@ -574,7 +574,7 @@
     }, 
     "proportion_of_children_u5_diarrhea_treated_with_ors_med": {
         "name": "Percentage of children under five years of age with diarrhea who received oral rehydration therapy ", 
-        "description": "Percentage of Children under 5 years old who had diarrhea in the last two weeks who were treated with ORS or RHS "
+        "description": "Percentage of Children under 5 years old who had diarrhea in the last two weeks who were treated with ORS or RHS. (DHS, 2008)"
     }, 
     "proportion_schools_missed_pay_juniorsec": {
         "name": "Percentage of junior secondary schools that have missed teacher payments in the past 12 months", 
@@ -830,7 +830,7 @@
     }, 
     "literacy_rate": {
         "name": "Literacy rate of 15-24 year olds (men and women)", 
-        "description": "Proportion of individuals aged 15 and over  who were unable to read a simple letter either in their local language or in English and were unable to write a letter in their local, language or in English from  the total population greater than 15 years . It could also be calculated as 100-%literacy rate"
+        "description": "Proportion of individuals aged 15 and over  who were unable to read a simple letter either in their local language or in English and were unable to write a letter in their local, language or in English from  the total population greater than 15 years . It could also be calculated as 100-%literacy rate. (School Census,2005)"
     }, 
     "proportion_schools_two_shifts": {
         "name": "Proportion of schools with double shift arrangement", 
@@ -1342,7 +1342,7 @@
     }, 
     "percentage_of_individuals_tested_for_hiv_ever": {
         "name": "Percentage of men and women ever tested for HIV", 
-        "description": "Percentage of women aged 15-49 years old who have ever been tested for HIV"
+        "description": "Percentage of women aged 15-49 years old who have ever been tested for HIV. (HNLSS, 2008-2009)"
     }, 
     "malaria_treatment_artemisinin": {
         "name": "ACT", 
@@ -1418,7 +1418,7 @@
     }, 
     "prevalence_of_wasting_children_u5": {
         "name": "Percentage of children under five with wasting (weight-for-height) ", 
-        "description": "Percentage of children whose weight-for-height is below minus two standard deviations (-2 SD) from the median of the reference population "
+        "description": "Percentage of children whose weight-for-height is below minus two standard deviations (-2 SD) from the median of the reference population (DHS, 2008)"
     }, 
     "emergency_transport_currently_functioning": {
         "name": "Access to Emergency Transport", 
@@ -1738,7 +1738,7 @@
     }, 
     "percentage_pregnant_women_tested_for_hiv_during_pregnancy": {
         "name": "Percentage of pregnant women tested for HIV ", 
-        "description": "Percentage of women between 15-49 years who were preganant in the last 5 years who got tested for HIV as a part of antenatal visit"
+        "description": "Percentage of women between 15-49 years who were preganant in the last 5 years who got tested for HIV as a part of antenatal visit. (DHS, 2008) "
     }, 
     "school_1kmplus_secondary_school": {
         "name": "Farther than 1km from nearest secondary school", 
