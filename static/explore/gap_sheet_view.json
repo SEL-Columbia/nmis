@@ -1,7 +1,13 @@
 {
     "health": {
         "overview": [
-            "num_total_water_points"
+            "pop_2006",
+            "total_facilities",
+            "total_hospitals",
+            "total_phcentres",
+            "total_phclinics",
+            "total_phclinics.1",
+            "total_sec_tertiary"
         ],
         "groups": [
             {
@@ -12,14 +18,37 @@
                     {
                         "title": "Delivery and Neonatal Care",
                         "indicators": [
-                            "child_health_measles_immun_calc",
-                            "equipment_sterilizer"
+                            "improved_water_supply",
+                            "any_power_available",
+                            "emerg_tran",
+                            "sba",
+                            "delivery_services_yn",
+                            "c_section_yn"
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "on_track": "> 95%",
+                "needs_attention": "50 - 95%",
+                "off_track": "< 50%",
+                "sections": [
                     {
                         "title": "Antenatal Care / Family Planning",
                         "indicators": [
-                            "family_planning_iud_calc"
+                            "antenatal_care",
+                            "family_planning_yn"
+                        ]
+                    },
+                    {
+                        "title": "Child Health / Malaria / General Primary Care",
+                        "indicators": [
+                            "child_health_measles_immun",
+                            "vaccines_fridge_freezer",
+                            "medication_anti_malarials",
+                            "phcentre",
+                            "phclinic",
+                            "dispensary"
                         ]
                     }
                 ]
@@ -28,7 +57,10 @@
     },
     "education": {
         "overview": [
-            "num_total_water_points"
+            "num_existing_schools",
+            "num_existing_classrooms",
+            "total_teachers",
+            "primary_js"
         ],
         "groups": [
             {
@@ -39,7 +71,28 @@
                     {
                         "title": "Infrastructure",
                         "indicators": [
-                            "improved_water_supply"
+                            "improved_functional_water",
+                            "improved_sanitation",
+                            "phcn_electricity"
+                        ]
+                    }
+                ]
+            },
+            {
+                "on_track": "> 95%",
+                "needs_attention": "50 - 95%",
+                "off_track": "< 50%",
+                "sections": [
+                    {
+                        "title": "Furniture",
+                        "indicators": [
+                            "num_classrm_w_chalkboard"
+                        ]
+                    },
+                    {
+                        "title": "Teaching Staff",
+                        "indicators": [
+                            "num_tchrs_with_nce"
                         ]
                     }
                 ]
