@@ -122,7 +122,7 @@
     }, 
     "girl_boy_ratio_secondary_school": {
         "name": "Ratio of girls to boys in senior secondary schools ", 
-        "description": ""
+        "description": "Ratio of the number of female students enrolled in senior secondary school to the number of male students enrolled in senior secondary school, regardless of ages. (School Census,2005)"
     }, 
     "num_overhead_tanks": {
         "name": "- Overhead tanks", 
@@ -154,7 +154,7 @@
     }, 
     "proportion_of_births_by_skilled_health_personnel": {
         "name": "Proportion of births attended by skilled health personnel ", 
-        "description": ""
+        "description": "Percentage of births managed by a health professional trained in managing deliveries and their complications (Traditional birth attendants are not considered skilled birth attendants) (HNLSS, 2008-2009)"
     }, 
     "percent_management_public": {
         "name": "Percentage that are managed by the government", 
@@ -458,7 +458,7 @@
     }, 
     "prevalence_of_hiv": {
         "name": "HIV Prevalence ", 
-        "description": ""
+        "description": "Percentage of pregnant women who tested positive for HIV at a site where all pregnant women are tested (HSS,2005)"
     }, 
     "num_nurses_and_midwives_per_1000": {
         "name": "num_nurses_and_midwives_per_1000(name=='')", 
@@ -658,7 +658,7 @@
     }, 
     "gender_parity_index_js": {
         "name": "Gender parity index (GPI) for junior secondary schools", 
-        "description": ""
+        "description": "The gross enrolment ratio for females divided by the gross enrolment ratio for males for junior secondary schools. (see description of gross enrollment ratio). (School Census,2005)"
     }, 
     "num_diesel": {
         "name": "Number", 
@@ -1062,7 +1062,7 @@
     }, 
     "percent_antenatal_care_four": {
         "name": "Percentage of women who attended at least four antenatal visits ", 
-        "description": ""
+        "description": "Percentage of pregnant women who have had at least four visits for antenatal care (care specifically related to pregnancy) (DHS, 2008)"
     }, 
     "proportion_adequate_staff": {
         "name": "Proportion of facilities that were adequately staffed in the past month", 
@@ -1242,7 +1242,7 @@
     }, 
     "girl_boy_ratio_primary": {
         "name": "Ratio of girls to boys in primary schools ", 
-        "description": ""
+        "description": "Ratio of the number of female students enrolled in primary school to the number of male students enrolled in primary school, regardless of ages. (School Census,2005)"
     }, 
     "num_taps": {
         "name": "- Taps", 
@@ -1566,7 +1566,7 @@
     }, 
     "gender_parity_index_primary": {
         "name": "Gender parity index (GPI) for primary schools", 
-        "description": ""
+        "description": "The gross enrolment ratio for females divided by the gross enrolment ratio for males for primary schools. (see description of gross enrollment ratio). (School Census,2005)"
     }, 
     "pop_2006": {
         "name": "Population (2006)", 
