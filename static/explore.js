@@ -452,11 +452,17 @@ TableView.render = function(lga, sector){
 TableView.show_table = function(sector, table_index, facilities){
     var aoColumns = [];
     var table = NMIS.table_view[sector][table_index];
+    var tableWidth = $('#content .container').width() - 400;
+    var colWidth = Math.floor(tableWidth / (table.indicators.length - 2));
 
-    _.each(table.indicators, function(indicator){
-        aoColumns.push({
-            sTitle: indicator_name(indicator)
-        });
+    _.each(table.indicators, function(indicator, i){
+        var aoColumn = {sTitle: indicator_name(indicator)};
+        if (i < 2){
+            aoColumn.sWidth = '195px';
+        } else {
+            aoColumn.sWidth = colWidth - 6 + 'px';
+        }
+        aoColumns.push(aoColumn);
     });
     
     var aaData = [];
@@ -483,6 +489,7 @@ TableView.show_table = function(sector, table_index, facilities){
             aoColumns: aoColumns,
             bPaginate: false,
             bDestroy: true,
+            bAutoWidth: false,
             bFilter: false
         })
         .width('100%');
