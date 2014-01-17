@@ -347,8 +347,24 @@ table .value {
 .sorting_asc_disabled { background: url('/static/lib/datatables/images/sort_asc_disabled.png') no-repeat center right; }
 .sorting_desc_disabled { background: url('/static/lib/datatables/images/sort_desc_disabled.png') no-repeat center right; }
 
+.sorting,
+.sorting_asc,
+.sorting_desc {
+	cursor: pointer;
+}
+
+.sorting_asc,
+.sorting_desc {
+	background-color: rgb(225, 238, 245);
+}
+.sorting_1,
+.sorting_2,
+.sorting_3 {
+	background-color: #f5f5f5;
+}
+
 .dataTables_info {
-    font-size: 13px;
+    font-size: 11px;
 }
 
 table thead th:active,
@@ -577,13 +593,16 @@ table thead td:active {
     overflow-x: scroll;
 }
 #facilities_data_table {
-    font-size: 13px;
+    font-size: 14px;
+    text-align: center;
 }
 #facilities_data_table th,
 #facilities_data_table td {
 	overflow: hidden;
 	padding: 5px;
+	text-align: center;
 }
+
 
 
 /* Explore.html, Gap Sheet View
