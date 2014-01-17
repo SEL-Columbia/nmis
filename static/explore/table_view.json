@@ -11,7 +11,6 @@
     "water": [
         {
             "indicators": [
-                "water_source_type", 
                 "community", 
                 "ward", 
                 "is_improved", 
