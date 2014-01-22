@@ -59,6 +59,7 @@ def explore():
     sorted_lgas.sort(key=lambda x: x[0])
 
     return flask.render_template('explore.html',
+        show_gap_sheets=flask.request.cookies.get('gap_sheets'),
         baseline=flask.request.args.get('baseline', None),
         data_folder=flask.request.args.get('data', 'data'),
         zones=json.dumps(sorted_zones),
@@ -73,6 +74,13 @@ def explore():
 @app.route('/mdgs')
 def mdgs():
     return flask.render_template('mdgs.html', load_file=load_file)
+
+
+@app.route('/enable_gap_sheets')
+def enable_gap_sheets():
+    response = flask.make_response(flask.redirect('/explore'))
+    response.set_cookie('gap_sheets', '1')
+    return response
 
 
 @app.errorhandler(404)

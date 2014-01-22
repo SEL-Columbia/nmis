@@ -143,14 +143,16 @@
         <div class="lga_profile">
             <div class="map"></div>
             <table>
-                <tr>
-                    <td colspan="2">
-                        <a href="#<%= lga.unique_lga %>/gap_sheet_education"
-                            target="_blank">
-                            See Gap Sheets
-                        </a>
-                    </td>
-                </tr>
+                {% if show_gap_sheets %}
+                    <tr>
+                        <td colspan="2">
+                            <a href="#<%= lga.unique_lga %>/gap_sheet_education"
+                                target="_blank">
+                                See Gap Sheets
+                            </a>
+                        </td>
+                    </tr>
+                {% endif %}
                 <% _.each(lga_overview.overview, function(indicator){ %>
                     <tr>
                         <td class="name">
