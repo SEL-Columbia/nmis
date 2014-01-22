@@ -3,6 +3,18 @@
         "name": "Sector",
         "description": "" 
     },
+	"delivery_services": {
+        "name": "Delivery Services",
+        "description": "" 
+    },
+	"num_chews_fulltime": {
+        "name": "CHEWS (full-time)",
+        "description": "" 
+    },
+	"c_section_yn": {
+        "name": "C-sections",
+        "description": "" 
+    },
     "net_enrollment_rate_pry": {
         "name": "Net enrollment rate for primary education",
         "description": "Number of official primary school aged children (6-11 year olds in Nigeria) enrolled in primary school expressed as a percent of the total children of the official school age population (6-11 year olds in Nigeria). (HNLSS, 2008-2009)"
