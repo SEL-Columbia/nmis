@@ -33,44 +33,59 @@
             <h1>
                 <%= lga.lga %>, <%= lga.state %>
             </h1>
-            <div class="nav_views">
-                <a <% if (active_view === 'lga'){ %>class="active"<% } %>
-                    href="#<%= lga.unique_lga %>/lga_<%= sector %>">
-                    <span class="glyphicon glyphicon-home"></span>
-                    Overview
-                </a>
-                <a <% if (active_view === 'map'){ %>class="active"<% } %>
-                    href="#<%= lga.unique_lga %>/map_<%= sector %>">
-                    <span class="glyphicon glyphicon-map-marker"></span>
-                    Map
-                </a>
-                <a <% if (active_view === 'table'){ %>class="active"<% } %>
-                    href="#<%= lga.unique_lga %>/table_<%= sector %>">
-                    <span class="glyphicon glyphicon-list"></span>
-                    Table
-                </a>
-            </div>
-            <div class="nav_sectors">
-                <a <% if (sector === 'overview'){ %>class="active"<% } %>
-                    href="#<%= lga.unique_lga %>/<%= active_view %>_overview">
-                    All Sectors
-                </a>
-                |
-                <a <% if (sector === 'health'){ %>class="active"<% } %>
-                    href="#<%= lga.unique_lga %>/<%= active_view %>_health">
-                    Health
-                </a>
-                |
-                <a <% if (sector === 'education'){ %>class="active"<% } %>
-                    href="#<%= lga.unique_lga %>/<%= active_view %>_education">
-                    Education
-                </a>
-                |
-                <a <% if (sector === 'water'){ %>class="active"<% } %>
-                    href="#<%= lga.unique_lga %>/<%= active_view %>_water">
-                    Water
-                </a>
-            </div>
+
+            <% if (active_view === 'gap_sheet'){ %>
+                <div class="nav_sectors">
+                    <a <% if (sector === 'education'){ %>class="active"<% } %>
+                        href="#<%= lga.unique_lga %>/<%= active_view %>_education">
+                        Education Gap Sheet
+                    </a>
+                    |
+                    <a <% if (sector === 'health'){ %>class="active"<% } %>
+                        href="#<%= lga.unique_lga %>/<%= active_view %>_health">
+                        Health Gap Sheet
+                    </a>
+                </div>
+            <% } else { %>
+                <div class="nav_views">
+                    <a <% if (active_view === 'lga'){ %>class="active"<% } %>
+                        href="#<%= lga.unique_lga %>/lga_<%= sector %>">
+                        <span class="glyphicon glyphicon-home"></span>
+                        Overview
+                    </a>
+                    <a <% if (active_view === 'map'){ %>class="active"<% } %>
+                        href="#<%= lga.unique_lga %>/map_<%= sector %>">
+                        <span class="glyphicon glyphicon-map-marker"></span>
+                        Map
+                    </a>
+                    <a <% if (active_view === 'table'){ %>class="active"<% } %>
+                        href="#<%= lga.unique_lga %>/table_<%= sector %>">
+                        <span class="glyphicon glyphicon-list"></span>
+                        Table
+                    </a>
+                </div>
+                <div class="nav_sectors">
+                    <a <% if (sector === 'overview'){ %>class="active"<% } %>
+                        href="#<%= lga.unique_lga %>/<%= active_view %>_overview">
+                        All Sectors
+                    </a>
+                    |
+                    <a <% if (sector === 'health'){ %>class="active"<% } %>
+                        href="#<%= lga.unique_lga %>/<%= active_view %>_health">
+                        Health
+                    </a>
+                    |
+                    <a <% if (sector === 'education'){ %>class="active"<% } %>
+                        href="#<%= lga.unique_lga %>/<%= active_view %>_education">
+                        Education
+                    </a>
+                    |
+                    <a <% if (sector === 'water'){ %>class="active"<% } %>
+                        href="#<%= lga.unique_lga %>/<%= active_view %>_water">
+                        Water
+                    </a>
+                </div>
+            <% } %>
         </div>
     </script>
 
@@ -128,6 +143,14 @@
         <div class="lga_profile">
             <div class="map"></div>
             <table>
+                <tr>
+                    <td colspan="2">
+                        <a href="#<%= lga.unique_lga %>/gap_sheet_education"
+                            target="_blank">
+                            See Gap Sheets
+                        </a>
+                    </td>
+                </tr>
                 <% _.each(lga_overview.overview, function(indicator){ %>
                     <tr>
                         <td class="name">

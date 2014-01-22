@@ -499,6 +499,7 @@ TableView.show_table = function(sector, table_index, facilities){
 
 var GapSheetView = {};
 GapSheetView.render = function(lga, sector){
+    render_header(lga, 'gap_sheet', sector);
     render('#gap_sheet_template', {
         lga: lga,
         sector: sector,
