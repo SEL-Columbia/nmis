@@ -16,18 +16,19 @@
                 // Initialize Map
                 var map_div = $('#mdg_map')[0];
                 var mapZoom = 6;
-                var lat_lng = new L.LatLng(9.16718, 7.53662);
-                var sw = new L.LatLng(4.039617826768437, 0.17578125);
+                //var lat_lng = new L.LatLng(9.16718, 7.53662);
+                var sw = new L.LatLng(4.039617826768437, 1.47216796875);
                 var ne = new L.LatLng(14.221788628397572, 14.897460937499998);
                 var country_bounds = new L.LatLngBounds(sw, ne);
                 var map = new L.Map(map_div,{
                         maxBounds: country_bounds
-                    }).setView(lat_lng, mapZoom);
+                    }).fitBounds(country_bounds,{maxZoom:11});
                 var baseLayer = createLayer('nigeria_base', 6, 9);
                 baseLayer.addTo(map);
                 map_div._map = map;
                 map_div._mapLayers = {};
                 map_div._currentLayer = {};
+                window.map = map;
 
 
                 // Initialize Select box
