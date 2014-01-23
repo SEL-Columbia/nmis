@@ -453,7 +453,7 @@ table thead td:active {
     margin-bottom: 15px;
 }
 
-.lga_profile .map {
+.lga_profile .map_overview {
     width: 580px;
     float: right;
     border: 1px solid #ddd;

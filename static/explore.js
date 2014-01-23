@@ -158,7 +158,7 @@ LGAView.render = function(lga, sector){
 };
 
 LGAView.overview_map = function(lga){
-    var map_div = $('.map')[0];
+    var map_div = $('.map_overview')[0];
     var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
     var map_zoom = 9;
     var summary_map = L.map(map_div, {scrollWheelZoom: false})
