@@ -7,6 +7,19 @@
         "name": "Delivery Services",
         "description": "" 
     },
+    "family_planning_yn": {
+        "name": "Family Planning",
+        "description": "" 
+    },
+     "antenatal_care_yn": {
+        "name": "Antenatal Care",
+        "description": "" 
+    },
+     "num_midwives_fulltime": {
+        "name": "Midwives and Nurse-Midwives (full-time)",
+        "description": "" 
+    },
+
 	"num_chews_fulltime": {
         "name": "CHEWS (full-time)",
         "description": "" 
