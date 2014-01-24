@@ -105,12 +105,16 @@
     </script>
 
     <script id="index_template" type="text/html">
-        <h1 class="explore_title">Explore an LGA from the regions below</h1>
-        {% if baseline %}
-            <a class="explore_info" href="/explore">or view Current Data</a>
-        {% else %}
-            <a class="explore_info" href="/explore?baseline=1">or view 2012 Baseline Data</a>
-        {% endif %}
+        <% if (active_view === 'gap_sheet'){ %>
+            <h1 class="explore_title">Explore a Gap Sheet from the regions below</h1>
+        <% } else { %>
+            <h1 class="explore_title">Explore an LGA from the regions below</h1>
+            {% if baseline %}
+                <a class="explore_info" href="/explore">or view Current Data</a>
+            {% else %}
+                <a class="explore_info" href="/explore?baseline=1">or view 2012 Baseline Data</a>
+            {% endif %}
+        <% } %>
 
         <div id="zone_nav">
             <% _.each(zones, function(zone, i){ %>
@@ -125,7 +129,11 @@
                             <ul class="lgas">
                                 <% _.each(state[1], function(lga){ %>
                                     <li>
-                                        <a href="#<%= lga[1] %>/lga_overview">
+                                        <a  <% if (active_view === 'gap_sheet'){ %>
+                                                href="#<%= lga[1] %>/gap_sheet_education">
+                                            <% } else { %>
+                                                href="#<%= lga[1] %>/lga_overview">
+                                            <% } %>
                                             <%= lga[0] %>
                                         </a>
                                     </li>
@@ -143,16 +151,6 @@
         <div class="lga_profile">
             <div class="map_overview"></div>
             <table>
-                {% if show_gap_sheets %}
-                    <tr>
-                        <td colspan="2">
-                            <a href="#<%= lga.unique_lga %>/gap_sheet_education"
-                                target="_blank">
-                                See Gap Sheets
-                            </a>
-                        </td>
-                    </tr>
-                {% endif %}
                 <% _.each(lga_overview.overview, function(indicator){ %>
                     <tr>
                         <td class="name">

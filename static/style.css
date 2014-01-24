@@ -400,7 +400,7 @@ table thead td:active {
 	display: inline-block;
 	color: #666;
 	font-style: italic;
-	margin: 5px 0 40px;
+	margin-top: 5px;
 }
 .explore_info:hover {
 	color: #444;
@@ -408,6 +408,9 @@ table thead td:active {
 }
 
 
+#zone_nav {
+    margin-top: 40px;
+}
 #zone_nav .zone {
     float: left;
     width: 15%;

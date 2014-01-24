@@ -4,6 +4,7 @@ $(function(){
     new Backbone.Router({
         routes: {
             '': IndexView,
+            'gap_sheets': GapSheetIndexView,
             ':unique_lga/lga_overview': view(LGAView, 'overview'),
             ':unique_lga/lga_health': view(LGAView, 'health'),              
             ':unique_lga/lga_education': view(LGAView, 'education'),
@@ -125,8 +126,29 @@ function indicator_name(slug){
 // Views
 // ============
 function IndexView(){
-    render('#index_template', {zones: NMIS.zones});
+    render('#index_template', {
+        zones: NMIS.zones,
+        active_view: null
+    });
 
+    $('#explore_header, .map_view').hide();
+    $('#content .content').addClass('index');
+
+    $('#zone_nav .state_title').click(function(){
+        $(this).next('.lgas').toggle();
+        return false;
+    });
+};
+
+
+function GapSheetIndexView(){
+    render('#index_template', {
+        zones: NMIS.zones,
+        active_view: 'gap_sheet'
+    });
+
+    $('#header .global_nav').hide()
+        .filter('.gap_sheet_nav').show();
     $('#explore_header, .map_view').hide();
     $('#content .content').addClass('index');
 
@@ -499,6 +521,8 @@ TableView.show_table = function(sector, table_index, facilities){
 
 var GapSheetView = {};
 GapSheetView.render = function(lga, sector){
+    $('#header .global_nav').hide()
+        .filter('.gap_sheet_nav').show();
     render_header(lga, 'gap_sheet', sector);
     render('#gap_sheet_template', {
         lga: lga,
