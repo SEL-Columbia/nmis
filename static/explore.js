@@ -147,9 +147,9 @@ function GapSheetIndexView(){
         active_view: 'gap_sheet'
     });
 
-    $('#header .global_nav').hide()
-        .filter('.gap_sheet_nav').show();
+    $('#header .global_nav, #lga_search').hide()
     $('#explore_header, .map_view').hide();
+    $('.gap_sheet_nav').show();
     $('#content .content').addClass('index');
 
     $('#zone_nav .state_title').click(function(){
@@ -521,8 +521,9 @@ TableView.show_table = function(sector, table_index, facilities){
 
 var GapSheetView = {};
 GapSheetView.render = function(lga, sector){
-    $('#header .global_nav').hide()
-        .filter('.gap_sheet_nav').show();
+    $('#header .global_nav, #lga_search').hide();
+    $('.gap_sheet_nav').show();
+
     render_header(lga, 'gap_sheet', sector);
     render('#gap_sheet_template', {
         lga: lga,
