@@ -3,3 +3,5 @@
 *.swp
 static/lgas
 static/nmis_data.zip
+
+protected_data/
