@@ -1,17 +1,5 @@
 *.pyc
 .DS_Store
-db.sqlite3
-error.log
-static/CACHE/*
-
-#for a local virtualenv (as done in mangrove repo)
-ve/
-
-data
-protected_data
-local_settings.py
-.~lock.*
 *.swp
-
 static/lgas
 static/nmis_data.zip

@@ -310,7 +310,7 @@ MapView.pie_chart_selector = function(lga, sector){
     var self = this;
     var chart_indicators = this.chart_indicators(lga.facilities, sector);
     
-    if (chart_indicators.length > 1){
+    if (chart_indicators.length) {
         var template = $('#pie_chart_selector_template').html();
         var html = _.template(template, {
             lga: lga,
@@ -448,7 +448,6 @@ MapView.map_legend = function(lga, sector, indicator){
     if (unknowns)
         html += '<span class="unknowns">' + unknow_icon + unknowns + ' Unknown' + '</span>';
     html += '</p>';
-    console.log(html);
     $('.map_legend .info').html(html);
 };
 
