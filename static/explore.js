@@ -97,6 +97,7 @@ function render(template_id, context){
     context.NMIS = NMIS;
     context.format_value = format_value;
     context.indicator_name = indicator_name;
+    context.indicator_description = indicator_description;
     var html = _.template(template, context);
     $('#content .content').html(html);
 }
@@ -121,6 +122,11 @@ function indicator_name(slug){
     return indicator ? indicator.name : slug;
 }
 
+
+function indicator_description(slug){
+    var indicator = NMIS.indicators[slug];
+    return indicator ? indicator.description : slug;
+}
 
 
 // Views
