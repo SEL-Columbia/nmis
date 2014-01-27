@@ -597,13 +597,11 @@ table thead td:active {
 }
 #facilities_data_table {
     font-size: 14px;
-    text-align: center;
 }
 #facilities_data_table th,
 #facilities_data_table td {
 	overflow: hidden;
 	padding: 5px;
-	text-align: center;
 }
 
 
