@@ -1,4 +1,5 @@
-current_dir=$(pwd)
+#!/bin/bash
+BASEDIR=$(dirname $0)
 check_available () {
     echo -n "checking if $1 exists..."
     if [ $(which $1) = "" ]; then
@@ -24,11 +25,14 @@ check_running () {
 check_available virtualenv
 # check if nmis virtualenv exists
 echo -n "check if .nmis_virtualenv folder exists..."
-virtualenv_folder=$(pwd)/../.nmis_virtualenv
+virtualenv_folder=$BASEDIR/../.nmis_virtualenv
 if [ ! -d $virtualenv_folder ]; then
     echo "no."
     echo -n "Creating nmis virtualenv directory..."
     virtualenv $virtualenv_folder
+    source $virtualenv_folder/bin/activate
+    pip install flask
+    deactivate
     echo "done."
 else
     echo "yes."
@@ -43,7 +47,7 @@ sites_enabled=/etc/nginx/sites-enabled/nmis
 echo "check if nginx config is set up"
 if [ ! -f $sites_available ]; then
     echo -n "copying nmis.nginx config to nginx folder..."
-    sudo cp $current_dir/nmis.nginx $sites_available
+    sudo cp $BASEDIR/nmis.nginx $sites_available
     echo "done."
 fi
 if [ ! -f $sites_enabled ]; then
@@ -58,7 +62,7 @@ check_available uwsgi
 
 if ! check_running uwsgi; then
     echo -n "starting uwsgi..."
-    uwsgi --ini $current_dir/uwsgi.ini
+    uwsgi --ini $BASEDIR/uwsgi.ini
     echo "done."
 fi
 if ! check_running nginx; then
