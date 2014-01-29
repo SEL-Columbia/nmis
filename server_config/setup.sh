@@ -20,7 +20,44 @@ check_running () {
         echo "no."
         return 1
     fi
+
 }
+
+
+write_uwsgi_ini ()
+{
+#uwsgi.ini appears to only work with absolute directory 
+#and file paths. Relative paths would not do.
+
+script_uri=$(readlink -f $0)
+script_dir=`dirname $script_uri`
+nmis_dir="$(dirname "$script_dir")"
+file_name="uwsgi.ini"
+file_uri=$script_dir/$file_name
+
+echo $file_uri
+if [ -f $file_uri ]; then
+echo -n "Overwriting $file_name..."
+else
+echo -n "Creating $file_name..."
+fi
+
+#writing to uwsgi.ini
+echo "[uwsgi]" > $file_uri
+echo "socket=/tmp/uwsgi.sock" >> $file_uri
+echo "plugin=python" >> $file_uri
+echo "processes=1" >> $file_uri
+echo  "pidfile=uwsgi.pid" >> $file_uri
+echo  "chdir=$nmis_dir" >> $file_uri
+echo  "virtualenv=$nmis_dir/.nmis_virtualenv" >> $file_uri
+echo  "module=main" >> $file_uri
+echo  "daemonize = $script_dir/uwsgi.log" >> $file_uri
+echo  "callable=app" >> $file_uri
+
+echo   "done"
+}
+
+
 # check if virtualenv programm exists
 check_available virtualenv
 # check if nmis virtualenv exists
@@ -56,6 +93,9 @@ if [ ! -f $sites_enabled ]; then
     echo "done."
 fi
 echo "nginx is set up"
+
+##Write or overwrite the uwsgi.ini file
+write_uwsgi_ini
 
 ## check if uwsgi is available
 check_available uwsgi
