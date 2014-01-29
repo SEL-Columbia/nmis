@@ -35,7 +35,7 @@ nmis_dir="$(dirname "$script_dir")"
 file_name="uwsgi.ini"
 file_uri=$script_dir/$file_name
 
-echo $file_uri
+
 if [ -f $file_uri ]; then
 echo -n "Overwriting $file_name..."
 else
