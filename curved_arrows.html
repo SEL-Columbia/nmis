@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <canvas id="canvas" width="1000" height="1000"></canvas>
+    <script>
+        curvedArrow(400, 400, 200, 10, 200, 200);
+
+        function curvedArrow(sx, sy, cpx, cpy, ex, ey){
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext('2d');
+                
+            ctx.beginPath();
+            ctx.moveTo(sx, sy);
+            ctx.quadraticCurveTo(cpx, cpy, ex, ey);
+            ctx.stroke();
+            
+            // Draw arrowhead
+            var angle = Math.atan2(ey-cpy, ex-cpx);
+            var size = 15;
+
+            ctx.translate(ex, ey);
+            
+            // Right side
+            ctx.rotate(angle + 1);
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, size);
+            ctx.stroke();
+            
+            // Left side
+            ctx.rotate(-2);
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, -size);
+            ctx.stroke();
+
+            // Restore context
+            ctx.rotate(1 - angle);
+            ctx.translate(-ex, -ey);
+        }
+    </script>
+</body>
+
+</html>
