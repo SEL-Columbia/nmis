@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        body {
+            background: url(https://f.cloud.github.com/assets/4739887/2041234/0fcf02e2-89c3-11e3-8707-a2d570e8e1ea.png);
+        }
+
+        .tutorial_modal {
+            font-family: 'helvetica neue';
+
+            position: relative;
+            color: white;
+            width: 500px;
+            height: 280px;
+            margin: 355px 345px;
+            margin-top: 650px;
+            background: rgba(0,0,0,0.75);
+            border-radius: 6px;
+        }
+
+        .tutorial_modal .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .tutorial_modal .body {
+            padding: 35px 68px 53px;
+            color: white;
+            font-size: 19px;
+            font-weight: 200;
+            text-align: justify;
+            line-height: 1.25;
+            letter-spacing: 0.06rem;
+        }
+
+        .tutorial_modal h1 {
+            color: rgb(245,238,49);
+            font-weight: 400;
+            font-size: 21px;
+            letter-spacing: 0.015rem;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .tutorial_nav {
+            position: relative;
+            font-size: 20px;
+            font-weight: 200;
+            padding: 10px 15px;
+            border-top: 1px solid #222;
+            clear: left;
+            letter-spacing: 0.08rem;
+        }
+        .tutorial_nav .back {
+            float: left;
+        }
+        .tutorial_nav .next {
+            float: right;
+        }
+        .tutorial_nav .disabled {
+            color: #888;
+        }
+        .tutorial_nav .progress {
+            text-align: center;
+            width: 300px;
+            position: absolute;
+            left: 100px;
+        }
+        .tutorial_nav .dot {
+            display: inline-block;
+            background: white;
+            width: 11px;
+            height: 11px;
+            border-radius: 100px;
+            margin: 6px 3px;
+        }
+        .tutorial_nav .dot.active {
+            background: #888;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="tutorial_modal">
+        <div class="close">x</div>
+        <div class="body">
+            <h1>Choose an LGA to get started</h1>
+            
+            LGAs are organized by zone. Click on a State for a list of LGAs within that State or search for an LGA in the dropdown menu above.
+        </div>
+        <div class="tutorial_nav">
+            <div class="back disabled">Back</div>
+            <div class="progress">
+                <div class="dot"></div>
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <div class="next">Next</div>
+        </div>
+    </div>
+
+    <canvas id="canvas" width="1000" height="1000"></canvas>
+    <script>
+        curvedArrow(400, 400, 200, 10, 200, 200);
+
+        function curvedArrow(sx, sy, cpx, cpy, ex, ey){
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext('2d');
+                
+            ctx.beginPath();
+            ctx.moveTo(sx, sy);
+            ctx.quadraticCurveTo(cpx, cpy, ex, ey);
+            ctx.stroke();
+            
+            // Draw arrowhead
+            var angle = Math.atan2(ey-cpy, ex-cpx);
+            var size = 15;
+
+            ctx.translate(ex, ey);
+            
+            // Right side
+            ctx.rotate(angle + 1);
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, size);
+            ctx.stroke();
+            
+            // Left side
+            ctx.rotate(-2);
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, -size);
+            ctx.stroke();
+
+            // Restore context
+            ctx.rotate(1 - angle);
+            ctx.translate(-ex, -ey);
+        }
+    </script>
+</body>
+
+</html>
