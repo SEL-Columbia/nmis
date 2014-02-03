@@ -112,17 +112,19 @@
             var canvas = document.getElementById('canvas');
             var ctx = canvas.getContext('2d');
             
+            // Styling
             ctx.strokeStyle = 'rgb(245,238,49)';
             ctx.lineWidth = 10;
             ctx.lineJoin = 'round';
             ctx.lineCap = 'round';
 
+            // Arrow body
             ctx.beginPath();
             ctx.moveTo(sx, sy);
             ctx.quadraticCurveTo(cpx, cpy, ex, ey);
             ctx.stroke();
             
-            // Draw arrowhead
+            // Arrow head
             var angle = Math.atan2(ey-cpy, ex-cpx);
             var size = 30;
 
