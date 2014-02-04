@@ -1,5 +1,6 @@
 import json
 import os
+import subprocess
 
 import flask
 
@@ -20,6 +21,13 @@ def load_file(file_name):
     with open(path, 'r') as f:
         data = f.read()
     return data
+
+
+def call_script(script_name):
+    cwd = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(cwd, 'server_config')
+    full_path = os.path.join(path, script_name)
+    subprocess.call([full_path], shell=True)
 
 
 @app.route('/')
@@ -79,6 +87,17 @@ def mdgs():
 def not_found(error):
     return flask.render_template('error.html'), 404
 
+@app.route('/git_update', methods=['POST'])
+def git_update():
+    try:
+        payload = flask.request.values.getlist('payload')[0]
+        ref = json.loads(payload)['ref']
+        if ref == 'refs/heads/master':
+            call_script('gitpull.sh')
+            call_script('restart.sh')
+        return "git update script executed", 200
+    except:
+        return "wrong post request", 404
 
 if __name__ == '__main__':
     app.run()
