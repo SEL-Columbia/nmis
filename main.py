@@ -26,7 +26,7 @@ def load_file(file_name):
 def call_script(script_name):
     cwd = os.path.dirname(os.path.abspath(__file__))
     path = os.path.join(cwd, 'server_config')
-    subprocess.call("sh", os.path.join(path, script_name))
+    subprocess.call(["sh", os.path.join(path, script_name)], shell=True)
 
 
 @app.route('/')
@@ -88,14 +88,15 @@ def not_found(error):
 
 @app.route('/git_update', methods=['POST'])
 def git_update():
+    print "entering git_update"
     try:
         payload = flask.request.values.getlist('payload')[0]
         ref = json.loads(payload)['ref']
         if ref == 'refs/heads/master':
             call_script('gitpull.sh')
             call_script('restart.sh')
-
-        return '1337'
+            print "finished executing restart script"
+        return 200
     except:
         return 404
 
