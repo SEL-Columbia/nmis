@@ -1,5 +1,6 @@
 import json
 import os
+import subprocess
 
 import flask
 
@@ -20,6 +21,12 @@ def load_file(file_name):
     with open(path, 'r') as f:
         data = f.read()
     return data
+
+
+def call_script(script_name):
+    cwd = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(cwd, 'server_config')
+    subprocess.call("sh", os.path.join(path, script_name))
 
 
 @app.route('/')
@@ -85,6 +92,8 @@ def git_update():
         payload = flask.request.values.getlist('payload')[0]
         ref = json.loads(payload)['ref']
         if ref == 'refs/heads/master':
+            call_script('gitpull.sh')
+            call_script('restart.sh')
 
         return '1337'
     except:
