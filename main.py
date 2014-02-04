@@ -79,6 +79,16 @@ def mdgs():
 def not_found(error):
     return flask.render_template('error.html'), 404
 
+@app.route('/git_update', methods=['POST'])
+def git_update():
+    try:
+        payload = flask.request.values.getlist('payload')[0]
+        ref = json.loads(payload)['ref']
+        if ref == 'refs/heads/master':
+
+        return '1337'
+    except:
+        return 404
 
 if __name__ == '__main__':
     app.run()
