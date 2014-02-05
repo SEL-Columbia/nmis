@@ -3,7 +3,9 @@
 <head>
     <style type="text/css">
         body {
+            /*
             background: url(https://f.cloud.github.com/assets/4739887/2041234/0fcf02e2-89c3-11e3-8707-a2d570e8e1ea.png);
+            */
         }
 
         .tutorial_modal {
@@ -85,7 +87,7 @@
 
 <body>
     <div class="tutorial_modal">
-        <div class="close">x</div>
+        <span class="glyphicon glyphicon-remove-circle"></span>
         <div class="body">
             <h1>Choose an LGA to get started</h1>
             
@@ -104,12 +106,60 @@
         </div>
     </div>
 
-    <canvas id="canvas" width="1000" height="1000"></canvas>
     <script>
-        curvedArrow(400, 400, 200, 10, 200, 200);
 
-        function curvedArrow(sx, sy, cpx, cpy, ex, ey){
-            var canvas = document.getElementById('canvas');
+        function quadraticCurveMinMax(p0, p1, p2){
+            var min = p0;
+            var max = p2;
+            var t_step = 0.0001;
+            for (var t=t_step; t <= 1; t += t_step){
+                var f = (1 - t) * (1 - t) * p0 + 2 * (1 - t) * t * p1 + (t * t * p2);
+                if (f < min) min = f;
+                if (f > max) max = f;
+            }
+            return [Math.round(min), Math.round(max)];
+        }
+
+
+        var p0x = 400;
+        var p0y = 400;
+        var p1x = 200;
+        var p1y = -50;
+        var p2x = 200;
+        var p2y = 200;
+
+
+        curvedArrow(400, 400, 200, -10, 200, 200);
+
+
+        function curvedArrow(p0x, p0y, p1x, p1y, p2x, p2y){
+            var size = 30;
+            var canvas = document.createElement('canvas');
+            document.body.appendChild(canvas);
+            canvas.style.border = '1px solid red';
+            var x_min_max = quadraticCurveMinMax(p0x, p1x, p2x);
+            var y_min_max = quadraticCurveMinMax(p0y, p1y, p2y);
+            var x_min = x_min_max[0] - size;
+            var x_max = x_min_max[1] + size;
+            var y_min = y_min_max[0] - size;
+            var y_max = y_min_max[1] + size;
+            console.log(x_min_max);
+            console.log(y_min_max);
+
+
+            canvas.style.position = 'absolute';
+            canvas.style.top = x_min + 'px';
+            canvas.style.left = y_min + 'px';
+            canvas.width = x_max - x_min;
+            canvas.height = y_max - y_min;
+
+            p0x -= x_min;
+            p0y -= y_min;
+            p1x -= x_min;
+            p1y -= y_min;
+            p2x -= x_min;
+            p2y -= y_min; 
+
             var ctx = canvas.getContext('2d');
             
             // Styling
@@ -120,15 +170,13 @@
 
             // Arrow body
             ctx.beginPath();
-            ctx.moveTo(sx, sy);
-            ctx.quadraticCurveTo(cpx, cpy, ex, ey);
+            ctx.moveTo(p0x, p0y);
+            ctx.quadraticCurveTo(p1x, p1y, p2x, p2y);
             ctx.stroke();
             
             // Arrow head
-            var angle = Math.atan2(ey-cpy, ex-cpx);
-            var size = 30;
-
-            ctx.translate(ex, ey);
+            var angle = Math.atan2(p2y - p1y, p2x - p1x);
+            ctx.translate(p2x, p2y);
             
             // Right side
             ctx.rotate(angle + 1);
@@ -144,7 +192,7 @@
 
             // Restore context
             ctx.rotate(1 - angle);
-            ctx.translate(-ex, -ey);
+            ctx.translate(-p2x, -p2y);
         }
     </script>
 </body>
