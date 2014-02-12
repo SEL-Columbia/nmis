@@ -1102,7 +1102,7 @@
         "description": ""
     }, 
     "at_least_three_skilled_birth_attendants": {
-        "name": "Skilled birth attendant 3", 
+        "name": "Three or more skilled birth attendants", 
         "description": "Facility has at least three skilled birth attendants (doctor, midwife or nurse-midwife) on staff."
     }, 
     "percent_antenatal_care_four": {
@@ -1506,7 +1506,7 @@
         "description": "School had power for at least three weeks in the month before the data was collected. Access to power is defined as having power for at least three weeks in the month before the data was collected. This indicator measures how consistent and reliable the school's power source is.   If there was always at least one working power source in the month before data collection and if the school had power for 5 or more hours a day then the school is considered as having reliable and consistent power. "
     }, 
     "at_least_four_skilled_birth_attendants": {
-        "name": "Skilled birth attendant 4", 
+        "name": "Four or more skilled birth attendants", 
         "description": "Facility has at least four skilled birth attendants (doctor, midwife or nurse-midwife) on staff."
     }, 
     "potable_water": {
@@ -1682,7 +1682,7 @@
         "description": ""
     }, 
     "at_least_two_skilled_birth_attendants": {
-        "name": "Skilled birth attendant 2", 
+        "name": "Two or more skilled birth attendants", 
         "description": "Facility has at least two skilled birth attendants (doctor, midwife or nurse-midwife) on staff."
     }, 
     "proportion_schools_improved_water_supply_juniorsec": {
@@ -1718,7 +1718,7 @@
         "description": ""
     }, 
     "skilled_birth_attendant": {
-        "name": "Skilled birth attendant 1", 
+        "name": "Skilled birth attendant", 
         "description": "Facility has at least one skilled birth attendant (doctor, midwife or nurse-midwife) on staff."
     }, 
     "tb_treatment_success_rate": {
