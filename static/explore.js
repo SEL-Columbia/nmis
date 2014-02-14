@@ -13,10 +13,10 @@ $(function(){
             ':unique_lga/map_health': view(MapView, 'health'),
             ':unique_lga/map_education': view(MapView, 'education'),  
             ':unique_lga/map_water': view(MapView, 'water'),  
-            ':unique_lga/table_overview': view(TableView, 'overview'),
-            ':unique_lga/table_health': view(TableView, 'health'),
-            ':unique_lga/table_education': view(TableView, 'education'),
-            ':unique_lga/table_water': view(TableView, 'water'),
+            ':unique_lga/facilities_overview': view(FacilitiesView, 'overview'),
+            ':unique_lga/facilities_health': view(FacilitiesView, 'health'),
+            ':unique_lga/facilities_education': view(FacilitiesView, 'education'),
+            ':unique_lga/facilities_water': view(FacilitiesView, 'water'),
             ':unique_lga/gap_sheet_education': view(GapSheetView, 'education'),
             ':unique_lga/gap_sheet_health': view(GapSheetView, 'health')
         }
@@ -459,10 +459,10 @@ MapView.map_legend = function(lga, sector, indicator){
 
 
 
-var TableView = {};
-TableView.render = function(lga, sector){
-    render_header(lga, 'table', sector);
-    render('#table_view_template', {
+var FacilitiesView = {};
+FacilitiesView.render = function(lga, sector){
+    render_header(lga, 'facilities', sector);
+    render('#facilities_view_template', {
         lga: lga,
         sector: sector,
         tables: NMIS.table_view[sector]
@@ -476,7 +476,7 @@ TableView.render = function(lga, sector){
     this.show_table(sector, 0, lga.facilities);
 };
 
-TableView.show_table = function(sector, table_index, facilities){
+FacilitiesView.show_table = function(sector, table_index, facilities){
     var aoColumns = [];
     var table = NMIS.table_view[sector][table_index];
     var tableWidth = $('#content .container').width() - 400;

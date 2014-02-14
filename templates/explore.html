@@ -50,7 +50,7 @@
                 <div class="nav_views">
                     <a <% if (active_view === 'lga'){ %>class="active"<% } %>
                         href="#<%= lga.unique_lga %>/lga_<%= sector %>">
-                        <span class="glyphicon glyphicon-home"></span>
+                        <span class="glyphicon glyphicon-list-alt"></span>
                         Overview
                     </a>
                     <a <% if (active_view === 'map'){ %>class="active"<% } %>
@@ -58,10 +58,10 @@
                         <span class="glyphicon glyphicon-map-marker"></span>
                         Map
                     </a>
-                    <a <% if (active_view === 'table'){ %>class="active"<% } %>
-                        href="#<%= lga.unique_lga %>/table_<%= sector %>">
-                        <span class="glyphicon glyphicon-list"></span>
-                        Table
+                    <a <% if (active_view === 'facilities'){ %>class="active"<% } %>
+                        href="#<%= lga.unique_lga %>/facilities_<%= sector %>">
+                        <span class="glyphicon glyphicon-home"></span>
+                        Facilities
                     </a>
                 </div>
                 <div class="nav_sectors">
@@ -281,7 +281,7 @@
         </div>
     </script>
 
-    <script id="table_view_template" type="text/html">
+    <script id="facilities_view_template" type="text/html">
         <% if (tables.length > 1){ %>
             <select class="filter_select facilities_table_selector form-control">
                 <% _.each(tables, function(value, index){ %>
@@ -323,6 +323,28 @@
                         <div style="clear:both"></div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </script>
+
+    <script id="tutorial_modal" type="text/html"></script>
+        <div class="tutorial_modal">
+            <span class="glyphicon glyphicon-remove-circle"></span>
+            <div class="body">
+                <h1>Choose an LGA to get started</h1>
+                
+                LGAs are organized by zone. Click on a State for a list of LGAs within that State or search for an LGA in the dropdown menu above.
+            </div>
+            <div class="tutorial_nav">
+                <div class="back disabled">Back</div>
+                <div class="progress">
+                    <div class="dot"></div>
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="next">Next</div>
             </div>
         </div>
     </script>
