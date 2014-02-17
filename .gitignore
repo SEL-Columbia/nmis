@@ -4,3 +4,5 @@
 static/lgas
 static/nmis_data.zip
 .nmis_virtualenv/
+
+protected_data/
