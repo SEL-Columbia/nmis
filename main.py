@@ -87,6 +87,7 @@ def mdgs():
 def not_found(error):
     return flask.render_template('error.html'), 404
 
+
 @app.route('/git_update', methods=['POST'])
 def git_update():
     try:
@@ -98,6 +99,7 @@ def git_update():
         return "git update script executed", 200
     except:
         return "wrong post request", 404
+
 
 if __name__ == '__main__':
     app.run()
