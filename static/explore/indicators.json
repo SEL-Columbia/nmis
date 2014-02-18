@@ -173,7 +173,7 @@
         "description": "Ratio of the number of female students enrolled in senior secondary school to the number of male students enrolled in senior secondary school, regardless of ages. (School Census,2005)"
     }, 
     "num_overhead_tanks": {
-        "name": "Number of overhead tanks", 
+        "name": "- Overhead tanks", 
         "description": ""
     }, 
     "num_textbooks_per_pupil": {
@@ -709,7 +709,7 @@
         "description": "The gross enrolment ratio for females divided by the gross enrolment ratio for males for junior secondary schools. (see description of gross enrollment ratio). (School Census,2005)"
     }, 
     "num_diesel": {
-        "name": "Number of diesel water pumps", 
+        "name": "Number", 
         "description": ""
     }, 
     "class_held_outside": {
@@ -1141,7 +1141,7 @@
         "description": ""
     }, 
     "num_handpumps": {
-        "name": "Number of hand pumps", 
+        "name": "- Hand pumps", 
         "description": ""
     }, 
     "pupil_toilet_ratio": {
@@ -1165,7 +1165,7 @@
         "description": ""
     }, 
     "num_electric": {
-        "name": "Number of electric water pumps", 
+        "name": "Number", 
         "description": ""
     }, 
     "proportion_schools_fence_good_cond_juniorsec": {
@@ -1293,7 +1293,7 @@
         "description": "Ratio of the number of female students enrolled in primary school to the number of male students enrolled in primary school, regardless of ages. (School Census,2005)"
     }, 
     "num_taps": {
-        "name": "Number of taps", 
+        "name": "- Taps", 
         "description": ""
     }, 
     "proportion_teachers_with_teacher_guide": {
@@ -1357,7 +1357,7 @@
         "description": "This is the number of teachers at the school who have an NCE"
     }, 
     "num_solar": {
-        "name": "Number of solar water pumps", 
+        "name": "Number", 
         "description": ""
     }, 
     "proportion_water_no_diesel": {
