@@ -1134,7 +1134,7 @@
         "description": ""
     }, 
     "percentage_diesel_functional": {
-        "name": "Percentage functional", 
+        "name": "Percentage of diesel pumps that are functional", 
         "description": ""
     }, 
     "num_handpumps": {
@@ -1214,7 +1214,7 @@
         "description": "The community this facility is in."
     }, 
     "percentage_solar_functional": {
-        "name": "Percentage functional", 
+        "name": "Percentage of solar pumps that are functional", 
         "description": ""
     }, 
     "equipment_bp_machine": {
