@@ -170,7 +170,7 @@
         "description": "Ratio of the number of female students enrolled in senior secondary school to the number of male students enrolled in senior secondary school, regardless of ages. (School Census,2005)"
     }, 
     "num_overhead_tanks": {
-        "name": "- Overhead tanks", 
+        "name": "Number of overhead tanks", 
         "description": ""
     }, 
     "num_textbooks_per_pupil": {
@@ -706,7 +706,7 @@
         "description": "The gross enrolment ratio for females divided by the gross enrolment ratio for males for junior secondary schools. (see description of gross enrollment ratio). (School Census,2005)"
     }, 
     "num_diesel": {
-        "name": "Number", 
+        "name": "Number of diesel water pumps", 
         "description": ""
     }, 
     "class_held_outside": {
@@ -722,7 +722,7 @@
         "description": ""
     }, 
     "percentage_functional_handpumps": {
-        "name": "Percentage functional", 
+        "name": "Percentage of hand pumps that are functional", 
         "description": ""
     }, 
     "num_primary_js_ss_level": {
@@ -1138,7 +1138,7 @@
         "description": ""
     }, 
     "num_handpumps": {
-        "name": "- Handpumps", 
+        "name": "Number of hand pumps", 
         "description": ""
     }, 
     "pupil_toilet_ratio": {
@@ -1162,7 +1162,7 @@
         "description": ""
     }, 
     "num_electric": {
-        "name": "Number", 
+        "name": "Number of electric water pumps", 
         "description": ""
     }, 
     "proportion_schools_fence_good_cond_juniorsec": {
@@ -1290,7 +1290,7 @@
         "description": "Ratio of the number of female students enrolled in primary school to the number of male students enrolled in primary school, regardless of ages. (School Census,2005)"
     }, 
     "num_taps": {
-        "name": "- Taps", 
+        "name": "Number of taps", 
         "description": ""
     }, 
     "proportion_teachers_with_teacher_guide": {
@@ -1354,7 +1354,7 @@
         "description": "This is the number of teachers at the school who have an NCE"
     }, 
     "num_solar": {
-        "name": "Number", 
+        "name": "Number of solar water pumps", 
         "description": ""
     }, 
     "proportion_water_no_diesel": {
