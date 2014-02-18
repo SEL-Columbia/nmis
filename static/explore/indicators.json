@@ -15,6 +15,9 @@
         "name": "Schools with access to improved functional water",
         "description": "All schools should have an improved, functional water point"
     },
+    "functional_water": {
+        "name": "Schools with access to potable water"
+    },
     "num_classrm_w_chalkboard": {
         "name": "Total number of classrooms with a useable chalkboard/blackboard/whiteboard",
         "description": "All classrooms should have a useable chalkboard"
