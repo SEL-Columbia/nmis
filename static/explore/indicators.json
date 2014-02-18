@@ -1138,7 +1138,7 @@
         "description": ""
     }, 
     "num_handpumps": {
-        "name": "Number of Handpumps", 
+        "name": "- Handpumps", 
         "description": ""
     }, 
     "pupil_toilet_ratio": {
