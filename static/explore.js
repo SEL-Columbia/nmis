@@ -305,7 +305,7 @@ MapView.facility_layer = function(facilities, sector, indicator) {
             });
             mark.on('mouseover', mark.openPopup.bind(mark))
                 .on('mouseout', mark.closePopup.bind(mark))
-                .bindPopup(popup);
+                .bindPopup(popup, {offset: new L.Point(14, 7)});
             marker_group.addLayer(mark);
         }
     });
