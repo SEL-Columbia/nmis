@@ -494,12 +494,10 @@ FacilitiesView.show_table = function(sector, table_index, facilities){
     
     var aaData = [];
     _.each(facilities, function(facility){
-        if (facility.sector === sector || sector === 'overview'){
+        if (facility.sector === sector || (sector === 'overview' && facility.sector !== 'water')){
             var facility_data = [];
             _.each(table.indicators, function(indicator){
                 var value = facility[indicator];
-                if (!value && facility.sector === 'water')
-                    value = 'Water Point';
                 value = format_value(value);
                 facility_data.push(value);
             });
