@@ -3,9 +3,6 @@
         {
             "indicators": [
                 "num_improved_water_points", 
-                "num_overhead_tanks", 
-                "num_taps", 
-                "num_handpumps", 
                 "num_unimproved_points", 
                 "num_total_water_points"
             ], 
