@@ -380,7 +380,7 @@ MapView.facility_modal = function(facility){
     var html = _.template(template, {
         NMIS: NMIS,
         facility: facility,
-        tables: NMIS.table_view[facility.sector]
+        tables: NMIS.facilities_view[facility.sector]
     });
     $('#facility_modal').remove();
     $('#content').append(html);
@@ -394,7 +394,7 @@ MapView.facility_modal = function(facility){
 
 MapView.facility_table = function(facility, index){
     var aoColumns = [{sTitle: 'Indicator'}, {sTitle: 'Value'}];
-    var table = NMIS.table_view[facility.sector][index];
+    var table = NMIS.facilities_view[facility.sector][index];
     var aaData = [];
 
     _.each(table.indicators, function(indicator){
@@ -465,7 +465,7 @@ FacilitiesView.render = function(lga, sector){
     render('#facilities_view_template', {
         lga: lga,
         sector: sector,
-        tables: NMIS.table_view[sector]
+        tables: NMIS.facilities_view[sector]
     });
 
     var that = this;
@@ -478,7 +478,7 @@ FacilitiesView.render = function(lga, sector){
 
 FacilitiesView.show_table = function(sector, table_index, facilities){
     var aoColumns = [];
-    var table = NMIS.table_view[sector][table_index];
+    var table = NMIS.facilities_view[sector][table_index];
     var tableWidth = $('#content .container').width() - 400;
     var colWidth = Math.floor(tableWidth / (table.indicators.length - 2));
 
