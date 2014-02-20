@@ -82,6 +82,10 @@ def explore():
 def mdgs():
     return flask.render_template('mdgs.html', load_file=load_file)
 
+@app.route('/planning')
+def planning():
+    return flask.render_template('planning.html')
+
 
 @app.errorhandler(404)
 def not_found(error):
