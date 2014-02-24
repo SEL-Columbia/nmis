@@ -12,48 +12,50 @@
 {% block content %}
     <h1>Download Data</h1>
     
-    <p class="toptext">
-        The NMIS Nigeria Facility Inventory dataset provides atrributes and location information for all 24144 health, 68801 education and 131977 water facilities recorded on NMIS.
+    <p class="toptext" style="font-size:18px;">
+        The NMIS Nigeria Facility Inventory dataset provides attributes and location information for over 250,000 health, education and water facilities. This dataset will be available for download starting Summer 2014.
     </p>
-    <div class="download_data">
-        <div id="contentButton">
-            <div class="buttonGreen"><a href="/static/nmis_data.zip" class="buttontext">Download NMIS Dataset</a></div>
-            <div style="clear:both;"></div>
-            <div style="margin-top:10px">Permanent URL: <a href=""></a></div>
+    {% if False %}
+        <div class="download_data">
+            <div id="contentButton">
+                <div class="buttonGreen"><a href="/static/nmis_data.zip" class="buttontext">Download NMIS Dataset</a></div>
+                <div style="clear:both;"></div>
+                <div style="margin-top:10px">Permanent URL: <a href=""></a></div>
+            </div>
+            <h3>About the Dataset</h3>
+            <table>
+                <tr>
+                    <td>
+                        <strong>File size</strong>
+                    </td>
+                    <td>27 MB</td>
+                </tr>
+                <tr>
+                    <td><strong>File Format</strong></td>
+                    <td>Zipped CSVs </td>
+                </tr>
+                <tr>
+                    <td><strong>Version</strong></td>
+                    <td>1.0</td>
+                </tr>
+                <tr>
+                    <td><strong>Created</strong></td>
+                    <td>December 02, 2013</td>
+                </tr>
+                <tr>
+                    <td class="firstcol"><strong>Last Updated</strong></td>
+                    <td>December 02, 2013</td>
+                </tr>
+                <tr>
+                    <td><strong>Attribution</strong></td>
+                    <td>Data provided by <a href="3">OSSAP</a></td>
+                </tr>
+                <tr>
+                    <td><strong>Licensing</strong></td>
+                    <td>ODbL</td>
+                </tr>
+            </table>
         </div>
-        <h3>About the Dataset</h3>
-        <table>
-            <tr>
-                <td>
-                    <strong>File size</strong>
-                </td>
-                <td>27 MB</td>
-            </tr>
-            <tr>
-                <td><strong>File Format</strong></td>
-                <td>Zipped CSVs </td>
-            </tr>
-            <tr>
-                <td><strong>Version</strong></td>
-                <td>1.0</td>
-            </tr>
-            <tr>
-                <td><strong>Created</strong></td>
-                <td>December 02, 2013</td>
-            </tr>
-            <tr>
-                <td class="firstcol"><strong>Last Updated</strong></td>
-                <td>December 02, 2013</td>
-            </tr>
-            <tr>
-                <td><strong>Attribution</strong></td>
-                <td>Data provided by <a href="3">OSSAP</a></td>
-            </tr>
-            <tr>
-                <td><strong>Licensing</strong></td>
-                <td>ODbL</td>
-            </tr>
-        </table>
-    </div>
+    {% endif %}
 {% endblock %}
 
