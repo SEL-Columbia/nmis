@@ -410,7 +410,8 @@ MapView.facility_table = function(facility, index){
             aoColumns: aoColumns,
             bFilter: false,
             bPaginate: false,
-            bDestroy: true
+            bDestroy: true,
+            sDom: '<"top">rt<"bottom"flp><"clear">'
         })
         .width('100%'); 
 };
@@ -515,7 +516,8 @@ FacilitiesView.show_table = function(sector, table_index, facilities){
             bPaginate: false,
             bDestroy: true,
             bAutoWidth: false,
-            bFilter: false
+            bFilter: false,
+            sDom: '<"top">rt<"bottom"flp><"clear">'
         })
         .width('100%');
 };
