@@ -596,7 +596,7 @@
         "description": "Teachers at the school have a Ministry of Education issued/approved teacher's guide or syllabus for all subjects"
     }, 
     "measles_yn": {
-        "name": "Immunizations", 
+        "name": "Measles Immunizations", 
         "description": "Facility offers measles vaccinations."
     }, 
     "child_health_measles_immun_calc": {
