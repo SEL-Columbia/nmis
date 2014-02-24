@@ -132,7 +132,7 @@
             "indicators": [
                 "facility_name", 
                 "facility_type", 
-                "delivery_services",
+                "maternal_health_delivery_services",
                 "antenatal_care_yn", 
                 "c_section_yn",
                 "measles_yn", 
