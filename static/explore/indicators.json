@@ -595,12 +595,8 @@
         "name": "Teaching guidebook for every teacher for every subject", 
         "description": "Teachers at the school have a Ministry of Education issued/approved teacher's guide or syllabus for all subjects"
     }, 
-    "measles_yn": {
-        "name": "Immunizations", 
-        "description": "Facility offers measles vaccinations."
-    }, 
     "child_health_measles_immun_calc": {
-        "name": "Measles", 
+        "name": "Immunizations", 
         "description": "Facility offers measles vaccination."
     }, 
     "family_planning_iud_calc": {
