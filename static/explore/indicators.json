@@ -596,7 +596,7 @@
         "description": "Teachers at the school have a Ministry of Education issued/approved teacher's guide or syllabus for all subjects"
     }, 
     "child_health_measles_immun_calc": {
-        "name": "Immunizations", 
+        "name": "Measles Immunizations", 
         "description": "Facility offers measles vaccination."
     }, 
     "family_planning_iud_calc": {
@@ -1612,7 +1612,7 @@
         "description": "Facility can perform deliveries 24 hours a day, seven days a week."
     }, 
     "maternal_health_delivery_services": {
-        "name": "Maternal Health Delivery Services", 
+        "name": "Delivery Services", 
         "description": ""
     }, 
     "gender_parity_index_primary": {

@@ -135,7 +135,7 @@
                 "maternal_health_delivery_services",
                 "antenatal_care_yn", 
                 "c_section_yn",
-                "measles_yn", 
+                "child_health_measles_immun_calc", 
                 "family_planning_yn", 
                 "malaria_treatment_artemisinin"
             ]
