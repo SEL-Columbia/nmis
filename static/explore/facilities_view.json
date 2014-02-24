@@ -98,7 +98,7 @@
                 "facility_type",
                 "num_chews_fulltime", 
                 "num_nurses_fulltime",
-                "num_midwives_fulltime",
+                "num_nursemidwives_fulltime",
                 "num_doctors_fulltime"
             ]
         },

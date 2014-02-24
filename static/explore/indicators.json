@@ -41,7 +41,7 @@
         "name": "Antenatal Care",
         "description": "" 
     },
-     "num_midwives_fulltime": {
+     "num_nursemidwives_fulltime": {
         "name": "Midwives and Nurse-Midwives (full-time)",
         "description": "" 
     },
