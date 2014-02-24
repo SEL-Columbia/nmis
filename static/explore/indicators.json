@@ -505,7 +505,7 @@
         "description": ""
     }, 
     "prevalence_of_hiv": {
-        "name": "HIV Prevalence ", 
+        "name": "HIV prevalence ", 
         "description": "Percentage of pregnant women who tested positive for HIV at a site where all pregnant women are tested (HSS,2005)"
     }, 
     "num_nurses_and_midwives_per_1000": {
@@ -585,7 +585,7 @@
         "description": "Facility does not charge any user fees for malaria treatment"
     }, 
     "mortality_rate_infant": {
-        "name": "Infant Mortality Rate (per 1,000 live births)", 
+        "name": "Infant mortality rate (per 1,000 live births)", 
         "description": "Proportion of children out of 1000 live births who would die before reach 1 years of age. (DHS, 2008)"
     }, 
     "teacher_guide_yn": {
