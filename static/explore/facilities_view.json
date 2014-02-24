@@ -46,7 +46,6 @@
                 "improved_water_supply",
                 "improved_sanitation",
                 "phcn_electricity",
-                "photo_repairs", 
                 "num_toilets_total" 
             ]
         },

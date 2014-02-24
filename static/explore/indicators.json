@@ -1064,7 +1064,7 @@
       "description": "The type of curriculum taught at this school"
     }, 
     "num_students_total": {
-      "name": "Students", 
+      "name": "Total students", 
       "description": "Total number of students in this school"
     }, 
     "phcn_electricity": {
@@ -1548,7 +1548,7 @@
         "description": ""
     }, 
     "num_tchrs_total": {
-        "name": "Total number of teachers", 
+        "name": "Total teachers", 
         "description": "This is the total number of teachers in each school."
     }, 
     "iv_antibiotics_yn_calc": {
@@ -1866,5 +1866,30 @@
     "proportion_teachers_nce": {
         "name": "Percentage of teachers with NCE qualification", 
         "description": ""
-    }
+    },
+    "num_students_male": {
+        "name": "Male students", 
+        "description": "Total number of male students in this school"
+    }, 
+    "num_students_female": {
+        "name": "Female students", 
+        "description": "Total number of female students in this school"
+    }, 
+    "num_tchrs_male": {
+        "name": "Male teachers", 
+        "description": "Total number of male teachers in this school"
+    }, 
+    "num_tchrs_female": {
+        "name": "Female teachers", 
+        "description": "Total number of female teachers in this school"
+    }, 
+    "num_toilets_total": {
+        "name": "Total Toilets", 
+        "description": "Total number of toilets in this school"
+    }, 
+
+
+
+
+
 }
