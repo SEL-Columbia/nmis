@@ -37,98 +37,43 @@
             ]
         },
         {
+            "name": "Infrastructure",
             "indicators": [
-                "facility_name", 
-                "school_1kmplus_catchment_area", 
-                "school_1kmplus_secondary_school", 
-                "students_living_3kmplus_school"
-            ], 
-            "name": "Access"
-        }, 
+                "facility_name",
+                "facility_type",
+                "chalkboard_each_classroom_yn",
+                "improved_water_supply",
+                "improved_sanitation",
+                "phcn_electricity",
+                "photo_repairs", 
+                "num_toilets_total" 
+            ]
+        },
         {
+            "name": "Gender Breakdown",
             "indicators": [
-                "facility_name", 
-                "male_to_female_student_ratio"
-            ], 
-            "name": "Participation"
-        }, 
+                "facility_name",
+                "facility_type",
+                "num_students_total",
+                "num_students_male",
+                "num_students_female",
+                "num_tchrs_total",
+                "num_tchrs_male",
+                "num_tchrs_female"
+            ]
+        },
         {
+            "name": "Basic Information",
             "indicators": [
-                "facility_name", 
-                "potable_water", 
-                "improved_sanitation", 
-                "gender_separated_toilets_yn", 
-                "pupil_toilet_ratio_facility"
-            ], 
-            "name": "Infrastructure: Water and Sanitation"
-        }, 
-        {
-            "indicators": [
-                "facility_name", 
-                "power_access", 
-                "num_classrms_need_min_repairs", 
-                "covered_roof_good_condi", 
-                "num_classrms_need_maj_repairs"
-            ], 
-            "name": "Infrastructure: Building Structure"
-        }, 
-        {
-            "indicators": [
-                "facility_name", 
-                "access_clinic_dispensary", 
-                "access_first_aid", 
-                "wall_fence_good_condi"
-            ], 
-            "name": "Infrastructure: Health and Safety"
-        }, 
-        {
-            "indicators": [
-                "facility_name", 
-                "pupil_classrm_ratio", 
-                "class_held_outside", 
-                "two_shifts_yn", 
-                "multigrade_classrms"
-            ], 
-            "name": "Infrastructure: Learning Environment"
-        }, 
-        {
-            "indicators": [
-                "facility_name", 
-                "chalkboard_each_classroom_yn", 
-                "pupil_bench_ratio", 
-                "pupil_desk_ratio"
-            ], 
-            "name": "Furniture"
-        }, 
-        {
-            "indicators": [
-                "facility_name", 
-                "pupil_tchr_ratio", 
-                "teacher_nonteachingstaff_ratio", 
-                "num_tchrs_with_nce", 
-                "num_tchrs_attended_training", 
-                "num_tchrs_total"
-            ], 
-            "name": "Adequacy of Staffing"
-        }, 
-        {
-            "indicators": [
-                "facility_name", 
-                "tchr_pay_delay", 
-                "tchr_pay_miss"
-            ], 
-            "name": "Institutional Development"
-        }, 
-        {
-            "indicators": [
-                "facility_name", 
-                "textbook_to_pupil_ratio", 
-                "provide_exercise_books_yn", 
-                "provide_pens_yn", 
-                "teacher_guide_yn", 
-                "functioning_library_yn"
-            ], 
-            "name": "Curriculum Issues"
+                "facility_name",
+                "facility_type",
+                "date_of_survey",
+                "education_type",
+                "facility_ID",
+                "community",
+                "ward", 
+                "management"
+                ]
         }
     ], 
     "health": [
