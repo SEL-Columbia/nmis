@@ -16,7 +16,8 @@
                 "ward", 
                 "is_improved", 
                 "functional", 
-                "breakdown"
+                "breakdown",
+                "lift_mechanism"
             ], 
             "name": "General"
         }
@@ -82,7 +83,7 @@
             "indicators": [
                 "facility_name",
                 "facility_type",
-                "delivery_services", 
+                "maternal_health_delivery_services", 
                 "emergency_transport",
                 "skilled_birth_attendant",
                 "num_chews_fulltime",
