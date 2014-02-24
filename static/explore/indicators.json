@@ -1629,7 +1629,7 @@
         "description": ""
     }, 
     "mortality_rate_maternal": {
-        "name": "Maternal mortality", 
+        "name": "Maternal Mortality Ratio (per 100,00 live births)", 
         "description": ""
     }, 
     "lab_tests_pregnancy_calc": {
