@@ -11,12 +11,12 @@
     "water": [
         {
             "indicators": [
+                "water_point_type",
                 "community", 
                 "ward", 
                 "is_improved", 
                 "functional", 
-                "breakdown", 
-                "lift_mechanism"
+                "breakdown"
             ], 
             "name": "General"
         }

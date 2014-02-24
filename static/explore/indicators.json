@@ -1,4 +1,7 @@
 {
+    "water_point_type": {
+        "name": "Type"
+    },
     "num_existing_schools": {
         "name": "Total existing schools"
     },
