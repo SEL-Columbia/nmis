@@ -1072,6 +1072,10 @@
       "name": "PHCN Electricity", 
       "description": "Facility has grid connectiviy"
     }, 
+    "proportion_phcn_electricity": {
+      "name": "Percentage with access to the national grid (PHCN)", 
+      "description": "Percentage with access to the national grid (PHCN)"
+    }, 
     "management": {
       "name": "Owner/Manager", 
       "description": "Management"
