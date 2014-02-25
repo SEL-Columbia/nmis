@@ -856,7 +856,7 @@
         "description": ""
     }, 
     "immunization_rate_measles": {
-        "name": "Infant mortality rate (per 1,000 live births) ", 
+        "name": "Measles immunization rate", 
         "description": "Percentage of children aged 12-23 months who received measles immunization any time before the survey"
     }, 
     "avg_school_enrollment_fee": {
