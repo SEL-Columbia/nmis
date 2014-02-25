@@ -59,7 +59,7 @@
             ]
         },
         {
-            "name": "General information for Primary Schools",
+            "name": "General information for primary schools",
             "indicators": [
                 "num_primary_schools",
                 "percent_management_public_primary",
@@ -72,7 +72,7 @@
             ]
         },
         {
-            "name": "General information for Junior Secondary Schools",
+            "name": "General information for runior secondary schools",
             "indicators": [
                 "num_junior_secondary_schools",
                 "percent_management_public_js",
@@ -84,7 +84,7 @@
             ]
         },
         {
-            "name": "Infrastructure in Primary Schools",
+            "name": "Infrastructure in primary schools",
             "indicators": [
                 "num_primary_schools",
                 "percent_functional_water_primary",
@@ -95,7 +95,7 @@
                 ]
         },
         {
-            "name": "Infrastructure in Junior Secondary Schools",
+            "name": "Infrastructure in junior secondary schools",
             "indicators": [
                 "num_junior_secondary_schools",
                 "percent_functional_water_js",
@@ -106,14 +106,14 @@
             ]
         },
         {
-            "name": "Ratios -- Primary Schools",
+            "name": "Ratios -- primary schools",
             "indicators": [
                 "student_classroom_ratio_lga_primary",
                 "primary_school_pupil_teachers_ratio_lga"
             ]
         },
         {
-            "name": "Ratios -- Junior Secondary Schools",
+            "name": "Ratios -- junior secondary schools",
             "indicators": [
                 "student_classroom_ratio_lga_juniorsec",
                 "junior_secondary_school_pupil_teachers_ratio_lga"
