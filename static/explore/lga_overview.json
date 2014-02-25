@@ -52,7 +52,7 @@
             "header": "Goal 2: Achieve universal primary education", 
             "indicators": [
                 "net_enrollment_ratio_primary_education", 
-                "gross_enrollment_rate_primary", 
+                "gross_enrollment_ratio_primary_education", 
                 "net_enrollment_ratio_secondary_education", 
                 "gross_enrollment_ratio_secondary_education", 
                 "literacy_rate"

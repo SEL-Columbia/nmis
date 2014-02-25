@@ -54,11 +54,11 @@
         "name": "C-sections",
         "description": "" 
     },
-    "net_enrollment_rate_pry": {
+    "net_enrollment_ratio_primary_education": {
         "name": "Net enrollment rate for primary education",
         "description": "Number of official primary school aged children (6-11 year olds in Nigeria) enrolled in primary school expressed as a percent of the total children of the official school age population (6-11 year olds in Nigeria). (HNLSS, 2008-2009)"
     },
-    "gross_enrollment_rate_pry": {
+    "gross_enrollment_ratio_secondary_education": {
         "name": "Gross enrollment rate in primary education",
         "description": "Total enrolment in primary school, regardless of age, expressed as a percentage of the eligible official primary school-age population (6-11 years of age in Nigeria) in a given school year. (School Census, 2005 / Population Census, 2006)"
     },
@@ -79,7 +79,7 @@
         "description": "Percentage of children under five years of age who sleep under an insecticide-treated bednet. (DHS, 2008)"
     },
 
-    "net_enrollment_rate_js": {
+    "net_enrollment_ratio_secondary_education": {
         "name": "Net enrollment rate for junior secondary education",
         "description": "Number of official junior secondary school aged children (12-14 year olds in Nigeria) enrolled in junior secondary school expressed as a percent of the total children of the official school age population (12-14 year olds in Nigeria). (HNLSS, 2008-2009)"
     },
@@ -891,7 +891,7 @@
         "name": "Percentage of facilities that do not charge fees for malaria-related services", 
         "description": ""
     }, 
-    "gross_enrollment_rate_primary": {
+    "gross_enrollment_ratio_primary_education": {
         "name": "Gross enrollment rate in primary education ", 
         "description": ""
     }, 
