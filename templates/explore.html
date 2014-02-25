@@ -328,17 +328,15 @@
         </div>
     </script>
 
-    <script id="tutorial_modal_template" type="text/html">
-        <div class="tutorial_modal">
-            <span class="glyphicon glyphicon-remove-circle"></span>
+    <script id="walkthrough_modal_template" type="text/html">
+        <div class="walkthrough_modal">
+            <span class="glyphicon glyphicon-remove-circle walkthrough_close"></span>
             <div class="body">
-                <h1>Choose an LGA to get started</h1>
-                
-                LGAs are organized by zone. Click on a State for a list of LGAs within that State or search for an LGA in the dropdown menu above.
+                <%= body %>
             </div>
-            <div class="tutorial_nav">
+            <div class="walkthrough_nav">
                 <div class="back disabled">Back</div>
-                <div class="progress">
+                <div class="dots">
                     <div class="dot"></div>
                     <div class="dot active"></div>
                     <div class="dot"></div>
@@ -346,6 +344,7 @@
                     <div class="dot"></div>
                 </div>
                 <div class="next">Next</div>
+                <div class="clearfix"></div>
             </div>
         </div>
     </script>

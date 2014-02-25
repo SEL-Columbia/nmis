@@ -30,7 +30,8 @@ $(function(){
 
 
 // Helper Functions
-// =================
+// ===========================================
+
 function view(viewObj, sector){
     // Wrapper for LGA based views. Fetches the appropriate 
     // LGA JSON data before calling the render() function of a view.
@@ -129,8 +130,20 @@ function indicator_description(slug){
 }
 
 
+function show_walkthrough(){
+    // Renders the LGA navigation bar
+    var template = $('#walkthrough_modal_template').html();
+    var html = _.template(template, {
+        body: '<h1>Choose an LGA to get started</h1> LGAs are organized by zone. Click on a State for a list of LGAs within that State or search for an LGA in the dropdown menu above.'
+    });
+    $('#content').append(html).show();
+}
+
+
+
+
 // Views
-// ============
+// ===========================================
 function IndexView(){
     render('#index_template', {
         zones: NMIS.zones,
@@ -144,6 +157,7 @@ function IndexView(){
         $(this).next('.lgas').toggle();
         return false;
     });
+    //show_walkthrough();
 };
 
 
