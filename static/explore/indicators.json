@@ -204,7 +204,7 @@
         "description": "Facility has anticonvulsants available."
     }, 
     "proportion_of_births_by_skilled_health_personnel": {
-        "name": "Proportion of births attended by skilled health personnel ", 
+        "name": "Proportion of births attended by skilled health personnel**", 
         "description": "Percentage of births managed by a health professional trained in managing deliveries and their complications (Traditional birth attendants are not considered skilled birth attendants) (HNLSS, 2008-2009)"
     }, 
     "percent_management_public": {
@@ -400,7 +400,7 @@
         "description": ""
     }, 
     "prevalence_of_underweight_children_u5": {
-        "name": "Percentage of children under five who are underweight (weight-for-age)", 
+        "name": "Percentage of children under five who are underweight (weight-for-age)**", 
         "description": "Percentage of children under five whose weight-for-age is below minus two standard deviations (-2 SD) from the median of the reference population (all children under 5)(DHS, 2008)"
     }, 
     "student_classroom_ratio_lga_juniorsec": {
@@ -480,7 +480,7 @@
         "description": "Number of children of primary school  \ngoing age who are enrolled in it, as a percentage of the official primary school going age population respectively"
     }, 
     "immunization_rate_dpt3": {
-        "name": "DPT 3 immunization rate ", 
+        "name": "DPT 3 immunization rate**", 
         "description": "Percentage of children aged 12-23 months who received DPT3 immunization any time before the survey. (DHS, 2008)"
     }, 
     "distribution_type": {
@@ -508,7 +508,7 @@
         "description": ""
     }, 
     "prevalence_of_hiv": {
-        "name": "HIV prevalence ", 
+        "name": "HIV prevalence**", 
         "description": "Percentage of pregnant women who tested positive for HIV at a site where all pregnant women are tested (HSS,2005)"
     }, 
     "num_nurses_and_midwives_per_1000": {
@@ -532,7 +532,7 @@
         "description": ""
     }, 
     "prevalence_of_stunting_children_u5": {
-        "name": "Percentage of children under five with stunting (height-for-age) ", 
+        "name": "Percentage of children under five with stunting (height-for-age)**", 
         "description": "Percentage of children under five whose height-for-age is below minus two standard deviations (-2 SD) from the median of the reference population (DHS, 2008)"
     }, 
     "proportion_water_poor_water_quality": {
@@ -588,7 +588,7 @@
         "description": "Facility does not charge any user fees for malaria treatment"
     }, 
     "mortality_rate_infant": {
-        "name": "Infant mortality rate (per 1,000 live births)", 
+        "name": "Infant mortality rate (per 1,000 live births)**", 
         "description": "Proportion of children out of 1000 live births who would die before reach 1 years of age. (DHS, 2008)"
     }, 
     "teacher_guide_yn": {
@@ -620,7 +620,7 @@
         "description": ""
     }, 
     "proportion_of_children_u5_diarrhea_treated_with_ors_med": {
-        "name": "Percentage of children under five years of age with diarrhea who received oral rehydration therapy ", 
+        "name": "Percentage of children under five years of age with diarrhea who received oral rehydration therapy**", 
         "description": "Percentage of Children under 5 years old who had diarrhea in the last two weeks who were treated with ORS or RHS. (DHS, 2008)"
     }, 
     "proportion_schools_missed_pay_juniorsec": {
@@ -856,7 +856,7 @@
         "description": ""
     }, 
     "immunization_rate_measles": {
-        "name": "Measles immunization rate", 
+        "name": "Measles immunization rate**", 
         "description": "Percentage of children aged 12-23 months who received measles immunization any time before the survey"
     }, 
     "avg_school_enrollment_fee": {
@@ -1112,7 +1112,7 @@
         "description": "Facility has at least three skilled birth attendants (doctor, midwife or nurse-midwife) on staff."
     }, 
     "percent_antenatal_care_four": {
-        "name": "Percentage of women who attended at least four antenatal visits ", 
+        "name": "Percentage of women who attended at least four antenatal visits**", 
         "description": "Percentage of pregnant women who have had at least four visits for antenatal care (care specifically related to pregnancy) (DHS, 2008)"
     }, 
     "proportion_adequate_staff": {
@@ -1200,7 +1200,7 @@
         "description": ""
     }, 
     "proportion_children_u5_sleeping_under_itns": {
-        "name": "Percentage of children under five sleeping under insecticide-treated bednets ", 
+        "name": "Percentage of children under five sleeping under insecticide-treated bednets**", 
         "description": "Percentage of children under 5  who slept under insecticide-treated bednets the night before the survey"
     }, 
     "proportion_schools_functioning_library_primary": {
@@ -1468,7 +1468,7 @@
         "description": "The ratio of boys to girls enrolled at the school. The indicator is a ratio of the number of  enrolled boys to enrolled girls, regardless of ages. It measures the equality of educational opportunity, measured in terms of school enrolment, for boys and girls"
     }, 
     "prevalence_of_wasting_children_u5": {
-        "name": "Percentage of children under five with wasting (weight-for-height) ", 
+        "name": "Percentage of children under five with wasting (weight-for-height)**", 
         "description": "Percentage of children whose weight-for-height is below minus two standard deviations (-2 SD) from the median of the reference population (DHS, 2008)"
     }, 
     "emergency_transport_currently_functioning": {
@@ -1660,7 +1660,7 @@
         "description": ""
     }, 
     "mortality_rate_children_u5": {
-        "name": "Under five mortality rate (per 1,000 live births)", 
+        "name": "Under five mortality rate (per 1,000 live births)**", 
         "description": "Proportion of children out of 1000 live births who would die before reach 5 years of age "
     }, 
     "supplies_available_latex_gloves": {
