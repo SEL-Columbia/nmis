@@ -131,14 +131,44 @@ function indicator_description(slug){
 
 
 function show_walkthrough(){
-    // Renders the LGA navigation bar
+    var pages = [
+        {
+            body: "<h1>New to NMIS?</h1>" +
+            "Before you get started, we'd like to show you a few tips on exploring facilities"
+        },
+        {
+            body: "<h1>Choose an LGA to get started</h1>" +
+            "LGAs are organized by zone. Click on a State for a list of LGAs within that State or search for an LGA in the dropdown menu above."
+        },
+        {
+            body: "<h1>Filter by Sector</h1>" +
+            "View all sectors within an LGA or choose from Health, Education or Water."
+        },
+        {
+            body: "<h1>Overview, Map or Facility Views</h1>" +
+            "You can easily switch between an LGA overview, map of facilities, or individual facility data by selecting the appropriate tab."
+        },
+        {
+            body: "<h1>Facility Snapshot and Detail</h1>" +
+            "View the Snapshot, the most relevant indicators for each facility, or view more detailed indicators such as those for Infrastructure or Staffing."
+        },
+        {
+            body: "<h1>Indicator Detail in Mapview</h1>" +
+            "View which or how many facilities provide a specific service, by selecting the indicator from the dropdown."
+        },
+        {
+            body: "<h1><i>Okay, I've got it</i></h1>" +
+            '<div class="walkthrough_btn">Start Exploring</div>' +
+            '<i>Need more help? <br>View additional <a href="/planning">Planning Tools</a></i>'
+        }
+    ];
+    
     var template = $('#walkthrough_modal_template').html();
     var html = _.template(template, {
         body: '<h1>Choose an LGA to get started</h1> LGAs are organized by zone. Click on a State for a list of LGAs within that State or search for an LGA in the dropdown menu above.'
     });
     $('#content').append(html).show();
 }
-
 
 
 
