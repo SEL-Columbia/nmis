@@ -604,7 +604,7 @@
         "description": "Facility has intrauterine devices for long-term contraception available."
     }, 
     "num_junior_secondary_schools": {
-        "name": "Number of Junior Secondary Schools", 
+        "name": "Number of junior secondary schools", 
         "description": ""
     }, 
     "proportion_schools_gender_sep_toilet_primary": {
@@ -956,7 +956,7 @@
         "description": ""
     }, 
     "num_primary_schools": {
-        "name": "Number of Primary Schools", 
+        "name": "Number of primary schools", 
         "description": ""
     }, 
     "proportion_schools_nomadic": {
@@ -1856,7 +1856,7 @@
         "description": ""
     }, 
     "num_senior_secondary_schools": {
-        "name": "Number of Senior Secondary Schools", 
+        "name": "Number of senior secondary schools", 
         "description": ""
     }, 
     "proportion_schools_with_first_aid_kit_primary": {
