@@ -134,7 +134,8 @@ function show_walkthrough(){
     var pages = [
         {
             body: "<h1>New to NMIS?</h1>" +
-            "Before you get started, we'd like to show you a few tips on exploring facilities"
+            "Before you get started, we'd like to show you a few tips on exploring facilities" +
+            '<div class="walkthrough_btn">Take Tour</div>'
         },
         {
             body: "<h1>Choose an LGA to get started</h1>" +
@@ -162,7 +163,7 @@ function show_walkthrough(){
             '<i>Need more help? <br>View additional <a href="/planning">Planning Tools</a></i>'
         }
     ];
-    
+
     var template = $('#walkthrough_modal_template').html();
     var html = _.template(template, {
         body: '<h1>Choose an LGA to get started</h1> LGAs are organized by zone. Click on a State for a list of LGAs within that State or search for an LGA in the dropdown menu above.'
@@ -187,7 +188,7 @@ function IndexView(){
         $(this).next('.lgas').toggle();
         return false;
     });
-    //show_walkthrough();
+    show_walkthrough();
 };
 
 
