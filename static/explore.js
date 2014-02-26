@@ -188,7 +188,7 @@ function IndexView(){
         $(this).next('.lgas').toggle();
         return false;
     });
-    show_walkthrough();
+    //show_walkthrough();
 };
 
 
