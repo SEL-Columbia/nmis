@@ -11,6 +11,16 @@
             NMIS.indicators = {{ load_file('indicators.json')|safe }};
             NMIS.mdgs_view = {{ load_file('mdgs_view.json')|safe }};
 
+            function indicator_name(slug){
+                var indicator = NMIS.indicators[slug];
+                return indicator ? indicator.name : slug;
+            }
+
+            function indicator_description(slug){
+                var indicator = NMIS.indicators[slug];
+                return indicator ? indicator.description : slug;
+            }
+
             
             $(function(){
                 // Initialize Map
@@ -33,9 +43,11 @@
 
                 // Initialize Select box
                 var template = $('#mdgs_view_template').html();
+                                console.log(template)
+
                 var html = _.template(template, {
                     mdg_goals: NMIS.mdgs_view,
-                    indicators: NMIS.indicators
+                    indicator_name: indicator_name
                 });
                 $('#mdg_selector').html(html)
                     .change(function(){
@@ -46,7 +58,7 @@
                         addLayer(map_div, this.value);
                         $('.mdg_title').text(label);
                         $('.mdg_description').text(
-                            NMIS.indicators[this.value].description);
+                            indicator_description(this.value));
                     }).change();
             });
             
@@ -109,7 +121,7 @@
             <optgroup label="<%= goal.name %>">
                 <% _.each(goal.indicators, function(indicator){ %>
                     <option value="<%= indicator %>">
-                        <%= indicators[indicator].name %>
+                        <%= indicator_name(indicator) %>
                     </option>
                 <% }); %>
             </optgroup>
