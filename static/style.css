@@ -132,7 +132,9 @@ table .value {
     background: #ddd;
 }
 
-
+#content {
+    position: relative;
+}
 #content .container {
     position: relative;
     background: #fff;
@@ -402,8 +404,8 @@ table thead td:active {
 /* Walkthrough 
 ---------------*/
 .walkthrough_modal {
-    position: fixed;
-    top: 200px;
+    position: absolute;
+    top: 150px;
     left: 50%;
     color: white;
     width: 500px;
@@ -411,7 +413,6 @@ table thead td:active {
     background: rgba(0,0,0,0.85);
     border-radius: 6px;
     box-shadow: 5px 5px 20px #666;
-    z-index: 1000;
 }
 .walkthrough_close {
     position: absolute;
@@ -439,6 +440,22 @@ table thead td:active {
     margin-bottom: 15px;
 }
 
+.walkthrough_btn {
+    cursor: pointer;
+    display: inline-block;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    background: rgb(247, 244, 36);
+    padding: 6px 35px;
+    margin-top: 15px;
+    text-transform: uppercase;
+    border-radius: 4px;
+}
+.walkthrough_btn:hover {
+    opacity: 0.8;
+}
+
 .walkthrough_nav {
     position: relative;
     font-size: 20px;
@@ -447,17 +464,17 @@ table thead td:active {
     border-top: 1px solid #222;
     letter-spacing: 0.08rem;
 }
-.walkthrough_nav .back {
+.walkthrough_back {
     float: left;
     cursor: pointer;
 }
-.walkthrough_nav .next {
+.walkthrough_next {
     float: right;
     cursor: pointer;
 }
 .walkthrough_close:hover,
-.walkthrough_nav .next:hover,
-.walkthrough_nav .back:hover,
+.walkthrough_next:hover,
+.walkthrough_back:hover,
 .walkthrough_nav .disabled {
     color: #888;
 }

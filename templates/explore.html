@@ -335,7 +335,7 @@
                 <%= body %>
             </div>
             <div class="walkthrough_nav">
-                <div class="back disabled">Back</div>
+                <div class="walkthrough_back disabled" data-index="<%= index - 1 %>">Back</div>
                 <div class="dots">
                     <div class="dot"></div>
                     <div class="dot active"></div>
@@ -343,7 +343,7 @@
                     <div class="dot"></div>
                     <div class="dot"></div>
                 </div>
-                <div class="next">Next</div>
+                <div class="walkthrough_next" data-index="<%= index + 1 %>">Next</div>
                 <div class="clearfix"></div>
             </div>
         </div>

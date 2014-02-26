@@ -130,16 +130,43 @@ function indicator_description(slug){
 }
 
 
-function show_walkthrough(){
+function start_walkthrough(){
     var pages = [
         {
             body: "<h1>New to NMIS?</h1>" +
             "Before you get started, we'd like to show you a few tips on exploring facilities" +
-            '<div class="walkthrough_btn">Take Tour</div>'
+            '<div class="walkthrough_btn">Take Tour</div>',
+            post_cb: function(index){
+                $(this).find('.walkthrough_nav')
+                    .css('visibility', 'hidden')
+                    .end()
+                    .find('.walkthrough_btn')
+                    .click(function(){
+                        show_walkthrough(index + 1);
+                    });
+            }
         },
         {
             body: "<h1>Choose an LGA to get started</h1>" +
-            "LGAs are organized by zone. Click on a State for a list of LGAs within that State or search for an LGA in the dropdown menu above."
+            "LGAs are organized by zone. Click on a State for a list of LGAs within that State or search for an LGA in the dropdown menu above.",
+            post_cb: function(index){
+                function load_next_page(){
+
+                }
+
+                $('.lgas:eq(2)').show() // Show 3rd LGA menu
+                    .find('a')
+                    .click(load_next_page());
+                
+                $.curvedArrow({
+                    p0x: 400,
+                    p0y: 400,
+                    p1x: 300,
+                    p1y: 300,
+                    p2x: 250,
+                    p2y: 440
+                });
+            }
         },
         {
             body: "<h1>Filter by Sector</h1>" +
@@ -164,11 +191,36 @@ function show_walkthrough(){
         }
     ];
 
-    var template = $('#walkthrough_modal_template').html();
-    var html = _.template(template, {
-        body: '<h1>Choose an LGA to get started</h1> LGAs are organized by zone. Click on a State for a list of LGAs within that State or search for an LGA in the dropdown menu above.'
-    });
-    $('#content').append(html).show();
+    function show_walkthrough(index){
+        var page = pages[index];
+        var template = $('#walkthrough_modal_template').html();
+        var html = _.template(template, {
+            body: page.body,
+            index: index
+        });
+
+        $('.walkthrough_modal, .curved_arrow').remove();
+
+        if (page.pre_cb){
+            // pre callback runs before modal is added to DOM
+            page.pre_hook(index);
+        }
+
+        var modal = $(html).appendTo('#content');
+        modal.show()
+            .find('.walkthrough_back, .walkthrough_next')
+            .click(function(){
+                var i = $(this).data('index');
+                show_walkthrough(i);
+            });
+
+        if (page.post_cb){
+            // post callback runs after modal is added to DOM
+            page.post_cb.call(modal[0], index); 
+        }
+    }
+
+    show_walkthrough(0);
 }
 
 
@@ -188,7 +240,7 @@ function IndexView(){
         $(this).next('.lgas').toggle();
         return false;
     });
-    //show_walkthrough();
+    //start_walkthrough();
 };
 
 
