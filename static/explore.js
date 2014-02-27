@@ -187,7 +187,10 @@ function start_walkthrough(){
         {
             body: "<h1><i>Okay, I've got it</i></h1>" +
             '<div class="walkthrough_btn">Start Exploring</div>' +
-            '<i>Need more help? <br>View additional <a href="/planning">Planning Tools</a></i>'
+            '<i>Need more help? <br>View additional <a href="/planning">Planning Tools</a></i>',
+            post_cb: function(){
+                $('.dots').hide();
+            }
         }
     ];
 
@@ -212,7 +215,15 @@ function start_walkthrough(){
             .click(function(){
                 var i = $(this).data('index');
                 show_walkthrough(i);
-            });
+            })
+            .end()
+            .find('.walkthrough_close')
+            .click(function(){
+                $('.walkthrough_modal, .curved_arrow').remove();
+            })
+            .end()
+            .find('.dot[data-index="' + index + '"]')
+            .addClass('active');
 
         if (page.post_cb){
             // post callback runs after modal is added to DOM
