@@ -150,27 +150,30 @@ function start_walkthrough(){
             body: "<h1>Choose an LGA to get started</h1>" +
             "LGAs are organized by zone. Click on a State for a list of LGAs within that State or search for an LGA in the dropdown menu above.",
             post_cb: function(index){
-                function load_next_page(){
-
-                }
-
-                $('.lgas:eq(2)').show() // Show 3rd LGA menu
+                // Show 3rd LGA menu
+                $('.lgas:eq(2)').show()
                     .find('a')
-                    .click(load_next_page());
+                    .click(function(){
+
+                    });
                 
                 $.curvedArrow({
-                    p0x: 400,
-                    p0y: 400,
-                    p1x: 300,
-                    p1y: 300,
-                    p2x: 250,
-                    p2y: 440
+                    p0x: 400, p0y: 400,
+                    p1x: 300, p1y: 300,
+                    p2x: 250, p2y: 440
                 });
             }
         },
         {
             body: "<h1>Filter by Sector</h1>" +
-            "View all sectors within an LGA or choose from Health, Education or Water."
+            "View all sectors within an LGA or choose from Health, Education or Water.",
+            post_cb: function(index){
+                $.curvedArrow({
+                    p0x: 400, p0y: 400,
+                    p1x: 300, p1y: 400,
+                    p2x: 300, p2y: 225
+                });
+            }
         },
         {
             body: "<h1>Overview, Map or Facility Views</h1>" +
@@ -209,7 +212,7 @@ function start_walkthrough(){
             page.pre_hook(index);
         }
 
-        var modal = $(html).appendTo('#content');
+        var modal = $(html).appendTo('#content .container');
         modal.show()
             .find('.walkthrough_back, .walkthrough_next')
             .click(function(){
@@ -223,7 +226,13 @@ function start_walkthrough(){
             })
             .end()
             .find('.dot[data-index="' + index + '"]')
-            .addClass('active');
+            .addClass('active')
+            .end()
+            .find('.dot')
+            .click(function(){
+                var i = $(this).data('index');
+                show_walkthrough(i);
+            });
 
         if (page.post_cb){
             // post callback runs after modal is added to DOM

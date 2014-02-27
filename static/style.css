@@ -19,6 +19,8 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 
 /* Base.html 
 ==================================================================== */
+* { box-sizing: border-box; }
+
 body {
     padding-top: 115px;
     font-size: 15px;
@@ -132,9 +134,6 @@ table .value {
     background: #ddd;
 }
 
-#content {
-    position: relative;
-}
 #content .container {
     position: relative;
     background: #fff;
@@ -413,6 +412,7 @@ table thead td:active {
     background: rgba(0,0,0,0.85);
     border-radius: 6px;
     box-shadow: 5px 5px 20px #666;
+    z-index: 50;
 }
 .walkthrough_close {
     position: absolute;
