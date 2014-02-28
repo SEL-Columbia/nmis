@@ -228,7 +228,7 @@ function start_walkthrough(){
                 window.setTimeout(function(){
                     $('.pie_chart_selector')
                         .find('option[value="potable_water_access"]')
-                        .attr('selected', 'selected')
+                        .prop('selected', 'selected')
                         .end()
                         .change();
                 }, 1000);
@@ -243,7 +243,7 @@ function start_walkthrough(){
             '<div class="walkthrough_btn">Start Exploring</div>' +
             '<i>Need more help? <br>View additional <a href="/planning">Planning Tools</a></i>',
             post_cb: function(){
-                $('.dots').hide();
+                $('.dots, .walkthrough_next').hide();
             }
         }
     ];
