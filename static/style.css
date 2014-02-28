@@ -134,6 +134,9 @@ table .value {
     background: #ddd;
 }
 
+#content {
+    position: relative;
+}
 #content .container {
     position: relative;
     background: #fff;
