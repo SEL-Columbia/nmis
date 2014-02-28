@@ -291,7 +291,7 @@ function start_walkthrough(){
         }
     }
 
-    //show_walkthrough(0);
+    show_walkthrough(0);
 }
 
 
@@ -311,7 +311,7 @@ function IndexView(){
         $(this).next('.lgas').toggle();
         return false;
     });
-    start_walkthrough();
+    //start_walkthrough();
 };
 
 
