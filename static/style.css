@@ -459,7 +459,7 @@ table thead td:active {
     font-weight: 500;
     background: rgb(247, 244, 36);
     padding: 6px 35px;
-    margin-top: 15px;
+    margin: 25px 0 15px;
     text-transform: uppercase;
     border-radius: 4px;
 }

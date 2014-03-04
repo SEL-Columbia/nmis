@@ -138,7 +138,7 @@ function start_walkthrough(){
             '<div class="walkthrough_btn">Take Tour</div>',
             post_cb: function(index){
                 $(this).find('.walkthrough_nav')
-                    .css('visibility', 'hidden')
+                    .hide()
                     .end()
                     .find('.walkthrough_btn')
                     .click(function(){
@@ -150,10 +150,8 @@ function start_walkthrough(){
             body: "<h1>Choose an LGA to get started</h1>" +
             "LGAs are organized by zone. Click on a State for a list of LGAs within that State or search for an LGA in the dropdown menu above.",
             pre_cb: function(index){
-                if (window.location.hash){
-                    // Return to explore page
-                    window.location.hash = '';
-                }
+                // Return to explore page
+                window.location.hash = '';
             },
             post_cb: function(index){
                 // Show 3rd LGA menu
@@ -189,10 +187,7 @@ function start_walkthrough(){
             body: "<h1>Overview, Map or Facility Views</h1>" +
             "You can easily switch between an LGA overview, map of facilities, or individual facility data by selecting the appropriate tab.",
             pre_cb: function(index){
-                if (location.hash.indexOf('lga_health') < 0){
-                    // If we are not on an lga page, then navigate to one
-                    location.hash = 'kogi_adavi/lga_health';
-                }
+                location.hash = 'kogi_adavi/lga_health';
             },
             post_cb: function(index){
                 $.curvedArrow({
@@ -322,7 +317,7 @@ function IndexView(){
         $(this).next('.lgas').toggle();
         return false;
     });
-    start_walkthrough();
+    //start_walkthrough();
 };
 
 
