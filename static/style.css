@@ -350,8 +350,16 @@ table .value {
     -moz-animation-delay: 0.6s;
 }
  
-@keyframes loading,
-@-webkit-keyframes loading,
+@keyframes loading {
+    10% { background: #ccc; }
+    20% { background-color: #bbb; }
+    30% { background-color: #aaa; }
+}
+@-webkit-keyframes loading {
+    10% { background: #ccc; }
+    20% { background-color: #bbb; }
+    30% { background-color: #aaa; }
+}
 @-moz-keyframes loading {
     10% { background: #ccc; }
     20% { background-color: #bbb; }
