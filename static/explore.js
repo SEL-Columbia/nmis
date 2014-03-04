@@ -174,10 +174,8 @@ function start_walkthrough(){
             body: "<h1>Filter by Sector</h1>" +
             "View all sectors within an LGA or choose from Health, Education or Water.",
             pre_cb: function(index){
-                if (location.hash.indexOf('lga_overview') < 0){
-                    // If we are not on an lga page, then navigate to one
-                    location.hash = 'kogi_adavi/lga_overview';
-                }
+                // If we are not on an lga page, then navigate to one
+                location.hash = 'kogi_adavi/lga_overview';
             },
             post_cb: function(index){
                 $.curvedArrow({
@@ -208,40 +206,53 @@ function start_walkthrough(){
             body: "<h1>Indicator Detail in Mapview</h1>" +
             "View which or how many facilities provide a specific service, by selecting the indicator from the dropdown.",
             pre_cb: function(index){
-                if (location.hash.indexOf('/map_health') < 0){
-                    // If we are not on an lga map page, then navigate to one
-                    location.hash = 'kogi_adavi/map_health';
-                }
+                location.hash = 'kogi_adavi/map_health';
             },
             post_cb: function(){
                 $('.walkthrough_modal').css({
-                    top: 100,
+                    top: 75,
                     left: '65%'
                 });
 
                 $.curvedArrow({
-                    p0x: 600, p0y: 400,
-                    p1x: 400, p1y: 400,
+                    p0x: 600, p0y: 450,
+                    p1x: 400, p1y: 450,
                     p2x: 400, p2y: 300
-                });
-
-                window.setTimeout(function(){
+                })
+                .delay(1000)
+                .fadeOut(function(){
                     $('.pie_chart_selector')
                         .find('option[value="potable_water_access"]')
                         .prop('selected', 'selected')
                         .end()
                         .change();
-                }, 1000);
+                });
             }
         },
         {
             body: "<h1>Facility Snapshot and Detail</h1>" +
-            "View the Snapshot, the most relevant indicators for each facility, or view more detailed indicators such as those for Infrastructure or Staffing."
+            "View the Snapshot, the most relevant indicators for each facility, or view more detailed indicators such as those for Infrastructure or Staffing.",
+            pre_cb: function(){
+                location.hash = 'kogi_adavi/facilities_health';
+            },
+            post_cb: function(){
+                $('.walkthrough_modal').css('top', 200);
+                
+                $.curvedArrow({
+                    p0x: 400, p0y: 450,
+                    p1x: 300, p1y: 450,
+                    p2x: 300, p2y: 310
+                });
+            }
         },
         {
             body: "<h1><i>Okay, I've got it</i></h1>" +
             '<div class="walkthrough_btn">Start Exploring</div>' +
             '<i>Need more help? <br>View additional <a href="/planning">Planning Tools</a></i>',
+            pre_cb: function(){
+                // Return to explore page
+                window.location.hash = '';
+            },
             post_cb: function(){
                 $('.dots, .walkthrough_next').hide();
             }
@@ -311,7 +322,7 @@ function IndexView(){
         $(this).next('.lgas').toggle();
         return false;
     });
-    //start_walkthrough();
+    start_walkthrough();
 };
 
 
