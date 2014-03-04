@@ -60,7 +60,7 @@
     },
     "gross_enrollment_ratio_secondary_education": {
         "name": "Gross enrollment rate in primary education",
-        "description": "Total enrolment in primary school, regardless of age, expressed as a percentage of the eligible official primary school-age population (6-11 years of age in Nigeria) in a given school year. (School Census, 2005 / Population Census, 2006)"
+        "description": "Total enrollment in primary school, regardless of age, expressed as a percentage of the eligible official primary school-age population (6-11 years of age in Nigeria) in a given school year. (School Census, 2005 / Population Census, 2006)"
     },
     "girls_boys_ratio_js": {
         "name": "Ratio of girls to boys in junior secondary schools",
@@ -85,7 +85,7 @@
     },
     "gross_enrollment_rate_js": {
         "name": "Gross enrollment rate in junior secondary education",
-        "description": "Total enrolment in secondary school, regardless of age, expressed as a percentage of the eligible official secondary school-age population (12-17 years of age in Nigeria) in a given school year. (HNLSS, 2008-2009)"
+        "description": "Total enrollment in secondary school, regardless of age, expressed as a percentage of the eligible official secondary school-age population (12-17 years of age in Nigeria) in a given school year. (HNLSS, 2008-2009)"
     },
     "nga_pct_hholds_with_access_to_improved_water_sources": {
         "name": "Proportion of households with an improved water source",
@@ -228,11 +228,11 @@
         "description": ""
     }, 
     "num_ss_schools_multiplecount": {
-        "name": "Senior secondary schools", 
+        "name": "Number of senior secondary schools", 
         "description": ""
     }, 
     "num_js_schools_multiplecount": {
-        "name": "Junior secondary schools", 
+        "name": "Number of junior secondary schools", 
         "description": ""
     }, 
     "avg_num_students_primary": {
@@ -392,7 +392,7 @@
         "description": ""
     }, 
     "proportion_teachers_nce_juniorsec": {
-        "name": "Percentage of junior secondary qualified teachers (with NCE)", 
+        "name": "Percentage of junior secondary teacher with NCE qualification", 
         "description": ""
     }, 
     "num_health_facilities_c_sections": {
@@ -456,7 +456,7 @@
         "description": "Number of full-time nurses on staff at the facility."
     }, 
     "proportion_schools_chalkboard_all_rooms_juniorsec": {
-        "name": "Percentage of junior secondary schools with a chalkboard in every classroom", 
+        "name": "Percentage of junior secondary schools with a useable chalkboard in every classroom", 
         "description": ""
     }, 
     "proportion_students_3kmplus_primary": {
@@ -705,7 +705,7 @@
     }, 
     "gender_parity_index_js": {
         "name": "Gender parity index (GPI) for junior secondary schools", 
-        "description": "The gross enrolment ratio for females divided by the gross enrolment ratio for males for junior secondary schools. (see description of gross enrollment ratio). (School Census,2005)"
+        "description": "The gross enrollment ratio for females divided by the gross enrollment ratio for males for junior secondary schools. (see description of gross enrollment ratio). (School Census,2005)"
     }, 
     "num_diesel": {
         "name": "Number", 
@@ -872,7 +872,7 @@
         "description": ""
     }, 
     "proportion_schools_chalkboard_all_rooms_primary": {
-        "name": "Percentage of primary schools with a chalkboard in every classroom", 
+        "name": "Percentage of primary schools with a useable chalkboard in every classroom", 
         "description": ""
     }, 
     "literacy_rate": {
@@ -1460,12 +1460,12 @@
         "description": ""
     }, 
     "proportion_schools_chalkboard_all_rooms": {
-        "name": "Proportion of schools with a chalkboard in every classroom", 
+        "name": "Proportion of schools with a useable chalkboard in every classroom", 
         "description": ""
     }, 
     "male_to_female_student_ratio": {
         "name": "Ratio boys to girls", 
-        "description": "The ratio of boys to girls enrolled at the school. The indicator is a ratio of the number of  enrolled boys to enrolled girls, regardless of ages. It measures the equality of educational opportunity, measured in terms of school enrolment, for boys and girls"
+        "description": "The ratio of boys to girls enrolled at the school. The indicator is a ratio of the number of  enrolled boys to enrolled girls, regardless of ages. It measures the equality of educational opportunity, measured in terms of school enrollment, for boys and girls"
     }, 
     "prevalence_of_wasting_children_u5": {
         "name": "Percentage of children under five with wasting (weight-for-height)*", 
@@ -1617,7 +1617,7 @@
     }, 
     "gender_parity_index_primary": {
         "name": "Gender parity index (GPI) for primary schools", 
-        "description": "The gross enrolment ratio for females divided by the gross enrolment ratio for males for primary schools. (see description of gross enrollment ratio). (School Census,2005)"
+        "description": "The gross enrollment ratio for females divided by the gross enrollment ratio for males for primary schools. (see description of gross enrollment ratio). (School Census,2005)"
     }, 
     "pop_2006": {
         "name": "Population (2006)", 
@@ -1640,7 +1640,7 @@
         "description": ""
     }, 
     "proportion_teachers_nce_primary": {
-        "name": "Percentage of primary school qualified teachers (with NCE)", 
+        "name": "Percentage of primary school teachers with NCE qualification", 
         "description": ""
     }, 
     "num_level_other_health_facilities": {
@@ -1697,7 +1697,7 @@
     }, 
     "chalkboard_each_classroom_yn": {
         "name": "Chalkboards in every classroom", 
-        "description": "Every classroom at the school has a chalkboard"
+        "description": "Every classroom at the school has a useable chalkboard"
     }, 
     "drop_out_rate": {
         "name": "Drop Out Rate", 
