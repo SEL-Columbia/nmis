@@ -10,10 +10,8 @@ cd /home/ubuntu/srv/nmis_ui_data_2ef92c15
 # Run csv2json if needed
 git_status=`git status -s | wc -l`
 if [ $git_status -ne 0 ]; then
-    do
-        git pull
-        python csv2json.py >> /tmp/csv2json.log 2>&1
-    done
+    git pull
+    python csv2json.py >> /tmp/csv2json.log 2>&1
 fi
 
 
