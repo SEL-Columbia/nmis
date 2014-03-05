@@ -72,7 +72,7 @@
             ]
         },
         {
-            "name": "General information for runior secondary schools",
+            "name": "General information for junior secondary schools",
             "indicators": [
                 "num_junior_secondary_schools",
                 "percent_management_public_js",
