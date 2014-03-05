@@ -18,8 +18,7 @@ if [ $csv2json -eq 1 ]; then
     git_pull=`git pull`
     git_result=`echo $git_pull | grep "^Already up-to-date." | wc -l`
     echo $git_pull >> $log
-    echo $git_result >> $log
-    
+        
     if [ $git_result -eq 0 ]; then
         echo "Running csv2json:" >> $log
         python csv2json.py >> $log
