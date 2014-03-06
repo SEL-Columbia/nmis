@@ -6,3 +6,5 @@ static/nmis_data.zip
 .nmis_virtualenv/
 
 protected_data/
+
+mopupmon/secrets.py

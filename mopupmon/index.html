@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    {% for zone in zones %}
+        <div class="zone">
+            <h2>{{ zone[0] }}</h2>
+            <div class="state">
+                {% for state in zone[1] %}
+                    <a class="state_title" href="#">
+                        {{ state[0] }}
+                    </a>
+                    <ul class="lgas">
+                        {% for lga in state[1] %}
+                            <li>
+                                {{ lga }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+

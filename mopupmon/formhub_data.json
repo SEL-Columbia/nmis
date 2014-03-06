@@ -1,0 +1,8187 @@
+[
+  {
+    "facility_ID": "Mibt",
+    "_id": 2711279,
+    "lga": "anambra_idemili_north"
+  },
+  {
+    "facility_ID": "Kycs",
+    "_id": 2711277,
+    "lga": "anambra_idemili_north"
+  },
+  {
+    "facility_ID": "Zfdi",
+    "_id": 2711274,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "dizp",
+    "_id": 2711272,
+    "lga": "anambra_idemili_north"
+  },
+  {
+    "facility_ID": "Ghzu",
+    "_id": 2711267,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "Jkdf",
+    "_id": 2711263,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "Hroz",
+    "_id": 2711255,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "Obrh",
+    "_id": 2711252,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "Ztxw",
+    "_id": 2711250,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "Iehb",
+    "_id": 2711206,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "Dkol",
+    "_id": 2711204,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "Igey",
+    "_id": 2711137,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "Zjgu",
+    "_id": 2711135,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "Rtty",
+    "_id": 2711123,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "Csev",
+    "_id": 2711121,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "NRAU",
+    "_id": 2711110,
+    "lga": "imo_orlu"
+  },
+  {
+    "facility_ID": "edzo",
+    "_id": 2711048,
+    "lga": "jigawa_birnin_kudu"
+  },
+  {
+    "facility_ID": "Vomg",
+    "_id": 2711009,
+    "lga": "kwara_ilorin_south"
+  },
+  {
+    "lga": "jigawa_birnin_kudu",
+    "_id": 2710977
+  },
+  {
+    "facility_ID": "Nquz",
+    "_id": 2710911,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "0037",
+    "_id": 2710900,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "fakr",
+    "_id": 2710876,
+    "lga": "jigawa_birnin_kudu"
+  },
+  {
+    "facility_ID": "hcjx",
+    "_id": 2710794,
+    "lga": "bauchi_bogoro"
+  },
+  {
+    "facility_ID": "djun",
+    "_id": 2710736,
+    "lga": "jigawa_birnin_kudu"
+  },
+  {
+    "facility_ID": "Oxpm",
+    "_id": 2710727,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "Evjs",
+    "_id": 2710625,
+    "lga": "adamawa_michika"
+  },
+  {
+    "facility_ID": "Kcpk",
+    "_id": 2710596,
+    "lga": "adamawa_michika"
+  },
+  {
+    "lga": "jigawa_birnin_kudu",
+    "_id": 2710593
+  },
+  {
+    "facility_ID": "Epke",
+    "_id": 2710590,
+    "lga": "adamawa_michika"
+  },
+  {
+    "facility_ID": "Bgiu",
+    "_id": 2710589,
+    "lga": "adamawa_michika"
+  },
+  {
+    "facility_ID": "Fnfa",
+    "_id": 2710579,
+    "lga": "adamawa_michika"
+  },
+  {
+    "facility_ID": "Mlgc",
+    "_id": 2710567,
+    "lga": "adamawa_michika"
+  },
+  {
+    "facility_ID": "Vdal",
+    "_id": 2710553,
+    "lga": "adamawa_michika"
+  },
+  {
+    "facility_ID": "Zitv",
+    "_id": 2710552,
+    "lga": "adamawa_michika"
+  },
+  {
+    "facility_ID": "Ttqe",
+    "_id": 2710550,
+    "lga": "adamawa_michika"
+  },
+  {
+    "facility_ID": "vanw",
+    "_id": 2710505,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "Hngs",
+    "_id": 2710504,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "msjb",
+    "_id": 2710495,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "dwlp",
+    "_id": 2710493,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "leyu",
+    "_id": 2710489,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "aate",
+    "_id": 2710479,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "mdit",
+    "_id": 2710478,
+    "lga": "jigawa_birnin_kudu"
+  },
+  {
+    "facility_ID": "zsbu",
+    "_id": 2710475,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "Saaf",
+    "_id": 2710466,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "Llnt",
+    "_id": 2710467,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "vxmb",
+    "_id": 2710465,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "Bhwk",
+    "_id": 2710464,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "lga": "borno_bayo",
+    "_id": 2710457
+  },
+  {
+    "facility_ID": "niov",
+    "_id": 2710452,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "nlqc",
+    "_id": 2710450,
+    "lga": "yobe_potiskum"
+  },
+  {
+    "facility_ID": "pwdp",
+    "_id": 2710449,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "Stla",
+    "_id": 2710440,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "fmfa",
+    "_id": 2710439,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "bnzd",
+    "_id": 2710432,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "heec",
+    "_id": 2710417,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "epet",
+    "_id": 2710412,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "Tttf",
+    "_id": 2710401,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "znqa",
+    "_id": 2710392,
+    "lga": "adamawa_michika"
+  },
+  {
+    "facility_ID": "Cayh",
+    "_id": 2710391,
+    "lga": "adamawa_michika"
+  },
+  {
+    "facility_ID": "zjps",
+    "_id": 2710356,
+    "lga": "jigawa_birnin_kudu"
+  },
+  {
+    "facility_ID": "ztnc",
+    "_id": 2710328,
+    "lga": "jigawa_birnin_kudu"
+  },
+  {
+    "facility_ID": "Qeur",
+    "_id": 2710326,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "Skeh",
+    "_id": 2710321,
+    "lga": "rivers_obio_akpor"
+  },
+  {
+    "facility_ID": "zqgs",
+    "_id": 2710312,
+    "lga": "yobe_potiskum"
+  },
+  {
+    "facility_ID": "Thkq",
+    "_id": 2710310,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "Qfrm",
+    "_id": 2710297,
+    "lga": "adamawa_michika"
+  },
+  {
+    "facility_ID": "Xjtd",
+    "_id": 2710287,
+    "lga": "adamawa_michika"
+  },
+  {
+    "facility_ID": "cfax",
+    "_id": 2710274,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "zzxi",
+    "_id": 2710264,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "rzzb",
+    "_id": 2710262,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "ssmf",
+    "_id": 2710260,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "jdad",
+    "_id": 2710250,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "fswe",
+    "_id": 2710249,
+    "lga": "borno_bayo"
+  },
+  {
+    "lga": "adamawa_michika",
+    "_id": 2710228
+  },
+  {
+    "facility_ID": "Ikxu",
+    "_id": 2710227,
+    "lga": "adamawa_michika"
+  },
+  {
+    "facility_ID": "Xnql",
+    "_id": 2710217,
+    "lga": "adamawa_michika"
+  },
+  {
+    "facility_ID": "wmvk",
+    "_id": 2710215,
+    "lga": "enugu_nsukka"
+  },
+  {
+    "facility_ID": "ttaq",
+    "_id": 2710203,
+    "lga": "yobe_potiskum"
+  },
+  {
+    "facility_ID": "Udqj",
+    "_id": 2710182,
+    "lga": "adamawa_michika"
+  },
+  {
+    "facility_ID": "Awvt",
+    "_id": 2710145,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "Grpp",
+    "_id": 2710118,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "jzen",
+    "_id": 2710104,
+    "lga": "yobe_potiskum"
+  },
+  {
+    "facility_ID": "jmsz",
+    "_id": 2710063,
+    "lga": "yobe_potiskum"
+  },
+  {
+    "facility_ID": "veff",
+    "_id": 2710000,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "oiyk",
+    "_id": 2709977,
+    "lga": "jigawa_babura"
+  },
+  {
+    "facility_ID": "BGDK",
+    "_id": 2709935,
+    "lga": "imo_orlu"
+  },
+  {
+    "facility_ID": "qhbr",
+    "_id": 2709914,
+    "lga": "yobe_potiskum"
+  },
+  {
+    "lga": "imo_orlu",
+    "_id": 2709793
+  },
+  {
+    "facility_ID": "jwun",
+    "_id": 2707223,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "KRAO",
+    "_id": 2709647,
+    "lga": "imo_orlu"
+  },
+  {
+    "facility_ID": "vcnb",
+    "_id": 2709623,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "facility_ID": "abhl",
+    "_id": 2709552,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "facility_ID": "vcnb",
+    "_id": 2709549,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "facility_ID": "eajb",
+    "_id": 2709546,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "facility_ID": "ltzt",
+    "_id": 2709544,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "facility_ID": "Nszh",
+    "_id": 2702830,
+    "lga": "kaduna_sanga"
+  },
+  {
+    "facility_ID": "Xctp",
+    "_id": 2702843,
+    "lga": "sokoto_dange_shuni"
+  },
+  {
+    "facility_ID": "Zhsi",
+    "_id": 2674662,
+    "lga": "edo_esan_west"
+  },
+  {
+    "facility_ID": "bnkh",
+    "_id": 2674657,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "tuuh",
+    "_id": 2702810,
+    "lga": "ondo_akure_south"
+  },
+  {
+    "facility_ID": "Sdyj",
+    "_id": 2702829,
+    "lga": "sokoto_dange_shuni"
+  },
+  {
+    "facility_ID": "cuds",
+    "_id": 2632992,
+    "lga": "sokoto_silame"
+  },
+  {
+    "facility_ID": "dyks",
+    "_id": 2642630,
+    "lga": "sokoto_silame"
+  },
+  {
+    "facility_ID": "zaps",
+    "_id": 2652126,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "Xdrf",
+    "_id": 2655268,
+    "lga": "edo_egor"
+  },
+  {
+    "facility_ID": "gyyc",
+    "_id": 2655780,
+    "lga": "enugu_nsukka"
+  },
+  {
+    "facility_ID": "dvil",
+    "_id": 2656065,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "rxke",
+    "_id": 2656159,
+    "lga": "edo_egor"
+  },
+  {
+    "facility_ID": "Fvoy",
+    "_id": 2657768,
+    "lga": "edo_egor"
+  },
+  {
+    "facility_ID": "kmdz",
+    "_id": 2659071,
+    "lga": "ogun_ijebu_ode"
+  },
+  {
+    "facility_ID": "zauv",
+    "_id": 2659106,
+    "lga": "ogun_ijebu_ode"
+  },
+  {
+    "facility_ID": "Ywxq",
+    "_id": 2661423,
+    "lga": "akwa_ibom_ibesikpo_asutan"
+  },
+  {
+    "facility_ID": "Sacg",
+    "_id": 2661463,
+    "lga": "akwa_ibom_ibesikpo_asutan"
+  },
+  {
+    "facility_ID": "Iufv",
+    "_id": 2661508,
+    "lga": "akwa_ibom_ibesikpo_asutan"
+  },
+  {
+    "facility_ID": "Uixn",
+    "_id": 2661819,
+    "lga": "kebbi_wasagu_danko"
+  },
+  {
+    "facility_ID": "ekjz",
+    "_id": 2661855,
+    "lga": "kebbi_wasagu_danko"
+  },
+  {
+    "facility_ID": "zreg",
+    "_id": 2662015,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "yzbg",
+    "_id": 2662024,
+    "lga": "jigawa_kafin_hausa"
+  },
+  {
+    "facility_ID": "nkme",
+    "_id": 2662062,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "Suam",
+    "_id": 2662159,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "albv",
+    "_id": 2662262,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "Yevm",
+    "_id": 2662445,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "nwhu",
+    "_id": 2662674,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "seud",
+    "_id": 2662930,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "Ijbt",
+    "_id": 2662947,
+    "lga": "kebbi_wasagu_danko"
+  },
+  {
+    "facility_ID": "xarb",
+    "_id": 2663060,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "pooc",
+    "_id": 2663153,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "sakd",
+    "_id": 2663206,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "nhdp",
+    "_id": 2663235,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "jqjy",
+    "_id": 2663258,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "ypgq",
+    "_id": 2663312,
+    "lga": "ondo_akoko_south_east"
+  },
+  {
+    "facility_ID": "zkng",
+    "_id": 2663336,
+    "lga": "jigawa_kafin_hausa"
+  },
+  {
+    "lga": "ebonyi_ohaukwu",
+    "_id": 2663352
+  },
+  {
+    "facility_ID": "ihic",
+    "_id": 2663366,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "vffz",
+    "_id": 2663465,
+    "lga": "ebonyi_ohaukwu"
+  },
+  {
+    "facility_ID": "rhgl",
+    "_id": 2663546,
+    "lga": "jigawa_kafin_hausa"
+  },
+  {
+    "lga": "jigawa_kafin_hausa",
+    "_id": 2663718
+  },
+  {
+    "facility_ID": "bzya",
+    "_id": 2663731,
+    "lga": "niger_shiroro"
+  },
+  {
+    "lga": "benue_ushongo",
+    "_id": 2664333
+  },
+  {
+    "facility_ID": "9999",
+    "_id": 2664489,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "facility_ID": "9999",
+    "_id": 2664519,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "facility_ID": "Swfr",
+    "_id": 2664578,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "Pbew",
+    "_id": 2664582,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "9999",
+    "_id": 2664583,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "facility_ID": "Xvaj",
+    "_id": 2664605,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "Ofxs",
+    "_id": 2664622,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "Nwcz",
+    "_id": 2664629,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "sotz",
+    "_id": 2664675,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "9999",
+    "_id": 2665020,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "facility_ID": "9999",
+    "_id": 2665050,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "facility_ID": "yjzl",
+    "_id": 2665113,
+    "lga": "ogun_egbado_south"
+  },
+  {
+    "facility_ID": "0499",
+    "_id": 2665142,
+    "lga": "adamawa_michika"
+  },
+  {
+    "facility_ID": "Qqee",
+    "_id": 2665304,
+    "lga": "kano_bichi"
+  },
+  {
+    "facility_ID": "ceun",
+    "_id": 2665393,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "0775",
+    "_id": 2665406,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2665511
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2665535
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2665604
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2665626
+  },
+  {
+    "lga": "ogun_egbado_south",
+    "_id": 2665926
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2665947
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2665961
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2665976
+  },
+  {
+    "facility_ID": "qjgn",
+    "_id": 2666560,
+    "lga": "anambra_aguata"
+  },
+  {
+    "lga": "anambra_aguata",
+    "_id": 2666621
+  },
+  {
+    "facility_ID": "hcrf",
+    "_id": 2666628,
+    "lga": "benue_ushongo"
+  },
+  {
+    "lga": "anambra_aguata",
+    "_id": 2666671
+  },
+  {
+    "facility_ID": "tlqw",
+    "_id": 2666754,
+    "lga": "anambra_aguata"
+  },
+  {
+    "lga": "ogun_ifo",
+    "_id": 2666863
+  },
+  {
+    "lga": "ogun_ifo",
+    "_id": 2666867
+  },
+  {
+    "facility_ID": "ajqs",
+    "_id": 2666953,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "rjwp",
+    "_id": 2667015,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "rpyo",
+    "_id": 2667034,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "ttxl",
+    "_id": 2667092,
+    "lga": "anambra_aguata"
+  },
+  {
+    "lga": "adamawa_hong",
+    "_id": 2667127
+  },
+  {
+    "facility_ID": "Kyyt",
+    "_id": 2667144,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "Kbqs",
+    "_id": 2667147,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "Edum",
+    "_id": 2667148,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "Yxpm",
+    "_id": 2667157,
+    "lga": "adamawa_hong"
+  },
+  {
+    "lga": "anambra_aguata",
+    "_id": 2667164
+  },
+  {
+    "facility_ID": "zppj",
+    "_id": 2667215,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "tzzt",
+    "_id": 2668608,
+    "lga": "ondo_irele"
+  },
+  {
+    "facility_ID": "ywbh",
+    "_id": 2668715,
+    "lga": "ondo_irele"
+  },
+  {
+    "facility_ID": "cnqx",
+    "_id": 2670963,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "facility_ID": "mplx",
+    "_id": 2670966,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "facility_ID": "mmex",
+    "_id": 2670994,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "facility_ID": "Kibo",
+    "_id": 2671020,
+    "lga": "delta_okpe"
+  },
+  {
+    "facility_ID": "zqmr",
+    "_id": 2671171,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "facility_ID": "axoh",
+    "_id": 2671468,
+    "lga": "delta_okpe"
+  },
+  {
+    "facility_ID": "Hyqu",
+    "_id": 2671643,
+    "lga": "delta_okpe"
+  },
+  {
+    "facility_ID": "djcm",
+    "_id": 2672388,
+    "lga": "ebonyi_afikpo_north"
+  },
+  {
+    "facility_ID": "Jtjj",
+    "_id": 2672643,
+    "lga": "ondo_akure_south"
+  },
+  {
+    "facility_ID": "Kbbc",
+    "_id": 2673398,
+    "lga": "bauchi_bogoro"
+  },
+  {
+    "facility_ID": "Kfjj",
+    "_id": 2673700,
+    "lga": "bauchi_bogoro"
+  },
+  {
+    "facility_ID": "Dydt",
+    "_id": 2673743,
+    "lga": "bauchi_bogoro"
+  },
+  {
+    "facility_ID": "azdx",
+    "_id": 2673813,
+    "lga": "bauchi_bogoro"
+  },
+  {
+    "facility_ID": "tsag",
+    "_id": 2673853,
+    "lga": "bauchi_bogoro"
+  },
+  {
+    "lga": "bauchi_bogoro",
+    "_id": 2673888
+  },
+  {
+    "facility_ID": "ckaq",
+    "_id": 2673901,
+    "lga": "bauchi_bogoro"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2674620,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "fuer",
+    "_id": 2673935,
+    "lga": "bauchi_bogoro"
+  },
+  {
+    "facility_ID": "sxme",
+    "_id": 2673980,
+    "lga": "bauchi_bogoro"
+  },
+  {
+    "lga": "bauchi_bogoro",
+    "_id": 2673995
+  },
+  {
+    "facility_ID": "hkrs",
+    "_id": 2674116,
+    "lga": "bauchi_bogoro"
+  },
+  {
+    "facility_ID": "adfg",
+    "_id": 2674708,
+    "lga": "benue_tarka"
+  },
+  {
+    "lga": "edo_esan_west",
+    "_id": 2674673
+  },
+  {
+    "facility_ID": "Flei",
+    "_id": 2674670,
+    "lga": "edo_esan_west"
+  },
+  {
+    "facility_ID": "Fted",
+    "_id": 2674665,
+    "lga": "edo_esan_west"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2674352,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2674360,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2674369,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2674372,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2674378,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2674472,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "pdzb",
+    "_id": 2674473,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "owpg",
+    "_id": 2674604,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "rafc",
+    "_id": 2674625,
+    "lga": "zamfara_talata_mafara"
+  },
+  {
+    "facility_ID": "Lycj",
+    "_id": 2674663,
+    "lga": "edo_esan_west"
+  },
+  {
+    "facility_ID": "Mhgu",
+    "_id": 2674672,
+    "lga": "edo_esan_west"
+  },
+  {
+    "facility_ID": "Dvfw",
+    "_id": 2674680,
+    "lga": "edo_esan_west"
+  },
+  {
+    "facility_ID": "Hcho",
+    "_id": 2674681,
+    "lga": "edo_esan_west"
+  },
+  {
+    "facility_ID": "aljf",
+    "_id": 2674918,
+    "lga": "akwa_ibom_ibiono_ibom"
+  },
+  {
+    "facility_ID": "kdaz",
+    "_id": 2675401,
+    "lga": "edo_egor"
+  },
+  {
+    "facility_ID": "9999",
+    "_id": 2676910,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "facility_ID": "9999",
+    "_id": 2676933,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "lga": "ebonyi_onicha",
+    "_id": 2677005
+  },
+  {
+    "facility_ID": "Agae",
+    "_id": 2677660,
+    "lga": "lagos_surulere"
+  },
+  {
+    "facility_ID": "nvow",
+    "_id": 2678093,
+    "lga": "ogun_ijebu_ode"
+  },
+  {
+    "facility_ID": "nlxt",
+    "_id": 2679513,
+    "lga": "kaduna_igabi"
+  },
+  {
+    "facility_ID": "qzos",
+    "_id": 2679554,
+    "lga": "kaduna_igabi"
+  },
+  {
+    "facility_ID": "tymp",
+    "_id": 2679567,
+    "lga": "kaduna_igabi"
+  },
+  {
+    "facility_ID": "hvfr",
+    "_id": 2679574,
+    "lga": "kaduna_igabi"
+  },
+  {
+    "facility_ID": "cvzl",
+    "_id": 2679578,
+    "lga": "kaduna_igabi"
+  },
+  {
+    "facility_ID": "hllb",
+    "_id": 2679583,
+    "lga": "kaduna_igabi"
+  },
+  {
+    "facility_ID": "glcd",
+    "_id": 2680213,
+    "lga": "ebonyi_onicha"
+  },
+  {
+    "facility_ID": "akkj",
+    "_id": 2680233,
+    "lga": "ebonyi_onicha"
+  },
+  {
+    "facility_ID": "cffm",
+    "_id": 2680280,
+    "lga": "ebonyi_onicha"
+  },
+  {
+    "facility_ID": "xayp",
+    "_id": 2680428,
+    "lga": "gombe_yalmatu_deba"
+  },
+  {
+    "facility_ID": "plum",
+    "_id": 2680465,
+    "lga": "gombe_yalmatu_deba"
+  },
+  {
+    "facility_ID": "oawk",
+    "_id": 2680708,
+    "lga": "gombe_yalmatu_deba"
+  },
+  {
+    "facility_ID": "bmfv",
+    "_id": 2680751,
+    "lga": "gombe_yalmatu_deba"
+  },
+  {
+    "facility_ID": "acbl",
+    "_id": 2680849,
+    "lga": "gombe_yalmatu_deba"
+  },
+  {
+    "facility_ID": "soff",
+    "_id": 2680850,
+    "lga": "ogun_ijebu_ode"
+  },
+  {
+    "facility_ID": "Hitm",
+    "_id": 2680857,
+    "lga": "kaduna_kubau"
+  },
+  {
+    "facility_ID": "djby",
+    "_id": 2680859,
+    "lga": "ogun_ijebu_ode"
+  },
+  {
+    "facility_ID": "cdgj",
+    "_id": 2680862,
+    "lga": "gombe_yalmatu_deba"
+  },
+  {
+    "lga": "ogun_ijebu_ode",
+    "_id": 2680867
+  },
+  {
+    "lga": "ogun_ijebu_ode",
+    "_id": 2680883
+  },
+  {
+    "facility_ID": "yjlj",
+    "_id": 2680911,
+    "lga": "ogun_ijebu_ode"
+  },
+  {
+    "facility_ID": "Ptdt",
+    "_id": 2680944,
+    "lga": "kaduna_kubau"
+  },
+  {
+    "facility_ID": "Vifa",
+    "_id": 2680987,
+    "lga": "kaduna_kubau"
+  },
+  {
+    "facility_ID": "Krmh",
+    "_id": 2681006,
+    "lga": "kaduna_kubau"
+  },
+  {
+    "facility_ID": "mndz",
+    "_id": 2706885,
+    "lga": "osun_osogbo"
+  },
+  {
+    "facility_ID": "Nnbd",
+    "_id": 2681027,
+    "lga": "kaduna_kubau"
+  },
+  {
+    "facility_ID": "Wvwq",
+    "_id": 2681066,
+    "lga": "kaduna_kubau"
+  },
+  {
+    "facility_ID": "Tfsc",
+    "_id": 2681081,
+    "lga": "kaduna_kubau"
+  },
+  {
+    "facility_ID": "Gyby",
+    "_id": 2681103,
+    "lga": "sokoto_sabon_birni"
+  },
+  {
+    "facility_ID": "2xcu",
+    "_id": 2681104,
+    "lga": "sokoto_sabon_birni"
+  },
+  {
+    "facility_ID": "Lwni",
+    "_id": 2681167,
+    "lga": "kaduna_kubau"
+  },
+  {
+    "facility_ID": "zahe",
+    "_id": 2681329,
+    "lga": "jigawa_kafin_hausa"
+  },
+  {
+    "facility_ID": "hgxq",
+    "_id": 2681340,
+    "lga": "jigawa_kafin_hausa"
+  },
+  {
+    "facility_ID": "Vfqa",
+    "_id": 2681354,
+    "lga": "benue_ushongo"
+  },
+  {
+    "lga": "ebonyi_ohaukwu",
+    "_id": 2681378
+  },
+  {
+    "facility_ID": "ikhg",
+    "_id": 2681387,
+    "lga": "jigawa_kafin_hausa"
+  },
+  {
+    "facility_ID": "vgze",
+    "_id": 2681437,
+    "lga": "akwa_ibom_ibiono_ibom"
+  },
+  {
+    "facility_ID": "yxdy",
+    "_id": 2681447,
+    "lga": "akwa_ibom_ibiono_ibom"
+  },
+  {
+    "facility_ID": "dldb",
+    "_id": 2681482,
+    "lga": "akwa_ibom_ibiono_ibom"
+  },
+  {
+    "lga": "ogun_egbado_south",
+    "_id": 2681512
+  },
+  {
+    "lga": "ebonyi_ohaukwu",
+    "_id": 2681704
+  },
+  {
+    "lga": "ebonyi_ohaukwu",
+    "_id": 2681712
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2681833,
+    "lga": "cross_river_obudu"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2681837,
+    "lga": "cross_river_obudu"
+  },
+  {
+    "lga": "cross_river_obudu",
+    "_id": 2681847
+  },
+  {
+    "lga": "cross_river_obudu",
+    "_id": 2681854
+  },
+  {
+    "facility_ID": "DU07",
+    "_id": 2681857,
+    "lga": "cross_river_obudu"
+  },
+  {
+    "facility_ID": "XXXX",
+    "_id": 2681860,
+    "lga": "cross_river_obudu"
+  },
+  {
+    "facility_ID": "DU01",
+    "_id": 2681862,
+    "lga": "cross_river_obudu"
+  },
+  {
+    "facility_ID": "Wcdu",
+    "_id": 2681872,
+    "lga": "osun_ilesha_east"
+  },
+  {
+    "facility_ID": "DU08",
+    "_id": 2681873,
+    "lga": "cross_river_obudu"
+  },
+  {
+    "facility_ID": "Ksjo",
+    "_id": 2681879,
+    "lga": "osun_ilesha_east"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2681943,
+    "lga": "cross_river_obudu"
+  },
+  {
+    "facility_ID": "0768",
+    "_id": 2681953,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "facility_ID": "9999",
+    "_id": 2681974,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "facility_ID": "0820",
+    "_id": 2681980,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "lga": "osun_ilesha_east",
+    "_id": 2681995
+  },
+  {
+    "facility_ID": "Jzrv",
+    "_id": 2682029,
+    "lga": "osun_ilesha_east"
+  },
+  {
+    "facility_ID": "Vmwd",
+    "_id": 2682035,
+    "lga": "kaduna_sanga"
+  },
+  {
+    "facility_ID": "9999",
+    "_id": 2682067,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "facility_ID": "amxx",
+    "_id": 2682153,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "lzwc",
+    "_id": 2682158,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "sghw",
+    "_id": 2682169,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "tyxa",
+    "_id": 2682175,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2682179
+  },
+  {
+    "facility_ID": "2510",
+    "_id": 2682185,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2682192
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2682211
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2682254
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2682282
+  },
+  {
+    "facility_ID": "Fsrk",
+    "_id": 2682286,
+    "lga": "ondo_akure_south"
+  },
+  {
+    "facility_ID": "wfyu",
+    "_id": 2682301,
+    "lga": "ondo_akure_south"
+  },
+  {
+    "facility_ID": "Ijqy",
+    "_id": 2682304,
+    "lga": "ondo_akure_south"
+  },
+  {
+    "facility_ID": "hvil",
+    "_id": 2682313,
+    "lga": "ondo_akure_south"
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2682357
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2682375
+  },
+  {
+    "facility_ID": "ahxh",
+    "_id": 2682376,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "ofrv",
+    "_id": 2682391,
+    "lga": "enugu_nsukka"
+  },
+  {
+    "facility_ID": "mcds",
+    "_id": 2682395,
+    "lga": "anambra_aguata"
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2682432
+  },
+  {
+    "facility_ID": "Iyrz",
+    "_id": 2682435,
+    "lga": "enugu_enugu_south"
+  },
+  {
+    "facility_ID": "Qxkm",
+    "_id": 2682438,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "Warn",
+    "_id": 2682441,
+    "lga": "enugu_enugu_south"
+  },
+  {
+    "facility_ID": "Ppaq",
+    "_id": 2682446,
+    "lga": "enugu_enugu_south"
+  },
+  {
+    "facility_ID": "tyvh",
+    "_id": 2682458,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "Oeji",
+    "_id": 2682465,
+    "lga": "enugu_enugu_south"
+  },
+  {
+    "facility_ID": "xgqr",
+    "_id": 2682466,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "Qynh",
+    "_id": 2682475,
+    "lga": "enugu_enugu_south"
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2682476
+  },
+  {
+    "lga": "anambra_aguata",
+    "_id": 2682479
+  },
+  {
+    "facility_ID": "zwkk",
+    "_id": 2682499,
+    "lga": "enugu_nsukka"
+  },
+  {
+    "facility_ID": "sefv",
+    "_id": 2682534,
+    "lga": "enugu_nsukka"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2682540,
+    "lga": "delta_warri_south"
+  },
+  {
+    "lga": "anambra_aguata",
+    "_id": 2682542
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2682548,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "mppg",
+    "_id": 2682551,
+    "lga": "enugu_nsukka"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2682552,
+    "lga": "delta_warri_south"
+  },
+  {
+    "lga": "anambra_aguata",
+    "_id": 2682567
+  },
+  {
+    "facility_ID": "Wvtx",
+    "_id": 2682591,
+    "lga": "abia_aba_north"
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2682641
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2682665
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2682693
+  },
+  {
+    "lga": "abia_aba_south",
+    "_id": 2682724
+  },
+  {
+    "facility_ID": "yuav",
+    "_id": 2682741,
+    "lga": "fct_municipal_area_council"
+  },
+  {
+    "facility_ID": "gccm",
+    "_id": 2682752,
+    "lga": "zamfara_gusau"
+  },
+  {
+    "facility_ID": "Nads",
+    "_id": 2682753,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "rjck",
+    "_id": 2682756,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "fldk",
+    "_id": 2682759,
+    "lga": "zamfara_gusau"
+  },
+  {
+    "facility_ID": "Lwfd",
+    "_id": 2682769,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "bukw",
+    "_id": 2682809,
+    "lga": "zamfara_gusau"
+  },
+  {
+    "facility_ID": "auju",
+    "_id": 2682811,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "zvni",
+    "_id": 2682822,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "ntxh",
+    "_id": 2682851,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "czew",
+    "_id": 2682855,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "vvdu",
+    "_id": 2682867,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "ckfr",
+    "_id": 2682872,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "gtmp",
+    "_id": 2682881,
+    "lga": "zamfara_gusau"
+  },
+  {
+    "facility_ID": "ojsb",
+    "_id": 2682896,
+    "lga": "zamfara_gusau"
+  },
+  {
+    "facility_ID": "vjdi",
+    "_id": 2683014,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "vskx",
+    "_id": 2683118,
+    "lga": "akwa_ibom_ibiono_ibom"
+  },
+  {
+    "facility_ID": "qbeh",
+    "_id": 2683121,
+    "lga": "akwa_ibom_ibiono_ibom"
+  },
+  {
+    "facility_ID": "siiw",
+    "_id": 2683144,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "Cqbw",
+    "_id": 2683156,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "Tqch",
+    "_id": 2683186,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "facility_ID": "Inft",
+    "_id": 2683368,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "facility_ID": "Xxgt",
+    "_id": 2683398,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "facility_ID": "Poul",
+    "_id": 2683399,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "facility_ID": "Qgtt",
+    "_id": 2683402,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "Kfdf",
+    "_id": 2683403,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "facility_ID": "Bqcr",
+    "_id": 2683405,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "facility_ID": "Awjg",
+    "_id": 2683414,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "facility_ID": "Zqge",
+    "_id": 2683417,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "facility_ID": "Xqef",
+    "_id": 2683421,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "facility_ID": "Wftl",
+    "_id": 2683475,
+    "lga": "kaduna_sanga"
+  },
+  {
+    "facility_ID": "Dlxx",
+    "_id": 2683483,
+    "lga": "kaduna_sanga"
+  },
+  {
+    "facility_ID": "Tcza",
+    "_id": 2683489,
+    "lga": "kaduna_sanga"
+  },
+  {
+    "facility_ID": "klix",
+    "_id": 2683504,
+    "lga": "ogun_ifo"
+  },
+  {
+    "facility_ID": "mlxc",
+    "_id": 2683506,
+    "lga": "ogun_ifo"
+  },
+  {
+    "lga": "ogun_ifo",
+    "_id": 2683508
+  },
+  {
+    "facility_ID": "dvxj",
+    "_id": 2683510,
+    "lga": "ogun_ifo"
+  },
+  {
+    "facility_ID": "fvyl",
+    "_id": 2683515,
+    "lga": "fct_municipal_area_council"
+  },
+  {
+    "facility_ID": "irtz",
+    "_id": 2683532,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "facility_ID": "memg",
+    "_id": 2683533,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "facility_ID": "ndpc",
+    "_id": 2683535,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "facility_ID": "swli",
+    "_id": 2683626,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "zzlk",
+    "_id": 2683720,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "xizc",
+    "_id": 2683732,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "llnx",
+    "_id": 2683737,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "tcki",
+    "_id": 2684183,
+    "lga": "kogi_lokoja"
+  },
+  {
+    "lga": "bauchi_tafawa_balewa",
+    "_id": 2684198
+  },
+  {
+    "facility_ID": "yfki",
+    "_id": 2684308,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "gemv",
+    "_id": 2684315,
+    "lga": "bauchi_tafawa_balewa"
+  },
+  {
+    "facility_ID": "dzgz",
+    "_id": 2684318,
+    "lga": "bauchi_tafawa_balewa"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2684349,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "ixbc",
+    "_id": 2684514,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "Xynp",
+    "_id": 2684698,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "lga": "benue_oturkpo",
+    "_id": 2684701
+  },
+  {
+    "lga": "benue_oturkpo",
+    "_id": 2684714
+  },
+  {
+    "facility_ID": "Gjay",
+    "_id": 2684783,
+    "lga": "kaduna_sanga"
+  },
+  {
+    "facility_ID": "jjby",
+    "_id": 2684903,
+    "lga": "fct_municipal_area_council"
+  },
+  {
+    "facility_ID": "lisd",
+    "_id": 2685137,
+    "lga": "benue_oturkpo"
+  },
+  {
+    "facility_ID": "xqsk",
+    "_id": 2685169,
+    "lga": "benue_oturkpo"
+  },
+  {
+    "facility_ID": "usbg",
+    "_id": 2685173,
+    "lga": "benue_oturkpo"
+  },
+  {
+    "facility_ID": "zlhw",
+    "_id": 2685178,
+    "lga": "benue_oturkpo"
+  },
+  {
+    "lga": "benue_oturkpo",
+    "_id": 2685195
+  },
+  {
+    "facility_ID": "osps",
+    "_id": 2685218,
+    "lga": "ondo_akure_south"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2685386,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2685392,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2685395,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2685396,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2685398,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2685402,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2685405,
+    "lga": "delta_warri_north"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2685419,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2685447,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "Ugca",
+    "_id": 2685708,
+    "lga": "lagos_surulere"
+  },
+  {
+    "lga": "imo_ehime_mbano",
+    "_id": 2685820
+  },
+  {
+    "facility_ID": "mnno",
+    "_id": 2685822,
+    "lga": "imo_ehime_mbano"
+  },
+  {
+    "facility_ID": "jvib",
+    "_id": 2685835,
+    "lga": "imo_ehime_mbano"
+  },
+  {
+    "facility_ID": "cifm",
+    "_id": 2685841,
+    "lga": "imo_ehime_mbano"
+  },
+  {
+    "facility_ID": "yjvq",
+    "_id": 2685847,
+    "lga": "imo_ehime_mbano"
+  },
+  {
+    "facility_ID": "hogi",
+    "_id": 2685894,
+    "lga": "imo_ehime_mbano"
+  },
+  {
+    "lga": "imo_ehime_mbano",
+    "_id": 2685899
+  },
+  {
+    "lga": "imo_ehime_mbano",
+    "_id": 2685901
+  },
+  {
+    "lga": "borno_maiduguri",
+    "_id": 2685919
+  },
+  {
+    "facility_ID": "Pare",
+    "_id": 2685922,
+    "lga": "borno_maiduguri"
+  },
+  {
+    "facility_ID": "itez",
+    "_id": 2686693,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "Uccd",
+    "_id": 2686938,
+    "lga": "kaduna_kubau"
+  },
+  {
+    "lga": "ogun_ijebu_ode",
+    "_id": 2687062
+  },
+  {
+    "facility_ID": "oyyj",
+    "_id": 2687107,
+    "lga": "ogun_ijebu_ode"
+  },
+  {
+    "facility_ID": "opmg",
+    "_id": 2687927,
+    "lga": "jigawa_kafin_hausa"
+  },
+  {
+    "facility_ID": "Mpim",
+    "_id": 2688196,
+    "lga": "gombe_funakaye"
+  },
+  {
+    "facility_ID": "Mdww",
+    "_id": 2688202,
+    "lga": "gombe_funakaye"
+  },
+  {
+    "facility_ID": "Crfo",
+    "_id": 2688214,
+    "lga": "gombe_funakaye"
+  },
+  {
+    "facility_ID": "mdcp",
+    "_id": 2688227,
+    "lga": "gombe_funakaye"
+  },
+  {
+    "facility_ID": "tqqo",
+    "_id": 2688230,
+    "lga": "gombe_funakaye"
+  },
+  {
+    "facility_ID": "dkkq",
+    "_id": 2688308,
+    "lga": "gombe_funakaye"
+  },
+  {
+    "facility_ID": "ride",
+    "_id": 2688313,
+    "lga": "gombe_funakaye"
+  },
+  {
+    "facility_ID": "efya",
+    "_id": 2688463,
+    "lga": "ogun_ijebu_ode"
+  },
+  {
+    "facility_ID": "Jxcb",
+    "_id": 2699735,
+    "lga": "kaduna_sanga"
+  },
+  {
+    "facility_ID": "Vxkm",
+    "_id": 2699752,
+    "lga": "kaduna_sanga"
+  },
+  {
+    "lga": "ogun_ijebu_ode",
+    "_id": 2688485
+  },
+  {
+    "facility_ID": "bfag",
+    "_id": 2688520,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "lga": "ebonyi_onicha",
+    "_id": 2688525
+  },
+  {
+    "facility_ID": "xxus",
+    "_id": 2688532,
+    "lga": "ebonyi_onicha"
+  },
+  {
+    "lga": "ebonyi_onicha",
+    "_id": 2688587
+  },
+  {
+    "facility_ID": "qdek",
+    "_id": 2688594,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "ugkf",
+    "_id": 2688601,
+    "lga": "ebonyi_onicha"
+  },
+  {
+    "facility_ID": "ejdc",
+    "_id": 2688621,
+    "lga": "ebonyi_onicha"
+  },
+  {
+    "lga": "ebonyi_onicha",
+    "_id": 2688623
+  },
+  {
+    "facility_ID": "lspx",
+    "_id": 2688627,
+    "lga": "ebonyi_onicha"
+  },
+  {
+    "facility_ID": "zsbb",
+    "_id": 2688633,
+    "lga": "ogun_ijebu_ode"
+  },
+  {
+    "facility_ID": "skkm",
+    "_id": 2688678,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "czwz",
+    "_id": 2688714,
+    "lga": "ondo_irele"
+  },
+  {
+    "facility_ID": "rogd",
+    "_id": 2688739,
+    "lga": "ogun_ijebu_ode"
+  },
+  {
+    "facility_ID": "wmbm",
+    "_id": 2688745,
+    "lga": "ondo_irele"
+  },
+  {
+    "facility_ID": "yvqw",
+    "_id": 2688768,
+    "lga": "ondo_irele"
+  },
+  {
+    "facility_ID": "gzqo",
+    "_id": 2689087,
+    "lga": "gombe_yalmatu_deba"
+  },
+  {
+    "facility_ID": "beyn",
+    "_id": 2689091,
+    "lga": "ogun_ijebu_ode"
+  },
+  {
+    "facility_ID": "qghw",
+    "_id": 2689131,
+    "lga": "gombe_yalmatu_deba"
+  },
+  {
+    "facility_ID": "kfob",
+    "_id": 2689168,
+    "lga": "gombe_yalmatu_deba"
+  },
+  {
+    "facility_ID": "wvpa",
+    "_id": 2689196,
+    "lga": "gombe_yalmatu_deba"
+  },
+  {
+    "facility_ID": "sxnb",
+    "_id": 2689211,
+    "lga": "gombe_yalmatu_deba"
+  },
+  {
+    "facility_ID": "jxbb",
+    "_id": 2689215,
+    "lga": "gombe_yalmatu_deba"
+  },
+  {
+    "facility_ID": "BhGh",
+    "_id": 2689216,
+    "lga": "gombe_yalmatu_deba"
+  },
+  {
+    "facility_ID": "zrne",
+    "_id": 2689249,
+    "lga": "sokoto_silame"
+  },
+  {
+    "facility_ID": "ylxo",
+    "_id": 2689250,
+    "lga": "sokoto_silame"
+  },
+  {
+    "facility_ID": "frmq",
+    "_id": 2689251,
+    "lga": "sokoto_silame"
+  },
+  {
+    "facility_ID": "hzje",
+    "_id": 2689252,
+    "lga": "sokoto_silame"
+  },
+  {
+    "facility_ID": "hsva",
+    "_id": 2689253,
+    "lga": "sokoto_silame"
+  },
+  {
+    "facility_ID": "dvmu",
+    "_id": 2689263,
+    "lga": "sokoto_silame"
+  },
+  {
+    "facility_ID": "bfsf",
+    "_id": 2689304,
+    "lga": "jigawa_kafin_hausa"
+  },
+  {
+    "facility_ID": "rqqx",
+    "_id": 2689312,
+    "lga": "gombe_funakaye"
+  },
+  {
+    "facility_ID": "aeqd",
+    "_id": 2689343,
+    "lga": "gombe_funakaye"
+  },
+  {
+    "facility_ID": "clrj",
+    "_id": 2689371,
+    "lga": "ebonyi_ohaukwu"
+  },
+  {
+    "facility_ID": "waoi",
+    "_id": 2689378,
+    "lga": "gombe_funakaye"
+  },
+  {
+    "facility_ID": "sjex",
+    "_id": 2689385,
+    "lga": "akwa_ibom_ibiono_ibom"
+  },
+  {
+    "facility_ID": "Wepr",
+    "_id": 2689389,
+    "lga": "edo_owan_west"
+  },
+  {
+    "facility_ID": "Yels",
+    "_id": 2689391,
+    "lga": "edo_owan_west"
+  },
+  {
+    "facility_ID": "Syxk",
+    "_id": 2689393,
+    "lga": "edo_owan_west"
+  },
+  {
+    "facility_ID": "Phcl",
+    "_id": 2689398,
+    "lga": "edo_owan_west"
+  },
+  {
+    "lga": "edo_owan_west",
+    "_id": 2689401
+  },
+  {
+    "facility_ID": "ooxk",
+    "_id": 2689404,
+    "lga": "edo_owan_west"
+  },
+  {
+    "lga": "edo_owan_west",
+    "_id": 2689405
+  },
+  {
+    "facility_ID": "amkl",
+    "_id": 2689406,
+    "lga": "gombe_funakaye"
+  },
+  {
+    "lga": "edo_owan_west",
+    "_id": 2689407
+  },
+  {
+    "lga": "edo_owan_west",
+    "_id": 2689408
+  },
+  {
+    "facility_ID": "ndya",
+    "_id": 2689410,
+    "lga": "akwa_ibom_ibiono_ibom"
+  },
+  {
+    "facility_ID": "Mthx",
+    "_id": 2689419,
+    "lga": "edo_owan_west"
+  },
+  {
+    "lga": "edo_owan_west",
+    "_id": 2689432
+  },
+  {
+    "facility_ID": "qmvk",
+    "_id": 2689512,
+    "lga": "ondo_akure_south"
+  },
+  {
+    "facility_ID": "jaew",
+    "_id": 2689515,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "facility_ID": "avjp",
+    "_id": 2689517,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "facility_ID": "pcks",
+    "_id": 2689523,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "lga": "bauchi_tafawa_balewa",
+    "_id": 2689542
+  },
+  {
+    "lga": "bauchi_tafawa_balewa",
+    "_id": 2689562
+  },
+  {
+    "facility_ID": "saws",
+    "_id": 2689571,
+    "lga": "ondo_akure_south"
+  },
+  {
+    "facility_ID": "bbbq",
+    "_id": 2689579,
+    "lga": "ondo_akure_south"
+  },
+  {
+    "facility_ID": "9999",
+    "_id": 2689587,
+    "lga": "bauchi_tafawa_balewa"
+  },
+  {
+    "facility_ID": "pphg",
+    "_id": 2689591,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "facility_ID": "9999",
+    "_id": 2689600,
+    "lga": "bauchi_tafawa_balewa"
+  },
+  {
+    "facility_ID": "epqd",
+    "_id": 2689602,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "lga": "bauchi_tafawa_balewa",
+    "_id": 2689603
+  },
+  {
+    "facility_ID": "Fepz",
+    "_id": 2689610,
+    "lga": "enugu_enugu_south"
+  },
+  {
+    "facility_ID": "afnv",
+    "_id": 2689611,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "facility_ID": "Ijdu",
+    "_id": 2689768,
+    "lga": "anambra_onitsha_north"
+  },
+  {
+    "facility_ID": "Qfvs",
+    "_id": 2689822,
+    "lga": "anambra_onitsha_north"
+  },
+  {
+    "facility_ID": "Feeg",
+    "_id": 2689886,
+    "lga": "kaduna_sanga"
+  },
+  {
+    "facility_ID": "Poyh",
+    "_id": 2689891,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "zmbe",
+    "_id": 2689896,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "Bwku",
+    "_id": 2689939,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "Udwk",
+    "_id": 2689945,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "pbla",
+    "_id": 2689950,
+    "lga": "ogun_egbado_south"
+  },
+  {
+    "facility_ID": "dxcb",
+    "_id": 2689967,
+    "lga": "ogun_egbado_south"
+  },
+  {
+    "facility_ID": "Gnra",
+    "_id": 2689973,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "Ihap",
+    "_id": 2689975,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "xlvt",
+    "_id": 2689976,
+    "lga": "ogun_egbado_south"
+  },
+  {
+    "facility_ID": "Fqkl",
+    "_id": 2689997,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "Qqeg",
+    "_id": 2690008,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "jhvs",
+    "_id": 2690012,
+    "lga": "ebonyi_afikpo_north"
+  },
+  {
+    "facility_ID": "Amkh",
+    "_id": 2690017,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "Hvoc",
+    "_id": 2690021,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "Awyb",
+    "_id": 2690027,
+    "lga": "abia_aba_north"
+  },
+  {
+    "lga": "osun_ilesha_east",
+    "_id": 2690069
+  },
+  {
+    "facility_ID": "unyy",
+    "_id": 2690112,
+    "lga": "ebonyi_afikpo_north"
+  },
+  {
+    "facility_ID": "dihn",
+    "_id": 2690113,
+    "lga": "osun_ilesha_east"
+  },
+  {
+    "facility_ID": "fzjl",
+    "_id": 2690143,
+    "lga": "osun_ilesha_east"
+  },
+  {
+    "facility_ID": "Brul",
+    "_id": 2690180,
+    "lga": "kaduna_sanga"
+  },
+  {
+    "facility_ID": "hbqz",
+    "_id": 2690204,
+    "lga": "ebonyi_afikpo_north"
+  },
+  {
+    "facility_ID": "wqsy",
+    "_id": 2690205,
+    "lga": "osun_ilesha_east"
+  },
+  {
+    "facility_ID": "geln",
+    "_id": 2690207,
+    "lga": "osun_ilesha_east"
+  },
+  {
+    "facility_ID": "nutx",
+    "_id": 2690208,
+    "lga": "osun_ilesha_east"
+  },
+  {
+    "facility_ID": "zpjq",
+    "_id": 2690213,
+    "lga": "osun_ilesha_east"
+  },
+  {
+    "facility_ID": "rmwd",
+    "_id": 2690214,
+    "lga": "osun_ilesha_east"
+  },
+  {
+    "facility_ID": "nevi",
+    "_id": 2690218,
+    "lga": "osun_ilesha_east"
+  },
+  {
+    "facility_ID": "livj",
+    "_id": 2690219,
+    "lga": "osun_ilesha_east"
+  },
+  {
+    "lga": "osun_ilesha_east",
+    "_id": 2690229
+  },
+  {
+    "facility_ID": "iqdp",
+    "_id": 2690232,
+    "lga": "osun_ilesha_east"
+  },
+  {
+    "facility_ID": "mwcb",
+    "_id": 2690249,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "facility_ID": "sqom",
+    "_id": 2690272,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "facility_ID": "dqaq",
+    "_id": 2690282,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "facility_ID": "bdxi",
+    "_id": 2690287,
+    "lga": "kano_bichi"
+  },
+  {
+    "facility_ID": "czjk",
+    "_id": 2690296,
+    "lga": "lagos_kosofe"
+  },
+  {
+    "facility_ID": "Cipa",
+    "_id": 2690351,
+    "lga": "borno_maiduguri"
+  },
+  {
+    "facility_ID": "cawi",
+    "_id": 2690363,
+    "lga": "ebonyi_afikpo_north"
+  },
+  {
+    "facility_ID": "Mmhs",
+    "_id": 2690371,
+    "lga": "kaduna_sanga"
+  },
+  {
+    "facility_ID": "xljn",
+    "_id": 2690427,
+    "lga": "ebonyi_afikpo_north"
+  },
+  {
+    "facility_ID": "Vmwy",
+    "_id": 2690479,
+    "lga": "delta_ughelli_north"
+  },
+  {
+    "facility_ID": "Ilhw",
+    "_id": 2690903,
+    "lga": "sokoto_sabon_birni"
+  },
+  {
+    "facility_ID": "Fapc",
+    "_id": 2690918,
+    "lga": "sokoto_sabon_birni"
+  },
+  {
+    "facility_ID": "lhym",
+    "_id": 2690978,
+    "lga": "kaduna_igabi"
+  },
+  {
+    "facility_ID": "Ejao",
+    "_id": 2691019,
+    "lga": "sokoto_sabon_birni"
+  },
+  {
+    "facility_ID": "Wshf",
+    "_id": 2691139,
+    "lga": "enugu_enugu_south"
+  },
+  {
+    "facility_ID": "Vxqc",
+    "_id": 2691149,
+    "lga": "delta_ughelli_north"
+  },
+  {
+    "facility_ID": "Vkrb",
+    "_id": 2691202,
+    "lga": "delta_ughelli_north"
+  },
+  {
+    "facility_ID": "Mbrg",
+    "_id": 2691228,
+    "lga": "delta_ughelli_north"
+  },
+  {
+    "facility_ID": "Flur",
+    "_id": 2691275,
+    "lga": "delta_ughelli_north"
+  },
+  {
+    "facility_ID": "0000",
+    "_id": 2691284,
+    "lga": "delta_oshimili_south"
+  },
+  {
+    "facility_ID": "Vxno",
+    "_id": 2691326,
+    "lga": "enugu_enugu_south"
+  },
+  {
+    "facility_ID": "Oycv",
+    "_id": 2691351,
+    "lga": "enugu_enugu_south"
+  },
+  {
+    "facility_ID": "Wiox",
+    "_id": 2691372,
+    "lga": "enugu_enugu_south"
+  },
+  {
+    "facility_ID": "0000",
+    "_id": 2691455,
+    "lga": "delta_oshimili_south"
+  },
+  {
+    "facility_ID": "hglv",
+    "_id": 2691460,
+    "lga": "zamfara_kaura_namoda"
+  },
+  {
+    "facility_ID": "xuqp",
+    "_id": 2691599,
+    "lga": "zamfara_gusau"
+  },
+  {
+    "facility_ID": "Rofe",
+    "_id": 2691607,
+    "lga": "delta_ughelli_north"
+  },
+  {
+    "lga": "zamfara_gusau",
+    "_id": 2691612
+  },
+  {
+    "facility_ID": "czkz",
+    "_id": 2691615,
+    "lga": "zamfara_gusau"
+  },
+  {
+    "facility_ID": "rdew",
+    "_id": 2691622,
+    "lga": "zamfara_gusau"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2691623,
+    "lga": "benue_ushongo"
+  },
+  {
+    "lga": "zamfara_gusau",
+    "_id": 2691627
+  },
+  {
+    "facility_ID": "fgaw",
+    "_id": 2691635,
+    "lga": "zamfara_gusau"
+  },
+  {
+    "facility_ID": "alaf",
+    "_id": 2691638,
+    "lga": "zamfara_gusau"
+  },
+  {
+    "facility_ID": "eusa",
+    "_id": 2691658,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "uujv",
+    "_id": 2691671,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "vkde",
+    "_id": 2691677,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "siyo",
+    "_id": 2691686,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "qnxh",
+    "_id": 2691714,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "Emzy",
+    "_id": 2691734,
+    "lga": "delta_ughelli_north"
+  },
+  {
+    "facility_ID": "mqgl",
+    "_id": 2691749,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "Nxxd",
+    "_id": 2706891,
+    "lga": "imo_orlu"
+  },
+  {
+    "facility_ID": "Ynii",
+    "_id": 2691796,
+    "lga": "delta_ughelli_north"
+  },
+  {
+    "facility_ID": "Qpxm",
+    "_id": 2691801,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "Xchz",
+    "_id": 2691811,
+    "lga": "bayelsa_ogbia"
+  },
+  {
+    "facility_ID": "Jkjg",
+    "_id": 2691816,
+    "lga": "bayelsa_ogbia"
+  },
+  {
+    "facility_ID": "gxeq",
+    "_id": 2691828,
+    "lga": "bayelsa_ogbia"
+  },
+  {
+    "facility_ID": "Qgba",
+    "_id": 2691897,
+    "lga": "akwa_ibom_uyo"
+  },
+  {
+    "facility_ID": "qcki",
+    "_id": 2691931,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "Zyjg",
+    "_id": 2691955,
+    "lga": "akwa_ibom_uyo"
+  },
+  {
+    "facility_ID": "xjeh",
+    "_id": 2691959,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "chwx",
+    "_id": 2691967,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "0000",
+    "_id": 2691998,
+    "lga": "delta_oshimili_south"
+  },
+  {
+    "facility_ID": "cixn",
+    "_id": 2692016,
+    "lga": "bauchi_bogoro"
+  },
+  {
+    "facility_ID": "Mjgz",
+    "_id": 2706867,
+    "lga": "kano_gwarzo"
+  },
+  {
+    "facility_ID": "gwig",
+    "_id": 2692080,
+    "lga": "delta_okpe"
+  },
+  {
+    "facility_ID": "Qmzo",
+    "_id": 2692147,
+    "lga": "delta_ughelli_north"
+  },
+  {
+    "facility_ID": "Izql",
+    "_id": 2692173,
+    "lga": "ebonyi_afikpo_north"
+  },
+  {
+    "facility_ID": "Aipl",
+    "_id": 2692204,
+    "lga": "delta_ughelli_north"
+  },
+  {
+    "lga": "anambra_aguata",
+    "_id": 2692218
+  },
+  {
+    "lga": "imo_ehime_mbano",
+    "_id": 2692230
+  },
+  {
+    "facility_ID": "gkmc",
+    "_id": 2692232,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "eloq",
+    "_id": 2692242,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "czrw",
+    "_id": 2692252,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "vaqn",
+    "_id": 2692263,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "kjri",
+    "_id": 2692267,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "fzdy",
+    "_id": 2692292,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "drgd",
+    "_id": 2692294,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "aigr",
+    "_id": 2692307,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "Fecg",
+    "_id": 2692323,
+    "lga": "delta_ughelli_north"
+  },
+  {
+    "facility_ID": "covs",
+    "_id": 2692329,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "kxkv",
+    "_id": 2692334,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "tlte",
+    "_id": 2692338,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "0000",
+    "_id": 2692426,
+    "lga": "delta_oshimili_north"
+  },
+  {
+    "facility_ID": "Vwdm",
+    "_id": 2692472,
+    "lga": "delta_ughelli_north"
+  },
+  {
+    "facility_ID": "0000",
+    "_id": 2692484,
+    "lga": "delta_oshimili_south"
+  },
+  {
+    "facility_ID": "0000",
+    "_id": 2692556,
+    "lga": "delta_oshimili_south"
+  },
+  {
+    "facility_ID": "imve",
+    "_id": 2692973,
+    "lga": "niger_borgu"
+  },
+  {
+    "facility_ID": "luvp",
+    "_id": 2692990,
+    "lga": "niger_borgu"
+  },
+  {
+    "facility_ID": "XXXX",
+    "_id": 2693057,
+    "lga": "cross_river_obudu"
+  },
+  {
+    "facility_ID": "fdua",
+    "_id": 2693793,
+    "lga": "enugu_enugu_east"
+  },
+  {
+    "facility_ID": "tntc",
+    "_id": 2694226,
+    "lga": "niger_borgu"
+  },
+  {
+    "facility_ID": "uozd",
+    "_id": 2694261,
+    "lga": "niger_borgu"
+  },
+  {
+    "facility_ID": "vavn",
+    "_id": 2694469,
+    "lga": "fct_municipal_area_council"
+  },
+  {
+    "facility_ID": "nivl",
+    "_id": 2694488,
+    "lga": "fct_municipal_area_council"
+  },
+  {
+    "facility_ID": "Zyok",
+    "_id": 2694605,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "vubd",
+    "_id": 2694829,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "jixf",
+    "_id": 2694841,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "vkrq",
+    "_id": 2694899,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "aadg",
+    "_id": 2694976,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "tmyz",
+    "_id": 2694986,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "vsto",
+    "_id": 2694991,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "mcvg",
+    "_id": 2695055,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "ddfp",
+    "_id": 2695067,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "fibp",
+    "_id": 2695075,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "dgwh",
+    "_id": 2695101,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "qksa",
+    "_id": 2695108,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "ghwl",
+    "_id": 2695126,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "Zthx",
+    "_id": 2695129,
+    "lga": "kogi_dekina"
+  },
+  {
+    "facility_ID": "webx",
+    "_id": 2695150,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "yvzr",
+    "_id": 2695211,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "tnzz",
+    "_id": 2695246,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "txrg",
+    "_id": 2695281,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "hkbz",
+    "_id": 2695500,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "Gbtd",
+    "_id": 2695520,
+    "lga": "delta_ughelli_north"
+  },
+  {
+    "facility_ID": "pwhu",
+    "_id": 2695683,
+    "lga": "delta_okpe"
+  },
+  {
+    "facility_ID": "Rroa",
+    "_id": 2695691,
+    "lga": "delta_ughelli_north"
+  },
+  {
+    "facility_ID": "Yopi",
+    "_id": 2695828,
+    "lga": "delta_ughelli_north"
+  },
+  {
+    "facility_ID": "wltt",
+    "_id": 2695839,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "xgxb",
+    "_id": 2696115,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "krjp",
+    "_id": 2696146,
+    "lga": "fct_municipal_area_council"
+  },
+  {
+    "facility_ID": "Snri",
+    "_id": 2696230,
+    "lga": "borno_monguno"
+  },
+  {
+    "facility_ID": "Ribe",
+    "_id": 2696484,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "lga": "cross_river_ikom",
+    "_id": 2696500
+  },
+  {
+    "facility_ID": "Monv",
+    "_id": 2696546,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "facility_ID": "Rxjj",
+    "_id": 2696562,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "facility_ID": "wlqg",
+    "_id": 2696641,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "facility_ID": "puuy",
+    "_id": 2696654,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "facility_ID": "kcsk",
+    "_id": 2696690,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "facility_ID": "dkud",
+    "_id": 2697081,
+    "lga": "delta_okpe"
+  },
+  {
+    "facility_ID": "Kgyo",
+    "_id": 2697169,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "facility_ID": "gaqd",
+    "_id": 2697238,
+    "lga": "fct_municipal_area_council"
+  },
+  {
+    "facility_ID": "sgvo",
+    "_id": 2697267,
+    "lga": "fct_municipal_area_council"
+  },
+  {
+    "facility_ID": "Bxbv",
+    "_id": 2697289,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "facility_ID": "Wuum",
+    "_id": 2697346,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "facility_ID": "Pccn",
+    "_id": 2697348,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "facility_ID": "Vzii",
+    "_id": 2697351,
+    "lga": "cross_river_ikom"
+  },
+  {
+    "facility_ID": "itai",
+    "_id": 2697493,
+    "lga": "kogi_lokoja"
+  },
+  {
+    "facility_ID": "ocfi",
+    "_id": 2697522,
+    "lga": "kogi_lokoja"
+  },
+  {
+    "facility_ID": "pnzf",
+    "_id": 2697619,
+    "lga": "kogi_lokoja"
+  },
+  {
+    "lga": "enugu_nsukka",
+    "_id": 2697848
+  },
+  {
+    "facility_ID": "qdho",
+    "_id": 2698027,
+    "lga": "enugu_nsukka"
+  },
+  {
+    "facility_ID": "lkdh",
+    "_id": 2698101,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "ipkh",
+    "_id": 2698130,
+    "lga": "enugu_nsukka"
+  },
+  {
+    "facility_ID": "Kria",
+    "_id": 2698157,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "uvpv",
+    "_id": 2698162,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "Vpor",
+    "_id": 2698164,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "Hkjx",
+    "_id": 2698169,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "lga": "enugu_nsukka",
+    "_id": 2698168
+  },
+  {
+    "facility_ID": "Brjs",
+    "_id": 2698171,
+    "lga": "bauchi_bauchi"
+  },
+  {
+    "facility_ID": "Ycys",
+    "_id": 2698181,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "Uhux",
+    "_id": 2698182,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "Ybdu",
+    "_id": 2698185,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "Jgbh",
+    "_id": 2698188,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "Ztku",
+    "_id": 2698191,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "Skyx",
+    "_id": 2698196,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "Xzpf",
+    "_id": 2698215,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "Vopl",
+    "_id": 2698218,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "Xqci",
+    "_id": 2698223,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "Qelx",
+    "_id": 2698231,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "Oioy",
+    "_id": 2698240,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "fdzh",
+    "_id": 2698249,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "Difp",
+    "_id": 2698276,
+    "lga": "borno_monguno"
+  },
+  {
+    "facility_ID": "ufzf",
+    "_id": 2698490,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "Ifcn",
+    "_id": 2699129,
+    "lga": "edo_esan_west"
+  },
+  {
+    "facility_ID": "Fkvq",
+    "_id": 2699144,
+    "lga": "edo_esan_west"
+  },
+  {
+    "facility_ID": "Ceaj",
+    "_id": 2699146,
+    "lga": "edo_esan_west"
+  },
+  {
+    "facility_ID": "hnkn",
+    "_id": 2699173,
+    "lga": "benue_oturkpo"
+  },
+  {
+    "facility_ID": "xdxc",
+    "_id": 2699176,
+    "lga": "benue_oturkpo"
+  },
+  {
+    "facility_ID": "mgev",
+    "_id": 2699177,
+    "lga": "benue_oturkpo"
+  },
+  {
+    "facility_ID": "tnaj",
+    "_id": 2699178,
+    "lga": "benue_oturkpo"
+  },
+  {
+    "facility_ID": "yhne",
+    "_id": 2699180,
+    "lga": "benue_oturkpo"
+  },
+  {
+    "facility_ID": "burw",
+    "_id": 2699184,
+    "lga": "benue_oturkpo"
+  },
+  {
+    "facility_ID": "rxbg",
+    "_id": 2699188,
+    "lga": "benue_oturkpo"
+  },
+  {
+    "facility_ID": "eybt",
+    "_id": 2699195,
+    "lga": "benue_oturkpo"
+  },
+  {
+    "lga": "benue_oturkpo",
+    "_id": 2699216
+  },
+  {
+    "facility_ID": "Mggl",
+    "_id": 2699225,
+    "lga": "kaduna_sanga"
+  },
+  {
+    "facility_ID": "gnnh",
+    "_id": 2699261,
+    "lga": "osun_osogbo"
+  },
+  {
+    "facility_ID": "evcn",
+    "_id": 2699264,
+    "lga": "osun_osogbo"
+  },
+  {
+    "facility_ID": "pold",
+    "_id": 2699303,
+    "lga": "osun_osogbo"
+  },
+  {
+    "facility_ID": "rbuj",
+    "_id": 2699305,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "oank",
+    "_id": 2699308,
+    "lga": "osun_osogbo"
+  },
+  {
+    "facility_ID": "nzeo",
+    "_id": 2699311,
+    "lga": "osun_osogbo"
+  },
+  {
+    "facility_ID": "ufne",
+    "_id": 2699316,
+    "lga": "osun_osogbo"
+  },
+  {
+    "facility_ID": "icmb",
+    "_id": 2699321,
+    "lga": "osun_osogbo"
+  },
+  {
+    "lga": "osun_osogbo",
+    "_id": 2699325
+  },
+  {
+    "lga": "osun_osogbo",
+    "_id": 2699327
+  },
+  {
+    "facility_ID": "Nukb",
+    "_id": 2699332,
+    "lga": "lagos_surulere"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2727422,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "sydv",
+    "_id": 2727433,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2727420,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "Qdxe",
+    "_id": 2701264,
+    "lga": "sokoto_dange_shuni"
+  },
+  {
+    "facility_ID": "rlrn",
+    "_id": 2701914,
+    "lga": "lagos_alimosho"
+  },
+  {
+    "facility_ID": "jcrl",
+    "_id": 2701916,
+    "lga": "lagos_alimosho"
+  },
+  {
+    "facility_ID": "dqzm",
+    "_id": 2701922,
+    "lga": "lagos_alimosho"
+  },
+  {
+    "facility_ID": "izks",
+    "_id": 2701924,
+    "lga": "lagos_alimosho"
+  },
+  {
+    "facility_ID": "dnty",
+    "_id": 2701926,
+    "lga": "lagos_alimosho"
+  },
+  {
+    "facility_ID": "jsvm",
+    "_id": 2701931,
+    "lga": "lagos_alimosho"
+  },
+  {
+    "facility_ID": "siia",
+    "_id": 2701933,
+    "lga": "lagos_alimosho"
+  },
+  {
+    "facility_ID": "gqse",
+    "_id": 2701939,
+    "lga": "lagos_alimosho"
+  },
+  {
+    "facility_ID": "wneh",
+    "_id": 2701942,
+    "lga": "lagos_alimosho"
+  },
+  {
+    "facility_ID": "cdko",
+    "_id": 2701945,
+    "lga": "lagos_alimosho"
+  },
+  {
+    "facility_ID": "fmly",
+    "_id": 2702149,
+    "lga": "zamfara_talata_mafara"
+  },
+  {
+    "facility_ID": "wjrh",
+    "_id": 2702155,
+    "lga": "zamfara_talata_mafara"
+  },
+  {
+    "facility_ID": "wugg",
+    "_id": 2702171,
+    "lga": "zamfara_talata_mafara"
+  },
+  {
+    "facility_ID": "emyy",
+    "_id": 2702172,
+    "lga": "zamfara_talata_mafara"
+  },
+  {
+    "facility_ID": "fmtr",
+    "_id": 2702177,
+    "lga": "zamfara_talata_mafara"
+  },
+  {
+    "facility_ID": "puuv",
+    "_id": 2702201,
+    "lga": "zamfara_talata_mafara"
+  },
+  {
+    "facility_ID": "xkfl",
+    "_id": 2702207,
+    "lga": "zamfara_talata_mafara"
+  },
+  {
+    "facility_ID": "meri",
+    "_id": 2702212,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "qpge",
+    "_id": 2702217,
+    "lga": "zamfara_talata_mafara"
+  },
+  {
+    "facility_ID": "twwu",
+    "_id": 2702220,
+    "lga": "zamfara_talata_mafara"
+  },
+  {
+    "facility_ID": "meri",
+    "_id": 2702344,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "qxve",
+    "_id": 2702368,
+    "lga": "ogun_ijebu_ode"
+  },
+  {
+    "lga": "ogun_ijebu_ode",
+    "_id": 2702397
+  },
+  {
+    "facility_ID": "Gbxt",
+    "_id": 2702442,
+    "lga": "kogi_dekina"
+  },
+  {
+    "facility_ID": "Iqyk",
+    "_id": 2702450,
+    "lga": "kogi_dekina"
+  },
+  {
+    "facility_ID": "Nozw",
+    "_id": 2702455,
+    "lga": "kogi_dekina"
+  },
+  {
+    "lga": "sokoto_dange_shuni",
+    "_id": 2702463
+  },
+  {
+    "lga": "sokoto_dange_shuni",
+    "_id": 2702471
+  },
+  {
+    "facility_ID": "Qrqi",
+    "_id": 2702547,
+    "lga": "kogi_dekina"
+  },
+  {
+    "lga": "kogi_dekina",
+    "_id": 2702549
+  },
+  {
+    "facility_ID": "Twah",
+    "_id": 2702579,
+    "lga": "kogi_dekina"
+  },
+  {
+    "facility_ID": "Plfv",
+    "_id": 2702587,
+    "lga": "sokoto_dange_shuni"
+  },
+  {
+    "lga": "ogun_ijebu_ode",
+    "_id": 2702588
+  },
+  {
+    "facility_ID": "Tvjq",
+    "_id": 2702612,
+    "lga": "sokoto_dange_shuni"
+  },
+  {
+    "facility_ID": "Cdue",
+    "_id": 2702614,
+    "lga": "sokoto_dange_shuni"
+  },
+  {
+    "facility_ID": "Gnnm",
+    "_id": 2702624,
+    "lga": "sokoto_dange_shuni"
+  },
+  {
+    "facility_ID": "acjm",
+    "_id": 2702626,
+    "lga": "niger_borgu"
+  },
+  {
+    "facility_ID": "xfsp",
+    "_id": 2702633,
+    "lga": "niger_borgu"
+  },
+  {
+    "lga": "ogun_ijebu_ode",
+    "_id": 2702637
+  },
+  {
+    "facility_ID": "bhee",
+    "_id": 2702639,
+    "lga": "niger_borgu"
+  },
+  {
+    "facility_ID": "ijcx",
+    "_id": 2702666,
+    "lga": "niger_borgu"
+  },
+  {
+    "facility_ID": "nosd",
+    "_id": 2702667,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "pdle",
+    "_id": 2702668,
+    "lga": "ogun_ijebu_ode"
+  },
+  {
+    "facility_ID": "Yxej",
+    "_id": 2702683,
+    "lga": "ondo_akoko_south_west"
+  },
+  {
+    "facility_ID": "Wttb",
+    "_id": 2702736,
+    "lga": "sokoto_dange_shuni"
+  },
+  {
+    "facility_ID": "Caxa",
+    "_id": 2702772,
+    "lga": "sokoto_dange_shuni"
+  },
+  {
+    "facility_ID": "Ignm",
+    "_id": 2702946,
+    "lga": "kaduna_sanga"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2703006,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "facility_ID": "Rqht",
+    "_id": 2703025,
+    "lga": "kaduna_sanga"
+  },
+  {
+    "facility_ID": "dknr",
+    "_id": 2703029,
+    "lga": "ondo_akure_south"
+  },
+  {
+    "facility_ID": "ofww",
+    "_id": 2703035,
+    "lga": "ondo_akure_south"
+  },
+  {
+    "facility_ID": "osps",
+    "_id": 2703040,
+    "lga": "ondo_akure_south"
+  },
+  {
+    "facility_ID": "Whct",
+    "_id": 2703068,
+    "lga": "kaduna_sanga"
+  },
+  {
+    "lga": "yobe_potiskum",
+    "_id": 2703118
+  },
+  {
+    "facility_ID": "xqqv",
+    "_id": 2703152,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "facility_ID": "lupu",
+    "_id": 2703163,
+    "lga": "yobe_potiskum"
+  },
+  {
+    "facility_ID": "pulr",
+    "_id": 2703165,
+    "lga": "yobe_potiskum"
+  },
+  {
+    "facility_ID": "apzy",
+    "_id": 2703166,
+    "lga": "niger_borgu"
+  },
+  {
+    "facility_ID": "mkrc",
+    "_id": 2703169,
+    "lga": "niger_borgu"
+  },
+  {
+    "facility_ID": "figd",
+    "_id": 2703221,
+    "lga": "zamfara_gusau"
+  },
+  {
+    "facility_ID": " 005",
+    "_id": 2703223,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2703251,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2703270,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "facility_ID": "bunm",
+    "_id": 2703294,
+    "lga": "lagos_alimosho"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2703301,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2703324,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2703325,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "facility_ID": "ibde",
+    "_id": 2703326,
+    "lga": "kebbi_wasagu_danko"
+  },
+  {
+    "facility_ID": "tqyi",
+    "_id": 2703331,
+    "lga": "lagos_alimosho"
+  },
+  {
+    "facility_ID": "cetl",
+    "_id": 2703332,
+    "lga": "lagos_alimosho"
+  },
+  {
+    "facility_ID": "vhem",
+    "_id": 2703333,
+    "lga": "lagos_alimosho"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2703340,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "lga": "bauchi_darazo",
+    "_id": 2703341
+  },
+  {
+    "facility_ID": "Llxk",
+    "_id": 2703342,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "Cavj",
+    "_id": 2703345,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2703349,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2703356,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "facility_ID": "Wwni",
+    "_id": 2703364,
+    "lga": "bauchi_gamawa"
+  },
+  {
+    "facility_ID": "XXxx",
+    "_id": 2703375,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "lga": "bauchi_darazo",
+    "_id": 2703434
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2703475,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2703487,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2703494,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2703519,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "facility_ID": "hhgu",
+    "_id": 2703521,
+    "lga": "kebbi_wasagu_danko"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2703525,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "facility_ID": "pztp",
+    "_id": 2703526,
+    "lga": "enugu_nsukka"
+  },
+  {
+    "lga": "kebbi_wasagu_danko",
+    "_id": 2703532
+  },
+  {
+    "facility_ID": "hnsi",
+    "_id": 2703625,
+    "lga": "kebbi_wasagu_danko"
+  },
+  {
+    "facility_ID": "pyjl",
+    "_id": 2703639,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "suih",
+    "_id": 2703657,
+    "lga": "kebbi_wasagu_danko"
+  },
+  {
+    "lga": "kebbi_wasagu_danko",
+    "_id": 2703663
+  },
+  {
+    "facility_ID": "hgph",
+    "_id": 2703691,
+    "lga": "kebbi_wasagu_danko"
+  },
+  {
+    "facility_ID": "bihl",
+    "_id": 2703713,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "ksjs",
+    "_id": 2703758,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "mhoe",
+    "_id": 2703773,
+    "lga": "ondo_irele"
+  },
+  {
+    "facility_ID": "anaa",
+    "_id": 2703807,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "ipoj",
+    "_id": 2703818,
+    "lga": "edo_owan_west"
+  },
+  {
+    "lga": "edo_owan_west",
+    "_id": 2703825
+  },
+  {
+    "facility_ID": "Mivl",
+    "_id": 2703827,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "9999",
+    "_id": 2703832,
+    "lga": "bauchi_tafawa_balewa"
+  },
+  {
+    "facility_ID": "aaks",
+    "_id": 2703836,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "facility_ID": "Lluv",
+    "_id": 2703841,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "Kxxe",
+    "_id": 2703849,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "9999",
+    "_id": 2703850,
+    "lga": "bauchi_tafawa_balewa"
+  },
+  {
+    "lga": "edo_owan_west",
+    "_id": 2703852
+  },
+  {
+    "facility_ID": "Stas",
+    "_id": 2703854,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "Sejn",
+    "_id": 2703862,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "vibq",
+    "_id": 2703863,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "facility_ID": "Wcjr",
+    "_id": 2703865,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "jvtr",
+    "_id": 2703867,
+    "lga": "gombe_billiri"
+  },
+  {
+    "facility_ID": "juqn",
+    "_id": 2703871,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "facility_ID": "kvtc",
+    "_id": 2703874,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "facility_ID": "gwmh",
+    "_id": 2703886,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "facility_ID": "ihbu",
+    "_id": 2703922,
+    "lga": "ondo_irele"
+  },
+  {
+    "facility_ID": "whfq",
+    "_id": 2703957,
+    "lga": "ondo_irele"
+  },
+  {
+    "facility_ID": "xntw",
+    "_id": 2703974,
+    "lga": "kwara_oyun"
+  },
+  {
+    "facility_ID": "Bzil",
+    "_id": 2704034,
+    "lga": "kaduna_kubau"
+  },
+  {
+    "facility_ID": "jbap",
+    "_id": 2704036,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "Qwjj",
+    "_id": 2704075,
+    "lga": "kaduna_kubau"
+  },
+  {
+    "facility_ID": "Uoea",
+    "_id": 2704079,
+    "lga": "kaduna_kubau"
+  },
+  {
+    "facility_ID": "nwhn",
+    "_id": 2704106,
+    "lga": "niger_shiroro"
+  },
+  {
+    "facility_ID": "Hbqi",
+    "_id": 2704110,
+    "lga": "kano_nassarawa"
+  },
+  {
+    "facility_ID": "Vjjg",
+    "_id": 2704117,
+    "lga": "kano_nassarawa"
+  },
+  {
+    "facility_ID": "Pede",
+    "_id": 2704138,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "hdib",
+    "_id": 2704147,
+    "lga": "kwara_oyun"
+  },
+  {
+    "facility_ID": "Jibs",
+    "_id": 2704151,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "ghgv",
+    "_id": 2704154,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "pcyy",
+    "_id": 2704174,
+    "lga": "kwara_oyun"
+  },
+  {
+    "facility_ID": "Voaq",
+    "_id": 2704176,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "Zzsk",
+    "_id": 2704199,
+    "lga": "abia_aba_north"
+  },
+  {
+    "facility_ID": "Ifwv",
+    "_id": 2704204,
+    "lga": "kano_nassarawa"
+  },
+  {
+    "facility_ID": "Mcnc",
+    "_id": 2704212,
+    "lga": "kano_nassarawa"
+  },
+  {
+    "lga": "niger_shiroro",
+    "_id": 2704220
+  },
+  {
+    "facility_ID": "Qiky",
+    "_id": 2704225,
+    "lga": "kano_nassarawa"
+  },
+  {
+    "facility_ID": "Euwf",
+    "_id": 2704226,
+    "lga": "kano_nassarawa"
+  },
+  {
+    "facility_ID": "Fqjh",
+    "_id": 2704231,
+    "lga": "kano_nassarawa"
+  },
+  {
+    "facility_ID": "hlkc",
+    "_id": 2704232,
+    "lga": "kwara_oyun"
+  },
+  {
+    "facility_ID": "Hfcr",
+    "_id": 2704237,
+    "lga": "edo_esan_west"
+  },
+  {
+    "facility_ID": "ehri",
+    "_id": 2704238,
+    "lga": "kano_nassarawa"
+  },
+  {
+    "facility_ID": "goiu",
+    "_id": 2704241,
+    "lga": "imo_ehime_mbano"
+  },
+  {
+    "facility_ID": "Loqp",
+    "_id": 2704256,
+    "lga": "sokoto_sabon_birni"
+  },
+  {
+    "facility_ID": "jdxa",
+    "_id": 2704301,
+    "lga": "kwara_oyun"
+  },
+  {
+    "facility_ID": "Ioio",
+    "_id": 2704302,
+    "lga": "akwa_ibom_ibesikpo_asutan"
+  },
+  {
+    "facility_ID": "gaul",
+    "_id": 2704308,
+    "lga": "kano_bichi"
+  },
+  {
+    "facility_ID": "jhbg",
+    "_id": 2704330,
+    "lga": "ondo_irele"
+  },
+  {
+    "facility_ID": "ehyh",
+    "_id": 2704345,
+    "lga": "ogun_ijebu_ode"
+  },
+  {
+    "facility_ID": "sqzy",
+    "_id": 2704407,
+    "lga": "kano_bichi"
+  },
+  {
+    "lga": "ogun_ijebu_ode",
+    "_id": 2704352
+  },
+  {
+    "lga": "edo_esan_west",
+    "_id": 2704377
+  },
+  {
+    "facility_ID": "gfdp",
+    "_id": 2704378,
+    "lga": "kano_bichi"
+  },
+  {
+    "facility_ID": "Hbqi",
+    "_id": 2704379,
+    "lga": "kano_nassarawa"
+  },
+  {
+    "facility_ID": "bndv",
+    "_id": 2704383,
+    "lga": "niger_shiroro"
+  },
+  {
+    "lga": "niger_shiroro",
+    "_id": 2704385
+  },
+  {
+    "facility_ID": "Kukj",
+    "_id": 2704418,
+    "lga": "kano_nassarawa"
+  },
+  {
+    "facility_ID": "Yifh",
+    "_id": 2704419,
+    "lga": "kano_nassarawa"
+  },
+  {
+    "facility_ID": "eqhp",
+    "_id": 2704423,
+    "lga": "niger_shiroro"
+  },
+  {
+    "facility_ID": "nvxx",
+    "_id": 2704424,
+    "lga": "jigawa_kafin_hausa"
+  },
+  {
+    "facility_ID": "yctx",
+    "_id": 2704432,
+    "lga": "kano_bichi"
+  },
+  {
+    "lga": "niger_shiroro",
+    "_id": 2704464
+  },
+  {
+    "facility_ID": "Pzud",
+    "_id": 2704473,
+    "lga": "niger_shiroro"
+  },
+  {
+    "lga": "kwara_oyun",
+    "_id": 2704474
+  },
+  {
+    "facility_ID": "qspo",
+    "_id": 2704479,
+    "lga": "niger_shiroro"
+  },
+  {
+    "facility_ID": "endh",
+    "_id": 2704485,
+    "lga": "niger_shiroro"
+  },
+  {
+    "facility_ID": "pyyo",
+    "_id": 2704525,
+    "lga": "kwara_oyun"
+  },
+  {
+    "facility_ID": "dgxi",
+    "_id": 2704536,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "upgg",
+    "_id": 2704563,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "judd",
+    "_id": 2704579,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "qkde",
+    "_id": 2704582,
+    "lga": "kwara_oyun"
+  },
+  {
+    "lga": "bauchi_darazo",
+    "_id": 2704604
+  },
+  {
+    "facility_ID": "ihag",
+    "_id": 2704607,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "vsww",
+    "_id": 2704632,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "xhda",
+    "_id": 2704640,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "kpyz",
+    "_id": 2704647,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "wemn",
+    "_id": 2704650,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2704667,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "facility_ID": "ehxt",
+    "_id": 2704691,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "jcxd",
+    "_id": 2704703,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "yzhs",
+    "_id": 2704705,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "roud",
+    "_id": 2704706,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "lga": "abia_aba_north",
+    "_id": 2704713
+  },
+  {
+    "facility_ID": "Jfak",
+    "_id": 2704720,
+    "lga": "akwa_ibom_abak"
+  },
+  {
+    "facility_ID": "lawv",
+    "_id": 2704722,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2704724,
+    "lga": "bauchi_darazo"
+  },
+  {
+    "facility_ID": "troj",
+    "_id": 2704728,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "dgpd",
+    "_id": 2704730,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "gttb",
+    "_id": 2704736,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "piah",
+    "_id": 2704760,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "Orbn",
+    "_id": 2704786,
+    "lga": "akwa_ibom_abak"
+  },
+  {
+    "facility_ID": "cmzk",
+    "_id": 2704792,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "cpgx",
+    "_id": 2704797,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "aplp",
+    "_id": 2704806,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "mwtx",
+    "_id": 2704812,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "uyzy",
+    "_id": 2704819,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "dtna",
+    "_id": 2704825,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "Ksfd",
+    "_id": 2704827,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "Hmgx",
+    "_id": 2704832,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "giza",
+    "_id": 2705119,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "icqd",
+    "_id": 2705125,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "jxfs",
+    "_id": 2705131,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "vays",
+    "_id": 2705137,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "pthx",
+    "_id": 2705142,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "vpet",
+    "_id": 2705143,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "yqmr",
+    "_id": 2705147,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "wutg",
+    "_id": 2705153,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "vruu",
+    "_id": 2705159,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "bukz",
+    "_id": 2705167,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "kcyv",
+    "_id": 2705173,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "fifn",
+    "_id": 2705179,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "dfxa",
+    "_id": 2705193,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "D014",
+    "_id": 2705196,
+    "lga": "cross_river_obudu"
+  },
+  {
+    "facility_ID": "kxxe",
+    "_id": 2705200,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "czzj",
+    "_id": 2705204,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "lqxl",
+    "_id": 2705209,
+    "lga": "katsina_batsari"
+  },
+  {
+    "facility_ID": "pvxv",
+    "_id": 2705214,
+    "lga": "katsina_batsari"
+  },
+  {
+    "lga": "niger_shiroro",
+    "_id": 2705223
+  },
+  {
+    "facility_ID": "08UK",
+    "_id": 2705256,
+    "lga": "cross_river_obudu"
+  },
+  {
+    "facility_ID": "03BE",
+    "_id": 2705261,
+    "lga": "cross_river_obudu"
+  },
+  {
+    "facility_ID": "0003",
+    "_id": 2705267,
+    "lga": "cross_river_obudu"
+  },
+  {
+    "facility_ID": "0012",
+    "_id": 2705271,
+    "lga": "cross_river_obubra"
+  },
+  {
+    "facility_ID": "XXXX",
+    "_id": 2705272,
+    "lga": "cross_river_obudu"
+  },
+  {
+    "facility_ID": "Xxxc",
+    "_id": 2705286,
+    "lga": "cross_river_obudu"
+  },
+  {
+    "facility_ID": "U003",
+    "_id": 2705309,
+    "lga": "cross_river_obudu"
+  },
+  {
+    "facility_ID": "XXXX",
+    "_id": 2705315,
+    "lga": "cross_river_obudu"
+  },
+  {
+    "facility_ID": "efqv",
+    "_id": 2705372,
+    "lga": "osun_iwo"
+  },
+  {
+    "facility_ID": "mukg",
+    "_id": 2705379,
+    "lga": "osun_iwo"
+  },
+  {
+    "facility_ID": "fjag",
+    "_id": 2705387,
+    "lga": "osun_iwo"
+  },
+  {
+    "lga": "kano_bichi",
+    "_id": 2705431
+  },
+  {
+    "lga": "ekiti_gbonyin",
+    "_id": 2705432
+  },
+  {
+    "facility_ID": "nhgd",
+    "_id": 2705443,
+    "lga": "kano_bichi"
+  },
+  {
+    "facility_ID": "rjbt",
+    "_id": 2705449,
+    "lga": "kano_bichi"
+  },
+  {
+    "facility_ID": "kjvo",
+    "_id": 2705522,
+    "lga": "oyo_ibadan_north_east"
+  },
+  {
+    "facility_ID": "oeju",
+    "_id": 2705526,
+    "lga": "oyo_ibadan_north_east"
+  },
+  {
+    "facility_ID": "uill",
+    "_id": 2705527,
+    "lga": "oyo_ibadan_north_east"
+  },
+  {
+    "facility_ID": "nhsa",
+    "_id": 2705554,
+    "lga": "oyo_ibadan_north_east"
+  },
+  {
+    "facility_ID": "dluc",
+    "_id": 2705555,
+    "lga": "zamfara_gusau"
+  },
+  {
+    "facility_ID": "joid",
+    "_id": 2705568,
+    "lga": "oyo_ibadan_north_east"
+  },
+  {
+    "facility_ID": "sumh",
+    "_id": 2705569,
+    "lga": "oyo_ibadan_north_east"
+  },
+  {
+    "facility_ID": "jzrc",
+    "_id": 2705572,
+    "lga": "oyo_ibadan_north_east"
+  },
+  {
+    "lga": "oyo_ibadan_north_east",
+    "_id": 2705573
+  },
+  {
+    "lga": "oyo_ibadan_north_east",
+    "_id": 2705574
+  },
+  {
+    "facility_ID": "Hohk",
+    "_id": 2705577,
+    "lga": "adamawa_hong"
+  },
+  {
+    "lga": "oyo_ibadan_north_east",
+    "_id": 2705578
+  },
+  {
+    "lga": "oyo_ibadan_north_east",
+    "_id": 2705581
+  },
+  {
+    "facility_ID": "Yecx",
+    "_id": 2705584,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "gisf",
+    "_id": 2705586,
+    "lga": "oyo_ibadan_north_east"
+  },
+  {
+    "facility_ID": "Acts",
+    "_id": 2705593,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "Pbhn",
+    "_id": 2705602,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "Pvkb",
+    "_id": 2705605,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "bhwv",
+    "_id": 2705611,
+    "lga": "osun_iwo"
+  },
+  {
+    "lga": "oyo_ibadan_north_east",
+    "_id": 2705619
+  },
+  {
+    "lga": "oyo_ibadan_north_east",
+    "_id": 2705622
+  },
+  {
+    "lga": "oyo_ibadan_north_east",
+    "_id": 2705625
+  },
+  {
+    "facility_ID": "Ibtd",
+    "_id": 2705629,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "Fibo",
+    "_id": 2705643,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "etpd",
+    "_id": 2705670,
+    "lga": "osun_iwo"
+  },
+  {
+    "facility_ID": "tlvy",
+    "_id": 2705676,
+    "lga": "osun_iwo"
+  },
+  {
+    "lga": "oyo_ibadan_north_east",
+    "_id": 2705682
+  },
+  {
+    "facility_ID": "Baxf",
+    "_id": 2705683,
+    "lga": "adamawa_hong"
+  },
+  {
+    "lga": "oyo_ibadan_north_east",
+    "_id": 2705684
+  },
+  {
+    "facility_ID": "Truj",
+    "_id": 2705685,
+    "lga": "adamawa_hong"
+  },
+  {
+    "lga": "oyo_ibadan_north_east",
+    "_id": 2705688
+  },
+  {
+    "facility_ID": "Gojd",
+    "_id": 2705689,
+    "lga": "adamawa_hong"
+  },
+  {
+    "lga": "oyo_ibadan_north_west",
+    "_id": 2705690
+  },
+  {
+    "facility_ID": "Oiyh",
+    "_id": 2705692,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "Tnwo",
+    "_id": 2705698,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "Mbeg",
+    "_id": 2705699,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "Iryu",
+    "_id": 2705701,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "Wxbx",
+    "_id": 2705706,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "Vkrv",
+    "_id": 2705712,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "Klly",
+    "_id": 2705727,
+    "lga": "adamawa_hong"
+  },
+  {
+    "facility_ID": "oygn",
+    "_id": 2705737,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "Ytzz",
+    "_id": 2705740,
+    "lga": "anambra_onitsha_north"
+  },
+  {
+    "lga": "akwa_ibom_uyo",
+    "_id": 2705746
+  },
+  {
+    "facility_ID": "Fxpe",
+    "_id": 2705747,
+    "lga": "anambra_onitsha_north"
+  },
+  {
+    "facility_ID": "Skkc",
+    "_id": 2705748,
+    "lga": "anambra_onitsha_north"
+  },
+  {
+    "facility_ID": "Mknt",
+    "_id": 2705760,
+    "lga": "anambra_onitsha_north"
+  },
+  {
+    "facility_ID": "Uuaw",
+    "_id": 2705761,
+    "lga": "anambra_onitsha_north"
+  },
+  {
+    "facility_ID": "xtjj",
+    "_id": 2705771,
+    "lga": "osun_iwo"
+  },
+  {
+    "facility_ID": "chnu",
+    "_id": 2705778,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "nxhm",
+    "_id": 2705797,
+    "lga": "osun_iwo"
+  },
+  {
+    "facility_ID": "pwtx",
+    "_id": 2705806,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "Xufm",
+    "_id": 2705807,
+    "lga": "enugu_enugu_south"
+  },
+  {
+    "facility_ID": "Jdsg",
+    "_id": 2705808,
+    "lga": "borno_monguno"
+  },
+  {
+    "facility_ID": "pdae",
+    "_id": 2705811,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "Faxm",
+    "_id": 2705812,
+    "lga": "borno_monguno"
+  },
+  {
+    "facility_ID": "leln",
+    "_id": 2705816,
+    "lga": "osun_iwo"
+  },
+  {
+    "facility_ID": "Jqho",
+    "_id": 2705817,
+    "lga": "borno_monguno"
+  },
+  {
+    "facility_ID": "oocd",
+    "_id": 2705818,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "teah",
+    "_id": 2705830,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "Fsxs",
+    "_id": 2705839,
+    "lga": "akwa_ibom_ibesikpo_asutan"
+  },
+  {
+    "facility_ID": "rksp",
+    "_id": 2705840,
+    "lga": "osun_iwo"
+  },
+  {
+    "facility_ID": "klww",
+    "_id": 2705879,
+    "lga": "osun_iwo"
+  },
+  {
+    "facility_ID": "qixw",
+    "_id": 2705886,
+    "lga": "osun_iwo"
+  },
+  {
+    "lga": "ekiti_gbonyin",
+    "_id": 2705894
+  },
+  {
+    "facility_ID": "vjbk",
+    "_id": 2705895,
+    "lga": "osun_iwo"
+  },
+  {
+    "facility_ID": "arpn",
+    "_id": 2705905,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "oooi",
+    "_id": 2705910,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "jdef",
+    "_id": 2705913,
+    "lga": "osun_iwo"
+  },
+  {
+    "facility_ID": "Odav",
+    "_id": 2705920,
+    "lga": "taraba_ardo_kola"
+  },
+  {
+    "facility_ID": "cbms",
+    "_id": 2705921,
+    "lga": "osun_iwo"
+  },
+  {
+    "facility_ID": "pjlz",
+    "_id": 2705925,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "ngem",
+    "_id": 2705927,
+    "lga": "osun_iwo"
+  },
+  {
+    "facility_ID": "beus",
+    "_id": 2705938,
+    "lga": "anambra_aguata"
+  },
+  {
+    "facility_ID": "zpha",
+    "_id": 2705948,
+    "lga": "taraba_ardo_kola"
+  },
+  {
+    "lga": "osun_osogbo",
+    "_id": 2705949
+  },
+  {
+    "facility_ID": "rmsv",
+    "_id": 2705950,
+    "lga": "zamfara_kaura_namoda"
+  },
+  {
+    "lga": "osun_osogbo",
+    "_id": 2705978
+  },
+  {
+    "lga": "osun_osogbo",
+    "_id": 2705982
+  },
+  {
+    "facility_ID": "fvxy",
+    "_id": 2705993,
+    "lga": "taraba_ardo_kola"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2706020,
+    "lga": "abia_aba_south"
+  },
+  {
+    "facility_ID": "qxot",
+    "_id": 2706035,
+    "lga": "zamfara_kaura_namoda"
+  },
+  {
+    "facility_ID": "uubg",
+    "_id": 2706042,
+    "lga": "benue_ushongo"
+  },
+  {
+    "lga": "osun_osogbo",
+    "_id": 2706897
+  },
+  {
+    "facility_ID": "Kfjx",
+    "_id": 2706849,
+    "lga": "lagos_surulere"
+  },
+  {
+    "facility_ID": "oahc",
+    "_id": 2706057,
+    "lga": "zamfara_kaura_namoda"
+  },
+  {
+    "facility_ID": "lxpr",
+    "_id": 2706069,
+    "lga": "taraba_ardo_kola"
+  },
+  {
+    "lga": "imo_orlu",
+    "_id": 2706886
+  },
+  {
+    "facility_ID": "Hhtd",
+    "_id": 2706127,
+    "lga": "enugu_enugu_south"
+  },
+  {
+    "facility_ID": "umwq",
+    "_id": 2706158,
+    "lga": "taraba_ardo_kola"
+  },
+  {
+    "lga": "NA",
+    "_id": 2706168
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2706180,
+    "lga": "abia_aba_south"
+  },
+  {
+    "facility_ID": "Bnht",
+    "_id": 2706832,
+    "lga": "lagos_surulere"
+  },
+  {
+    "facility_ID": "Kqwf",
+    "_id": 2706839,
+    "lga": "kano_gwarzo"
+  },
+  {
+    "lga": "ekiti_ado_ekiti",
+    "_id": 2706213
+  },
+  {
+    "facility_ID": "0010",
+    "_id": 2706253,
+    "lga": "cross_river_biase"
+  },
+  {
+    "lga": "NA",
+    "_id": 2706265
+  },
+  {
+    "facility_ID": "0601",
+    "_id": 2706267,
+    "lga": "cross_river_biase"
+  },
+  {
+    "facility_ID": "Nacs",
+    "_id": 2706298,
+    "lga": "enugu_enugu_south"
+  },
+  {
+    "lga": "ekiti_ado_ekiti",
+    "_id": 2706307
+  },
+  {
+    "facility_ID": "0009",
+    "_id": 2706314,
+    "lga": "plateau_qua_an_pan"
+  },
+  {
+    "facility_ID": "wvel",
+    "_id": 2706327,
+    "lga": "akwa_ibom_ibiono_ibom"
+  },
+  {
+    "lga": "ekiti_ado_ekiti",
+    "_id": 2706356
+  },
+  {
+    "facility_ID": "Fkzn",
+    "_id": 2706376,
+    "lga": "kwara_ilorin_south"
+  },
+  {
+    "facility_ID": "pvfu",
+    "_id": 2706402,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "lga": "NA",
+    "_id": 2706420
+  },
+  {
+    "facility_ID": "0025",
+    "_id": 2706421,
+    "lga": "cross_river_biase"
+  },
+  {
+    "facility_ID": "0001",
+    "_id": 2706431,
+    "lga": "cross_river_biase"
+  },
+  {
+    "facility_ID": "1316",
+    "_id": 2706439,
+    "lga": "cross_river_biase"
+  },
+  {
+    "facility_ID": "hxjh",
+    "_id": 2706448,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "0029",
+    "_id": 2706449,
+    "lga": "cross_river_biase"
+  },
+  {
+    "facility_ID": "0025",
+    "_id": 2706456,
+    "lga": "cross_river_biase"
+  },
+  {
+    "facility_ID": "0000",
+    "_id": 2706460,
+    "lga": "cross_river_biase"
+  },
+  {
+    "facility_ID": "0000",
+    "_id": 2706463,
+    "lga": "cross_river_biase"
+  },
+  {
+    "lga": "NA",
+    "_id": 2706468
+  },
+  {
+    "lga": "NA",
+    "_id": 2706479
+  },
+  {
+    "facility_ID": "0004",
+    "_id": 2706483,
+    "lga": "cross_river_biase"
+  },
+  {
+    "lga": "ekiti_ado_ekiti",
+    "_id": 2706512
+  },
+  {
+    "lga": "ekiti_ado_ekiti",
+    "_id": 2706513
+  },
+  {
+    "facility_ID": "0003",
+    "_id": 2706514,
+    "lga": "cross_river_biase"
+  },
+  {
+    "facility_ID": "UILM",
+    "_id": 2706518,
+    "lga": "ekiti_ado_ekiti"
+  },
+  {
+    "facility_ID": "0010",
+    "_id": 2706521,
+    "lga": "cross_river_biase"
+  },
+  {
+    "facility_ID": "0008",
+    "_id": 2706526,
+    "lga": "cross_river_biase"
+  },
+  {
+    "facility_ID": "0019",
+    "_id": 2706537,
+    "lga": "cross_river_biase"
+  },
+  {
+    "facility_ID": "fnwr",
+    "_id": 2706546,
+    "lga": "kwara_oyun"
+  },
+  {
+    "facility_ID": "0022",
+    "_id": 2706552,
+    "lga": "cross_river_biase"
+  },
+  {
+    "lga": "NA",
+    "_id": 2706555
+  },
+  {
+    "facility_ID": "0013",
+    "_id": 2706561,
+    "lga": "cross_river_biase"
+  },
+  {
+    "lga": "NA",
+    "_id": 2706592
+  },
+  {
+    "facility_ID": "Yfvr",
+    "_id": 2706593,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "oabf",
+    "_id": 2706598,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "jdlb",
+    "_id": 2706617,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "lga": "ekiti_ado_ekiti",
+    "_id": 2706623
+  },
+  {
+    "lga": "NA",
+    "_id": 2706628
+  },
+  {
+    "facility_ID": "nqxe",
+    "_id": 2706630,
+    "lga": "kwara_oyun"
+  },
+  {
+    "lga": "ekiti_ado_ekiti",
+    "_id": 2706631
+  },
+  {
+    "facility_ID": "xofp",
+    "_id": 2706642,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "lga": "ekiti_ado_ekiti",
+    "_id": 2706652
+  },
+  {
+    "lga": "ekiti_ado_ekiti",
+    "_id": 2706653
+  },
+  {
+    "facility_ID": "KJHR",
+    "_id": 2706658,
+    "lga": "ekiti_ado_ekiti"
+  },
+  {
+    "facility_ID": "usvq",
+    "_id": 2706661,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "lga": "NA",
+    "_id": 2706666
+  },
+  {
+    "lga": "NA",
+    "_id": 2706677
+  },
+  {
+    "lga": "kano_gwarzo",
+    "_id": 2706694
+  },
+  {
+    "lga": "ekiti_gbonyin",
+    "_id": 2706701
+  },
+  {
+    "facility_ID": "Tnbv",
+    "_id": 2706716,
+    "lga": "kano_gwarzo"
+  },
+  {
+    "lga": "imo_orlu",
+    "_id": 2706727
+  },
+  {
+    "lga": "NA",
+    "_id": 2706736
+  },
+  {
+    "lga": "kano_gwarzo",
+    "_id": 2706738
+  },
+  {
+    "lga": "NA",
+    "_id": 2706753
+  },
+  {
+    "lga": "imo_orlu",
+    "_id": 2706755
+  },
+  {
+    "lga": "NA",
+    "_id": 2706763
+  },
+  {
+    "facility_ID": "Wkzj",
+    "_id": 2706764,
+    "lga": "kano_gwarzo"
+  },
+  {
+    "facility_ID": "Mrfe",
+    "_id": 2706782,
+    "lga": "lagos_surulere"
+  },
+  {
+    "facility_ID": "Qvcs",
+    "_id": 2706789,
+    "lga": "kano_gwarzo"
+  },
+  {
+    "facility_ID": "ikxv",
+    "_id": 2706802,
+    "lga": "oyo_ogbomoso_north"
+  },
+  {
+    "facility_ID": "stii",
+    "_id": 2706899,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "Oske",
+    "_id": 2706900,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "Ohfv",
+    "_id": 2706905,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "kxut",
+    "_id": 2706908,
+    "lga": "osun_osogbo"
+  },
+  {
+    "facility_ID": "Jxoi",
+    "_id": 2706909,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "taxq",
+    "_id": 2706911,
+    "lga": "osun_osogbo"
+  },
+  {
+    "facility_ID": "Pofg",
+    "_id": 2706912,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "Ggvo",
+    "_id": 2706925,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "Tkms",
+    "_id": 2706941,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "Pelr",
+    "_id": 2706951,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "aljj",
+    "_id": 2706973,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "xlnf",
+    "_id": 2706978,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "Tulg",
+    "_id": 2706979,
+    "lga": "anambra_idemili_north"
+  },
+  {
+    "facility_ID": "apht",
+    "_id": 2706981,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "yqhe",
+    "_id": 2706983,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "qgux",
+    "_id": 2706994,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "rvqd",
+    "_id": 2707001,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "pjqt",
+    "_id": 2707008,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "sqwc",
+    "_id": 2707012,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "ensy",
+    "_id": 2707018,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "qfxg",
+    "_id": 2707019,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "nlqf",
+    "_id": 2707026,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "Chmp",
+    "_id": 2707029,
+    "lga": "lagos_surulere"
+  },
+  {
+    "facility_ID": "ygql",
+    "_id": 2707057,
+    "lga": "kogi_lokoja"
+  },
+  {
+    "facility_ID": "yqux",
+    "_id": 2707061,
+    "lga": "kogi_lokoja"
+  },
+  {
+    "facility_ID": "vfdv",
+    "_id": 2707062,
+    "lga": "kogi_lokoja"
+  },
+  {
+    "facility_ID": "dmez",
+    "_id": 2707064,
+    "lga": "kogi_lokoja"
+  },
+  {
+    "facility_ID": "ocfi",
+    "_id": 2707065,
+    "lga": "kogi_lokoja"
+  },
+  {
+    "facility_ID": "oara",
+    "_id": 2707075,
+    "lga": "kogi_lokoja"
+  },
+  {
+    "facility_ID": "uwpi",
+    "_id": 2707082,
+    "lga": "kogi_lokoja"
+  },
+  {
+    "facility_ID": "dqsd",
+    "_id": 2707083,
+    "lga": "kogi_lokoja"
+  },
+  {
+    "facility_ID": "aikn",
+    "_id": 2707113,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "Xokh",
+    "_id": 2707122,
+    "lga": "lagos_surulere"
+  },
+  {
+    "facility_ID": "nzar",
+    "_id": 2707130,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "edak",
+    "_id": 2707140,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "gsmw",
+    "_id": 2707149,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "gmlw",
+    "_id": 2707155,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "rpnj",
+    "_id": 2707160,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "hspe",
+    "_id": 2707169,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "lga": "imo_orlu",
+    "_id": 2707170
+  },
+  {
+    "facility_ID": "RWNA",
+    "_id": 2707172,
+    "lga": "imo_orlu"
+  },
+  {
+    "lga": "imo_orlu",
+    "_id": 2707173
+  },
+  {
+    "facility_ID": "vqws",
+    "_id": 2707179,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "ngca",
+    "_id": 2707186,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "lga": "benue_oturkpo",
+    "_id": 2707196
+  },
+  {
+    "facility_ID": "Nnwb",
+    "_id": 2707202,
+    "lga": "akwa_ibom_uyo"
+  },
+  {
+    "facility_ID": "zmru",
+    "_id": 2707203,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "jhcb",
+    "_id": 2707212,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "Srmg",
+    "_id": 2707213,
+    "lga": "akwa_ibom_uyo"
+  },
+  {
+    "lga": "benue_oturkpo",
+    "_id": 2707228
+  },
+  {
+    "facility_ID": "ggff",
+    "_id": 2707230,
+    "lga": "niger_paikoro"
+  },
+  {
+    "facility_ID": "sgkf",
+    "_id": 2707235,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "hxqk",
+    "_id": 2707239,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "dzwr",
+    "_id": 2707244,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "fzhv",
+    "_id": 2707245,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "jrlq",
+    "_id": 2707252,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "bdan",
+    "_id": 2707259,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "Gytl",
+    "_id": 2707265,
+    "lga": "akwa_ibom_uyo"
+  },
+  {
+    "facility_ID": "ibfb",
+    "_id": 2707269,
+    "lga": "benue_oturkpo"
+  },
+  {
+    "facility_ID": "iuop",
+    "_id": 2707275,
+    "lga": "benue_oturkpo"
+  },
+  {
+    "facility_ID": "zijq",
+    "_id": 2707277,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "tgvk",
+    "_id": 2707281,
+    "lga": "benue_oturkpo"
+  },
+  {
+    "facility_ID": "hdvh",
+    "_id": 2707290,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "teex",
+    "_id": 2707299,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "lfpu",
+    "_id": 2707304,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "lpoq",
+    "_id": 2707306,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "qdei",
+    "_id": 2707307,
+    "lga": "enugu_enugu_east"
+  },
+  {
+    "facility_ID": "cwjo",
+    "_id": 2707311,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "kybv",
+    "_id": 2707312,
+    "lga": "enugu_enugu_east"
+  },
+  {
+    "facility_ID": "dgxx",
+    "_id": 2707313,
+    "lga": "enugu_enugu_east"
+  },
+  {
+    "facility_ID": "qlhg",
+    "_id": 2707321,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "qzhs",
+    "_id": 2707323,
+    "lga": "enugu_enugu_east"
+  },
+  {
+    "facility_ID": "anrp",
+    "_id": 2707324,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "gqit",
+    "_id": 2707325,
+    "lga": "enugu_enugu_east"
+  },
+  {
+    "facility_ID": "woya",
+    "_id": 2707329,
+    "lga": "enugu_enugu_east"
+  },
+  {
+    "lga": "nasarawa_karu",
+    "_id": 2707330
+  },
+  {
+    "facility_ID": "inga",
+    "_id": 2707331,
+    "lga": "enugu_enugu_east"
+  },
+  {
+    "facility_ID": "vroj",
+    "_id": 2707335,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "nqgo",
+    "_id": 2707349,
+    "lga": "enugu_enugu_east"
+  },
+  {
+    "facility_ID": "qbhp",
+    "_id": 2707350,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "ovfh",
+    "_id": 2707351,
+    "lga": "niger_shiroro"
+  },
+  {
+    "facility_ID": "fvak",
+    "_id": 2707352,
+    "lga": "enugu_enugu_east"
+  },
+  {
+    "facility_ID": "Oyxf",
+    "_id": 2707365,
+    "lga": "akwa_ibom_uyo"
+  },
+  {
+    "lga": "ekiti_ado_ekiti",
+    "_id": 2707367
+  },
+  {
+    "facility_ID": "kyag",
+    "_id": 2707368,
+    "lga": "enugu_enugu_east"
+  },
+  {
+    "facility_ID": "vhrz",
+    "_id": 2707372,
+    "lga": "enugu_enugu_east"
+  },
+  {
+    "facility_ID": "qnfm",
+    "_id": 2707373,
+    "lga": "niger_shiroro"
+  },
+  {
+    "facility_ID": "huyt",
+    "_id": 2707374,
+    "lga": "enugu_enugu_east"
+  },
+  {
+    "facility_ID": "Gpwn",
+    "_id": 2707375,
+    "lga": "akwa_ibom_uyo"
+  },
+  {
+    "facility_ID": "eudg",
+    "_id": 2707376,
+    "lga": "enugu_enugu_east"
+  },
+  {
+    "facility_ID": "gjon",
+    "_id": 2707377,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "lga": "kwara_oyun",
+    "_id": 2707381
+  },
+  {
+    "facility_ID": "qbuy",
+    "_id": 2707385,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "ykcd",
+    "_id": 2707387,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "rzfj",
+    "_id": 2707391,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "Taph",
+    "_id": 2707392,
+    "lga": "akwa_ibom_uyo"
+  },
+  {
+    "facility_ID": "hmip",
+    "_id": 2707396,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "Xaov",
+    "_id": 2707398,
+    "lga": "akwa_ibom_uyo"
+  },
+  {
+    "facility_ID": "Cfvk",
+    "_id": 2707406,
+    "lga": "akwa_ibom_uyo"
+  },
+  {
+    "facility_ID": "fzhv",
+    "_id": 2707414,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "zuzh",
+    "_id": 2707425,
+    "lga": "nasarawa_karu"
+  },
+  {
+    "facility_ID": "Sfyw",
+    "_id": 2707434,
+    "lga": "akwa_ibom_uyo"
+  },
+  {
+    "facility_ID": "Pyjv",
+    "_id": 2707439,
+    "lga": "akwa_ibom_uyo"
+  },
+  {
+    "lga": "ogun_ifo",
+    "_id": 2707449
+  },
+  {
+    "facility_ID": "Ehgt",
+    "_id": 2707463,
+    "lga": "akwa_ibom_uyo"
+  },
+  {
+    "facility_ID": "qeus",
+    "_id": 2707464,
+    "lga": "ogun_ifo"
+  },
+  {
+    "facility_ID": "pbfn",
+    "_id": 2707468,
+    "lga": "ogun_ifo"
+  },
+  {
+    "facility_ID": "emtk",
+    "_id": 2707477,
+    "lga": "ogun_ifo"
+  },
+  {
+    "facility_ID": "uspz",
+    "_id": 2707483,
+    "lga": "ogun_ifo"
+  },
+  {
+    "facility_ID": "Weng",
+    "_id": 2707487,
+    "lga": "akwa_ibom_uyo"
+  },
+  {
+    "facility_ID": "cwfa",
+    "_id": 2707489,
+    "lga": "kwara_oyun"
+  },
+  {
+    "facility_ID": "Edtj",
+    "_id": 2707493,
+    "lga": "akwa_ibom_uyo"
+  },
+  {
+    "facility_ID": "Xjad",
+    "_id": 2707497,
+    "lga": "akwa_ibom_uyo"
+  },
+  {
+    "facility_ID": "tinm",
+    "_id": 2707507,
+    "lga": "kwara_oyun"
+  },
+  {
+    "facility_ID": "rsdd",
+    "_id": 2707548,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "XXXX",
+    "_id": 2707657,
+    "lga": "rivers_emuoha"
+  },
+  {
+    "facility_ID": "XXXX",
+    "_id": 2707661,
+    "lga": "rivers_emuoha"
+  },
+  {
+    "facility_ID": "XXXX",
+    "_id": 2707662,
+    "lga": "rivers_emuoha"
+  },
+  {
+    "facility_ID": "XXXX",
+    "_id": 2707675,
+    "lga": "rivers_emuoha"
+  },
+  {
+    "lga": "kano_gwarzo",
+    "_id": 2707694
+  },
+  {
+    "facility_ID": "hovw",
+    "_id": 2707731,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "stgo",
+    "_id": 2707734,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "Llww",
+    "_id": 2707768,
+    "lga": "akwa_ibom_ibesikpo_asutan"
+  },
+  {
+    "facility_ID": "heqd",
+    "_id": 2707782,
+    "lga": "delta_udu"
+  },
+  {
+    "facility_ID": "qdoo",
+    "_id": 2707871,
+    "lga": "delta_warri_south"
+  },
+  {
+    "facility_ID": "leqv",
+    "_id": 2708002,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "hhfs",
+    "_id": 2708003,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "pomp",
+    "_id": 2708010,
+    "lga": "gombe_kaltungo"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2708148,
+    "lga": "abia_aba_south"
+  },
+  {
+    "facility_ID": "ufiw",
+    "_id": 2708659,
+    "lga": "kwara_oyun"
+  },
+  {
+    "facility_ID": "ipim",
+    "_id": 2708712,
+    "lga": "kwara_oyun"
+  },
+  {
+    "facility_ID": "vaap",
+    "_id": 2708895,
+    "lga": "kwara_oyun"
+  },
+  {
+    "facility_ID": "ibwd",
+    "_id": 2708915,
+    "lga": "kwara_oyun"
+  },
+  {
+    "lga": "ekiti_ado_ekiti",
+    "_id": 2708981
+  },
+  {
+    "lga": "ekiti_ado_ekiti",
+    "_id": 2708999
+  },
+  {
+    "facility_ID": "026*",
+    "_id": 2709053,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "Yooi",
+    "_id": 2709063,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "wfbl",
+    "_id": 2709175,
+    "lga": "jigawa_birnin_kudu"
+  },
+  {
+    "facility_ID": "Ghay",
+    "_id": 2709369,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "Mzgw",
+    "_id": 2709377,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "Dmwg",
+    "_id": 2709408,
+    "lga": "borno_monguno"
+  },
+  {
+    "facility_ID": "Ygom",
+    "_id": 2709409,
+    "lga": "borno_monguno"
+  },
+  {
+    "facility_ID": "Qfbb",
+    "_id": 2709411,
+    "lga": "borno_monguno"
+  },
+  {
+    "facility_ID": "Ghzm",
+    "_id": 2709414,
+    "lga": "borno_monguno"
+  },
+  {
+    "facility_ID": "Uelg",
+    "_id": 2709416,
+    "lga": "borno_monguno"
+  },
+  {
+    "facility_ID": "Xula",
+    "_id": 2709418,
+    "lga": "borno_monguno"
+  },
+  {
+    "facility_ID": "Igtc",
+    "_id": 2709419,
+    "lga": "borno_monguno"
+  },
+  {
+    "facility_ID": "Axia",
+    "_id": 2709421,
+    "lga": "borno_monguno"
+  },
+  {
+    "facility_ID": "jdfw",
+    "_id": 2709427,
+    "lga": "enugu_enugu_east"
+  },
+  {
+    "facility_ID": "Ycpk",
+    "_id": 2709438,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "wjpi",
+    "_id": 2709446,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "Ukcs",
+    "_id": 2709516,
+    "lga": "borno_maiduguri"
+  },
+  {
+    "facility_ID": "exsj",
+    "_id": 2709523,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "facility_ID": "jwes",
+    "_id": 2709528,
+    "lga": "fct_gwagwalada"
+  },
+  {
+    "lga": "imo_ehime_mbano",
+    "_id": 2710517
+  },
+  {
+    "facility_ID": "qyis",
+    "_id": 2710737,
+    "lga": "imo_ehime_mbano"
+  },
+  {
+    "facility_ID": "Mdvs",
+    "_id": 2711405,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "Irpu",
+    "_id": 2711492,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "Ibcn",
+    "_id": 2711517,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "Zron",
+    "_id": 2711527,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "Omnd",
+    "_id": 2711573,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "kocy",
+    "_id": 2711627,
+    "lga": "kwara_edu"
+  },
+  {
+    "lga": "imo_ehime_mbano",
+    "_id": 2711652
+  },
+  {
+    "facility_ID": "oymc",
+    "_id": 2711934,
+    "lga": "kwara_edu"
+  },
+  {
+    "facility_ID": "igig",
+    "_id": 2712016,
+    "lga": "borno_bayo"
+  },
+  {
+    "facility_ID": "ddjn",
+    "_id": 2712313,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "sjdk",
+    "_id": 2712337,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "zfdv",
+    "_id": 2712339,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "facility_ID": "CCOW",
+    "_id": 2712340,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "facility_ID": "xldw",
+    "_id": 2712341,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "exhu",
+    "_id": 2712559,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "lga": "kwara_ilorin_south",
+    "_id": 2712596
+  },
+  {
+    "facility_ID": "wzsj",
+    "_id": 2712652,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "facility_ID": "dpbc",
+    "_id": 2712671,
+    "lga": "kwara_ilorin_south"
+  },
+  {
+    "facility_ID": "Dwmx",
+    "_id": 2712674,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "Zfgx",
+    "_id": 2712707,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "Fetd",
+    "_id": 2712708,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "Eqpl",
+    "_id": 2712709,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "Nqel",
+    "_id": 2712710,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "pciw",
+    "_id": 2712726,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "lga": "imo_ehime_mbano",
+    "_id": 2712737
+  },
+  {
+    "lga": "imo_ehime_mbano",
+    "_id": 2712751
+  },
+  {
+    "facility_ID": "cozt",
+    "_id": 2712758,
+    "lga": "kwara_ilorin_south"
+  },
+  {
+    "facility_ID": "qgpr",
+    "_id": 2712762,
+    "lga": "kwara_asa"
+  },
+  {
+    "facility_ID": "dvpw",
+    "_id": 2712764,
+    "lga": "kwara_ilorin_south"
+  },
+  {
+    "facility_ID": "Wikv",
+    "_id": 2712902,
+    "lga": "oyo_ona_ara"
+  },
+  {
+    "facility_ID": "ikua",
+    "_id": 2712906,
+    "lga": "kwara_ilorin_south"
+  },
+  {
+    "facility_ID": "xuuy",
+    "_id": 2712920,
+    "lga": "kwara_ilorin_south"
+  },
+  {
+    "facility_ID": "kiyr",
+    "_id": 2712961,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "facility_ID": "Qofi",
+    "_id": 2713059,
+    "lga": "kebbi_bagudo"
+  },
+  {
+    "facility_ID": "Pfgs",
+    "_id": 2713061,
+    "lga": "kebbi_bagudo"
+  },
+  {
+    "facility_ID": "Inpt",
+    "_id": 2713064,
+    "lga": "kebbi_bagudo"
+  },
+  {
+    "facility_ID": "Ztki",
+    "_id": 2713352,
+    "lga": "adamawa_michika"
+  },
+  {
+    "lga": "adamawa_michika",
+    "_id": 2713361
+  },
+  {
+    "facility_ID": "bveu",
+    "_id": 2713986,
+    "lga": "kwara_ilorin_south"
+  },
+  {
+    "facility_ID": "ibru",
+    "_id": 2714123,
+    "lga": "kwara_ilorin_south"
+  },
+  {
+    "facility_ID": "mmfw",
+    "_id": 2714808,
+    "lga": "kwara_ilorin_south"
+  },
+  {
+    "facility_ID": "xcgu",
+    "_id": 2714939,
+    "lga": "ekiti_ilejemeje"
+  },
+  {
+    "facility_ID": "cfot",
+    "_id": 2715414,
+    "lga": "kwara_ilorin_south"
+  },
+  {
+    "facility_ID": "lkua",
+    "_id": 2715445,
+    "lga": "kwara_ilorin_south"
+  },
+  {
+    "facility_ID": "ozyp",
+    "_id": 2715454,
+    "lga": "kwara_ilorin_south"
+  },
+  {
+    "facility_ID": "kljt",
+    "_id": 2715491,
+    "lga": "kwara_ilorin_south"
+  },
+  {
+    "facility_ID": "Gcgt",
+    "_id": 2715498,
+    "lga": "kebbi_bagudo"
+  },
+  {
+    "facility_ID": "auhi",
+    "_id": 2715514,
+    "lga": "kebbi_bagudo"
+  },
+  {
+    "facility_ID": "RUYW",
+    "_id": 2715674,
+    "lga": "imo_orlu"
+  },
+  {
+    "facility_ID": "CLYF",
+    "_id": 2715726,
+    "lga": "imo_orlu"
+  },
+  {
+    "facility_ID": "ybil",
+    "_id": 2716109,
+    "lga": "ebonyi_afikpo_north"
+  },
+  {
+    "lga": "imo_orlu",
+    "_id": 2716121
+  },
+  {
+    "facility_ID": "eiig",
+    "_id": 2716132,
+    "lga": "ebonyi_afikpo_north"
+  },
+  {
+    "facility_ID": "sbkw",
+    "_id": 2716139,
+    "lga": "ebonyi_afikpo_north"
+  },
+  {
+    "facility_ID": "cdwg",
+    "_id": 2716151,
+    "lga": "ebonyi_afikpo_north"
+  },
+  {
+    "facility_ID": "pnha",
+    "_id": 2716333,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "facility_ID": "VTSL",
+    "_id": 2716349,
+    "lga": "imo_orlu"
+  },
+  {
+    "lga": "plateau_qua_an_pan",
+    "_id": 2716517
+  },
+  {
+    "facility_ID": "SKJR",
+    "_id": 2716694,
+    "lga": "imo_orlu"
+  },
+  {
+    "facility_ID": "swig",
+    "_id": 2716714,
+    "lga": "ebonyi_afikpo_north"
+  },
+  {
+    "facility_ID": "taot",
+    "_id": 2716728,
+    "lga": "ebonyi_afikpo_north"
+  },
+  {
+    "lga": "imo_orlu",
+    "_id": 2718287
+  },
+  {
+    "facility_ID": "asld",
+    "_id": 2718309,
+    "lga": "benue_ushongo"
+  },
+  {
+    "lga": "imo_orlu",
+    "_id": 2718400
+  },
+  {
+    "facility_ID": "rrae",
+    "_id": 2718449,
+    "lga": "benue_ushongo"
+  },
+  {
+    "facility_ID": "wezk",
+    "_id": 2718502,
+    "lga": "bauchi_bogoro"
+  },
+  {
+    "facility_ID": "uuyh",
+    "_id": 2718515,
+    "lga": "rivers_obio_akpor"
+  },
+  {
+    "lga": "rivers_obio_akpor",
+    "_id": 2718520
+  },
+  {
+    "facility_ID": "gnhk",
+    "_id": 2718539,
+    "lga": "rivers_obio_akpor"
+  },
+  {
+    "lga": "rivers_obio_akpor",
+    "_id": 2718540
+  },
+  {
+    "facility_ID": "qznc",
+    "_id": 2718561,
+    "lga": "ekiti_ilejemeje"
+  },
+  {
+    "lga": "abia_aba_north",
+    "_id": 2718582
+  },
+  {
+    "facility_ID": "krph",
+    "_id": 2718589,
+    "lga": "ekiti_ilejemeje"
+  },
+  {
+    "lga": "abia_aba_north",
+    "_id": 2718594
+  },
+  {
+    "lga": "abia_aba_north",
+    "_id": 2718598
+  },
+  {
+    "lga": "abia_aba_north",
+    "_id": 2718602
+  },
+  {
+    "lga": "kebbi_bagudo",
+    "_id": 2718603
+  },
+  {
+    "facility_ID": "Ojnp",
+    "_id": 2718612,
+    "lga": "kebbi_bagudo"
+  },
+  {
+    "facility_ID": "zpcn",
+    "_id": 2718626,
+    "lga": "ekiti_ilejemeje"
+  },
+  {
+    "lga": "rivers_obio_akpor",
+    "_id": 2718649
+  },
+  {
+    "facility_ID": "Lsbb",
+    "_id": 2718655,
+    "lga": "sokoto_sabon_birni"
+  },
+  {
+    "lga": "rivers_obio_akpor",
+    "_id": 2718670
+  },
+  {
+    "lga": "rivers_obio_akpor",
+    "_id": 2718679
+  },
+  {
+    "lga": "rivers_obio_akpor",
+    "_id": 2718682
+  },
+  {
+    "facility_ID": "Qxpt",
+    "_id": 2718698,
+    "lga": "adamawa_numan"
+  },
+  {
+    "facility_ID": "Kjtc",
+    "_id": 2718700,
+    "lga": "adamawa_numan"
+  },
+  {
+    "facility_ID": "fold",
+    "_id": 2718702,
+    "lga": "adamawa_numan"
+  },
+  {
+    "facility_ID": "Lydu",
+    "_id": 2718703,
+    "lga": "adamawa_numan"
+  },
+  {
+    "facility_ID": "Hpjc",
+    "_id": 2718706,
+    "lga": "adamawa_numan"
+  },
+  {
+    "facility_ID": "Heqq",
+    "_id": 2718707,
+    "lga": "adamawa_numan"
+  },
+  {
+    "facility_ID": "nojw",
+    "_id": 2718711,
+    "lga": "adamawa_numan"
+  },
+  {
+    "facility_ID": "nvlv",
+    "_id": 2718718,
+    "lga": "adamawa_numan"
+  },
+  {
+    "facility_ID": "xelc",
+    "_id": 2718719,
+    "lga": "adamawa_numan"
+  },
+  {
+    "facility_ID": "xvbx",
+    "_id": 2718723,
+    "lga": "adamawa_numan"
+  },
+  {
+    "facility_ID": "udqp",
+    "_id": 2718724,
+    "lga": "adamawa_numan"
+  },
+  {
+    "facility_ID": "ownw",
+    "_id": 2718745,
+    "lga": "sokoto_sabon_birni"
+  },
+  {
+    "facility_ID": "agog",
+    "_id": 2718748,
+    "lga": "adamawa_numan"
+  },
+  {
+    "facility_ID": "ucnt",
+    "_id": 2718755,
+    "lga": "adamawa_numan"
+  },
+  {
+    "facility_ID": "rrlx",
+    "_id": 2718764,
+    "lga": "adamawa_numan"
+  },
+  {
+    "lga": "plateau_qua_an_pan",
+    "_id": 2718802
+  },
+  {
+    "facility_ID": "ucwy",
+    "_id": 2718815,
+    "lga": "adamawa_numan"
+  },
+  {
+    "lga": "rivers_khana",
+    "_id": 2719112
+  },
+  {
+    "facility_ID": "frse",
+    "_id": 2719132,
+    "lga": "rivers_khana"
+  },
+  {
+    "facility_ID": "ikmx",
+    "_id": 2719171,
+    "lga": "rivers_khana"
+  },
+  {
+    "facility_ID": "ywdm",
+    "_id": 2719199,
+    "lga": "ekiti_ilejemeje"
+  },
+  {
+    "facility_ID": "yqzv",
+    "_id": 2719212,
+    "lga": "ekiti_ilejemeje"
+  },
+  {
+    "facility_ID": "oeir",
+    "_id": 2719263,
+    "lga": "ekiti_ilejemeje"
+  },
+  {
+    "facility_ID": "zbwd",
+    "_id": 2719284,
+    "lga": "yobe_potiskum"
+  },
+  {
+    "lga": "yobe_potiskum",
+    "_id": 2719285
+  },
+  {
+    "facility_ID": "tlhe",
+    "_id": 2719302,
+    "lga": "rivers_khana"
+  },
+  {
+    "facility_ID": "lpau",
+    "_id": 2719332,
+    "lga": "rivers_khana"
+  },
+  {
+    "facility_ID": "qrsw",
+    "_id": 2719340,
+    "lga": "ekiti_ilejemeje"
+  },
+  {
+    "facility_ID": "pijr",
+    "_id": 2719349,
+    "lga": "rivers_khana"
+  },
+  {
+    "facility_ID": "ldfl",
+    "_id": 2719350,
+    "lga": "ekiti_ilejemeje"
+  },
+  {
+    "facility_ID": "ubau",
+    "_id": 2719352,
+    "lga": "ekiti_ilejemeje"
+  },
+  {
+    "facility_ID": "qler",
+    "_id": 2719459,
+    "lga": "ogun_egbado_south"
+  },
+  {
+    "facility_ID": "cqbc",
+    "_id": 2719536,
+    "lga": "imo_ehime_mbano"
+  },
+  {
+    "facility_ID": "bkrp",
+    "_id": 2719560,
+    "lga": "imo_ehime_mbano"
+  },
+  {
+    "facility_ID": "eyma",
+    "_id": 2719564,
+    "lga": "yobe_potiskum"
+  },
+  {
+    "facility_ID": "qzqa",
+    "_id": 2719587,
+    "lga": "yobe_potiskum"
+  },
+  {
+    "facility_ID": "zuxm",
+    "_id": 2719614,
+    "lga": "yobe_potiskum"
+  },
+  {
+    "lga": "borno_maiduguri",
+    "_id": 2719888
+  },
+  {
+    "facility_ID": "Wdht",
+    "_id": 2719907,
+    "lga": "borno_maiduguri"
+  },
+  {
+    "lga": "borno_maiduguri",
+    "_id": 2719932
+  },
+  {
+    "facility_ID": "XXXX",
+    "_id": 2720278,
+    "lga": "rivers_emuoha"
+  },
+  {
+    "facility_ID": "Vvkw",
+    "_id": 2720475,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "XXXX",
+    "_id": 2720486,
+    "lga": "rivers_emuoha"
+  },
+  {
+    "facility_ID": "Shqk",
+    "_id": 2721782,
+    "lga": "akwa_ibom_ibesikpo_asutan"
+  },
+  {
+    "facility_ID": "vdls",
+    "_id": 2721941,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "bzev",
+    "_id": 2721948,
+    "lga": "abia_umuahia_north"
+  },
+  {
+    "facility_ID": "zftk",
+    "_id": 2722156,
+    "lga": "bauchi_bogoro"
+  },
+  {
+    "facility_ID": "mfxt",
+    "_id": 2722174,
+    "lga": "bauchi_bogoro"
+  },
+  {
+    "facility_ID": "nwje",
+    "_id": 2722231,
+    "lga": "bauchi_bogoro"
+  },
+  {
+    "facility_ID": "jnxp",
+    "_id": 2722262,
+    "lga": "bauchi_bogoro"
+  },
+  {
+    "facility_ID": "Rbod",
+    "_id": 2722372,
+    "lga": "akwa_ibom_ibesikpo_asutan"
+  },
+  {
+    "facility_ID": "XXXX",
+    "_id": 2722619,
+    "lga": "rivers_emuoha"
+  },
+  {
+    "facility_ID": "Cwwe",
+    "_id": 2723471,
+    "lga": "akwa_ibom_ibesikpo_asutan"
+  },
+  {
+    "facility_ID": "Nygi",
+    "_id": 2723488,
+    "lga": "akwa_ibom_ibesikpo_asutan"
+  },
+  {
+    "lga": "nasarawa_nasarawa_eggon",
+    "_id": 2723689
+  },
+  {
+    "facility_ID": "Kqtq",
+    "_id": 2723716,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "Wogb",
+    "_id": 2723788,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "Pzzc",
+    "_id": 2724029,
+    "lga": "nasarawa_nasarawa_eggon"
+  },
+  {
+    "facility_ID": "vaxx",
+    "_id": 2724093,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "Pqzf",
+    "_id": 2724103,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "nhlo",
+    "_id": 2724114,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "Chue",
+    "_id": 2724420,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "Nlfi",
+    "_id": 2724431,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "Rarh",
+    "_id": 2724432,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "Ljqs",
+    "_id": 2724444,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "Ukpy",
+    "_id": 2724445,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "Jgju",
+    "_id": 2724456,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "yuhl",
+    "_id": 2724468,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "deth",
+    "_id": 2724469,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "jyvp",
+    "_id": 2724480,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "empr",
+    "_id": 2724481,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "mpsh",
+    "_id": 2724493,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "nhlo",
+    "_id": 2724495,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "jauq",
+    "_id": 2724516,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "sfci",
+    "_id": 2724527,
+    "lga": "kogi_olamabolo"
+  },
+  {
+    "facility_ID": "utjx",
+    "_id": 2724948,
+    "lga": "bayelsa_ogbia"
+  },
+  {
+    "facility_ID": "fsrn",
+    "_id": 2724962,
+    "lga": "bayelsa_ogbia"
+  },
+  {
+    "facility_ID": "Jxkv",
+    "_id": 2725359,
+    "lga": "bayelsa_ekeremor"
+  },
+  {
+    "facility_ID": "Cwqq",
+    "_id": 2725375,
+    "lga": "bayelsa_ekeremor"
+  },
+  {
+    "facility_ID": "Okzo",
+    "_id": 2725971,
+    "lga": "bayelsa_ekeremor"
+  },
+  {
+    "facility_ID": "Bgku",
+    "_id": 2725972,
+    "lga": "bayelsa_ekeremor"
+  },
+  {
+    "facility_ID": "Vtvb",
+    "_id": 2725996,
+    "lga": "bayelsa_ekeremor"
+  },
+  {
+    "facility_ID": "Cnkb",
+    "_id": 2726001,
+    "lga": "bayelsa_ekeremor"
+  },
+  {
+    "facility_ID": "Jxql",
+    "_id": 2726012,
+    "lga": "bayelsa_ekeremor"
+  },
+  {
+    "facility_ID": "fkur",
+    "_id": 2726017,
+    "lga": "bayelsa_kolokuma"
+  },
+  {
+    "facility_ID": "wnde",
+    "_id": 2726021,
+    "lga": "bayelsa_kolokuma"
+  },
+  {
+    "facility_ID": "ajfu",
+    "_id": 2726023,
+    "lga": "bayelsa_kolokuma"
+  },
+  {
+    "facility_ID": "tbqx",
+    "_id": 2726024,
+    "lga": "bayelsa_kolokuma"
+  },
+  {
+    "facility_ID": "jqkq",
+    "_id": 2726029,
+    "lga": "bayelsa_kolokuma"
+  },
+  {
+    "lga": "bayelsa_ekeremor",
+    "_id": 2726033
+  },
+  {
+    "facility_ID": "bpbz",
+    "_id": 2726183,
+    "lga": "taraba_ardo_kola"
+  },
+  {
+    "facility_ID": "lafe",
+    "_id": 2726184,
+    "lga": "taraba_ardo_kola"
+  },
+  {
+    "facility_ID": "ciyy",
+    "_id": 2726187,
+    "lga": "taraba_ardo_kola"
+  },
+  {
+    "facility_ID": "xbzg",
+    "_id": 2726189,
+    "lga": "taraba_ardo_kola"
+  },
+  {
+    "facility_ID": "jjwz",
+    "_id": 2726201,
+    "lga": "taraba_ardo_kola"
+  },
+  {
+    "facility_ID": "xvlh",
+    "_id": 2726209,
+    "lga": "taraba_ardo_kola"
+  },
+  {
+    "facility_ID": "uoiv",
+    "_id": 2726220,
+    "lga": "taraba_ardo_kola"
+  },
+  {
+    "facility_ID": "ayny",
+    "_id": 2726223,
+    "lga": "taraba_ardo_kola"
+  },
+  {
+    "facility_ID": "hhwt",
+    "_id": 2726224,
+    "lga": "taraba_ardo_kola"
+  },
+  {
+    "facility_ID": "naru",
+    "_id": 2726663,
+    "lga": "rivers_port_harcourt"
+  },
+  {
+    "facility_ID": "wyvz",
+    "_id": 2726667,
+    "lga": "rivers_port_harcourt"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726895,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726896,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "lga": "taraba_gashaka",
+    "_id": 2726898
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726901,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726902,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726903,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726904,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726907,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726908,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726910,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726911,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726913,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726914,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726915,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726916,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726917,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726918,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726941,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "lga": "rivers_port_harcourt",
+    "_id": 2726944
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2726952,
+    "lga": "taraba_gashaka"
+  },
+  {
+    "facility_ID": "bnob",
+    "_id": 2727182,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "facility_ID": "xxdb",
+    "_id": 2727400,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "facility_ID": "kidx",
+    "_id": 2730398,
+    "lga": "plateau_qua_an_pan"
+  },
+  {
+    "facility_ID": "Ofqs",
+    "_id": 2730414,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "ncdd",
+    "_id": 2730415,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "ghex",
+    "_id": 2730420,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "zsgg",
+    "_id": 2730426,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "srpx",
+    "_id": 2730428,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "boor",
+    "_id": 2730431,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "gnhr",
+    "_id": 2730432,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "uads",
+    "_id": 2730436,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "jkbp",
+    "_id": 2730440,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "wltm",
+    "_id": 2730442,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "Ijdr",
+    "_id": 2730476,
+    "lga": "rivers_port_harcourt"
+  },
+  {
+    "facility_ID": "geln",
+    "_id": 2730495,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "ggoq",
+    "_id": 2730512,
+    "lga": "rivers_port_harcourt"
+  },
+  {
+    "facility_ID": "qwsl",
+    "_id": 2730543,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "ceqk",
+    "_id": 2730544,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "tzta",
+    "_id": 2730573,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "syhk",
+    "_id": 2730574,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "exbi",
+    "_id": 2730581,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "owyv",
+    "_id": 2730582,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "bfwp",
+    "_id": 2730584,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "gyse",
+    "_id": 2730599,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "eiet",
+    "_id": 2730615,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "fwtg",
+    "_id": 2730616,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "cbpb",
+    "_id": 2730617,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "wriy",
+    "_id": 2730618,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "mdlk",
+    "_id": 2730619,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "kpvd",
+    "_id": 2730620,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "krik",
+    "_id": 2730621,
+    "lga": "plateau_bokkos"
+  },
+  {
+    "facility_ID": "pviu",
+    "_id": 2730622,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "rxzn",
+    "_id": 2730624,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "tvcl",
+    "_id": 2730626,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "lucw",
+    "_id": 2730627,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "tqjh",
+    "_id": 2730628,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "kisn",
+    "_id": 2730629,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "wjvk",
+    "_id": 2730630,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "pacj",
+    "_id": 2730631,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "qtpn",
+    "_id": 2730632,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "qqjw",
+    "_id": 2730633,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "mmnh",
+    "_id": 2730634,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "sqfp",
+    "_id": 2730635,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "hqqx",
+    "_id": 2730636,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "duwu",
+    "_id": 2730668,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "wllr",
+    "_id": 2730669,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "awga",
+    "_id": 2730670,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "sfdu",
+    "_id": 2730673,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "ptee",
+    "_id": 2730674,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "fhtu",
+    "_id": 2730675,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "gurb",
+    "_id": 2730676,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "wyfg",
+    "_id": 2730679,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "iqlo",
+    "_id": 2730680,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "gdhx",
+    "_id": 2730682,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "nwkr",
+    "_id": 2730683,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "bvgp",
+    "_id": 2730686,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "vgrq",
+    "_id": 2730689,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "meuh",
+    "_id": 2730690,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "yzpm",
+    "_id": 2730697,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "arrf",
+    "_id": 2730706,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "Knig",
+    "_id": 2730707,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "lga": "katsina_bindawa",
+    "_id": 2730708
+  },
+  {
+    "facility_ID": "leld",
+    "_id": 2730711,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "hixi",
+    "_id": 2730717,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "xqgz",
+    "_id": 2730720,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "qtyl",
+    "_id": 2730725,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "mbez",
+    "_id": 2730730,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "mffj",
+    "_id": 2730733,
+    "lga": "plateau_bokkos"
+  },
+  {
+    "facility_ID": "nuzb",
+    "_id": 2730735,
+    "lga": "plateau_bokkos"
+  },
+  {
+    "facility_ID": "bbot",
+    "_id": 2730736,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "xjec",
+    "_id": 2730737,
+    "lga": "plateau_bokkos"
+  },
+  {
+    "facility_ID": "uito",
+    "_id": 2730738,
+    "lga": "plateau_bokkos"
+  },
+  {
+    "facility_ID": "cqut",
+    "_id": 2730739,
+    "lga": "plateau_bokkos"
+  },
+  {
+    "facility_ID": "xxxx",
+    "_id": 2730791,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "rdxd",
+    "_id": 2730819,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "zcxj",
+    "_id": 2730876,
+    "lga": "plateau_qua_an_pan"
+  },
+  {
+    "facility_ID": "zaqr",
+    "_id": 2730896,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "iokk",
+    "_id": 2730981,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "qple",
+    "_id": 2732797,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "mzha",
+    "_id": 2732825,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "yoqi",
+    "_id": 2732837,
+    "lga": "plateau_qua_an_pan"
+  },
+  {
+    "facility_ID": "dhna",
+    "_id": 2732858,
+    "lga": "plateau_qua_an_pan"
+  },
+  {
+    "facility_ID": "lyat",
+    "_id": 2732873,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "kipn",
+    "_id": 2732886,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "qkwr",
+    "_id": 2732921,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "euno",
+    "_id": 2733016,
+    "lga": "taraba_wukari"
+  },
+  {
+    "facility_ID": "jzqr",
+    "_id": 2738924,
+    "lga": "plateau_qua_an_pan"
+  },
+  {
+    "facility_ID": "knig",
+    "_id": 2740263,
+    "lga": "katsina_bindawa"
+  },
+  {
+    "facility_ID": "yyrs",
+    "_id": 2740414,
+    "lga": "rivers_port_harcourt"
+  },
+  {
+    "facility_ID": "Wwhl",
+    "_id": 2740426,
+    "lga": "rivers_port_harcourt"
+  },
+  {
+    "facility_ID": "Vrvm",
+    "_id": 2740897,
+    "lga": "benue_buruku"
+  },
+  {
+    "facility_ID": "Jexz",
+    "_id": 2740912,
+    "lga": "benue_buruku"
+  },
+  {
+    "facility_ID": "Lolk",
+    "_id": 2741031,
+    "lga": "benue_buruku"
+  },
+  {
+    "facility_ID": "Pnwl",
+    "_id": 2741100,
+    "lga": "benue_buruku"
+  },
+  {
+    "facility_ID": "Eccp",
+    "_id": 2741226,
+    "lga": "benue_buruku"
+  },
+  {
+    "facility_ID": "Cpgn",
+    "_id": 2741330,
+    "lga": "benue_buruku"
+  },
+  {
+    "facility_ID": "ekgb",
+    "_id": 2741417,
+    "lga": "plateau_qua_an_pan"
+  },
+  {
+    "facility_ID": "fnhz",
+    "_id": 2741430,
+    "lga": "plateau_qua_an_pan"
+  },
+  {
+    "facility_ID": "wtjk",
+    "_id": 2741432,
+    "lga": "plateau_qua_an_pan"
+  },
+  {
+    "facility_ID": "Guec",
+    "_id": 2741438,
+    "lga": "benue_buruku"
+  },
+  {
+    "facility_ID": "Wcye",
+    "_id": 2741442,
+    "lga": "benue_buruku"
+  },
+  {
+    "facility_ID": "mobh",
+    "_id": 2741443,
+    "lga": "plateau_qua_an_pan"
+  },
+  {
+    "facility_ID": "Ijbl",
+    "_id": 2741466,
+    "lga": "benue_buruku"
+  },
+  {
+    "facility_ID": "stax",
+    "_id": 2741685,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "facility_ID": "kmca",
+    "_id": 2741688,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "facility_ID": "nabf",
+    "_id": 2741689,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "facility_ID": "ncpj",
+    "_id": 2741690,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "facility_ID": "nkqt",
+    "_id": 2741693,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "facility_ID": "pjca",
+    "_id": 2741698,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "lga": "bayelsa_southern_ijaw",
+    "_id": 2741735
+  },
+  {
+    "lga": "bayelsa_southern_ijaw",
+    "_id": 2741780
+  },
+  {
+    "facility_ID": "Dvhf",
+    "_id": 2741931,
+    "lga": "rivers_oyigbo"
+  },
+  {
+    "facility_ID": "Ndik",
+    "_id": 2741933,
+    "lga": "rivers_oyigbo"
+  },
+  {
+    "facility_ID": "Jvxv",
+    "_id": 2741941,
+    "lga": "rivers_oyigbo"
+  },
+  {
+    "facility_ID": "Xumy",
+    "_id": 2741943,
+    "lga": "rivers_oyigbo"
+  },
+  {
+    "facility_ID": "Rtdt",
+    "_id": 2741956,
+    "lga": "rivers_oyigbo"
+  },
+  {
+    "facility_ID": "Berh",
+    "_id": 2741959,
+    "lga": "rivers_oyigbo"
+  },
+  {
+    "facility_ID": "Cenb",
+    "_id": 2741964,
+    "lga": "rivers_oyigbo"
+  },
+  {
+    "facility_ID": "Rsvb",
+    "_id": 2741972,
+    "lga": "rivers_oyigbo"
+  },
+  {
+    "facility_ID": "luyh",
+    "_id": 2742556,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "facility_ID": "hgkg",
+    "_id": 2742564,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "facility_ID": "kusq",
+    "_id": 2742567,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "facility_ID": "nrqz",
+    "_id": 2742570,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "facility_ID": "sxcs",
+    "_id": 2742571,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "facility_ID": "vbga",
+    "_id": 2742574,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "facility_ID": "iefb",
+    "_id": 2742575,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "facility_ID": "pkcw",
+    "_id": 2742576,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "facility_ID": "pbxb",
+    "_id": 2742579,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "facility_ID": "tinm",
+    "_id": 2742582,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "lga": "bayelsa_southern_ijaw",
+    "_id": 2743395
+  },
+  {
+    "facility_ID": "Kdxc",
+    "_id": 2743438,
+    "lga": "bayelsa_southern_ijaw"
+  },
+  {
+    "facility_ID": "ecke",
+    "_id": 2747761,
+    "lga": "ebonyi_afikpo_north"
+  },
+  {
+    "facility_ID": "Hqtl",
+    "_id": 2748506,
+    "lga": "rivers_oyigbo"
+  },
+  {
+    "facility_ID": "wfqp",
+    "_id": 2749607,
+    "lga": "rivers_obio_akpor"
+  },
+  {
+    "facility_ID": "eopu",
+    "_id": 2751899,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "facility_ID": "thap",
+    "_id": 2753215,
+    "lga": "imo_ehime_mbano"
+  },
+  {
+    "facility_ID": "iyha",
+    "_id": 2753266,
+    "lga": "imo_ehime_mbano"
+  },
+  {
+    "lga": "imo_ehime_mbano",
+    "_id": 2753269
+  },
+  {
+    "facility_ID": "Fuaa",
+    "_id": 2753293,
+    "lga": "bayelsa_yenagoa"
+  },
+  {
+    "facility_ID": "Yxsi",
+    "_id": 2753307,
+    "lga": "benue_buruku"
+  },
+  {
+    "facility_ID": "XXXX",
+    "_id": 2754353,
+    "lga": "rivers_etche"
+  },
+  {
+    "facility_ID": "Uhph",
+    "_id": 2754369,
+    "lga": "benue_buruku"
+  },
+  {
+    "lga": "imo_orlu",
+    "_id": 2754400
+  },
+  {
+    "facility_ID": "Ejrr",
+    "_id": 2754403,
+    "lga": "benue_buruku"
+  },
+  {
+    "lga": "imo_orlu",
+    "_id": 2754413
+  },
+  {
+    "lga": "imo_orlu",
+    "_id": 2754460
+  },
+  {
+    "facility_ID": "TPLQ",
+    "_id": 2754483,
+    "lga": "imo_orlu"
+  },
+  {
+    "facility_ID": "CGGA",
+    "_id": 2754507,
+    "lga": "imo_orlu"
+  },
+  {
+    "facility_ID": "dzlc",
+    "_id": 2755096,
+    "lga": "plateau_bokkos"
+  },
+  {
+    "facility_ID": "kkyi",
+    "_id": 2755108,
+    "lga": "plateau_bokkos"
+  },
+  {
+    "facility_ID": "Opwx",
+    "_id": 2755308,
+    "lga": "benue_buruku"
+  },
+  {
+    "facility_ID": "Aacq",
+    "_id": 2755315,
+    "lga": "benue_buruku"
+  },
+  {
+    "facility_ID": "bleu",
+    "_id": 2755420,
+    "lga": "plateau_qua_an_pan"
+  },
+  {
+    "facility_ID": "qbxk",
+    "_id": 2755438,
+    "lga": "plateau_qua_an_pan"
+  },
+  {
+    "facility_ID": "Wwjt",
+    "_id": 2755444,
+    "lga": "benue_buruku"
+  },
+  {
+    "facility_ID": "Iuvd",
+    "_id": 2755505,
+    "lga": "benue_buruku"
+  },
+  {
+    "facility_ID": "Lulh",
+    "_id": 2755539,
+    "lga": "benue_buruku"
+  },
+  {
+    "facility_ID": "Nofz",
+    "_id": 2755546,
+    "lga": "benue_buruku"
+  },
+  {
+    "lga": "rivers_port_harcourt",
+    "_id": 2756911
+  },
+  {
+    "facility_ID": "Vmys",
+    "_id": 2756927,
+    "lga": "rivers_port_harcourt"
+  },
+  {
+    "facility_ID": "dylg",
+    "_id": 2759679,
+    "lga": "plateau_qua_an_pan"
+  },
+  {
+    "facility_ID": "hbcz",
+    "_id": 2759807,
+    "lga": "plateau_qua_an_pan"
+  },
+  {
+    "facility_ID": "wfqp",
+    "_id": 2760534,
+    "lga": "rivers_obio_akpor"
+  },
+  {
+    "facility_ID": "qsgn",
+    "_id": 2760536,
+    "lga": "rivers_obio_akpor"
+  },
+  {
+    "facility_ID": "yler",
+    "_id": 2760537,
+    "lga": "rivers_obio_akpor"
+  },
+  {
+    "facility_ID": "rqhf",
+    "_id": 2760538,
+    "lga": "rivers_obio_akpor"
+  },
+  {
+    "facility_ID": "ewmr",
+    "_id": 2760540,
+    "lga": "rivers_obio_akpor"
+  },
+  {
+    "facility_ID": "rdwa",
+    "_id": 2760541,
+    "lga": "rivers_obio_akpor"
+  },
+  {
+    "facility_ID": "ayhv",
+    "_id": 2761153,
+    "lga": "bayelsa_yenagoa"
+  },
+  {
+    "facility_ID": "mgnc",
+    "_id": 2761272,
+    "lga": "bayelsa_yenagoa"
+  },
+  {
+    "facility_ID": "Rpmo",
+    "_id": 2762934,
+    "lga": "rivers_oyigbo"
+  },
+  {
+    "facility_ID": "Himh",
+    "_id": 2763007,
+    "lga": "bayelsa_yenagoa"
+  },
+  {
+    "facility_ID": "dxfq",
+    "_id": 2763010,
+    "lga": "bayelsa_yenagoa"
+  },
+  {
+    "facility_ID": "hiyg",
+    "_id": 2763350,
+    "lga": "bayelsa_yenagoa"
+  },
+  {
+    "facility_ID": "wyfy",
+    "_id": 2763382,
+    "lga": "bayelsa_yenagoa"
+  },
+  {
+    "facility_ID": "idxl",
+    "_id": 2763435,
+    "lga": "bayelsa_yenagoa"
+  },
+  {
+    "facility_ID": "ektg",
+    "_id": 2763460,
+    "lga": "bayelsa_yenagoa"
+  },
+  {
+    "facility_ID": "Rcsy",
+    "_id": 2765094,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "facility_ID": "hfkm",
+    "_id": 2765395,
+    "lga": "rivers_khana"
+  },
+  {
+    "facility_ID": "Spbb",
+    "_id": 2765429,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "facility_ID": "ihqw",
+    "_id": 2765566,
+    "lga": "plateau_jos_south"
+  },
+  {
+    "facility_ID": "fxjm",
+    "_id": 2765740,
+    "lga": "rivers_khana"
+  },
+  {
+    "facility_ID": "Upiv",
+    "_id": 2766254,
+    "lga": "rivers_port_harcourt"
+  },
+  {
+    "lga": "rivers_port_harcourt",
+    "_id": 2766362
+  },
+  {
+    "facility_ID": "rmkl",
+    "_id": 2766476,
+    "lga": "rivers_port_harcourt"
+  },
+  {
+    "facility_ID": "wmzy",
+    "_id": 2766481,
+    "lga": "rivers_port_harcourt"
+  },
+  {
+    "facility_ID": "jgog",
+    "_id": 2766486,
+    "lga": "rivers_port_harcourt"
+  },
+  {
+    "facility_ID": "Kwyv",
+    "_id": 2768159,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "facility_ID": "Hzls",
+    "_id": 2768165,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "facility_ID": "Dmwb",
+    "_id": 2768172,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "facility_ID": "Ivgn",
+    "_id": 2768175,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "facility_ID": "XXXX",
+    "_id": 2768219,
+    "lga": "rivers_emuoha"
+  },
+  {
+    "facility_ID": "ooql",
+    "_id": 2769683,
+    "lga": "rivers_ikwerre"
+  },
+  {
+    "facility_ID": "jlym",
+    "_id": 2769749,
+    "lga": "rivers_obio_akpor"
+  },
+  {
+    "facility_ID": "eqcw",
+    "_id": 2769756,
+    "lga": "rivers_obio_akpor"
+  },
+  {
+    "facility_ID": "eppt",
+    "_id": 2769757,
+    "lga": "rivers_obio_akpor"
+  },
+  {
+    "lga": "rivers_ikwerre",
+    "_id": 2769998
+  },
+  {
+    "facility_ID": "Jwbs",
+    "_id": 2765259,
+    "lga": "rivers_abua_odual"
+  },
+  {
+    "facility_ID": "Wuiw",
+    "_id": 2771458,
+    "lga": "rivers_ikwerre"
+  },
+  {
+    "facility_ID": "Nhwx",
+    "_id": 2773159,
+    "lga": "rivers_ikwerre"
+  },
+  {
+    "lga": "rivers_ikwerre",
+    "_id": 2773165
+  },
+  {
+    "facility_ID": "Vcci",
+    "_id": 2773595,
+    "lga": "rivers_ikwerre"
+  },
+  {
+    "facility_ID": "Fmyt",
+    "_id": 2773597,
+    "lga": "rivers_ikwerre"
+  },
+  {
+    "facility_ID": "Krmq",
+    "_id": 2773801,
+    "lga": "rivers_ikwerre"
+  },
+  {
+    "facility_ID": "xhqn",
+    "_id": 2774108,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "facility_ID": "Jepx",
+    "_id": 2774391,
+    "lga": "rivers_ikwerre"
+  },
+  {
+    "facility_ID": "bgcd",
+    "_id": 2774417,
+    "lga": "rivers_ikwerre"
+  },
+  {
+    "facility_ID": "dswl",
+    "_id": 2774563,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "facility_ID": "Ydjc",
+    "_id": 2774635,
+    "lga": "rivers_ikwerre"
+  },
+  {
+    "facility_ID": "bzvr",
+    "_id": 2775039,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "facility_ID": "Pccs",
+    "_id": 2775180,
+    "lga": "rivers_ikwerre"
+  },
+  {
+    "facility_ID": "Kvmt",
+    "_id": 2775463,
+    "lga": "rivers_ikwerre"
+  },
+  {
+    "facility_ID": "Vwqf",
+    "_id": 2775696,
+    "lga": "rivers_ikwerre"
+  },
+  {
+    "facility_ID": "XLYI",
+    "_id": 2776042,
+    "lga": "imo_orlu"
+  },
+  {
+    "facility_ID": "XLYI",
+    "_id": 2776275,
+    "lga": "imo_orlu"
+  },
+  {
+    "facility_ID": "dijv",
+    "_id": 2777528,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "facility_ID": "gbsn",
+    "_id": 2777671,
+    "lga": "imo_owerri_municipal"
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2778403,
+    "lga": "rivers_etche"
+  },
+  {
+    "lga": "rivers_etche",
+    "_id": 2778503
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2778513,
+    "lga": "rivers_etche"
+  },
+  {
+    "facility_ID": "XXXX",
+    "_id": 2778606,
+    "lga": "rivers_etche"
+  },
+  {
+    "lga": "rivers_etche",
+    "_id": 2778608
+  },
+  {
+    "facility_ID": "Xxxx",
+    "_id": 2778620,
+    "lga": "rivers_etche"
+  },
+  {
+    "lga": "rivers_etche",
+    "_id": 2778624
+  }
+]
