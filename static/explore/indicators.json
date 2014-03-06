@@ -64,7 +64,7 @@
     },
     "girls_boys_ratio_js": {
         "name": "Ratio of girls to boys in junior secondary schools",
-        "description": "Ratio of the number of female students enrolled in junior secondary school to the number of male students enrolled in junior secondary school, regardless of ages. (School Census,2005)"
+        "description": "Ratio of the number of female students enrolled in junior secondary school to the number of male students enrolled in junior secondary school, regardless of ages. (School Census, 2005)"
     },
     "nga_under5_mortality_rate": {
         "name": "Under five mortality rate (per 1,000 live births)",
@@ -72,7 +72,7 @@
     },
     "nga_proportion_immunized_against_measles": {
         "name": "Measles immunization rate",
-        "description": "Percentage of one-year old children who received a measles vaccination. (DHS, 2008)"
+        "description": "Percentage of one-year-old children who received a measles vaccination. (DHS, 2008)"
     },
     "nga_proportion_u5_children_sleeping_under_bednets": {
         "name": "Proportion of children under five sleeping under insecticide-treated bednets",
@@ -173,7 +173,7 @@
     }, 
     "girl_boy_ratio_secondary_school": {
         "name": "Ratio of girls to boys in senior secondary schools ", 
-        "description": "Ratio of the number of female students enrolled in senior secondary school to the number of male students enrolled in senior secondary school, regardless of ages. (School Census,2005)"
+        "description": "Ratio of the number of female students enrolled in senior secondary school to the number of male students enrolled in senior secondary school, regardless of ages. (School Census, 2005)"
     }, 
     "num_overhead_tanks": {
         "name": "- Overhead tanks", 
@@ -205,7 +205,7 @@
     }, 
     "proportion_of_births_by_skilled_health_personnel": {
         "name": "Proportion of births attended by skilled health personnel*", 
-        "description": "Percentage of births managed by a health professional trained in managing deliveries and their complications (Traditional birth attendants are not considered skilled birth attendants) (HNLSS, 2008-2009)"
+        "description": "Percentage of births managed by a health professional trained in managing deliveries and their complications (note: traditional birth attendants are not considered skilled birth attendants) (HNLSS, 2008-2009)"
     }, 
     "percent_management_public": {
         "name": "Percentage that are managed by the government", 
@@ -401,7 +401,7 @@
     }, 
     "prevalence_of_underweight_children_u5": {
         "name": "Percentage of children under five who are underweight (weight-for-age)*", 
-        "description": "Percentage of children under five whose weight-for-age is below minus two standard deviations (-2 SD) from the median of the reference population (all children under 5)(DHS, 2008)"
+        "description": "Percentage of children under five whose weight-for-age is below minus two standard deviations (-2 SD) from the median of the reference population (all children under five)(DHS, 2008)"
     }, 
     "student_classroom_ratio_lga_juniorsec": {
         "name": "Pupil to classroom ratio (junior secondary)", 
@@ -509,7 +509,7 @@
     }, 
     "prevalence_of_hiv": {
         "name": "HIV prevalence*", 
-        "description": "Percentage of pregnant women who tested positive for HIV at a site where all pregnant women are tested (HSS,2005)"
+        "description": "Percentage of pregnant women who tested positive for HIV at a site where all pregnant women are tested (HSS, 2005)"
     }, 
     "num_nurses_and_midwives_per_1000": {
         "name": "num_nurses_and_midwives_per_1000(name=='')", 
@@ -589,7 +589,7 @@
     }, 
     "mortality_rate_infant": {
         "name": "Infant mortality rate (per 1,000 live births)*", 
-        "description": "Proportion of children out of 1000 live births who would die before reach 1 years of age. (DHS, 2008)"
+        "description": "The likelihood of a child dying before reaching one year of age (expressed as number of deaths per 1,000 births) (DHS, 2008)"
     }, 
     "teacher_guide_yn": {
         "name": "Teaching guidebook for every teacher for every subject", 
@@ -621,7 +621,7 @@
     }, 
     "proportion_of_children_u5_diarrhea_treated_with_ors_med": {
         "name": "Percentage of children under five years of age with diarrhea who received oral rehydration therapy*", 
-        "description": "Percentage of Children under 5 years old who had diarrhea in the last two weeks who were treated with ORS or RHS. (DHS, 2008)"
+        "description": "Percentage of Children under five years old who had diarrhea in the last two weeks who were treated with ORS or RHS. (DHS, 2008)"
     }, 
     "proportion_schools_missed_pay_juniorsec": {
         "name": "Percentage of junior secondary schools that have missed teacher payments in the past 12 months", 
@@ -705,7 +705,7 @@
     }, 
     "gender_parity_index_js": {
         "name": "Gender parity index (GPI) for junior secondary schools", 
-        "description": "The gross enrollment ratio for females divided by the gross enrollment ratio for males for junior secondary schools. (see description of gross enrollment ratio). (School Census,2005)"
+        "description": "The gross enrollment ratio for females divided by the gross enrollment ratio for males for junior secondary schools. (see description of gross enrollment ratio). (School Census, 2005)"
     }, 
     "num_diesel": {
         "name": "Number", 
@@ -796,7 +796,7 @@
         "description": ""
     }, 
     "proportion_health_facilities_tb_treatment": {
-        "name": "Percentage of facilities that offer TB testing", 
+        "name": "Percentage of facilities that offer TB treatment", 
         "description": ""
     }, 
     "primary_nir_girl": {
@@ -852,7 +852,7 @@
         "description": "The school has a first aid kit that can be used for students and staff.  The aim behind this indicator is to find out whether the school is is prepared to manage very basic injuries that happen to students or staff. A school is counted as having a first aid kit if the respondnet explicitly said there is a first aid kit for students and staff. The school does not have a health clinic but just a first aid kit."
     }, 
     "num_level_4_health_facilities": {
-        "name": "Comprehensive health centres & hospitals", 
+        "name": "Comprehensive health centres and hospitals", 
         "description": ""
     }, 
     "immunization_rate_measles": {
@@ -877,7 +877,7 @@
     }, 
     "literacy_rate": {
         "name": "Literacy rate of 15-24 year olds (men and women)", 
-        "description": "Proportion of individuals aged 15 and over  who were unable to read a simple letter either in their local language or in English and were unable to write a letter in their local, language or in English from  the total population greater than 15 years . It could also be calculated as 100-%literacy rate. (School Census,2005)"
+        "description": "Proportion of individuals aged 15 and over  who were unable to read a simple letter either in their local language or in English and were unable to write a letter in their local, language or in English from  the total population greater than 15 years . It could also be calculated as 100-%literacy rate. (School Census, 2005)"
     }, 
     "proportion_schools_two_shifts": {
         "name": "Proportion of schools with double shift arrangement", 
@@ -1201,7 +1201,7 @@
     }, 
     "proportion_children_u5_sleeping_under_itns": {
         "name": "Percentage of children under five sleeping under insecticide-treated bednets*", 
-        "description": "Percentage of children under 5  who slept under insecticide-treated bednets the night before the survey"
+        "description": "Percentage of children under five  who slept under insecticide-treated bednets the night before the survey"
     }, 
     "proportion_schools_functioning_library_primary": {
         "name": "Percentage of primary schools with a functioning library", 
@@ -1293,7 +1293,7 @@
     }, 
     "girl_boy_ratio_primary": {
         "name": "Ratio of girls to boys in primary schools ", 
-        "description": "Ratio of the number of female students enrolled in primary school to the number of male students enrolled in primary school, regardless of ages. (School Census,2005)"
+        "description": "Ratio of the number of female students enrolled in primary school to the number of male students enrolled in primary school, regardless of ages. (School Census, 2005)"
     }, 
     "num_taps": {
         "name": "- Taps", 
@@ -1393,7 +1393,7 @@
     }, 
     "percentage_of_individuals_tested_for_hiv_ever": {
         "name": "Percentage of men and women ever tested for HIV", 
-        "description": "Percentage of women aged 15-49 years old who have ever been tested for HIV. (HNLSS, 2008-2009)"
+        "description": "Percentage of women between 15-49 years who were pregnant in the last five years and who got tested for HIV as a part of an antenatal visit (DHS, 2008)"
     }, 
     "malaria_treatment_artemisinin": {
         "name": "ACT", 
@@ -1617,7 +1617,7 @@
     }, 
     "gender_parity_index_primary": {
         "name": "Gender parity index (GPI) for primary schools", 
-        "description": "The gross enrollment ratio for females divided by the gross enrollment ratio for males for primary schools. (see description of gross enrollment ratio). (School Census,2005)"
+        "description": "The gross enrollment ratio for females divided by the gross enrollment ratio for males for primary schools. (see description of gross enrollment ratio). (School Census, 2005)"
     }, 
     "pop_2006": {
         "name": "Population (2006)", 
@@ -1628,7 +1628,7 @@
         "description": ""
     }, 
     "mortality_rate_maternal": {
-        "name": "Maternal Mortality Ratio (per 100,00 live births)", 
+        "name": "Maternal Mortality Ratio (per 100,000 live births)", 
         "description": ""
     }, 
     "lab_tests_pregnancy_calc": {
