@@ -1,25 +1,58 @@
-{% extends "base.html" %}
-
-
-{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mop-up Monitor</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $(document.body).on('click', '.state_title', function(){
+                $(this).toggleClass('active')
+                    .parent()
+                    .find('.lgas')
+                    .toggle();
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
     {% for zone in zones %}
         <div class="zone">
-            <h2>{{ zone["name"] }} ({{ zone["percent_complete"] }}%)</h2>
-            <div class="state">
-                {% for state in zone["states"] %}
-                    <a class="state_title" href="#">
-                        {{ state["name"] }} ({{ state["percent_complete"] }}%)
-                    </a>
-                    <ul class="lgas">
-                        {% for lga in state["lgas"] %}
-                            <li>
-                                {{ lga["name"] }} ({{ lga["percent_complete"] }})
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endfor %}
+            <div class="zone_title">
+                {{ zone["name"] }}
+                <div class="percent_complete">
+                    {{ zone["percent_complete"] }}%
+                </div>
             </div>
+            {% for state in zone["states"] %}
+                <div class="state">
+                    <div class="state_title">
+                        {{ state["name"] }}
+                        <div class="percent_complete">
+                            {{ state["percent_complete"] }}%
+                        </div>
+                    </div>
+                    <table class="lgas">
+                        <tr>
+                            <th class="name"></th>
+                            <th class="surveyed">Complete</th>
+                            <th class="unsurveyed">Need to Survey</th>
+                            <th class="complete"></th>
+                        </tr>
+                        {% for lga in state["lgas"] %}
+                            <tr class="lga">
+                                <td class="name">{{ lga["name"] }}</td>
+                                <td>{{ len(lga["surveyed"]) }}</td>
+                                <td>{{ len(lga["unsurveyed"]) }}</td>
+                                <td>{{ lga["percent_complete"] }}%</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endfor %}
         </div>
     {% endfor %}
-{% endblock %}
+</body>
+</html>
 

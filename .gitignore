@@ -8,3 +8,5 @@ static/nmis_data.zip
 protected_data/
 
 mopupmon/secrets.py
+
+mopupmon/cache.json

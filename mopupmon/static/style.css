@@ -1,0 +1,73 @@
+
+body {
+    color: #444;
+    background-color: #fefefe;
+    font-family: futura;
+    font-size: 16px;
+    max-width: 500px;
+    margin: auto;
+}
+
+.zone_title {
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.08rem;
+    background: #64A4DC;
+    padding: 10px;
+}
+
+.state {
+    background: #f7f7f7;
+}
+
+.state_title {
+    cursor: pointer;
+    font-size: 18px;
+    padding: 10px;
+    background: #eee;
+    border-bottom: 1px dotted #ddd;
+}
+.state_title:hover,
+.state_title.active {
+    background: #ddd;
+}
+.state:last-child .state_title {
+    border-bottom: none;
+}
+
+
+.zone_title .percent_complete,
+.state_title .percent_complete {
+    float: right;
+}
+
+
+
+
+.lgas {
+    display: none;
+    width: 100%;
+    padding: 10px;
+}
+.lgas td,
+.lgas th {
+    width: 25%;
+    text-align: right;
+    padding: 5px 0;
+    border-bottom: 1px dotted #ddd;
+}
+.lgas tr:hover td {
+    background: #ddd;
+}
+
+.lgas th {
+    color: #555;
+    font-size: 13px;
+    font-weight: 200;
+}
+.lgas .name {
+    text-align: left;
+}
+
+

@@ -1,4 +1,5 @@
 import csv
+import datetime
 import urllib2
 import base64
 import json
@@ -192,21 +193,29 @@ def build_zones():
             state["lgas"].sort(key=lambda x: x["name"])
         zone["states"].sort(key=lambda x: x["name"])
     zones.sort(key=lambda x: x["name"])
-
-    #print json.dumps(zones, indent=4)
     return zones
 
 
-
-
+last_updated = datetime.datetime.now()
 
 @app.route('/')
 def index():
-    surveyed = get_mopup_data()
-    lgas = parse_facilities(surveyed)
-    zones = build_zones()
-    zones = merge_survey_data(lgas, zones)
-    return flask.render_template('index.html', zones=zones)
+    seconds_since_update = (datetime.datetime.now() - last_updated).seconds
+    cache_file_path = os.path.join(CWD, "cache.json")
+
+    if not os.path.isfile(cache_file_path) or seconds_since_update > 600:
+        surveyed = get_mopup_data()
+        lgas = parse_facilities(surveyed)
+        zones = build_zones()
+        zones = merge_survey_data(lgas, zones)
+
+        with open(cache_file_path, "w") as f:
+            f.write(json.dumps(zones))
+    else:
+        with open(cache_file_path, "r") as f:
+            zones = json.loads(f.read())
+
+    return flask.render_template('index.html', zones=zones, len=len)
 
 
 
