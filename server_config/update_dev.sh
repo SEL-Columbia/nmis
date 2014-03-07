@@ -24,7 +24,7 @@ if [ $csv2json -eq 1 ]; then
         python csv2json.py >> $log
 
         # Remove old LGAs folder
-        rm /home/ubuntu/srv/nmis/static/lgas
+        rm -r /home/ubuntu/srv/nmis/static/lgas
 
         # Move new LGAs folder to NMIS folder
         mv lgas /home/ubuntu/srv/nmis/static
