@@ -1,24 +1,25 @@
 
 body {
     color: #444;
-    background-color: #fefefe;
     font-family: futura;
     font-size: 16px;
+    margin: 0;
+}
+
+
+#content {
+    background-color: #f7f7f7;
     max-width: 500px;
     margin: auto;
 }
 
-.zone_title {
+.block_title {
     color: white;
     font-size: 20px;
     font-weight: 400;
     letter-spacing: 0.08rem;
     background: #64A4DC;
     padding: 10px;
-}
-
-.state {
-    background: #f7f7f7;
 }
 
 .state_title {
@@ -36,13 +37,10 @@ body {
     border-bottom: none;
 }
 
-
-.zone_title .percent_complete,
+.block_title .percent_complete,
 .state_title .percent_complete {
     float: right;
 }
-
-
 
 
 .lgas {
@@ -57,7 +55,11 @@ body {
     padding: 5px 0;
     border-bottom: 1px dotted #ddd;
 }
-.lgas tr:hover td {
+.lgas .lga_row {
+    cursor: pointer;
+}
+
+.lgas .lga_row:hover td {
     background: #ddd;
 }
 
@@ -66,8 +68,31 @@ body {
     font-size: 13px;
     font-weight: 200;
 }
-.lgas .name {
+.lga_name {
     text-align: left;
 }
 
+
+.lga_details {
+    display: none;
+}
+.lga_details .back {
+    color: #fff;
+    background: rgba(0,0,0,0.1);
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-right: 6px;
+}
+.lga_details .back:hover {
+    background: rgba(0,0,0,0.2);
+}
+
+.lga_body {
+    padding: 10px;
+}
+.lga_details h3 {
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ddd;
+}
 
