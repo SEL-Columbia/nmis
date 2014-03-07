@@ -11,6 +11,10 @@ import secrets
 
 
 CWD = os.path.dirname(os.path.abspath(__file__))
+CACHE = {
+    "last_updated": datetime.datetime.now(),
+    "html": None
+}
 
 app = flask.Flask(__name__)
 app.debug = True
@@ -161,12 +165,9 @@ def build_zones():
         }
     ]
     """
-
     file_path = os.path.join(CWD, "zones.json")
     with open(file_path, "r") as f:
         data = json.loads(f.read())
-
-    print data
 
     # Build zones output
     zones = []
@@ -196,26 +197,18 @@ def build_zones():
     return zones
 
 
-last_updated = datetime.datetime.now()
 
 @app.route('/')
 def index():
-    seconds_since_update = (datetime.datetime.now() - last_updated).seconds
-    cache_file_path = os.path.join(CWD, "cache.json")
-
-    if not os.path.isfile(cache_file_path) or seconds_since_update > 600:
+    seconds_since_update = (datetime.datetime.now() - CACHE["last_updated"]).seconds
+    if seconds_since_update > 600 or not CACHE["html"]:
         surveyed = get_mopup_data()
         lgas = parse_facilities(surveyed)
         zones = build_zones()
         zones = merge_survey_data(lgas, zones)
-
-        with open(cache_file_path, "w") as f:
-            f.write(json.dumps(zones))
-    else:
-        with open(cache_file_path, "r") as f:
-            zones = json.loads(f.read())
-
-    return flask.render_template('index.html', zones=zones, len=len)
+        CACHE["html"] = flask.render_template("index.html", zones=zones, len=len)
+        CACHE["last_updated"] = datetime.datetime.now()
+    return CACHE["html"]
 
 
 
