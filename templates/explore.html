@@ -106,11 +106,17 @@
 
     <script id="index_template" type="text/html">
         <% if (active_view === 'gap_sheet'){ %>
-            <h1 class="explore_title">Explore a Gap Sheet from the regions below</h1>
+            <h1 class="explore_title">Explore a Gap Sheet from the zones below</h1>
         <% } else { %>
             <h1 class="explore_title">Explore an LGA from the zones below</h1>
             {% if baseline %}
-                <a class="explore_info" href="/explore">or view Current Data</a>
+                <p class="explore_info">The 2012 Baseline Data is an archival
+                    dataset derived from the baseline facility inventory 
+                    conducted between 2010 and 2012. It is not inclusive of 
+                    more recent data collection efforts, such as the 2014 
+                    collection. To view the most up-to-date facility inventory
+                    : <a class="explore_link" href="/explore">Explore Facilities</a>
+                </p>
             {% else %}
                 <a class="explore_info" href="/explore?baseline=1">or view 2012 Baseline Data</a>
             {% endif %}
