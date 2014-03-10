@@ -516,17 +516,17 @@ MapView.chart_indicators = function(facilities, sector){
     // Iterates through facilities within a sector to find
     // indicators which contain boolean values.
     // Returns a sorted list of [indicator, indicator_name]
-    var allowed_indicators = [];
+    var relevant_indicators = [];
     _.each(NMIS.facilities_view[sector], function(sec){
         _.each(sec.indicators, function(ind){
-            allowed_indicators.push(ind);
+            relevant_indicators.push(ind);
         });
     });
     var indicators = {};
     for (var i=0, facility; facility=facilities[i]; i++){
         if (facility.sector === sector){
             for (var indicator in facility){
-                if (allowed_indicators.indexOf(indicator) > 0){
+                if (relevant_indicators.indexOf(indicator) > 0){
                     if (facility.hasOwnProperty(indicator)){
                         var value = facility[indicator];
                         if (value === false || value === true)
