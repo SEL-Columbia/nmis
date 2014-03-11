@@ -1879,6 +1879,10 @@
         "name": "Total Toilets", 
         "description": "Total number of toilets in this school"
     }, 
+    "owner_manager": {
+        "name": "Owner/Manager",
+        "description": ""
+    }
 
 
 
