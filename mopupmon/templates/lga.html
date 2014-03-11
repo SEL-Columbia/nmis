@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+
+{% block script %}
+    <script>
+        $(function(){
+            
+        });
+    </script>
+{% endblock %}
+
+
+{% block content %}
+    <div class="block_title">
+        <a href="/" class="back">←</a>
+        {{ lga['name'] }}
+    </div>
+    <div class="padded">
+        <h3>Surveyed Facilities</h3>
+        {% for name in lga["surveyed"] %}
+            <p>{{ name }}</p>
+        {% endfor %}
+
+        <h3>Unsurveyed Facilities</h3>
+        {% for name in lga["unsurveyed"] %}
+            <p>{{ name }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}
+

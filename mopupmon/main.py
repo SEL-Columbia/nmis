@@ -20,38 +20,59 @@ app = flask.Flask(__name__)
 app.debug = True
 
 
-def get_mopup_data():
+def get_surveyed_facilities():
     """
-    Returns a set of facility ids that have been surveyed.
+    Returns a dict of the facility data grouped by lga.
 
-    set(["hcho", "nlqf", "xjeh"])
+    {
+        "anambra_idemili_north": [{
+            "facility_ID": "kycs",
+            "facility_name": "Odida Primary health Centre",
+            ...
+        }]
+    }
     """
-    url = "https://formhub.org/ossap/forms/mopup_questionnaire_health_final/api?fields=%5B%22lga%22%2C+%22facility_ID%22%5D"
-    
-    request = urllib2.Request(url)
-    base64string = base64.encodestring("%s:%s" % (secrets.username, secrets.password)).replace("\n", "")
-    request.add_header("Authorization", "Basic %s" % base64string)   
-    response = urllib2.urlopen(request)
-    facilities = json.loads(response.read())
+    urls = [
+        "https://formhub.org/ossap/forms/mopup_questionnaire_health_final/api",
+        "https://formhub.org/ossap/forms/mopup_questionnaire_education_final/api",
+        "https://formhub.org/ossap/forms/mopup_questionnaire_education_v2/api",
+        "https://formhub.org/ossap/forms/mopup_questionnaire_health_v2/api"
+    ]
+    facilities = []
 
-    return set(f["facility_ID"].lower() for f in facilities if "facility_ID" in f)
+    for url in urls:
+        request = urllib2.Request(url)
+        base64string = base64.encodestring("%s:%s" % (secrets.username, secrets.password)).replace("\n", "")
+        request.add_header("Authorization", "Basic %s" % base64string)   
+        response = urllib2.urlopen(request)
+        data = response.read()
+        facilities += json.loads(data)
+
+    output = {}
+    for fac in facilities:
+        lga_id = fac.get("lga", None)
+        fac_id = fac.get("facility_ID", None)
+        if lga_id:
+            fac["id"] = fac_id.lower() if fac_id else None
+            fac["name"] = fac.get("facility_name", "")
+            lga_facilities = output.setdefault(lga_id, [])
+            lga_facilities.append(fac)
+    return output
 
 
-def parse_facilities(surveyed_ids=set()):
+def parse_facilities():
     """
     Parses the education and health CSVs and returns the data structure below.
 
-    Keyword arguments:
-    surveyed_ids (optional) -- a set of facility ids that have been surveyed
-
     Returns:
     {
-        "imo_oru_west": {
-            "surveyed": ["Saint Andrews", "Government School"],
-            "unsurveyed": ["AFONORI Primary School", "FOGUWA Primary School", "MARI Primary School"],
-            "percent_complete": 40
+        "imo_oru_west":  [
+            {
+                "id": "yxrl",
+                "name": "AFONORI Primary School"
+            },
             ...
-        }
+        ]
     }
     """
     # Parse CSV files
@@ -80,35 +101,56 @@ def parse_facilities(surveyed_ids=set()):
         fac_id = fac["uid"]
         fac_name = fac["name"]
 
-        lga = lgas.setdefault(lga_id, {})
-        surveyed = lga.setdefault("surveyed", [])
-        unsurveyed = lga.setdefault("unsurveyed", [])
-
-        if fac_id in surveyed_ids:
-            surveyed.append(fac_name)
-        else:
-            unsurveyed.append(fac_name)
-
-        lga["percent_complete"] = int(len(surveyed) / float(len(surveyed) + len(unsurveyed)) * 100)
+        lga = lgas.setdefault(lga_id, [])
+        lga.append({
+            "id": fac_id,
+            "name": fac_name
+        })
     return lgas
 
 
 
-def merge_survey_data(lgas, zones):
+def merge_survey_data(zones, facilities_by_lga, surveyed_facilities):
     """
-    Merges the facility survey data to the zones data.
+    Merges the facility data and FormHub data into the zones data.
 
     Keyword arguments:
     zones -- zones data
     lgas -- lga facility data
+    surveyed -- FormHub surveyed facilities data
+
+    Structure of zone data:
+    [
+        {
+            "name": "Northeast",
+            "percent_complete": 40
+            "states": [
+                {
+                    "name": "Gombe",
+                    "percent_complete": 40
+                    "lgas": [
+                        # See LGA data structure below
+                    ]
+                }
+            ]
+        }
+    ]
 
     Structure of an LGA's data:
     {
-        "id": "gombe_kwami",
-        "name": "Kwami",
-        "surveyed": ["Saint Andrews", "Government School"],
-        "unsurveyed": ["AFONORI Primary School", "FOGUWA Primary School", "MARI Primary School"],
-        "percent_complete": 40
+        "imo_oru_west": {
+            "percent_complete": 40,
+            "facilities": [
+                {
+                    "id": "yxrl",
+                    "name": "AFONORI Primary School",
+                    "surveyed": True,
+                    "wrong_id": False,
+                    "new_facility": False
+                }
+            ]
+            ...
+        }
     }
     """
     for zone in zones:
@@ -122,24 +164,58 @@ def merge_survey_data(lgas, zones):
             for lga in state["lgas"]:
                 lga_id = lga["id"]
 
-                # Set lga defaults
-                lga["percent_complete"] = 100
-                lga["surveyed"] = []
-                lga["unsurveyed"] = []
+                # Update with survey data
+                lga_facilities = facilities_by_lga.get(lga_id, [])
+                lga["facilities"] = lga_facilities
+                surveyed = surveyed_facilities.get(lga_id, [])
 
-                if lga_id in lgas:
-                    # Update with survey data
-                    lga.update(lgas[lga_id])
+                # Mark surveyed/unsurveyed facilities
+                for fac in lga_facilities:
+                    fac_surveyed = [f for f in surveyed if f["id"] == fac["id"]]
+                    fac["surveyed"] = True if fac_surveyed else False
+                    fac["newly_collected"] = False
+                    fac["wrong_id"] = False
 
-                state_surveyed += len(lga["surveyed"])
-                state_unsurveyed += len(lga["unsurveyed"])
+                # Mark new facilities & facilities with wrong id
+                for fac in surveyed:
+                    fac["surveyed"] = True
+                    fac_in_list = [f for f in lga_facilities if f["id"] == fac["id"]]
+                    if fac["new_old"] == "yes":
+                        fac["newly_collected"] = True
+                        fac["wrong_id"] = False
+                        lga_facilities.append(fac)
+                    elif not fac_in_list:
+                        fac["newly_collected"] = False
+                        fac["wrong_id"] = True
+                        lga_facilities.append(fac)
 
-            state["percent_complete"] = int(state_surveyed / float(state_unsurveyed) * 100)
+                # Calculate lga percent_complete
+                lga["surveyed"] = 0
+                lga["unsurveyed"] = 0
+                for fac in lga_facilities:
+                    if fac["surveyed"]:
+                        lga["surveyed"] += 1
+                    else:
+                        lga["unsurveyed"] += 1
+                try:
+                    lga["percent_complete"] = int(lga["surveyed"] / float(lga["surveyed"] + lga["unsurveyed"]) * 100)
+                except:
+                    lga["percent_complete"] = 100
+
+                state_surveyed += lga["surveyed"]
+                state_unsurveyed += lga["unsurveyed"]
+
+            try:
+                state["percent_complete"] = int(state_surveyed / float(state_surveyed + state_unsurveyed) * 100)
+            except:
+                state["percent_complete"] = 100
             zone_surveyed += state_surveyed
             zone_unsurveyed += state_unsurveyed
 
-        zone["percent_complete"] = int(zone_surveyed / float(zone_unsurveyed) * 100)
-    print json.dumps(zones, indent=4)
+        try:
+            zone["percent_complete"] = int(zone_surveyed / float(zone_surveyed + zone_unsurveyed) * 100)
+        except:
+            zone["percent_complete"] = 100
     return zones
 
 
@@ -202,10 +278,10 @@ def build_zones():
 def index():
     seconds_since_update = (datetime.datetime.now() - CACHE["last_updated"]).seconds
     if seconds_since_update > 600 or not CACHE["html"]:
-        surveyed = get_mopup_data()
-        lgas = parse_facilities(surveyed)
+        surveyed_facilities = get_surveyed_facilities()
+        facilities_by_lga = parse_facilities()
         zones = build_zones()
-        zones = merge_survey_data(lgas, zones)
+        zones = merge_survey_data(zones, facilities_by_lga, surveyed_facilities)
         CACHE["html"] = flask.render_template("index.html", zones=zones, len=len)
         CACHE["last_updated"] = datetime.datetime.now()
     return CACHE["html"]
@@ -214,6 +290,13 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run("0.0.0.0")
+    #app.run("0.0.0.0")
+    surveyed_facilities = get_surveyed_facilities()
+    facilities_by_lga = parse_facilities()
+    zones = build_zones()
+    zones = merge_survey_data(zones, facilities_by_lga, surveyed_facilities)
+    print json.dumps(zones, indent=4)
+
+
 
 
