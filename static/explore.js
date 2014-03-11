@@ -108,7 +108,7 @@ function render(template_id, context){
 function format_value(value){
     // Formats indicator values for use in tables
     if (typeof value === 'undefined' ||
-        value === null) return '-';
+        value === null) return 'NA';
     if (value === true) return 'Yes';
     if (value === false) return 'No';
     if (_.isNumber(value) && value % 1 !== 0)
@@ -516,14 +516,22 @@ MapView.chart_indicators = function(facilities, sector){
     // Iterates through facilities within a sector to find
     // indicators which contain boolean values.
     // Returns a sorted list of [indicator, indicator_name]
+    var relevant_indicators = [];
+    _.each(NMIS.facilities_view[sector], function(sec){
+        _.each(sec.indicators, function(ind){
+            relevant_indicators.push(ind);
+        });
+    });
     var indicators = {};
     for (var i=0, facility; facility=facilities[i]; i++){
         if (facility.sector === sector){
             for (var indicator in facility){
-                if (facility.hasOwnProperty(indicator)){
-                    var value = facility[indicator];
-                    if (value === false || value === true)
-                        indicators[indicator] = 1;
+                if (relevant_indicators.indexOf(indicator) > 0){
+                    if (facility.hasOwnProperty(indicator)){
+                        var value = facility[indicator];
+                        if (value === false || value === true)
+                            indicators[indicator] = 1;
+                    }
                 }
             }
         }

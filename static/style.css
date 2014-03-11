@@ -527,10 +527,15 @@ table thead td:active {
 .explore_info {
 	display: inline-block;
 	color: #666;
+	margin-top: 5px;
+}
+.explore_link {
+	display: inline-block;
+	color: #666;
 	font-style: italic;
 	margin-top: 5px;
 }
-.explore_info:hover {
+.explore_link:hover {
 	color: #444;
 	text-decoration: none;
 }
