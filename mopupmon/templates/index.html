@@ -19,19 +19,19 @@
                 </div>
                 <table class="deets">
                     <tr>
-                        <th class="fifty"></th>
-                        <th class="align_right sixteen">Complete</th>
-                        <th class="align_right sixteen">Need to Survey</th>
-                        <th class="align_right sixteen"></th>
+                        <th class="lga_name"></th>
+                        <th class="align_right twenty">Surveyed</th>
+                        <th class="align_right twenty">Unsurveyed</th>
+                        <th class="align_right twenty">Progress</th>
                     </tr>
                     {% for lga in state["lgas"] %}
-                        <tr class="lga_row">
-                            <td class="fifty">
+                        <tr>
+                            <td class="lga_name">
                                 <a href="/{{ lga['id'] }}">{{ lga['name'] }}</a>
                             </td>
-                            <td class="align_right sixteen">{{ len(lga['surveyed']) }}</td>
-                            <td class="align_right sixteen">{{ len(lga['unsurveyed']) }}</td>
-                            <td class="align_right sixteen">{{ lga['percent_complete'] }}%</td>
+                            <td class="align_right twenty">{{ len(lga['surveyed']) }}</td>
+                            <td class="align_right twenty">{{ len(lga['unsurveyed']) }}</td>
+                            <td class="align_right twenty">{{ lga['percent_complete'] }}%</td>
                         </tr>
                     {% endfor %}
                 </table>

@@ -75,7 +75,7 @@ a:hover {
     border-bottom: 1px dotted #ddd;
     text-align: left;
 }
-.deets .right_align {
+.deets .align_right {
     text-align: right;
 }
 
@@ -88,14 +88,15 @@ a:hover {
     font-size: 13px;
     font-weight: 200;
 }
-.deets .half {
-    width: 50%;
+.deets .lga_name {
+    width: 40%;
 }
-.deets .large {
-    width: 70%;
+.deets .facility_name {
+    width: 80%;
+    padding-right: 10px;
 }
-.deets .sixteen {
-    width: 16%;
+.deets .twenty {
+    width: 20%;
 }
 
 
