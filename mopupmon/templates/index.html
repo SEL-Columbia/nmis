@@ -25,7 +25,7 @@
                         <th class="align_right twenty">Progress</th>
                     </tr>
                     {% for lga in state["lgas"] %}
-                        <tr>
+                        <tr class="clickable">
                             <td class="lga_name">
                                 <a href="/{{ lga['id'] }}">{{ lga['name'] }}</a>
                             </td>

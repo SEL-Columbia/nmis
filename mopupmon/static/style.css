@@ -74,12 +74,13 @@ a:hover {
     padding: 5px 0;
     border-bottom: 1px dotted #ddd;
     text-align: left;
+    border-collapse: collapse;
 }
 .deets .align_right {
     text-align: right;
 }
 
-.deets .tr:hover td {
+.deets .tr:hover {
     background: #ddd;
 }
 
@@ -87,6 +88,12 @@ a:hover {
     color: #555;
     font-size: 13px;
     font-weight: 200;
+}
+.deets .clickable td {
+    cursor: pointer;
+}
+.deets .clickable:hover td {
+    background-color: #eee;
 }
 .deets .lga_name {
     width: 40%;

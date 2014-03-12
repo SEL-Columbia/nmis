@@ -20,6 +20,10 @@
                     var scroll = $('#zones').show().data('scroll');
                     document.body.scrollTop = scroll;
                     return false;
+                })
+                .on('click', '.deets .clickable', function(){
+                    window.location.href = $(this).find('a').attr('href');
+                    return false;
                 });
         });
     </script>
