@@ -67,11 +67,11 @@ a:hover {
     padding: 10px;
 }
 .deets a {
-    font-size: 18px;
+    font-size: 17px;
 }
 .deets td,
 .deets th {
-    padding: 5px 0;
+    padding: 8px 0;
     border-bottom: 1px dotted #ddd;
     text-align: left;
     border-collapse: collapse;
