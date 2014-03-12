@@ -6,6 +6,13 @@ body {
     margin: 0;
 }
 
+a {
+    color: #2179C7;
+    text-decoration: none;
+}
+a:hover {
+    color: #2788DE;
+}
 
 #content {
     background-color: #f7f7f7;
@@ -13,7 +20,7 @@ body {
     margin: auto;
 }
 
-.block_title {
+.section_title {
     color: white;
     font-size: 20px;
     font-weight: 400;
@@ -21,62 +28,7 @@ body {
     background: #64A4DC;
     padding: 10px;
 }
-
-.state_title {
-    cursor: pointer;
-    font-size: 18px;
-    padding: 10px;
-    background: #eee;
-    border-bottom: 1px dotted #ddd;
-}
-.state_title:hover,
-.state_title.active {
-    background: #ddd;
-}
-.state:last-child .state_title {
-    border-bottom: none;
-}
-
-.block_title .percent_complete,
-.state_title .percent_complete {
-    float: right;
-}
-
-
-.lgas {
-    display: none;
-    width: 100%;
-    padding: 10px;
-}
-.lgas td,
-.lgas th {
-    width: 25%;
-    text-align: right;
-    padding: 5px 0;
-    border-bottom: 1px dotted #ddd;
-}
-.lgas .lga_row {
-    cursor: pointer;
-}
-
-.lgas .lga_row:hover td {
-    background: #ddd;
-}
-
-.lgas th {
-    color: #555;
-    font-size: 13px;
-    font-weight: 200;
-}
-.lga_name {
-    text-align: left;
-}
-
-
-.lga_details {
-    display: none;
-}
-.lga_details .back {
+.section_title .back {
     color: #fff;
     background: rgba(0,0,0,0.1);
     text-decoration: none;
@@ -84,15 +36,70 @@ body {
     padding: 5px 10px;
     margin-right: 6px;
 }
-.lga_details .back:hover {
+.section_title .back:hover {
     background: rgba(0,0,0,0.2);
 }
 
-.lga_body {
+
+.block_title {
+    cursor: pointer;
+    font-size: 18px;
+    padding: 10px;
+    background: #eee;
+    border-bottom: 1px dotted #ddd;
+}
+.block_title:hover,
+.block_title.active {
+    background: #ddd;
+}
+.block_expand:last-child .block_title {
+    border-bottom: none;
+}
+
+.percent_complete {
+    float: right;
+}
+
+
+.deets {
+    display: none;
+    width: 100%;
     padding: 10px;
 }
-.lga_details h3 {
-    padding-bottom: 8px;
-    border-bottom: 1px solid #ddd;
+.deets a {
+    font-size: 18px;
+}
+.deets td,
+.deets th {
+    padding: 5px 0;
+    border-bottom: 1px dotted #ddd;
+    text-align: left;
+}
+.deets .right_align {
+    text-align: right;
+}
+
+.deets .tr:hover td {
+    background: #ddd;
+}
+
+.deets th {
+    color: #555;
+    font-size: 13px;
+    font-weight: 200;
+}
+.deets .half {
+    width: 50%;
+}
+.deets .large {
+    width: 70%;
+}
+.deets .sixteen {
+    width: 16%;
+}
+
+
+.deets {
+    display: none;
 }
 

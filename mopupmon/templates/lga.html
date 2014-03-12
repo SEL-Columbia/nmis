@@ -1,30 +1,40 @@
 {% extends "base.html" %}
 
 
-{% block script %}
-    <script>
-        $(function(){
-            
-        });
-    </script>
-{% endblock %}
+{% macro render_facility_section(title, facilities) -%}
+    <div class="block_expand">
+        <div class="block_title">
+            {{ title }}
+            <div class="percent_complete">
+                {{ len(facilities) }}
+            </div>
+        </div>
+        {% if facilities %}
+            <table class="deets">
+                <tr>
+                    <th class="large">Name</th>
+                    <th>ID</th>
+                </tr>
+                {% for fac in facilities %}
+                    <tr>
+                        <td class="large">{{ fac['name'] }}</td>
+                        <td>{{ fac['id'] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+{%- endmacro %}
 
 
 {% block content %}
-    <div class="block_title">
+    <div class="section_title">
         <a href="/" class="back">←</a>
         {{ lga['name'] }}
     </div>
-    <div class="padded">
-        <h3>Surveyed Facilities</h3>
-        {% for name in lga["surveyed"] %}
-            <p>{{ name }}</p>
-        {% endfor %}
-
-        <h3>Unsurveyed Facilities</h3>
-        {% for name in lga["unsurveyed"] %}
-            <p>{{ name }}</p>
-        {% endfor %}
-    </div>
+    {{ render_facility_section('Surveyed Facilities', lga['surveyed']) }}
+    {{ render_facility_section('Unsurveyed Facilities', lga['unsurveyed']) }}
+    {{ render_facility_section('Newly collected facilities', lga['new_facilities']) }}
+    {{ render_facility_section('Facilities with incorrect ID', lga['unknown_facilities']) }}
 {% endblock %}
 
