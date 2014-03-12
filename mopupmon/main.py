@@ -26,8 +26,8 @@ def get_surveyed_facilities():
 
     {
         "anambra_idemili_north": [{
-            "facility_ID": "kycs",
-            "facility_name": "Odida Primary health Centre",
+            "id": "kycs",
+            "name": "Odida Primary health Centre",
             ...
         }]
     }
@@ -60,7 +60,7 @@ def get_surveyed_facilities():
     return output
 
 
-def parse_facilities():
+def parse_facilities_csv():
     """
     Parses the education and health CSVs and returns the data structure below.
 
@@ -109,6 +109,58 @@ def parse_facilities():
     return lgas
 
 
+def build_zones():
+    """
+    Builds the following structure from NMIS' zones.json.
+    
+    [
+        {
+            "name": "Northeast",
+            "states": [
+                {
+                    "name": "Gombe",
+                    "lgas": [
+                        {
+                            "id": "gombe_kwami",
+                            "name": "Kwami"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+    """
+    file_path = os.path.join(CWD, 'zones.json')
+    with open(file_path, 'r') as f:
+        data = json.loads(f.read())
+
+    # Build zones output
+    zones = []
+    for zone_name, zone_states in data.items():
+        zone = {'name': zone_name}
+        states = zone['states'] = []
+
+        for state_name, state_lgas in zone_states.items():
+            state = {'name': state_name}
+            lgas = state['lgas'] = []
+
+            for lga_name, lga_id in state_lgas.items():
+                lga = {
+                    'id': lga_id,
+                    'name': lga_name
+                }
+                lgas.append(lga)
+            states.append(state)
+        zones.append(zone)
+
+    # Sort zones, states, and lgas
+    for zone in zones:
+        for state in zone['states']:
+            state['lgas'].sort(key=lambda x: x['name'])
+        zone['states'].sort(key=lambda x: x['name'])
+    zones.sort(key=lambda x: x['name'])
+    return zones
+
 
 def merge_survey_data(zones, facilities_by_lga, surveyed_facilities):
     """
@@ -116,8 +168,8 @@ def merge_survey_data(zones, facilities_by_lga, surveyed_facilities):
 
     Keyword arguments:
     zones -- zones data
-    lgas -- lga facility data
-    surveyed -- FormHub surveyed facilities data
+    facilities_by_lga -- lga facility data
+    surveyed_facilities -- FormHub surveyed facilities data
 
     Structure of zone data:
     [
@@ -210,66 +262,12 @@ def merge_survey_data(zones, facilities_by_lga, surveyed_facilities):
     return zones
 
 
-
-def build_zones():
-    """
-    Builds the following structure from NMIS' zones.json.
-    
-    [
-        {
-            "name": "Northeast",
-            "states": [
-                {
-                    "name": "Gombe",
-                    "lgas": [
-                        {
-                            "id": "gombe_kwami",
-                            "name": "Kwami"
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
-    """
-    file_path = os.path.join(CWD, 'zones.json')
-    with open(file_path, 'r') as f:
-        data = json.loads(f.read())
-
-    # Build zones output
-    zones = []
-    for zone_name, zone_states in data.items():
-        zone = {'name': zone_name}
-        states = zone['states'] = []
-
-        for state_name, state_lgas in zone_states.items():
-            state = {'name': state_name}
-            lgas = state['lgas'] = []
-
-            for lga_name, lga_id in state_lgas.items():
-                lga = {
-                    'id': lga_id,
-                    'name': lga_name
-                }
-                lgas.append(lga)
-            states.append(state)
-        zones.append(zone)
-
-    # Sort zones, states, and lgas
-    for zone in zones:
-        for state in zone['states']:
-            state['lgas'].sort(key=lambda x: x['name'])
-        zone['states'].sort(key=lambda x: x['name'])
-    zones.sort(key=lambda x: x['name'])
-    return zones
-
-
 def fetch_zones_data():
     seconds_since_update = (datetime.datetime.now() - CACHE['last_updated']).seconds
     # Update cache every 12 hours
     if seconds_since_update > (12 * 60 * 60) or not CACHE.get('zones'):
         surveyed_facilities = get_surveyed_facilities()
-        facilities_by_lga = parse_facilities()
+        facilities_by_lga = parse_facilities_csv()
         zones = build_zones()
         zones = merge_survey_data(zones, facilities_by_lga, surveyed_facilities)
         CACHE['zones'] = zones
