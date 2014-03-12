@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mop-up Monitor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $(document.body)
+                .on('click', '.block_title', function(){
+                    $(this).toggleClass('active')
+                        .parent()
+                        .find('.deets')
+                        .toggle();
+                    return false;
+                })
+                .on('click', '.lga_details .back', function(){
+                    $(this).closest('.lga_details').hide();
+                    var scroll = $('#zones').show().data('scroll');
+                    document.body.scrollTop = scroll;
+                    return false;
+                });
+        });
+    </script>
+</head>
+<body>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
+

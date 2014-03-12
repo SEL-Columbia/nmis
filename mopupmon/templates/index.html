@@ -1,105 +1,42 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Mop-up Monitor</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" type="text/css" href="/static/style.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script>
-        $(function(){
-            $(document.body)
-                .on('click', '.state_title', function(){
-                    $(this).toggleClass('active')
-                        .parent()
-                        .find('.lgas')
-                        .toggle();
-                    return false;
-                })
-                .on('click', '.lga_row', function(){
-                    var lga_id = $(this).data('lga_id');
-                    $('#zones')
-                        .data('scroll', document.body.scrollTop) // Save scroll position
-                        .hide();
-                    $('#' + lga_id).show();
-                    document.body.scrollTop = 0;
-                    return false;
-                })
-                .on('click', '.lga_details .back', function(){
-                    $(this).closest('.lga_details').hide();
-                    var scroll = $('#zones').show().data('scroll');
-                    document.body.scrollTop = scroll;
-                    return false;
-                });
-        });
-    </script>
-</head>
-<body>
-    <div id="content">
-        <div id="zones">
-            {% for zone in zones %}
-                <div class="zone">
-                    <div class="block_title">
-                        {{ zone["name"] }}
-                        <div class="percent_complete">
-                            {{ zone["percent_complete"] }}%
-                        </div>
-                    </div>
-                    {% for state in zone["states"] %}
-                        <div class="state">
-                            <div class="state_title">
-                                {{ state["name"] }}
-                                <div class="percent_complete">
-                                    {{ state["percent_complete"] }}%
-                                </div>
-                            </div>
-                            <table class="lgas">
-                                <tr>
-                                    <th class="lga_name"></th>
-                                    <th class="surveyed">Complete</th>
-                                    <th class="unsurveyed">Need to Survey</th>
-                                    <th class="complete"></th>
-                                </tr>
-                                {% for lga in state["lgas"] %}
-                                    <tr class="lga_row" data-lga_id="{{ lga["id"] }}">
-                                        <td class="lga_name">
-                                            {{ lga["name"] }}
-                                        </td>
-                                        <td>{{ len(lga["surveyed"]) }}</td>
-                                        <td>{{ len(lga["unsurveyed"]) }}</td>
-                                        <td>{{ lga["percent_complete"] }}%</td>
-                                    </tr>
-                                {% endfor %}
-                            </table>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endfor %}
+{% extends "base.html" %}
+
+
+{% block content %}
+    {% for zone in zones %}
+        <div class="section_title">
+            {{ zone['name'] }}
+            <div class="percent_complete">
+                {{ zone['percent_complete'] }}%
+            </div>
         </div>
-
-        {% for zone in zones %}
-            {% for state in zone["states"] %}
-                {% for lga in state["lgas"] %}
-                    <div id="{{ lga["id"] }}" class="lga_details">
-                        <div class="block_title">
-                            <a href="#" class="back">←</a>
-                            {{ lga['name'] }}
-                        </div>
-                        <div class="lga_body">
-                            <h3>Surveyed Facilities</h3>
-                            {% for name in lga["surveyed"] %}
-                                <p>{{ name }}</p>
-                            {% endfor %}
-
-                            <h3>Unsurveyed Facilities</h3>
-                            {% for name in lga["unsurveyed"] %}
-                                <p>{{ name }}</p>
-                            {% endfor %}
-                        </div>
+        {% for state in zone['states'] %}
+            <div class="block_expand">
+                <div class="block_title">
+                    {{ state['name'] }}
+                    <div class="percent_complete">
+                        {{ state['percent_complete'] }}%
                     </div>
-                {% endfor %}
-            {% endfor %}
+                </div>
+                <table class="deets">
+                    <tr>
+                        <th class="fifty"></th>
+                        <th class="align_right sixteen">Complete</th>
+                        <th class="align_right sixteen">Need to Survey</th>
+                        <th class="align_right sixteen"></th>
+                    </tr>
+                    {% for lga in state["lgas"] %}
+                        <tr class="lga_row">
+                            <td class="fifty">
+                                <a href="/{{ lga['id'] }}">{{ lga['name'] }}</a>
+                            </td>
+                            <td class="align_right sixteen">{{ len(lga['surveyed']) }}</td>
+                            <td class="align_right sixteen">{{ len(lga['unsurveyed']) }}</td>
+                            <td class="align_right sixteen">{{ lga['percent_complete'] }}%</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
         {% endfor %}
-    </div>
-</body>
-</html>
+    {% endfor %}
+{% endblock %}
 
