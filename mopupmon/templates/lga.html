@@ -31,6 +31,9 @@
     <div class="section_title">
         <a href="/" class="back">←</a>
         {{ lga['name'] }}
+        <div class="percent_complete">
+            {{ lga['percent_complete'] }}%
+        </div>
     </div>
     {{ render_facility_section('Surveyed Facilities', lga['surveyed']) }}
     {{ render_facility_section('Unsurveyed Facilities', lga['unsurveyed']) }}
