@@ -4,6 +4,7 @@ $(function(){
     new Backbone.Router({
         routes: {
             '': IndexView,
+            'walkthrough_end': IndexView,
             'gap_sheets': GapSheetIndexView,
             ':unique_lga/lga_overview': view(LGAView, 'overview'),
             ':unique_lga/lga_health': view(LGAView, 'health'),              
@@ -43,7 +44,7 @@ function view(viewObj, sector){
         $('#content .container').show();
         $(window).scrollTop(0);
         viewObj.render(lga, sector);
-        show_walkthrough();
+        Walkthrough.show();
     }
 
     return function(unique_lga){
@@ -131,170 +132,6 @@ function indicator_description(slug){
 }
 
 
-function show_walkthrough(index){
-    var pages = [
-        {
-            body: "<h1>New to NMIS?</h1>" +
-            "Before you get started, we'd like to show you a few tips on exploring facilities" +
-            '<div class="walkthrough_btn">Take Tour</div>',
-            location_hash: '',
-            callback: function(index){
-                $(this).find('.walkthrough_nav')
-                    .hide()
-                    .end()
-                    .find('.walkthrough_btn')
-                    .click(function(){
-                        show_walkthrough(index + 1);
-                    });
-            }
-        },
-        {
-            body: "<h1>Choose an LGA to get started</h1>" +
-            "LGAs are organized by zone. Click on a State for a list of LGAs within that State or search for an LGA in the dropdown menu above.",
-            location_hash: '',
-            callback: function(index){
-                // Show 3rd LGA menu
-                $('.lgas:eq(2)').show()
-                    .find('a')
-                    .click(function(){
-                        show_walkthrough(index + 1);
-                    });
-                
-                $.curvedArrow({
-                    p0x: 400, p0y: 400,
-                    p1x: 300, p1y: 300,
-                    p2x: 250, p2y: 440
-                });
-            }
-        },
-        {
-            body: "<h1>Filter by Sector</h1>" +
-            "View all sectors within an LGA or choose from Health, Education or Water.",
-            location_hash: '#kogi_adavi/lga_overview',
-            callback: function(index){
-                $.curvedArrow({
-                    p0x: 400, p0y: 400,
-                    p1x: 300, p1y: 400,
-                    p2x: 300, p2y: 235
-                });
-            }
-        },
-        {
-            body: "<h1>Overview, Map or Facility Views</h1>" +
-            "You can easily switch between an LGA overview, map of facilities, or individual facility data by selecting the appropriate tab.",
-            location_hash: '#kogi_adavi/lga_health',
-            callback: function(index){
-                $.curvedArrow({
-                    p0x: 950, p0y: 400,
-                    p1x: 1070, p1y: 400,
-                    p2x: 1070, p2y: 225
-                });
-            }  
-        },
-        {
-            body: "<h1>Indicator Detail in Mapview</h1>" +
-            "View which or how many facilities provide a specific service, by selecting the indicator from the dropdown.",
-            location_hash: '#kogi_adavi/map_health',
-            callback: function(){
-                $('.walkthrough_modal').css({
-                    top: 75,
-                    left: '65%'
-                });
-
-                $.curvedArrow({
-                    p0x: 600, p0y: 450,
-                    p1x: 400, p1y: 450,
-                    p2x: 400, p2y: 300
-                })
-                .delay(1000)
-                .fadeOut(function(){
-                    $('.pie_chart_selector')
-                        .find('option[value="potable_water_access"]')
-                        .prop('selected', 'selected')
-                        .end()
-                        .change();
-                });
-            }
-        },
-        {
-            body: "<h1>Facility Snapshot and Detail</h1>" +
-            "View the Snapshot, the most relevant indicators for each facility, or view more detailed indicators such as those for Infrastructure or Staffing.",
-            location_hash: '#kogi_adavi/facilities_health',
-            callback: function(){
-                $('.walkthrough_modal').css('top', 200);
-                
-                $.curvedArrow({
-                    p0x: 400, p0y: 450,
-                    p1x: 300, p1y: 450,
-                    p2x: 300, p2y: 310
-                });
-            }
-        },
-        {
-            body: "<h1><i>Okay, I've got it</i></h1>" +
-            '<div class="walkthrough_btn">Start Exploring</div>' +
-            '<i>Need more help? <br>View additional <a href="/planning">Planning Tools</a></i>',
-            location_hash: '',
-            callback: function(){
-                $('.dots, .walkthrough_next').hide();
-            }
-        }
-    ];
-
-    if (typeof index === 'undefined'){
-        var page = null;
-        var index = null;
-        _.each(pages, function(p, i){
-            var a = window.location.hash;
-            if (p.location_hash === window.location.hash){
-                page = p;
-                index = i;
-            }
-        });
-        if (page === null) return;
-    } else {
-        var page = pages[index];
-    }
-
-    var template = $('#walkthrough_modal_template').html();
-    var html = _.template(template, {
-        body: page.body,
-        index: index
-    });
-
-    $('.walkthrough_modal, .curved_arrow').remove();
-
-    window.location.hash = page.location_hash;
-
-    var modal = $(html).appendTo('#content');
-    modal.show()
-        .find('.walkthrough_back, .walkthrough_next')
-        .click(function(){
-            var i = $(this).data('index');
-            show_walkthrough(i);
-        })
-        .end()
-        .find('.walkthrough_close')
-        .click(function(){
-            $('.walkthrough_modal, .curved_arrow').remove();
-        })
-        .end()
-        .find('.dot[data-index="' + index + '"]')
-        .addClass('active')
-        .end()
-        .find('.dot')
-        .click(function(){
-            var i = $(this).data('index');
-            show_walkthrough(i);
-        });
-
-    if (page.callback){
-        // Callback that runs after modal is added to DOM
-        page.callback.call(modal[0], index); 
-    }
-}
-
-
 
 // Views
 // ===========================================
@@ -311,7 +148,7 @@ function IndexView(){
         $(this).next('.lgas').toggle();
         return false;
     });
-    //show_walkthrough(0);
+    Walkthrough.show();
 };
 
 
@@ -730,6 +567,184 @@ GapSheetView.num_bool_indicator = function(indicator, sector, facilities){
     }
     return num_bool;
 };
+
+
+
+var Walkthrough = {};
+Walkthrough.show = function(index){
+    if ($.cookie('hide_walkthrough')){
+        return;
+    } else if (typeof index === 'undefined'){
+        // Find the page which matches with location.hash
+        var page = null;
+        var index = null;
+        $.each(this.pages, function(i, p){
+            if (p.location_hash === window.location.hash){
+                page = p;
+                index = i;
+                return false;
+            }
+        });
+        if (page === null) return;
+    } else {
+        var page = this.pages[index];
+    }
+
+    var template = $('#walkthrough_modal_template').html();
+    var html = _.template(template, {
+        body: page.body,
+        index: index
+    });
+
+    $('.walkthrough_modal, .curved_arrow').remove();
+
+    window.location.hash = page.location_hash;
+
+    var modal = $(html).appendTo('#content');
+    modal.show()
+        .find('.walkthrough_back, .walkthrough_next')
+        .click(function(){
+            var i = $(this).data('index');
+            Walkthrough.show(i);
+        })
+        .end()
+        .find('.walkthrough_close')
+        .click(Walkthrough.hide)
+        .end()
+        .find('.dot[data-index="' + index + '"]')
+        .addClass('active')
+        .end()
+        .find('.dot')
+        .click(function(){
+            var i = $(this).data('index');
+            Walkthrough.show(index + 1);
+        });
+
+    if (page.callback){
+        // Callback that runs after modal is added to DOM
+        page.callback.call(modal[0], index); 
+    }
+};
+
+Walkthrough.hide = function(){
+    $('.walkthrough_modal, .curved_arrow').remove();
+    $.cookie('hide_walkthrough', '1');
+};
+
+Walkthrough.pages = [
+    {
+        body: "<h1>New to NMIS?</h1>" +
+        "Before you get started, we'd like to show you a few tips on exploring facilities" +
+        '<div class="walkthrough_btn">Take Tour</div>',
+        location_hash: '',
+        callback: function(index){
+            $(this).find('.walkthrough_nav')
+                .hide()
+                .end()
+                .find('.walkthrough_btn')
+                .click(function(){
+                    Walkthrough.show(index + 1);
+                });
+        }
+    },
+    {
+        body: "<h1>Choose an LGA to get started</h1>" +
+        "LGAs are organized by zone. Click on a State for a list of LGAs within that State or search for an LGA in the dropdown menu above.",
+        location_hash: '',
+        callback: function(index){
+            // Show 3rd LGA menu
+            $('.lgas:eq(0)').show()
+                .find('a')
+                .click(function(){
+                    Walkthrough.show(index + 1);
+                    return false;
+                });
+            
+            $.curvedArrow({
+                p0x: 400, p0y: 400,
+                p1x: 300, p1y: 300,
+                p2x: 250, p2y: 440
+            });
+        }
+    },
+    {
+        body: "<h1>Filter by Sector</h1>" +
+        "View all sectors within an LGA or choose from Health, Education or Water.",
+        location_hash: '#benue_apa/lga_overview',
+        callback: function(index){
+            $.curvedArrow({
+                p0x: 400, p0y: 400,
+                p1x: 300, p1y: 400,
+                p2x: 300, p2y: 235
+            });
+        }
+    },
+    {
+        body: "<h1>Overview, Map or Facility Views</h1>" +
+        "You can easily switch between an LGA overview, map of facilities, or individual facility data by selecting the appropriate tab.",
+        location_hash: '#benue_apa/lga_health',
+        callback: function(index){
+            $.curvedArrow({
+                p0x: 950, p0y: 400,
+                p1x: 1070, p1y: 400,
+                p2x: 1070, p2y: 225
+            });
+        }  
+    },
+    {
+        body: "<h1>Indicator Detail in Mapview</h1>" +
+        "View which or how many facilities provide a specific service, by selecting the indicator from the dropdown.",
+        location_hash: '#benue_apa/map_health',
+        callback: function(){
+            $('.walkthrough_modal').css({
+                top: 75,
+                left: '65%'
+            });
+
+            $.curvedArrow({
+                p0x: 600, p0y: 450,
+                p1x: 400, p1y: 450,
+                p2x: 400, p2y: 300
+            })
+            .delay(1000)
+            .fadeOut(function(){
+                $('.pie_chart_selector')
+                    .find('option[value="child_health_measles_immun_calc"]')
+                    .prop('selected', 'selected')
+                    .end()
+                    .change();
+            });
+        }
+    },
+    {
+        body: "<h1>Facility Snapshot and Detail</h1>" +
+        "View the Snapshot, the most relevant indicators for each facility, or view more detailed indicators such as those for Infrastructure or Staffing.",
+        location_hash: '#benue_apa/facilities_health',
+        callback: function(){
+            $('.walkthrough_modal').css('top', 200);
+            
+            $.curvedArrow({
+                p0x: 400, p0y: 450,
+                p1x: 300, p1y: 450,
+                p2x: 300, p2y: 310
+            });
+        }
+    },
+    {
+        body: '<h1 class="white">Okay, I\'ve got it</h1>' +
+        '<div class="walkthrough_btn">Start Exploring</div><br>' +
+        'Need more help? View additional <a href="/planning">Planning Tools</a>',
+        location_hash: '#walkthrough_end',
+        callback: function(){
+            $('.dots, .walkthrough_next').hide();
+            $(this).find('.walkthrough_btn')
+                .click(function(){
+                    Walkthrough.hide();
+                    $('.walkthrough_modal').remove();
+                });
+        }
+    }
+];
 
 
 

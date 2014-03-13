@@ -450,6 +450,11 @@ table thead td:active {
     text-align: center;
     margin-bottom: 15px;
 }
+.walkthrough_modal h1.white {
+    color: white;
+    font-style: italic;
+    text-transform: none;
+}
 
 .walkthrough_btn {
     cursor: pointer;
