@@ -680,8 +680,8 @@ Walkthrough.pages = [
         }
     },
     {
-        body: "<h1>Overview, Map or Facility Views</h1>" +
-        "You can easily switch between an LGA overview, map of facilities, or individual facility data by selecting the appropriate tab.",
+        body: "<h1>Multiple Views</h1>" +
+        "You can easily switch between an LGA overview, map of facilities, or individual facility data by selecting the<br> appropriate tab.",
         location_hash: '#benue_apa/lga_health',
         callback: function(index){
             $.curvedArrow({
@@ -736,7 +736,7 @@ Walkthrough.pages = [
         'Need more help? View additional <a href="/planning">Planning Tools</a>',
         location_hash: '#walkthrough_end',
         callback: function(){
-            $('.dots, .walkthrough_next').hide();
+            $('.walkthrough_next').hide();
             $(this).find('.walkthrough_btn')
                 .click(function(){
                     Walkthrough.hide();
