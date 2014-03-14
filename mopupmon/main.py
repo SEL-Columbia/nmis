@@ -35,8 +35,8 @@ def get_surveyed_facilities():
     urls = [
         'https://formhub.org/ossap/forms/mopup_questionnaire_health_final/api',
         'https://formhub.org/ossap/forms/mopup_questionnaire_education_final/api',
-        'https://formhub.org/ossap/forms/mopup_questionnaire_education_v2/api',
-        'https://formhub.org/ossap/forms/mopup_questionnaire_health_v2/api'
+        #'https://formhub.org/ossap/forms/mopup_questionnaire_education_v2/api',
+        #'https://formhub.org/ossap/forms/mopup_questionnaire_health_v2/api'
     ]
     facilities = []
 
