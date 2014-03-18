@@ -314,7 +314,9 @@
                         </h4>
                     </div>
                     <div class="modal-body">
-                        <a href="<%= facility.photo_url %>" target="_blank"><img src="<%= facility.photo_url_sml %>"></a>
+                        <a href="http://nmisfac.s3.amazonaws.com/original/<%= facility.formhub_photo_id %>" target="_blank">
+                            <img src="http://nmisfac.s3.amazonaws.com/small/<%= facility.formhub_photo_id %>">
+                        </a>
                         <div class="info">
                             <% if (tables.length > 1){ %>
                                 <select class="facility_table_selector form-control">
