@@ -101,7 +101,7 @@
                         "pupil_toilet_ratio_primary", 
                         "pupil_toilet_ratio_secondary"
                     ], 
-                    "name": "Water & Sanitation"
+                    "name": "Water and Sanitation"
                 }, 
                 {
                     "indicators": [
@@ -125,7 +125,7 @@
                         "proportion_schools_fence_good_cond_primary", 
                         "proportion_schools_fence_good_cond_juniorsec"
                     ], 
-                    "name": "Health & Safety"
+                    "name": "Health and Safety"
                 }, 
                 {
                     "indicators": [
@@ -285,7 +285,7 @@
                     "name": "Tuberculosis"
                 }
             ], 
-            "name": "HIV/AIDS, Malaria and other Diseases"
+            "name": "HIV/AIDS, Malaria and Other Diseases"
         }, 
         {
             "indicators": [
