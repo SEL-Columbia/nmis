@@ -196,7 +196,7 @@
         "description": "Facility has the capacity to perform safe blood transfusion."
     }, 
     "proportion_access_functional_emergency_transport": {
-        "name": "Percentage of facilities with access to emergency transport services", 
+        "name": "Percentage of facilities with access to emergency transport services",
         "description": ""
     }, 
     "emoc_parenteral_anticonvulsant": {
@@ -884,7 +884,7 @@
         "description": ""
     }, 
     "proportion_delivery_no_user_fees": {
-        "name": "Percentage of facilities that do not charge any fees for maternal health servi", 
+        "name": "Percentage of facilities that do not charge any fees for maternal health services", 
         "description": ""
     }, 
     "proportion_no_user_fees_malaria": {
