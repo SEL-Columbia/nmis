@@ -1048,7 +1048,7 @@
       "description": ""
     }, 
     "facility_type": {
-      "name": "Facility type", 
+      "name": "Facility level", 
       "description": ""
     }, 
     "education_type": {
