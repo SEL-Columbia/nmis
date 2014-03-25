@@ -434,6 +434,7 @@ MapView.map_legend = function(lga, sector, indicator){
     var trues = 0;
     var falses = 0;
     var unknowns = 0;
+
     _.each(lga.facilities, function(facility){
         if (facility.sector === sector){
             var value = facility[indicator];
@@ -442,31 +443,36 @@ MapView.map_legend = function(lga, sector, indicator){
             else unknowns++;
         }
     });
+
     var total = trues + falses + unknowns;
-    var data = [{
-        value: trues / total * 100,
-        color: '#071efb'
-    }, {
-        value : falses / total * 100,
-        color : '#cc0202'
-    }, {
-        value : unknowns / total * 100,
-        color : '#e6e6e6'
-    }];
-    new Chart(ctx).Pie(data, {
+    var percent_complete = trues ? (trues / total * 100).toFixed(0): 0;
+    var pie_data = [{
+            value: trues / total * 100,
+            color: '#071efb'
+        }, {
+            value : falses / total * 100,
+            color : '#cc0202'
+        }, {
+            value : unknowns / total * 100,
+            color : '#e6e6e6'
+        }];
+
+    new Chart(ctx).Pie(pie_data, {
         animationEasing: 'easeOutQuart',
         animationSteps: 15
     });
-    var html = '<h4>' + indicator_name(indicator) + '</h4>';
+    
+    var html = '<h4>' + indicator_name(indicator) + ' (' + percent_complete + '%)</h4>';
     html += NMIS.indicators[indicator].description;
-    var yes_icon = '<img src="static/images/icons_f/true.png"></img>';
-    var no_icon = '<img src="static/images/icons_f/false.png"></img>';
-    var unknow_icon = '<img src="static/images/icons_f/undefined.png"></img>';
-    html += '<p class="values">';
-    html += '<span class="trues">' + yes_icon + trues + ' Yes' + '</span>';
-    html +='<span class="falses">' + no_icon + falses + ' No' + '</span>';
-    if (unknowns)
-        html += '<span class="unknowns">' + unknow_icon + unknowns + ' Unknown' + '</span>';
+    html += '<p class="values">' +
+        '<span class="trues"><img src="static/images/icons_f/true.png">' + 
+            trues + ' Yes</span>' +
+        '<span class="falses"><img src="static/images/icons_f/false.png">' + 
+            falses + ' No</span>';
+    if (unknowns){
+        html += '<span class="unknowns"><img src="static/images/icons_f/undefined.png">' + 
+            unknowns + ' Unknown</span>';
+    }
     html += '</p>';
     $('.map_legend .info').html(html);
 };
