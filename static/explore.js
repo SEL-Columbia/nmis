@@ -213,6 +213,13 @@ MapView.init = function(){
     // Append map outside of .container so it can fill the width of the page
     $('#content').append(
         $('#map_view_template').html());
+
+    if (window.G_vmlCanvasManager){
+        // Internet explorer excanvas initialization
+        var canvas = $('.map_legend canvas')[0];
+        G_vmlCanvasManager.initElement(canvas);
+    }
+
     $('.map_view').hide();
 
     $('.map_legend').on('click', '.close', function(){
