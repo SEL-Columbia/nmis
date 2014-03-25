@@ -71,7 +71,6 @@
             "indicators": [
                 "girl_boy_ratio_primary", 
                 "girl_boy_ratio_js", 
-                "girl_boy_ratio_secondary_school", 
                 "gender_parity_index_primary", 
                 "gender_parity_index_js"
             ]
