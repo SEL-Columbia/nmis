@@ -9,7 +9,22 @@
 
 
 {% block js %}
-    <!--[if IE]><script src="/static/lib/excanvas_r3/excanvas.js"></script><![endif]-->
+    <!--[if IE]>
+        <script src="/static/lib/excanvas_r3/excanvas.js"></script>
+        <script>
+            // Initialize canvas elements with excanvas
+            (function(){
+                var createElement = document.createElement;
+                document.createElement = function(tagName){
+                    var el = createElement(tagName);
+                    if (tagName === 'canvas'){
+                        G_vmlCanvasManager.initElement(el);
+                    }
+                    return el;
+                };
+            })();
+        </script>
+    <![endif]-->
     <script src="/static/explore.js"></script>
     <script>
         NMIS = {};
