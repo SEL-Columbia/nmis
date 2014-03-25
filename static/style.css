@@ -420,6 +420,7 @@ table thead td:active {
     color: white;
     width: 500px;
     margin-left: -250px;
+    background: #444; /* IE */
     background: rgba(0,0,0,0.85);
     border-radius: 6px;
     box-shadow: 5px 5px 20px #666;
