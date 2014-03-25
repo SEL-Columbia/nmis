@@ -89,8 +89,11 @@ function render_lga_search(sorted_lgas){
                 location.hash = '#' + value + '/lga_overview';
                 this.clear();
                 return false;
-            }  
+            }
         });
+
+    // < IE 10 placeholder polyfill
+    $('#lga_search input').placeholder();
 }
 
 
