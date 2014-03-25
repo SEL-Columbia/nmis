@@ -396,7 +396,7 @@
         "description": ""
     }, 
     "num_health_facilities_c_sections": {
-        "name": "Facilities that perform Caesarean sections", 
+        "name": "Number of facilities that perform Caesarean sections", 
         "description": ""
     }, 
     "prevalence_of_underweight_children_u5": {
