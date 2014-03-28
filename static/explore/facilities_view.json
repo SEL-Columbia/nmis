@@ -27,7 +27,7 @@
             "name": "Snapshot",
             "indicators": [
                 "facility_name",
-                "facility_type",
+                "facility_type_display",
                 "improved_water_supply",
                 "improved_sanitation",
                 "chalkboard_each_classroom_yn",
@@ -41,7 +41,7 @@
             "name": "Infrastructure",
             "indicators": [
                 "facility_name",
-                "facility_type",
+                "facility_type_display",
                 "chalkboard_each_classroom_yn",
                 "improved_water_supply",
                 "improved_sanitation",
@@ -53,7 +53,7 @@
             "name": "Gender Breakdown",
             "indicators": [
                 "facility_name",
-                "facility_type",
+                "facility_type_display",
                 "num_students_total",
                 "num_students_male",
                 "num_students_female",
@@ -66,7 +66,7 @@
             "name": "Basic Information",
             "indicators": [
                 "facility_name",
-                "facility_type",
+                "facility_type_display",
                 "date_of_survey",
                 "education_type",
                 "facility_ID",
@@ -81,7 +81,7 @@
             "name": "Snapshot",
             "indicators": [
                 "facility_name",
-                "facility_type",
+                "facility_type_display",
                 "maternal_health_delivery_services", 
                 "emergency_transport",
                 "skilled_birth_attendant",
@@ -95,7 +95,7 @@
             "name": "Staffing",
             "indicators": [
                 "facility_name",
-                "facility_type",
+                "facility_type_display",
                 "num_chews_fulltime", 
                 "num_nurses_fulltime",
                 "num_nursemidwives_fulltime",
@@ -106,7 +106,7 @@
             "name": "Basic Information",
             "indicators": [
                 "facility_name",
-                "facility_type",
+                "facility_type_display",
                 "date_of_survey",
                 "facility_ID",
                 "community",
@@ -118,7 +118,7 @@
             "name": "Infrastructure",
             "indicators": [
                 "facility_name", 
-                "facility_type", 
+                "facility_type_display", 
                 "improved_water_supply", 
                 "improved_sanitation",
                 "phcn_electricity",
@@ -130,7 +130,7 @@
             "name": "Services",
             "indicators": [
                 "facility_name", 
-                "facility_type", 
+                "facility_type_display", 
                 "maternal_health_delivery_services",
                 "antenatal_care_yn", 
                 "c_section_yn",
