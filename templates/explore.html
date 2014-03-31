@@ -9,7 +9,7 @@
 
 
 {% block js %}
-    <!--[if lt IE 9]>
+    <!--[if lt IE 9]>    
         <script src="/static/lib/excanvas_r3/excanvas.js"></script>
         <script>
             // Initialize canvas elements with excanvas
@@ -112,8 +112,8 @@
             <div class="loading_bar"></div>
             <div style="clear:both"></div>
         </div>
-        <select placeholder="Select an LGA">
-            <option value="">Select an LGA</option>
+        <select>
+            <option value="">View an LGA</option>
             <% _.each(sorted_lgas, function(lga){ %>
                 <option value="<%= lga[1] %>"><%= lga[0] %></option>
             <% }); %>

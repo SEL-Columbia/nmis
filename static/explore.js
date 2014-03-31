@@ -84,16 +84,14 @@ function render_lga_search(sorted_lgas){
         .html(html)
         .show()
         .find('select')
-        .selectize({
-            onItemAdd: function(value){
-                location.hash = '#' + value + '/lga_overview';
-                this.clear();
-                return false;
-            }
+        .select2({
+            placeholder: 'View an LGA',
+            allowClear: true
+        })
+        .change(function(e){
+            window.location.hash = '#' + e.val + '/lga_overview';
+            $(this).select2('val', null);
         });
-
-    // < IE 10 placeholder polyfill
-    $('#lga_search input').placeholder();
 }
 
 
