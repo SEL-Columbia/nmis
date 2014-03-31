@@ -104,11 +104,12 @@ table .value {
     display: none;
     float: right;
     margin-top: 24px;
-    width: 250px;
+    width: 350px;
 }
 
 .select2-container {
-    width: 100%;
+    width: 250px;
+    float: right;
 }
 .select2-container .select2-choice {
     height: 32px;
