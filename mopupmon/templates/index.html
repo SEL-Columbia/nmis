@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    {% for zone in zones %}
+        <div class="section_title">
+            {{ zone['name'] }}
+            <div class="percent_complete">
+                {{ zone['percent_complete'] }}%
+            </div>
+        </div>
+        {% for state in zone['states'] %}
+            <div class="block_expand">
+                <div class="block_title">
+                    {{ state['name'] }}
+                    <div class="percent_complete">
+                        {{ state['percent_complete'] }}%
+                    </div>
+                </div>
+                <table class="deets">
+                    <tr>
+                        <th class="lga_name"></th>
+                        <th class="align_right twenty">Surveyed</th>
+                        <th class="align_right twenty">Unsurveyed</th>
+                        <th class="align_right twenty">Progress</th>
+                    </tr>
+                    {% for lga in state["lgas"] %}
+                        <tr class="clickable">
+                            <td class="lga_name">
+                                <a href="/{{ lga['id'] }}">{{ lga['name'] }}</a>
+                            </td>
+                            <td class="align_right twenty">{{ len(lga['surveyed']) }}</td>
+                            <td class="align_right twenty">{{ len(lga['unsurveyed']) }}</td>
+                            <td class="align_right twenty">{{ lga['percent_complete'] }}%</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+

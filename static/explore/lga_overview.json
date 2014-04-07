@@ -51,10 +51,10 @@
         {
             "header": "Goal 2: Achieve universal primary education", 
             "indicators": [
-                "net_enrollment_ratio_primary_education", 
-                "gross_enrollment_ratio_primary_education", 
-                "net_enrollment_ratio_secondary_education", 
-                "gross_enrollment_ratio_secondary_education", 
+                "net_enrollment_rate_pry", 
+                "gross_enrollment_rate_pry", 
+                "net_enrollment_rate_js", 
+                "gross_enrollment_rate_js", 
                 "literacy_rate"
             ]
         }, 
@@ -63,7 +63,6 @@
             "indicators": [
                 "girl_boy_ratio_primary", 
                 "girl_boy_ratio_js", 
-                "girl_boy_ratio_secondary_school", 
                 "gender_parity_index_primary", 
                 "gender_parity_index_js"
             ]
