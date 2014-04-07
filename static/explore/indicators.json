@@ -240,7 +240,7 @@
         "description": ""
     }, 
     "avg_num_tchrs_primary": {
-        "name": "Average number of teachers per school", 
+        "name": "Average number of full-time teachers per school", 
         "description": ""
     }, 
     "avg_num_classrms_primary": {
@@ -264,7 +264,7 @@
         "description": ""
     }, 
     "avg_num_tchrs_js": {
-        "name": "Average number of teachers per school", 
+        "name": "Average number of full-time teachers per school", 
         "description": ""
     }, 
     "avg_num_classrms_js": {
@@ -1549,7 +1549,7 @@
     }, 
     "num_tchrs_total": {
         "name": "Total teachers", 
-        "description": "This is the total number of teachers in each school."
+        "description": "This is the total number of full-time teachers in each school."
     }, 
     "iv_antibiotics_yn_calc": {
         "name": "IV antibiotics", 
