@@ -40,7 +40,7 @@ def get_surveyed_facilities():
     facilities = []
 
     for url in urls:
-        logging.debug('fetching: ' + url)
+        logging.debug('Fetching: ' + url)
         request = urllib2.Request(url)
         base64string = base64.encodestring('%s:%s' % (secrets.username, secrets.password)).replace('\n', '')
         request.add_header('Authorization', 'Basic %s' % base64string)   
@@ -83,7 +83,7 @@ def parse_facilities_csv():
 
         file_path = os.path.join(CWD, fname)            
         with open(file_path, 'rb') as f:
-            print 'Parsing: ' + f.name
+            logging.debug('Parsing: ' + f.name)
 
             reader = csv.reader(f, delimiter=',', quotechar='"')
             headers = [h.strip('"') for h in reader.next()]
