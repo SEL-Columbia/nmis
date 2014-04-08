@@ -12,7 +12,8 @@ import flask
 import secrets
 
 
-CWD = os.path.dirname(os.path.abspath(__file__))
+cwd = os.path.dirname(os.path.abspath(__file__))
+cache_path = os.path.join(cwd, 'cache.json')
 logging.basicConfig(filename='/tmp/mopupmon.log', level=logging.DEBUG)
 
 app = flask.Flask(__name__)
@@ -77,11 +78,11 @@ def parse_facilities_csv():
     """
     # Parse CSV files
     facilities = []
-    for fname in os.listdir(CWD):
+    for fname in os.listdir(cwd):
         if not fname.endswith('.csv'):
             continue
 
-        file_path = os.path.join(CWD, fname)            
+        file_path = os.path.join(cwd, fname)            
         with open(file_path, 'rb') as f:
             logging.debug('Parsing: ' + f.name)
 
@@ -130,7 +131,7 @@ def build_zones():
         }
     ]
     """
-    file_path = os.path.join(CWD, 'zones.json')
+    file_path = os.path.join(cwd, 'zones.json')
     with open(file_path, 'r') as f:
         data = json.loads(f.read())
 
@@ -263,45 +264,33 @@ def merge_survey_data(zones, facilities_by_lga, surveyed_facilities):
     return zones
 
 
-def fetch_zones_data():
-    cache_path = os.path.join(CWD, 'cache.json')
-    try:
-        epoch = os.path.getmtime(cache_path)
-        last_updated = datetime.datetime.fromtimestamp(epoch)
-        age = (datetime.datetime.now() - last_updated).seconds
-    except OSError:
-        # cache file does not exist
-        age = 0
-
-    if not age or age > (12 * 60 * 60):
-        # Update cache every 12 hours
-        try:
-            surveyed_facilities = get_surveyed_facilities()
-            facilities_by_lga = parse_facilities_csv()
-            zones = build_zones()
-            zones = merge_survey_data(zones, facilities_by_lga, surveyed_facilities)
-
-            with open(cache_path, 'w') as f:
-                f.write(json.dumps(zones))
-        except:
-            # Formhub down
-            e = sys.exc_info()[0]
-            logging.error(e)
-
+def fetch_zones():
+    last_updated = os.path.getmtime(cache_path)
+    last_updated = datetime.datetime.fromtimestamp(last_updated)
+    age = (datetime.datetime.now() - last_updated).seconds
     with open(cache_path, 'r') as f:
         zones = json.loads(f.read())
     return zones, int(age / 60)
 
 
+def update_cache():
+    surveyed_facilities = get_surveyed_facilities()
+    facilities_by_lga = parse_facilities_csv()
+    zones = build_zones()
+    zones = merge_survey_data(zones, facilities_by_lga, surveyed_facilities)
+    with open(cache_path, 'w') as f:
+        f.write(json.dumps(zones))
+
+
 @app.route('/')
 def index():
-    zones, age = fetch_zones_data()
+    zones, age = fetch_zones()
     return flask.render_template('index.html', zones=zones, age=age, len=len)
 
 
 @app.route('/<unique_lga>')
 def lga(unique_lga):
-    zones, age = fetch_zones_data()
+    zones, age = fetch_zones()
     lgas = {}
     for zone in zones:
         for state in zone['states']:
@@ -314,7 +303,16 @@ def lga(unique_lga):
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0')
+    try:
+        if 'update' in sys.argv:
+            update_cache()
+        else:
+            app.run('0.0.0.0')
+    except:
+        # log uncaught exceptions
+        e = sys.exc_info()[0]
+        logging.error(e)
+
 
 
 
