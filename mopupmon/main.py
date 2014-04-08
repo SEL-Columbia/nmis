@@ -3,7 +3,9 @@ import datetime
 import urllib2
 import base64
 import json
+import logging
 import os
+import sys
 
 import flask
 
@@ -11,10 +13,7 @@ import secrets
 
 
 CWD = os.path.dirname(os.path.abspath(__file__))
-CACHE = {
-    'last_updated': datetime.datetime.now(),
-    'html': None
-}
+logging.basicConfig(filename='/tmp/mopupmon.log', level=logging.DEBUG)
 
 app = flask.Flask(__name__)
 app.debug = True
@@ -33,14 +32,15 @@ def get_surveyed_facilities():
     }
     """
     urls = [
+        'https://formhub.org/ossap/forms/health_mopup/api',
+        'https://formhub.org/ossap/forms/education_mopup/api',
         'https://formhub.org/ossap/forms/mopup_questionnaire_health_final/api',
-        'https://formhub.org/ossap/forms/mopup_questionnaire_education_final/api',
-        #'https://formhub.org/ossap/forms/mopup_questionnaire_education_v2/api',
-        #'https://formhub.org/ossap/forms/mopup_questionnaire_health_v2/api'
+        'https://formhub.org/ossap/forms/mopup_questionnaire_education_final/api'
     ]
     facilities = []
 
     for url in urls:
+        logging.debug('fetching:', url)
         request = urllib2.Request(url)
         base64string = base64.encodestring('%s:%s' % (secrets.username, secrets.password)).replace('\n', '')
         request.add_header('Authorization', 'Basic %s' % base64string)   
@@ -234,7 +234,7 @@ def merge_survey_data(zones, facilities_by_lga, surveyed_facilities):
                 lga['unknown_facilities'] = []                
                 for fac in surveyed:
                     fac_in_list = [f for f in lga_facilities if f['id'] == fac['id']]
-                    if fac['new_old'] == 'yes':
+                    if fac.get('new_old', None) == 'yes':
                         lga['new_facilities'].append(fac)
                     elif not fac_in_list:
                         lga['unknown_facilities'].append(fac)
@@ -263,16 +263,33 @@ def merge_survey_data(zones, facilities_by_lga, surveyed_facilities):
 
 
 def fetch_zones_data():
-    seconds_since_update = (datetime.datetime.now() - CACHE['last_updated']).seconds
-    # Update cache every 12 hours
-    if seconds_since_update > (12 * 60 * 60) or not CACHE.get('zones'):
-        surveyed_facilities = get_surveyed_facilities()
-        facilities_by_lga = parse_facilities_csv()
-        zones = build_zones()
-        zones = merge_survey_data(zones, facilities_by_lga, surveyed_facilities)
-        CACHE['zones'] = zones
-        CACHE['last_updated'] = datetime.datetime.now()
-    return CACHE['zones']
+    cache_path = os.path.join(CWD, 'cache.json')
+    try:
+        epoch = os.path.getmtime(cache_path)
+        last_updated = datetime.datetime.fromtimestamp(epoch)
+        age_seconds = (datetime.datetime.now() - last_updated).seconds
+    except OSError:
+        # cache file does not exist
+        age_seconds = None
+
+    if not age_seconds or age_seconds > (12 * 60 * 60):
+        # Update cache every 12 hours
+        try:
+            surveyed_facilities = get_surveyed_facilities()
+            facilities_by_lga = parse_facilities_csv()
+            zones = build_zones()
+            zones = merge_survey_data(zones, facilities_by_lga, surveyed_facilities)
+
+            with open(cache_path, 'w') as f:
+                f.write(json.dumps(zones))
+        except:
+            # Formhub down
+            e = sys.exc_info()[0]
+            logging.error(e)
+
+    with open(cache_path, 'r') as f:
+        zones = json.loads(f.read())
+    return zones
 
 
 @app.route('/')
