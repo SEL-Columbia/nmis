@@ -40,7 +40,7 @@ def get_surveyed_facilities():
     facilities = []
 
     for url in urls:
-        logging.debug('fetching:', url)
+        logging.debug('fetching: ' + url)
         request = urllib2.Request(url)
         base64string = base64.encodestring('%s:%s' % (secrets.username, secrets.password)).replace('\n', '')
         request.add_header('Authorization', 'Basic %s' % base64string)   
@@ -234,7 +234,8 @@ def merge_survey_data(zones, facilities_by_lga, surveyed_facilities):
                 lga['unknown_facilities'] = []                
                 for fac in surveyed:
                     fac_in_list = [f for f in lga_facilities if f['id'] == fac['id']]
-                    if fac.get('new_old', None) == 'yes':
+                    if fac.get('new_old', None) == 'yes' or \
+                        fac.get('facility_list_yn', None) == 'no':
                         lga['new_facilities'].append(fac)
                     elif not fac_in_list:
                         lga['unknown_facilities'].append(fac)
@@ -267,13 +268,12 @@ def fetch_zones_data():
     try:
         epoch = os.path.getmtime(cache_path)
         last_updated = datetime.datetime.fromtimestamp(epoch)
-        # age in minutes
-        age = int((datetime.datetime.now() - last_updated).seconds / 60)
+        age = (datetime.datetime.now() - last_updated).seconds
     except OSError:
         # cache file does not exist
         age = 0
 
-    if not age or age > (12 * 60):
+    if not age or age > (12 * 60 * 60):
         # Update cache every 12 hours
         try:
             surveyed_facilities = get_surveyed_facilities()
@@ -290,7 +290,7 @@ def fetch_zones_data():
 
     with open(cache_path, 'r') as f:
         zones = json.loads(f.read())
-    return zones, age
+    return zones, int(age / 60)
 
 
 @app.route('/')
