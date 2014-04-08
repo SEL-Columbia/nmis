@@ -446,7 +446,7 @@ MapView.map_legend = function(lga, sector, indicator){
     _.each(lga.facilities, function(facility){
         if (facility.sector === sector){
             var value = facility[indicator];
-            if (value) trues++;
+            if (value === true) trues++;
             else if (value === false) falses++;
             else unknowns++;
         }
