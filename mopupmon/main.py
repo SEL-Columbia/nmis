@@ -250,6 +250,8 @@ def merge_survey_data(zones, facilities_by_lga, surveyed_facilities):
                 state_surveyed += len(lga['surveyed'])
                 state_unsurveyed += len(lga['unsurveyed'])
 
+            state['n_surveyed'] = state_surveyed
+            state['n_unsurveyed'] = state_unsurveyed
             try:
                 state['percent_complete'] = int(state_surveyed / float(state_surveyed + state_unsurveyed) * 100)
             except:

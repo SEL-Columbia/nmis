@@ -24,6 +24,12 @@
                         <th class="align_right twenty">Unsurveyed</th>
                         <th class="align_right twenty">Progress</th>
                     </tr>
+                    <tr>
+                        <td class="lga_name">Totals</td>
+                        <td class="align_right twenty">{{ state['n_surveyed'] }}</td>
+                        <td class="align_right twenty">{{ state['n_unsurveyed'] }}</td>
+                        <td class="align_right twenty">{{ state['percent_complete'] }}%</td>
+                    </tr>
                     {% for lga in state["lgas"] %}
                         <tr class="clickable">
                             <td class="lga_name">
