@@ -267,12 +267,13 @@ def fetch_zones_data():
     try:
         epoch = os.path.getmtime(cache_path)
         last_updated = datetime.datetime.fromtimestamp(epoch)
-        age_seconds = (datetime.datetime.now() - last_updated).seconds
+        # age in minutes
+        age = int((datetime.datetime.now() - last_updated).seconds / 60)
     except OSError:
         # cache file does not exist
-        age_seconds = None
+        age = 0
 
-    if not age_seconds or age_seconds > (12 * 60 * 60):
+    if not age or age > (12 * 60):
         # Update cache every 12 hours
         try:
             surveyed_facilities = get_surveyed_facilities()
@@ -289,17 +290,18 @@ def fetch_zones_data():
 
     with open(cache_path, 'r') as f:
         zones = json.loads(f.read())
-    return zones
+    return zones, age
 
 
 @app.route('/')
 def index():
-    return flask.render_template('index.html', zones=fetch_zones_data(), len=len)
+    zones, age = fetch_zones_data()
+    return flask.render_template('index.html', zones=zones, age=age, len=len)
 
 
 @app.route('/<unique_lga>')
 def lga(unique_lga):
-    zones = fetch_zones_data()
+    zones, age = fetch_zones_data()
     lgas = {}
     for zone in zones:
         for state in zone['states']:
@@ -307,7 +309,7 @@ def lga(unique_lga):
                 lgas[lga['id']] = lga
     if unique_lga not in lgas:
         flask.abort(404)
-    return flask.render_template('lga.html', lga=lgas[unique_lga], len=len)
+    return flask.render_template('lga.html', lga=lgas[unique_lga], age=age, len=len)
 
 
 

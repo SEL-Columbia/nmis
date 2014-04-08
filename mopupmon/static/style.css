@@ -20,6 +20,12 @@ a:hover {
     margin: auto;
 }
 
+.age {
+    font-size: 14px;
+    text-align: center;
+    padding: 10px 0;
+}
+
 .section_title {
     color: white;
     font-size: 20px;
