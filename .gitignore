@@ -10,3 +10,5 @@ protected_data/
 mopupmon/secrets.py
 
 mopupmon/cache.json
+
+build
