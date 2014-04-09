@@ -35,17 +35,17 @@ def index():
     return flask.render_template('index.html')
 
 
-@app.route('/download')
+@app.route('/download.html')
 def download():
     return flask.render_template('download.html')
 
 
-@app.route('/about')
+@app.route('/about.html')
 def about():
     return flask.render_template('about.html')
 
 
-@app.route('/explore')
+@app.route('/explore.html')
 def explore():
     # Sort zones for navigation
     zones = json.loads(load_file('zones.json'))
@@ -78,11 +78,11 @@ def explore():
         gap_sheet_view=load_file('gap_sheet_view.json'))
 
 
-@app.route('/mdgs')
+@app.route('/mdgs.html')
 def mdgs():
     return flask.render_template('mdgs.html', load_file=load_file)
 
-@app.route('/planning')
+@app.route('/planning.html')
 def planning():
     return flask.render_template('planning.html')
 

@@ -24,9 +24,9 @@
             </div>
         </div>
         <div>
-            <a class="btn btn-warning explore" href="/explore">Explore Facilities</a>
+            <a class="btn btn-warning explore" href="{{url_for('explore')}}">Explore Facilities</a>
             {% if False %}
-                <a class="btn btn-default download" href="/download">Download Data</a>
+            <a class="btn btn-default download" href="{{url_for('download')}}">Download Data</a>
             {% endif %}
         </div>
         <div class="caption">
