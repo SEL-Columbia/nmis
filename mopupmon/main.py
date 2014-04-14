@@ -309,9 +309,9 @@ if __name__ == '__main__':
             update_cache()
         elif 'debug' in sys.argv:
             app.debug = True
-            app.run('0.0.0.0')
+            app.run('0.0.0.0', port=5000)
         else:
-            app.run('0.0.0.0')
+            app.run('0.0.0.0', port=5000)
     except:
         # log uncaught exceptions
         e = sys.exc_info()[0]
