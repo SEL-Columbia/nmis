@@ -17,7 +17,6 @@ cache_path = os.path.join(cwd, 'cache.json')
 logging.basicConfig(filename='/tmp/mopupmon.log', level=logging.DEBUG)
 
 app = flask.Flask(__name__)
-app.debug = True
 
 
 def get_surveyed_facilities():
@@ -308,8 +307,11 @@ if __name__ == '__main__':
     try:
         if 'update' in sys.argv:
             update_cache()
-        else:
+        elif 'debug' in sys.argv:
+            app.debug = True
             app.run('0.0.0.0')
+        else:
+            app.run()
     except:
         # log uncaught exceptions
         e = sys.exc_info()[0]
