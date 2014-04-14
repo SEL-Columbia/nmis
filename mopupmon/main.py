@@ -14,7 +14,7 @@ import secrets
 
 cwd = os.path.dirname(os.path.abspath(__file__))
 cache_path = os.path.join(cwd, 'cache.json')
-logging.basicConfig(filename='/tmp/mopupmon.log', level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG)
 
 app = flask.Flask(__name__)
 
@@ -304,18 +304,13 @@ def lga(unique_lga):
 
 
 if __name__ == '__main__':
-    try:
-        if 'update' in sys.argv:
-            update_cache()
-        elif 'debug' in sys.argv:
-            app.debug = True
-            app.run('0.0.0.0', port=5000)
-        else:
-            app.run('0.0.0.0', port=5000)
-    except:
-        # log uncaught exceptions
-        e = sys.exc_info()[0]
-        logging.error(e)
+    if 'update' in sys.argv:
+        update_cache()
+    elif 'debug' in sys.argv:
+        app.debug = True
+        app.run()
+    else:
+        app.run('0.0.0.0')
 
 
 
