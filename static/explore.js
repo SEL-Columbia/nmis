@@ -453,7 +453,7 @@ MapView.map_legend = function(lga, sector, indicator){
     });
 
     var total = trues + falses + unknowns;
-    var percent_complete = trues ? (trues / total * 100).toFixed(0): 0;
+    var percent_complete = trues ? (trues / (trues + falses) * 100).toFixed(0): 0;
     var pie_data = [{
             value: trues / total * 100,
             color: '#071efb'
