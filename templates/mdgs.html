@@ -54,7 +54,7 @@
             });
             
             function createLayer(indicator, minZoom, maxZoom) {
-                var mapboxName = 'modilabs.' + indicator;
+                var mapboxName = 'ossap-mdgs.' + NMIS.indicators[indicator].mapid;
                 var tileLayer = new L.mapbox.tileLayer(mapboxName, {
                     minZoom: minZoom,
                     maxZoom: maxZoom,
