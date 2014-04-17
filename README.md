@@ -10,7 +10,7 @@ NMIS Project v1.0
 
 2. Follow the instructions here to install the data:
 
-    https://github.com/modilabs/nmis_ui_data_2ef92c15
+    https://github.com/SEL-Columbia/nmis_ui_data_2ef92c15
 
 3. Cd to the "nmis" folder and run the local server
 
