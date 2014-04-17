@@ -29,16 +29,10 @@
                 // Initialize Map
                 var map_div = $('#mdg_map')[0];
                 var mapZoom = 6;
-                var sw = new L.LatLng(4.039617826768437, 1.47216796875);
-                var ne = new L.LatLng(14.221788628397572, 14.897460937499998);
-                var country_bounds = new L.LatLngBounds(sw, ne);
-                var map = new L.Map(map_div,{
-                        maxBounds: country_bounds
-                    }).fitBounds(country_bounds,{maxZoom:11});
+                var map = new L.Map(map_div);
                 var baseLayer = createLayer('nigeria_base', 6, 9);
                 baseLayer.addTo(map);
-
-
+                
                 // Initialize Select box
                 var template = $('#mdgs_view_template').html();
                 var html = _.template(template, {
