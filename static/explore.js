@@ -132,6 +132,14 @@ function indicator_description(slug){
     return indicator ? indicator.description : slug;
 }
 
+function mapbox_layer(slug) {
+    var mapid = NMIS.indicators[slug].mapid;
+    var url = 'http://{s}.tiles.mapbox.com/v3/ossap-mdgs.' + mapid +
+              '/{z}/{x}/{y}.png';
+    return url;
+}
+
+
 
 
 // Views
@@ -197,8 +205,7 @@ LGAView.overview_map = function(lga){
     var map_zoom = 9;
     var summary_map = L.map(map_div, {scrollWheelZoom: false})
             .setView(lat_lng, map_zoom);
-    var tile_server = 'http://{s}.tiles.mapbox.com/v3/' +
-        'modilabs.nigeria_base/{z}/{x}/{y}.png';
+    var tile_server = mapbox_layer('nigeria_base');
 
     L.tileLayer(tile_server, {
         minZoom: 6,
@@ -255,12 +262,12 @@ MapView.facility_map = function(lga, sector, indicator) {
         map = new L.Map(map_div, {scrollWheelZoom: false})
             .setView(lat_lng, 11);
         var lga_layer = new L.TileLayer(
-            'http://{s}.tiles.mapbox.com/v3/modilabs.nigeria_overlays_white/{z}/{x}/{y}.png', {
+            mapbox_layer('nigeria_overlays_white'), {
                 minZoom: 6,
                 maxZoom: 14
             });
         var locality_layer = new L.TileLayer(
-            'http://{s}.tiles.mapbox.com/v3/modilabs.Nigeria_Localities/{z}/{x}/{y}.png', {
+            mapbox_layer('Nigeria_Localities'), {
                 minZoom: 13,
                 maxZoom: 18
             });

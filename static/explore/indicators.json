@@ -1898,5 +1898,41 @@
     "owner_manager": {
         "name": "Owner/Manager",
         "description": ""
+    },
+    "nigeria_basemap_new": {
+        "name": "nigeria_basemap_new",
+        "mapid": "x6v9rudi"
+    },
+    "nigeria_lgas_towns": {
+        "name": "nigeria_lgas_towns",
+        "mapid": "erp8ehfr"
+    },
+    "nigeria_new": {
+        "name": "nigeria_new",
+        "mapid": "uphf47vi"
+    },
+    "nigeria_overlays_white": {
+        "name": "nigeria_overlays_white",
+        "mapid": "kelgzaor"
+    },
+    "nigeria_overlay_white_new": {
+        "name": "nigeria_overlay_white_new",
+        "mapid": "lguba9k9"
+    },
+    "Nigeria_Localities": {
+        "name": "Nigeria_Localities",
+        "mapid": "g9s2t85v"
+    },
+    "nigeria_pop_density": {
+        "name": "nigeria_pop_density",
+        "mapid": "zhddkj4i"
+    },
+    "NMIS_gross_enrollment_ratio_primary_education": {
+        "name": "NMIS_gross_enrollment_ratio_primary_education",
+        "mapid": "mktsxlxr"
+    },
+    "NMIS_gross_enrollment_ratio_secondary_education": {
+        "name": "NMIS_gross_enrollment_ratio_secondary_education",
+        "mapid": "xqi79zfr"
     }
 }
