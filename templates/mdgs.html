@@ -29,16 +29,17 @@
                 // Initialize Map
                 var map_div = $('#mdg_map')[0];
                 var mapZoom = 6;
-                var map = new L.Map(map_div);
+                var map = new L.Map(map_div).setView([9.2, 8], 6);
                 var baseLayer = createLayer('nigeria_base', 6, 9);
                 baseLayer.addTo(map);
-                
+
                 // Initialize Select box
                 var template = $('#mdgs_view_template').html();
                 var html = _.template(template, {
                     mdg_goals: NMIS.mdgs_view,
                     indicator_name: indicator_name
                 });
+                
                 $('#mdg_selector').html(html)
                     .change(function(){
                         var label = $(this)
