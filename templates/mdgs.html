@@ -11,6 +11,9 @@
             NMIS.indicators = {{ load_file('indicators.json')|safe }};
             NMIS.mdgs_view = {{ load_file('mdgs_view.json')|safe }};
 
+            var currentLayer = {};
+            var cachedLayers = {};
+
             function indicator_name(slug){
                 var indicator = NMIS.indicators[slug];
                 return indicator ? indicator.name : slug;
@@ -26,35 +29,24 @@
                 // Initialize Map
                 var map_div = $('#mdg_map')[0];
                 var mapZoom = 6;
-                //var lat_lng = new L.LatLng(9.16718, 7.53662);
-                var sw = new L.LatLng(4.039617826768437, 1.47216796875);
-                var ne = new L.LatLng(14.221788628397572, 14.897460937499998);
-                var country_bounds = new L.LatLngBounds(sw, ne);
-                var map = new L.Map(map_div,{
-                        maxBounds: country_bounds
-                    }).fitBounds(country_bounds,{maxZoom:11});
+                var map = new L.Map(map_div).setView([9.2, 8], 6);
                 var baseLayer = createLayer('nigeria_base', 6, 9);
                 baseLayer.addTo(map);
-                map_div._map = map;
-                map_div._mapLayers = {};
-                map_div._currentLayer = {};
-
 
                 // Initialize Select box
                 var template = $('#mdgs_view_template').html();
-                                console.log(template)
-
                 var html = _.template(template, {
                     mdg_goals: NMIS.mdgs_view,
                     indicator_name: indicator_name
                 });
+                
                 $('#mdg_selector').html(html)
                     .change(function(){
                         var label = $(this)
                             .find(':selected')
                             .parent()
                             .attr('label');
-                        addLayer(map_div, this.value);
+                        addLayer(map, this.value);
                         $('.mdg_title').text(label);
                         $('.mdg_description').text(
                             indicator_description(this.value));
@@ -70,18 +62,14 @@
                 return tileLayer;
             }
 
-            function addLayer(map_div, value) {
-                var map = map_div._map;
-                var currentLayer = map_div._currentLayer;
-                var mapLayers = map_div._mapLayers
-
-                if (map_div._currentLayer.layer){
-                    // Remove current layer
-                    currentLayer.legend.removeFrom(map);
+            function addLayer(map, value){
+                if (currentLayer.layer){
+                    // Remove current layer & legend
                     map.removeLayer(currentLayer.layer);
+                    currentLayer.legend.removeFrom(map);
                 }
 
-                if (!map_div._mapLayers[value]) {
+                if (!cachedLayers[value]){
                     // Create layer
                     var legend = L.mapbox.legendControl();
                     var mdgsLayer = createLayer(value, 6, 9);
@@ -89,13 +77,13 @@
                         var tileJSON = mdgsLayer.getTileJSON();
                         legend.addLegend(tileJSON.legend);
                     });
-                    mapLayers[value] = {layer: mdgsLayer, legend: legend};
+                    cachedLayers[value] = {layer: mdgsLayer, legend: legend};
                 }
 
                 // Add layer to map
-                map_div._currentLayer = mapLayers[value];
-                map.addLayer(mapLayers[value].layer);
-                mapLayers[value].legend.addTo(map);
+                currentLayer = cachedLayers[value];
+                map.addLayer(currentLayer.layer);
+                currentLayer.legend.addTo(map);
             }
         })();
     </script>
