@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+    <div class="section_title">
+        <a href="/" class="back">←</a>
+        {{ lga['name'] }}
+        <div class="percent_complete">
+            {{ lga['percent_complete'] }}%
+        </div>
+    </div>
+    {% module Template('_facility_section.html', title='Surveyed Facilities', facilities=lga['surveyed']) %}
+    {% module Template('_facility_section.html', title='Unsurveyed Facilities', facilities=lga['unsurveyed']) %}
+    {% module Template('_facility_section.html', title='Newly collected facilities', facilities=lga['new_facilities']) %}
+    {% module Template('_facility_section.html', title='Facilities with incorrect ID', facilities=lga['unknown_facilities']) %}
+{% end %}
+
