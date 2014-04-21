@@ -2,12 +2,12 @@
     "health": {
         "overview": [
             "pop_2006",
-            "total_facilities",
-            "total_hospitals",
-            "total_phcentres",
-            "total_phclinics",
-            "total_phclinics.1",
-            "total_sec_tertiary"
+            "gap_sheet_total_facilities",
+            "gap_sheet_total_hospitals",
+            "gap_sheet_total_phcentres",
+            "gap_sheet_total_phclinics",
+            "gap_sheet_total_dispensary",
+            "gap_sheet_total_sec_tertiary"
         ],
         "groups": [
             {
@@ -18,12 +18,14 @@
                     {
                         "title": "Delivery and Neonatal Care",
                         "indicators": [
-                            "improved_water_supply",
-                            "any_power_available",
-                            "emerg_tran",
-                            "sba",
-                            "delivery_services_yn",
-                            "c_section_yn"
+                            "gap_sheet_i_water_supply_percent",
+                            "gap_sheet_i_sanitation_percent",
+                            "gap_sheet_phcn_electricity_percent",
+                            "gap_sheet_any_power_available_percent",
+                            "gap_sheet_emerg_tran_percent",
+                            "gap_sheet_sba_percent",
+                            "gap_sheet_delivery_services_yn_percent",
+                            "gap_sheet_c_section_yn_percent"
                         ]
                     }
                 ]
@@ -36,19 +38,19 @@
                     {
                         "title": "Antenatal Care / Family Planning",
                         "indicators": [
-                            "antenatal_care",
-                            "family_planning_yn"
+                            "gap_sheet_antenatal_care_yn_percent",
+                            "gap_sheet_family_planning_yn_percent"
                         ]
                     },
                     {
                         "title": "Child Health / Malaria / General Primary Care",
                         "indicators": [
-                            "child_health_measles_immun",
-                            "vaccines_fridge_freezer",
-                            "medication_anti_malarials",
-                            "phcentre",
-                            "phclinic",
-                            "dispensary"
+                            "gap_sheet_child_health_measles_immun_percent",
+                            "gap_sheet_vaccines_fridge_freezer_percent",
+                            "gap_sheet_medication_anti_malarials_percent",
+                            "gap_sheet_phcentre_percent",
+                            "gap_sheet_phclinic_percent",
+                            "gap_sheet_dispensary_percent"
                         ]
                     }
                 ]
@@ -57,10 +59,10 @@
     },
     "education": {
         "overview": [
-            "num_existing_schools",
-            "num_existing_classrooms",
-            "total_teachers",
-            "primary_js"
+            "pop_2006",
+            "gap_sheet_primary_js",
+            "gap_sheet_num_existing_classrooms",
+            "gap_sheet_total_teachers"
         ],
         "groups": [
             {
@@ -71,9 +73,10 @@
                     {
                         "title": "Infrastructure",
                         "indicators": [
-                            "improved_functional_water",
-                            "improved_sanitation",
-                            "phcn_electricity"
+                            "gap_sheet_improved_functional_water_percent",
+                            "gap_sheet_improved_sanitation_percent",
+                            "gap_sheet_phcn_electricity_percent",
+                            "gap_sheet_num_classrms_repairs_percent"
                         ]
                     }
                 ]
@@ -86,13 +89,13 @@
                     {
                         "title": "Furniture",
                         "indicators": [
-                            "num_classrm_w_chalkboard"
+                            "gap_sheet_num_classrm_w_chalkboard_percent"
                         ]
                     },
                     {
                         "title": "Teaching Staff",
                         "indicators": [
-                            "num_tchrs_with_nce"
+                            "gap_sheet_num_tchrs_with_nce_percent"
                         ]
                     }
                 ]
