@@ -18,14 +18,14 @@
                     {
                         "title": "Delivery and Neonatal Care",
                         "indicators": [
-                            "gap_sheet_i_water_supply_percent",
-                            "gap_sheet_i_sanitation_percent",
-                            "gap_sheet_phcn_electricity_percent",
-                            "gap_sheet_any_power_available_percent",
-                            "gap_sheet_emerg_tran_percent",
-                            "gap_sheet_sba_percent",
-                            "gap_sheet_delivery_services_yn_percent",
-                            "gap_sheet_c_section_yn_percent"
+                            "gap_sheet_i_water_supply",
+                            "gap_sheet_i_sanitation",
+                            "gap_sheet_phcn_electricity",
+                            "gap_sheet_any_power_available",
+                            "gap_sheet_emerg_tran",
+                            "gap_sheet_sba",
+                            "gap_sheet_delivery_services_yn",
+                            "gap_sheet_c_section_yn"
                         ]
                     }
                 ]
@@ -38,19 +38,19 @@
                     {
                         "title": "Antenatal Care / Family Planning",
                         "indicators": [
-                            "gap_sheet_antenatal_care_yn_percent",
-                            "gap_sheet_family_planning_yn_percent"
+                            "gap_sheet_antenatal_care_yn",
+                            "gap_sheet_family_planning_yn"
                         ]
                     },
                     {
                         "title": "Child Health / Malaria / General Primary Care",
                         "indicators": [
-                            "gap_sheet_child_health_measles_immun_percent",
-                            "gap_sheet_vaccines_fridge_freezer_percent",
-                            "gap_sheet_medication_anti_malarials_percent",
-                            "gap_sheet_phcentre_percent",
-                            "gap_sheet_phclinic_percent",
-                            "gap_sheet_dispensary_percent"
+                            "gap_sheet_child_health_measles_immun",
+                            "gap_sheet_vaccines_fridge_freezer",
+                            "gap_sheet_medication_anti_malarials",
+                            "gap_sheet_phcentre",
+                            "gap_sheet_phclinic",
+                            "gap_sheet_dispensary"
                         ]
                     }
                 ]
@@ -73,10 +73,10 @@
                     {
                         "title": "Infrastructure",
                         "indicators": [
-                            "gap_sheet_improved_functional_water_percent",
-                            "gap_sheet_improved_sanitation_percent",
-                            "gap_sheet_phcn_electricity_percent",
-                            "gap_sheet_num_classrms_repairs_percent"
+                            "gap_sheet_improved_functional_water",
+                            "gap_sheet_improved_sanitation",
+                            "gap_sheet_phcn_electricity",
+                            "gap_sheet_num_classrms_repairs"
                         ]
                     }
                 ]
@@ -89,13 +89,13 @@
                     {
                         "title": "Furniture",
                         "indicators": [
-                            "gap_sheet_num_classrm_w_chalkboard_percent"
+                            "gap_sheet_num_classrm_w_chalkboard"
                         ]
                     },
                     {
                         "title": "Teaching Staff",
                         "indicators": [
-                            "gap_sheet_num_tchrs_with_nce_percent"
+                            "gap_sheet_num_tchrs_with_nce"
                         ]
                     }
                 ]
