@@ -4,6 +4,7 @@ $(function(){
     new Backbone.Router({
         routes: {
             '': IndexView,
+            'walkthrough': WalkthroughView, 
             'walkthrough_end': IndexView,
             'gap_sheets': GapSheetIndexView,
             ':unique_lga/lga_overview': view(LGAView, 'overview'),
@@ -158,6 +159,12 @@ function IndexView(){
         return false;
     });
     Walkthrough.show();
+};
+
+
+function WalkthroughView(){
+    $.removeCookie('hide_walkthrough');
+    window.location.hash = '';
 };
 
 
