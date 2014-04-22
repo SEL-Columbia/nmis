@@ -20,7 +20,7 @@
                         "indicators": [
                             "gap_sheet_i_water_supply",
                             "gap_sheet_i_sanitation",
-                            "gap_sheet_phcn_electricity",
+                            "gap_sheet_phcn_electricity_h",
                             "gap_sheet_any_power_available",
                             "gap_sheet_emerg_tran",
                             "gap_sheet_sba",
@@ -75,7 +75,7 @@
                         "indicators": [
                             "gap_sheet_improved_functional_water",
                             "gap_sheet_improved_sanitation",
-                            "gap_sheet_phcn_electricity",
+                            "gap_sheet_phcn_electricity_e",
                             "gap_sheet_num_classrms_repairs"
                         ]
                     }
