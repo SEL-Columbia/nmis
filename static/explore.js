@@ -110,8 +110,8 @@ function render(template_id, context){
 
 function format_value(value){
     // Formats indicator values for use in tables
-    if (typeof value === 'undefined' ||
-        value === null) return 'NA';
+    if (typeof value === 'undefined' || value === null || value === 'NaN' || value === 'NA')
+        return 'N/A';
     if (value === true) return 'Yes';
     if (value === false) return 'No';
     if (_.isNumber(value) && value % 1 !== 0)
