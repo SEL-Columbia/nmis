@@ -557,7 +557,7 @@
         "description": ""
     },
     "gap_sheet_total_dispensary": {
-        "name": "Number of Dispensaries",
+        "name": "Number of Health Posts and Dispensaries",
         "description": ""
     },
     "gap_sheet_total_sec_tertiary": {
