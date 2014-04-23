@@ -564,71 +564,71 @@
         "name": "Total Number of Secondary and Tertiary Facilities (Health Posts + Mobile Clinics)",
         "description": ""
     },
-    "gap_sheet_i_water_supply_percent": {
+    "gap_sheet_i_water_supply": {
         "name": "Improved and Functional Water Point",
-        "description": ""
+        "description": "At least 1 improved water point per Hospital, PHC or PH Clinic functioning at all times"
     },
-    "gap_sheet_i_sanitation_percent": {
+    "gap_sheet_i_sanitation": {
         "name": "Improved Toilet",
-        "description": ""
+        "description": "At least 1 improved toilet per Primary Health Care Facility"
     },
-    "gap_sheet_phcn_electricity_h_percent": {
+    "gap_sheet_phcn_electricity_h": {
         "name": "Grid Power available (PHCN/NEPA)",
-        "description": ""
+        "description": "All Hospitals, PHCs and PH Clinics should have a grid connection"
     },
-    "gap_sheet_phcn_electricity_e_percent": {
+    "gap_sheet_phcn_electricity_e": {
         "name": "Grid Power available (PHCN/NEPA)",
-        "description": ""
+        "description": "All schools should be connected to the national grid"
     },
-    "gap_sheet_any_power_available_percent": {
+    "gap_sheet_any_power_available": {
         "name": "Any Power Available (grid or alternative power supply)",
-        "description": ""
+        "description": "All Hospitals, PHCs and PH Clinics should have a grid connection, but if not, at least a non-grid solution"
     },
-    "gap_sheet_emerg_tran_percent": {
+    "gap_sheet_emerg_tran": {
         "name": "Emergency Transport available for referrals",
-        "description": ""
+        "description": "All facilities should have access to emergency transport"
     },
-    "gap_sheet_sba_percent": {
+    "gap_sheet_sba": {
         "name": "Sufficient Skilled Birth Attendants",
-        "description": ""
+        "description": "At least 2 skilled birth attendants per Hospital, PHC and PHC clinic"
     },
-    "gap_sheet_delivery_services_yn_percent": {
+    "gap_sheet_delivery_services_yn": {
         "name": "Delivery Services available",
-        "description": ""
+        "description": "For each Hospital, PHC and PH Clinic"
     },
-    "gap_sheet_c_section_yn_percent": {
+    "gap_sheet_c_section_yn": {
         "name": "C-Sections performed",
-        "description": ""
+        "description": "All hospitals"
     },
-    "gap_sheet_antenatal_care_yn_percent": {
+    "gap_sheet_antenatal_care_yn": {
         "name": "Antenatal Care Services are provided",
-        "description": ""
+        "description": "All facilities should provide antenatal care"
     },
-    "gap_sheet_family_planning_yn_percent": {
+    "gap_sheet_family_planning_yn": {
         "name": "Family Planning Methods provided",
-        "description": ""
+        "description": "All facilities should provide family planning methods"
     },
-    "gap_sheet_child_health_measles_immun_percent": {
+    "gap_sheet_child_health_measles_immun": {
         "name": "Measles Immunizations are provided",
         "description": ""
     },
-    "gap_sheet_vaccines_fridge_freezer_percent": {
+    "gap_sheet_vaccines_fridge_freezer": {
         "name": "Refrigerator or Freezer for vaccine storage",
         "description": ""
     },
-    "gap_sheet_medication_anti_malarials_percent": {
+    "gap_sheet_medication_anti_malarials": {
         "name": "Artemisinin-based combination therapy (ACT)",
         "description": ""
     },
-    "gap_sheet_phcentre_percent": {
+    "gap_sheet_phcentre": {
         "name": "Fully staffed primary health centres (PHCs)",
         "description": ""
     },
-    "gap_sheet_phclinic_percent": {
+    "gap_sheet_phclinic": {
         "name": "Fully staffed primary health clinics",
         "description": ""
     },
-    "gap_sheet_dispensary_percent": {
+    "gap_sheet_dispensary": {
         "name": "Fully staffed dispensaries",
         "description": ""
     },
@@ -646,199 +646,23 @@
     },
     "gap_sheet_improved_functional_water": {
         "name": "Schools with access to improved functional water",
-        "description": ""
+        "description": "All schools should have an improved, functional water point"
     },
-    "gap_sheet_improved_sanitation_percent": {
+    "gap_sheet_improved_sanitation": {
         "name": "Schools with access to improved sanitation",
-        "description": ""
+        "description": "All schools should have improved, gender separated toilets"
     },
-    "gap_sheet_num_classrms_repairs_percent": {
+    "gap_sheet_num_classrms_repairs": {
         "name": "Classrooms in primary & junior secondary schools needing major repairs, renovations, or reconstruction",
         "description": ""
     },
-    "gap_sheet_num_classrm_w_chalkboard_percent": {
+    "gap_sheet_num_classrm_w_chalkboard": {
         "name": "Total number of classrooms with a useable chalkboard/blackboard/whiteboard",
-        "description": ""
+        "description": "All classrooms should have a usable chalkboard"
     },
-    "gap_sheet_num_tchrs_with_nce_percent": {
+    "gap_sheet_num_tchrs_with_nce": {
         "name": "Total number of NCE qualified teachers ",
-        "description": ""
-    },
-    "gap_sheet_i_water_supply_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_i_water_supply_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_i_sanitation_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_i_sanitation_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_phcn_electricity_h_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_phcn_electricity_h_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_any_power_available_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_any_power_available_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_emerg_tran_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_emerg_tran_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_sba_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_sba_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_delivery_services_yn_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_delivery_services_yn_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_c_section_yn_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_c_section_yn_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_antenatal_care_yn_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_antenatal_care_yn_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_family_planning_yn_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_family_planning_yn_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_child_health_measles_immun_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_child_health_measles_immun_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_vaccines_fridge_freezer_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_vaccines_fridge_freezer_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_medication_anti_malarials_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_medication_anti_malarials_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_phcentre_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_phcentre_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_phclinic_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_phclinic_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_phclinic_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_phclinic_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_dispensary_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_dispensary_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_improved_sanitation_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_improved_sanitation_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_phcn_electricity_e_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_phcn_electricity_e_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_num_classrms_repairs_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_num_classrms_repairs_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_num_classrm_w_chalkboard_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_num_classrm_w_chalkboard_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_num_tchrs_with_nce_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_num_tchrs_with_nce_denominator": {
-        "name": "",
-        "description": ""
+        "description": "100% of teachers should have NCE"
     },
     "proportion_lift_type_diesel": {
         "name": "Tuberculosis treatment success rate ",
