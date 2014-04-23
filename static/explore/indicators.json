@@ -561,7 +561,7 @@
         "description": ""
     },
     "gap_sheet_total_sec_tertiary": {
-        "name": "Total Number of Secondary and Tertiary Facilities (Health Posts + Mobile Clinics)",
+        "name": "Total Number of Secondary and Tertiary Facilities",
         "description": ""
     },
     "gap_sheet_i_water_supply": {
