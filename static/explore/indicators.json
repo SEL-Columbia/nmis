@@ -610,27 +610,27 @@
     },
     "gap_sheet_child_health_measles_immun": {
         "name": "Measles Immunizations are provided",
-        "description": ""
+        "description": "All facilities should provide measles immunizations"
     },
     "gap_sheet_vaccines_fridge_freezer": {
         "name": "Refrigerator or Freezer for vaccine storage",
-        "description": ""
+        "description": "All Hospital, PHC and PH Clinic should have vaccine fridge/freezer"
     },
     "gap_sheet_medication_anti_malarials": {
         "name": "Artemisinin-based combination therapy (ACT)",
-        "description": ""
+        "description": "All facilities should provide ACT for malaria"
     },
     "gap_sheet_phcentre": {
         "name": "Fully staffed primary health centres (PHCs)",
-        "description": ""
+        "description": "100% of facilities fully staffed to minimum standards"
     },
     "gap_sheet_phclinic": {
         "name": "Fully staffed primary health clinics",
-        "description": ""
+        "description": "100% of facilities fully staffed to minimum standards"
     },
     "gap_sheet_dispensary": {
         "name": "Fully staffed dispensaries",
-        "description": ""
+        "description": "100% of facilities fully staffed to minimum standards"
     },
     "gap_sheet_num_existing_classrooms": {
         "name": "Total number of existing classrooms in Primary & Junior Secondary Schools",
@@ -654,7 +654,7 @@
     },
     "gap_sheet_num_classrms_repairs": {
         "name": "Classrooms in primary & junior secondary schools needing major repairs, renovations, or reconstruction",
-        "description": ""
+        "description": "All classrooms should be fully repaired"
     },
     "gap_sheet_num_classrm_w_chalkboard": {
         "name": "Total number of classrooms with a useable chalkboard/blackboard/whiteboard",
