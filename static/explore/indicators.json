@@ -644,7 +644,7 @@
         "name": "Total Number of existing Primary & Junior secondary schools",
         "description": ""
     },
-    "gap_sheet_improved_functional_water_percent": {
+    "gap_sheet_improved_functional_water": {
         "name": "Schools with access to improved functional water",
         "description": ""
     },
@@ -797,14 +797,6 @@
         "description": ""
     },
     "gap_sheet_dispensary_denominator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_improved_functional_water_numerator": {
-        "name": "",
-        "description": ""
-    },
-    "gap_sheet_improved_functional_water_denominator": {
         "name": "",
         "description": ""
     },
