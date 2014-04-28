@@ -34,7 +34,7 @@
                 "facility_type_display",
                 "education_type",
                 "management",
-                "num_tchrs_total",
+                "num_tchr_full_time",
                 "num_students_total",
                 "num_classrms_total",
                 "chalkboard_each_classroom_yn",
@@ -115,7 +115,7 @@
                 "teacher_nonteachingstaff_ratio", 
                 "num_tchrs_with_nce", 
                 "num_tchrs_attended_training", 
-                "num_tchrs_total"
+                "num_tchr_full_time"
             ], 
             "name": "Adequacy of Staffing"
         }, 
