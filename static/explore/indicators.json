@@ -1030,8 +1030,8 @@
         "description": "Teachers were not paid at all at least once in the last 12 months"
     },
     "students_living_3kmplus_school": {
-        "name": "More than 20% students living farther than 3km from school",
-        "description": "The school has>20% students who live more than 3kms away. This indicator measures how easily students can access a school. The assumption is that students are more likely to attend school if they do not live very far away from the school or if the school is within a reasonable distance from where the population it serves live."
+        "name": "Number of students living farther than 3km from school",
+        "description": ""
     },
     "percentage_functional_taps": {
         "name": "Percentage of taps that are functional",
@@ -1677,8 +1677,8 @@
         "name": "proportion_level_1_health_facilities(name=='')",
         "description": ""
     },
-    "num_tchrs_total": {
-        "name": "Total teachers",
+    "num_tchr_full_time": {
+        "name": "Total full time teachers",
         "description": "This is the total number of full-time teachers in each school."
     },
     "iv_antibiotics_yn_calc": {
@@ -1936,7 +1936,7 @@
         "description": "Facility offers laboratory testing of stool."
     },
     "pupil_tchr_ratio": {
-        "name": "Proportion of children who can do basic numeracy (TBD)",
+        "name": "Pupil to teacher ratio",
         "description": "This is the proportion of children at the school who demonstrate  adequate ability to perform and understand basic maths.\n"
     },
     "proportion_emoc": {
