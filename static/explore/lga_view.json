@@ -101,7 +101,7 @@
                 "percent_functional_water_js",
                 "percent_improved_sanitation_js",
                 "percent_phcn_electricity_js",
-                "pupil_toilet_ratio_secondary", 
+                "pupil_toilet_ratio_js", 
                 "proportion_schools_chalkboard_all_rooms_juniorsec"
             ]
         },
@@ -109,21 +109,21 @@
             "name": "Ratios -- primary schools",
             "indicators": [
                 "student_classroom_ratio_lga_primary",
-                "primary_school_pupil_teachers_ratio_lga"
+                "pupil_teachers_ratio_lga_primary"
             ]
         },
         {
             "name": "Ratios -- junior secondary schools",
             "indicators": [
-                "student_classroom_ratio_lga_juniorsec",
-                "junior_secondary_school_pupil_teachers_ratio_lga"
+                "student_classroom_ratio_lga_js",
+                "pupil_teachers_ratio_lga_js"
             ]
         },
         {
             "name": "Teacher Qualifications",
             "indicators": [
                 "proportion_teachers_nce_primary", 
-                "proportion_teachers_nce_juniorsec"
+                "proportion_teachers_nce_js"
             ]
         }
     ], 

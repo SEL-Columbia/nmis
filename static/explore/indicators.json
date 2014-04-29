@@ -360,7 +360,7 @@
         "name": "Percentage functional",
         "description": ""
     },
-    "primary_school_pupil_teachers_ratio_lga": {
+    "pupil_teachers_ratio_lga_primary": {
         "name": "Primary school pupil to teacher ratio",
         "description": ""
     },
@@ -396,7 +396,7 @@
         "name": "Preprimary and primary",
         "description": ""
     },
-    "proportion_teachers_nce_juniorsec": {
+    "proportion_teachers_nce_js": {
         "name": "Percentage of junior secondary teacher with NCE qualification",
         "description": ""
     },
@@ -409,7 +409,7 @@
         "description": "Percentage of children under five whose weight-for-age is below minus two standard deviations (-2 SD) from the median of the reference population (all children under five)(DHS, 2008)",
         "mapid": "7jh9imxa"
     },
-    "student_classroom_ratio_lga_juniorsec": {
+    "student_classroom_ratio_lga_js": {
         "name": "Pupil to classroom ratio (junior secondary)",
         "description": ""
     },
@@ -916,7 +916,7 @@
         "name": "Textbook to pupil ratio (junior secondary)",
         "description": ""
     },
-    "junior_secondary_school_pupil_teachers_ratio_lga": {
+    "pupil_teachers_ratio_lga_js": {
         "name": "Junior secondary school pupil to teacher ratio",
         "description": ""
     },
@@ -1057,7 +1057,7 @@
         "name": "Pupil to bench ratio",
         "description": "This is the ratio of the number of students at the school to the number of benches available at the school."
     },
-    "pupil_toilet_ratio_secondary": {
+    "pupil_toilet_ratio_js": {
         "name": "Pupil to toilet ratio (junior secondary)",
         "description": ""
     },
