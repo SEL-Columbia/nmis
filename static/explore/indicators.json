@@ -224,10 +224,6 @@
         "name": "Percentage with formal curriculum",
         "description": ""
     },
-    "percent_teachers_nce_primary": {
-        "name": "Percentage of teachers with NCE qualification",
-        "description": ""
-    },
     "percent_management_public_primary": {
         "name": "Percentage that are managed by the government",
         "description": ""

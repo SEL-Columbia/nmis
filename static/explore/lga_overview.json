@@ -24,7 +24,7 @@
                 "num_ss_schools_multiplecount",
                 "num_schools",
                 "student_teacher_ratio_lga",
-                "percent_teachers_nce_primary"
+                "proportion_teachers_nce_primary"
             ], 
             "name": "Education Facilities"
         },
