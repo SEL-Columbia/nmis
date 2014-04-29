@@ -1,0 +1,22 @@
+<div class="block_expand">
+    <div class="block_title">
+        {{ title }}
+        <div class="percent_complete">
+            {{ len(facilities) }}
+        </div>
+    </div>
+    {% if facilities %}
+        <table class="deets">
+            <tr>
+                <th class="facility_name">Name</th>
+                <th>ID</th>
+            </tr>
+            {% for fac in facilities %}
+                <tr>
+                    <td class="facility_name">{{ fac['name'] }}</td>
+                    <td>{{ fac['id'] }}</td>
+                </tr>
+            {% end %}
+        </table>
+    {% end %}
+</div>

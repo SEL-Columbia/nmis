@@ -7,16 +7,15 @@ import logging
 import os
 import sys
 
-import flask
+import tornado.ioloop
+import tornado.web
+import tornado.gen
 
 import secrets
 
 
 cwd = os.path.dirname(os.path.abspath(__file__))
 cache_path = os.path.join(cwd, 'cache.json')
-logging.basicConfig(level=logging.DEBUG)
-
-app = flask.Flask(__name__)
 
 
 def get_surveyed_facilities():
@@ -283,34 +282,44 @@ def update_cache():
         f.write(json.dumps(zones))
 
 
-@app.route('/')
-def index():
-    zones, age = fetch_zones()
-    return flask.render_template('index.html', zones=zones, age=age, len=len)
+
+class Index(tornado.web.RequestHandler):
+    def get(self):
+        zones, age = fetch_zones()
+        self.render('index.html', zones=zones, age=age)
 
 
-@app.route('/<unique_lga>')
-def lga(unique_lga):
-    zones, age = fetch_zones()
-    lgas = {}
-    for zone in zones:
-        for state in zone['states']:
-            for lga in state['lgas']:
-                lgas[lga['id']] = lga
-    if unique_lga not in lgas:
-        flask.abort(404)
-    return flask.render_template('lga.html', lga=lgas[unique_lga], age=age, len=len)
+class LGA(tornado.web.RequestHandler):
+    def get(self, unique_lga):
+        zones, age = fetch_zones()
+        lgas = {}
+        for zone in zones:
+            for state in zone['states']:
+                for lga in state['lgas']:
+                    lgas[lga['id']] = lga
+        if unique_lga not in lgas:
+            raise tornado.web.HTTPError(404)
+        self.render('lga.html', lga=lgas[unique_lga], age=age)
 
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.DEBUG)
     if 'update' in sys.argv:
         update_cache()
-    elif 'debug' in sys.argv:
-        app.debug = True
-        app.run()
     else:
-        app.run('0.0.0.0', passthrough_errors=True)
+        settings = {
+            'template_path': os.path.join(os.path.dirname(__file__), 'templates'),
+            'static_path': os.path.join(os.path.dirname(__file__), 'static'),
+            'debug': True
+        }
+        app = tornado.web.Application([
+            (r'/', Index),
+            (r'/(.+)', LGA)
+        ], **settings)
+        app.listen('5000', '0.0.0.0')
+        tornado.ioloop.IOLoop.instance().start()
+
 
 
 

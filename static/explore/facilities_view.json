@@ -32,7 +32,7 @@
                 "improved_sanitation",
                 "chalkboard_each_classroom_yn",
                 "num_tchrs_with_nce",
-                "num_tchrs_total",
+                "num_tchr_full_time",
                 "num_students_total",
                 "num_classrms_total"
             ]
@@ -57,7 +57,7 @@
                 "num_students_total",
                 "num_students_male",
                 "num_students_female",
-                "num_tchrs_total",
+                "num_tchr_full_time",
                 "num_tchrs_male",
                 "num_tchrs_female"
             ]

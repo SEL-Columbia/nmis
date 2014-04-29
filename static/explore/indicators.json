@@ -536,6 +536,130 @@
         "name": "Total number of facilities",
         "description": ""
     },
+    "gap_sheet_total_facilities": {
+        "name": "Total Number of Existing Primary Health Care Facilities",
+        "description": ""
+    },
+    "gap_sheet_total_hospitals": {
+        "name": "Number of Hospitals",
+        "description": ""
+    },
+    "gap_sheet_total_phcentres": {
+        "name": "Number of Primary Health Centres (PHCs)",
+        "description": ""
+    },
+    "gap_sheet_total_phclinics": {
+        "name": "Number of Primary Health Clinics",
+        "description": ""
+    },
+    "gap_sheet_total_dispensary": {
+        "name": "Number of Health Posts and Dispensaries",
+        "description": ""
+    },
+    "gap_sheet_total_sec_tertiary": {
+        "name": "Total Number of Secondary and Tertiary Facilities",
+        "description": ""
+    },
+    "gap_sheet_i_water_supply": {
+        "name": "Improved and Functional Water Point",
+        "description": "At least 1 improved water point per Hospital, PHC or PH Clinic functioning at all times"
+    },
+    "gap_sheet_i_sanitation": {
+        "name": "Improved Toilet",
+        "description": "At least 1 improved toilet per Primary Health Care Facility"
+    },
+    "gap_sheet_phcn_electricity_h": {
+        "name": "Grid Power available (PHCN/NEPA)",
+        "description": "All Hospitals, PHCs and PH Clinics should have a grid connection"
+    },
+    "gap_sheet_phcn_electricity_e": {
+        "name": "Grid Power available (PHCN/NEPA)",
+        "description": "All schools should be connected to the national grid"
+    },
+    "gap_sheet_any_power_available": {
+        "name": "Any Power Available (grid or alternative power supply)",
+        "description": "All Hospitals, PHCs and PH Clinics should have a grid connection, but if not, at least a non-grid solution"
+    },
+    "gap_sheet_emerg_tran": {
+        "name": "Emergency Transport available for referrals",
+        "description": "All facilities should have access to emergency transport"
+    },
+    "gap_sheet_sba": {
+        "name": "Sufficient Skilled Birth Attendants",
+        "description": "At least 2 skilled birth attendants per Hospital, PHC and PHC clinic"
+    },
+    "gap_sheet_delivery_services_yn": {
+        "name": "Delivery Services available",
+        "description": "For each Hospital, PHC and PH Clinic"
+    },
+    "gap_sheet_c_section_yn": {
+        "name": "C-Sections performed",
+        "description": "All hospitals"
+    },
+    "gap_sheet_antenatal_care_yn": {
+        "name": "Antenatal Care Services are provided",
+        "description": "All facilities should provide antenatal care"
+    },
+    "gap_sheet_family_planning_yn": {
+        "name": "Family Planning Methods provided",
+        "description": "All facilities should provide family planning methods"
+    },
+    "gap_sheet_child_health_measles_immun": {
+        "name": "Measles Immunizations are provided",
+        "description": "All facilities should provide measles immunizations"
+    },
+    "gap_sheet_vaccines_fridge_freezer": {
+        "name": "Refrigerator or Freezer for vaccine storage",
+        "description": "All Hospital, PHC and PH Clinic should have vaccine fridge/freezer"
+    },
+    "gap_sheet_medication_anti_malarials": {
+        "name": "Artemisinin-based combination therapy (ACT)",
+        "description": "All facilities should provide ACT for malaria"
+    },
+    "gap_sheet_phcentre": {
+        "name": "Fully staffed primary health centres (PHCs)",
+        "description": "100% of facilities fully staffed to minimum standards"
+    },
+    "gap_sheet_phclinic": {
+        "name": "Fully staffed primary health clinics",
+        "description": "100% of facilities fully staffed to minimum standards"
+    },
+    "gap_sheet_dispensary": {
+        "name": "Fully staffed dispensaries",
+        "description": "100% of facilities fully staffed to minimum standards"
+    },
+    "gap_sheet_num_existing_classrooms": {
+        "name": "Total number of existing classrooms in Primary & Junior Secondary Schools",
+        "description": ""
+    },
+    "gap_sheet_total_teachers": {
+        "name": "Total Number of Teachers",
+        "description": ""
+    },
+    "gap_sheet_primary_js": {
+        "name": "Total Number of existing Primary & Junior secondary schools",
+        "description": ""
+    },
+    "gap_sheet_improved_functional_water": {
+        "name": "Schools with access to improved functional water",
+        "description": "All schools should have an improved, functional water point"
+    },
+    "gap_sheet_improved_sanitation": {
+        "name": "Schools with access to improved sanitation",
+        "description": "All schools should have improved, gender separated toilets"
+    },
+    "gap_sheet_num_classrms_repairs": {
+        "name": "Classrooms in primary & junior secondary schools needing major repairs, renovations, or reconstruction",
+        "description": "All classrooms should be fully repaired"
+    },
+    "gap_sheet_num_classrm_w_chalkboard": {
+        "name": "Total number of classrooms with a useable chalkboard/blackboard/whiteboard",
+        "description": "All classrooms should have a usable chalkboard"
+    },
+    "gap_sheet_num_tchrs_with_nce": {
+        "name": "Total number of NCE qualified teachers ",
+        "description": "100% of teachers should have NCE"
+    },
     "proportion_lift_type_diesel": {
         "name": "Tuberculosis treatment success rate ",
         "description": ""
@@ -902,8 +1026,8 @@
         "description": "Teachers were not paid at all at least once in the last 12 months"
     },
     "students_living_3kmplus_school": {
-        "name": "More than 20% students living farther than 3km from school",
-        "description": "The school has>20% students who live more than 3kms away. This indicator measures how easily students can access a school. The assumption is that students are more likely to attend school if they do not live very far away from the school or if the school is within a reasonable distance from where the population it serves live."
+        "name": "Number of students living farther than 3km from school",
+        "description": ""
     },
     "percentage_functional_taps": {
         "name": "Percentage of taps that are functional",
@@ -1549,8 +1673,8 @@
         "name": "proportion_level_1_health_facilities(name=='')",
         "description": ""
     },
-    "num_tchrs_total": {
-        "name": "Total teachers",
+    "num_tchr_full_time": {
+        "name": "Total full time teachers",
         "description": "This is the total number of full-time teachers in each school."
     },
     "iv_antibiotics_yn_calc": {
@@ -1808,7 +1932,7 @@
         "description": "Facility offers laboratory testing of stool."
     },
     "pupil_tchr_ratio": {
-        "name": "Proportion of children who can do basic numeracy (TBD)",
+        "name": "Pupil to teacher ratio",
         "description": "This is the proportion of children at the school who demonstrate  adequate ability to perform and understand basic maths.\n"
     },
     "proportion_emoc": {

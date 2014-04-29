@@ -429,7 +429,11 @@
                                     <% } else { %>
                                         yellow
                                     <% } %>">
-                                    <%= percent + '%' %>
+                                    <% if (_.isNumber(percent)){ %>
+                                        <%= percent + '%' %>
+                                    <% } else { %>                                        
+                                        N/A
+                                    <% } %>
                                 </div>
                             </td>
                         </tr>
