@@ -1,3 +1,8 @@
 data/*
 authfile
+CONFIG.JSON
+
 .RData
+*.Rout
+*.Rproj
+
