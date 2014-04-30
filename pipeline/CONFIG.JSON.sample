@@ -1,5 +1,5 @@
 {
-    "NMIS_774_FACILITY_DATA": "data/old_data",
-    "NMIS_REPO": "~/moldi/nmis",
-    "AUTHFILE": "authfile"
+    NMIS_774_FACILITY_DATA: "DATA DIRECTORY FOR NMIS FACILITIES",
+    NMIS_REPO: "DATA DIRECTORY FOR THE NMIS REPO",
+    AUTHFILE: "LOCATION FOR authfile"
 }
