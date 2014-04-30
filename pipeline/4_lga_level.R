@@ -1,5 +1,5 @@
 require(dplyr); require(stringr); require(lubridate)
-source("nmis_functions_v2.R")
+source("nmis_functions.R")
 
 ## LGA-level indicators for mopup
 education_mopup_lga_indicators = function(education_data) {
