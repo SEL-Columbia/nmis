@@ -21,7 +21,7 @@ edu_mopup_all <- education_mopup_facility_level(edu_mopup_all)
 source('T0_indicator_checks.R')
 missing_indicators(edu_mopup_all, facility_indicators, 'education')
 necessary_indicators <- intersect(names(edu_mopup_all), 
-    names(readRDS(sprintf("%s/Education_774_NMIS_Facility.rds", normalizePath(PATH_NMISFACILITY_DATA)))))
+    names(readRDS(FACILITY_FILE_774$EDUCATION)))
 saveRDS(edu_mopup_all[necessary_indicators], 'data/output_data/Education_mopup_NMIS_Facility.rds')
 
 ### 4. LGA LEVEL
@@ -53,7 +53,7 @@ health_mopup_all <- health_mopup_facility_level(health_mopup_all)
 source('T0_indicator_checks.R')
 missing_indicators(health_mopup_all, facility_indicators, 'health')
 necessary_indicators <- intersect(names(health_mopup_all), 
-    names(readRDS(sprintf("%s/Health_774_NMIS_Facility.rds", normalizePath(PATH_NMISFACILITY_DATA)))))
+    names(readRDS(FACILITY_FILE_774$HEALTH)))
 saveRDS(health_mopup_all[necessary_indicators], 'data/output_data/Health_mopup_NMIS_Facility.rds')
 
 ### 4. LGA LEVEL
