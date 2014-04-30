@@ -3,7 +3,7 @@ require(formhub); require(dplyr)
 
 ### LOAD DOWNLOAD(ed) EDUCATION DATA
 # source("Download.R") # if you need to re-download data
-edu_661 <- tbl_df(readRDS(sprintf("%s/Education_774_NMIS_Facility.rds", normalizePath(PATH_NMISFACILITY_DATA))))
+edu_661 <- tbl_df(readRDS(FACILITY_FILE_774$EDUCATION))
 edu_mopup <- readRDS("data/output_data/Education_mopup_NMIS_Facility.rds")
 
 ### 1. NORMALIZE (Note: this encompasses 2. OUTLIERS and 3. FACILITY LEVEL, for 661)
@@ -22,7 +22,7 @@ rm(edu_lga)
 
 ### LOAD DOWNLOAD(ed) Health DATA
 # source("Download.R") # if you need to re-download data
-health_661 <- tbl_df(readRDS(sprintf("%s/Health_774_NMIS_Facility.rds", normalizePath(PATH_NMISFACILITY_DATA))))
+health_661 <- tbl_df(readRDS(FACILITY_FILE_774$HEALTH))
 health_mopup <- readRDS("data/output_data/Health_mopup_NMIS_Facility.rds")
 
 ### 1. NORMALIZE (Note: this encompasses 2. OUTLIERS and 3. FACILITY LEVEL, for 661)
