@@ -1,3 +1,4 @@
+require('plyr')
 PATHS = RJSONIO::fromJSON("CONFIG.JSON")
 
 sapply(PATHS, function(path) {
