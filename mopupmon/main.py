@@ -203,6 +203,7 @@ def merge_survey_data(zones, facilities_by_lga, surveyed_facilities):
         }
     }
     """
+    excluded_states = ['Yobe', 'Borno']
     for zone in zones:
         zone_surveyed = 0
         zone_unsurveyed = 0
@@ -254,8 +255,10 @@ def merge_survey_data(zones, facilities_by_lga, surveyed_facilities):
                 state['percent_complete'] = int(state_surveyed / float(state_surveyed + state_unsurveyed) * 100)
             except:
                 state['percent_complete'] = 100
-            zone_surveyed += state_surveyed
-            zone_unsurveyed += state_unsurveyed
+
+            if state['name'] not in excluded_states:
+                zone_surveyed += state_surveyed
+                zone_unsurveyed += state_unsurveyed
 
         try:
             zone['percent_complete'] = int(zone_surveyed / float(zone_surveyed + zone_unsurveyed) * 100)
