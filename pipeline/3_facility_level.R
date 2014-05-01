@@ -24,6 +24,7 @@ all_mopup_facility_level = function(facility_data) {
 ## Transformations for education facilities, mopup data, for facility level
 education_mopup_facility_level = function(education_data) {
     all_mopup_facility_level(education_data) %.% mutate(
+        sector = "education",
         ## TYPE, SRC, etc.
         is_primary = str_detect(facility_type, 'primary'),
         is_junior_secondary = str_detect(facility_type, 'junior'), 
@@ -46,6 +47,7 @@ health_mopup_facility_level = function(health_data) {
         child_health_measles_immun_calc = measles_yn,
         matches('.')
     ) %.% mutate(
+        sector = "health",
         # NEWLY CALCULATED FIELDS
         skilled_birth_attendant = ((num_nursemidwives_fulltime > 0) | (num_doctors_fulltime > 0))  
     )
