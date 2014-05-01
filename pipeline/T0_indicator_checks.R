@@ -1,5 +1,5 @@
 source('CONFIG.R')
-nmis_file <- function(fname) { sprintf('%s/%s', PATHS['NMIS_REPO'], fname)}
+nmis_file <- function(fname) { sprintf('%s/%s', '..', fname)}
 
 facility_indicators = RJSONIO::fromJSON(nmis_file("static/explore/facilities_view.json"))
 facility_indicators$health <- c(facility_indicators$health, facility_indicators$overview)
