@@ -1,6 +1,6 @@
 data/*
 authfile
-CONFIG.JSON
+CONFIG.*
 
 .RData
 *.Rout
