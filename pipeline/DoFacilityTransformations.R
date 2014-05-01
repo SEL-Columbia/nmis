@@ -29,7 +29,7 @@ saveRDS(edu_mopup_all[necessary_indicators], sprintf('%s/Education_mopup_NMIS_Fa
 # edu_lga <- education_mopup_lga_indicators(edu_mopup_all)
 # missing_indicators(edu_lga, lga_indicators, 'education')
 
-#rm(list=ls())
+rm(list=setdiff(ls(), "CONFIG"))
 
 
 ### LOAD DOWNLOAD(ed) HEALTH DATA
