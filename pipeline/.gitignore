@@ -1,6 +1,6 @@
 data/*
 authfile
-CONFIG.*
+CONFIG.R
 
 .RData
 *.Rout
