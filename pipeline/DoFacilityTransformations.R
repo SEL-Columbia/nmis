@@ -15,7 +15,7 @@ edu_mopup_all <- rbind(normalize_mopup(edu_mopup, 'mopup', 'education'),
 rm(edu_mopup, edu_mopup_new, edu_mopup_pilot)
 ### 2. TODO: OUTLIERS
 source('2_outlier_cleaning.R')
-edu_mopup_all <-education_outlier(edu_mopup_all)
+edu_mopup_all <- education_outlier(edu_mopup_all)
 
 ### 3. FACILITY LEVEL
 source('3_facility_level.R')
