@@ -1,13 +1,21 @@
 ######################################################################################################
 #Mopup Integration: Outlier Cleaning##################################################################
 ######################################################################################################
-education_outlier = function(edu_mopup_all) {
-    require('data.table')
-    ed_dt = data.table(edu_mopup_all)
-    ed_dt[num_tchrs_male == 999, num_tchrs_male := NA]
-    print(ed_dt$num_tchrs_male)
-    edu_mopup_all
-
+require(dplyr)
+education_outlier <- function(education_data) {
+    return education_data %.% mutate(
+        replace(num_tchrs_male, num_tchrs_male < num_tchrs_total, NA),
+        replace(num_tchrs_female, num_tchrs_female < num_tchrs_total, NA),
+        replace(num_tchrs_with_nce, num_tchrs_with_nce > num_tchrs_total, NA),
+        replace(num_classrms_repair, num_classrms_repair > num_classrms_total, NA),
+        replace(num_tchrs_total, num_tchrs_total > (num_tchrs_male + num_tchrs_female), NA)
+    ) %.% mutate(
+        replace(num_tchrs_male, num_tchrs_male > 100, NA),
+        replace(num_tchrs_female, num_tchrs_female > 100, NA),
+        replace(num_tchrs_with_nce, num_tchrs_with_nce > 100, NA),
+        replace(num_classrms_repair, num_classrms_repair > 50, NA),
+        replace(num_students_total, num_students_total > 2355, NA)
+    )
 }
 
 # #calling source script

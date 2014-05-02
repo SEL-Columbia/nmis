@@ -8,10 +8,4 @@ ratio <- function(numerator, denominator) {
     sum(df$num) / sum(df$den)
 }
 
-outlier_list <- function(df, lst) {
-    table = data.table(df)
-    for (formula, col in lst) {
-        table[eval(formula), `:=`(col, NA)]
-    }
-    as.data.frame(table)
-}
+
