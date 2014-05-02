@@ -6,6 +6,7 @@ normalize_mopup = function(formhubData, survey_name, sector) {
     d <- tbl_df(formhubData) %.% mutate(
         ## Create facility_type_display using the formhub form
         facility_type_display = replaceColumnNamesWithLabels(formhubData, 'facility_type'))
+    
     ## Survey_name: mopup, mopup_new, or mopup_pilot
     # mopup and mopup_new are pretty much the same, except mopup has some LGAs mistakenly as NA
     if(survey_name %in% c("mopup", "mopup_new")) {
