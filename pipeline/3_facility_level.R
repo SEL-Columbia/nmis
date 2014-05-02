@@ -28,8 +28,8 @@ education_mopup_facility_level = function(education_data) {
     return(all_mopup_facility_level(education_data) %.% mutate(
             sector = "education",
             ## from outlier which shouldnt belong there
-            ratio_students_to_toilet = num_stdents_total / num_toilets_total
-            pupil_class_ratio = num_students_total/num_classrms_total
+            ratio_students_to_toilet = num_students_total / num_toilets_total,
+            pupil_class_ratio = num_students_total/num_classrms_total,
             ## TYPE, SRC, etc.
             is_primary = str_detect(facility_type, 'primary'),
             is_junior_secondary = str_detect(facility_type, 'junior'), 
