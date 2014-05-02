@@ -5,17 +5,17 @@ require(dplyr)
 education_outlier <- function(education_data) {
     return(education_data 
         %.% mutate(
-            replace(num_tchrs_male, num_tchrs_male > num_tchrs_total, NA),
-            replace(num_tchrs_female, num_tchrs_female > num_tchrs_total, NA),
-            replace(num_tchrs_with_nce, num_tchrs_with_nce > num_tchrs_total, NA),
-            replace(num_classrms_repair, num_classrms_repair > num_classrms_total, NA),
-            replace(num_tchrs_total, num_tchrs_total > (num_tchrs_male + num_tchrs_female), NA)
+            num_tchrs_male = replace(num_tchrs_male, num_tchrs_male > num_tchrs_total, NA),
+            num_tchrs_female = replace(num_tchrs_female, num_tchrs_female > num_tchrs_total, NA),
+            num_tchrs_with_nce = replace(num_tchrs_with_nce, num_tchrs_with_nce > num_tchrs_total, NA),
+            num_classrms_repair = replace(num_classrms_repair, num_classrms_repair > num_classrms_total, NA),
+            num_tchrs_total = replace(num_tchrs_total, num_tchrs_total > (num_tchrs_male + num_tchrs_female), NA)
         ) %.% mutate(
-            replace(num_tchrs_male, num_tchrs_male > 100, NA),
-            replace(num_tchrs_female, num_tchrs_female > 100, NA),
-            replace(num_tchrs_with_nce, num_tchrs_with_nce > 100, NA),
-            replace(num_classrms_repair, num_classrms_repair > 50, NA),
-            replace(num_students_total, num_students_total > 2355, NA)
+            num_tchrs_male = replace(num_tchrs_male, num_tchrs_male > 100, NA),
+            num_tchrs_female = replace(num_tchrs_female, num_tchrs_female > 100, NA),
+            num_tchrs_with_nce = replace(num_tchrs_with_nce, num_tchrs_with_nce > 100, NA),
+            num_classrms_repair = replace(num_classrms_repair, num_classrms_repair > 50, NA),
+            num_students_total = replace(num_students_total, num_students_total > 2355, NA)
         )
     )
 }
@@ -24,57 +24,24 @@ health_outlier <- function(health_data) {
     return(health_outlier %.% mutate(
 
 
-# #health###############################################################################################
-# 
-# #outliers
-# #   health_merged <-outlierreplace(health_merged, 'num_doctors_fulltime',
-# #                                      (health_merged$num_doctors_fulltime > 12 & 
-# #                                         (health_merged$facility_type != "teaching_hospital" & 
-# #                                            health_merged$facility_type != "district_hospital")))
-        replace(num_doctors_fulltime, num_doctors_fulltime > 12 & 
+        num_doctors_fulltime = replace(num_doctors_fulltime, num_doctors_fulltime > 12 & 
             facility_type != ("teaching_hospital" | "district_hospital"), 
             NA),
-# 
-# #   health_merged <- outlierreplace(health_merged, 'num_doctors_fulltime',
-# #                                       (health_merged$num_doctors_fulltime > 20 & 
-# #                                          (health_merged$facility_type == "teaching_hospital" | 
-# #                                             health_merged$facility_type == "district_hospital")))
-# 
-        replace(num_doctors_fulltime, num_doctors_fulltime > 20 &
+        num_doctors_fulltime = replace(num_doctors_fulltime, num_doctors_fulltime > 20 &
             facility_type == ("teaching_hospital" | "district_hospital"),
             NA),
-# #   health_merged <- outlierreplace(health_merged, 'num_nurses_fulltime',
-# #                                       (health_merged$num_nurses_fulltime > 16 & 
-# #                                          (health_merged$facility_type != "teaching_hospital" & 
-# #                                             health_merged$facility_type != "district_hospital")))
-# 
-        replace(num_nurses_fulltime, num_nurses_fulltime > 16 &
+        num_nurses_fulltime = replace(num_nurses_fulltime, num_nurses_fulltime > 16 &
             facility_type != ("teaching_hospital" | "district_hospital"),
             NA),
-# #   health_merged <- outlierreplace(health_merged, 'num_nurses_fulltime',
-# #                                       (health_merged$num_nurses_fulltime > 24 & 
-# #                                          (health_merged$facility_type == "teaching_hospital" | 
-# #                                             health_merged$facility_type == "federalmedicalcentre")))
-# 
-        replace(num_nurses_fulltime, num_nurses_fulltime > 24 &
+        num_nurses_fulltime = replace(num_nurses_fulltime, num_nurses_fulltime > 24 &
             facility_type == ("teaching_hospital" | "federalmedicalcentre"),
             NA),
-#   health_merged <- outlierreplace(health_merged, 'num_midwives_fulltime',
-#                                       (health_merged$num_midwives_fulltime > 24 & 
-#                                          (health_merged$facility_type == "teaching_hospital" | 
-#                                             health_merged$facility_type == "district_hospital")))
-        replace(num_midwives_fulltime, num_midwives_fulltime > 24 &
+        num_midwives_fulltime = replace(num_midwives_fulltime, num_midwives_fulltime > 16 &
+            facility_type != ("teaching_hospital" | "district_hospital"),
+            NA),
+        num_midwives_fulltime = replace(num_midwives_fulltime, num_midwives_fulltime > 24 &
             facility_type == ("teaching_hospital" | "district_hospital"),
             NA),
-# 
-# #   health_merged <- outlierreplace(health_merged, 'num_midwives_fulltime',
-# #                                       (health_merged$num_midwives_fulltime > 16 & 
-# #                                          (health_merged$facility_type != "teaching_hospital" & 
-# #                                             health_merged$facility_type != "district_hospital")))
-        replace(num_midwives_fulltime, num_midwives_fulltime > 16 &
-                facility_type != ("teaching_hospital" | "district_hospital"),
-                NA)
-# 
 # #   health_merged <- outlierreplace(health_merged, 'facility_type',
 # #                                       (((health_merged$num_doctors_fulltime < 30 & 
 # #                                            health_merged$num_doctors_fulltime != 0) & 
