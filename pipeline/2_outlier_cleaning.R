@@ -3,12 +3,13 @@
 ######################################################################################################
 require(dplyr)
 education_outlier <- function(education_data) {
-    return(education_data %.% mutate(
-        replace(num_tchrs_male, num_tchrs_male > num_tchrs_total, NA),
-        replace(num_tchrs_female, num_tchrs_female > num_tchrs_total, NA),
-        replace(num_tchrs_with_nce, num_tchrs_with_nce > num_tchrs_total, NA),
-        replace(num_classrms_repair, num_classrms_repair > num_classrms_total, NA),
-        replace(num_tchrs_total, num_tchrs_total > (num_tchrs_male + num_tchrs_female), NA)
+    return(education_data 
+        %.% mutate(
+            replace(num_tchrs_male, num_tchrs_male > num_tchrs_total, NA),
+            replace(num_tchrs_female, num_tchrs_female > num_tchrs_total, NA),
+            replace(num_tchrs_with_nce, num_tchrs_with_nce > num_tchrs_total, NA),
+            replace(num_classrms_repair, num_classrms_repair > num_classrms_total, NA),
+            replace(num_tchrs_total, num_tchrs_total > (num_tchrs_male + num_tchrs_female), NA)
         ) %.% mutate(
             replace(num_tchrs_male, num_tchrs_male > 100, NA),
             replace(num_tchrs_female, num_tchrs_female > 100, NA),
