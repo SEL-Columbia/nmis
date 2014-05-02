@@ -27,10 +27,6 @@ all_mopup_facility_level = function(facility_data) {
 education_mopup_facility_level = function(education_data) {
     return(all_mopup_facility_level(education_data) %.% mutate(
             sector = "education",
-            ## TYPE, SRC, etc.
-            is_primary = str_detect(facility_type, 'primary'),
-            is_junior_secondary = str_detect(facility_type, 'junior'), 
-            pj = is_primary | is_junior_secondary, ## TODO: non-descriptive name
             
             ## INFRASTRUCTURE
             ## note: these are also written like this for historical consistency

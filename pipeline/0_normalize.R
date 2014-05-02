@@ -18,7 +18,10 @@ normalize_mopup = function(formhubData, survey_name, sector) {
     }
     
     ## These are all useful at early monitoring stages. Drop for the future.
-    d %.% dplyr::select(-matches('_dontknow'))
+    d %.% dplyr::select(-matches('_dontknow')) %.%
+        dplyr::mutate(
+            phcn_electricity = phcn_electricity == 'yes'
+    )
 }
 
 normalize_661 = function(d, survey_name, sector) {

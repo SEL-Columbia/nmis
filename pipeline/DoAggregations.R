@@ -22,6 +22,7 @@ rm(edu_lga)
 
 ### LOAD DOWNLOAD(ed) Health DATA
 # source("Download.R") # if you need to re-download data
+source("0_normalize.R")
 health_661 <- tbl_df(readRDS(CONFIG$BASELINE_HEALTH))
 health_mopup <- readRDS("data/output_data/Health_mopup_NMIS_Facility.rds")
 
