@@ -3,7 +3,7 @@
 ######################################################################################################
 require(dplyr)
 education_outlier <- function(education_data) {
-    return education_data %.% mutate(
+    return(education_data %.% mutate(
         replace(num_tchrs_male, num_tchrs_male > num_tchrs_total, NA),
         replace(num_tchrs_female, num_tchrs_female > num_tchrs_total, NA),
         replace(num_tchrs_with_nce, num_tchrs_with_nce > num_tchrs_total, NA),
@@ -15,7 +15,112 @@ education_outlier <- function(education_data) {
         replace(num_tchrs_with_nce, num_tchrs_with_nce > 100, NA),
         replace(num_classrms_repair, num_classrms_repair > 50, NA),
         replace(num_students_total, num_students_total > 2355, NA)
-    )
+    ))
+}
+
+health_outlier <- function(health_data) {
+    return(health_outlier %.% mutate(
+
+
+# #health###############################################################################################
+# 
+# #outliers
+# #   health_merged <-outlierreplace(health_merged, 'num_doctors_fulltime',
+# #                                      (health_merged$num_doctors_fulltime > 12 & 
+# #                                         (health_merged$facility_type != "teaching_hospital" & 
+# #                                            health_merged$facility_type != "district_hospital")))
+        replace(num_doctors_fulltime, num_doctors_fulltime > 12 & 
+            facility_type != ("teaching_hospital" | "district_hospital"), 
+            NA)
+# 
+# #   health_merged <- outlierreplace(health_merged, 'num_doctors_fulltime',
+# #                                       (health_merged$num_doctors_fulltime > 20 & 
+# #                                          (health_merged$facility_type == "teaching_hospital" | 
+# #                                             health_merged$facility_type == "district_hospital")))
+# 
+        replace(num_doctors_fulltime, num_doctors_fulltime > 20 &
+            facility_type == ("teaching_hospital" | "district_hospital"),
+            NA)
+# #   health_merged <- outlierreplace(health_merged, 'num_nurses_fulltime',
+# #                                       (health_merged$num_nurses_fulltime > 16 & 
+# #                                          (health_merged$facility_type != "teaching_hospital" & 
+# #                                             health_merged$facility_type != "district_hospital")))
+# 
+        replace(num_nurses_fulltime, num_nurses_fulltime > 16 &
+            facility_type != ("teaching_hospital" | "district_hospital"),
+            NA)
+# #   health_merged <- outlierreplace(health_merged, 'num_nurses_fulltime',
+# #                                       (health_merged$num_nurses_fulltime > 24 & 
+# #                                          (health_merged$facility_type == "teaching_hospital" | 
+# #                                             health_merged$facility_type == "federalmedicalcentre")))
+# 
+        replace(num_nurses_fulltime, num_nurses_fulltime > 24 &
+            facility_type == ("teaching_hospital" | "federalmedicalcentre"),
+            NA)
+#   health_merged <- outlierreplace(health_merged, 'num_midwives_fulltime',
+#                                       (health_merged$num_midwives_fulltime > 24 & 
+#                                          (health_merged$facility_type == "teaching_hospital" | 
+#                                             health_merged$facility_type == "district_hospital")))
+        replace(num_midwives_fulltime, num_midwives_fulltime > 24 &
+            facility_type == ("teaching_hospital" | "district_hospital"),
+            NA)
+# 
+# #   health_merged <- outlierreplace(health_merged, 'num_midwives_fulltime',
+# #                                       (health_merged$num_midwives_fulltime > 16 & 
+# #                                          (health_merged$facility_type != "teaching_hospital" & 
+# #                                             health_merged$facility_type != "district_hospital")))
+        replace(num_midwives_fulltime, num_midwives_fulltime > 16 &
+                facility_type != ("teaching_hospital" | "district_hospital"),
+                NA)
+# 
+# #   health_merged <- outlierreplace(health_merged, 'facility_type',
+# #                                       (((health_merged$num_doctors_fulltime < 30 & 
+# #                                            health_merged$num_doctors_fulltime != 0) & 
+# #                                           (health_merged$num_midwives_fulltime < 30 & 
+# #                                              health_merged$num_midwives_fulltime != 0) &
+# #                                           (health_merged$num_nurses_fulltime < 30 & 
+# #                                              health_merged$num_nurses_fulltime != 0)) &
+# #                                          (health_merged$facility_type == "teaching_hospital" | 
+# #                                             health_merged$facility_type == "district_hospital")))
+# 
+# #   health_merged <- outlierreplace(health_merged, 'num_doctors_fulltime',
+# #                                       ((health_merged$num_doctors_fulltime > 500 | 
+# #                                           health_merged$num_doctors_fulltime < 100) & 
+# #                                          (health_merged$facility_type == "teaching_hospital"  |
+# #                                             health_merged$facility_type == "district_hospital")
+# #                                       ))
+# 
+# #   health_merged <- outlierreplace(health_merged, 'num_nurses_fulltime',
+# #                                       (health_merged$num_nurses_fulltime < 100 &
+# #                                          (health_merged$facility_type == "teaching_hospital" | 
+# #                                             health_merged$facility_type == "district_hospital")))
+# 
+# #   health_merged <- outlierreplace(health_merged, 'num_nurses_fulltime',
+# #                                       (health_merged$num_nurses_fulltime > 16 & 
+# #                                          (health_merged$facility_type != "teaching_hospital" & 
+# #                                             health_merged$facility_type != "district_hospital")))            
+# 
+# #   health_merged <- outlierreplace(health_merged, 'num_midwives_fulltime',
+# #                                       (health_merged$num_midwives_fulltime < 100 & 
+# #                                          (health_merged$facility_type == "teaching_hospital" | 
+# #                                             health_merged$facility_type == "district_hospital")))
+# 
+#   
+# #   health_merged <- outlierreplace(health_merged, 'num_midwives_fulltime',
+# #                                       (health_merged$num_midwives_fulltime > 16 & 
+# #                                          (health_merged$facility_type != "teaching_hospital" & 
+# #                                             health_merged$facility_type != "district_hospital")))
+# 
+# #   health_merged <- outlierreplace(health_merged, 'num_chews_fulltime',
+# #                                       (health_merged$num_chews_fulltime > 50 & 
+# #                                          (health_merged$facility_type != "teaching_hospital" & 
+# #                                             health_merged$facility_type != "district_hospital")))
+# 
+# #   health_merged <- outlierreplace(health_merged, 'num_chews_fulltime',
+# #                                       (health_merged$num_chews_fulltime > 50 &
+# #                                          (health_merged$facility_type == "teaching_hospital" | 
+# #                                             health_merged$facility_type == "district_hospital")))
+    ))
 }
 
 # #calling source script
