@@ -1,5 +1,6 @@
-source('CONFIG.R')
-require(testthat); require(formhub)
+source('CONFIG.R')                                  ## Helps make sure its run from the right directory
+suppressPackageStartupMessages(require(formhub))    ## suppressPackageStartupMessages loads packages silently 
+suppressPackageStartupMessages(require(testthat))
 expected_lga_output = read.csv("tests/test_data/mopup_NMIS_LGA_Indicators_SUBSET_zamfara_zurmi.csv")
 
 ####### TEST EDUCATION #######
