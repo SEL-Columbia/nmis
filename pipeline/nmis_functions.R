@@ -24,5 +24,16 @@ percent <- function(boolean_vector) {
     percent_format(sum(boolean_vector, na.rm=T), length(na.omit(boolean_vector)))
 }
 
+between <- function(value, min, max, inclusive=F) { 
+  if(inclusive) { 
+    value >= min & value <= max 
+  } else { 
+    value > min & value < max 
+  }
+}
+
+outside <- function(value, min, max, inclusive=F) {
+    !(between(value, min, max, !inclusive))
+}
 
 

@@ -1,13 +1,80 @@
 ######################################################################################################
 #Mopup Integration: Outlier Cleaning##################################################################
 ######################################################################################################
-education_outlier = function(edu_mopup_all) {
-    require('data.table')
-    ed_dt = data.table(edu_mopup_all)
-    ed_dt[num_tchrs_male == 999, num_tchrs_male := NA]
-    print(ed_dt$num_tchrs_male)
-    edu_mopup_all
+require(dplyr)
+source('nmis_functions.R')
+education_outlier <- function(education_data) {
+    return(education_data 
+        %.% mutate(
+            num_tchrs_male = replace(num_tchrs_male, num_tchrs_male > num_tchrs_total, NA),
+            num_tchrs_female = replace(num_tchrs_female, num_tchrs_female > num_tchrs_total, NA),
+            num_tchrs_with_nce = replace(num_tchrs_with_nce, num_tchrs_with_nce > num_tchrs_total, NA),
+            num_classrms_repair = replace(num_classrms_repair, num_classrms_repair > num_classrms_total, NA),
+            num_tchrs_total = replace(num_tchrs_total, num_tchrs_total > (num_tchrs_male + num_tchrs_female), NA)
+        ) %.% mutate(
+            num_tchrs_male = replace(num_tchrs_male, num_tchrs_male > 100, NA),
+            num_tchrs_female = replace(num_tchrs_female, num_tchrs_female > 100, NA),
+            num_tchrs_with_nce = replace(num_tchrs_with_nce, num_tchrs_with_nce > 100, NA),
+            num_classrms_repair = replace(num_classrms_repair, num_classrms_repair > 50, NA),
+            num_students_total = replace(num_students_total, num_students_total > 2355, NA)
+        )
+    )
+}
 
+health_outlier <- function(health_data) {
+    return(health_data 
+            %.% mutate(
+
+                num_doctors_fulltime = replace(num_doctors_fulltime, num_doctors_fulltime > 12 & 
+                    facility_type %in% c("teaching_hospital", "district_hospital"),
+                    NA),
+                num_doctors_fulltime = replace(num_doctors_fulltime, num_doctors_fulltime > 20 &
+                    !(facility_type %in% c("teaching_hospital", "district_hospital")),
+                    NA),
+                num_nurses_fulltime = replace(num_nurses_fulltime, num_nurses_fulltime > 16 &
+                    !(facility_type %in% c("teaching_hospital", "district_hospital")),
+                    NA),
+                num_nurses_fulltime = replace(num_nurses_fulltime, num_nurses_fulltime > 24 &
+                    facility_type %in% c("teaching_hospital", "district_hospital"),
+                    NA),
+                num_midwives_fulltime = replace(num_midwives_fulltime, num_midwives_fulltime > 16 &
+                    !(facility_type %in% c("teaching_hospital", "district_hospital")),
+                    NA),
+                num_midwives_fulltime = replace(num_midwives_fulltime, num_midwives_fulltime > 24 &
+                    facility_type %in% c("teaching_hospital", "district_hospital"),
+                    NA)
+            ) %.% mutate (
+                facility_type = replace(facility_type,
+                    between(num_doctors_fulltime, 0, 30) & 
+                    between(num_nurses_fulltime, 0, 30) &
+                    between(num_midwives_fulltime, 0, 30) &
+                    facility_type %in% c("teaching_hospital", "district_hospital"),
+                    NA),
+                num_doctors_fulltime = replace(num_doctors_fulltime,
+                    outside(num_doctors_fulltime, 100, 500) &
+                    facility_type %in% c("teaching_hospital", "district_hospital"),
+                    NA),
+                num_nurses_fulltime = replace(num_nurses_fulltime,
+                    num_nurses_fulltime < 100 &
+                    facility_type %in% c("teaching_hospital", "district_hospital"),
+                    NA),
+                num_nurses_fulltime = replace(num_nurses_fulltime,
+                    num_nurses_fulltime >16 &
+                    !(facility_type %in% c("teaching_hospital", "district_hospital")),
+                    NA),
+                num_midwives_fulltime = replace(num_midwives_fulltime,
+                    num_midwives_fulltime < 100 &
+                    facility_type %in% c("teaching_hospital", "district_hospital"),
+                    NA),
+                num_midwives_fulltime = replace(num_midwives_fulltime,
+                    num_midwives_fulltime >16 &
+                    !(facility_type %in% c("teaching_hospital", "district_hospital")),
+                    NA),
+                num_chews_fulltime = replace(num_chews_fulltime,
+                    num_chews_fulltime > 50,
+                    NA)
+           )
+    )
 }
 
 # #calling source script

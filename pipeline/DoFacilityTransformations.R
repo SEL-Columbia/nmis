@@ -47,6 +47,8 @@ health_mopup_all <- rbind(normalize_mopup(health_mopup, 'mopup', 'health'),
 rm(health_mopup, health_mopup_new, health_mopup_pilot)
 
 ### 2. TODO: OUTLIERS
+source("2_outlier_cleaning.R")
+health_mopup_all <- health_outlier(health_mopup_all)
 
 ### 3. FACILITY LEVEL
 source('3_facility_level.R')
