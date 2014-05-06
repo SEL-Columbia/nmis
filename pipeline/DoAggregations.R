@@ -4,7 +4,7 @@ require(formhub); require(dplyr)
 ### LOAD DOWNLOAD(ed) EDUCATION DATA
 # source("Download.R") # if you need to re-download data
 edu_661 <- tbl_df(readRDS(CONFIG$BASELINE_EDUCATION))
-edu_mopup <- readRDS("data/output_data/Education_mopup_NMIS_Facility.rds")
+edu_mopup <- readRDS(sprintf('%s/Education_mopup_NMIS_Facility.rds', CONFIG$OUTPUT_DIR))
 
 ### 1. NORMALIZE (Note: this encompasses 2. OUTLIERS and 3. FACILITY LEVEL, for 661)
 source("0_normalize.R")
@@ -16,7 +16,10 @@ rm(edu_661, edu_mopup)
 ### 4. LGA LEVEL
 source('4_lga_level.R')
 edu_lga <- education_mopup_lga_indicators(edu_all)
-saveRDS(edu_lga, 'data/output_data/Education_mopup_LGA_Aggregations.rds')
+saveRDS(edu_lga, sprintf('%s/Education_mopup_LGA_Aggregations.rds',
+            CONFIG$OUTPUT_DIR))
+#write.csv(edu_lga, sprintf('%s/Education_mopup_NMIS_Facility.rds',
+#            CONFIG$OUTPUT_DIR), row.names=F)
 rm(edu_lga)
 
 
@@ -24,7 +27,7 @@ rm(edu_lga)
 # source("Download.R") # if you need to re-download data
 source("0_normalize.R")
 health_661 <- tbl_df(readRDS(CONFIG$BASELINE_HEALTH))
-health_mopup <- readRDS("data/output_data/Health_mopup_NMIS_Facility.rds")
+health_mopup <- readRDS(sprintf('%s/Health_mopup_NMIS_Facility.rds', CONFIG$OUTPUT_DIR))
 
 ### 1. NORMALIZE (Note: this encompasses 2. OUTLIERS and 3. FACILITY LEVEL, for 661)
 health_661 <- normalize_661(health_661, '661', 'health')
@@ -35,5 +38,7 @@ rm(health_661, health_mopup)
 ### 4. LGA LEVEL
 source('4_lga_level.R')
 health_lga <- health_mopup_lga_indicators(health_all)
-saveRDS(health_lga, 'data/output_data/Health_mopup_LGA_Aggregations.rds')
+saveRDS(health_lga, sprintf('%s/Health_mopup_LGA_Aggregations.rds', CONFIG$OUTPUT_DIR))
+#write.csv(health_lga, sprintf('%s/Health_mopup_NMIS_Facility.rds',
+#            CONFIG$OUTPUT_DIR), row.names=F)
 rm(health_lga)
