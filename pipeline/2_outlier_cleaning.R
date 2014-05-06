@@ -23,7 +23,7 @@ education_outlier <- function(education_data) {
 }
 
 health_outlier <- function(health_data) {
-    hospital_outlier_repalced <- health_data %.% filter(
+    hospital_outlier_replaced <- health_data %.% filter(
         facility_type %in% c("teaching_hospital", "district_hospital")
         ) %.% mutate(
             num_doctors_fulltime = replace(num_doctors_fulltime, num_doctors_fulltime > 12, NA), 
