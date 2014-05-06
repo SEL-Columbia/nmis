@@ -24,6 +24,8 @@ percent <- function(boolean_vector) {
     percent_format(sum(boolean_vector, na.rm=T), length(na.omit(boolean_vector)))
 }
 
+# between is a helper function that returns a boolan TRUE if the value falls in
+# between min and max, with a flag "inclusive" set to False by default
 between <- function(value, min, max, inclusive=F) { 
   if(inclusive) { 
     value >= min & value <= max 
@@ -32,6 +34,9 @@ between <- function(value, min, max, inclusive=F) {
   }
 }
 
+# outside is a helper function that returns a boolan TRUE if the value falls
+# outside of min and max, with a flag "inclusive" set to False by default
+# outside is just a reverse call of between
 outside <- function(value, min, max, inclusive=F) {
     !(between(value, min, max, !inclusive))
 }
