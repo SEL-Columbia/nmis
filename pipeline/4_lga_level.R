@@ -107,9 +107,6 @@ health_mopup_lga_indicators = function(health_data) {
         is_healthpost = facility_type %in% c('dispensary', 'health_post'),
         is_healthfacility = ! (facility_type %in% c('dk', 'none')),
         is_allExceptHealthPost = is_healthfacility & ! is_healthpost
-    #    alternative_functional_power = # either have functional generator, or functional solar
-    #        ifelse(power_sources.generator, generator_functional=='yes', FALSE) |
-    #        ifelse(power_sources.solar_system, solar_functional=='yes', FALSE)
     )
     ## (2) Aggregation 1: Services that are provided at Hospitals only
     hospital_data = health_data %.% filter(is_hospital) %.% group_by(lga)  %.% 
@@ -154,8 +151,8 @@ health_mopup_lga_indicators = function(health_data) {
             ## Infrastructure -- all facilities
             proportion_improved_water_supply = percent(improved_water_supply),
             proportion_improved_sanitation = percent(improved_sanitation),
-            proportion_phcn_electricity = percent(phcn_electricity))
-#             proportion_power_alternative_functional = percent(alternative_functional_power))
+            proportion_phcn_electricity = percent(phcn_electricity),
+            proportion_power_alternative_functional = percent(power_sources_alternative_functional))
      ## (5) Merge everything (merge is equivalent to left_join in dplyr) and return
      return(allFacilities_data %.% 
                 left_join(allExceptHealthPost_data, by='lga') %.% 

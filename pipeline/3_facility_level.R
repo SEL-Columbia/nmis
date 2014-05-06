@@ -18,6 +18,9 @@ all_mopup_facility_level = function(facility_data) {
                 improved_water_supply.rainwater | improved_water_supply.handpump,
             improved_sanitation = improved_sanitation.vip_latrine | 
                 improved_sanitation.pit_latrine_with_slab | improved_sanitation.flush,
+            # NEEDED for aggregations
+            power_sources_alternative_functional = ifelse(power_sources.generator, generator_functional=='yes', FALSE) |
+                ifelse(power_sources.solar_system, solar_functional=='yes', FALSE),
             # USEFUL DATA POINTS for DATA output, not in NMIS
             power_access = power_sources.generator | power_sources.solar_system | power_sources.grid
         )
