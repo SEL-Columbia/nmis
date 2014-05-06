@@ -27,7 +27,7 @@ health_outlier <- function(health_data) {
         facility_type %in% c("teaching_hospital", "district_hospital")
         ) %.% mutate(
             num_doctors_fulltime = replace(num_doctors_fulltime, num_doctors_fulltime > 12, NA), 
-            num_nurses_fulltime = replace(num_nurses_fulltime, num_nurses_fulltime > 2, NA),
+            num_nurses_fulltime = replace(num_nurses_fulltime, num_nurses_fulltime > 24, NA),
             num_midwives_fulltime = replace(num_midwives_fulltime, num_midwives_fulltime > 24, NA),
             facility_type = replace(facility_type,
                 between(num_doctors_fulltime, 0, 30) & 
@@ -48,10 +48,9 @@ health_outlier <- function(health_data) {
             num_doctors_fulltime = replace(num_doctors_fulltime, num_doctors_fulltime > 20, NA),
             num_nurses_fulltime = replace(num_nurses_fulltime, num_nurses_fulltime > 16, NA),
             num_midwives_fulltime = replace(num_midwives_fulltime, num_midwives_fulltime > 16, NA),
-            num_nurses_fulltime = replace(num_nurses_fulltime,
-                num_nurses_fulltime >16, NA),
-            num_midwives_fulltime = replace(num_midwives_fulltime,
-                num_midwives_fulltime >16, NA)
+            num_nurses_fulltime = replace(num_nurses_fulltime, num_nurses_fulltime >16, NA),
+            num_midwives_fulltime = replace(num_midwives_fulltime, num_midwives_fulltime >16, NA),
+            num_chews_fulltime = replace(num_chews_fulltime, num_chews_fulltime > 50, NA)
         )
     return(rbind(hospital_outlier_replaced, non_hospital_outlier_replaced))
 }
