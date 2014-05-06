@@ -4,7 +4,7 @@
 
 # Formats a percentage given scalar numerator and denominator
 percent_format <- function(numerator, denominator) {
-    sprintf("%i%% (%i out of %i)", round(100 * numerator / denominator), numerator, denominator)
+    sprintf("%1.0f%% (%i out of %i)", 100 * numerator / denominator, numerator, denominator)
 }
 
 # Ratio: produces the ratio of a numerator and a denominator column. Includes functionality to:
