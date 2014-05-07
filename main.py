@@ -67,7 +67,8 @@ def explore():
     sorted_lgas.sort(key=lambda x: x[0])
 
     baseline = flask.request.args.get('baseline', None)
-    lgas_folder = '/static/lgas_baseline/' if baseline else '/static/lgas/'
+    #lgas_folder = '/static/lgas_baseline/' if baseline else '/static/lgas/'
+    lgas_folder = '/static/lgas/'
     return flask.render_template('explore.html',
         baseline=baseline,
         lgas_folder=lgas_folder,
