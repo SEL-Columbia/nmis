@@ -20,19 +20,19 @@ edu_mopup_all <- education_outlier(edu_mopup_all)
 ### 3. FACILITY LEVEL
 source('3_facility_level.R')
 edu_mopup_all <- education_mopup_facility_level(edu_mopup_all)
-source('T0_indicator_checks.R')
-missing_indicators(edu_mopup_all, facility_indicators, 'education')
-necessary_indicators <- intersect(names(edu_mopup_all), 
-    names(readRDS(CONFIG$BASELINE_EDUCATION)))
+source('nmis_functions.R')
+necessary_indicators <- get_necessary_indicators()$facility$education
 saveRDS(edu_mopup_all[necessary_indicators], sprintf('%s/Education_mopup_NMIS_Facility.rds', CONFIG$OUTPUT_DIR))
 
 ### 4. LGA LEVEL
-# source('4_lga_level.R')
-# edu_lga <- education_mopup_lga_indicators(edu_mopup_all)
-# missing_indicators(edu_lga, lga_indicators, 'education')
-
+source('4_lga_level.R')
+edu_661 <- tbl_df(readRDS(CONFIG$BASELINE_EDUCATION))
+edu_661 <- normalize_661(edu_661, '661', 'education')
+common_indicators <- intersect(names(edu_661), names(edu_mopup_all))
+edu_all <- rbind(edu_661[common_indicators], edu_mopup_all[common_indicators])
+edu_lga <- education_mopup_lga_indicators(edu_mopup_all)
+saveRDS(edu_lga, sprintf('%s/Education_mopup_LGA_Aggregations.rds', CONFIG$OUTPUT_DIR))
 rm(list=setdiff(ls(), "CONFIG"))
-
 
 ### LOAD DOWNLOAD(ed) HEALTH DATA
 # source("Download.R") # if you need to re-download data
@@ -53,13 +53,16 @@ health_mopup_all <- health_outlier(health_mopup_all)
 ### 3. FACILITY LEVEL
 source('3_facility_level.R')
 health_mopup_all <- health_mopup_facility_level(health_mopup_all)
-source('T0_indicator_checks.R')
-missing_indicators(health_mopup_all, facility_indicators, 'health')
-necessary_indicators <- intersect(names(health_mopup_all), 
-    names(readRDS(CONFIG$BASELINE_HEALTH)))
+source('nmis_functions.R')
+necessary_indicators <- get_necessary_indicators()$facility$health
 saveRDS(health_mopup_all[necessary_indicators], sprintf('%s/Health_mopup_NMIS_Facility.rds', CONFIG$OUTPUT_DIR))
 
 ### 4. LGA LEVEL
-# source('4_lga_level.R')
-# health_lga <- health_mopup_lga_indicators(health_mopup_all)
-# missing_indicators(health_lga, lga_indicators, 'health')
+source('4_lga_level.R')
+health_661 <- tbl_df(readRDS(CONFIG$BASELINE_HEALTH))
+health_661 <- normalize_661(health_661, '661', 'health')
+common_indicators <- intersect(names(health_661), names(health_mopup_all))
+health_all <- rbind(health_661[common_indicators], health_mopup_all[common_indicators])
+health_lga <- health_mopup_lga_indicators(health_mopup_all)
+saveRDS(health_lga, sprintf('%s/Health_mopup_LGA_Aggregations.rds', CONFIG$OUTPUT_DIR))
+rm(list=setdiff(ls(), "CONFIG"))

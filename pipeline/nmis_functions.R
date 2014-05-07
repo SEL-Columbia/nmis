@@ -41,4 +41,36 @@ outside <- function(value, min, max, inclusive=F) {
     !(between(value, min, max, !inclusive))
 }
 
-
+## Get the indicators that are necessary for NMIS.
+## Reads from json files within ../static/explore, in addition to adding some "hard-coded" indicators.
+## Returns a two-element list, one with name lga_level, and the other facility_level
+get_necessary_indicators <- function() {
+    indicators_for_sector = function(sector, all_indicators) {
+        unlist(sapply(all_indicators[[sector]], 
+                             function(x) { x$indicators }))
+    }
+    ## "EXTRAS": Indicators hardcoded in the NMIS code
+    facility_level_extras = c("formhub_photo_id", "facility_name", "gps", "uuid")
+    lga_level_extras = c("lga", "unique_lga", "state", "latitude", "longitude")
+    ## facility level: education and health indicators should include anything in the overview tab as well
+    facility_indicators = RJSONIO::fromJSON("../static/explore/facilities_view.json")
+    facility_indicators$education <- unique(c(indicators_for_sector('education', facility_indicators), 
+                                       indicators_for_sector('overview', facility_indicators),
+                                       facility_level_extras))
+    facility_indicators$health <- unique(c(indicators_for_sector('health', facility_indicators), 
+                                    indicators_for_sector('overview', facility_indicators),
+                                    facility_level_extras))
+    ## lga level: education and health indicators should include specific items in the overview tab as well
+    lga_indicators = RJSONIO::fromJSON("../static/explore/lga_view.json")
+    overview_json = RJSONIO::fromJSON("../static/explore/lga_overview.json")
+    ### NOTE: THE FOLLOWING IS A BIT BRITTLE
+    lga_indicators$health <- c(indicators_for_sector('health', lga_indicators),
+                               overview_json[[2]][1][[1]]$indicators,
+                               lga_level_extras)
+    lga_indicators$education <- c(indicators_for_sector('education', lga_indicators),
+                                  overview_json[[2]][2][[1]]$indicators,
+                                  lga_level_extras)
+    ### RETURN
+    list(facility=list(health=facility_indicators$health, education=facility_indicators$education), 
+         lga=list(health=lga_indicators$health, education=lga_indicators$education))
+}
