@@ -3,7 +3,7 @@ require(formhub); require(plyr); require(dplyr);
 ## Normalize mopup surveys. We use "survey_name" to see what the name of the survey was,
 ## and map question names and values as required. Unmatching and rarely used columns are just dropped.
 normalize_mopup = function(formhubData, survey_name, sector) {
-    d <- tbl_df(formhubData) %.% mutate(
+    d <- tbl_df(as.data.frame(formhubData)) %.% mutate(
         ## Create facility_type_display using the formhub form
         facility_type_display = replaceColumnNamesWithLabels(formhubData, 'facility_type'))
     
