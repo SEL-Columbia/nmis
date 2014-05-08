@@ -75,7 +75,7 @@ health_661 <- tbl_df(readRDS(CONFIG$BASELINE_HEALTH))
 health_661 <- normalize_661(health_661, '661', 'health')
 common_indicators <- intersect(names(health_661), names(health_mopup_all))
 health_all <- rbind(health_661[common_indicators], health_mopup_all[common_indicators])
-rm(health_661, health_mopup)
+rm(health_661, health_mopup_all)
 write.csv(health_all, sprintf('%s/Health_mopup_NMIS_Facility.csv', 
                            CONFIG$OUTPUT_DIR), row.names=F)
 source('4_lga_level.R')
