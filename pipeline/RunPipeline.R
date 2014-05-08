@@ -1,6 +1,10 @@
 source('CONFIG.R')
 require(formhub); require(dplyr)
 
+### READ IN LGAS FILE ##
+lgas <- read.csv(CONFIG$LGASFILE) %.% 
+    dplyr::select(matches('lga'), latitude, longitude, state, zone)
+
 ################ EDUCATION ####################################################
 source("nmis_functions.R"); source("0_normalize.R"); source("2_outlier_cleaning.R");
 source("3_facility_level.R"); source("4_lga_level.R")
@@ -31,17 +35,14 @@ common_indicators <- intersect(names(edu_baseline_2012), names(edu_mopup_all))
 edu_all <- rbind(edu_baseline_2012[common_indicators], edu_mopup_all[common_indicators])
 rm(edu_baseline_2012, edu_mopup_all)
 ## 4.3 aggregate
-edu_lga <- education_mopup_lga_indicators(edu_all)
+edu_lga <- education_mopup_lga_indicators(edu_all) %.% join(lgas)
 
-### 5. OUTPUT
-edu_all <- edu_all[get_necessary_indicators()$facility$education]
-write.csv(edu_all, sprintf('%s/Education_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR),
-          row.names=F)
-#TODO: necessary indicators subset 
-#edu_lga <- edu_lga[get_necessary_indicators()$lga$education]
-write.csv(edu_lga, sprintf('%s/Education_mopup_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR), 
-          row.names=F)
-rm(list=setdiff(ls(), "CONFIG"))
+### 5. OUTPUT 
+write.csv(edu_all[get_necessary_indicators()$facility$education], row.names=F,
+          file=sprintf('%s/Education_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
+write.csv(edu_lga[get_necessary_indicators()$lga$education], row.names=F,
+          file=sprintf('%s/Education_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
+rm(list=setdiff(ls(), c("CONFIG", "lgas")))
 
 ################ HEALTH ####################################################
 source("nmis_functions.R"); source("0_normalize.R"); source("2_outlier_cleaning.R");
@@ -73,13 +74,11 @@ common_indicators <- intersect(names(health_baseline_2012), names(health_mopup_a
 health_all <- rbind(health_baseline_2012[common_indicators], health_mopup_all[common_indicators])
 rm(health_baseline_2012, health_mopup_all)
 ## 4.3 aggregate
-health_lga <- health_mopup_lga_indicators(health_all)
+health_lga <- health_mopup_lga_indicators(health_all) %.% join(lgas)
 
 ## 5. OUTPUT
-health_all <- health_all[get_necessary_indicators()$facility$health]
-write.csv(health_all, sprintf('%s/Health_mopup_NMIS_Facility.csv', CONFIG$OUTPUT_DIR),
-          row.names=F)
-#TODO: necessary indicators subset 
-#health_lga <- health_lga[get_necessary_indicators()$lga$health]
-write.csv(health_lga, sprintf('%s/Health_mopup_LGA_Aggregations.csv',
-            CONFIG$OUTPUT_DIR), row.names=F)
+write.csv(health_all[get_necessary_indicators()$facility$health], row.names=F,
+          file=sprintf('%s/Health_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
+write.csv(health_lga[get_necessary_indicators()$lga$health], row.names=F,
+          file=sprintf('%s/Health_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
+rm(list=setdiff(ls(), "CONFIG"))

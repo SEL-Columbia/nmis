@@ -52,7 +52,6 @@
             "indicators": [
                 "num_primary_schools",
                 "num_junior_secondary_schools",
-                "num_senior_secondary_schools",
                 "num_schools",
                 "percent_management_public",
                 "percent_natl_curriculum"
@@ -64,7 +63,6 @@
                 "num_primary_schools",
                 "percent_management_public_primary",
                 "percent_natl_curriculum_primary",
-                "num_school_1kmplus_secondary_school",
                 "avg_num_students_primary",
                 "avg_num_tchrs_primary",
                 "avg_num_classrms_primary",
@@ -135,7 +133,6 @@
                 "num_level_2_health_facilities",
                 "num_level_3_health_facilities", 
                 "num_level_4_health_facilities",
-                "num_level_other_health_facilities",
                 "num_health_facilities"
             ]
         },
