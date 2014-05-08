@@ -31,5 +31,5 @@ CONFIG = list(
     * this will run all the tests in the tests folder automatically
     * If you see errors, FIX THEM IMMEDIATELY.
 
-or you can run individual tests by
-    * R CMD BATCH tests/{name_of_test.R} /dev/tty
+or you can run individual tests by:
+* R CMD BATCH tests/{name_of_test.R} /dev/tty
