@@ -26,11 +26,11 @@ normalize_mopup = function(formhubData, survey_name, sector) {
     )
 }
 
-normalize_661 = function(d, survey_name, sector) {
+normalize_2012 = function(d, survey_name, sector) {
     ## Survey_name: mopup, mopup_new, or mopup_pilot
     # mopup and mopup_new are pretty much the same, except mopup has some LGAs mistakenly as NA
-    stopifnot(survey_name %in% c("661") & sector %in% c("education", "health"))
-    if (survey_name %in% c("661")) {
+    stopifnot(survey_name %in% c("2012") & sector %in% c("education", "health"))
+    if (survey_name %in% c("2012")) {
         d %.% mutate(
                 facility_ID = NA
             )

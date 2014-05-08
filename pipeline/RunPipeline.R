@@ -34,11 +34,9 @@ rm(edu_baseline_2012, edu_mopup_all)
 edu_lga <- education_mopup_lga_indicators(edu_all)
 
 ### 5. OUTPUT
-necessary_ef_indicators <- get_necessary_indicators()$facility$education
-saveRDS(edu_mopup_all[necessary_indicators], sprintf('%s/Education_mopup_NMIS_Facility.rds', CONFIG$OUTPUT_DIR))
-write.csv(edu_all[necessary_indicators], sprintf('%s/Education_mopup_NMIS_Facility.csv', CONFIG$OUTPUT_DIR), 
+edu_all <- edu_all[get_necessary_indicators()$facility$education]
+write.csv(edu_all, sprintf('%s/Education_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR),
           row.names=F)
-
 #TODO: necessary indicators subset 
 #edu_lga <- edu_lga[get_necessary_indicators()$lga$education]
 write.csv(edu_lga, sprintf('%s/Education_mopup_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR), 
@@ -79,7 +77,6 @@ health_lga <- health_mopup_lga_indicators(health_all)
 
 ## 5. OUTPUT
 health_all <- health_all[get_necessary_indicators()$facility$health]
-saveRDS(health_all, sprintf('%s/Health_mopup_NMIS_Facility.rds', CONFIG$OUTPUT_DIR))
 write.csv(health_all, sprintf('%s/Health_mopup_NMIS_Facility.csv', CONFIG$OUTPUT_DIR),
           row.names=F)
 #TODO: necessary indicators subset 
