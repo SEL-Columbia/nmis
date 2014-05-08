@@ -80,14 +80,10 @@ education_mopup_lga_indicators <- function(education_data) {
         select(##RENAMING BEFORE RETURNING: NOTE THESE SHOULD BE CHANGED ONCE 774 + MOPUP ARE TOGETHER
             num_primary_schools = num_schools_primary,
             num_junior_secondary_schools = num_schools_js,
-            pupil_toilet_ratio_secondary = pupil_toilet_ratio_js,
             proportion_schools_chalkboard_all_rooms_juniorsec = percent_schools_chalkboard_all_rooms_js,
             proportion_schools_chalkboard_all_rooms_primary = percent_schools_chalkboard_all_rooms_primary,
-            primary_school_pupil_teachers_ratio_lga = pupil_teachers_ratio_lga_primary,
-            student_classroom_ratio_lga_juniorsec = student_classroom_ratio_lga_js,
-            junior_secondary_school_pupil_teachers_ratio_lga = pupil_teachers_ratio_lga_js,
-            proportion_teachers_nce_juniorsec = percent_teachers_nce_js,
             proportion_teachers_nce_primary = percent_teachers_nce_primary,
+            proportion_teachers_nce_js = percent_teachers_nce_js,
             student_teacher_ratio_lga = pupil_teachers_ratio_lga,
             matches('.')
         )
@@ -105,7 +101,7 @@ health_mopup_lga_indicators = function(health_data) {
         is_public = management %in% c('federal_gov', 'local_gov', 'state_gov'),
         is_hospital = str_detect(facility_type, 'hospital'),
         is_healthpost = facility_type %in% c('dispensary', 'health_post'),
-        is_healthfacility = ! (facility_type %in% c('dk', 'none')),
+        is_healthfacility = ! (facility_type %in% c('dk', 'none') | is.na(facility_type)),
         is_allExceptHealthPost = is_healthfacility & ! is_healthpost
     )
     ## (2) Aggregation 1: Services that are provided at Hospitals only

@@ -20,8 +20,7 @@
         {
             "indicators": [
                 "num_primary_schools", 
-                "num_js_schools_multiplecount",
-                "num_ss_schools_multiplecount",
+                "num_junior_secondary_schools",
                 "num_schools",
                 "student_teacher_ratio_lga",
                 "proportion_teachers_nce_primary"
