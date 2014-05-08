@@ -66,9 +66,12 @@ def explore():
         for lga in lgas.items()]
     sorted_lgas.sort(key=lambda x: x[0])
 
+    baseline = flask.request.args.get('baseline', None)
+    #lgas_folder = '/static/lgas_baseline/' if baseline else '/static/lgas/'
+    lgas_folder = '/static/lgas/'
     return flask.render_template('explore.html',
-        baseline=flask.request.args.get('baseline', None),
-        data_folder=flask.request.args.get('data', 'data'),
+        baseline=baseline,
+        lgas_folder=lgas_folder,
         zones=json.dumps(sorted_zones),
         sorted_lgas=json.dumps(sorted_lgas),
         indicators=load_file('indicators.json'),

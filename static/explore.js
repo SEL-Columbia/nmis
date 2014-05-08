@@ -55,7 +55,7 @@ function view(viewObj, sector){
         } else {
             $('.loading').show();
             $('#content').fadeTo(100, 0.5);
-            var url = '/static/lgas/' + unique_lga + '.json';
+            var url = NMIS.lgas_folder + unique_lga + '.json';
             $.getJSON(url, function(lga){
                 NMIS.lgas[unique_lga] = lga;
                 render_wrap(lga, sector);
