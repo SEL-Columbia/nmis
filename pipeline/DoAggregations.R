@@ -12,14 +12,16 @@ edu_661 <- normalize_661(edu_661, '661', 'education')
 common_indicators <- intersect(names(edu_661), names(edu_mopup))
 edu_all <- rbind(edu_661[common_indicators], edu_mopup[common_indicators])
 rm(edu_661, edu_mopup)
+write.csv(edu_all, sprintf('%s/Education_mopup_NMIS_Facility.csv', 
+                           CONFIG$OUTPUT_DIR), row.names=F)
 
 ### 4. LGA LEVEL
 source('4_lga_level.R')
 edu_lga <- education_mopup_lga_indicators(edu_all)
-saveRDS(edu_lga, sprintf('%s/Education_mopup_LGA_Aggregations.rds',
-            CONFIG$OUTPUT_DIR))
-#write.csv(edu_lga, sprintf('%s/Education_mopup_NMIS_Facility.rds',
-#            CONFIG$OUTPUT_DIR), row.names=F)
+#saveRDS(edu_lga, sprintf('%s/Education_mopup_LGA_Aggregations.rds',
+#            CONFIG$OUTPUT_DIR))
+write.csv(edu_lga, sprintf('%s/Education_mopup_LGA_Aggregations.csv',
+            CONFIG$OUTPUT_DIR), row.names=F)
 rm(edu_lga)
 
 
@@ -34,11 +36,13 @@ health_661 <- normalize_661(health_661, '661', 'health')
 common_indicators <- intersect(names(health_661), names(health_mopup))
 health_all <- rbind(health_661[common_indicators], health_mopup[common_indicators])
 rm(health_661, health_mopup)
+write.csv(health_all, sprintf('%s/Health_mopup_NMIS_Facility.csv', 
+                           CONFIG$OUTPUT_DIR), row.names=F)
 
 ### 4. LGA LEVEL
 source('4_lga_level.R')
 health_lga <- health_mopup_lga_indicators(health_all)
-saveRDS(health_lga, sprintf('%s/Health_mopup_LGA_Aggregations.rds', CONFIG$OUTPUT_DIR))
-#write.csv(health_lga, sprintf('%s/Health_mopup_NMIS_Facility.rds',
-#            CONFIG$OUTPUT_DIR), row.names=F)
+#saveRDS(health_lga, sprintf('%s/Health_mopup_LGA_Aggregations.rds', CONFIG$OUTPUT_DIR))
+write.csv(health_lga, sprintf('%s/Health_mopup_LGA_Aggregations.csv',
+            CONFIG$OUTPUT_DIR), row.names=F)
 rm(health_lga)
