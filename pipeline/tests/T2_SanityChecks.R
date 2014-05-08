@@ -1,7 +1,8 @@
 # RUN THIS FILE from the pipeline directory; on the command line:
 # R CMD BATCH test/T0_MissingIndicators.R /dev/tty
 source('nmis_functions.R'); source('CONFIG.R')
-require(testthat); require(dplyr)
+suppressPackageStartupMessages(require(testthat))
+suppressPackageStartupMessages(require(dplyr))
 
 output_file <- function(file) { sprintf("%s/%s", CONFIG$OUTPUT_DIR, file) }
 

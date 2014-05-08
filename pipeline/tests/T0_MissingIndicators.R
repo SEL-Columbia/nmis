@@ -1,7 +1,7 @@
 # RUN THIS FILE from the pipeline directory; on the command line:
 # R CMD BATCH test/T0_MissingIndicators.R /dev/tty
 source('nmis_functions.R'); source('CONFIG.R')
-require(testthat)
+suppressPackageStartupMessages(require(testthat))
 
 required_indicators = get_necessary_indicators()
 

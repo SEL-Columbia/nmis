@@ -27,4 +27,8 @@ CONFIG = list(
  * Download data from formhub: `Rscript Download.R`
 
 (6) To make sure that we are calculating our indicators correctly, we have written tests for our pipeline. To run them, from the command line (in the pipeline directory), run:
- * `Rscripts tests/T1_TestLGAData.R` -- If you see errors, FIX THEM IMMEDIATELY.
+ * sh run_tests.sh
+    * this will run all the tests in the tests folder automatically
+    * If you see errors, FIX THEM IMMEDIATELY.
+or you can run individual tests by
+    * R CMD BATCH tests/{name_of_test.R} /dev/tty
