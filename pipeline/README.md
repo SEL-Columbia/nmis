@@ -23,9 +23,8 @@ CONFIG = list(
 ```
 
 (5) For each of the following purposes, run the corresponding command in the command line (you have to be in the pipeline directory):
+ * Run facility and lga level transformations: `Rscript RunPipeline.R`
  * Download data from formhub: `Rscript Download.R`
- * Run facility level transformations: `Rscript DoFacilityTransformations.R`
- * Run lga level aggregations: `Rscript DoAggregations.R` 
 
 (6) To make sure that we are calculating our indicators correctly, we have written tests for our pipeline. To run them, from the command line (in the pipeline directory), run:
  * `Rscripts tests/T1_TestLGAData.R` -- If you see errors, FIX THEM IMMEDIATELY.

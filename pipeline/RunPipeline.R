@@ -13,7 +13,8 @@ edu_mopup_all <- rbind(normalize_mopup(edu_mopup, 'mopup', 'education'),
                        normalize_mopup(edu_mopup_new, 'mopup_new', 'education'),
                        normalize_mopup(edu_mopup_pilot, 'mopup_pilot', 'education'))
 rm(edu_mopup, edu_mopup_new, edu_mopup_pilot)
-### 2. TODO: OUTLIERS
+
+### 2. OUTLIERS
 source('2_outlier_cleaning.R')
 edu_mopup_all <- education_outlier(edu_mopup_all)
 
@@ -24,12 +25,22 @@ source('T0_indicator_checks.R')
 missing_indicators(edu_mopup_all, facility_indicators, 'education')
 necessary_indicators <- intersect(names(edu_mopup_all), 
     names(readRDS(CONFIG$BASELINE_EDUCATION)))
-saveRDS(edu_mopup_all[necessary_indicators], sprintf('%s/Education_mopup_NMIS_Facility.rds', CONFIG$OUTPUT_DIR))
+edu_mopup_all <- edu_mopup_all[necessary_indicators]
 
 ### 4. LGA LEVEL
-# source('4_lga_level.R')
-# edu_lga <- education_mopup_lga_indicators(edu_mopup_all)
-# missing_indicators(edu_lga, lga_indicators, 'education')
+source('4_lga_level.R')
+edu_661 <- tbl_df(readRDS(CONFIG$BASELINE_EDUCATION))
+edu_661 <- normalize_661(edu_661, '661', 'education')
+common_indicators <- intersect(names(edu_661), names(edu_mopup_all))
+edu_all <- rbind(edu_661[common_indicators], edu_mopup_all[common_indicators])
+rm(edu_661, edu_mopup_all)
+write.csv(edu_all, sprintf('%s/Education_mopup_NMIS_Facility.csv', 
+                           CONFIG$OUTPUT_DIR), row.names=F)
+edu_lga <- education_mopup_lga_indicators(edu_all)
+write.csv(edu_lga, sprintf('%s/Education_mopup_LGA_Aggregations.csv',
+            CONFIG$OUTPUT_DIR), row.names=F)
+rm(edu_lga)
+
 
 rm(list=setdiff(ls(), "CONFIG"))
 
@@ -57,9 +68,19 @@ source('T0_indicator_checks.R')
 missing_indicators(health_mopup_all, facility_indicators, 'health')
 necessary_indicators <- intersect(names(health_mopup_all), 
     names(readRDS(CONFIG$BASELINE_HEALTH)))
-saveRDS(health_mopup_all[necessary_indicators], sprintf('%s/Health_mopup_NMIS_Facility.rds', CONFIG$OUTPUT_DIR))
+health_mopup_all <- health_mopup_all[necessary_indicators]
 
 ### 4. LGA LEVEL
-# source('4_lga_level.R')
-# health_lga <- health_mopup_lga_indicators(health_mopup_all)
-# missing_indicators(health_lga, lga_indicators, 'health')
+health_661 <- tbl_df(readRDS(CONFIG$BASELINE_HEALTH))
+health_661 <- normalize_661(health_661, '661', 'health')
+common_indicators <- intersect(names(health_661), names(health_mopup_all))
+health_all <- rbind(health_661[common_indicators], health_mopup_all[common_indicators])
+rm(health_661, health_mopup_all)
+write.csv(health_all, sprintf('%s/Health_mopup_NMIS_Facility.csv', 
+                           CONFIG$OUTPUT_DIR), row.names=F)
+source('4_lga_level.R')
+health_lga <- health_mopup_lga_indicators(health_all)
+write.csv(health_lga, sprintf('%s/Health_mopup_LGA_Aggregations.csv',
+            CONFIG$OUTPUT_DIR), row.names=F)
+rm(health_lga)
+
