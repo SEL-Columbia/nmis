@@ -7,3 +7,5 @@ CONFIG.R
 *.Rproj
 .Rhistory
 
+lgas
+*.zip
