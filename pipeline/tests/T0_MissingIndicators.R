@@ -13,9 +13,11 @@ missing_indicators = function(df, nmis_indicators, sector) {
 
 test_that('Required Facility Level Indicators are not missing.', {
     output_file <- function(file) { sprintf("%s/%s", CONFIG$OUTPUT_DIR, file) }
-    (e_miss <- missing_indicators(read.csv(output_file("Education_Mopup_and_Baseline_NMIS_Facility.csv")), 
+    (e_miss <- missing_indicators(
+        read.csv(output_file("Education_Mopup_and_Baseline_NMIS_Facility.csv"), nrows=1), 
         required_indicators$facility, 'education'))
-    (h_miss <- missing_indicators(read.csv(output_file("Health_Mopup_and_Baseline_NMIS_Facility.csv")), 
+    (h_miss <- missing_indicators(
+        read.csv(output_file("Health_Mopup_and_Baseline_NMIS_Facility.csv"), nrows=1), 
         required_indicators$facility, 'health'))
     expect_equivalent(character(0), e_miss)
     expect_equivalent(character(0), h_miss)
@@ -23,9 +25,11 @@ test_that('Required Facility Level Indicators are not missing.', {
 
 test_that('Required LGA Indicators are not missing.', {
     output_file <- function(file) { sprintf("%s/%s", CONFIG$OUTPUT_DIR, file) }
-    (e_miss <- missing_indicators(read.csv(output_file("Education_Mopup_and_Baseline_LGA_Aggregations.csv")), 
+    (e_miss <- missing_indicators(
+        read.csv(output_file("Education_Mopup_and_Baseline_LGA_Aggregations.csv"), nrows=1), 
         required_indicators$lga, 'education'))
-    (h_miss <- missing_indicators(read.csv(output_file("Health_Mopup_and_Baseline_LGA_Aggregations.csv")), 
+    (h_miss <- missing_indicators(
+        read.csv(output_file("Health_Mopup_and_Baseline_LGA_Aggregations.csv"), nrows=1), 
         required_indicators$lga, 'health'))
     expect_equivalent(character(0), e_miss)
     expect_equivalent(character(0), h_miss)

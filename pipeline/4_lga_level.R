@@ -107,21 +107,21 @@ health_mopup_lga_indicators = function(health_data) {
     ## (2) Aggregation 1: Services that are provided at Hospitals only
     hospital_data = health_data %.% filter(is_hospital) %.% group_by(lga)  %.% 
          dplyr::summarise(
-             percent_compr_oc_c_sections = percent(c_section_yn == 'yes'))
+             percent_compr_oc_c_sections = percent(c_section_yn))
     ## (3) Aggregation 2: Services that are provided at all facilties except for Health Posts
     allExceptHealthPost_data = health_data %.% filter(is_allExceptHealthPost) %.% group_by(lga) %.%
         dplyr::summarise(
-            proportion_delivery_24_7_sansHP = percent(maternal_health_delivery_services == 'yes'),
-            proportion_vaccines_fridge_freezer_sansHP = percent(vaccines_fridge_freezer == 'yes'))
+            proportion_delivery_24_7_sansHP = percent(maternal_health_delivery_services),
+            proportion_vaccines_fridge_freezer_sansHP = percent(vaccines_fridge_freezer))
     ## (4) Aggregation 3: Services that are provided at all facilities including Health Posts
     allFacilities_data = health_data %.% filter(is_healthfacility) %.% group_by(lga) %.%
         dplyr::summarise(
             num_health_facilities = n(),
-            proportion_antenatal = percent(antenatal_care_yn == 'yes'),
-            proportion_family_planning = percent(family_planning_yn == 'yes'),
-            proportion_access_functional_emergency_transport = percent(emergency_transport == 'yes'),
-            proportion_act_treatment_for_malaria = percent(malaria_treatment_artemisinin == 'yes'),
-            proportion_measles = percent(child_health_measles_immun_calc == 'yes'),
+            proportion_antenatal = percent(antenatal_care_yn),
+            proportion_family_planning = percent(family_planning_yn),
+            proportion_access_functional_emergency_transport = percent(emergency_transport),
+            proportion_act_treatment_for_malaria = percent(malaria_treatment_artemisinin),
+            proportion_measles = percent(child_health_measles_immun_calc),
             
             ## Facilities
             num_facilities = n(),
@@ -139,10 +139,10 @@ health_mopup_lga_indicators = function(health_data) {
             num_nursemidwives_midwives = sum(num_nursemidwives_fulltime, na.rm=T),
             
             ## Overview Tab
-            facilities_delivery_services_yn = sum(maternal_health_delivery_services == 'yes', na.rm=T),
-            facilities_emergency_transport = sum(emergency_transport == 'yes', na.rm=T),
+            facilities_delivery_services_yn = sum(maternal_health_delivery_services, na.rm=T),
+            facilities_emergency_transport = sum(emergency_transport, na.rm=T),
             facilities_skilled_birth_attendant = sum(skilled_birth_attendant, na.rm=T),
-            facilities_measles = sum(child_health_measles_immun_calc == 'yes', na.rm=T),
+            facilities_measles = sum(child_health_measles_immun_calc, na.rm=T),
             
             ## Infrastructure -- all facilities
             proportion_improved_water_supply = percent(improved_water_supply),
