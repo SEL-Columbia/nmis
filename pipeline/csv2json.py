@@ -67,10 +67,13 @@ def create_lga_files(data_folder):
             results = parse_csv(f)
 
         for item in results:
-            if 'LGA' in fname and 'All' in fname:
+            if 'LGA' in fname:
                 id = item['unique_lga']
-                lgas[id] = item
-            elif 'Facility' in fname:
+                if not lgas.has_key(id):
+                    lgas[id] = item
+                else:
+                    lgas[id] = dict(lgas[id].items() + item.items())
+            elif 'NMIS' in fname:
                 facilities.append(item)
 
     out_dir = os.path.join(CWD, 'lgas')
@@ -81,9 +84,12 @@ def create_lga_files(data_folder):
     os.makedirs(out_dir)
     
     for unique_lga, lga_data in lgas.iteritems():
+        if not unique_lga:
+            continue
         lga_data['unique_lga'] = unique_lga
         lga_data['facilities'] = [fac for fac in facilities if fac['unique_lga'] == unique_lga]
-        out = json.dumps(lga_data, indent=4, ensure_ascii=True)
+        #out = json.dumps(lga_data, indent=4, ensure_ascii=True)
+        out = json.dumps(lga_data, indent=4, ensure_ascii=False)
         path = os.path.join(out_dir, unique_lga + '.json')
         print 'Writing: ' + unique_lga + '.json'
         with open(path, 'w') as f:
