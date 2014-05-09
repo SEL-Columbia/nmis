@@ -43,7 +43,30 @@ test_that("LGA indicators match for health for Zurmi", {
     ## Convert things from x% (y out of z) to just x, which is what it looks like for expected_output
     health_lga[-1] <- colwise(as.numeric)(colwise(function(x) { str_extract(x, '[0-9]*')})(health_lga[-1]))
     health_indicators <- intersect(names(expected_lga_output), names(health_lga))
-    should_eq = rbind(expected_lga_output[health_indicators], health_lga[health_indicators])
+    should_eq <- rbind(expected_lga_output[health_indicators], health_lga[health_indicators])
     ## For debugging, print out should_eq, should_eq[1,] - should_eq[2,]
     expect_true(all(should_eq[1,] == should_eq[2,], na.rm=T))    
+})
+
+test_that("Mopup Integration pipeline reproduces baseline aggregations", {
+    source("0_normalize.R"); source("4_lga_level.R")
+    test_health_data <- tbl_df(readRDS(CONFIG$BASELINE_HEALTH)) %.%
+        normalize_2012(survey_name="2012", sector="health")
+    health_lga <- health_mopup_lga_indicators(test_health_data)
+    
+    expected_lga_output <- tbl_df(readRDS("~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/in_process_data/nmis/data_774/All_774_LGA.rds"))
+    percent_indicators <- names(expected_lga_output)[str_detect(names(expected_lga_output), 'proportion|percent')]
+    expected_lga_output[percent_indicators] <- colwise(function(x) {round(100*x)})expected_lga_output[percent_indicators]
+   
+    ## Convert things from x% (y out of z) to just x, which is what it looks like for expected_output
+    health_lga[-1] <- colwise(as.numeric)(colwise(function(x) { str_extract(x, '[0-9]*')})(health_lga[-1]))
+    health_indicators <- intersect(names(expected_lga_output), names(health_lga))
+    
+    for(lg in intersect(expected_lga_output$lga, health_lga$lga)) {
+        # (lg = sample(intersect(expected_lga_output$lga, health_lga$lga), 1))
+        (should_eq <- data.frame(rbind(subset(expected_lga_output, lga == lg, select=health_indicators), 
+                       subset(health_lga, lga == lg, select=health_indicators))))
+        ## For debugging, print out should_eq OR should_eq[1,] - should_eq[2,]
+        expect_true(all(should_eq[1,] == should_eq[2,], na.rm=T))    
+    }
 })
