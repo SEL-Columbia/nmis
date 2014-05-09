@@ -56,7 +56,7 @@ test_that("Mopup Integration pipeline reproduces baseline aggregations", {
     
     expected_lga_output <- tbl_df(readRDS("~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/in_process_data/nmis/data_774/All_774_LGA.rds"))
     percent_indicators <- names(expected_lga_output)[str_detect(names(expected_lga_output), 'proportion|percent')]
-    expected_lga_output[percent_indicators] <- colwise(function(x) {round(100*x)})expected_lga_output[percent_indicators]
+    expected_lga_output[percent_indicators] <- colwise(function(x) {round(100*x)})(expected_lga_output[percent_indicators])
    
     ## Convert things from x% (y out of z) to just x, which is what it looks like for expected_output
     health_lga[-1] <- colwise(as.numeric)(colwise(function(x) { str_extract(x, '[0-9]*')})(health_lga[-1]))
