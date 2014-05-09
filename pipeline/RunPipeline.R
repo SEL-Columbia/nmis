@@ -17,7 +17,8 @@ edu_mopup <- readRDS(sprintf("%s/education_mopup.RDS",CONFIG$MOPUP_DATA_DIR))
 ### 0. NORMALIZE (and merge)
 edu_mopup_all <- rbind(normalize_mopup(edu_mopup, 'mopup', 'education'),
                        normalize_mopup(edu_mopup_new, 'mopup_new', 'education'),
-                       normalize_mopup(edu_mopup_pilot, 'mopup_pilot', 'education'))
+                       normalize_mopup(edu_mopup_pilot, 'mopup_pilot', 'education')
+                       ) %.% join(lgas)
 rm(edu_mopup, edu_mopup_new, edu_mopup_pilot)
 
 ### 2. OUTLIERS
@@ -56,7 +57,8 @@ health_mopup_pilot <- readRDS(sprintf("%s/mopup_questionnaire_health_final.RDS",
 ### 0. NORMALIZE (and merge)
 health_mopup_all <- rbind(normalize_mopup(health_mopup, 'mopup', 'health'),
                           normalize_mopup(health_mopup_new, 'mopup_new', 'health'),
-                          normalize_mopup(health_mopup_pilot, 'mopup_pilot', 'health'))
+                          normalize_mopup(health_mopup_pilot, 'mopup_pilot', 'health')
+                          ) %.% join(lgas)
 rm(health_mopup, health_mopup_new, health_mopup_pilot)
 
 ### 2. OUTLIERS
