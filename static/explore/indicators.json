@@ -324,7 +324,7 @@
         "name": "Percentage that perform C-sections",
         "description": ""
     },
-    "percent_csections": {
+    "percent_csection": {
         "name": "Percentage that perform C-sections",
         "description": ""
     },
