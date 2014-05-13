@@ -149,14 +149,14 @@
             "name": "Services that are provided at Hospitals only",
             "indicators": [
                 "num_hospitals", 
-                "percent_compr_oc_c_sections" 
+                "percent_csection" 
             ]
         },
         {
             "name": "Services that are provided at all facilties except for Health Posts",
             "indicators": [
                 "num_health_facilities_sansHP",
-                "proportion_delivery_24_7_sansHP", 
+                "proportion_delivery_sansHP", 
                 "proportion_vaccines_fridge_freezer_sansHP" 
             ]
         }, 
@@ -166,7 +166,7 @@
                 "num_health_facilities", 
                 "proportion_antenatal", 
                 "proportion_family_planning",
-                "proportion_access_functional_emergency_transport",
+                "proportion_access_emergency_transport",
                 "proportion_act_treatment_for_malaria",
                 "proportion_measles"
             ]
@@ -178,7 +178,7 @@
                 "proportion_improved_water_supply", 
                 "proportion_improved_sanitation",
                 "proportion_phcn_electricity",
-                "proportion_power_alternative_functional"
+                "proportion_access_to_alternative_power"
             ]
         }
     ]

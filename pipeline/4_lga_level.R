@@ -107,11 +107,11 @@ health_mopup_lga_indicators = function(health_data) {
     ## (2) Aggregation 1: Services that are provided at Hospitals only
     hospital_data = health_data %.% filter(is_hospital) %.% group_by(lga)  %.% 
          dplyr::summarise(
-             percent_compr_oc_c_sections = percent(c_section_yn))
+             percent_csection = percent(c_section_yn))
     ## (3) Aggregation 2: Services that are provided at all facilties except for Health Posts
     allExceptHealthPost_data = health_data %.% filter(is_allExceptHealthPost) %.% group_by(lga) %.%
         dplyr::summarise(
-            proportion_delivery_24_7_sansHP = percent(maternal_health_delivery_services),
+            proportion_delivery_sansHP = percent(maternal_health_delivery_services),
             proportion_vaccines_fridge_freezer_sansHP = percent(vaccines_fridge_freezer))
     ## (4) Aggregation 3: Services that are provided at all facilities including Health Posts
     allFacilities_data = health_data %.% filter(is_healthfacility) %.% group_by(lga) %.%
@@ -119,12 +119,12 @@ health_mopup_lga_indicators = function(health_data) {
             num_health_facilities = n(),
             proportion_antenatal = percent(antenatal_care_yn),
             proportion_family_planning = percent(family_planning_yn),
-            proportion_access_functional_emergency_transport = percent(emergency_transport),
+            proportion_access_emergency_transport = percent(emergency_transport),
             proportion_act_treatment_for_malaria = percent(malaria_treatment_artemisinin),
             proportion_measles = percent(child_health_measles_immun_calc),
             
             ## Facilities
-            num_facilities = n(),
+            num_health_facilities = n(),
             num_level_1_health_facilities = sum(is_healthpost, na.rm=T),
             num_level_2_health_facilities = sum(facility_type == 'basic_health_centre', na.rm=T),       
             num_level_3_health_facilities = sum(facility_type == 'primary_health_centre', na.rm=T),
@@ -148,7 +148,7 @@ health_mopup_lga_indicators = function(health_data) {
             proportion_improved_water_supply = percent(improved_water_supply),
             proportion_improved_sanitation = percent(improved_sanitation),
             proportion_phcn_electricity = percent(phcn_electricity),
-            proportion_power_alternative_functional = percent(power_sources_alternative_functional))
+            proportion_access_to_alternative_power = percent(power_sources_alternative_functional))
      ## (5) Merge everything (merge is equivalent to left_join in dplyr) and return
      return(allFacilities_data %.% 
                 left_join(allExceptHealthPost_data, by='lga') %.% 

@@ -30,7 +30,9 @@ normalize_2012 = function(d, survey_name, sector) {
     stopifnot(survey_name %in% c("2012") & sector %in% c("education", "health"))
     if (survey_name %in% c("2012")) {
         if(sector == 'health') {
-            d <- d %.% mutate(facility_type = revalue(facility_type,
+            d <- d %.% 
+                mutate(
+                    facility_type = revalue(facility_type,
                                     c("comprehensivehealthcentre" = "district_hospital",
                                       "cottagehospital" = "general_hospital",
                                       "dentalclinic" = "none", # these are being dropped
@@ -44,7 +46,12 @@ normalize_2012 = function(d, survey_name, sector) {
                                       "private" = "none", # also dropping private facilities -- there are only 24
                                       "specialisthospital" = "specialist_hospital",
                                       "teachinghospital" = "teaching_hospital",
-                                      "wardmodelphccentre" = "primary_health_centre")))
+                                      "wardmodelphccentre" = "primary_health_centre"))
+                ) %.% select( # the following are renames. format: new_value = old_value
+                    ## RENAMING SOME BASELINE INDICATORS TO MATCH WITH NEW NAMES
+                    malaria_treatment_artemisinin = medication_anti_malarials,
+                    matches('.') # this is necessary, in order not to drop the rest of the columns
+                )
         }
         return(d %.% mutate(facility_ID = NA))
     } else {

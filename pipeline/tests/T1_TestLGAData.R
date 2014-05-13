@@ -61,12 +61,18 @@ test_that("Mopup Integration pipeline reproduces baseline aggregations", {
     ## Convert things from x% (y out of z) to just x, which is what it looks like for expected_output
     health_lga[-1] <- colwise(as.numeric)(colwise(function(x) { str_extract(x, '[0-9]*')})(health_lga[-1]))
     health_indicators <- intersect(names(expected_lga_output), names(health_lga))
+
+    cat(".. Ignoring Indicators: ", setdiff(names(health_lga), health_indicators), "\n")
     
     for(lg in intersect(expected_lga_output$lga, health_lga$lga)) {
-        # (lg = sample(intersect(expected_lga_output$lga, health_lga$lga), 1))
-        (should_eq <- data.frame(rbind(subset(expected_lga_output, lga == lg, select=health_indicators), 
+        # (lg = "Zaria")
+        #sample(intersect(expected_lga_output$lga, health_lga$lga), 1))
+        if(!is.na(expected_lga_output$num_level_other_health_facilities) &
+               expected_lga_output$num_level_other_health_facilities == 0) {
+            (should_eq <- data.frame(rbind(subset(expected_lga_output, lga == lg, select=health_indicators), 
                        subset(health_lga, lga == lg, select=health_indicators))))
-        ## For debugging, print out should_eq OR should_eq[1,] - should_eq[2,]
-        expect_true(all(should_eq[1,] == should_eq[2,], na.rm=T))    
+            ## For debugging, print out should_eq OR should_eq[1,] - should_eq[2,]
+            expect_true(all(should_eq[1,] == should_eq[2,], na.rm=T))
+        }
     }
 })

@@ -1,9 +1,10 @@
 source('CONFIG.R')
-require(formhub); require(dplyr)
+suppressPackageStartupMessages(require(formhub))
+suppressPackageStartupMessages(require(dplyr))
 
 ### READ IN LGAS FILE ##
 lgas <- read.csv(CONFIG$LGASFILE) %.% 
-    dplyr::select(matches('lga'), latitude, longitude, state, zone)
+    dplyr::select(matches('lga'), latitude, longitude, state, zone, lga_id)
 
 ################ EDUCATION ####################################################
 source("nmis_functions.R"); source("0_normalize.R"); source("2_outlier_cleaning.R");
