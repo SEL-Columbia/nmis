@@ -23,11 +23,8 @@ education_mopup_lga_indicators <- function(education_data) {
         is_primary = facility_type %in% TYPES$primary,
         is_junior_secondary = facility_type %in% TYPES$junior_sec, 
         is_combined = facility_type %in% TYPES$combined,
-        is_valid_facility = ! facility_type %in% c('dk', 'none'),
-        
-        ## Public / natl curriculum
-        is_public = management %in% c('federal_gov', 'local_gov', 'state_gov'),
-        natl_curriculum_yn = education_type %in% c('formal_only', 'integrated')
+        is_public = management %in% c('federal_gov', 'local_gov', 'state_gov', 'public'),
+        is_valid_facility = ! facility_type %in% c('dk', 'none', 'DROP')
     )
     ## (2) Define a function which will calculate indicators given a "level". Level is primary or junior.
     ## primary and junior secondary indicator transformations. Note: columns will end with _primary or _js

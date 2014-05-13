@@ -52,6 +52,28 @@ normalize_2012 = function(d, survey_name, sector) {
                     malaria_treatment_artemisinin = medication_anti_malarials,
                     matches('.') # this is necessary, in order not to drop the rest of the columns
                 )
+        } else if (sector == "education") {
+            d <- d %.% 
+                mutate(
+                    facility_type = revalue(facility_type,
+                                            c("adult_ed" = "DROP",
+                                              "adult_lit" = "DROP",
+                                              "adult_vocational" = "DROP",
+                                              "js" = "junior_sec_only",
+                                              "js_ss" = "junior_and_senior_sec",
+                                              "preprimary" = "DROP",
+                                              "preprimary_only" = "DROP",
+                                              "preprimary_primary" = "preprimary_and_primary",
+                                              "primary" = "primary_only",
+                                              "primary_js" = "primary_and_junior_sec",
+                                              "primary_js_ss" = "primary_junior_and_senior_sec",
+                                              "science_technical" = "DROP",
+                                              "senior_sec_only" = "DROP",
+                                              "ss" = "DROP",
+                                              "vocational" = "DROP",
+                                              "vocational_post_primary" = "DROP",
+                                              "vocational_post_secondary" = "DROP"))
+                )
         }
         return(d %.% mutate(facility_ID = NA))
     } else {

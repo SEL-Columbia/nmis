@@ -29,9 +29,10 @@ all_mopup_facility_level = function(facility_data) {
 education_mopup_facility_level = function(education_data) {
     return(all_mopup_facility_level(education_data) %.% mutate(
             sector = "education",
-            ## from outlier which shouldnt belong there
+            ## The following are used in other parts of the pipeline
             ratio_students_to_toilet = num_students_total / num_toilets_total,
-            pupil_class_ratio = num_students_total/num_classrms_total,
+            pupil_class_ratio = num_students_total / num_classrms_total,
+            natl_curriculum_yn = education_type %in% c('formal_only', 'integrated'),
             
             ## INFRASTRUCTURE
             ## note: these are also written like this for historical consistency
