@@ -148,7 +148,7 @@ health_mopup_lga_indicators = function(health_data) {
             proportion_improved_water_supply = percent(improved_water_supply),
             proportion_improved_sanitation = percent(improved_sanitation),
             proportion_phcn_electricity = percent(phcn_electricity),
-            proportion_access_to_alternative_power = percent(power_sources_alternative_functional))
+            proportion_access_to_alternative_power = percent(access_to_alternative_power_source))
      ## (5) Merge everything (merge is equivalent to left_join in dplyr) and return
      return(allFacilities_data %.% 
                 left_join(allExceptHealthPost_data, by='lga') %.% 

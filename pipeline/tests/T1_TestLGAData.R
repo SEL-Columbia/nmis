@@ -14,8 +14,11 @@ test_that("LGA indicators match for education for Zurmi", {
     edu <- education_mopup_facility_level(edu)
     edu_lga <- education_mopup_lga_indicators(edu)
     ### (2) Test that they are the same
-    stopifnot(nrow(edu_lga) == 1)
-    education_indicators <- intersect(names(expected_lga_output), names(edu_lga))
+    
+    ## Sanity checks
+    expect_true(nrow(edu_lga) == 1) # we should produce only one column
+    expect_equivalent(setdiff(names(edu_lga), names(expected_lga_output)),
+                      character(0)) # all columns should be in test data
     
     ## Convert things from x% (y out of z) to just x, which is what it looks like for expected_output
     edu_lga[-1] <- colwise(as.numeric)(colwise(function(x) { str_extract(x, '[0-9]*')})(edu_lga[-1]))
@@ -37,8 +40,10 @@ test_that("LGA indicators match for health for Zurmi", {
     health <- health_mopup_facility_level(health)
     health_lga <- health_mopup_lga_indicators(health) %.% filter(lga != "DISCARD") ## we had to insert
     ### (2) Test that they are the same
-    stopifnot(nrow(health_lga) == 1)
-    
+    ## Sanity checks
+    expect_true(nrow(health_lga) == 1) # we should produce only one column
+    expect_equivalent(setdiff(names(health_lga), names(expected_lga_output)),
+                      character(0)) # all columns should be in test data
     
     ## Convert things from x% (y out of z) to just x, which is what it looks like for expected_output
     health_lga[-1] <- colwise(as.numeric)(colwise(function(x) { str_extract(x, '[0-9]*')})(health_lga[-1]))
