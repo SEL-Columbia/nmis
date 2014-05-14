@@ -10,11 +10,16 @@ normalize_mopup = function(formhubData, survey_name, sector) {
     ## Survey_name: mopup, mopup_new, or mopup_pilot
     # mopup and mopup_new are pretty much the same, except mopup has some LGAs mistakenly as NA
     if(survey_name %in% c("mopup", "mopup_new")) {
-        d <- d %.% dplyr::select(-facility_list_yn, -grid_proximity_if_not_connected,
-                                 formhub_photo_id = photo_facility, matches('.'))
+        d <- d %.% dplyr::select(-facility_list_yn, 
+                                 -grid_proximity_if_not_connected,
+                                 formhub_photo_id = photo_facility, 
+                                 unique_lga = lga,
+                                 matches('.'))
     } else if (survey_name %in% c("mopup_pilot")) {
         d <- d %.% dplyr::select(-new_old,
-                                 formhub_photo_id = photo_facility, matches('.'))
+                                 unique_lga = lga,
+                                 formhub_photo_id = photo_facility, 
+                                 matches('.'))
     } else {
         stop("survey_name or sector is invalid")
     }
