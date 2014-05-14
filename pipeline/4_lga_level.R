@@ -32,7 +32,7 @@ education_mopup_lga_indicators <- function(education_data) {
     primary_and_junior_sec_indicators <- function(data, level) {
         stopifnot(level %in% c("primary", "junior_sec")) # make sure level is either Primary or Junior
         data <- data %.% 
-            group_by(lga) %.% 
+            group_by(unique_lga) %.% 
             filter(facility_type %in% TYPES[[level]]) %.% ## subset for this level only
             dplyr::summarize(
                 num_schools = n(),
@@ -63,7 +63,7 @@ education_mopup_lga_indicators <- function(education_data) {
     primary_indicators = primary_and_junior_sec_indicators(education_data, 'primary')
     js_indicators = primary_and_junior_sec_indicators(education_data, 'junior_sec')
     ## (4) Make overall indicators (ie, ones that are not specific to each level).
-    lga_data = education_data %.% filter(is_valid_facility) %.% group_by(lga) %.% 
+    lga_data = education_data %.% filter(is_valid_facility) %.% group_by(unique_lga) %.% 
         dplyr::summarise(
             num_schools = n(),
             percent_management_public = percent(management == "public"),
@@ -72,8 +72,8 @@ education_mopup_lga_indicators <- function(education_data) {
             percent_natl_curriculum = percent(natl_curriculum_yn)) 
     ## (5) Join everything together
     lga_data %.% 
-        inner_join(primary_indicators, by='lga') %.%
-        inner_join(js_indicators, by='lga') %.%
+        inner_join(primary_indicators, by='unique_lga') %.%
+        inner_join(js_indicators, by='unique_lga') %.%
     ## (6) Rename some of our indicators to possibly non-standard form. (Should go away).
         dplyr::select(##RENAMING BEFORE RETURNING: NOTE THESE SHOULD BE CHANGED ONCE 774 + MOPUP ARE TOGETHER
             num_primary_schools = num_schools_primary,
@@ -103,16 +103,16 @@ health_mopup_lga_indicators = function(health_data) {
         is_allExceptHealthPost = is_healthfacility & ! is_healthpost
     )
     ## (2) Aggregation 1: Services that are provided at Hospitals only
-    hospital_data = health_data %.% filter(is_hospital) %.% group_by(lga)  %.% 
+    hospital_data = health_data %.% filter(is_hospital) %.% group_by(unique_lga)  %.% 
          dplyr::summarise(
              percent_csection = percent(c_section_yn))
     ## (3) Aggregation 2: Services that are provided at all facilties except for Health Posts
-    allExceptHealthPost_data = health_data %.% filter(is_allExceptHealthPost) %.% group_by(lga) %.%
+    allExceptHealthPost_data = health_data %.% filter(is_allExceptHealthPost) %.% group_by(unique_lga) %.%
         dplyr::summarise(
             proportion_delivery_sansHP = percent(maternal_health_delivery_services),
             proportion_vaccines_fridge_freezer_sansHP = percent(vaccines_fridge_freezer))
     ## (4) Aggregation 3: Services that are provided at all facilities including Health Posts
-    allFacilities_data = health_data %.% filter(is_healthfacility) %.% group_by(lga) %.%
+    allFacilities_data = health_data %.% filter(is_healthfacility) %.% group_by(unique_lga) %.%
         dplyr::summarise(
             num_health_facilities = n(),
             proportion_antenatal = percent(antenatal_care_yn),
@@ -149,6 +149,6 @@ health_mopup_lga_indicators = function(health_data) {
             proportion_access_to_alternative_power = percent(access_to_alternative_power_source))
      ## (5) Merge everything (merge is equivalent to left_join in dplyr) and return
      return(allFacilities_data %.% 
-                left_join(allExceptHealthPost_data, by='lga') %.% 
-                left_join(hospital_data, by='lga'))
+                left_join(allExceptHealthPost_data, by='unique_lga') %.% 
+                left_join(hospital_data, by='unique_lga'))
 }

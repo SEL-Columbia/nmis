@@ -19,7 +19,7 @@ edu_mopup <- readRDS(sprintf("%s/education_mopup.RDS",CONFIG$MOPUP_DATA_DIR))
 edu_mopup_all <- rbind(normalize_mopup(edu_mopup, 'mopup', 'education'),
                        normalize_mopup(edu_mopup_new, 'mopup_new', 'education'),
                        normalize_mopup(edu_mopup_pilot, 'mopup_pilot', 'education')
-                       ) %.% join(lgas)
+                       ) %.% join(lgas, by='unique_lga')
 rm(edu_mopup, edu_mopup_new, edu_mopup_pilot)
 
 ### 2. OUTLIERS
@@ -37,7 +37,7 @@ common_indicators <- intersect(names(edu_baseline_2012), names(edu_mopup_all))
 edu_all <- rbind(edu_baseline_2012[common_indicators], edu_mopup_all[common_indicators])
 rm(edu_baseline_2012, edu_mopup_all)
 ## 4.3 aggregate
-edu_lga <- education_mopup_lga_indicators(edu_all) %.% join(lgas)
+edu_lga <- education_mopup_lga_indicators(edu_all) %.% join(lgas, by='unique_lga')
 
 ### 5. OUTPUT 
 write.csv(edu_all[get_necessary_indicators()$facility$education], row.names=F,
@@ -59,7 +59,7 @@ health_mopup_pilot <- readRDS(sprintf("%s/mopup_questionnaire_health_final.RDS",
 health_mopup_all <- rbind(normalize_mopup(health_mopup, 'mopup', 'health'),
                           normalize_mopup(health_mopup_new, 'mopup_new', 'health'),
                           normalize_mopup(health_mopup_pilot, 'mopup_pilot', 'health')
-                          ) %.% join(lgas)
+                          ) %.% join(lgas, by='unique_lga')
 rm(health_mopup, health_mopup_new, health_mopup_pilot)
 
 ### 2. OUTLIERS
@@ -77,7 +77,7 @@ common_indicators <- intersect(names(health_baseline_2012), names(health_mopup_a
 health_all <- rbind(health_baseline_2012[common_indicators], health_mopup_all[common_indicators])
 rm(health_baseline_2012, health_mopup_all)
 ## 4.3 aggregate
-health_lga <- health_mopup_lga_indicators(health_all) %.% join(lgas)
+health_lga <- health_mopup_lga_indicators(health_all) %.% join(lgas, by='unique_lga')
 
 ## 5. OUTPUT
 write.csv(health_all[get_necessary_indicators()$facility$health], row.names=F,
