@@ -16,6 +16,7 @@ install_github('formhub.R', 'SEL-Columbia')
 CONFIG = list(
     BASELINE_EDUCATION="~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/in_process_data/nmis/Normalized/Education_774_NMIS_Facility.rds",
     BASELINE_HEALTH="~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/in_process_data/nmis/Normalized/Health_774_NMIS_Facility.rds",
+    BASELINE_ALL_774_LGA="~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/in_process_data/nmis/data_774/All_774_LGA.rds"
     MOPUP_DATA_DIR="data", 
     OUTPUT_DIR="data/output_data",
     AUTHFILE="authfile.txt" # this is the filename that we created in step 3.
@@ -34,3 +35,13 @@ CONFIG = list(
 or you can run individual tests by:
 ```R CMD BATCH --slave tests/{name_of_test.R} /dev/tty```
 Remove the --slave for more detailed output.
+
+(7) Splitting into LGA level json files
+* it is the data structure behind NMIS site
+* the name comes from `unique_lga` field + `.json`
+* the structure is:
+    * first level are lga level indicators
+    * all facility level indicators are nested as an array inside of the key "facilities"
+* to run the split script, do
+```python csv2json.py```
+it will then create a folder `lgas` and a zipfile `nmis_data.zip`
