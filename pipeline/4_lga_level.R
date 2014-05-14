@@ -23,7 +23,8 @@ education_mopup_lga_indicators <- function(education_data) {
         is_primary = facility_type %in% TYPES$primary,
         is_junior_secondary = facility_type %in% TYPES$junior_sec, 
         is_combined = facility_type %in% TYPES$combined,
-        is_public = management %in% c('federal_gov', 'local_gov', 'state_gov', 'public'),
+        management = revalue(management, c("federal_gov"="public", "local_gov" = "public",
+                                           "state_gov" = "public")),
         is_valid_facility = ! facility_type %in% c('dk', 'none', 'DROP')
     )
     ## (2) Define a function which will calculate indicators given a "level". Level is primary or junior.
@@ -41,7 +42,7 @@ education_mopup_lga_indicators <- function(education_data) {
                 avg_num_classrms = round(mean(num_classrms_total, na.rm=T)),
                 avg_num_toilets = round(mean(num_toilets_total, na.rm=T)),
                 ## Percent indicators
-                percent_management_public = percent(is_public),
+                percent_management_public = percent(management == "public"),
                 percent_natl_curriculum = percent(natl_curriculum_yn),
                 percent_functional_water = percent(functional_water),
                 percent_schools_chalkboard_all_rooms = percent(chalkboard_each_classroom_yn),
@@ -65,7 +66,7 @@ education_mopup_lga_indicators <- function(education_data) {
     lga_data = education_data %.% filter(is_valid_facility) %.% group_by(lga) %.% 
         dplyr::summarise(
             num_schools = n(),
-            percent_management_public = percent(is_public),
+            percent_management_public = percent(management == "public"),
             pupil_teachers_ratio_lga = ratio(num_students_total, num_tchr_full_time),
             num_informal_schools = sum(!natl_curriculum_yn, na.rm=T),
             percent_natl_curriculum = percent(natl_curriculum_yn)) 
@@ -74,7 +75,7 @@ education_mopup_lga_indicators <- function(education_data) {
         inner_join(primary_indicators, by='lga') %.%
         inner_join(js_indicators, by='lga') %.%
     ## (6) Rename some of our indicators to possibly non-standard form. (Should go away).
-        select(##RENAMING BEFORE RETURNING: NOTE THESE SHOULD BE CHANGED ONCE 774 + MOPUP ARE TOGETHER
+        dplyr::select(##RENAMING BEFORE RETURNING: NOTE THESE SHOULD BE CHANGED ONCE 774 + MOPUP ARE TOGETHER
             num_primary_schools = num_schools_primary,
             num_junior_secondary_schools = num_schools_js,
             proportion_schools_chalkboard_all_rooms_juniorsec = percent_schools_chalkboard_all_rooms_js,

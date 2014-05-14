@@ -9,7 +9,7 @@ test_that("LGA indicators match for education for Zurmi", {
     test_education_data <- formhubRead("tests/test_data/education_mopup_SUBSET_zamfara_zurmi.csv",
                                       "tests/test_data/education_mopup.json", na.strings=c("999", "9999", "n/a"),
                                       keepGroupNames=F)
-    source('0_normalize.R'); source('3_facility_level.R'); source('4_lga_level.R')
+    source('CONFIG.R'); source('0_normalize.R'); source('3_facility_level.R'); source('4_lga_level.R')
     edu <- normalize_mopup(test_education_data, "mopup_new")
     edu <- education_mopup_facility_level(edu)
     edu_lga <- education_mopup_lga_indicators(edu)
@@ -36,7 +36,7 @@ test_that("LGA indicators match for health for Zurmi", {
     test_health_data <- formhubRead("tests/test_data/health_mopup_SUBSET_zamfara_zurmi.csv",
                                    "tests/test_data/health_mopup.json", na.strings=c("999", "9999", "n/a", "NA"),
                                    keepGroupNames=F)
-    source('0_normalize.R'); source('3_facility_level.R'); source('4_lga_level.R')
+    source('CONFIG.R'); source('0_normalize.R'); source('3_facility_level.R'); source('4_lga_level.R')
     health <- normalize_mopup(test_health_data, "mopup_new")
     health <- health_mopup_facility_level(health)
     health_lga <- health_mopup_lga_indicators(health) %.% filter(lga != "DISCARD") ## we had to insert
@@ -55,7 +55,7 @@ test_that("LGA indicators match for health for Zurmi", {
 })
 
 test_that("Mopup Integration pipeline reproduces baseline aggregations for health", {
-    source("0_normalize.R"); source("4_lga_level.R")
+    source('CONFIG.R'); source("0_normalize.R"); source("4_lga_level.R")
     test_health_data <- tbl_df(readRDS(CONFIG$BASELINE_HEALTH)) %.%
         normalize_2012(survey_name="2012", sector="health")
     health_lga <- health_mopup_lga_indicators(test_health_data)
@@ -65,14 +65,16 @@ test_that("Mopup Integration pipeline reproduces baseline aggregations for healt
     expected_lga_output[percent_indicators] <- colwise(function(x) {round(100*x)})(expected_lga_output[percent_indicators])
    
     ## Convert things from x% (y out of z) to just x, which is what it looks like for expected_output
-    health_lga[-1] <- colwise(as.numeric)(colwise(function(x) { str_extract(x, '[0-9]*')})(health_lga[-1]))
+    non_lga_cols <- setdiff(names(health_lga), c("lga"))
+    health_lga[non_lga_cols] <- colwise(as.numeric)(colwise
+                                                       (function(x) { str_extract(x, '[0-9]*')})(health_lga[non_lga_cols]))
     health_indicators <- intersect(names(expected_lga_output), names(health_lga))
 
-    cat(".. Ignoring Indicators: ", setdiff(names(health_lga), health_indicators), "\n")
+    cat(".. Ignoring changed/new Indicators: ", setdiff(names(health_lga), health_indicators), "\n")
     
     for(lg in intersect(expected_lga_output$lga, health_lga$lga)) {
         # (lg = "Zaria")
-        #sample(intersect(expected_lga_output$lga, health_lga$lga), 1))
+        # (lg = sample(intersect(expected_lga_output$lga, health_lga$lga), 1))
         if(!is.na(expected_lga_output$num_level_other_health_facilities) &
                expected_lga_output$num_level_other_health_facilities == 0) {
             (should_eq <- data.frame(rbind(subset(expected_lga_output, lga == lg, select=health_indicators), 
@@ -85,7 +87,7 @@ test_that("Mopup Integration pipeline reproduces baseline aggregations for healt
 
 
 test_that("Mopup Integration pipeline reproduces baseline aggregations for education", {
-    source("0_normalize.R"); source("4_lga_level.R")
+    source("CONFIG.R"); source("0_normalize.R"); source("4_lga_level.R")
     test_education_data <- tbl_df(readRDS(CONFIG$BASELINE_EDUCATION)) %.%
         normalize_2012(survey_name="2012", sector="education")
     education_lga <- education_mopup_lga_indicators(test_education_data)
@@ -93,9 +95,19 @@ test_that("Mopup Integration pipeline reproduces baseline aggregations for educa
     expected_lga_output <- tbl_df(readRDS("~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/in_process_data/nmis/data_774/All_774_LGA.rds"))
     percent_indicators <- names(expected_lga_output)[str_detect(names(expected_lga_output), 'proportion|percent')]
     expected_lga_output[percent_indicators] <- colwise(function(x) {round(100*x)})(expected_lga_output[percent_indicators])
+    avg_ratio_indicators <- names(expected_lga_output)[str_detect(names(expected_lga_output), 'avg|ratio')]
+    expected_lga_output[avg_ratio_indicators] <- colwise(function(x) {round(x)})(expected_lga_output[avg_ratio_indicators])
     
     # Only two LGAs are comparable, because they only have primary and junior secondary schools only.
-    expected_lga_output <- expected_lga_output %.% filter(lga %in% c("Guzamala", "Illela"))
+    expected_lga_output <- expected_lga_output %.% filter(lga %in% c("Guzamala", "Illela")) %.%
+        dplyr::select( ## RENAME 2012 LGA indicators to match up with integrated version
+            proportion_teachers_nce_js = proportion_teachers_nce_juniorsec,
+            pupil_teachers_ratio_lga_primary = primary_school_pupil_teachers_ratio_lga,
+            pupil_toilet_ratio_js = pupil_toilet_ratio_secondary,
+            student_classroom_ratio_lga_js = student_classroom_ratio_lga_juniorsec,
+            pupil_teachers_ratio_lga_js = junior_secondary_school_pupil_teachers_ratio_lga,
+            matches('.')
+        )
     
     ## Convert things from x% (y out of z) to just x, which is what it looks like for expected_output
     non_lga_cols <- setdiff(names(education_lga), c("lga"))
@@ -103,17 +115,14 @@ test_that("Mopup Integration pipeline reproduces baseline aggregations for educa
         (function(x) { str_extract(x, '[0-9]*')})(education_lga[non_lga_cols]))
     education_indicators <- intersect(names(expected_lga_output), names(education_lga))
     
-    cat("... Ignoring renamed indicators: ", setdiff(names(education_lga), education_indicators), "\n")
+    cat("... Ignoring changed/new indicators: ", setdiff(names(education_lga), education_indicators), "\n")
     
     for(lg in intersect(expected_lga_output$lga, education_lga$lga)) {
         # (lg = "Zaria")
         # (lg = sample(intersect(expected_lga_output$lga, education_lga$lga), 1))
-        if(!is.na(expected_lga_output$num_level_other_education_facilities) &
-               expected_lga_output$num_level_other_education_facilities == 0) {
-            (should_eq <- data.frame(rbind(subset(expected_lga_output, lga == lg, select=education_indicators), 
+        (should_eq <- data.frame(rbind(subset(expected_lga_output, lga == lg, select=education_indicators), 
                                            subset(education_lga, lga == lg, select=education_indicators))))
-            ## For debugging, print out should_eq OR should_eq[1,] - should_eq[2,]
-            expect_true(all(should_eq[1,] == should_eq[2,], na.rm=T))
-        }
+        ## For debugging, print out should_eq OR should_eq[1,] - should_eq[2,]
+        expect_true(all(should_eq[1,] == should_eq[2,], na.rm=T))
     }
 })
