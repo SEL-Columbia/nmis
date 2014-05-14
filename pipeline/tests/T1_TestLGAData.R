@@ -60,7 +60,7 @@ test_that("Mopup Integration pipeline reproduces baseline aggregations for healt
         normalize_2012(survey_name="2012", sector="health")
     health_lga <- health_mopup_lga_indicators(test_health_data)
     
-    expected_lga_output <- tbl_df(readRDS("~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/in_process_data/nmis/data_774/All_774_LGA.rds"))
+    expected_lga_output <- tbl_df(readRDS(CONFIG$BASELINE_ALL_774_LGA))
     percent_indicators <- names(expected_lga_output)[str_detect(names(expected_lga_output), 'proportion|percent')]
     expected_lga_output[percent_indicators] <- colwise(function(x) {round(100*x)})(expected_lga_output[percent_indicators])
    
@@ -92,7 +92,7 @@ test_that("Mopup Integration pipeline reproduces baseline aggregations for educa
         normalize_2012(survey_name="2012", sector="education")
     education_lga <- education_mopup_lga_indicators(test_education_data)
     
-    expected_lga_output <- tbl_df(readRDS("~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/in_process_data/nmis/data_774/All_774_LGA.rds"))
+    expected_lga_output <- tbl_df(readRDS(CONFIG$BASELINE_ALL_774_LGA))
     percent_indicators <- names(expected_lga_output)[str_detect(names(expected_lga_output), 'proportion|percent')]
     expected_lga_output[percent_indicators] <- colwise(function(x) {round(100*x)})(expected_lga_output[percent_indicators])
     avg_ratio_indicators <- names(expected_lga_output)[str_detect(names(expected_lga_output), 'avg|ratio')]
