@@ -1,4 +1,5 @@
-data/*
+data/
+!data/lgas.csv
 authfile
 CONFIG.R
 
