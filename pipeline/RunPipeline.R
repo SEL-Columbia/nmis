@@ -3,7 +3,7 @@ suppressPackageStartupMessages(require(formhub))
 suppressPackageStartupMessages(require(dplyr))
 
 ### READ IN LGAS FILE ##
-lgas <- read.csv(CONFIG$LGASFILE) %.% 
+lgas <- read.csv("data/lgas.csv") %.% 
     dplyr::select(matches('lga'), latitude, longitude, state, zone, lga_id)
 
 ################ EDUCATION ####################################################
