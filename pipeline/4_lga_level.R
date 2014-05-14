@@ -23,11 +23,9 @@ education_mopup_lga_indicators <- function(education_data) {
         is_primary = facility_type %in% TYPES$primary,
         is_junior_secondary = facility_type %in% TYPES$junior_sec, 
         is_combined = facility_type %in% TYPES$combined,
-        is_valid_facility = ! facility_type %in% c('dk', 'none'),
-        
-        ## Public / natl curriculum
-        is_public = management %in% c('federal_gov', 'local_gov', 'state_gov'),
-        natl_curriculum_yn = education_type %in% c('formal_only', 'integrated')
+        management = revalue(management, c("federal_gov"="public", "local_gov" = "public",
+                                           "state_gov" = "public")),
+        is_valid_facility = ! facility_type %in% c('dk', 'none', 'DROP')
     )
     ## (2) Define a function which will calculate indicators given a "level". Level is primary or junior.
     ## primary and junior secondary indicator transformations. Note: columns will end with _primary or _js
@@ -44,7 +42,7 @@ education_mopup_lga_indicators <- function(education_data) {
                 avg_num_classrms = round(mean(num_classrms_total, na.rm=T)),
                 avg_num_toilets = round(mean(num_toilets_total, na.rm=T)),
                 ## Percent indicators
-                percent_management_public = percent(is_public),
+                percent_management_public = percent(management == "public"),
                 percent_natl_curriculum = percent(natl_curriculum_yn),
                 percent_functional_water = percent(functional_water),
                 percent_schools_chalkboard_all_rooms = percent(chalkboard_each_classroom_yn),
@@ -68,7 +66,7 @@ education_mopup_lga_indicators <- function(education_data) {
     lga_data = education_data %.% filter(is_valid_facility) %.% group_by(lga) %.% 
         dplyr::summarise(
             num_schools = n(),
-            percent_management_public = percent(is_public),
+            percent_management_public = percent(management == "public"),
             pupil_teachers_ratio_lga = ratio(num_students_total, num_tchr_full_time),
             num_informal_schools = sum(!natl_curriculum_yn, na.rm=T),
             percent_natl_curriculum = percent(natl_curriculum_yn)) 
@@ -77,7 +75,7 @@ education_mopup_lga_indicators <- function(education_data) {
         inner_join(primary_indicators, by='lga') %.%
         inner_join(js_indicators, by='lga') %.%
     ## (6) Rename some of our indicators to possibly non-standard form. (Should go away).
-        select(##RENAMING BEFORE RETURNING: NOTE THESE SHOULD BE CHANGED ONCE 774 + MOPUP ARE TOGETHER
+        dplyr::select(##RENAMING BEFORE RETURNING: NOTE THESE SHOULD BE CHANGED ONCE 774 + MOPUP ARE TOGETHER
             num_primary_schools = num_schools_primary,
             num_junior_secondary_schools = num_schools_js,
             proportion_schools_chalkboard_all_rooms_juniorsec = percent_schools_chalkboard_all_rooms_js,
@@ -107,24 +105,24 @@ health_mopup_lga_indicators = function(health_data) {
     ## (2) Aggregation 1: Services that are provided at Hospitals only
     hospital_data = health_data %.% filter(is_hospital) %.% group_by(lga)  %.% 
          dplyr::summarise(
-             percent_compr_oc_c_sections = percent(c_section_yn == 'yes'))
+             percent_csection = percent(c_section_yn))
     ## (3) Aggregation 2: Services that are provided at all facilties except for Health Posts
     allExceptHealthPost_data = health_data %.% filter(is_allExceptHealthPost) %.% group_by(lga) %.%
         dplyr::summarise(
-            proportion_delivery_24_7_sansHP = percent(maternal_health_delivery_services == 'yes'),
-            proportion_vaccines_fridge_freezer_sansHP = percent(vaccines_fridge_freezer == 'yes'))
+            proportion_delivery_sansHP = percent(maternal_health_delivery_services),
+            proportion_vaccines_fridge_freezer_sansHP = percent(vaccines_fridge_freezer))
     ## (4) Aggregation 3: Services that are provided at all facilities including Health Posts
     allFacilities_data = health_data %.% filter(is_healthfacility) %.% group_by(lga) %.%
         dplyr::summarise(
             num_health_facilities = n(),
-            proportion_antenatal = percent(antenatal_care_yn == 'yes'),
-            proportion_family_planning = percent(family_planning_yn == 'yes'),
-            proportion_access_functional_emergency_transport = percent(emergency_transport == 'yes'),
-            proportion_act_treatment_for_malaria = percent(malaria_treatment_artemisinin == 'yes'),
-            proportion_measles = percent(child_health_measles_immun_calc == 'yes'),
+            proportion_antenatal = percent(antenatal_care_yn),
+            proportion_family_planning = percent(family_planning_yn),
+            proportion_access_emergency_transport = percent(emergency_transport),
+            proportion_act_treatment_for_malaria = percent(malaria_treatment_artemisinin),
+            proportion_measles = percent(child_health_measles_immun_calc),
             
             ## Facilities
-            num_facilities = n(),
+            num_health_facilities = n(),
             num_level_1_health_facilities = sum(is_healthpost, na.rm=T),
             num_level_2_health_facilities = sum(facility_type == 'basic_health_centre', na.rm=T),       
             num_level_3_health_facilities = sum(facility_type == 'primary_health_centre', na.rm=T),
@@ -139,16 +137,16 @@ health_mopup_lga_indicators = function(health_data) {
             num_nursemidwives_midwives = sum(num_nursemidwives_fulltime, na.rm=T),
             
             ## Overview Tab
-            facilities_delivery_services_yn = sum(maternal_health_delivery_services == 'yes', na.rm=T),
-            facilities_emergency_transport = sum(emergency_transport == 'yes', na.rm=T),
+            facilities_delivery_services_yn = sum(maternal_health_delivery_services, na.rm=T),
+            facilities_emergency_transport = sum(emergency_transport, na.rm=T),
             facilities_skilled_birth_attendant = sum(skilled_birth_attendant, na.rm=T),
-            facilities_measles = sum(child_health_measles_immun_calc == 'yes', na.rm=T),
+            facilities_measles = sum(child_health_measles_immun_calc, na.rm=T),
             
             ## Infrastructure -- all facilities
             proportion_improved_water_supply = percent(improved_water_supply),
             proportion_improved_sanitation = percent(improved_sanitation),
             proportion_phcn_electricity = percent(phcn_electricity),
-            proportion_power_alternative_functional = percent(power_sources_alternative_functional))
+            proportion_access_to_alternative_power = percent(access_to_alternative_power_source))
      ## (5) Merge everything (merge is equivalent to left_join in dplyr) and return
      return(allFacilities_data %.% 
                 left_join(allExceptHealthPost_data, by='lga') %.% 

@@ -23,13 +23,14 @@ CONFIG = list(
 ```
 
 (5) For each of the following purposes, run the corresponding command in the command line (you have to be in the pipeline directory):
- * Run facility and lga level transformations: `Rscript RunPipeline.R`
- * Download data from formhub: `Rscript Download.R`
+ * Run facility and lga level transformations: `make pipepline` or `Rscript RunPipeline.R`
+ * Download data from formhub: `make download` or `Rscript Download.R`
 
 (6) To make sure that we are calculating our indicators correctly, we have written tests for our pipeline. To run them, from the command line (in the pipeline directory), run:
- ```sh run_tests.sh```
+```make test```
 * this will run all the tests in the tests folder automatically
 * If you see errors, FIX THEM IMMEDIATELY.
 
 or you can run individual tests by:
-```R CMD BATCH tests/{name_of_test.R} /dev/tty```
+```R CMD BATCH --slave tests/{name_of_test.R} /dev/tty```
+Remove the --slave for more detailed output.

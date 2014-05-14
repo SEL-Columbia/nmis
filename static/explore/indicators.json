@@ -110,8 +110,12 @@
         "description": ""
     },
     "proportion_delivery_24_7_sansHP": {
-        "name": "Percentage that provide delivery services for pregnant women",
-        "description": "Percentage that provide delivery services for pregnant women"
+        "name": "Percentage that provide delivery services for pregnant women 24/7.",
+        "description": "Percentage that provide delivery services for pregnant women twenty four hours and seven days in a week."
+    },
+    "proportion_delivery_sansHP": {
+        "name": "Percentage that provide delivery services for pregnant.",
+        "description": "Percentage that provide delivery services for pregnant women twenty four hours and seven days in a week."
     },
     "proportion_vaccines_fridge_freezer_sansHP": {
         "name": "Percentage with refrigerator or freezer for vaccine storage",
@@ -204,6 +208,10 @@
         "description": "Facility has the capacity to perform safe blood transfusion."
     },
     "proportion_access_functional_emergency_transport": {
+        "name": "Percentage of facilities with access to functional emergency transport services",
+        "description": ""
+    },
+    "proportion_access_emergency_transport": {
         "name": "Percentage of facilities with access to emergency transport services",
         "description": ""
     },
@@ -316,12 +324,20 @@
         "name": "Percentage that perform C-sections",
         "description": ""
     },
+    "percent_csection": {
+        "name": "Percentage that perform C-sections",
+        "description": ""
+    },
     "num_health_facilities_sansHP": {
         "name": "Total number of primary health clinics, primary health centers, comprehensive health centers and hospitals",
         "description": ""
     },
     "proportion_power_alternative_functional": {
-        "name": "Percentage with alternative source of electricity/power",
+        "name": "Percentage with functional alternative source of electricity/power",
+        "description": ""
+    },
+    "proportion_access_to_alternative_power": {
+        "name": "Percentage with access to alternative source of electricity/power",
         "description": ""
     },
     "facilities_delivery_services_yn": {

@@ -19,8 +19,7 @@ all_mopup_facility_level = function(facility_data) {
             improved_sanitation = improved_sanitation.vip_latrine | 
                 improved_sanitation.pit_latrine_with_slab | improved_sanitation.flush,
             # NEEDED for aggregations
-            power_sources_alternative_functional = ifelse(power_sources.generator, generator_functional=='yes', FALSE) |
-                ifelse(power_sources.solar_system, solar_functional=='yes', FALSE),
+            access_to_alternative_power_source = power_sources.generator | power_sources.solar_system,
             # USEFUL DATA POINTS for DATA output, not in NMIS
             power_access = power_sources.generator | power_sources.solar_system | power_sources.grid
         )
@@ -30,9 +29,10 @@ all_mopup_facility_level = function(facility_data) {
 education_mopup_facility_level = function(education_data) {
     return(all_mopup_facility_level(education_data) %.% mutate(
             sector = "education",
-            ## from outlier which shouldnt belong there
+            ## The following are used in other parts of the pipeline
             ratio_students_to_toilet = num_students_total / num_toilets_total,
-            pupil_class_ratio = num_students_total/num_classrms_total,
+            pupil_class_ratio = num_students_total / num_classrms_total,
+            natl_curriculum_yn = education_type %in% c('formal_only', 'integrated'),
             
             ## INFRASTRUCTURE
             ## note: these are also written like this for historical consistency
