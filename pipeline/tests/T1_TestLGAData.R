@@ -12,7 +12,7 @@ test_that("LGA indicators match for education for Zurmi", {
     source('CONFIG.R'); source('0_normalize.R'); source('3_facility_level.R'); source('4_lga_level.R')
     edu <- normalize_mopup(test_education_data, "mopup_new")
     edu <- education_mopup_facility_level(edu)
-    edu_lga <- education_mopup_lga_indicators(edu)
+    edu_lga <- education_mopup_lga_indicators(edu) %.% select(lga = unique_lga)
     ### (2) Test that they are the same
     
     ## Sanity checks
@@ -39,7 +39,8 @@ test_that("LGA indicators match for health for Zurmi", {
     source('CONFIG.R'); source('0_normalize.R'); source('3_facility_level.R'); source('4_lga_level.R')
     health <- normalize_mopup(test_health_data, "mopup_new")
     health <- health_mopup_facility_level(health)
-    health_lga <- health_mopup_lga_indicators(health) %.% filter(lga != "DISCARD") ## we had to insert
+    health_lga <- health_mopup_lga_indicators(health) %.% 
+        select(lga = unique_lga) %.% filter(lga != "DISCARD") ## we had to insert
     ### (2) Test that they are the same
     ## Sanity checks
     expect_true(nrow(health_lga) == 1) # we should produce only one column

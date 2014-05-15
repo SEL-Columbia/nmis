@@ -2,10 +2,6 @@ source('CONFIG.R')
 suppressPackageStartupMessages(require(formhub))
 suppressPackageStartupMessages(require(dplyr))
 
-### READ IN LGAS FILE ##
-lgas <- read.csv(CONFIG$LGASFILE) %.% 
-    dplyr::select(matches('lga'), latitude, longitude, state, zone, lga_id)
-
 ################ EDUCATION ####################################################
 source("nmis_functions.R"); source("0_normalize.R"); source("2_outlier_cleaning.R");
 source("3_facility_level.R"); source("4_lga_level.R")
@@ -18,7 +14,8 @@ edu_mopup <- readRDS(sprintf("%s/education_mopup.RDS",CONFIG$MOPUP_DATA_DIR))
 ### 0. NORMALIZE (and merge)
 edu_mopup_all <- rbind(normalize_mopup(edu_mopup, 'mopup', 'education'),
                        normalize_mopup(edu_mopup_new, 'mopup_new', 'education'),
-                       normalize_mopup(edu_mopup_pilot, 'mopup_pilot', 'education'))
+                       normalize_mopup(edu_mopup_pilot, 'mopup_pilot', 'education')
+                       )
 rm(edu_mopup, edu_mopup_new, edu_mopup_pilot)
 
 ### 2. OUTLIERS
@@ -36,14 +33,14 @@ common_indicators <- intersect(names(edu_baseline_2012), names(edu_mopup_all))
 edu_all <- rbind(edu_baseline_2012[common_indicators], edu_mopup_all[common_indicators])
 rm(edu_baseline_2012, edu_mopup_all)
 ## 4.3 aggregate
-edu_lga <- education_mopup_lga_indicators(edu_all) %.% join(lgas)
-
+edu_lga <- education_mopup_lga_indicators(edu_all)
 ### 5. OUTPUT 
-write.csv(edu_all[get_necessary_indicators()$facility$education], row.names=F,
+source("5_necessary_indicators.R")
+write.csv(output_indicators(edu_all, 'facility', 'education'), row.names=F,
           file=sprintf('%s/Education_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
-write.csv(edu_lga[get_necessary_indicators()$lga$education], row.names=F,
+write.csv(output_indicators(edu_lga, 'lga', 'education'), row.names=F,
           file=sprintf('%s/Education_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
-rm(list=setdiff(ls(), c("CONFIG", "lgas")))
+rm(list=setdiff(ls(), c("CONFIG")))
 
 ################ HEALTH ####################################################
 source("nmis_functions.R"); source("0_normalize.R"); source("2_outlier_cleaning.R");
@@ -57,7 +54,8 @@ health_mopup_pilot <- readRDS(sprintf("%s/mopup_questionnaire_health_final.RDS",
 ### 0. NORMALIZE (and merge)
 health_mopup_all <- rbind(normalize_mopup(health_mopup, 'mopup', 'health'),
                           normalize_mopup(health_mopup_new, 'mopup_new', 'health'),
-                          normalize_mopup(health_mopup_pilot, 'mopup_pilot', 'health'))
+                          normalize_mopup(health_mopup_pilot, 'mopup_pilot', 'health')
+                          )
 rm(health_mopup, health_mopup_new, health_mopup_pilot)
 
 ### 2. OUTLIERS
@@ -75,11 +73,11 @@ common_indicators <- intersect(names(health_baseline_2012), names(health_mopup_a
 health_all <- rbind(health_baseline_2012[common_indicators], health_mopup_all[common_indicators])
 rm(health_baseline_2012, health_mopup_all)
 ## 4.3 aggregate
-health_lga <- health_mopup_lga_indicators(health_all) %.% join(lgas)
-
+health_lga <- health_mopup_lga_indicators(health_all)
 ## 5. OUTPUT
-write.csv(health_all[get_necessary_indicators()$facility$health], row.names=F,
+source("5_necessary_indicators.R")
+write.csv(output_indicators(health_all, 'facility', 'health'), row.names=F,
           file=sprintf('%s/Health_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
-write.csv(health_lga[get_necessary_indicators()$lga$health], row.names=F,
+write.csv(output_indicators(health_lga, 'lga', 'health'), row.names=F,
           file=sprintf('%s/Health_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
 rm(list=setdiff(ls(), "CONFIG"))

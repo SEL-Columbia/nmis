@@ -1,5 +1,4 @@
-data/*
-authfile*
+authfile
 CONFIG.R
 
 .RData
@@ -7,3 +6,5 @@ CONFIG.R
 *.Rproj
 .Rhistory
 
+lgas
+*.zip
