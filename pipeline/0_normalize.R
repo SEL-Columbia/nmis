@@ -19,11 +19,26 @@ normalize_mopup = function(formhubData, survey_name, sector) {
     } else {
         stop("survey_name or sector is invalid")
     }
+    #### CORRECT THE MISTAKE WHERE SOME LGAs were given the unique_lga value "NA" by mistake
+    if(survey_name == "mopup") {
+        messed_up_lgas <- d %.% dplyr::filter(lga=="NA") %.%
+            mutate(
+                lga = str_c(state, lga),   # add state names to make revaluing possible
+                lga = revalue(lga, c("adamawaNA" = "adamawa_larmurde",
+                                     "nasarawaNA" = "nasarawa_obi",
+                                     "osunNA" = "NA", ## SADLY: two possible values for osun
+                                     "oyoNA" = "oyo_surulere",
+                                     "plateauNA" = "plateaut_bassa"))
+            )
+        d <- rbind_list(d %.% filter(lga != "NA"), messed_up_lgas)
+    }
     
-    ## These are all useful at early monitoring stages. Drop for the future.
-    d %.% 
-        dplyr::select(formhub_photo_id = photo_facility, unique_lga = lga,
-                      -matches('_dontknow', '_calc'))
+    return(d %.% ## drop _dontknow and _calc values, which are only meant for monitoring
+        dplyr::select(-matches('_dontknow', '_calc'),
+                      formhub_photo_id = photo_facility,
+                      unique_lga = lga,
+                      matches('.')) # 
+    )
 }
 
 normalize_2012 = function(d, survey_name, sector) {
