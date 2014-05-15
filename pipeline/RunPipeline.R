@@ -2,10 +2,6 @@ source('CONFIG.R')
 suppressPackageStartupMessages(require(formhub))
 suppressPackageStartupMessages(require(dplyr))
 
-### READ IN LGAS FILE ##
-lgas <- read.csv("data/lgas.csv") %.% 
-    dplyr::select(matches('lga'), latitude, longitude, state, zone, lga_id)
-
 ################ EDUCATION ####################################################
 source("nmis_functions.R"); source("0_normalize.R"); source("2_outlier_cleaning.R");
 source("3_facility_level.R"); source("4_lga_level.R")
@@ -40,11 +36,11 @@ rm(edu_baseline_2012, edu_mopup_all)
 edu_lga <- education_mopup_lga_indicators(edu_all)
 ### 5. OUTPUT 
 source("5_necessary_indicators.R")
-write.csv(output_indicators(edu_all, lgas, 'facility', 'education'), row.names=F,
+write.csv(output_indicators(edu_all, 'facility', 'education'), row.names=F,
           file=sprintf('%s/Education_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
-write.csv(output_indicators(edu_lga, lgas, 'lga', 'education'), row.names=F,
+write.csv(output_indicators(edu_lga, 'lga', 'education'), row.names=F,
           file=sprintf('%s/Education_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
-rm(list=setdiff(ls(), c("CONFIG", "lgas")))
+rm(list=setdiff(ls(), c("CONFIG")))
 
 ################ HEALTH ####################################################
 source("nmis_functions.R"); source("0_normalize.R"); source("2_outlier_cleaning.R");
@@ -80,8 +76,8 @@ rm(health_baseline_2012, health_mopup_all)
 health_lga <- health_mopup_lga_indicators(health_all)
 ## 5. OUTPUT
 source("5_necessary_indicators.R")
-write.csv(output_indicators(health_all, lgas, 'facility', 'health'), row.names=F,
+write.csv(output_indicators(health_all, 'facility', 'health'), row.names=F,
           file=sprintf('%s/Health_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
-write.csv(output_indicators(health_lga, lgas, 'lga', 'health'), row.names=F,
+write.csv(output_indicators(health_lga, 'lga', 'health'), row.names=F,
           file=sprintf('%s/Health_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
 rm(list=setdiff(ls(), "CONFIG"))
