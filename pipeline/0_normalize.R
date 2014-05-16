@@ -90,6 +90,10 @@ normalize_2012 = function(d, survey_name, sector) {
                                               "vocational" = "DROP",
                                               "vocational_post_primary" = "DROP",
                                               "vocational_post_secondary" = "DROP"))
+                ) %.% dplyr::select( # the following are renames. format: new_value = old_value
+                    ## RENAMING SOME BASELINE INDICATORS TO MATCH WITH NEW NAMES
+                    num_classrms_repair = num_classrms_need_maj_repairs,
+                    matches('.') # this is necessary, in order not to drop the rest of the columns
                 )
         }
         return(d %.% mutate(facility_ID = NA))
