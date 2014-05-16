@@ -81,3 +81,22 @@ write.csv(output_indicators(health_all, 'facility', 'health'), row.names=F,
 write.csv(output_indicators(health_lga, 'lga', 'health'), row.names=F,
           file=sprintf('%s/Health_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
 rm(list=setdiff(ls(), "CONFIG"))
+
+########## WATER ###########################################################
+source("nmis_functions.R"); source("0_normalize.R"); source("2_outlier_cleaning.R");
+source("3_facility_level.R"); source("4_lga_level.R")
+### since there is no mopup data from water, we would go straight to
+### aggregation
+
+### 4. LGA aggregation
+## 4.1 load in 2012 data
+water_baseline_2012 <- tbl_df(readRDS(CONFIG$BASELINE_WATER))
+water_baseline_2012 <- normalize_2012(water_baseline_2012, '2012', 'water')
+nwater <- get_necessary_indicators()[['facility']][['water']]
+print nwater
+
+
+water_all <- water_baseline_2012
+
+
+

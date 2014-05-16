@@ -91,6 +91,8 @@ normalize_2012 = function(d, survey_name, sector) {
                                               "vocational_post_primary" = "DROP",
                                               "vocational_post_secondary" = "DROP"))
                 )
+        } else if (selcot == "water") {
+            d <- d
         }
         return(d %.% mutate(facility_ID = NA))
     } else {
