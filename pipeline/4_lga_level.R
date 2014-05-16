@@ -182,4 +182,29 @@ water_lga_indicators <- function(water_data) {
         )
 
      return(lga_data) 
+
+education_gap_sheet_indicators <- function(education_data) {
+    ## (0) WE will list out which types are which here:
+    TYPES = list("primary" = c("preprimary_and_primary", "primary_only"),
+                 "junior_sec" = c("junior_sec_only"),
+                 "combined" = c("primary_and_junior_sec", "primary_junior_and_senior_sec",
+                                "junior_and_senior_sec"))
+    ## (1) Create additional facility-level indicators that are helpful in our later calculations
+    education_data %.% 
+        mutate(
+            is_primary_or_js = facility_type %in% c(TYPES$primary, TYPES$junior_sec)
+        ) %.% 
+        filter(is_primary_or_js) %.%
+        group_by(unique_lga) %.%
+        summarize(
+            primary_js = n(),
+            num_existing_classrooms = sum(num_classrms_total, na.rm=T),
+            total_teachers = sum(num_tchr_full_time, na.rm=T),
+            improved_functional_water = percent(improved_water_supply),
+            improved_sanitation = percent(improved_sanitation),
+            phcn_electricity_e = percent(phcn_electricity),
+            num_classrms_repairs = ratio(num_classrms_repair, num_classrms_total, as.percent=TRUE),
+            num_classrm_w_chalkboard = ratio(num_classrm_w_chalkboard, num_classrms_total, as.percent=TRUE),
+            num_tchrs_with_nce = ratio(num_tchrs_with_nce, num_tchr_full_time, as.percent=TRUE)
+        )
 }
