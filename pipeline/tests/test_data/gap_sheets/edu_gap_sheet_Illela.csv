@@ -1,0 +1,15 @@
+variable,value,numerator,denominator
+lga ,Illela,,
+state ,Sokoto,,
+unique_lga ,sokoto_illela,,
+zone ,Northwest,,
+pop_2006 ,150489,,
+gap_sheet_primary_js ,108,,
+gap_sheet_num_existing_classrooms ,655,,
+gap_sheet_total_teachers ,378,,
+gap_sheet_improved_functional_water ,20%,22,108
+gap_sheet_improved_sanitation ,29%,31,108
+gap_sheet_phcn_electricity_e ,10%,11,108
+gap_sheet_num_classrms_repairs ,40%,262,655
+gap_sheet_num_classrm_w_chalkboard ,18%,116,655
+gap_sheet_num_tchrs_with_nce,17%,64,378
