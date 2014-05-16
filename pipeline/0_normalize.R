@@ -11,22 +11,34 @@ normalize_mopup = function(formhubData, survey_name, sector) {
     ## Survey_name: mopup, mopup_new, or mopup_pilot
     # mopup and mopup_new are pretty much the same, except mopup has some LGAs mistakenly as NA
     if(survey_name %in% c("mopup", "mopup_new")) {
-        d <- d %.% dplyr::select(-facility_list_yn, 
-                                 -grid_proximity_if_not_connected,
-                                 formhub_photo_id = photo_facility, 
-                                 unique_lga = lga,
-                                 matches('.'))
+        d <- d %.%
+            dplyr::select(-facility_list_yn, -grid_proximity_if_not_connected, matches('.'))
     } else if (survey_name %in% c("mopup_pilot")) {
-        d <- d %.% dplyr::select(-new_old,
-                                 unique_lga = lga,
-                                 formhub_photo_id = photo_facility, 
-                                 matches('.'))
+        d <- d %.% 
+            dplyr::select(-new_old, matches('.'))
     } else {
         stop("survey_name or sector is invalid")
     }
+    #### CORRECT THE MISTAKE WHERE SOME LGAs were given the unique_lga value "NA" by mistake
+    if(survey_name == "mopup") {
+        messed_up_lgas <- d %.% dplyr::filter(lga=="NA") %.%
+            mutate(
+                lga = str_c(state, lga),   # add state names to make revaluing possible
+                lga = revalue(lga, c("adamawaNA" = "adamawa_larmurde",
+                                     "nasarawaNA" = "nasarawa_obi",
+                                     "osunNA" = "NA", ## SADLY: two possible values for osun
+                                     "oyoNA" = "oyo_surulere",
+                                     "plateauNA" = "plateaut_bassa"))
+            )
+        d <- rbind_list(d %.% filter(lga != "NA"), messed_up_lgas)
+    }
     
-    ## These are all useful at early monitoring stages. Drop for the future.
-    d %.% dplyr::select(-matches('_dontknow', '_calc'))
+    return(d %.% ## drop _dontknow and _calc values, which are only meant for monitoring
+        dplyr::select(-matches('_dontknow', '_calc'),
+                      formhub_photo_id = photo_facility,
+                      unique_lga = lga,
+                      matches('.')) # 
+    )
 }
 
 normalize_2012 = function(d, survey_name, sector) {
