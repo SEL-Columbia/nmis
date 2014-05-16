@@ -32,7 +32,9 @@ def get_surveyed_facilities():
     """
     urls = [
         'https://formhub.org/ossap/forms/health_mopup/api',
+        'https://formhub.org/ossap/forms/health_mopup_new/api',
         'https://formhub.org/ossap/forms/education_mopup/api',
+        'https://formhub.org/ossap/forms/education_mopup_new/api',
         'https://formhub.org/ossap/forms/mopup_questionnaire_health_final/api',
         'https://formhub.org/ossap/forms/mopup_questionnaire_education_final/api'
     ]
