@@ -152,3 +152,22 @@ health_mopup_lga_indicators = function(health_data) {
                 left_join(allExceptHealthPost_data, by='unique_lga') %.% 
                 left_join(hospital_data, by='unique_lga'))
 }
+
+water_lga_indicators <- function(water_data) {
+    ## all calculation are gathered from 
+    ## nmis_R_scripts/nmis/nmis_indicators_water_lga_level_normalized.R
+    lga_data = water_data %.% group_by(unique_lga) %.% 
+        dplyr::summarise(
+            num_total_water_points = n(),
+            num_taps =  sum(water_point_type == "Tap", na.rm = T),
+            num_unimproved_points = sum(!is_improved, na.rm = T),
+            num_overhead_tanks = sum(water_point_type
+                %in% c("Overhead Tank", "Rainwater Harvesting System"), na.rm = T),
+            num_handpumps = sum(water_point_type %in% c('Borehole', 'Hand Pump'), na.rm = T),
+            num_improved_water_points = sum(is_improved, na.rm = T),
+            percentage_functional_improved = ratio(is_improved, functional),
+            percentage_functional_handpumps = ratio(water_point_type %in% c("Handpump", "Borehole"), is_improved),
+            percentage_functional_taps = ratio(water_point_type == "Tap", functional)
+        )
+    return(lga_data)
+}

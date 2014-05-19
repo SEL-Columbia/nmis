@@ -92,8 +92,7 @@ normalize_2012 = function(d, survey_name, sector) {
                                               "vocational_post_secondary" = "DROP"))
                 )
         } else if (sector == "water") {
-            d <- d
-        }
+            d <- d         }
         return(d %.% mutate(facility_ID = NA))
     } else {
         stop("Sector and Survey Name normalization not yet supported.")

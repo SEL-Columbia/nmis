@@ -93,10 +93,13 @@ source("3_facility_level.R"); source("4_lga_level.R")
 water_baseline_2012 <- tbl_df(readRDS(CONFIG$BASELINE_WATER))
 water_baseline_2012 <- normalize_2012(water_baseline_2012, '2012', 'water')
 nwater <- get_necessary_indicators()[['facility']][['water']]
-print(nwater)
-
-
-water_all <- water_baseline_2012
-
-
+## 4.2 aggregate
+water_lga <- water_lga_indicators(water_baseline_2012)
+### 5. Write Out
+source("5_necessary_indicators.R")
+write.csv(output_indicators(water_baseline_2012, 'facility', 'water'), row.names=F,
+          file=sprintf('%s/Water_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
+write.csv(output_indicators(water_lga, 'lga', 'water'), row.names=F,
+          file=sprintf('%s/Water_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
+rm(list=setdiff(ls(), "CONFIG"))
 
