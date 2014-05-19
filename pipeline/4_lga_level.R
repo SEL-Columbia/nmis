@@ -165,8 +165,10 @@ education_gap_sheet_indicators <- function(education_data) {
         mutate(
             is_primary_or_js = facility_type %in% c(TYPES$primary, TYPES$junior_sec)
         ) %.% 
+    ## (2) Filter by just primary and junior secondary schools and group by lga
         filter(is_primary_or_js) %.%
         group_by(unique_lga) %.%
+    ## (3) And finally, create the summary indicators
         dplyr::summarize(
             primary_js = n(),
             num_existing_classrooms = sum(num_classrms_total, na.rm=T),
@@ -174,8 +176,13 @@ education_gap_sheet_indicators <- function(education_data) {
             improved_functional_water = percent(improved_water_supply),
             improved_sanitation = percent(improved_sanitation),
             phcn_electricity_e = percent(phcn_electricity),
-            num_classrms_repairs = ratio(num_classrms_repair, num_classrms_total, as.percent=TRUE),
-            num_classrm_w_chalkboard = ratio(num_classrm_w_chalkboard, num_classrms_total, as.percent=TRUE),
-            num_tchrs_with_nce = ratio(num_tchrs_with_nce, num_tchr_full_time, as.percent=TRUE)
+            num_classrms_repairs = 
+                ratio(num_classrms_repair, num_classrms_total, as.percent=TRUE),
+            num_classrm_w_chalkboard = 
+                ratio(num_classrm_w_chalkboard, num_classrms_total, as.percent=TRUE),
+            num_tchrs_with_nce = 
+                ratio(num_tchrs_with_nce, num_tchr_full_time, as.percent=TRUE)
         )
+    ## (4) Final step for gap sheets. Note that we want to output data as numerator / denominator
+    ## rather than percent for gap sheets. We do the splitting below. TODO
 }
