@@ -3,8 +3,23 @@
 ######################################################################################################
 
 # Formats a percentage given scalar numerator and denominator
+## NOTE: May need to change numbers_from_percent_format if you chane this.
 percent_format <- function(numerator, denominator) {
-    sprintf("%1.0f%% (%i out of %i)", 100 * numerator / denominator, numerator, denominator)
+    ifelse(is.finite(numerator) & is.finite(denominator),
+           sprintf("%1.0f%% (%i out of %i)", 100 * numerator / denominator, numerator, denominator),
+           "NA"
+    )
+}
+
+# Numbers from percent_format. ie, "Inverse" the percent format operation.
+## NOTE: May need to change percent_format if you change this.
+numbers_from_percent_format <- function(string_in_percent_format) {
+    splitted <- as.numeric(unlist(str_extract_all(string_in_percent_format, '[0-9]+')))
+    if(length(splitted) == 3) {
+        setNames(splitted, c('percent', 'numerator', 'denominator'))     
+    } else {
+        c(percent=NA, numerator=NA, denominator=NA)   
+    }
 }
 
 # Ratio: produces the ratio of a numerator and a denominator column. Includes functionality to:
