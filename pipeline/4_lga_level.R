@@ -167,7 +167,7 @@ education_gap_sheet_indicators <- function(education_data) {
         ) %.% 
         filter(is_primary_or_js) %.%
         group_by(unique_lga) %.%
-        summarize(
+        dplyr::summarize(
             primary_js = n(),
             num_existing_classrooms = sum(num_classrms_total, na.rm=T),
             total_teachers = sum(num_tchr_full_time, na.rm=T),
