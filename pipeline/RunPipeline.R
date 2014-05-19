@@ -93,7 +93,7 @@ source("3_facility_level.R"); source("4_lga_level.R")
 water_baseline_2012 <- tbl_df(readRDS(CONFIG$BASELINE_WATER))
 water_baseline_2012 <- normalize_2012(water_baseline_2012, '2012', 'water')
 nwater <- get_necessary_indicators()[['facility']][['water']]
-print nwater
+print(nwater)
 
 
 water_all <- water_baseline_2012
