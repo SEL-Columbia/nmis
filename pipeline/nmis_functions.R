@@ -19,11 +19,14 @@ ratio <- function(numerator, denominator, as.percent=FALSE) {
 # Percent: produces the percent true for a boolean-valued column. Includes functionality to:
 # (1) drop NA
 # (2) output something in the format: 87% (87 out of 100)
-percent <- function(boolean_vector) {
+percent <- function(boolean_vector, filter=NULL) {
     stopifnot(class(boolean_vector) == 'logical')
+    if (!is.null(filter)) {
+        stopifnot(class(filter) == 'logical')
+        boolean_vector = boolean_vector[filter]
+    }
     percent_format(sum(boolean_vector, na.rm=T), length(na.omit(boolean_vector)))
 }
-
 # between is a helper function that returns a boolan TRUE if the value falls in
 # between min and max, with a flag "inclusive" set to False by default
 between <- function(value, min, max, inclusive=F) { 
