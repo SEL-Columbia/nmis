@@ -24,6 +24,8 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 body {
     padding-top: 115px;
     font-size: 15px;
+    width: 1200px;
+    margin: auto;
 }
 
 h1 {
@@ -423,7 +425,7 @@ table thead td:active {
 .walkthrough_modal {
     position: absolute;
     top: 150px;
-    left: 50%;
+    left: 600px;
     color: white;
     width: 500px;
     margin-left: -250px;
@@ -657,8 +659,8 @@ table thead td:active {
 }
 
 .map_view {
-    margin-top: 100px;
-    height: 1000px;
+    position: fixed;
+    left: 0;
     width: 100%;
 }
 .map_legend_container {

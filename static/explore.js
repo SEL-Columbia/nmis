@@ -258,9 +258,10 @@ MapView.render = function(lga, sector){
 
 MapView.facility_map = function(lga, sector, indicator) {
     var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
-    var map_height = $(document).height() - $('#header').outerHeight() + 5;
+    var map_top = $('#header').outerHeight();
+    var map_height = $(document).height() - map_top;
     var map_div = $('.map_view')
-        .height(map_height)
+        .css({top: map_top, height: map_height})
         .show()[0];
     var map = map_div._map;
 
@@ -688,10 +689,10 @@ Walkthrough.pages = [
                     return false;
                 });
             
-            $.curvedArrow({
-                p0x: 400, p0y: 400,
-                p1x: 300, p1y: 300,
-                p2x: 250, p2y: 440
+            $('#content').curvedArrow({
+                p0x: 320, p0y: 250,
+                p1x: 250, p1y: 250,
+                p2x: 210, p2y: 330
             });
         }
     },
@@ -700,10 +701,10 @@ Walkthrough.pages = [
         "View all sectors within an LGA or choose from Health, Education or Water.",
         location_hash: '#benue_apa/lga_overview',
         callback: function(index){
-            $.curvedArrow({
-                p0x: 400, p0y: 400,
-                p1x: 300, p1y: 400,
-                p2x: 300, p2y: 235
+            $('#content').curvedArrow({
+                p0x: 320, p0y: 250,
+                p1x: 240, p1y: 250,
+                p2x: 240, p2y: 130
             });
         }
     },
@@ -712,10 +713,10 @@ Walkthrough.pages = [
         "You can easily switch between an LGA overview, map of facilities, or individual facility data by selecting the<br> appropriate tab.",
         location_hash: '#benue_apa/lga_health',
         callback: function(index){
-            $.curvedArrow({
-                p0x: 950, p0y: 400,
-                p1x: 1070, p1y: 400,
-                p2x: 1070, p2y: 225
+            $('#content').curvedArrow({
+                p0x: 880, p0y: 300,
+                p1x: 1000, p1y: 300,
+                p2x: 1000, p2y: 125
             });
         }  
     },
@@ -725,14 +726,14 @@ Walkthrough.pages = [
         location_hash: '#benue_apa/map_health',
         callback: function(){
             $('.walkthrough_modal').css({
-                top: 75,
-                left: '65%'
+                top: 174,
+                left: '70%'
             });
 
-            $.curvedArrow({
-                p0x: 600, p0y: 450,
-                p1x: 400, p1y: 450,
-                p2x: 400, p2y: 300
+            $('#content').curvedArrow({
+                p0x: 500, p0y: 350,
+                p1x: 300, p1y: 350,
+                p2x: 300, p2y: 200
             })
             .delay(1000)
             .fadeOut(function(){
@@ -751,10 +752,10 @@ Walkthrough.pages = [
         callback: function(){
             $('.walkthrough_modal').css('top', 200);
             
-            $.curvedArrow({
-                p0x: 400, p0y: 450,
-                p1x: 300, p1y: 450,
-                p2x: 300, p2y: 310
+            $('#content').curvedArrow({
+                p0x: 300, p0y: 350,
+                p1x: 200, p1y: 350,
+                p2x: 200, p2y: 210
             });
         }
     },
