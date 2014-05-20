@@ -182,6 +182,7 @@ water_lga_indicators <- function(water_data) {
         )
 
      return(lga_data) 
+}
 
 education_gap_sheet_indicators <- function(education_data) {
     ## (0) WE will list out which types are which here:
@@ -222,17 +223,12 @@ health_gap_sheet_indicators <- function(health_data) {
         is_public = management %in% c('federal_gov', 'local_gov', 'state_gov', 'public'),
         is_hospital = str_detect(facility_type, 'hospital'),
         is_healthpost = facility_type %in% c('dispensary', 'health_post'),
-        is_dispensary = facility_type %in% c('dispensary'),
         is_phcentre = facility_type %in% c('primary_health_centre'),
         is_phclinic = facility_type %in% c('basic_health_centre'),
         is_healthfacility = ! (facility_type %in% c('dk', 'none') | is.na(facility_type)),
         is_allExceptHealthPost = is_healthfacility & ! is_healthpost,
         is_hospital_phc_or_clinic = is_hospital | is_phcentre | is_phclinic,
-        # note: gap sheet indicator requires at least two skilled birth attendants available
-        at_least_two_skilled_birth_attendants = rowSums(
-            cbind(num_nursemidwives_fulltime, num_doctors_fulltime), na.rm=T) >= 2,
-        num_nurse_or_nusemidwives_fulltime = rowSums(cbind(
-            num_nursemidwives_fulltime, num_nurses_fulltime), na.rm=T)
+        num_skilled_birth_attendants = rowSums(cbind(num_nursemidwives_fulltime, num_doctors_fulltime), na.rm=T)
     )
     ## (2) Aggregation 1: Services that are provided at Hospitals only
     hospital_data = health_data %.% 
@@ -250,7 +246,7 @@ health_gap_sheet_indicators <- function(health_data) {
             i_sanitation = percent(improved_sanitation),
             phcn_electricity_h = percent(phcn_electricity),
             any_power_available = percent(phcn_electricity | access_to_alternative_power_source),        
-            sba = percent(at_least_two_skilled_birth_attendants),
+            sba = percent(num_skilled_birth_attendants >= 2),
             delivery_services_yn = percent(maternal_health_delivery_services),
             vaccines_fridge_freezer = percent(vaccines_fridge_freezer)
         )
@@ -263,12 +259,15 @@ health_gap_sheet_indicators <- function(health_data) {
             total_hospitals = sum(is_hospital, na.rm=T),
             total_phcentres = sum(is_phcentre, na.rm=T),
             total_phclinics = sum(is_phclinic, na.rm=T),
-            total_dispensaries = sum(is_dispensary, na.rm=T),
-            total_sec_tertiary = sum(is_healthpost, na.rm=T),
+            total_dispensary = sum(is_healthpost, na.rm=T),
+            total_sec_tertiary = 0,
             
-            #phcentre = num_cho_posted >= 1 & num_chews_posted >= 3 & num_nurse_or_nursemidwives_fulltime >= 4, # fully staffed
-            #phclinic = , # fully staffed
-            #dispensary = ,# fully staffed
+            ## fully staffed indicators:
+            phcentre = percent(num_skilled_birth_attendants >= 5 & num_chews_fulltime >= 9,
+                               filter = is_phcentre),
+            phclinic = percent(num_skilled_birth_attendants >= 2 & num_chews_fulltime >= 4,
+                               filter = is_phclinic),
+            dispensary = percent(num_chews_fulltime >= 1, filter = is_healthpost),
             
             emerg_tran = percent(emergency_transport),
             antenatal_care_yn = percent(antenatal_care_yn),
