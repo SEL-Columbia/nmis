@@ -50,6 +50,7 @@ test_that('GAP Sheets are calculated as expected for health', {
     for (indicator in expected_gap_sheets$variable) {
         if(str_detect(indicator, "gap_sheet_")) {
             bare_indicator = str_trim(str_sub(indicator, 11))
+            
             expect_true(all(bare_indicator %in% names(health_jemaa_gap_sheet)))
             expected_indicator = subset(expected_gap_sheets, variable == indicator)[,'value']
             calculated_indicator = str_extract(health_jemaa_gap_sheet[,bare_indicator], '[^ ]+')
