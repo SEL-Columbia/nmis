@@ -16,3 +16,17 @@ test_that('Certain Health LGA level indicators should add up to each other', {
         select(matches('expect'))
     expect_true(all(expectations$expect_nums_add_up))
 })
+
+test_that('LGAs.csv has exactly 774 unique LGAs, 37 (36 + FCT) states, and 6 zones, and all
+          LGAs should have unique lat/lng and area', {
+    lga_data <- read.csv("data/lgas.csv")
+    expect_equal(length(unique(lga_data$state)), 37)
+    expect_equal(length(unique(lga_data$zone)), 6)
+    
+    expect_equal(length(lga_data$lga_id), 774)
+    expect_equal(anyDuplicated(lga_data$lga_id), 0)
+    
+    expect_equal(anyDuplicated(lga_data$latitude), 0)
+    expect_equal(anyDuplicated(lga_data$longitude), 0)
+    expect_equal(anyDuplicated(lga_data$area_sq_km), 0)
+})
