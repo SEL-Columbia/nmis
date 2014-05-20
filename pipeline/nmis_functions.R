@@ -19,6 +19,7 @@ ratio <- function(numerator, denominator, as.percent=FALSE) {
 # Percent: produces the percent true for a boolean-valued column. Includes functionality to:
 # (1) drop NA
 # (2) output something in the format: 87% (87 out of 100)
+# (3) an optional filter, which prefilters the vector before calculating percent
 percent <- function(boolean_vector, filter=NULL) {
     stopifnot(class(boolean_vector) == 'logical')
     if (!is.null(filter)) {
