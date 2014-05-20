@@ -46,12 +46,16 @@ outside <- function(value, min, max, inclusive=F) {
 ## Returns a two-element list, one with name lga_level, and the other facility_level
 get_necessary_indicators <- function() {
     ind = function(x) { 
-        if (is.list(x$indicators)) { ind(x$indicators) }
-        else { x$indicators }
+        if (is.list(x$indicators)) {
+            c(unlist(sapply(x$indicators, ind))) # specifically for water nested indicators
+        } else {
+            x$indicators
+        }
     }
     indicators_for_sector = function(sector, all_indicators) {
         unlist(sapply(all_indicators[[sector]], ind))
     }
+    
     ## "EXTRAS": Indicators hardcoded in the NMIS code
     facility_level_extras = c("formhub_photo_id", "facility_name", "gps", "uuid", "unique_lga")
     lga_level_extras = c("lga", "unique_lga", "state", "latitude", "longitude")
