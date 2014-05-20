@@ -215,3 +215,68 @@ education_gap_sheet_indicators <- function(education_data) {
     ## (4) Final step for gap sheets. Note that we want to output data as numerator / denominator
     ## rather than percent for gap sheets. We do the splitting below. TODO
 }
+
+health_gap_sheet_indicators <- function(health_data) {
+    ## (1) Definitions to help us make indicators later on
+    health_data = health_data %.% mutate(
+        is_public = management %in% c('federal_gov', 'local_gov', 'state_gov', 'public'),
+        is_hospital = str_detect(facility_type, 'hospital'),
+        is_healthpost = facility_type %in% c('dispensary', 'health_post'),
+        is_dispensary = facility_type %in% c('dispensary'),
+        is_phcentre = facility_type %in% c('primary_health_centre'),
+        is_phclinic = facility_type %in% c('basic_health_centre'),
+        is_healthfacility = ! (facility_type %in% c('dk', 'none') | is.na(facility_type)),
+        is_allExceptHealthPost = is_healthfacility & ! is_healthpost,
+        is_hospital_phc_or_clinic = is_hospital | is_phcentre | is_phclinic,
+        # note: gap sheet indicator requires at least two skilled birth attendants available
+        at_least_two_skilled_birth_attendants = rowSums(
+            cbind(num_nursemidwives_fulltime, num_doctors_fulltime), na.rm=T) >= 2,
+        num_nurse_or_nusemidwives_fulltime = rowSums(cbind(
+            num_nursemidwives_fulltime, num_nurses_fulltime), na.rm=T)
+    )
+    ## (2) Aggregation 1: Services that are provided at Hospitals only
+    hospital_data = health_data %.% 
+        filter(is_hospital) %.% 
+        group_by(unique_lga)  %.% 
+        dplyr::summarise(
+            c_section_yn = percent(c_section_yn)
+        )
+    ## (3) Aggregation 2: Services that are provided at all facilties except for Health Posts
+    hospital_phc_clinic_data = health_data %.% 
+        filter(is_hospital_phc_or_clinic) %.% 
+        group_by(unique_lga) %.%
+        dplyr::summarise(
+            i_water_supply = percent(improved_water_supply),
+            i_sanitation = percent(improved_sanitation),
+            phcn_electricity_h = percent(phcn_electricity),
+            any_power_available = percent(phcn_electricity | access_to_alternative_power_source),        
+            sba = percent(at_least_two_skilled_birth_attendants),
+            delivery_services_yn = percent(maternal_health_delivery_services),
+            vaccines_fridge_freezer = percent(vaccines_fridge_freezer)
+        )
+    ## (4) Aggregation 3: Services that are provided at all facilities including Health Posts
+    allFacilities_data = health_data %.% 
+        filter(is_healthfacility) %.% 
+        group_by(unique_lga) %.%
+        dplyr::summarise(
+            total_facilities = sum(is_healthfacility, na.rm=T),
+            total_hospitals = sum(is_hospital, na.rm=T),
+            total_phcentres = sum(is_phcentre, na.rm=T),
+            total_phclinics = sum(is_phclinic, na.rm=T),
+            total_dispensaries = sum(is_dispensary, na.rm=T),
+            total_sec_tertiary = sum(is_healthpost, na.rm=T),
+            
+            #phcentre = num_cho_posted >= 1 & num_chews_posted >= 3 & num_nurse_or_nursemidwives_fulltime >= 4, # fully staffed
+            #phclinic = , # fully staffed
+            #dispensary = ,# fully staffed
+            
+            emerg_tran = percent(emergency_transport),
+            antenatal_care_yn = percent(antenatal_care_yn),
+            family_planning_yn = percent(family_planning_yn),
+            medication_anti_malarials = percent(malaria_treatment_artemisinin),
+            child_health_measles_immun = percent(child_health_measles_immun_calc)
+        )
+    return(allFacilities_data %.% 
+               left_join(hospital_phc_clinic_data, by='unique_lga') %.% 
+               left_join(hospital_data, by='unique_lga'))
+}
