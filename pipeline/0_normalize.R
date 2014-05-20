@@ -44,7 +44,7 @@ normalize_mopup = function(formhubData, survey_name, sector) {
 normalize_2012 = function(d, survey_name, sector) {
     ## Survey_name: mopup, mopup_new, or mopup_pilot
     # mopup and mopup_new are pretty much the same, except mopup has some LGAs mistakenly as NA
-    stopifnot(survey_name %in% c("2012") & sector %in% c("education", "health"))
+    stopifnot(survey_name %in% c("2012") & sector %in% c("education", "health", "water"))
     if (survey_name %in% c("2012")) {
         if(sector == 'health') {
             d <- d %.% 
@@ -95,7 +95,8 @@ normalize_2012 = function(d, survey_name, sector) {
                     num_classrms_repair = num_classrms_need_maj_repairs,
                     matches('.') # this is necessary, in order not to drop the rest of the columns
                 )
-        }
+        } else if (sector == "water") {
+            d <- d         }
         return(d %.% mutate(facility_ID = NA))
     } else {
         stop("Sector and Survey Name normalization not yet supported.")

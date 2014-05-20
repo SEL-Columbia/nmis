@@ -373,7 +373,7 @@
         "description": ""
     },
     "percentage_electric_functional": {
-        "name": "Percentage functional",
+        "name": "Percent of electric pumps that are functional",
         "description": ""
     },
     "pupil_teachers_ratio_lga_primary": {

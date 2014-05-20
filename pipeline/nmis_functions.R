@@ -34,11 +34,15 @@ ratio <- function(numerator, denominator, as.percent=FALSE) {
 # Percent: produces the percent true for a boolean-valued column. Includes functionality to:
 # (1) drop NA
 # (2) output something in the format: 87% (87 out of 100)
-percent <- function(boolean_vector) {
+# (3) an optional filter, which prefilters the vector before calculating percent
+percent <- function(boolean_vector, filter=NULL) {
     stopifnot(class(boolean_vector) == 'logical')
+    if (!is.null(filter)) {
+        stopifnot(class(filter) == 'logical')
+        boolean_vector = boolean_vector[filter]
+    }
     percent_format(sum(boolean_vector, na.rm=T), length(na.omit(boolean_vector)))
 }
-
 # between is a helper function that returns a boolan TRUE if the value falls in
 # between min and max, with a flag "inclusive" set to False by default
 between <- function(value, min, max, inclusive=F) { 
@@ -60,10 +64,17 @@ outside <- function(value, min, max, inclusive=F) {
 ## Reads from json files within ../static/explore, in addition to adding some "hard-coded" indicators.
 ## Returns a two-element list, one with name lga_level, and the other facility_level
 get_necessary_indicators <- function() {
-    indicators_for_sector = function(sector, all_indicators) {
-        unlist(sapply(all_indicators[[sector]], 
-                             function(x) { x$indicators }))
+    ind = function(x) { 
+        if (is.list(x$indicators)) {
+            c(unlist(sapply(x$indicators, ind))) # specifically for water nested indicators
+        } else {
+            x$indicators
+        }
     }
+    indicators_for_sector = function(sector, all_indicators) {
+        unlist(sapply(all_indicators[[sector]], ind))
+    }
+    
     ## "EXTRAS": Indicators hardcoded in the NMIS code
     facility_level_extras = c("formhub_photo_id", "facility_name", "gps", "uuid", "unique_lga")
     lga_level_extras = c("lga", "unique_lga", "state", "latitude", "longitude")
@@ -75,6 +86,9 @@ get_necessary_indicators <- function() {
     facility_indicators$health <- unique(c(indicators_for_sector('health', facility_indicators), 
                                     indicators_for_sector('overview', facility_indicators),
                                     facility_level_extras))
+    facility_indicators$water <- unique(c(indicators_for_sector('water', facility_indicators), 
+                                           indicators_for_sector('overview', facility_indicators),
+                                           facility_level_extras))
     ## lga level: education and health indicators should include specific items in the overview tab as well
     lga_indicators = RJSONIO::fromJSON("../static/explore/lga_view.json")
     overview_json = RJSONIO::fromJSON("../static/explore/lga_overview.json")
@@ -85,7 +99,15 @@ get_necessary_indicators <- function() {
     lga_indicators$education <- c(indicators_for_sector('education', lga_indicators),
                                   overview_json[[2]][2][[1]]$indicators,
                                   lga_level_extras)
+    lga_indicators$water <- c(indicators_for_sector('water', lga_indicators),
+                                  overview_json[[2]][3][[1]]$indicators,
+                                  lga_level_extras)
+    
     ### RETURN
-    list(facility=list(health=facility_indicators$health, education=facility_indicators$education), 
-         lga=list(health=lga_indicators$health, education=lga_indicators$education))
+    list(facility=list(health=facility_indicators$health, 
+                       education=facility_indicators$education,
+                       water=facility_indicators$water), 
+         lga=list(health=lga_indicators$health, 
+                  education=lga_indicators$education,
+                  water=lga_indicators$water))
 }

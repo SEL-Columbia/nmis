@@ -153,7 +153,6 @@ health_mopup_lga_indicators = function(health_data) {
                 left_join(hospital_data, by='unique_lga'))
 }
 
-
 education_gap_sheet_indicators <- function(education_data) {
     ## (0) WE will list out which types are which here:
     TYPES = list("primary" = c("preprimary_and_primary", "primary_only"),
@@ -250,4 +249,34 @@ health_gap_sheet_indicators <- function(health_data) {
     return(allFacilities_data %.% 
                left_join(hospital_phc_clinic_data, by='unique_lga') %.% 
                left_join(hospital_data, by='unique_lga'))
+
+water_lga_indicators <- function(water_data) {
+    ## all calculation are gathered from 
+    ## nmis_R_scripts/nmis/nmis_indicators_water_lga_level_normalized.R
+    lga_data = water_data %.% group_by(unique_lga) %.% 
+        dplyr::summarise(
+            ## Water Point Type
+            num_total_water_points = n(),
+            num_taps =  sum(water_point_type == "Tap", na.rm = T),
+            num_unimproved_points = sum(!is_improved, na.rm = T),
+            num_overhead_tanks = sum(water_point_type
+                %in% c("Overhead Tank", "Rainwater Harvesting System"), na.rm = T),
+            num_handpumps = sum(water_point_type %in% c('Borehole', 'Handpump'), na.rm = T),
+            num_improved_water_points = sum(is_improved, na.rm = T),
+
+            ## Functionality
+            percentage_functional_improved = percent(functional, filter = is_improved),
+            percentage_functional_handpumps = percent(functional, filter = water_point_type %in% c("Handpump", "Borehole")),
+            percentage_functional_taps = percent(functional, water_point_type == "Tap"),
+
+            ## Lift Mechanism Analysis
+            num_diesel = sum(lift_mechanism == "Diesel", na.rm = T),
+            percentage_diesel_functional = percent(functional, lift_mechanism == "Diesel"),
+            num_electric = sum(lift_mechanism == "Electric", na.rm = T),
+            percentage_electric_functional = percent(functional, lift_mechanism == "Electric"),
+            num_solar = sum(lift_mechanism == "Solar", na.rm = T),
+            percentage_solar_functional = percent(functional, lift_mechanism == "Solar")
+        )
+
+     return(lga_data) 
 }
