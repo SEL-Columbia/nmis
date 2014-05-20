@@ -105,3 +105,5 @@ source("nmis_functions.R"); source("0_normalize.R"); source("2_outlier_cleaning.
 source("3_facility_level.R"); source("4_lga_level.R"); source("5_necessary_indicators.R")
 
 external_data_2012 <- tbl_df(readRDS(CONFIG$BASELINE_EXTERNAL))
+write.csv(output_indicators(external_data_2012, 'lga', 'overview'), row.names=F,
+          file=sprintf('%s/Overview_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
