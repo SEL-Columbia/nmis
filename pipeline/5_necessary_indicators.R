@@ -6,7 +6,7 @@ source('nmis_functions.R')
 source('CONFIG.R')
 
 lga_data <- read.csv("data/lgas.csv") %.% 
-    dplyr::select(matches('lga'), latitude, longitude, state, zone, lga_id)
+    dplyr::select(matches('lga'), pop_2006, area_sq_km, latitude, longitude, state, zone, lga_id)
 
 output_indicators <- function(df, level, sector) {
     needed_indicators = get_necessary_indicators()[[level]][[sector]]
