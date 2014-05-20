@@ -158,16 +158,27 @@ water_lga_indicators <- function(water_data) {
     ## nmis_R_scripts/nmis/nmis_indicators_water_lga_level_normalized.R
     lga_data = water_data %.% group_by(unique_lga) %.% 
         dplyr::summarise(
+            ## Water Point Type
             num_total_water_points = n(),
             num_taps =  sum(water_point_type == "Tap", na.rm = T),
             num_unimproved_points = sum(!is_improved, na.rm = T),
             num_overhead_tanks = sum(water_point_type
                 %in% c("Overhead Tank", "Rainwater Harvesting System"), na.rm = T),
-            num_handpumps = sum(water_point_type %in% c('Borehole', 'Hand Pump'), na.rm = T),
+            num_handpumps = sum(water_point_type %in% c('Borehole', 'Handpump'), na.rm = T),
             num_improved_water_points = sum(is_improved, na.rm = T),
+
+            ## Functionality
             percentage_functional_improved = ratio(is_improved, functional),
             percentage_functional_handpumps = ratio(water_point_type %in% c("Handpump", "Borehole"), is_improved),
-            percentage_functional_taps = ratio(water_point_type == "Tap", functional)
+            percentage_functional_taps = ratio(water_point_type == "Tap", functional),
+
+            ## Lift Mechanism Analysis
+            num_diesel = sum(lift_mechanism == "Diesel", na.rm = T),
+            percentage_diesel_functional = ratio(lift_mechanism == "Diesel", functional),
+            num_electric = sum(lift_mechanism == "Electric", na.rm = T),
+            percentage_electric_functional = ratio(lift_mechanism == "Electric", functional),
+            num_solar = sum(lift_mechanism == "Solar", na.rm = T),
+            percentage_solar_functional = ratio(lift_mechanism == "Solar", functional)
         )
     return(lga_data)
 }
