@@ -212,9 +212,11 @@ education_gap_sheet_indicators <- function(education_data) {
                 ratio(num_classrm_w_chalkboard, num_classrms_total, as.percent=TRUE),
             num_tchrs_with_nce = 
                 ratio(num_tchrs_with_nce, num_tchr_full_time, as.percent=TRUE)
-        )
+        ) %.%
     ## (4) Final step for gap sheets. Note that we want to output data as numerator / denominator
-    ## rather than percent for gap sheets. We do the splitting below. TODO
+    ## rather than percent for gap sheets. We do the splitting below.
+        split_percent_columns()
+    
 }
 
 health_gap_sheet_indicators <- function(health_data) {
@@ -277,5 +279,6 @@ health_gap_sheet_indicators <- function(health_data) {
         )
     return(allFacilities_data %.% 
                left_join(hospital_phc_clinic_data, by='unique_lga') %.% 
-               left_join(hospital_data, by='unique_lga'))
+               left_join(hospital_data, by='unique_lga') %.%
+               split_percent_columns())
 }

@@ -3,7 +3,7 @@
 ######################################################################################################
 
 # Formats a percentage given scalar numerator and denominator
-## NOTE: May need to change numbers_from_percent_format if you chane this.
+## NOTE: If changed, split_percent_columns will also have to be changed
 percent_format <- function(numerator, denominator) {
     ifelse(is.finite(numerator) & is.finite(denominator),
            sprintf("%1.0f%% (%i out of %i)", 100 * numerator / denominator, numerator, denominator),
@@ -11,15 +11,42 @@ percent_format <- function(numerator, denominator) {
     )
 }
 
-# Numbers from percent_format. ie, "Inverse" the percent format operation.
-## NOTE: May need to change percent_format if you change this.
-numbers_from_percent_format <- function(string_in_percent_format) {
-    splitted <- as.numeric(unlist(str_extract_all(string_in_percent_format, '[0-9]+')))
-    if(length(splitted) == 3) {
-        setNames(splitted, c('percent', 'numerator', 'denominator'))     
-    } else {
-        c(percent=NA, numerator=NA, denominator=NA)   
+# Utility function that takes a data_frame, where a part of the data is percent_format-ted
+# Output is a data_frame, where each of those indicators instead as three different column.
+# eg. percent_functional column (percent_formatted) would turn 3 numerical columns:
+# percent_functional_percent, percent_functional_numerator, percent_functional_denominator
+split_percent_columns <- function(data_frame) {
+    stopifnot(!any(str_detect(names(data_frame), "[.]")))
+    # Helper: check whether a column is percent_formatted
+    is_in_percent_format <- function(column) { any(stringr::str_detect(column, "%")) }
+    
+    # Numbers from percent_format. ie, "Inverse" the percent format operation.
+    data_frame_from_percent_format <- function(col_in_percent_format) {
+        # If nothing is percent formatted, don't even bother
+        if(!is_in_percent_format(col_in_percent_format)) return(col_in_percent_format)
+        
+        # Else, the real logic starts
+        splitted <- str_extract_all(col_in_percent_format, '[0-9]+')
+        ldply(splitted, function(vec) {
+            if(length(vec) == 3) { # could extract everything
+                vec = as.numeric(vec)
+                data.frame(percent = vec[1], numerator = vec[2], denominator = vec[3])    
+            } else {               # couldn't extract everything, infinity or NA in source
+                data.frame(percent = NA, numerator = NA, denominator = NA)
+            }
+        })
     }
+    
+    # Now we run data_frame_from_percent_format on only those columns that are percent_formatted
+    res <- colwise(data_frame_from_percent_format)(data_frame)
+    # colwise results in nested data frame, unnest them:
+    nested_cols <- unlist(colwise(is.data.frame)(res))
+    nested_cols <- names(nested_cols)[nested_cols]
+    unnested_cols <- setdiff(names(res), nested_cols)
+    res <- cbind(res[,unnested_cols], do.call(cbind, res[,nested_cols]))
+    # colwise joins by ".", but we want to join by "_", so do that, and return
+    names(res) <- str_replace(names(res), "[.]", "_")
+    res
 }
 
 # Ratio: produces the ratio of a numerator and a denominator column. Includes functionality to:
