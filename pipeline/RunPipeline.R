@@ -34,11 +34,14 @@ edu_all <- rbind(edu_baseline_2012[common_indicators], edu_mopup_all[common_indi
 rm(edu_baseline_2012, edu_mopup_all)
 ## 4.3 aggregate
 edu_lga <- education_mopup_lga_indicators(edu_all)
+edu_gap <- education_gap_sheet_indicators(edu_all)
 ### 5. OUTPUT 
 write.csv(output_indicators(edu_all, 'facility', 'education'), row.names=F,
-          file=sprintf('%s/Education_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
+          file = sprintf('%s/Education_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
 write.csv(output_indicators(edu_lga, 'lga', 'education'), row.names=F,
-          file=sprintf('%s/Education_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
+          file = sprintf('%s/Education_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
+write.csv(edu_gap, row.names=F,        ## TODO: output_indicators for gap sheets?
+          file = sprintf('%s/Education_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR))
 rm(list=setdiff(ls(), c("CONFIG")))
 
 ################ HEALTH ####################################################
@@ -73,11 +76,14 @@ health_all <- rbind(health_baseline_2012[common_indicators], health_mopup_all[co
 rm(health_baseline_2012, health_mopup_all)
 ## 4.3 aggregate
 health_lga <- health_mopup_lga_indicators(health_all)
+health_gap <- health_gap_sheet_indicators(health_all)
 ## 5. OUTPUT
 write.csv(output_indicators(health_all, 'facility', 'health'), row.names=F,
-          file=sprintf('%s/Health_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
+          file = sprintf('%s/Health_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
 write.csv(output_indicators(health_lga, 'lga', 'health'), row.names=F,
-          file=sprintf('%s/Health_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
+          file = sprintf('%s/Health_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
+write.csv(health_gap, row.names=F,
+          file = sprintf('%s/Health_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR))
 rm(list=setdiff(ls(), "CONFIG"))
 
 ########## WATER ###########################################################
@@ -107,3 +113,4 @@ source("3_facility_level.R"); source("4_lga_level.R"); source("5_necessary_indic
 external_data_2012 <- tbl_df(readRDS(CONFIG$BASELINE_EXTERNAL))
 write.csv(output_indicators(external_data_2012, 'lga', 'overview'), row.names=F,
           file=sprintf('%s/Overview_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
+rm(list=setdiff(ls(), "CONFIG"))
