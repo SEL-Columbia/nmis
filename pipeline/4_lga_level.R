@@ -49,10 +49,14 @@ education_mopup_lga_indicators <- function(education_data) {
                 percent_improved_sanitation = percent(improved_sanitation),
                 percent_phcn_electricity = percent(phcn_electricity),
                 ## The following are "ratio" indicators
-                pupil_toilet_ratio = ratio(num_students_total, num_toilets_total),
-                student_classroom_ratio_lga = ratio(num_students_total, num_classrms_total),
-                percent_teachers_nce = ratio(num_tchrs_with_nce, num_tchr_full_time, as.percent=TRUE),
-                pupil_teachers_ratio_lga = ratio(num_students_total, num_tchr_full_time)
+                pupil_toilet_ratio = ratio(num_students_total, num_toilets_total, 
+                                           format = "ratio"),
+                student_classroom_ratio_lga = ratio(num_students_total, num_classrms_total, 
+                                                    format = "ratio"),
+                percent_teachers_nce = ratio(num_tchrs_with_nce, num_tchr_full_time, 
+                                             format = "percent"),
+                pupil_teachers_ratio_lga = ratio(num_students_total, num_tchr_full_time,
+                                                 format = "ratio")
             )
         ## Rename our indicators to end with _primary and _js. Note: don't rename lga, which is the first column.
         level_suffix = c('primary' = 'primary', 'junior_sec' = 'js')[level]
@@ -68,7 +72,8 @@ education_mopup_lga_indicators <- function(education_data) {
             num_schools = n(),
             num_combined_schools = sum(is_combined, na.rm=T),
             percent_management_public = percent(management == "public"),
-            pupil_teachers_ratio_lga = ratio(num_students_total, num_tchr_full_time),
+            pupil_teachers_ratio_lga = ratio(num_students_total, num_tchr_full_time,
+                                             format = "ratio"),
             num_informal_schools = sum(!natl_curriculum_yn, na.rm=T),
             percent_natl_curriculum = percent(natl_curriculum_yn)) 
     ## (5) Join everything together
@@ -177,11 +182,11 @@ education_gap_sheet_indicators <- function(education_data) {
             gap_sheet_improved_sanitation = percent(improved_sanitation),
             gap_sheet_phcn_electricity_e = percent(phcn_electricity),
             gap_sheet_num_classrms_repairs = 
-                ratio(num_classrms_repair, num_classrms_total, as.percent=TRUE),
+                ratio(num_classrms_repair, num_classrms_total, format = "percent"),
             gap_sheet_num_classrm_w_chalkboard = 
-                ratio(num_classrm_w_chalkboard, num_classrms_total, as.percent=TRUE),
+                ratio(num_classrm_w_chalkboard, num_classrms_total, format = "percent"),
             gap_sheet_num_tchrs_with_nce = 
-                ratio(num_tchrs_with_nce, num_tchr_full_time, as.percent=TRUE)
+                ratio(num_tchrs_with_nce, num_tchr_full_time, format = "percent")
         ) %.%
     ## (4) Final step for gap sheets. Note that we want to output data as numerator / denominator
     ## rather than percent for gap sheets. We do the splitting below.
