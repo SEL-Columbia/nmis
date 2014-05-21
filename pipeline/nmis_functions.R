@@ -89,7 +89,8 @@ get_necessary_indicators <- function() {
                                   overview_json[[2]][3][[1]]$indicators,
                                   lga_level_extras)
     lga_indicators$overview <- c(overview_json$overview,
-                                 unlist(sapply(overview_json$mdg_status, ind)))
+                                 unlist(sapply(overview_json$mdg_status, ind)),
+                                 lga_level_extras)
     
     ### RETURN
     list(facility=list(health=facility_indicators$health, 
