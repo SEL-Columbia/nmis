@@ -1,0 +1,28 @@
+variable,value,numerator,denominator,prabhas correction comments
+lga ,Jema'a,,,
+state ,Kaduna,,,
+unique_lga ,kaduna_jema_a,,,
+zone ,Northwest,,,
+pop_2006 ,278735,,,
+gap_sheet_total_facilities ,39,,,
+gap_sheet_total_hospitals ,1,,,
+gap_sheet_total_phcentres ,22,,,
+gap_sheet_total_phclinics ,14,,,
+gap_sheet_total_dispensary ,2,,,
+gap_sheet_total_sec_tertiary ,0,,,
+gap_sheet_i_water_supply ,57%,20,35,"numerator: mego: 21. prabhas: excluded one TRUE value from health post. Denom: mego: 39. prabhas: 35, skipping Nas + health post."
+gap_sheet_i_sanitation ,84%,16,19,denom: skip all Nas + 2 health posts
+gap_sheet_phcn_electricity_h ,37%,13,35,denom: skip all Nas + 2 health posts
+gap_sheet_any_power_available ,51%,18,35,denom: skill all Nas + 2 health posts
+gap_sheet_emerg_tran ,13%,5,39,:)
+gap_sheet_sba ,19%,7,37,"denom: no Nas, skipping 2 health posts"
+gap_sheet_delivery_services_yn ,78%,29,37,"denom: no Nas, skipping 2 health posts"
+gap_sheet_c_section_yn ,100%,1,1,"only hospitals. Only 1 present, in mopup data"
+gap_sheet_antenatal_care_yn ,92%,36,39,:)
+gap_sheet_family_planning_yn ,87%,34,39,:)
+gap_sheet_child_health_measles_immun ,86%,32,37,denom: no Nas
+gap_sheet_vaccines_fridge_freezer ,40%,4,10,dropping Nas
+gap_sheet_medication_anti_malarials ,87%,34,39,:)
+gap_sheet_phcentre ,5%,1,22,"Using at least 5 sbas, and at least 9 (JCHEWs + CHEWs), Primary Health Centre Kafanchan satisfies criteria"
+gap_sheet_phclinic ,0%,0,14,
+gap_sheet_dispensary,100%,2,2,
