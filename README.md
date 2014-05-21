@@ -8,9 +8,7 @@ NMIS Project v1.0
 
     pip install Flask
 
-2. Follow the instructions here to install the data:
-
-    https://github.com/SEL-Columbia/nmis_ui_data_2ef92c15
+2. Follow the instructions in the pipeline folder to generate lga level json:
 
 3. Cd to the "nmis" folder and run the local server
 

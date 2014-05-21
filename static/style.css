@@ -26,6 +26,9 @@ body {
     font-size: 15px;
     width: 1200px;
     margin: auto;
+    /* override bootstrap's modal-open styles */
+    margin-right: auto !important;
+    overflow: auto !important;
 }
 
 h1 {
@@ -744,7 +747,7 @@ table thead td:active {
     margin-bottom: 15px;
 }
 .facilities_table_container {
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 #facilities_data_table {
     font-size: 14px;
@@ -753,6 +756,9 @@ table thead td:active {
 #facilities_data_table td {
 	overflow: hidden;
 	padding: 5px;
+}
+#facilities_data_table tr {
+    cursor: pointer;
 }
 
 
