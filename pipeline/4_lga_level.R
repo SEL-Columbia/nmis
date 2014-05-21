@@ -66,6 +66,7 @@ education_mopup_lga_indicators <- function(education_data) {
     lga_data = education_data %.% filter(is_valid_facility) %.% group_by(unique_lga) %.% 
         dplyr::summarise(
             num_schools = n(),
+            num_combined_schools = sum(is_combined, na.rm=T),
             percent_management_public = percent(management == "public"),
             pupil_teachers_ratio_lga = ratio(num_students_total, num_tchr_full_time),
             num_informal_schools = sum(!natl_curriculum_yn, na.rm=T),
@@ -200,17 +201,17 @@ education_gap_sheet_indicators <- function(education_data) {
         group_by(unique_lga) %.%
     ## (3) And finally, create the summary indicators
         dplyr::summarize(
-            primary_js = n(),
-            num_existing_classrooms = sum(num_classrms_total, na.rm=T),
-            total_teachers = sum(num_tchr_full_time, na.rm=T),
-            improved_functional_water = percent(improved_water_supply),
-            improved_sanitation = percent(improved_sanitation),
-            phcn_electricity_e = percent(phcn_electricity),
-            num_classrms_repairs = 
+            gap_sheet_primary_js = n(),
+            gap_sheet_num_existing_classrooms = sum(num_classrms_total, na.rm=T),
+            gap_sheet_total_teachers = sum(num_tchr_full_time, na.rm=T),
+            gap_sheet_improved_functional_water = percent(improved_water_supply),
+            gap_sheet_improved_sanitation = percent(improved_sanitation),
+            gap_sheet_phcn_electricity_e = percent(phcn_electricity),
+            gap_sheet_num_classrms_repairs = 
                 ratio(num_classrms_repair, num_classrms_total, as.percent=TRUE),
-            num_classrm_w_chalkboard = 
+            gap_sheet_num_classrm_w_chalkboard = 
                 ratio(num_classrm_w_chalkboard, num_classrms_total, as.percent=TRUE),
-            num_tchrs_with_nce = 
+            gap_sheet_num_tchrs_with_nce = 
                 ratio(num_tchrs_with_nce, num_tchr_full_time, as.percent=TRUE)
         ) %.%
     ## (4) Final step for gap sheets. Note that we want to output data as numerator / denominator
@@ -237,45 +238,45 @@ health_gap_sheet_indicators <- function(health_data) {
         filter(is_hospital) %.% 
         group_by(unique_lga)  %.% 
         dplyr::summarise(
-            c_section_yn = percent(c_section_yn)
+            gap_sheet_c_section_yn = percent(c_section_yn)
         )
     ## (3) Aggregation 2: Services that are provided at all facilties except for Health Posts
     hospital_phc_clinic_data = health_data %.% 
         filter(is_hospital_phc_or_clinic) %.% 
         group_by(unique_lga) %.%
         dplyr::summarise(
-            i_water_supply = percent(improved_water_supply),
-            i_sanitation = percent(improved_sanitation),
-            phcn_electricity_h = percent(phcn_electricity),
-            any_power_available = percent(phcn_electricity | access_to_alternative_power_source),        
-            sba = percent(num_skilled_birth_attendants >= 2),
-            delivery_services_yn = percent(maternal_health_delivery_services),
-            vaccines_fridge_freezer = percent(vaccines_fridge_freezer)
+            gap_sheet_i_water_supply = percent(improved_water_supply),
+            gap_sheet_i_sanitation = percent(improved_sanitation),
+            gap_sheet_phcn_electricity_h = percent(phcn_electricity),
+            gap_sheet_any_power_available = percent(phcn_electricity | access_to_alternative_power_source),        
+            gap_sheet_sba = percent(num_skilled_birth_attendants >= 2),
+            gap_sheet_delivery_services_yn = percent(maternal_health_delivery_services),
+            gap_sheet_vaccines_fridge_freezer = percent(vaccines_fridge_freezer)
         )
     ## (4) Aggregation 3: Services that are provided at all facilities including Health Posts
     allFacilities_data = health_data %.% 
         filter(is_healthfacility) %.% 
         group_by(unique_lga) %.%
         dplyr::summarise(
-            total_facilities = sum(is_healthfacility, na.rm=T),
-            total_hospitals = sum(is_hospital, na.rm=T),
-            total_phcentres = sum(is_phcentre, na.rm=T),
-            total_phclinics = sum(is_phclinic, na.rm=T),
-            total_dispensary = sum(is_healthpost, na.rm=T),
-            total_sec_tertiary = 0,
+            gap_sheet_total_facilities = sum(is_healthfacility, na.rm=T),
+            gap_sheet_total_hospitals = sum(is_hospital, na.rm=T),
+            gap_sheet_total_phcentres = sum(is_phcentre, na.rm=T),
+            gap_sheet_total_phclinics = sum(is_phclinic, na.rm=T),
+            gap_sheet_total_dispensary = sum(is_healthpost, na.rm=T),
+            gap_sheet_total_sec_tertiary = 0,
             
             ## fully staffed indicators:
-            phcentre = percent(num_skilled_birth_attendants >= 5 & num_chews_fulltime >= 9,
-                               filter = is_phcentre),
-            phclinic = percent(num_skilled_birth_attendants >= 2 & num_chews_fulltime >= 4,
-                               filter = is_phclinic),
-            dispensary = percent(num_chews_fulltime >= 1, filter = is_healthpost),
+            gap_sheet_phcentre = percent(num_skilled_birth_attendants >= 5 
+                                         & num_chews_fulltime >= 9, filter = is_phcentre),
+            gap_sheet_phclinic = percent(num_skilled_birth_attendants >= 2 
+                                         & num_chews_fulltime >= 4, filter = is_phclinic),
+            gap_sheet_dispensary = percent(num_chews_fulltime >= 1, filter = is_healthpost),
             
-            emerg_tran = percent(emergency_transport),
-            antenatal_care_yn = percent(antenatal_care_yn),
-            family_planning_yn = percent(family_planning_yn),
-            medication_anti_malarials = percent(malaria_treatment_artemisinin),
-            child_health_measles_immun = percent(child_health_measles_immun_calc)
+            gap_sheet_emerg_tran = percent(emergency_transport),
+            gap_sheet_antenatal_care_yn = percent(antenatal_care_yn),
+            gap_sheet_family_planning_yn = percent(family_planning_yn),
+            gap_sheet_medication_anti_malarials = percent(malaria_treatment_artemisinin),
+            gap_sheet_child_health_measles_immun = percent(child_health_measles_immun_calc)
         )
     return(allFacilities_data %.% 
                left_join(hospital_phc_clinic_data, by='unique_lga') %.% 

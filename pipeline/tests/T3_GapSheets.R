@@ -19,11 +19,14 @@ test_that('GAP Sheets are calculated as expected for education', {
     education_gap_sheet <- education_gap_sheet_indicators(edu_all)
     expected_gap_sheets <- read.csv("tests/test_data/gap_sheets/Education_gap_sheet_Illela.csv",
                                     stringsAsFactors=FALSE)
+    
     for (indicator in expected_gap_sheets$variable) {
         if(str_detect(indicator, "gap_sheet_")) {
             expected_indicator = subset(expected_gap_sheets, variable == indicator)[,'value']
             
-            bare_indicator = str_trim(str_sub(indicator, 11))
+            bare_indicator = str_trim(indicator)
+            #bare_indicator = str_trim(str_sub(indicator, 11))
+            
             bare_percent_indicator = str_c(bare_indicator, '_percent')
             if(bare_indicator %in% names(education_gap_sheet)) {
                 calculated_indicator = as.character(education_gap_sheet[,bare_indicator])
@@ -57,7 +60,8 @@ test_that('GAP Sheets are calculated as expected for health', {
         if(str_detect(indicator, "gap_sheet_")) {
             expected_indicator = subset(expected_gap_sheets, variable == indicator)[,'value']
             
-            bare_indicator = str_trim(str_sub(indicator, 11))
+            bare_indicator = str_trim(indicator)
+            #bare_indicator = str_trim(str_sub(indicator, 11))
             bare_percent_indicator = str_c(bare_indicator, '_percent')
             if(bare_indicator %in% names(health_jemaa_gap_sheet)) {
                 calculated_indicator = as.character(health_jemaa_gap_sheet[,bare_indicator])
