@@ -98,6 +98,7 @@ get_necessary_indicators <- function() {
             x$indicators
         }
     }
+
     indicators_for_sector = function(sector, all_indicators) {
         unlist(sapply(all_indicators[[sector]], ind))
     }
@@ -129,6 +130,9 @@ get_necessary_indicators <- function() {
     lga_indicators$water <- c(indicators_for_sector('water', lga_indicators),
                                   overview_json[[2]][3][[1]]$indicators,
                                   lga_level_extras)
+    lga_indicators$overview <- c(overview_json$overview,
+                                 unlist(sapply(overview_json$mdg_status, ind)),
+                                 lga_level_extras)
     
     ### RETURN
     list(facility=list(health=facility_indicators$health, 
@@ -136,5 +140,6 @@ get_necessary_indicators <- function() {
                        water=facility_indicators$water), 
          lga=list(health=lga_indicators$health, 
                   education=lga_indicators$education,
-                  water=lga_indicators$water))
+                  water=lga_indicators$water,
+                  overview=lga_indicators$overview))
 }
