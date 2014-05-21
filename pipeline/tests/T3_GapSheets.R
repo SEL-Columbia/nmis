@@ -18,14 +18,20 @@ test_that('GAP Sheets are calculated as expected for education', {
     
     education_gap_sheet <- education_gap_sheet_indicators(edu_all)
     expected_gap_sheets <- read.csv("tests/test_data/gap_sheets/Education_gap_sheet_Illela.csv",
-                                    stringsAsFactors=FALSE) %.%
-        mutate(percent = percent_format(numerator, denominator))
+                                    stringsAsFactors=FALSE)
     for (indicator in expected_gap_sheets$variable) {
         if(str_detect(indicator, "gap_sheet_")) {
-            bare_indicator = str_trim(str_sub(indicator, 11))
-            expect_true(all(bare_indicator %in% names(education_gap_sheet)))
             expected_indicator = subset(expected_gap_sheets, variable == indicator)[,'value']
-            calculated_indicator = str_extract(education_gap_sheet[,bare_indicator], '[^ ]+')
+            
+            bare_indicator = str_trim(str_sub(indicator, 11))
+            bare_percent_indicator = str_c(bare_indicator, '_percent')
+            if(bare_indicator %in% names(education_gap_sheet)) {
+                calculated_indicator = as.character(education_gap_sheet[,bare_indicator])
+            } else {
+                expect_true(all(bare_percent_indicator %in% names(education_gap_sheet)))    
+                calculated_indicator = str_c(education_gap_sheet[,bare_percent_indicator], '%')
+            }
+            
             #cat(indicator, ' : ', expected_indicator, ' vs. ', calculated_indicator, '\n')
             expect_equal(expected_indicator, calculated_indicator)
         }
@@ -49,11 +55,17 @@ test_that('GAP Sheets are calculated as expected for health', {
         mutate(percent = percent_format(numerator, denominator))
     for (indicator in expected_gap_sheets$variable) {
         if(str_detect(indicator, "gap_sheet_")) {
-            bare_indicator = str_trim(str_sub(indicator, 11))
-            
-            expect_true(all(bare_indicator %in% names(health_jemaa_gap_sheet)))
             expected_indicator = subset(expected_gap_sheets, variable == indicator)[,'value']
-            calculated_indicator = str_extract(health_jemaa_gap_sheet[,bare_indicator], '[^ ]+')
+            
+            bare_indicator = str_trim(str_sub(indicator, 11))
+            bare_percent_indicator = str_c(bare_indicator, '_percent')
+            if(bare_indicator %in% names(health_jemaa_gap_sheet)) {
+                calculated_indicator = as.character(health_jemaa_gap_sheet[,bare_indicator])
+            } else {
+                expect_true(all(bare_percent_indicator %in% names(health_jemaa_gap_sheet)))    
+                calculated_indicator = str_c(health_jemaa_gap_sheet[,bare_percent_indicator], '%')
+            }
+            
             #cat(indicator, ' : ', expected_indicator, ' vs. ', calculated_indicator, '\n')
             expect_equal(expected_indicator, calculated_indicator)
         }
