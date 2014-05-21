@@ -15,8 +15,7 @@ output_indicators <- function(df, level, sector) {
         join(lga_data, by='unique_lga_2013')
     if(!all(needed_indicators %in% names(df))) {
         stop(sprintf("Missing %s-level indicators for %s: ", level, sector),
-             lapply(setdiff(needed_indicators, names(df)),function(x){
-                    sprintf("%s, ",x)}))
+             paste(setdiff(needed_indicators, names(df)), collapse = ", "))
     }
     df <- df[needed_indicators]
     return(df)
