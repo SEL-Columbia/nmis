@@ -309,7 +309,7 @@ MapView.facility_map = function(lga, sector, indicator) {
 };
 
 MapView.facility_layer = function(facilities, sector, indicator) {
-    var that = this;
+    var self = this;
     var marker_group = new L.LayerGroup();
 
     _.each(facilities, function(fac){
@@ -476,6 +476,7 @@ FacilitiesView.init = function(){
 };
 
 FacilitiesView.render = function(lga, sector){
+    var self = this;
     render_header(lga, 'facilities', sector);
     render('#facilities_view_template', {
         lga: lga,
@@ -483,12 +484,11 @@ FacilitiesView.render = function(lga, sector){
         tables: NMIS.facilities_view[sector]
     });
 
-    var that = this;
     $('.facilities_table_selector').change(function(){
         var index = parseInt(this.value, 10);
-        that.show_table(sector, index, lga.facilities);
+        self.show_table(sector, index, lga.facilities);
     });
-    this.show_table(sector, 0, lga.facilities);
+    self.show_table(sector, 0, lga.facilities);
 };
 
 FacilitiesView.show_table = function(sector, table_index, facilities){
@@ -523,7 +523,7 @@ FacilitiesView.show_table = function(sector, table_index, facilities){
 };
 
 FacilitiesView.show_modal = function(uuid){
-    var that = this;
+    var self = this;
     var facility = NMIS.facilities[uuid];
     var template = $('#facility_modal_template').html();
     var html = _.template(template, {
@@ -536,10 +536,10 @@ FacilitiesView.show_modal = function(uuid){
     $('#facility_modal').modal();
     $('.facility_table_selector').change(function(){
         var index = parseInt(this.value);
-        that.modal_table(facility, index);
+        self.modal_table(facility, index);
     });
 
-    this.modal_table(facility, 0);
+    self.modal_table(facility, 0);
 };
 
 FacilitiesView.modal_table = function(facility, index){
