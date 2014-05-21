@@ -29,7 +29,8 @@
     <script>
         NMIS = {};
         NMIS.lgas_folder = '{{ lgas_folder }}';
-        NMIS.lgas = {};
+        NMIS.lgas = {}; // LGA lga_id mapping
+        NMIS.facilities = {}; // Facility UUID mapping, used for modals
         NMIS.sorted_lgas = {{ sorted_lgas|safe }};
         NMIS.zones = {{ zones|safe }};
         NMIS.indicators = {{ indicators|safe }};
@@ -314,9 +315,28 @@
                 <% }); %>
             </select>
         <% } %>
-        <div class="facilities_table_container">
-            <table id="facilities_data_table" class="table table-striped table-hover table-condensed"></table>
-        </div>
+        <div class="facilities_table_container"></div>
+    </script>
+
+    <script id="facility_view_table_template" type="text/html">
+        <table id="facilities_data_table" class="facility_table table table-striped table-hover table-condensed">
+            <thead>
+                <tr>
+                    <% _.each(indicators, function(indicator){ %>
+                        <th><%= indicator_name(indicator) %></th>
+                    <% }); %>
+                </tr>
+            </thead>
+            <tbody>
+                <% _.each(facilities, function(facility){ %>
+                    <tr data-uuid="<%= facility.uuid %>">
+                        <% _.each(indicators, function(indicator){ %>
+                            <td><%= format_value(facility[indicator]) %></td>
+                        <% }); %>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
     </script>
 
     <script id="facility_modal_template" type="text/html">
@@ -343,13 +363,27 @@
                                     <% }); %>
                                 </select>
                             <% } %>
-                            <table class="facility_table table table-striped table-hover table-condensed"></table>
                         </div>
                         <div style="clear:both"></div>
                     </div>
                 </div>
             </div>
         </div>
+    </script>
+
+    <script id="facility_modal_table_template" type="text/html">
+        <table class="facility_table table table-striped table-hover table-condensed">
+            <tr>
+                <th>Indicator</th>
+                <th>Value</th>
+            </tr>
+            <% _.each(indicators, function(indicator){ %>
+                <tr>
+                    <td><%= indicator.name %></td>
+                    <td><%= indicator.value %></td>
+                </tr>
+            <% }); %>
+        </table>
     </script>
 
     <script id="walkthrough_modal_template" type="text/html">

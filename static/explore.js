@@ -25,6 +25,7 @@ $(function(){
     });
 
     MapView.init();
+    FacilitiesView.init();
     render_lga_search(NMIS.sorted_lgas);
     Backbone.history.start();
 });
@@ -55,9 +56,14 @@ function view(viewObj, sector){
         } else {
             $('.loading').show();
             $('#content').fadeTo(100, 0.5);
+
+            // Fetch LGA data from server
             var url = NMIS.lgas_folder + unique_lga + '.json';
             $.getJSON(url, function(lga){
                 NMIS.lgas[unique_lga] = lga;
+                _.each(lga.facilities, function(facility){
+                    NMIS.facilities[facility.uuid] = facility;
+                });
                 render_wrap(lga, sector);
             });
         }
@@ -329,7 +335,7 @@ MapView.facility_layer = function(facilities, sector, indicator) {
                 .setContent(fac.facility_name)
                 .setLatLng(lat_lng);
             mark.on('click', function(){
-                that.facility_modal(fac);
+                FacilitiesView.show_modal(fac.uuid);
             });
             mark.on('mouseover', mark.openPopup.bind(mark))
                 .on('mouseout', mark.closePopup.bind(mark))
@@ -410,48 +416,6 @@ MapView.chart_indicators = function(facilities, sector){
     return chart_indicators;
 };
 
-MapView.facility_modal = function(facility){
-    var that = this;
-    var template = $('#facility_modal_template').html();
-    var html = _.template(template, {
-        NMIS: NMIS,
-        facility: facility,
-        tables: NMIS.facilities_view[facility.sector]
-    });
-    $('#facility_modal').remove();
-    $('#content').append(html);
-    $('#facility_modal').modal();
-    $('.facility_table_selector').change(function(){
-        var index = parseInt(this.value);
-        that.facility_table(facility, index);
-    });
-    this.facility_table(facility, 0);
-};
-
-MapView.facility_table = function(facility, index){
-    var aoColumns = [{sTitle: 'Indicator'}, {sTitle: 'Value'}];
-    var table = NMIS.facilities_view[facility.sector][index];
-    var aaData = [];
-
-    _.each(table.indicators, function(indicator){
-        aaData.push([
-            indicator_name(indicator),
-            format_value(facility[indicator])
-        ]);
-    });
-    
-    $('.facility_table')
-        .dataTable({
-            aaData: aaData,
-            aoColumns: aoColumns,
-            bFilter: false,
-            bPaginate: false,
-            bDestroy: true,
-            sDom: '<"top">rt<"bottom"flp><"clear">'
-        })
-        .width('100%'); 
-};
-
 MapView.map_legend = function(lga, sector, indicator){
     var ctx = $('.map_legend canvas')[0].getContext('2d');        
     var trues = 0;
@@ -503,6 +467,14 @@ MapView.map_legend = function(lga, sector, indicator){
 
 
 var FacilitiesView = {};
+FacilitiesView.init = function(){
+    var self = this;
+    $('#content').on('click', '.facilities_table_container tr', function(){
+        var uuid = $(this).data('uuid');
+        self.show_modal(uuid);
+    });
+};
+
 FacilitiesView.render = function(lga, sector){
     render_header(lga, 'facilities', sector);
     render('#facilities_view_template', {
@@ -520,49 +492,82 @@ FacilitiesView.render = function(lga, sector){
 };
 
 FacilitiesView.show_table = function(sector, table_index, facilities){
-    var aoColumns = [];
     var table = NMIS.facilities_view[sector][table_index];
     var tableWidth = $('#content .container').width() - 400;
     var colWidth = Math.floor(tableWidth / (table.indicators.length - 2));
-
-    _.each(table.indicators, function(indicator, i){
-        var aoColumn = {sTitle: indicator_name(indicator)};
-        if (i < 2){
-            aoColumn.sWidth = '195px';
-        } else {
-            aoColumn.sWidth = colWidth - 6 + 'px';
-        }
-        aoColumns.push(aoColumn);
-    });
     
-    var aaData = [];
+    var sector_facilities = [];
     _.each(facilities, function(facility){
         if (facility.sector === sector || (sector === 'overview' && facility.sector !== 'water')){
-            var facility_data = [];
-            _.each(table.indicators, function(indicator){
-                var value = facility[indicator];
-                value = format_value(value);
-                facility_data.push(value);
-            });
-            aaData.push(facility_data);
+            sector_facilities.push(facility);
         }
     });
 
-    $('#facilities_data_table')
-        .find('thead')
-        .html('') // http://stackoverflow.com/questions/16290987/how-to-clear-all-column-headers-using-datatables
-        .end()
+    var template = $('#facility_view_table_template').html();
+    var html = _.template(template, {
+        indicator_name: indicator_name,
+        format_value: format_value,
+        indicators: table.indicators,
+        facilities: sector_facilities,
+    });
+
+    $('.facilities_table_container')
+        .empty()
+        .append(html)
+        .find('table')
         .dataTable({
-            aaData: aaData,
-            aoColumns: aoColumns,
-            bPaginate: false,
-            bDestroy: true,
-            bAutoWidth: false,
-            bFilter: false,
-            sDom: '<"top">rt<"bottom"flp><"clear">'
-        })
-        .width('100%');
+            searching: false,
+            paging: false,
+            sDom: '' // Remove "Showing 1 to 120 of 120 entries"
+        });
 };
+
+FacilitiesView.show_modal = function(uuid){
+    var that = this;
+    var facility = NMIS.facilities[uuid];
+    var template = $('#facility_modal_template').html();
+    var html = _.template(template, {
+        NMIS: NMIS,
+        facility: facility,
+        tables: NMIS.facilities_view[facility.sector]
+    });
+    $('#facility_modal').remove();
+    $(document.body).append(html);
+    $('#facility_modal').modal();
+    $('.facility_table_selector').change(function(){
+        var index = parseInt(this.value);
+        that.modal_table(facility, index);
+    });
+
+    this.modal_table(facility, 0);
+};
+
+FacilitiesView.modal_table = function(facility, index){
+    var table = NMIS.facilities_view[facility.sector][index];
+    var table_indicators = [];
+
+    _.each(table.indicators, function(indicator){
+        table_indicators.push({
+            name: indicator_name(indicator),
+            value: format_value(facility[indicator])
+        });
+    });
+
+    table_indicators.sort(function(a, b){
+        return a.name > b.name;
+    });
+
+    var template = $('#facility_modal_table_template').html();
+    var html = _.template(template, {
+        facility: facility,
+        indicators: table_indicators
+    });
+
+    var modal = $('#facility_modal');
+    modal.find('table').remove();
+    modal.find('.info').append(html);
+};
+
 
 
 
