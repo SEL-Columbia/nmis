@@ -52,10 +52,12 @@ split_percent_columns <- function(data_frame) {
 # Ratio: produces the ratio of a numerator and a denominator column. Includes functionality to:
 # (1) exclude observation with NA in either numerator or denominator
 # (2) output something in the format: 87% (87 out of 100)
-ratio <- function(numerator, denominator, as.percent=FALSE) {
+ratio <- function(numerator, denominator, format="none") {
     df <- na.omit(data.frame(num=numerator, den=denominator))
-    if(as.percent) return(percent_format(sum(df$num), sum(df$den)))
-    else return(round(sum(df$num) / sum(df$den)))
+    switch(format, 
+           none = return(round(sum(df$num) / sum(df$den))),
+           percent = return(percent_format(sum(df$num), sum(df$den))),
+           ratio = return(str_c(round(sum(df$num) / sum(df$den)), " : 1")))
 }
 
 # Percent: produces the percent true for a boolean-valued column. Includes functionality to:

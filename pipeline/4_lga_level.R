@@ -49,10 +49,14 @@ education_mopup_lga_indicators <- function(education_data) {
                 percent_improved_sanitation = percent(improved_sanitation),
                 percent_phcn_electricity = percent(phcn_electricity),
                 ## The following are "ratio" indicators
-                pupil_toilet_ratio = ratio(num_students_total, num_toilets_total),
-                student_classroom_ratio_lga = ratio(num_students_total, num_classrms_total),
-                percent_teachers_nce = ratio(num_tchrs_with_nce, num_tchr_full_time, as.percent=TRUE),
-                pupil_teachers_ratio_lga = ratio(num_students_total, num_tchr_full_time)
+                pupil_toilet_ratio = ratio(num_students_total, num_toilets_total, 
+                                           format = "ratio"),
+                student_classroom_ratio_lga = ratio(num_students_total, num_classrms_total, 
+                                                    format = "ratio"),
+                percent_teachers_nce = ratio(num_tchrs_with_nce, num_tchr_full_time, 
+                                             format = "percent"),
+                pupil_teachers_ratio_lga = ratio(num_students_total, num_tchr_full_time,
+                                                 format = "ratio")
             )
         ## Rename our indicators to end with _primary and _js. Note: don't rename lga, which is the first column.
         level_suffix = c('primary' = 'primary', 'junior_sec' = 'js')[level]
@@ -68,7 +72,8 @@ education_mopup_lga_indicators <- function(education_data) {
             num_schools = n(),
             num_combined_schools = sum(is_combined, na.rm=T),
             percent_management_public = percent(management == "public"),
-            pupil_teachers_ratio_lga = ratio(num_students_total, num_tchr_full_time),
+            pupil_teachers_ratio_lga = ratio(num_students_total, num_tchr_full_time,
+                                             format = "ratio"),
             num_informal_schools = sum(!natl_curriculum_yn, na.rm=T),
             percent_natl_curriculum = percent(natl_curriculum_yn)) 
     ## (5) Join everything together
@@ -161,7 +166,7 @@ education_gap_sheet_indicators <- function(education_data) {
                  "combined" = c("primary_and_junior_sec", "primary_junior_and_senior_sec",
                                 "junior_and_senior_sec"))
     ## (1) Create additional facility-level indicators that are helpful in our later calculations
-    education_data %.% 
+    education_gap <- education_data %.% 
         mutate(
             is_primary_or_js = facility_type %in% c(TYPES$primary, TYPES$junior_sec)
         ) %.% 
@@ -177,16 +182,16 @@ education_gap_sheet_indicators <- function(education_data) {
             gap_sheet_improved_sanitation = percent(improved_sanitation),
             gap_sheet_phcn_electricity_e = percent(phcn_electricity),
             gap_sheet_num_classrms_repairs = 
-                ratio(num_classrms_repair, num_classrms_total, as.percent=TRUE),
+                ratio(num_classrms_repair, num_classrms_total, format = "percent"),
             gap_sheet_num_classrm_w_chalkboard = 
-                ratio(num_classrm_w_chalkboard, num_classrms_total, as.percent=TRUE),
+                ratio(num_classrm_w_chalkboard, num_classrms_total, format = "percent"),
             gap_sheet_num_tchrs_with_nce = 
-                ratio(num_tchrs_with_nce, num_tchr_full_time, as.percent=TRUE)
+                ratio(num_tchrs_with_nce, num_tchr_full_time, format = "percent")
         ) %.%
     ## (4) Final step for gap sheets. Note that we want to output data as numerator / denominator
     ## rather than percent for gap sheets. We do the splitting below.
         split_percent_columns()
-    
+    return(education_gap)
 }
 
 health_gap_sheet_indicators <- function(health_data) {
@@ -283,101 +288,3 @@ water_lga_indicators <- function(water_data) {
      return(lga_data) 
 }
 
-education_gap_sheet_indicators <- function(education_data) {
-    ## (0) WE will list out which types are which here:
-    TYPES = list("primary" = c("preprimary_and_primary", "primary_only"),
-                 "junior_sec" = c("junior_sec_only"),
-                 "combined" = c("primary_and_junior_sec", "primary_junior_and_senior_sec",
-                                "junior_and_senior_sec"))
-    ## (1) Create additional facility-level indicators that are helpful in our later calculations
-    education_data %.% 
-        mutate(
-            is_primary_or_js = facility_type %in% c(TYPES$primary, TYPES$junior_sec)
-        ) %.% 
-    ## (2) Filter by just primary and junior secondary schools and group by lga
-        filter(is_primary_or_js) %.%
-        group_by(unique_lga) %.%
-    ## (3) And finally, create the summary indicators
-        dplyr::summarize(
-            gap_sheet_primary_js = n(),
-            gap_sheet_num_existing_classrooms = sum(num_classrms_total, na.rm=T),
-            gap_sheet_total_teachers = sum(num_tchr_full_time, na.rm=T),
-            gap_sheet_improved_functional_water = percent(improved_water_supply),
-            gap_sheet_improved_sanitation = percent(improved_sanitation),
-            gap_sheet_phcn_electricity_e = percent(phcn_electricity),
-            gap_sheet_num_classrms_repairs = 
-                ratio(num_classrms_repair, num_classrms_total, as.percent=TRUE),
-            gap_sheet_num_classrm_w_chalkboard = 
-                ratio(num_classrm_w_chalkboard, num_classrms_total, as.percent=TRUE),
-            gap_sheet_num_tchrs_with_nce = 
-                ratio(num_tchrs_with_nce, num_tchr_full_time, as.percent=TRUE)
-        ) %.%
-    ## (4) Final step for gap sheets. Note that we want to output data as numerator / denominator
-    ## rather than percent for gap sheets. We do the splitting below.
-        split_percent_columns()
-    
-}
-
-health_gap_sheet_indicators <- function(health_data) {
-    ## (1) Definitions to help us make indicators later on
-    health_data = health_data %.% mutate(
-        is_public = management %in% c('federal_gov', 'local_gov', 'state_gov', 'public'),
-        is_hospital = str_detect(facility_type, 'hospital'),
-        is_healthpost = facility_type %in% c('dispensary', 'health_post'),
-        is_phcentre = facility_type %in% c('primary_health_centre'),
-        is_phclinic = facility_type %in% c('basic_health_centre'),
-        is_healthfacility = ! (facility_type %in% c('dk', 'none') | is.na(facility_type)),
-        is_allExceptHealthPost = is_healthfacility & ! is_healthpost,
-        is_hospital_phc_or_clinic = is_hospital | is_phcentre | is_phclinic,
-        num_skilled_birth_attendants = rowSums(cbind(num_nursemidwives_fulltime, num_doctors_fulltime), na.rm=T)
-    )
-    ## (2) Aggregation 1: Services that are provided at Hospitals only
-    hospital_data = health_data %.% 
-        filter(is_hospital) %.% 
-        group_by(unique_lga)  %.% 
-        dplyr::summarise(
-            gap_sheet_c_section_yn = percent(c_section_yn)
-        )
-    ## (3) Aggregation 2: Services that are provided at all facilties except for Health Posts
-    hospital_phc_clinic_data = health_data %.% 
-        filter(is_hospital_phc_or_clinic) %.% 
-        group_by(unique_lga) %.%
-        dplyr::summarise(
-            gap_sheet_i_water_supply = percent(improved_water_supply),
-            gap_sheet_i_sanitation = percent(improved_sanitation),
-            gap_sheet_phcn_electricity_h = percent(phcn_electricity),
-            gap_sheet_any_power_available = percent(phcn_electricity | access_to_alternative_power_source),        
-            gap_sheet_sba = percent(num_skilled_birth_attendants >= 2),
-            gap_sheet_delivery_services_yn = percent(maternal_health_delivery_services),
-            gap_sheet_vaccines_fridge_freezer = percent(vaccines_fridge_freezer)
-        )
-    ## (4) Aggregation 3: Services that are provided at all facilities including Health Posts
-    allFacilities_data = health_data %.% 
-        filter(is_healthfacility) %.% 
-        group_by(unique_lga) %.%
-        dplyr::summarise(
-            gap_sheet_total_facilities = sum(is_healthfacility, na.rm=T),
-            gap_sheet_total_hospitals = sum(is_hospital, na.rm=T),
-            gap_sheet_total_phcentres = sum(is_phcentre, na.rm=T),
-            gap_sheet_total_phclinics = sum(is_phclinic, na.rm=T),
-            gap_sheet_total_dispensary = sum(is_healthpost, na.rm=T),
-            gap_sheet_total_sec_tertiary = 0,
-            
-            ## fully staffed indicators:
-            gap_sheet_phcentre = percent(num_skilled_birth_attendants >= 5 
-                                         & num_chews_fulltime >= 9, filter = is_phcentre),
-            gap_sheet_phclinic = percent(num_skilled_birth_attendants >= 2 
-                                         & num_chews_fulltime >= 4, filter = is_phclinic),
-            gap_sheet_dispensary = percent(num_chews_fulltime >= 1, filter = is_healthpost),
-            
-            gap_sheet_emerg_tran = percent(emergency_transport),
-            gap_sheet_antenatal_care_yn = percent(antenatal_care_yn),
-            gap_sheet_family_planning_yn = percent(family_planning_yn),
-            gap_sheet_medication_anti_malarials = percent(malaria_treatment_artemisinin),
-            gap_sheet_child_health_measles_immun = percent(child_health_measles_immun_calc)
-        )
-    return(allFacilities_data %.% 
-               left_join(hospital_phc_clinic_data, by='unique_lga') %.% 
-               left_join(hospital_data, by='unique_lga') %.%
-               split_percent_columns())
-}
