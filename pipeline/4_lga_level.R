@@ -31,7 +31,8 @@ education_mopup_lga_indicators <- function(education_data) {
             follows_natl_curriculum = natl_curriculum_yn,
             management = revalue(management, c("federal_gov"="public", "local_gov" = "public",
                                            "state_gov" = "public")),
-            is_valid_facility = ! facility_type %in% c('dk', 'none', 'DROP')
+            is_valid_facility = ! (facility_type %in% c('dk', 'none', 'DROP') |
+                                       is.na(natl_curriculum_yn))
         ) %.%
         dplyr::filter(is_valid_facility) 
     ## (2) Define a function which will calculate indicators given a "level". Level is primary or junior.
@@ -71,7 +72,6 @@ education_mopup_lga_indicators <- function(education_data) {
     }
     ## (3) Make the two indicators that are for both informal and formal schools
     lga_data_all_schools <- education_data %.%
-        dplyr::filter(is_valid_facility) %.%
         dplyr::group_by(unique_lga) %.%
         dplyr::summarise(
             num_schools = n(),
