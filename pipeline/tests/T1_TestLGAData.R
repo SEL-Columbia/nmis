@@ -12,7 +12,7 @@ test_that("LGA indicators match for education for Zurmi", {
     source('CONFIG.R'); source('0_normalize.R'); source('3_facility_level.R'); source('4_lga_level.R')
     edu <- normalize_mopup(test_education_data, "mopup_new")
     edu <- education_mopup_facility_level(edu)
-    edu_lga <- education_mopup_lga_indicators(edu) %.% select(lga = unique_lga)
+    edu_lga <- education_mopup_lga_indicators(edu) %.% select(lga = unique_lga, matches('.'))
     ### (2) Test that they are the same
     
     ## Sanity checks
@@ -29,6 +29,24 @@ test_that("LGA indicators match for education for Zurmi", {
     expect_true(all(should_eq[1,] == should_eq[2,], na.rm=T))    
 })
 
+test_that("Education, num_schools match for Kano Shanono", {
+    test_education_data_ks <- tbl_df(read.csv("tests/test_data/Education_m+b_Kano_Shanono.csv",
+                                    stringsAsFactors = F))
+    source('4_lga_level.R')
+    ks_lga <- education_mopup_lga_indicators(test_education_data_ks)
+   
+    ## See https://github.com/SEL-Columbia/nmis/issues/198
+    expected_data <- data.frame(unique_lga = "kano_shanono", 
+                                num_primary_schools = 84,
+                                num_junior_secondary_schools = 8,
+                                num_combined_schools = 4,
+                                num_informal_schools = 49,
+                                num_schools = 145)
+    
+    ks_lga <- ks_lga[names(expected_data)]
+    expect_true(all(ks_lga == expected_data))
+})
+
 ####### TEST HEALTH #######
 test_that("LGA indicators match for health for Zurmi", {
     expected_lga_output = read.csv("tests/test_data/mopup_NMIS_LGA_Indicators_SUBSET_zamfara_zurmi.csv")
@@ -40,7 +58,7 @@ test_that("LGA indicators match for health for Zurmi", {
     health <- normalize_mopup(test_health_data, "mopup_new")
     health <- health_mopup_facility_level(health)
     health_lga <- health_mopup_lga_indicators(health) %.% 
-        select(lga = unique_lga) %.% filter(lga != "DISCARD") ## we had to insert
+        select(lga = unique_lga, matches('.')) %.% filter(lga != "DISCARD") ## we had to insert
     ### (2) Test that they are the same
     ## Sanity checks
     expect_true(nrow(health_lga) == 1) # we should produce only one column

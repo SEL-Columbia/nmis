@@ -28,7 +28,7 @@ normalize_mopup = function(formhubData, survey_name, sector) {
                                      "nasarawaNA" = "nasarawa_obi",
                                      "osunNA" = "NA", ## SADLY: two possible values for osun
                                      "oyoNA" = "oyo_surulere",
-                                     "plateauNA" = "plateaut_bassa"))
+                                     "plateauNA" = "plateau_bassa"))
             )
         d <- rbind_list(d %.% filter(lga != "NA"), messed_up_lgas)
     }
