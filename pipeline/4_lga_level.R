@@ -3,30 +3,38 @@ source("nmis_functions.R")
 
 ## Education Facilities LGA-level indicators for mopup
 ## The way this works, roughly is:
+## (0) We will list out which types map to which.
 ## (1) Create additional facility-level indicators that are helpful in our later calculations
 ## (2) Define a function which will calculate indicators given a "level". Level is primary or junior.
 ##     We do this so we don't have to repeat the same code for primary and junior secondary indicators.
 ##     Note that before returning, based on level, this function tacks on _primary or _js to the indicator name.
-## (3) Actually call the function on both primary and js levels, and save the values.
-## (4) Make overall indicators (ie, ones that are not specific to each level).
-## (5) Join everything together
-## (6) Rename some of our indicators to possibly non-standard form. (Should go away).
+## (3) Make the two indicators that are for both informal and formal schools
+## (4) Drop all informal schools for the rest of the calculations    
+## (5) Create calculations for primary and junior secondary levels (using the function above)
+## (6) Calculate the indicators on formal schools that incorporate multiple levels
+## (7) Join everything together
+## (8) Rename some of our indicators to possibly non-standard form. (Should go away).
 education_mopup_lga_indicators <- function(education_data) {
     ## (0) WE will list out which types are which here:
     TYPES = list("primary" = c("preprimary_and_primary", "primary_only"),
                  "junior_sec" = c("junior_sec_only"),
                  "combined" = c("primary_and_junior_sec", "primary_junior_and_senior_sec",
                                   "junior_and_senior_sec"))
-    ## (1) Create additional facility-level indicators that are helpful in our later calculations
-    education_data <- education_data %.% mutate(
-        ## TYPES: primary and js are double-counted, plus we have a "combined" type
-        is_primary = facility_type %in% TYPES$primary,
-        is_junior_secondary = facility_type %in% TYPES$junior_sec, 
-        is_combined = facility_type %in% TYPES$combined,
-        management = revalue(management, c("federal_gov"="public", "local_gov" = "public",
+    ## (1) Create additional facility-level indicators that are helpful in our later calculations,
+    ## and drop invalid facilities
+    education_data <- education_data %.% 
+        dplyr::mutate(
+            ## TYPES: primary and js are double-counted, plus we have a "combined" type
+            is_primary = facility_type %in% TYPES$primary,
+            is_junior_secondary = facility_type %in% TYPES$junior_sec, 
+            is_combined = facility_type %in% TYPES$combined,
+            follows_natl_curriculum = natl_curriculum_yn,
+            management = revalue(management, c("federal_gov"="public", "local_gov" = "public",
                                            "state_gov" = "public")),
-        is_valid_facility = ! facility_type %in% c('dk', 'none', 'DROP')
-    )
+            is_valid_facility = ! (facility_type %in% c('dk', 'none', 'DROP') |
+                                       is.na(natl_curriculum_yn))
+        ) %.%
+        dplyr::filter(is_valid_facility) 
     ## (2) Define a function which will calculate indicators given a "level". Level is primary or junior.
     ## primary and junior secondary indicator transformations. Note: columns will end with _primary or _js
     primary_and_junior_sec_indicators <- function(data, level) {
@@ -35,7 +43,6 @@ education_mopup_lga_indicators <- function(education_data) {
             group_by(unique_lga) %.% 
             filter(facility_type %in% TYPES[[level]]) %.% ## subset for this level only
             dplyr::summarize(
-                num_schools = n(),
                 ## Average indicators (make sure to round)
                 avg_num_tchrs = round(mean(num_tchr_full_time, na.rm=T)),
                 avg_num_students = round(mean(num_students_total, na.rm=T)),
@@ -63,27 +70,39 @@ education_mopup_lga_indicators <- function(education_data) {
         names(data)[-1] <- paste(names(data)[-1], level_suffix, sep="_")
         return(data)
     }
-    ## (3) Actually call the function on both primary and js levels, and save the values.
-    primary_indicators = primary_and_junior_sec_indicators(education_data, 'primary')
-    js_indicators = primary_and_junior_sec_indicators(education_data, 'junior_sec')
-    ## (4) Make overall indicators (ie, ones that are not specific to each level).
-    lga_data = education_data %.% filter(is_valid_facility) %.% group_by(unique_lga) %.% 
+    ## (3) Make the two indicators that are for both informal and formal schools
+    lga_data_all_schools <- education_data %.%
+        dplyr::group_by(unique_lga) %.%
         dplyr::summarise(
             num_schools = n(),
+            num_informal_schools = sum(!natl_curriculum_yn, na.rm=T)
+        )
+    ## (4) Drop all informal schools for the rest of the calculations
+    education_data <- education_data %.%
+        dplyr::filter(follows_natl_curriculum)
+    
+    ## (5) Create calculations for primary and junior secondary levels (using the function above)
+    primary_indicators <- primary_and_junior_sec_indicators(education_data, 'primary')
+    js_indicators <- primary_and_junior_sec_indicators(education_data, 'junior_sec')
+    
+    ## (6) Calculate the indicators on formal schools that incorporate multiple levels
+    lga_data_formal_schools <- education_data %.%
+        dplyr::group_by(unique_lga) %.% 
+        dplyr::summarise(
             num_combined_schools = sum(is_combined, na.rm=T),
+            num_primary_schools = sum(is_primary, na.rm=T),
+            num_junior_secondary_schools = sum(is_junior_secondary, na.rm=T),
             percent_management_public = percent(management == "public"),
             pupil_teachers_ratio_lga = ratio(num_students_total, num_tchr_full_time,
-                                             format = "ratio"),
-            num_informal_schools = sum(!natl_curriculum_yn, na.rm=T),
-            percent_natl_curriculum = percent(natl_curriculum_yn)) 
-    ## (5) Join everything together
-    lga_data %.% 
-        inner_join(primary_indicators, by='unique_lga') %.%
-        inner_join(js_indicators, by='unique_lga') %.%
-    ## (6) Rename some of our indicators to possibly non-standard form. (Should go away).
+                                             format = "ratio")
+        ) 
+    ## (7) Join everything together
+    lga_data_all_schools %.% 
+        left_join(lga_data_formal_schools, by='unique_lga') %.%
+        left_join(primary_indicators, by='unique_lga') %.%
+        left_join(js_indicators, by='unique_lga') %.%
+    ## (8) Rename some of our indicators to possibly non-standard form. (Should go away).
         dplyr::select(##RENAMING BEFORE RETURNING: NOTE THESE SHOULD BE CHANGED ONCE 774 + MOPUP ARE TOGETHER
-            num_primary_schools = num_schools_primary,
-            num_junior_secondary_schools = num_schools_js,
             proportion_schools_chalkboard_all_rooms_juniorsec = percent_schools_chalkboard_all_rooms_js,
             proportion_schools_chalkboard_all_rooms_primary = percent_schools_chalkboard_all_rooms_primary,
             proportion_teachers_nce_primary = percent_teachers_nce_primary,
