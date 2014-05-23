@@ -91,7 +91,7 @@ education_mopup_lga_indicators <- function(education_data) {
         dplyr::summarise(
             num_combined_schools = sum(is_combined, na.rm=T),
             num_primary_schools = sum(is_primary, na.rm=T),
-            num_junior_secondary_schools = sum(is_junior_secondary),
+            num_junior_secondary_schools = sum(is_junior_secondary, na.rm=T),
             percent_management_public = percent(management == "public"),
             pupil_teachers_ratio_lga = ratio(num_students_total, num_tchr_full_time,
                                              format = "ratio")
