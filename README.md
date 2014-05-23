@@ -8,7 +8,7 @@ NMIS Project v1.0
 
     pip install Flask
 
-2. Follow the instructions in the pipeline folder to generate lga level json:
+2. Follow the instructions in the pipeline folder to generate lga level json. Symlink `pipeline/lgas` to `static/lgas` (`cd static && ln -sf ../pipeline/lgas lgas`).
 
 3. Cd to the "nmis" folder and run the local server
 
