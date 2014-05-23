@@ -17,6 +17,17 @@ test_that('Certain Health LGA level indicators should add up to each other', {
     expect_true(all(expectations$expect_nums_add_up))
 })
 
+test_that('Number of different level schools add up to the total', {
+    edu_lga <- read.csv(output_file("Education_Mopup_and_Baseline_LGA_Aggregations.csv"))
+    expectations <- edu_lga %.%
+        mutate(expect_nums_add_up = (ks$num_schools == ks$num_primary_schools 
+                    + ks$num_junior_secondary_schools + ks$num_combined_schools 
+                    + ks$num_informal_schools)
+        ) %.% 
+        select(matches('expect|lga'))
+    expect_true(all(expectations$expect_nums_add_up))
+})
+
 test_that('LGAs.csv has exactly 774 unique LGAs, 37 (36 + FCT) states, and 6 zones, and all
           LGAs should have unique lat/lng and area', {
     lga_data <- read.csv("data/lgas.csv")
