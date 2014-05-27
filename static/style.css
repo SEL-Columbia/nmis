@@ -646,6 +646,10 @@ table thead td:active {
     width: 80%;
 }
 
+.percent_values {
+    color: #888;
+}
+
 
 
 /* Explore.html, Map View
