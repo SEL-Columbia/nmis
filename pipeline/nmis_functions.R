@@ -6,7 +6,7 @@
 ## NOTE: If changed, split_percent_columns will also have to be changed
 percent_format <- function(numerator, denominator) {
     ifelse(is.finite(numerator) & is.finite(denominator) & (denominator > 0),
-           sprintf("%1.0f%% | %i / %i", 100 * numerator / denominator, numerator, denominator),
+           sprintf("%1.0f%% (%i/%i)", 100 * numerator / denominator, numerator, denominator),
            "NA"
     )
 }
