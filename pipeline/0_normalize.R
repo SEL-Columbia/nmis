@@ -6,7 +6,9 @@ normalize_mopup = function(formhubData, survey_name, sector) {
     d <- tbl_df(remapAllColumns(formhubData, remap=c("yes"=TRUE, "no"=FALSE, "dk"=NA))) %.%
         mutate(
             ## Create facility_type_display using the formhub form
-            facility_type_display = replaceColumnNamesWithLabels(formhubData, 'facility_type')
+            facility_type_display = replaceColumnNamesWithLabels(formhubData, 'facility_type'),
+            ## Toilets should be 0 if improved_sanitation.none is true
+            num_toilets_total = replace(num_toilets_total, improved_sanitation.none, 0)
         )
     ## Survey_name: mopup, mopup_new, or mopup_pilot
     # mopup and mopup_new are pretty much the same, except mopup has some LGAs mistakenly as NA
