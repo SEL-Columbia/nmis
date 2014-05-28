@@ -92,8 +92,8 @@ table .value {
 #header a.logo {
     display: inline-block;
     padding: 12px 0;
-    color: #444;
-    font-size: 20px;
+    color: #666;
+    font-size: 23px;
     font-weight: 500;
 }
 #header a.logo:hover {
@@ -166,18 +166,25 @@ table .value {
 }
 #index_content .intro {
     display: block;
-    width: 325px;
-	text-shadow: 1px 1px rgba(0,0,0,0.3);
+    width: 90%;
+    margin: auto;
+    text-align: center;
 }
 #index_content .intro h1 {
-    font-size: 32px;
+    font-size: 50px;
     line-height: 1.25;
+    text-shadow: 1px 1px rgba(0,0,0,0.3);
+}
+#index_content .commissioned {
+    font-size: 14px;
+    text-transform: uppercase;
 }
 #index_content .about {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 200;
     margin: 20px 0;
     line-height: 1.5;
+    letter-spacing: 0.5px;
 }
 #index_content .sponsors {
     background: white;
@@ -191,19 +198,20 @@ table .value {
 #index_content .sponsors img:last-child {
     margin-right: 0;
 }
-#index_content .btn {
+#index_content .explore_btn {
+    display: block;
+    width: 200px;
     color: white;
-    padding: 6px 19px;
-    font-size: 12px;
-    margin-right: 5px;
+    padding: 9px 20px;
+    font-size: 15px;
+    margin: auto;
     text-transform: uppercase;
     border: none;
-}
-#index_content .btn.explore {
+    border-radius: 5px;
     background: rgb(0, 152, 72);
 }
-#index_content .btn.download {
-    background-color: #939598;
+#index_content .explore_btn:hover {
+    background-color: rgb(0, 127, 60);
 }
 #index_content .caption {
     font-weight: 300;
@@ -438,7 +446,7 @@ table thead td:active {
     width: 500px;
     margin-left: -250px;
     background: #444; /* IE */
-    background: rgba(0,0,0,0.85);
+    background: rgba(0,0,0,0.8);
     border-radius: 6px;
     box-shadow: 5px 5px 20px #666;
     z-index: 50;
