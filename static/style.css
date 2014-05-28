@@ -333,6 +333,11 @@ table .value {
 }
 
 
+.notfound {
+    text-align: center;
+}
+
+
 /* Loading indicator */
 .loading {
 	display: none;

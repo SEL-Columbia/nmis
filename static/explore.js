@@ -65,6 +65,9 @@ function view(viewObj, sector){
                     NMIS.facilities[facility.uuid] = facility;
                 });
                 render_wrap(lga, sector);
+            }).error(function(e){
+                $('.loading').hide();
+                render('#notfound_template', {});
             });
         }
     }
@@ -118,22 +121,18 @@ function format_value(value){
     // Formats indicator values for use in tables
     if (typeof value === 'undefined' || value === null || value === 'NaN' || value === 'NA')
         return 'N/A';
-
     // Boolean
     if (value === true) return 'Yes';
     if (value === false) return 'No';
-
     // Percent values: "83% (10/12)"
     var capture = /(\d+%) (\(\d+\/\d+\))/.exec(value);
     if (capture){
         return capture[1] + ' <span class="percent_values">' + capture[2] + '</span>';
     }
-
     // Numbers
     if (_.isNumber(value) && value % 1 !== 0){
         return value.toFixed(2);
     }
-    
     // Strings
     if (_.isString(value)){
         return value[0].toUpperCase() + value.substr(1);
