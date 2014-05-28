@@ -11,7 +11,7 @@ lga_data <- read.csv("data/lgas.csv") %.%
 output_indicators <- function(df, level, sector) {
     needed_indicators = get_necessary_indicators()[[level]][[sector]]
     df <- df %.% 
-        select(unique_lga_2013 = unique_lga, matches('.')) %.% # rename unique_lga to unique_lga_2013
+        dplyr::select(unique_lga_2013 = unique_lga, matches('.')) %.% # rename unique_lga to unique_lga_2013
         join(lga_data, by='unique_lga_2013')
     if(!all(needed_indicators %in% names(df))) {
         stop(sprintf("Missing %s-level indicators for %s: ", level, sector),
@@ -20,5 +20,3 @@ output_indicators <- function(df, level, sector) {
     df <- df[needed_indicators]
     return(df)
 }
-
-

@@ -5,14 +5,15 @@ require(dplyr)
 source('nmis_functions.R')
 
 education_outlier <- function(education_data) {
-    return(education_data 
-        %.% mutate(
+    return(education_data %.% 
+        dplyr::mutate(
             num_tchrs_male = replace(num_tchrs_male, num_tchrs_male > num_tchrs_total, NA),
             num_tchrs_female = replace(num_tchrs_female, num_tchrs_female > num_tchrs_total, NA),
             num_tchrs_with_nce = replace(num_tchrs_with_nce, num_tchrs_with_nce > num_tchrs_total, NA),
             num_classrms_repair = replace(num_classrms_repair, num_classrms_repair > num_classrms_total, NA),
             num_tchrs_total = replace(num_tchrs_total, num_tchrs_total > (num_tchrs_male + num_tchrs_female), NA)
-        ) %.% mutate(
+        ) %.% 
+        dplyr::mutate(
             num_tchrs_male = replace(num_tchrs_male, num_tchrs_male > 100, NA),
             num_tchrs_female = replace(num_tchrs_female, num_tchrs_female > 100, NA),
             num_tchrs_with_nce = replace(num_tchrs_with_nce, num_tchrs_with_nce > 100, NA),
@@ -23,9 +24,11 @@ education_outlier <- function(education_data) {
 }
 
 health_outlier <- function(health_data) {
-    hospital_outlier_replaced <- health_data %.% filter(
-        facility_type %in% c("teaching_hospital", "district_hospital")
-        ) %.% mutate(
+    hospital_outlier_replaced <- health_data %.%
+        dplyr::filter(
+            facility_type %in% c("teaching_hospital", "district_hospital")
+        ) %.% 
+        dplyr::mutate(
             num_doctors_fulltime = replace(num_doctors_fulltime, num_doctors_fulltime > 12, NA), 
             num_nurses_fulltime = replace(num_nurses_fulltime, num_nurses_fulltime > 24, NA),
             num_midwives_fulltime = replace(num_midwives_fulltime, num_midwives_fulltime > 24, NA),
@@ -42,9 +45,11 @@ health_outlier <- function(health_data) {
             num_chews_fulltime = replace(num_chews_fulltime,
                 num_chews_fulltime > 50, NA)
         )
-    non_hospital_outlier_replaced = health_data %.% filter(
-        !(facility_type %in% c("teaching_hospital", "district_hospital"))
-        ) %.% mutate(
+    non_hospital_outlier_replaced = health_data %.% 
+        dplyr::filter(
+            !(facility_type %in% c("teaching_hospital", "district_hospital"))
+        ) %.% 
+        dplyr::mutate(
             num_doctors_fulltime = replace(num_doctors_fulltime, num_doctors_fulltime > 20, NA),
             num_nurses_fulltime = replace(num_nurses_fulltime, num_nurses_fulltime > 16, NA),
             num_midwives_fulltime = replace(num_midwives_fulltime, num_midwives_fulltime > 16, NA),

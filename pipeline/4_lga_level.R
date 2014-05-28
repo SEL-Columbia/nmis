@@ -98,9 +98,9 @@ education_mopup_lga_indicators <- function(education_data) {
         ) 
     ## (7) Join everything together
     lga_data_all_schools %.% 
-        left_join(lga_data_formal_schools, by='unique_lga') %.%
-        left_join(primary_indicators, by='unique_lga') %.%
-        left_join(js_indicators, by='unique_lga') %.%
+        dplyr::left_join(lga_data_formal_schools, by='unique_lga') %.%
+        dplyr::left_join(primary_indicators, by='unique_lga') %.%
+        dplyr::left_join(js_indicators, by='unique_lga') %.%
     ## (8) Rename some of our indicators to possibly non-standard form. (Should go away).
         dplyr::select(##RENAMING BEFORE RETURNING: NOTE THESE SHOULD BE CHANGED ONCE 774 + MOPUP ARE TOGETHER
             proportion_schools_chalkboard_all_rooms_juniorsec = percent_schools_chalkboard_all_rooms_js,
@@ -120,24 +120,31 @@ education_mopup_lga_indicators <- function(education_data) {
 ## (5) Merge our three aggregated datasets by lga, and return.
 health_mopup_lga_indicators = function(health_data) {
     ## (1) Definitions to help us make indicators later on
-    health_data = health_data %.% mutate(
-        is_public = management %in% c('federal_gov', 'local_gov', 'state_gov'),
-        is_hospital = str_detect(facility_type, 'hospital'),
-        is_healthpost = facility_type %in% c('dispensary', 'health_post'),
-        is_healthfacility = ! (facility_type %in% c('dk', 'none') | is.na(facility_type)),
-        is_allExceptHealthPost = is_healthfacility & ! is_healthpost
-    )
+    health_data = health_data %.% 
+        dplyr::mutate(
+            is_public = management %in% c('federal_gov', 'local_gov', 'state_gov'),
+            is_hospital = str_detect(facility_type, 'hospital'),
+            is_healthpost = facility_type %in% c('dispensary', 'health_post'),
+            is_healthfacility = ! (facility_type %in% c('dk', 'none') | is.na(facility_type)),
+            is_allExceptHealthPost = is_healthfacility & ! is_healthpost
+        )
     ## (2) Aggregation 1: Services that are provided at Hospitals only
-    hospital_data = health_data %.% filter(is_hospital) %.% group_by(unique_lga)  %.% 
-         dplyr::summarise(
-             percent_csection = percent(c_section_yn))
+    hospital_data = health_data %.% 
+        dplyr::filter(is_hospital) %.% 
+        dplyr::group_by(unique_lga)  %.% 
+        dplyr::summarise(percent_csection = percent(c_section_yn))
     ## (3) Aggregation 2: Services that are provided at all facilties except for Health Posts
-    allExceptHealthPost_data = health_data %.% filter(is_allExceptHealthPost) %.% group_by(unique_lga) %.%
+    allExceptHealthPost_data = health_data %.% 
+        dplyr::filter(is_allExceptHealthPost) %.% 
+        dplyr::group_by(unique_lga) %.%
         dplyr::summarise(
             proportion_delivery_sansHP = percent(maternal_health_delivery_services),
-            proportion_vaccines_fridge_freezer_sansHP = percent(vaccines_fridge_freezer))
+            proportion_vaccines_fridge_freezer_sansHP = percent(vaccines_fridge_freezer)
+        )
     ## (4) Aggregation 3: Services that are provided at all facilities including Health Posts
-    allFacilities_data = health_data %.% filter(is_healthfacility) %.% group_by(unique_lga) %.%
+    allFacilities_data = health_data %.% 
+        dplyr::filter(is_healthfacility) %.% 
+        dplyr::group_by(unique_lga) %.%
         dplyr::summarise(
             num_health_facilities = n(),
             proportion_antenatal = percent(antenatal_care_yn),
@@ -171,11 +178,12 @@ health_mopup_lga_indicators = function(health_data) {
             proportion_improved_water_supply = percent(improved_water_supply),
             proportion_improved_sanitation = percent(improved_sanitation),
             proportion_phcn_electricity = percent(phcn_electricity),
-            proportion_access_to_alternative_power = percent(access_to_alternative_power_source))
+            proportion_access_to_alternative_power = percent(access_to_alternative_power_source)
+        )
      ## (5) Merge everything (merge is equivalent to left_join in dplyr) and return
      return(allFacilities_data %.% 
-                left_join(allExceptHealthPost_data, by='unique_lga') %.% 
-                left_join(hospital_data, by='unique_lga'))
+                dplyr::left_join(allExceptHealthPost_data, by='unique_lga') %.% 
+                dplyr::left_join(hospital_data, by='unique_lga'))
 }
 
 education_gap_sheet_indicators <- function(education_data) {
@@ -186,12 +194,12 @@ education_gap_sheet_indicators <- function(education_data) {
                                 "junior_and_senior_sec"))
     ## (1) Create additional facility-level indicators that are helpful in our later calculations
     education_gap <- education_data %.% 
-        mutate(
+        dplyr::mutate(
             is_primary_or_js = facility_type %in% c(TYPES$primary, TYPES$junior_sec)
         ) %.% 
     ## (2) Filter by just primary and junior secondary schools and group by lga
-        filter(is_primary_or_js) %.%
-        group_by(unique_lga) %.%
+        dplyr::filter(is_primary_or_js) %.%
+        dplyr::group_by(unique_lga) %.%
     ## (3) And finally, create the summary indicators
         dplyr::summarize(
             gap_sheet_primary_js = n(),
@@ -215,28 +223,27 @@ education_gap_sheet_indicators <- function(education_data) {
 
 health_gap_sheet_indicators <- function(health_data) {
     ## (1) Definitions to help us make indicators later on
-    health_data = health_data %.% mutate(
-        is_public = management %in% c('federal_gov', 'local_gov', 'state_gov', 'public'),
-        is_hospital = str_detect(facility_type, 'hospital'),
-        is_healthpost = facility_type %in% c('dispensary', 'health_post'),
-        is_phcentre = facility_type %in% c('primary_health_centre'),
-        is_phclinic = facility_type %in% c('basic_health_centre'),
-        is_healthfacility = ! (facility_type %in% c('dk', 'none') | is.na(facility_type)),
-        is_allExceptHealthPost = is_healthfacility & ! is_healthpost,
-        is_hospital_phc_or_clinic = is_hospital | is_phcentre | is_phclinic,
-        num_skilled_birth_attendants = rowSums(cbind(num_nursemidwives_fulltime, num_doctors_fulltime), na.rm=T)
-    )
+    health_data = health_data %.% 
+        dplyr::mutate(
+            is_public = management %in% c('federal_gov', 'local_gov', 'state_gov', 'public'),
+            is_hospital = str_detect(facility_type, 'hospital'),
+            is_healthpost = facility_type %in% c('dispensary', 'health_post'),
+            is_phcentre = facility_type %in% c('primary_health_centre'),
+            is_phclinic = facility_type %in% c('basic_health_centre'),
+            is_healthfacility = ! (facility_type %in% c('dk', 'none') | is.na(facility_type)),
+            is_allExceptHealthPost = is_healthfacility & ! is_healthpost,
+            is_hospital_phc_or_clinic = is_hospital | is_phcentre | is_phclinic,
+            num_skilled_birth_attendants = rowSums(cbind(num_nursemidwives_fulltime, num_doctors_fulltime), na.rm=T)
+        )
     ## (2) Aggregation 1: Services that are provided at Hospitals only
     hospital_data = health_data %.% 
-        filter(is_hospital) %.% 
-        group_by(unique_lga)  %.% 
-        dplyr::summarise(
-            gap_sheet_c_section_yn = percent(c_section_yn)
-        )
+        dplyr::filter(is_hospital) %.% 
+        dplyr::group_by(unique_lga)  %.% 
+        dplyr::summarise(gap_sheet_c_section_yn = percent(c_section_yn))
     ## (3) Aggregation 2: Services that are provided at all facilties except for Health Posts
     hospital_phc_clinic_data = health_data %.% 
-        filter(is_hospital_phc_or_clinic) %.% 
-        group_by(unique_lga) %.%
+        dplyr::filter(is_hospital_phc_or_clinic) %.% 
+        dplyr::group_by(unique_lga) %.%
         dplyr::summarise(
             gap_sheet_i_water_supply = percent(improved_water_supply),
             gap_sheet_i_sanitation = percent(improved_sanitation),
@@ -248,8 +255,8 @@ health_gap_sheet_indicators <- function(health_data) {
         )
     ## (4) Aggregation 3: Services that are provided at all facilities including Health Posts
     allFacilities_data = health_data %.% 
-        filter(is_healthfacility) %.% 
-        group_by(unique_lga) %.%
+        dplyr::filter(is_healthfacility) %.% 
+        dplyr::group_by(unique_lga) %.%
         dplyr::summarise(
             gap_sheet_total_facilities = sum(is_healthfacility, na.rm=T),
             gap_sheet_total_hospitals = sum(is_hospital, na.rm=T),
@@ -272,15 +279,16 @@ health_gap_sheet_indicators <- function(health_data) {
             gap_sheet_child_health_measles_immun = percent(child_health_measles_immun_calc)
         )
     return(allFacilities_data %.% 
-               left_join(hospital_phc_clinic_data, by='unique_lga') %.% 
-               left_join(hospital_data, by='unique_lga') %.%
+               dplyr::left_join(hospital_phc_clinic_data, by='unique_lga') %.% 
+               dplyr::left_join(hospital_data, by='unique_lga') %.%
                split_percent_columns())
 }
 
 water_lga_indicators <- function(water_data) {
     ## all calculation are gathered from 
     ## nmis_R_scripts/nmis/nmis_indicators_water_lga_level_normalized.R
-    lga_data = water_data %.% group_by(unique_lga) %.% 
+    lga_data = water_data %.% 
+        dplyr::group_by(unique_lga) %.% 
         dplyr::summarise(
             ## Water Point Type
             num_total_water_points = n(),
@@ -306,4 +314,3 @@ water_lga_indicators <- function(water_data) {
         )
      return(lga_data) 
 }
-

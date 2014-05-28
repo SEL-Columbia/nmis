@@ -4,13 +4,15 @@ iso8601DateTimeConvert <- function(x) { ymd_hms(str_extract(x, '^[^+Z]*(T| )[^+Z
 
 ## Transformations for all facilities, mopup data, for facility level
 all_mopup_facility_level = function(facility_data) {
-    return(facility_data %.% dplyr::select(
+    return(facility_data %.% 
+        dplyr::select(
             # RENAMING FIELDS to be nicer; syntax is: new_col_name = old_col_name
             submission_time = X_submission_time, #TODO: use submission_time 
             latitude = X_gps_latitude,
             longitude = X_gps_longitude,
             matches('.') # this means match everything; ensure that we don't drop any columns
-        ) %.% mutate(
+        ) %.% 
+        dplyr::mutate(
             src = "mopup",
             # INFRASTRUCTURE
             date_of_survey = as.character(as.Date(iso8601DateTimeConvert(submission_time))), #TODO: fix
@@ -27,7 +29,8 @@ all_mopup_facility_level = function(facility_data) {
 }
 ## Transformations for education facilities, mopup data, for facility level
 education_mopup_facility_level = function(education_data) {
-    return(all_mopup_facility_level(education_data) %.% mutate(
+    return(all_mopup_facility_level(education_data) %.% 
+        dplyr::mutate(
             sector = "education",
             ## The following are used in other parts of the pipeline
             ratio_students_to_toilet = num_students_total / num_toilets_total,
@@ -46,13 +49,15 @@ education_mopup_facility_level = function(education_data) {
 }
 ## Transformations for health facilities, mopup data, for facility level
 health_mopup_facility_level = function(health_data) {
-    return(all_mopup_facility_level(health_data) %.% dplyr::select(
+    return(all_mopup_facility_level(health_data) %.% 
+        dplyr::select(
             # FIELDS THAT NEED RENAMING
             num_nursemidwives_fulltime = num_midwives_fulltime,
             maternal_health_delivery_services = delivery_services,
             child_health_measles_immun_calc = measles_yn,
             matches('.') # this means match everything; ensure that we don't drop any columns
-        ) %.% mutate(
+        ) %.% 
+        dplyr::mutate(
             sector = "health",
             # NEWLY CALCULATED FIELDS
             skilled_birth_attendant = ((num_nursemidwives_fulltime > 0) | (num_doctors_fulltime > 0))  

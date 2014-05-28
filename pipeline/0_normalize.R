@@ -3,8 +3,10 @@ require(formhub); require(plyr); require(dplyr);
 ## Normalize mopup surveys. We use "survey_name" to see what the name of the survey was,
 ## and map question names and values as required. Unmatching and rarely used columns are just dropped.
 normalize_mopup = function(formhubData, survey_name, sector) {
-    d <- tbl_df(remapAllColumns(formhubData, remap=c("yes"=TRUE, "no"=FALSE, "dk"=NA))) %.%
-        mutate(
+    d <- formhubData %.%
+        formhub::remapAllColumns(remap=c("yes"=TRUE, "no"=FALSE, "dk"=NA)) %.%
+        dplyr::tbl_df() %.%
+        dplyr::mutate(
             ## Create facility_type_display using the formhub form
             facility_type_display = replaceColumnNamesWithLabels(formhubData, 'facility_type')
         )
@@ -21,8 +23,9 @@ normalize_mopup = function(formhubData, survey_name, sector) {
     }
     #### CORRECT THE MISTAKE WHERE SOME LGAs were given the unique_lga value "NA" by mistake
     if(survey_name == "mopup") {
-        messed_up_lgas <- d %.% dplyr::filter(lga=="NA") %.%
-            mutate(
+        messed_up_lgas <- d %.% 
+            dplyr::filter(lga=="NA") %.%
+            dplyr::mutate(
                 lga = str_c(state, lga),   # add state names to make revaluing possible
                 lga = revalue(lga, c("adamawaNA" = "adamawa_larmurde",
                                      "nasarawaNA" = "nasarawa_obi",
@@ -30,7 +33,7 @@ normalize_mopup = function(formhubData, survey_name, sector) {
                                      "oyoNA" = "oyo_surulere",
                                      "plateauNA" = "plateau_bassa"))
             )
-        d <- rbind_list(d %.% filter(lga != "NA"), messed_up_lgas)
+        d <- rbind_list(filter(d, lga != "NA"), messed_up_lgas)
     }
     
     return(d %.% ## drop _dontknow and _calc values, which are only meant for monitoring
@@ -48,7 +51,7 @@ normalize_2012 = function(d, survey_name, sector) {
     if (survey_name %in% c("2012")) {
         if(sector == 'health') {
             d <- d %.% 
-                mutate(
+                dplyr::mutate(
                     facility_type = revalue(facility_type,
                                     c("comprehensivehealthcentre" = "district_hospital",
                                       "cottagehospital" = "general_hospital",
@@ -64,14 +67,15 @@ normalize_2012 = function(d, survey_name, sector) {
                                       "specialisthospital" = "specialist_hospital",
                                       "teachinghospital" = "teaching_hospital",
                                       "wardmodelphccentre" = "primary_health_centre"))
-                ) %.% dplyr::select( # the following are renames. format: new_value = old_value
+                ) %.% 
+                dplyr::select( # the following are renames. format: new_value = old_value
                     ## RENAMING SOME BASELINE INDICATORS TO MATCH WITH NEW NAMES
                     malaria_treatment_artemisinin = medication_anti_malarials,
                     matches('.') # this is necessary, in order not to drop the rest of the columns
                 )
         } else if (sector == "education") {
             d <- d %.% 
-                mutate(
+                dplyr::mutate(
                     facility_type = revalue(facility_type,
                                             c("adult_ed" = "DROP",
                                               "adult_lit" = "DROP",
@@ -90,14 +94,15 @@ normalize_2012 = function(d, survey_name, sector) {
                                               "vocational" = "DROP",
                                               "vocational_post_primary" = "DROP",
                                               "vocational_post_secondary" = "DROP"))
-                ) %.% dplyr::select( # the following are renames. format: new_value = old_value
+                ) %.% 
+                dplyr::select( # the following are renames. format: new_value = old_value
                     ## RENAMING SOME BASELINE INDICATORS TO MATCH WITH NEW NAMES
                     num_classrms_repair = num_classrms_need_maj_repairs,
                     matches('.') # this is necessary, in order not to drop the rest of the columns
                 )
         } else if (sector == "water") {
             d <- d         }
-        return(d %.% mutate(facility_ID = NA))
+        return(mutate(d, facility_ID = NA))
     } else {
         stop("Sector and Survey Name normalization not yet supported.")
     }
