@@ -651,7 +651,11 @@ table thead td:active {
     width: 80%;
 }
 
-.percent_values {
+/* Percent indicator values: "50% (5/10)" */
+.percent_value {
+    margin-right: 4px;
+}
+.percent_fraction {
     color: #888;
     font-size: 0.85em;
     letter-spacing: 1px;

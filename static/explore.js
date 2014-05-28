@@ -129,7 +129,8 @@ function format_value(value){
     // Percent values: "83% (10/12)"
     var capture = /(\d+%) (\(\d+\/\d+\))/.exec(value);
     if (capture){
-        return capture[1] + ' <span class="percent_values">' + capture[2] + '</span>';
+        return '<span class="percent_value">' + capture[1] + '</span> ' +
+        '<span class="percent_fraction">' + capture[2] + '</span>';
     }
     // Numbers
     if (_.isNumber(value) && value % 1 !== 0){
