@@ -66,8 +66,10 @@ function view(viewObj, sector){
                 });
                 render_wrap(lga, sector);
             }).error(function(e){
-                $('.loading').hide();
-                render('#notfound_template', {});
+                $('#explore_header, .map_view, .loading').hide();
+                $('#content .content').html(
+                    '<h1 class="notfound">Sorry, this LGA\'s data is currently unavailable</h1>');
+                $('#content .container').show();
             });
         }
     }
