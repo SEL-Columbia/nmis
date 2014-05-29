@@ -196,23 +196,21 @@ table .value {
     border-top: 1px solid white;
     border-bottom: 1px solid white;
     padding: 5px 0;
-    width: 175px;
+    width: 180px;
 }
 #index_content .stat.mid {
     margin: 0 55px;
 }
-#index_content .img {
+#index_content .stat img {
     position: absolute;
-    width: 30px;
-    height: 50px;
-    background-color: rgba(0,0,0,.3);
+    left: 0;
 }
 #index_content .stat .num {
     text-align: left;
-    font-size: 30px;
+    font-size: 32px;
     font-weight: 500;
     line-height: 1;
-    margin-left: 40px;
+    margin-left: 45px;
 }
 #index_content .stat .num::after {
     position: relative;
@@ -225,11 +223,11 @@ table .value {
 #index_content .stat .facilities {
     font-size: 15px;
     letter-spacing: 1px;
-    margin-left: 30px;
+    margin-left: 33px;
 }
 #index_content .stat.mid .facilities {
     /* manually align "education facilities" */
-    margin-left: 20px;
+    margin-left: 30px;
 }
 #index_content .explore_btn {
     display: block;
@@ -262,12 +260,12 @@ table .value {
     color: white;
     font-size: 12px;
     font-style: italic;
-    margin-top: 153px;
+    margin-top: 165px;
 }
 #index_content .sponsors {
     background: white;
     padding: 10px 0;
-    margin-top: 30px;
+    margin-top: 45px;
 }
 #index_content .sponsors img {
     display: inline-block;
