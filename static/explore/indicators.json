@@ -114,7 +114,7 @@
         "description": "Percentage that provide delivery services for pregnant women twenty four hours and seven days in a week."
     },
     "proportion_delivery_sansHP": {
-        "name": "Percentage that provide delivery services for pregnant.",
+        "name": "Percentage that provide delivery services for pregnant women",
         "description": "Percentage that provide delivery services for pregnant women twenty four hours and seven days in a week."
     },
     "proportion_vaccines_fridge_freezer_sansHP": {
