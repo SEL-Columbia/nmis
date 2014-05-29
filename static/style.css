@@ -187,7 +187,7 @@ table .value {
     letter-spacing: 0.5px;
 }
 #index_content .stats {
-    width: 650px;
+    width: 660px;
     margin: 5px auto 35px;
 }
 #index_content .stat {
@@ -196,10 +196,10 @@ table .value {
     border-top: 1px solid white;
     border-bottom: 1px solid white;
     padding: 5px 0;
-    width: 180px;
+    width: 185px;
 }
 #index_content .stat.mid {
-    margin: 0 55px;
+    margin: 0 50px;
 }
 #index_content .stat img {
     position: absolute;
@@ -227,7 +227,7 @@ table .value {
 }
 #index_content .stat.mid .facilities {
     /* manually align "education facilities" */
-    margin-left: 30px;
+    margin-left: 25px;
 }
 #index_content .explore_btn {
     display: block;
