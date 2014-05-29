@@ -135,6 +135,7 @@ table .value {
 #header .global_nav a:hover,
 #header .global_nav a.active {
     background: rgb(77, 77, 77);
+    background: rgba(0,0,0,0.5);
 }
 
 #header.baseline .global_nav {
