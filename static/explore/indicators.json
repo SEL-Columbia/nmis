@@ -1545,7 +1545,7 @@
     },
     "percentage_of_individuals_tested_for_hiv_ever": {
         "name": "Percentage of men and women ever tested for HIV",
-        "description": "Percentage of women between 15-49 years who were pregnant in the last five years and who got tested for HIV as a part of an antenatal visit (DHS, 2008)",
+        "description": "Percentage of individuals that have been tested for HIV/AIDS (HNLSS, 2009)",
         "mapid": "d161b57j"
     },
     "malaria_treatment_artemisinin": {
