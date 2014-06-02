@@ -92,8 +92,8 @@ table .value {
 #header a.logo {
     display: inline-block;
     padding: 12px 0;
-    color: #444;
-    font-size: 20px;
+    color: #666;
+    font-size: 23px;
     font-weight: 500;
 }
 #header a.logo:hover {
@@ -134,7 +134,7 @@ table .value {
 }
 #header .global_nav a:hover,
 #header .global_nav a.active {
-    background: rgb(77, 77, 77);
+    background: rgb(0, 76, 36);
 }
 
 #header.baseline .global_nav {
@@ -166,23 +166,106 @@ table .value {
 }
 #index_content .intro {
     display: block;
-    width: 325px;
-	text-shadow: 1px 1px rgba(0,0,0,0.3);
+    width: 90%;
+    margin: auto;
+    text-align: center;
 }
 #index_content .intro h1 {
-    font-size: 32px;
+    font-size: 50px;
     line-height: 1.25;
+    text-shadow: 1px 1px rgba(0,0,0,0.3);
+}
+#index_content .commissioned {
+    font-size: 14px;
+    text-transform: uppercase;
 }
 #index_content .about {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 200;
     margin: 20px 0;
     line-height: 1.5;
+    letter-spacing: 0.5px;
+}
+#index_content .stats {
+    width: 660px;
+    margin: 5px auto 35px;
+}
+#index_content .stat {
+    float: left;
+    position: relative;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: 5px 0;
+    width: 185px;
+}
+#index_content .stat.mid {
+    margin: 0 50px;
+}
+#index_content .stat img {
+    position: absolute;
+    left: 0;
+}
+#index_content .stat .num {
+    text-align: left;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1;
+    margin-left: 45px;
+}
+#index_content .stat .num::after {
+    position: relative;
+    top: -0.4em;
+    left: 0.1em;
+    content: "+";
+    font-size: 0.5em;
+    font-weight: normal;
+}
+#index_content .stat .facilities {
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-left: 33px;
+}
+#index_content .stat.mid .facilities {
+    /* manually align "education facilities" */
+    margin-left: 25px;
+}
+#index_content .explore_btn {
+    display: block;
+    width: 200px;
+    color: white;
+    padding: 9px 20px;
+    font-size: 15px;
+    margin: auto;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    background: rgb(0, 152, 72);
+}
+#index_content .explore_btn:hover {
+    background-color: rgb(0, 127, 60);
+}
+#index_content .learn {
+    display: block;
+    width: 250px;
+    margin: auto;
+    color: rgb(58,58,58);
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    text-decoration: underline;
+}
+#index_content .caption {
+    font-weight: 300;
+    color: white;
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 165px;
 }
 #index_content .sponsors {
     background: white;
     padding: 10px 0;
-    margin-top: 30px;
+    margin-top: 45px;
 }
 #index_content .sponsors img {
     display: inline-block;
@@ -191,31 +274,7 @@ table .value {
 #index_content .sponsors img:last-child {
     margin-right: 0;
 }
-#index_content .btn {
-    color: white;
-    padding: 6px 19px;
-    font-size: 12px;
-    margin-right: 5px;
-    text-transform: uppercase;
-    border: none;
-}
-#index_content .btn.explore {
-    background: rgb(0, 152, 72);
-}
-#index_content .btn.download {
-    background-color: #939598;
-}
-#index_content .caption {
-    font-weight: 300;
-    color: #FFF;
-    font-size: 12px;
-    font-style: italic;
-    margin-top: 153px;
-}
-#index_content .logo {
-    float: left;
-    margin: 20px 40px 0px 0px;
-}
+
 
 
 
@@ -262,7 +321,7 @@ table .value {
     width: 100%;
     height: 100px;
     padding: 5px 0 15px;
-    background: rgb(77, 77, 77);
+    background: rgb(0, 76, 36);
     overflow: hidden;
     z-index: 100;
     border-bottom: 5px solid #fff;
@@ -438,7 +497,7 @@ table thead td:active {
     width: 500px;
     margin-left: -250px;
     background: #444; /* IE */
-    background: rgba(0,0,0,0.85);
+    background: rgba(0,0,0,0.8);
     border-radius: 6px;
     box-shadow: 5px 5px 20px #666;
     z-index: 50;
