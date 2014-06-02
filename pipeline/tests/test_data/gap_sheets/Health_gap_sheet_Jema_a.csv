@@ -21,7 +21,7 @@ gap_sheet_c_section_yn ,100%,1,1,"only hospitals. Only 1 present, in mopup data"
 gap_sheet_antenatal_care_yn ,92%,36,39,:)
 gap_sheet_family_planning_yn ,87%,34,39,:)
 gap_sheet_child_health_measles_immun ,86%,32,37,denom: no Nas
-gap_sheet_vaccines_fridge_freezer ,40%,4,10,dropping Nas
+gap_sheet_vaccines_fridge_freezer ,14%,5,35,"denom: drop two Nas, two HPs"
 gap_sheet_medication_anti_malarials ,87%,34,39,:)
 gap_sheet_phcentre ,5%,1,22,"Using at least 5 sbas, and at least 9 (JCHEWs + CHEWs), Primary Health Centre Kafanchan satisfies criteria"
 gap_sheet_phclinic ,0%,0,14,
