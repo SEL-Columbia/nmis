@@ -51,7 +51,8 @@ education_mopup_lga_indicators <- function(education_data) {
                 ## Percent indicators
                 percent_management_public = percent(management == "public"),
                 percent_natl_curriculum = percent(natl_curriculum_yn),
-                percent_functional_water = percent(functional_water),
+                percent_improved_water = percent(improved_water_supply),
+                percent_improved_functional_water = percent(improved_functional_water),
                 percent_schools_chalkboard_all_rooms = percent(chalkboard_each_classroom_yn),
                 percent_improved_sanitation = percent(improved_sanitation),
                 percent_phcn_electricity = percent(phcn_electricity),
@@ -175,8 +176,9 @@ health_mopup_lga_indicators = function(health_data) {
             facilities_measles = sum(child_health_measles_immun_calc, na.rm=T),
             
             ## Infrastructure -- all facilities
-            proportion_improved_water_supply = percent(improved_water_supply),
-            proportion_improved_sanitation = percent(improved_sanitation),
+            percent_improved_water = percent(improved_water_supply),
+            percent_improved_functional_water = percent(improved_functional_water),
+            percent_improved_sanitation = percent(improved_sanitation),
             proportion_phcn_electricity = percent(phcn_electricity),
             proportion_access_to_alternative_power = percent(access_to_alternative_power_source)
         )
@@ -205,7 +207,7 @@ education_gap_sheet_indicators <- function(education_data) {
             gap_sheet_primary_js = n(),
             gap_sheet_num_existing_classrooms = sum(num_classrms_total, na.rm=T),
             gap_sheet_total_teachers = sum(num_tchr_full_time, na.rm=T),
-            gap_sheet_improved_functional_water = percent(improved_water_supply),
+            gap_sheet_improved_functional_water = percent(improved_functional_water),
             gap_sheet_improved_sanitation = percent(improved_sanitation),
             gap_sheet_phcn_electricity_e = percent(phcn_electricity),
             gap_sheet_num_classrms_repairs = 

@@ -18,9 +18,6 @@
         "name": "Schools with access to improved functional water",
         "description": "All schools should have an improved, functional water point"
     },
-    "functional_water": {
-        "name": "Schools with access to potable water"
-    },
     "num_classrm_w_chalkboard": {
         "name": "Total number of classrooms with a useable chalkboard/blackboard/whiteboard",
         "description": "All classrooms should have a useable chalkboard"
@@ -128,14 +125,6 @@
     "proportion_measles": {
         "name": "Percentage that provide measles immunizations",
         "description": "Percentage that provide measles immunizations"
-    },
-    "proportion_improved_water_supply": {
-        "name": "Percentage of facilities with access to an improved water source",
-        "description": ""
-    },
-    "proportion_improved_sanitation": {
-        "name": "Percentage of facilities with functioning improved sanitation",
-        "description": ""
     },
     "phcn_electricity": {
         "name": "PHCN Electricity",
@@ -288,8 +277,28 @@
         "name": "Average number of toilets per school",
         "description": ""
     },
-    "percent_functional_water_primary": {
-        "name": "Percentage with functioning water point",
+    "percent_improved_water": {
+        "name": "Percentage of facilities with access to an improved water source",
+        "description": ""
+    },
+    "percent_improved_sanitation": {
+        "name": "Percentage of facilities with improved sanitation",
+        "description": ""
+    },
+    "percent_improved_water_primary": {
+        "name": "Percentage with improved water point",
+        "description": ""
+    },
+    "percent_improved_water_js": {
+        "name": "Percentage with improved water point",
+        "description": ""
+    },
+    "percent_improved_functional_water": {
+        "name": "Percentage of facilities with improved, functional water",
+        "description": ""
+    },
+    "percent_improved_functional_water_primary": {
+        "name": "Percentage with improved, functional water",
         "description": ""
     },
     "percent_improved_sanitation_primary": {
@@ -300,8 +309,8 @@
         "name": "Percentage with access to the national grid (PHCN)",
         "description": ""
     },
-    "percent_functional_water_js": {
-        "name": "Percentage with functioning water point",
+    "percent_improved_functional_water_js": {
+        "name": "Percentage with improved, functional water",
         "description": ""
     },
     "percent_improved_sanitation_js": {
@@ -876,7 +885,7 @@
         "name": "Teach outside because there are not enough classrooms",
         "description": "The school does not have enough classrooms and as a result some classes are held outside."
     },
-    "percentage_functional_improved": {
+    "percentage_improved_functional": {
         "name": "Percentage of improved water points that are functional",
         "description": ""
     },
@@ -1843,7 +1852,7 @@
         "description": "Facility has at least two skilled birth attendants (doctor, midwife or nurse-midwife) on staff."
     },
     "proportion_schools_improved_water_supply_juniorsec": {
-        "name": "Percentage of junior secondary schools with access to potable water",
+        "name": "Percentage of junior secondary schools with access to improved water",
         "description": ""
     },
     "chalkboard_each_classroom_yn": {

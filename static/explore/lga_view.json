@@ -86,7 +86,8 @@
             "name": "Infrastructure in primary schools",
             "indicators": [
                 "num_primary_schools",
-                "percent_functional_water_primary",
+                "percent_improved_water_primary",
+                "percent_improved_functional_water_primary",
                 "percent_improved_sanitation_primary",
                 "percent_phcn_electricity_primary",
                 "pupil_toilet_ratio_primary",
@@ -97,7 +98,8 @@
             "name": "Infrastructure in junior secondary schools",
             "indicators": [
                 "num_junior_secondary_schools",
-                "percent_functional_water_js",
+                "percent_improved_water_js",
+                "percent_improved_functional_water_js",
                 "percent_improved_sanitation_js",
                 "percent_phcn_electricity_js",
                 "pupil_toilet_ratio_js", 
@@ -176,8 +178,9 @@
             "name": "Infrastructure -- All facilities",
             "indicators": [
                 "num_health_facilities", 
-                "proportion_improved_water_supply", 
-                "proportion_improved_sanitation",
+                "percent_improved_water", 
+                "percent_improved_functional_water", 
+                "percent_improved_sanitation",
                 "proportion_phcn_electricity",
                 "proportion_access_to_alternative_power"
             ]
