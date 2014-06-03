@@ -137,15 +137,6 @@ table .value {
     background: rgb(55, 64, 59);
 }
 
-#header.baseline .global_nav {
-	background: rgb(115, 115, 115);
-}
-#header.baseline .global_nav a:hover,
-#header.baseline .global_nav a.active {
-	color: rgb(77, 77, 77);
-    background: #ddd;
-}
-
 #content {
     position: relative;
 }
