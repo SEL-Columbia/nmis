@@ -35,6 +35,36 @@ $(function(){
 // Helper Functions
 // ===========================================
 
+function loadLGACache(unique_lga){
+    // Loads local storage cache into memory
+    if (window.localStorage && localStorage.lgas){
+        var lgas = $.parseJSON(localStorage.lgas);
+        _.each(lgas, function(lga){
+            NMIS.lgas[lga.unique_lga] = lga;
+        });
+    }
+}
+
+function setLGACache(lga){
+    // Local storage LGA cache
+    if (window.localStorage && JSON){
+        var lgas = $.parseJSON(localStorage.lgas || '[]');
+        lgas.push(lga);
+        while (true){
+            try {
+                localStorage.lgas = JSON.stringify(lgas);
+                break;
+            } catch(e){
+                // Assume quota exceeded error
+                // Currently no consistent error msg across browsers
+                // http://chrisberkhout.com/blog/localstorage-errors/
+                // Remove the oldest LGA and try again
+                lgas.shift();
+            }
+        }
+    }
+}
+
 function view(viewObj, sector){
     // Wrapper for LGA based views. Fetches the appropriate 
     // LGA JSON data before calling the render() function of a view.
@@ -50,6 +80,7 @@ function view(viewObj, sector){
     }
 
     return function(unique_lga){
+        // Load LGA from in memory cache
         var lga = NMIS.lgas[unique_lga];
         if (lga){
             render_wrap(lga, sector);
@@ -57,20 +88,26 @@ function view(viewObj, sector){
             $('.loading').show();
             $('#content').fadeTo(100, 0.5);
 
-            // Fetch LGA data from server
+            // Fetch LGA data from network
             var url = NMIS.lgas_folder + unique_lga + '.json';
             $.getJSON(url, function(lga){
-                NMIS.lgas[unique_lga] = lga;
-                _.each(lga.facilities, function(facility){
-                    NMIS.facilities[facility.uuid] = facility;
+                    NMIS.lgas[unique_lga] = lga;
+                    setLGACache(lga);
+                    render_wrap(lga, sector);
+                })
+                .error(function ajaxError(xhr, textStatus, errorThrown){
+                    // If there is a network error, load localStorage cache into memory
+                    loadLGACache();
+                    var lga = NMIS.lgas[unique_lga];
+                    if (lga){
+                        return render_wrap(lga, sector);
+                    }
+
+                    $('#explore_header, .map_view, .loading').hide();
+                    $('#content .content').html(
+                        '<h1 class="notfound">Sorry, this LGA\'s data is currently unavailable</h1>');
+                    $('#content .container').show();
                 });
-                render_wrap(lga, sector);
-            }).error(function(e){
-                $('#explore_header, .map_view, .loading').hide();
-                $('#content .content').html(
-                    '<h1 class="notfound">Sorry, this LGA\'s data is currently unavailable</h1>');
-                $('#content .container').show();
-            });
         }
     }
 }
@@ -351,7 +388,7 @@ MapView.facility_layer = function(facilities, sector, indicator) {
                 .setContent(fac.facility_name)
                 .setLatLng(lat_lng);
             mark.on('click', function(){
-                FacilitiesView.show_modal(fac.uuid);
+                FacilitiesView.show_modal(fac);
             });
             mark.on('mouseover', mark.openPopup.bind(mark))
                 .on('mouseout', mark.closePopup.bind(mark))
@@ -482,12 +519,15 @@ MapView.map_legend = function(lga, sector, indicator){
 
 
 
-var FacilitiesView = {};
+var FacilitiesView = {
+    facility_cache: {}
+};
 FacilitiesView.init = function(){
     var self = this;
     $('#content').on('click', '.facilities_table_container tr', function(){
         var uuid = $(this).data('uuid');
-        self.show_modal(uuid);
+        var facility = self.facility_cache[uuid];
+        self.show_modal(facility);
     });
 };
 
@@ -508,12 +548,14 @@ FacilitiesView.render = function(lga, sector){
 };
 
 FacilitiesView.show_table = function(sector, table_index, facilities){
+    var self = this;
     var table = NMIS.facilities_view[sector][table_index];
     var tableWidth = $('#content .container').width() - 400;
     var colWidth = Math.floor(tableWidth / (table.indicators.length - 2));
     
     var sector_facilities = [];
     _.each(facilities, function(facility){
+        self.facility_cache[facility.uuid] = facility;
         if (facility.sector === sector || (sector === 'overview' && facility.sector !== 'water')){
             sector_facilities.push(facility);
         }
@@ -538,9 +580,8 @@ FacilitiesView.show_table = function(sector, table_index, facilities){
         });
 };
 
-FacilitiesView.show_modal = function(uuid){
+FacilitiesView.show_modal = function(facility){
     var self = this;
-    var facility = NMIS.facilities[uuid];
     var template = $('#facility_modal_template').html();
     var html = _.template(template, {
         NMIS: NMIS,
