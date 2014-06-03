@@ -95,7 +95,7 @@ function view(viewObj, sector){
                     setLGACache(lga);
                     render_wrap(lga, sector);
                 })
-                .error(function ajaxError(xhr, textStatus, errorThrown){
+                .error(function(xhr){
                     // If there is a network error, load localStorage cache into memory
                     loadLGACache();
                     var lga = NMIS.lgas[unique_lga];
