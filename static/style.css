@@ -134,16 +134,7 @@ table .value {
 }
 #header .global_nav a:hover,
 #header .global_nav a.active {
-    background: rgb(0, 76, 36);
-}
-
-#header.baseline .global_nav {
-	background: rgb(115, 115, 115);
-}
-#header.baseline .global_nav a:hover,
-#header.baseline .global_nav a.active {
-	color: rgb(77, 77, 77);
-    background: #ddd;
+    background: rgb(55, 64, 59);
 }
 
 #content {
@@ -321,7 +312,7 @@ table .value {
     width: 100%;
     height: 100px;
     padding: 5px 0 15px;
-    background: rgb(0, 76, 36);
+    background: rgb(55, 64, 59);
     overflow: hidden;
     z-index: 100;
     border-bottom: 5px solid #fff;
