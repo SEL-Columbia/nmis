@@ -8,7 +8,12 @@ normalize_mopup = function(formhubData, survey_name, sector) {
         dplyr::tbl_df() %.%
         dplyr::mutate(
             ## Create facility_type_display using the formhub form
-            facility_type_display = replaceColumnNamesWithLabels(formhubData, 'facility_type')
+            facility_type_display = replaceColumnNamesWithLabels(formhubData, 'facility_type'),
+            management = revalue(management, c("federal_gov" = "public",
+                                               "local_gov" = "public",
+                                               "state_gov" = "public",
+                                               "private_non_profit" = "private",
+                                               "private_profit" = "private"))
         )
     ## Survey_name: mopup, mopup_new, or mopup_pilot
     # mopup and mopup_new are pretty much the same, except mopup has some LGAs mistakenly as NA

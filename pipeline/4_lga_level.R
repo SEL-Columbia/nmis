@@ -29,8 +29,6 @@ education_mopup_lga_indicators <- function(education_data) {
             is_junior_secondary = facility_type %in% TYPES$junior_sec, 
             is_combined = facility_type %in% TYPES$combined,
             follows_natl_curriculum = natl_curriculum_yn,
-            management = revalue(management, c("federal_gov"="public", "local_gov" = "public",
-                                           "state_gov" = "public")),
             is_valid_facility = ! (facility_type %in% c('dk', 'none', 'DROP') |
                                        is.na(natl_curriculum_yn))
         ) %.%
@@ -75,6 +73,7 @@ education_mopup_lga_indicators <- function(education_data) {
         dplyr::group_by(unique_lga) %.%
         dplyr::summarise(
             num_schools = n(),
+            percent_management_public = percent(management == "public"),
             num_informal_schools = sum(!natl_curriculum_yn, na.rm=T)
         )
     ## (4) Drop all informal schools for the rest of the calculations
@@ -92,7 +91,6 @@ education_mopup_lga_indicators <- function(education_data) {
             num_combined_schools = sum(is_combined, na.rm=T),
             num_primary_schools = sum(is_primary, na.rm=T),
             num_junior_secondary_schools = sum(is_junior_secondary, na.rm=T),
-            percent_management_public = percent(management == "public"),
             pupil_teachers_ratio_lga = ratio(num_students_total, num_tchr_full_time,
                                              format = "ratio")
         ) 
@@ -122,7 +120,7 @@ health_mopup_lga_indicators = function(health_data) {
     ## (1) Definitions to help us make indicators later on
     health_data = health_data %.% 
         dplyr::mutate(
-            is_public = management %in% c('federal_gov', 'local_gov', 'state_gov'),
+            is_public = management %in% c('public'),
             is_hospital = str_detect(facility_type, 'hospital'),
             is_healthpost = facility_type %in% c('dispensary', 'health_post'),
             is_healthfacility = ! (facility_type %in% c('dk', 'none') | is.na(facility_type)),
