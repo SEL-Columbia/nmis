@@ -145,3 +145,21 @@ test_that("Mopup Integration pipeline reproduces baseline aggregations for educa
         expect_true(all(should_eq[1,] == should_eq[2,], na.rm=T))
     }
 })
+
+
+test_that("number_of_toilets_is_correct_in_kebbi_shanga", {
+  
+  kebbi_shanga <- read.csv("tests/test_data/kebbi_toilet_test.csv")
+  
+  #hand calculated the total number of 0's should be 22
+  
+  #pipeline output
+  source("nmis_functions.R");source("2_outlier_cleaning.R")
+  pipeline_output <- education_outlier(kebbi_shanga)
+  
+  pipeline_output <- pipeline_output %.% 
+    dplyr::filter(num_toilets_total == 0) 
+  
+  expect_equal(nrow(pipeline_output),22)
+  
+})

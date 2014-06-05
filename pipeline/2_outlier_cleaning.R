@@ -19,7 +19,9 @@ education_outlier <- function(education_data) {
             num_tchrs_with_nce = replace(num_tchrs_with_nce, num_tchrs_with_nce > 100, NA),
             num_classrms_repair = replace(num_classrms_repair, num_classrms_repair > 50, NA),
             num_students_total = replace(num_students_total, num_students_total > 2355, NA)
-        )
+        ) %.%
+        dplyr::mutate(
+            num_toilets_total = replace(num_toilets_total, improved_sanitation.none, 0))
     )
 }
 
