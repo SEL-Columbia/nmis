@@ -12,6 +12,7 @@
         {
             "indicators": [
                 "water_point_type",
+                "date_of_survey",
                 "community", 
                 "ward", 
                 "is_improved", 
