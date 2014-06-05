@@ -13,10 +13,6 @@ app.debug = True
 def load_file(file_name):
     cwd = os.path.dirname(os.path.abspath(__file__))
     path = os.path.join(cwd, 'static', 'explore')
-    if flask.request.args.get('baseline', None):
-        baseline_path = os.path.join(path, 'baseline', file_name)
-        if os.path.exists(baseline_path):
-            path = os.path.join(path, 'baseline')
     path = os.path.join(path, file_name)
     with open(path, 'r') as f:
         data = f.read()
@@ -66,12 +62,7 @@ def explore():
         for lga in lgas.items()]
     sorted_lgas.sort(key=lambda x: x[0])
 
-    baseline = flask.request.args.get('baseline', None)
-    #lgas_folder = '/static/lgas_baseline/' if baseline else '/static/lgas/'
-    lgas_folder = '/static/lgas/'
     return flask.render_template('explore.html',
-        baseline=baseline,
-        lgas_folder=lgas_folder,
         zones=json.dumps(sorted_zones),
         sorted_lgas=json.dumps(sorted_lgas),
         indicators=load_file('indicators.json'),

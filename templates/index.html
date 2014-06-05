@@ -18,20 +18,42 @@
 {% block content %}
     <div id="index_content">
         <div class="intro">
-            <h1>Nigeria’s health, water and education facility inventory</h1>
+            <div class="commissioned">
+                Commissioned by The Office of the Senior Special Assistant to the President on MDGs
+            </div>
+
+            <h1>Nigeria’s health, education and water facility inventory</h1>
+            
             <div class="about">
-                An updatable public portal designed by The Office of The Senior Special Assistant to The President on MDGs to bolster the use of data in informing policy for poverty reduction through local planning.
+                Explore data collected to inform policy and planning for poverty reduction.
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <img src="/static/images/index_health.png">
+                    <div class="num">26,000</div>
+                    <div class="facilities">Health Facilities</div>
+                </div>
+                <div class="stat mid">
+                    <img src="/static/images/index_education.png">
+                    <div class="num">73,000</div>
+                    <div class="facilities">Education Facilities</div>
+                </div>
+                <div class="stat">
+                    <img src="/static/images/index_water.png">
+                    <div class="num">132,000</div>
+                    <div class="facilities">Water Facilities</div>
+                </div>
+                <div class="clearfix"></div>
             </div>
         </div>
-        <div>
-            <a class="btn btn-warning explore" href="/explore">Explore Facilities</a>
-            {% if False %}
-                <a class="btn btn-default download" href="/download">Download Data</a>
-            {% endif %}
-        </div>
-        <div class="caption">
-            <p>Augie, Kebbi</p>
-        </div>
+
+        <a class="explore_btn btn" href="/explore">Explore Data</a>
+
+        <a class="learn" href="/about">or learn more about the process</a>
+
+        <p class="caption">Augie, Kebbi</p>
+
         <div class="sponsors">
             <img src="/static/images/mdgs_logo.png" alt="Nigeria MDGs Logo">
             <img src="/static/images/ei_logo.png" alt="Earth Institute Logo">

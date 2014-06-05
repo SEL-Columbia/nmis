@@ -1,11 +1,7 @@
 {% extends "base.html" %}
 
 
-{% if baseline %}
-    {% set active_page = 'baseline' %}
-{% else %}
-    {% set active_page = 'explore' %}
-{% endif %}
+{% set active_page = 'explore' %}
 
 
 {% block js %}
@@ -28,9 +24,7 @@
     <script src="/static/explore.js"></script>
     <script>
         NMIS = {};
-        NMIS.lgas_folder = '{{ lgas_folder }}';
         NMIS.lgas = {}; // LGA lga_id mapping
-        NMIS.facilities = {}; // Facility UUID mapping, used for modals
         NMIS.sorted_lgas = {{ sorted_lgas|safe }};
         NMIS.zones = {{ zones|safe }};
         NMIS.indicators = {{ indicators|safe }};
@@ -126,17 +120,6 @@
             <h1 class="explore_title">Explore a Gap Sheet from the zones below</h1>
         <% } else { %>
             <h1 class="explore_title">Explore an LGA from the zones below</h1>
-            {% if baseline %}
-                <p class="explore_info">The 2012 Baseline Data is an archival
-                    dataset derived from the baseline facility inventory 
-                    conducted between 2010 and 2012. It is not inclusive of 
-                    more recent data collection efforts, such as the 2014 
-                    collection. To view the most up-to-date facility inventory
-                    : <a class="explore_link" href="/explore">Explore Facilities</a>
-                </p>
-            {% else %}
-                <a class="explore_link" href="/explore?baseline=1">or view 2012 Baseline Data</a>
-            {% endif %}
         <% } %>
 
         <div id="zone_nav">
