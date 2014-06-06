@@ -181,5 +181,9 @@
                 "proportion_access_to_alternative_power"
             ]
         }
+    ],
+    "health_footers": [
+        "* Health posts are not designated to provide cold vaccine storage or delivery services for pregnant women.",
+        "** Only hospitals and comprehensive health centres are designated to provide obstetric surgeries such as C-sections."
     ]
 }

@@ -263,6 +263,10 @@
                 <% }); %>
             </table>
         <% }); %>
+        
+        <% _.each(lga_view[sector + '_footers'] || [], function(footer){ %>
+            <p><%= footer %></p>
+        <% }); %>
     </script>
 
     <script id="pie_chart_selector_template" type="text/html">
