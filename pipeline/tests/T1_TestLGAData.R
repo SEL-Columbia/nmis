@@ -4,7 +4,7 @@ suppressPackageStartupMessages(require(testthat))
 
 ####### TEST EDUCATION #######
 test_that("LGA indicators match for education for Zurmi", {
-    expected_lga_output = read.csv("tests/test_data/mopup_NMIS_LGA_Indicators_SUBSET_zamfara_zurmi.csv")
+    expected_lga_output_e = read.csv("tests/test_data/Education_NMIS_LGA_Indicators_SUBSET_zamfara_zurmi.csv")
     ### (1) PIPELINE: normalize; facility level; lga level
     test_education_data <- formhubRead("tests/test_data/education_mopup_SUBSET_zamfara_zurmi.csv",
                                       "tests/test_data/education_mopup.json", na.strings=c("999", "9999", "n/a"),
@@ -17,13 +17,13 @@ test_that("LGA indicators match for education for Zurmi", {
     
     ## Sanity checks
     expect_true(nrow(edu_lga) == 1) # we should produce only one column
-    expect_equivalent(setdiff(names(edu_lga), names(expected_lga_output)),
+    expect_equivalent(setdiff(names(edu_lga), names(expected_lga_output_e)),
                       character(0)) # all columns should be in test data
     
     ## Convert things from x% (y out of z) to just x, which is what it looks like for expected_output
     edu_lga[-1] <- colwise(as.numeric)(colwise(function(x) { str_extract(x, '[0-9]*')})(edu_lga[-1]))
-    education_indicators <- intersect(names(expected_lga_output), names(edu_lga))
-    should_eq <- rbind(expected_lga_output[education_indicators], edu_lga[education_indicators])
+    education_indicators <- intersect(names(expected_lga_output_e), names(edu_lga))
+    should_eq <- rbind(expected_lga_output_e[education_indicators], edu_lga[education_indicators])
     
     ## For debugging, print out should_eq, should_eq[should_eq[1,] != should_eq[2,]]
     expect_true(all(should_eq[1,] == should_eq[2,], na.rm=T))    
@@ -49,7 +49,7 @@ test_that("Education, num_schools match for Kano Shanono", {
 
 ####### TEST HEALTH #######
 test_that("LGA indicators match for health for Zurmi", {
-    expected_lga_output = read.csv("tests/test_data/mopup_NMIS_LGA_Indicators_SUBSET_zamfara_zurmi.csv")
+    expected_lga_output_h = read.csv("tests/test_data/Health_NMIS_LGA_Indicators_SUBSET_zamfara_zurmi.csv")
     ### (1) PIPELINE: normalize; facility level; lga level
     test_health_data <- formhubRead("tests/test_data/health_mopup_SUBSET_zamfara_zurmi.csv",
                                    "tests/test_data/health_mopup.json", na.strings=c("999", "9999", "n/a", "NA"),
@@ -62,13 +62,13 @@ test_that("LGA indicators match for health for Zurmi", {
     ### (2) Test that they are the same
     ## Sanity checks
     expect_true(nrow(health_lga) == 1) # we should produce only one column
-    expect_equivalent(setdiff(names(health_lga), names(expected_lga_output)),
+    expect_equivalent(setdiff(names(health_lga), names(expected_lga_output_h)),
                       character(0)) # all columns should be in test data
     
     ## Convert things from x% (y out of z) to just x, which is what it looks like for expected_output
     health_lga[-1] <- colwise(as.numeric)(colwise(function(x) { str_extract(x, '[0-9]*')})(health_lga[-1]))
-    health_indicators <- intersect(names(expected_lga_output), names(health_lga))
-    should_eq <- rbind(expected_lga_output[health_indicators], health_lga[health_indicators])
+    health_indicators <- intersect(names(expected_lga_output_h), names(health_lga))
+    should_eq <- rbind(expected_lga_output_h[health_indicators], health_lga[health_indicators])
     ## For debugging, print out should_eq, should_eq[1,] - should_eq[2,]
     expect_true(all(should_eq[1,] == should_eq[2,], na.rm=T))    
 })
@@ -82,6 +82,17 @@ test_that("Mopup Integration pipeline reproduces baseline aggregations for healt
     expected_lga_output <- tbl_df(readRDS(CONFIG$BASELINE_ALL_774_LGA))
     percent_indicators <- names(expected_lga_output)[str_detect(names(expected_lga_output), 'proportion|percent')]
     expected_lga_output[percent_indicators] <- colwise(function(x) {round(100*x)})(expected_lga_output[percent_indicators])
+    
+    
+    # Modify the expected output a bit, because indicator definitions have changed quite a bit
+    expected_lga_output <- expected_lga_output %.% 
+        # Do some renaming of indicators, when the names changed for clarity (but definitions haven't changed)
+        dplyr::select( ## RENAME 2012 LGA indicators to match up with integrated version
+            percent_improved_water = proportion_improved_water_supply,
+            percent_improved_sanitation = proportion_improved_sanitation,
+            matches('.')
+        )
+    
    
     ## Convert things from x% (y out of z) to just x, which is what it looks like for expected_output
     non_lga_cols <- setdiff(names(health_lga), c("lga"))
@@ -117,14 +128,19 @@ test_that("Mopup Integration pipeline reproduces baseline aggregations for educa
     avg_ratio_indicators <- names(expected_lga_output)[str_detect(names(expected_lga_output), 'avg|ratio')]
     expected_lga_output[avg_ratio_indicators] <- colwise(function(x) {round(x)})(expected_lga_output[avg_ratio_indicators])
     
-    # Only two LGAs are comparable, because they only have primary and junior secondary schools only.
-    expected_lga_output <- expected_lga_output %.% filter(lga %in% c("Guzamala", "Illela")) %.%
+    # Modify the expected output a bit, because indicator definitions have changed quite a bit
+    expected_lga_output <- expected_lga_output %.% 
+        # Only two LGAs are comparable, since they have only primary_only + js_only schools
+        filter(lga %in% c("Guzamala", "Illela")) %.%
+        # Do some renaming of indicators, when the names changed for clarity (but definitions haven't changed)
         dplyr::select( ## RENAME 2012 LGA indicators to match up with integrated version
             proportion_teachers_nce_js = proportion_teachers_nce_juniorsec,
             pupil_teachers_ratio_lga_primary = primary_school_pupil_teachers_ratio_lga,
             pupil_toilet_ratio_js = pupil_toilet_ratio_secondary,
             student_classroom_ratio_lga_js = student_classroom_ratio_lga_juniorsec,
             pupil_teachers_ratio_lga_js = junior_secondary_school_pupil_teachers_ratio_lga,
+            percent_improved_water_primary = proportion_schools_improved_water_supply_primary,
+            percent_improved_water_js = proportion_schools_improved_water_supply_juniorsec,
             matches('.')
         )
     

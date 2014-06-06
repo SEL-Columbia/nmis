@@ -20,6 +20,7 @@ all_mopup_facility_level = function(facility_data) {
                 improved_water_supply.rainwater | improved_water_supply.handpump,
             improved_sanitation = improved_sanitation.vip_latrine | 
                 improved_sanitation.pit_latrine_with_slab | improved_sanitation.flush,
+            improved_functional_water = improved_water_supply & improved_water_functionality == 'functional',
             # NEEDED for aggregations
             access_to_alternative_power_source = power_sources.generator | power_sources.solar_system,
             # USEFUL DATA POINTS for DATA output, not in NMIS
@@ -39,8 +40,8 @@ education_mopup_facility_level = function(education_data) {
             
             ## INFRASTRUCTURE
             ## note: these are also written like this for historical consistency
-            chalkboard_each_classroom_yn = num_classrm_w_chalkboard == num_classrms_total,
-            functional_water = improved_water_functionality == 'functional') %.%
+            chalkboard_each_classroom_yn = num_classrm_w_chalkboard == num_classrms_total
+        ) %.%
         dplyr::select( ## RENAME: new_col_name = old_name
             num_tchr_full_time = num_tchrs_total,
             matches('.') # this means match everything; ensure that we don't drop any columns
