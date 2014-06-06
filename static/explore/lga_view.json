@@ -149,35 +149,31 @@
             ]
         },
         {
-            "name": "Services that are provided at Hospitals only",
+            "name": "Child Health",
             "indicators": [
-                "num_hospitals", 
-                "percent_csection" 
+                "proportion_measles",
+                "proportion_vaccines_fridge_freezer_sansHP"
             ]
         },
         {
-            "name": "Services that are provided at all facilties except for Health Posts",
+            "name": "Maternal Health",
             "indicators": [
-                "num_health_facilities_sansHP",
-                "proportion_delivery_sansHP", 
-                "proportion_vaccines_fridge_freezer_sansHP" 
-            ]
-        }, 
-        {
-            "name": "Services that are provided at all facilities including Health Posts",
-            "indicators": [
-                "num_health_facilities", 
                 "proportion_antenatal", 
                 "proportion_family_planning",
                 "proportion_access_emergency_transport",
-                "proportion_act_treatment_for_malaria",
-                "proportion_measles"
+                "proportion_delivery_sansHP",
+                "percent_csection"
             ]
         },
         {
-            "name": "Infrastructure -- All facilities",
+            "name": "Other Diseases",
             "indicators": [
-                "num_health_facilities", 
+                "proportion_act_treatment_for_malaria"
+            ]
+        }, 
+        {
+            "name": "Infrastructure",
+            "indicators": [
                 "percent_improved_water", 
                 "percent_improved_functional_water", 
                 "percent_improved_sanitation",

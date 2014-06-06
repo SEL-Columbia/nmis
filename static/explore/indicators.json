@@ -110,22 +110,6 @@
         "name": "Percentage that provide delivery services for pregnant women 24/7.",
         "description": "Percentage that provide delivery services for pregnant women twenty four hours and seven days in a week."
     },
-    "proportion_delivery_sansHP": {
-        "name": "Percentage that provide delivery services for pregnant women",
-        "description": "Percentage that provide delivery services for pregnant women twenty four hours and seven days in a week."
-    },
-    "proportion_vaccines_fridge_freezer_sansHP": {
-        "name": "Percentage with refrigerator or freezer for vaccine storage",
-        "description": "Percentage with refrigerator or freezer for vaccine storage"
-    },
-    "num_nurses": {
-        "name": "Total number of nurses in the LGA",
-        "description": ""
-    },
-    "proportion_measles": {
-        "name": "Percentage that provide measles immunizations",
-        "description": "Percentage that provide measles immunizations"
-    },
     "phcn_electricity": {
         "name": "PHCN Electricity",
         "description": "Facility has grid connectiviy"
@@ -198,10 +182,6 @@
     },
     "proportion_access_functional_emergency_transport": {
         "name": "Percentage of facilities with access to functional emergency transport services",
-        "description": ""
-    },
-    "proportion_access_emergency_transport": {
-        "name": "Percentage of facilities with access to emergency transport services",
         "description": ""
     },
     "emoc_parenteral_anticonvulsant": {
@@ -277,24 +257,12 @@
         "name": "Average number of toilets per school",
         "description": ""
     },
-    "percent_improved_water": {
-        "name": "Percentage of facilities with access to an improved water source",
-        "description": ""
-    },
-    "percent_improved_sanitation": {
-        "name": "Percentage of facilities with improved sanitation",
-        "description": ""
-    },
     "percent_improved_water_primary": {
         "name": "Percentage with improved water point",
         "description": ""
     },
     "percent_improved_water_js": {
         "name": "Percentage with improved water point",
-        "description": ""
-    },
-    "percent_improved_functional_water": {
-        "name": "Percentage of facilities with improved, functional water",
         "description": ""
     },
     "percent_improved_functional_water_primary": {
@@ -325,16 +293,12 @@
         "name": "Number of primary schools within 1 km of nearest junior secondary school",
         "description": ""
     },
-    "num_hospitals": {
-        "name": "Total number of hospitals in LGA",
-        "description": ""
-    },
     "percent_compr_oc_c_sections": {
         "name": "Percentage that perform C-sections",
         "description": ""
     },
-    "percent_csection": {
-        "name": "Percentage that perform C-sections",
+    "num_hospitals": {
+        "name": "Total number of hospitals in LGA",
         "description": ""
     },
     "num_health_facilities_sansHP": {
@@ -343,10 +307,6 @@
     },
     "proportion_power_alternative_functional": {
         "name": "Percentage with functional alternative source of electricity/power",
-        "description": ""
-    },
-    "proportion_access_to_alternative_power": {
-        "name": "Percentage with access to alternative source of electricity/power",
         "description": ""
     },
     "facilities_delivery_services_yn": {
@@ -446,10 +406,6 @@
         "name": "Pupil to teacher ratio",
         "description": ""
     },
-    "num_level_3_health_facilities": {
-        "name": "Primary health centres",
-        "description": ""
-    },
     "avg_infrastructure_rating": {
         "name": "Average infrastructure rating",
         "description": ""
@@ -528,16 +484,8 @@
         "name": "Ward",
         "description": "The ward this facility is in."
     },
-    "proportion_antenatal": {
-        "name": "Percentage of facilities that offer antenatal care",
-        "description": ""
-    },
     "proportion_level_2_health_facilities": {
         "name": "proportion_level_2_health_facilities(name=='')",
-        "description": ""
-    },
-    "proportion_family_planning": {
-        "name": "Percentage of facilities that offer family planning services",
         "description": ""
     },
     "prevalence_of_hiv": {
@@ -555,10 +503,6 @@
     },
     "proportion_schools_missed_pay_primary": {
         "name": "Percentage of primary schools that have missed teacher payments in the past 12 months",
-        "description": ""
-    },
-    "num_health_facilities": {
-        "name": "Total number of facilities",
         "description": ""
     },
     "gap_sheet_total_facilities": {
@@ -844,10 +788,6 @@
         "name": "Variable not found: proportion_routine_immunization",
         "description": ""
     },
-    "num_level_1_health_facilities": {
-        "name": "Health posts and dispensaries",
-        "description": ""
-    },
     "lab_tests_tb_microscopy_calc": {
         "name": "TB testing",
         "description": "Facility offers testing of tuberculosis with microscopy."
@@ -1013,10 +953,6 @@
         "name": "First-aid kit only (no health clinic)",
         "description": "The school has a first aid kit that can be used for students and staff.  The aim behind this indicator is to find out whether the school is is prepared to manage very basic injuries that happen to students or staff. A school is counted as having a first aid kit if the respondnet explicitly said there is a first aid kit for students and staff. The school does not have a health clinic but just a first aid kit."
     },
-    "num_level_4_health_facilities": {
-        "name": "Comprehensive health centres and hospitals",
-        "description": ""
-    },
     "immunization_rate_measles": {
         "name": "Measles immunization rate*",
         "description": "Percentage of children aged 12-23 months who received measles immunization any time before the survey"
@@ -1138,10 +1074,6 @@
         "name": "Mobile Coverage",
         "description": "Facility has a currently functioning mobile coverage on the premises."
     },
-    "num_level_2_health_facilities": {
-        "name": "Primary health clinics",
-        "description": ""
-    },
     "family_planning_pill_calc_calc": {
         "name": "Oral contraceptives",
         "description": "Facility has oral contraceptive pills available."
@@ -1229,10 +1161,6 @@
     "num_students_total": {
         "name": "Total students",
         "description": "Total number of students in this school"
-    },
-    "proportion_phcn_electricity": {
-        "name": "Percentage with access to the national grid (PHCN)",
-        "description": "Percentage with access to the national grid (PHCN)"
     },
     "management": {
         "name": "Owner/Manager",
@@ -1415,10 +1343,96 @@
         "name": "Total nuber of classrooms that need minor repair in the LGA",
         "description": ""
     },
+    "num_level_1_health_facilities": {
+        "name": "Health posts and dispensaries",
+        "description": ""
+    },
+    "num_level_2_health_facilities": {
+        "name": "Primary health clinics",
+        "description": ""
+    },
+    "num_level_3_health_facilities": {
+        "name": "Primary health centres",
+        "description": ""
+    },
+    "num_level_4_health_facilities": {
+        "name": "Comprehensive health centres and hospitals",
+        "description": ""
+    },
+    "num_health_facilities": {
+        "name": "Total number of facilities",
+        "description": ""
+    },
+    "num_doctors": {
+        "name": "Total number of doctors in the LGA",
+        "description": ""
+    },
+    "num_nursemidwives_midwives": {
+        "name": "Total number of midwives and nurse-midwives in the LGA",
+        "description": ""
+    },
+    "num_nurses": {
+        "name": "Total number of nurses in the LGA",
+        "description": ""
+    },
     "num_chews": {
         "name": "Total number of CHEWs (Jr. and Sr.) in the LGA",
         "description": ""
     },
+    "proportion_measles": {
+        "name": "Percentage of all facilities that provide measles immunizations",
+        "description": "Percentage of all facilities that provide measles immunizations"
+    },
+    "proportion_vaccines_fridge_freezer_sansHP": {
+        "name": "Percentage of all facilities except health posts* with refrigerator or freezer for vaccine storage",
+        "description": "Percentage of all faiclities except health posts* with refrigerator or freezer for vaccine storage"
+    },
+    "proportion_antenatal": {
+        "name": "Percentage of all facilities that offer antenatal care",
+        "description": ""
+    },
+    "proportion_family_planning": {
+        "name": "Percentage of all facilities that offer family planning services",
+        "description": ""
+    },
+    "proportion_access_emergency_transport": {
+        "name": "Percentage of facilities with access to emergency transport services",
+        "description": ""
+    },
+    "proportion_delivery_sansHP": {
+        "name": "Percentage of all facilities except health posts* that provide delivery services for pregnant women",
+        "description": "Percentage  of all facilities except health posts* that provide delivery services for pregnant women twenty four hours and seven days in a week."
+    },
+    "percent_csection": {
+        "name": "Percentage of all hospitals and comprehensive health centres** that perform C-sections",
+        "description": ""
+    },
+    "proportion_act_treatment_for_malaria": {
+        "name": "Percentage of all facilities that offer ACT-based treatment for malaria",
+        "description": ""
+    },
+    "percent_improved_water": {
+        "name": "Percentage of all facilities with access to an improved water source",
+        "description": ""
+    },
+    "percent_improved_sanitation": {
+        "name": "Percentage of all facilities with improved sanitation",
+        "description": ""
+    },
+    "percent_improved_functional_water": {
+        "name": "Percentage of all facilities with improved, functional water",
+        "description": ""
+    },
+    "proportion_phcn_electricity": {
+        "name": "Percentage of all facilities with access to the national grid (PHCN)",
+        "description": "Percentage of all facilities with access to the national grid (PHCN)"
+    },
+    "proportion_access_to_alternative_power": {
+        "name": "Percentage with access to alternative source of electricity/power",
+        "description": ""
+    },
+
+
     "num_total_water_points": {
         "name": "Total number of water points",
         "description": ""
@@ -1939,10 +1953,6 @@
         "name": "Average maternal health services performance",
         "description": ""
     },
-    "proportion_act_treatment_for_malaria": {
-        "name": "Percentage of facilities that offer ACT-based treatment for malaria",
-        "description": ""
-    },
     "provide_exercise_books_yn": {
         "name": "Exercise books provided",
         "description": "The school gives its students exercise books"
@@ -1955,10 +1965,6 @@
     "school_1kmplus_secondary_school": {
         "name": "Farther than 1km from nearest secondary school",
         "description": "The primary school is more than 1 km from the nearest secondary school. This indicator measures how easily students can access secondary education. The assumption is that students are more likely to attend secondary schools if they are easily accessible and are not located very far away from where the primary school or catchment area is."
-    },
-    "num_nursemidwives_midwives": {
-        "name": "Total number of midwives and nurse-midwives in the LGA",
-        "description": ""
     },
     "lab_tests_stool_calc": {
         "name": "Stool testing",
@@ -1974,10 +1980,6 @@
     },
     "proportion_mobile_coverage": {
         "name": "Percentage of facilities with mobile phone coverage somewhere on the premises",
-        "description": ""
-    },
-    "num_doctors": {
-        "name": "Total number of doctors in the LGA",
         "description": ""
     },
     "num_classrms_need_min_repairs": {
