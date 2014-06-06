@@ -339,7 +339,8 @@ MapView.facility_map = function(lga, sector, indicator) {
                 maxZoom: 18
             });
         var google_layer = new L.TileLayer(
-            'http://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            'http://mt{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+                subdomains: '0123',
                 maxZoom: 18, 
                 minZoom: 3
             });
