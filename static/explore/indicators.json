@@ -1396,7 +1396,7 @@
         "description": ""
     },
     "proportion_access_emergency_transport": {
-        "name": "Percentage of facilities with access to emergency transport services",
+        "name": "Percentage of all facilities with access to emergency transport services",
         "description": ""
     },
     "proportion_delivery_sansHP": {
@@ -1428,7 +1428,7 @@
         "description": "Percentage of all facilities with access to the national grid (PHCN)"
     },
     "proportion_access_to_alternative_power": {
-        "name": "Percentage with access to alternative source of electricity/power",
+        "name": "Percentage of all facilities with access to alternative source of electricity/power",
         "description": ""
     },
 
