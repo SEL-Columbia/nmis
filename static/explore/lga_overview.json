@@ -88,7 +88,8 @@
             "header": "Goal 6: Combat HIV/AIDS, malaria and other diseases", 
             "indicators": [
                 "percentage_of_individuals_tested_for_hiv_ever", 
-                "proportion_children_u5_sleeping_under_itns"
+                "proportion_children_u5_sleeping_under_itns",
+                "prevalence_of_hiv"
             ]
         }, 
         {
