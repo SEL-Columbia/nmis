@@ -15,9 +15,9 @@ install_github('formhub.R', 'SEL-Columbia')
 ```
 CONFIG = list(
     BASELINE_ALL_774_LGA = "~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/output_data/data_774/All_774_LGA.rds",
-    BASELINE_EDUCATION="~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/in_process_data/nmis/Normalized/Education_774_NMIS_Facility.rds",
-    BASELINE_HEALTH="~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/in_process_data/nmis/Normalized/Health_774_NMIS_Facility.rds",
-    BASELINE_WATER="~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/in_process_data/nmis/Normalized/Water_774_NMIS_Facility.rds",
+    BASELINE_EDUCATION="~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/output_data/normalized/Education_774_NMIS_Facility.rds",
+    BASELINE_HEALTH="~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/output_data/normalized/Health_774_NMIS_Facility.rds",
+    BASELINE_WATER="~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/output_data/normalized/Water_774_NMIS_Facility.rds",
     BASELINE_EXTERNAL="~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/external_data/output_data/external_data.rds",
     MOPUP_DATA_DIR="data", 
     OUTPUT_DIR="data/output_data",
