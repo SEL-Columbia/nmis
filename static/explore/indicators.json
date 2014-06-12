@@ -837,6 +837,10 @@
         "name": "Percentage of hand pumps that are functional",
         "description": ""
     },
+    "percentage_functional_improved": {
+        "name": "Percentage of improved water points that are functional",
+        "description": ""
+    },
     "num_primary_js_ss_level": {
         "name": "Primary, junior and senior secondary",
         "description": ""
