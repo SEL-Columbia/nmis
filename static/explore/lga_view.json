@@ -86,6 +86,7 @@
             "name": "Infrastructure in primary schools",
             "indicators": [
                 "num_primary_schools",
+                "percent_classrm_repairs_primary",
                 "percent_improved_water_primary",
                 "percent_improved_functional_water_primary",
                 "percent_improved_sanitation_primary",
@@ -98,6 +99,7 @@
             "name": "Infrastructure in junior secondary schools",
             "indicators": [
                 "num_junior_secondary_schools",
+                "percent_classrm_repairs_js",
                 "percent_improved_water_js",
                 "percent_improved_functional_water_js",
                 "percent_improved_sanitation_js",

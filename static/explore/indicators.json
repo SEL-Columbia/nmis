@@ -257,6 +257,14 @@
         "name": "Average number of toilets per school",
         "description": ""
     },
+    "percent_classrm_repairs_primary": {
+        "name": "Percentage of primary-only classrooms needing repairs",
+        "description": "Percentage of primary-only classrooms needing repairs"
+    },
+    "percent_classrm_repairs_js": {
+        "name": "Percentage of junior secondary-only classrooms needing repairs",
+        "description": "Percentage of junior secondary-only classrooms needing repairs"
+    },
     "percent_improved_water_primary": {
         "name": "Percentage with improved water point",
         "description": ""
