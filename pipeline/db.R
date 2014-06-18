@@ -1,11 +1,12 @@
 require(dplyr)
 
-if( ! file.exists("./data/sqlite_db/facility_registry.db")){
-    my_db <- dplyr::src_sqlite("./data/sqlite_db/facility_registry.db", create = TRUE)    
+db_path = "./data/sqlite_db/facility_registry.db"
+if( ! file.exists(db_path)){
+    my_db <- dplyr::src_sqlite(db_path, create = TRUE)    
 }
 
 
-my_db_conn <- dbConnect(SQLite(), dbname="./data/sqlite_db/facility_registry.db")
+my_db_conn <- dbConnect(SQLite(), dbname=dbpath)
 
 # dbDisconnect(SQLite(), conn = db)
 
@@ -34,6 +35,7 @@ insert_uid <- function(){
     dbSendQuery(conn = my_db_conn, facility_query)
     return(uid)
 }
+
 insert_new_uid <- function(){
     uid <-gen_uid()
     facility_query <- sprintf("INSERT INTO facility_tb
@@ -41,12 +43,6 @@ insert_new_uid <- function(){
     tryCatch(dbSendQuery(conn = my_db_conn, facility_query),
              error = insert_new_uid())
 }
-
-tryCatch(insert_uid(),
-          error = function(c){
-              print("dups!")
-              insert_uid()
-         })
 
 db_attempt = function(some_func, max_try){
     if (max_try == 0){
