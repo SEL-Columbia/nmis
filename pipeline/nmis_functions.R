@@ -145,3 +145,25 @@ get_necessary_indicators <- function() {
                   water=lga_indicators$water,
                   overview=lga_indicators$overview))
 }
+
+# Hash functions to generate facility UID
+gen_num = function() {
+    return(sample.int(26^5-1, 1, replace=F))
+}
+
+base26 = function(num, dig_str="") {
+    dig = num %% 26
+    letter = toupper(letters)[dig+1]
+    dig_str = paste(letter, dig_str, sep="")
+    if (num %/% 26 >= 1) {
+        base26(num %/% 26, dig_str)
+    } else {
+        append_a = paste(rep("A", 5 - nchar(dig_str)), collapse="", sep="")
+        dig_str = paste(append_a, dig_str, sep="")
+        return(dig_str)
+    }
+}
+
+gen_uid = function(){
+    return(base26(gen_num()))
+}
