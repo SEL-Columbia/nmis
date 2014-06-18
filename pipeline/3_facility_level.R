@@ -1,6 +1,5 @@
 require(dplyr); require(stringr); require(lubridate)
 
-iso8601DateTimeConvert <- function(x) { ymd_hms(str_extract(x, '^[^+Z]*(T| )[^+Z-]*')) } #TODO: get rid of this
 
 ## Transformations for all facilities, mopup data, for facility level
 all_mopup_facility_level = function(facility_data) {
