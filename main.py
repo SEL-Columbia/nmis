@@ -74,7 +74,9 @@ def explore():
 
 @app.route('/mdgs')
 def mdgs():
-    return flask.render_template('mdgs.html', load_file=load_file)
+    return flask.render_template('mdgs.html',
+        indicators=load_file('indicators.json'),
+        mdgs_view=load_file('mdgs_view.json'))
 
 @app.route('/planning')
 def planning():
