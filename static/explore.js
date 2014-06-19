@@ -255,7 +255,6 @@ LGAView.render = function(lga, sector){
             lga: lga,
             lga_overview: NMIS.lga_overview
         });
-        this.overview_map(lga);
     } else {
         render('#lga_view_template', {
             lga: lga,
@@ -264,21 +263,6 @@ LGAView.render = function(lga, sector){
         });
     }
 };
-
-LGAView.overview_map = function(lga){
-    var map_div = $('.map_overview')[0];
-    var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
-    var map_zoom = 9;
-    var summary_map = L.map(map_div, {scrollWheelZoom: false})
-            .setView(lat_lng, map_zoom);
-    var tile_server = mapbox_layer('nigeria_base');
-
-    L.tileLayer(tile_server, {
-        minZoom: 6,
-        maxZoom: 11
-    }).addTo(summary_map);
-};
-
 
 
 var MapView = {};

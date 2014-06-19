@@ -663,15 +663,6 @@ table thead td:active {
     margin-bottom: 15px;
 }
 
-.lga_profile .map_overview {
-    width: 580px;
-    float: right;
-    border: 1px solid #ddd;
-    margin: 6px 0;
-    height: 165px;
-    border-radius: 4px;
-    background-color: #f6f6f6;
-}
 .lga_profile table {
     width: 320px;
 }
