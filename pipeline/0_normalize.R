@@ -60,15 +60,15 @@ normalize_2012 = function(d, survey_name, sector) {
                     facility_type = revalue(facility_type,
                                     c("comprehensivehealthcentre" = "district_hospital",
                                       "cottagehospital" = "general_hospital",
-                                      "dentalclinic" = "none", # these are being dropped
+                                      "dentalclinic" = "DROP", # these are being dropped
                                       "federalmedicalcentre" = "specialist_hospital",
                                       "generalhospital" = "general_hospital",
                                       "healthpostdispensary" = "health_post",
                                       "maternity" = "primary_health_centre",
-                                      "None" = "none", "other" = "none",
+                                      "None" = "DROP", "other" = "DROP", # these are being dropped
                                       "primaryhealthcarecentre" = "primary_health_centre",
                                       "primaryhealthclinic" = "basic_health_centre",
-                                      "private" = "none", # also dropping private facilities -- there are only 24
+                                      "private" = "DROP", # also dropping private facilities -- there are only 24
                                       "specialisthospital" = "specialist_hospital",
                                       "teachinghospital" = "teaching_hospital",
                                       "wardmodelphccentre" = "primary_health_centre"))
@@ -105,8 +105,7 @@ normalize_2012 = function(d, survey_name, sector) {
                     num_classrms_repair = num_classrms_need_maj_repairs,
                     matches('.') # this is necessary, in order not to drop the rest of the columns
                 )
-        } else if (sector == "water") {
-            d <- d         }
+        }
         return(mutate(d, facility_ID = NA))
     } else {
         stop("Sector and Survey Name normalization not yet supported.")

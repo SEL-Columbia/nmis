@@ -7,7 +7,7 @@ require(devtools)
 install_github('formhub.R', 'SEL-Columbia')
 ```
 
-(2) Make the following directories inside pipeline: `data`, `data/output_data`.
+(2) Make the following directories inside pipeline: `data/output_data`.
 
 (3) Create a file called `authfile.txt`. Its content should be FORMHUB_USERNAME:FORMHUB_PASSWORD and nothing else. Example, if my formhub username is Johnny and my password is appleseed, the file should have `Johnny:appleseed` in it.
 
