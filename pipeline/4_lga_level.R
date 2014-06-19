@@ -54,8 +54,10 @@ education_mopup_lga_indicators <- function(education_data) {
                 percent_schools_chalkboard_all_rooms = percent(chalkboard_each_classroom_yn),
                 percent_improved_sanitation = percent(improved_sanitation),
                 percent_phcn_electricity = percent(phcn_electricity),
+                percent_classrm_repairs = ratio(num_classrms_repair, num_classrms_total, 
+                                                format = "percent"),
                 ## The following are "ratio" indicators
-                pupil_toilet_ratio = ratio(num_students_total, num_toilets_total, 
+                pupil_toilet_ratio = ratio(num_students_total, num_toilets_total,
                                            format = "ratio"),
                 student_classroom_ratio_lga = ratio(num_students_total, num_classrms_total, 
                                                     format = "ratio"),
