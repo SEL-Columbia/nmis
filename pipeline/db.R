@@ -12,13 +12,13 @@ my_db_conn <- dbConnect(SQLite(), dbname=db_path)
 
 create_db <- function(db_connection) {
     dbSendQuery(conn = db_connection, "CREATE TABLE IF NOT EXISTS facility_tb(
-                    uid VARCHAR(5) PRIMARY KEY);")
+                    facility_id VARCHAR(5) PRIMARY KEY);")
                 
     dbSendQuery(conn = db_connection, "CREATE TABLE IF NOT EXISTS survey_tb(
-                            uuid VARCHAR(36) UNIQUE NOT NULL,
+                            survey_id VARCHAR(36) UNIQUE NOT NULL,
                             survey_time INTEGER,
-                            uid VARCHAR(5) NOT NULL,
-                            FOREIGN KEY(uid) REFERENCES facility_tb(uid));")
+                            facility_id VARCHAR(5) NOT NULL,
+                            FOREIGN KEY(facility_id) REFERENCES facility_tb(facility_id));")
 }
 
 create_db(my_db_conn)
@@ -34,21 +34,21 @@ create_db(my_db_conn)
 # for mopup, uid exists, we just need to insert it
 
 ## insert_facility_db
-insert_facility <- function(conn, gen_id=T){
-    if(gen_id){
-        facility_id <-gen_uid()
-    }
+## if in scenario 1: uid = gen_uid()
+## if in scenario 2: uid = survey$uid
+insert_facility <- function(conn, survey=NULL){
+    facility_id = ifelse(is.null(survey), gen_uid(), survey$uid)
     facility_query <- sprintf("INSERT INTO facility_tb
                         VALUES ('%s')", facility_id)
     dbSendQuery(conn = conn, facility_query)
     return(facility_id)
 }
 
-insert_facility_db = function(conn, max_try=10000, gen_id=T){
+insert_facility_db = function(conn, max_try=10000){
     if (max_try == 0){
         stop("Too many collisions, consider expanding to one extra digit")
     }
-    tryCatch(return(insert_facility(conn, gen_id=gen_id)), 
+    tryCatch(return(insert_facility(conn)), 
              error = function(e){
                     max_try = max_try - 1;
                     insert_facility_db(conn, max_try);
@@ -84,4 +84,9 @@ check_facility_id <- function(survey){
 }
 
 get_facility_id <- function(conn, facility_id) {
+    res <- dbGetQuery(conn, sprintf("SELECT facility_id from facility_tb
+                                         WHERE facility_id = '%s'", facility_id))
+    return(ifelse(length(res$facility_id) == 0, FALSE, TRUE))
 }
+
+
