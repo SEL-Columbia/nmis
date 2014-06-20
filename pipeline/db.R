@@ -1,15 +1,6 @@
 require(dplyr)
 require(RSQLite)
 source('nmis_functions.R')
-
-db_path = "./data/sqlite_db/facility_registry.db"
-if( ! file.exists(db_path)){
-    my_db <- dplyr::src_sqlite(db_path, create = TRUE)    
-}
-my_db_conn <- dbConnect(SQLite(), dbname=db_path)
-
-# dbDisconnect(SQLite(), conn = db)
-
 create_db <- function(db_connection) {
     dbSendQuery(conn = db_connection, "CREATE TABLE IF NOT EXISTS facility_tb(
                     facility_id VARCHAR(5) PRIMARY KEY);")
@@ -21,21 +12,6 @@ create_db <- function(db_connection) {
                             FOREIGN KEY(facility_id) REFERENCES facility_tb(facility_id));")
 }
 
-create_db(my_db_conn)
-
-
-#dbSendQuery(conn = my_db_conn,
-#            "INSERT INTO survey_tb
-#            VALUES ('d78a3185-5a01-429a-83fd-c6f16e23155a', 41234841, 'TLCP')")
-#
-# what do we want to do here
-# insert UID into faciliti_tb and if it fails try agiain util
-# it reaches limit of trial or it succeed
-# for mopup, uid exists, we just need to insert it
-
-## insert_facility_db
-## if in scenario 1: uid = gen_uid()
-## if in scenario 2: uid = survey$uid
 insert_facility <- function(conn, survey=NULL){
     facility_id = ifelse(is.null(survey), gen_uid(), survey$uid)
     facility_query <- sprintf("INSERT INTO facility_tb
@@ -57,14 +33,13 @@ insert_facility_db = function(conn, max_try=10000){
 
 
 ## insert_survey
-insert_survey <- function(conn, survey_entry){
-    #survey_entry is c(uuid, t, uid)
+insert_survey <- function(conn, survey_id, submission_time, facility_id){
     survey_query <- sprintf("INSERT INTO survey_tb
-                        VALUES ('%s', %i, '%s')", survey_entry["uuid"],
-                                                  survey_entry["survey_time"],
-                                                  survey_entry["uid"])
-    tryCatch(dbSendQuery(conn, survey_entry),
-             error = function(e){print("error!", e)})
+                        VALUES ('%s', %i, '%s')", survey_id,
+                                                  get_epoch(submission_time),
+                                                  facility_id)
+    tryCatch(dbSendQuery(conn, survey_query),
+             error = function(e){print(e)})
 }
 
 
@@ -75,12 +50,22 @@ pull_survey_id <- function(conn) {
 }
 
 
-check_exist_survey <- function(survey, survey_list) {
+check_exist_survey <- function(conn, survey) {
     return(survey$uuid %in% survey_list)
 }
 
+check_exist_survey_from_db <- function(conn, survey) {
+    res <- dbGetQuery(conn, sprintf("SELECT survey_id from survey_tb WHERE survey_id = '%s'", survey$uuid))
+    return(ifelse(length(res$survey_id)==0, FALSE, TRUE))
+}
+
 check_facility_id <- function(survey){
-    return(!is.na(survey$uid) | !is.null(survey$uid))
+    if (!is.null(survey$uid)){
+        if(!is.na(survey$uid)){
+            return(TRUE)
+        }
+    }
+    return(FALSE)
 }
 
 get_facility_id <- function(conn, facility_id) {
@@ -89,4 +74,49 @@ get_facility_id <- function(conn, facility_id) {
     return(ifelse(length(res$facility_id) == 0, FALSE, TRUE))
 }
 
+sync_row <- function(conn, survey){
+    if (!check_exist_survey_from_db(conn, survey)){
+        if (check_facility_id(survey)){
+            #do something
+            if(get_facility_id(conn, survey$uid)){
+                insert_survey(conn, 
+                              survey$uuid, 
+                              survey$submission_time, 
+                              survey$uid)
+            } else {
+                # do something
+                facility_id <- insert_facility(conn, survey=survey)
+                insert_survey(conn,
+                              survey$uuid, 
+                              survey$submission_time, 
+                              facility_id)
+            }
+        }else {
+            facility_id <- insert_facility_db(conn)
+            insert_survey(conn,
+                          survey$uuid, 
+                          survey$submission_time, 
+                          facility_id)
+        }
+    }
+}
 
+sync_db <- function(df){
+    db_path = "./data/sqlite_db/facility_registry.db"
+    if( ! file.exists(db_path)){
+        my_db <- dplyr::src_sqlite(db_path, create = TRUE)    
+        rm(my_db)
+    }
+    database <- dbConnect(SQLite(), dbname=db_path)
+    create_db(database)
+    for (i in 1:nrow(df)) {
+        sync_row(database, df[i,])
+    }
+    id_df <- dbGetQuery(database, 
+                        "SELECT facility_id, survey_id FROM survey_tb")
+    df$uid <- NULL
+    df <- merge(df, id_df, by.x="uuid", by.y="survey_id", all.x=TRUE)
+    df <- rename(df, c("facility_id" = "uid"))
+    dbDisconnect(database)
+    return(df)
+}
