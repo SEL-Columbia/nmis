@@ -171,4 +171,4 @@ gen_uid = function(){
 # time conversions
 iso8601DateTimeConvert <- function(x) { ymd_hms(str_extract(x, '^[^+Z]*(T| )[^+Z-]*')) } #TODO: get rid of this
 
-get_epoch <- function(x) {as.character(as.POSIXct(iso8601DateTimeConvert(x)))}
+get_epoch <- function(x) {as.integer(as.POSIXct(iso8601DateTimeConvert(x)))}
