@@ -2,7 +2,7 @@ Instructions on running the pipeline.
 
 (1) Install R, and run the following on the R console to install required packages:
 ```
-install.packages(c("devtools", "dplyr", "testthat"))
+install.packages(c("devtools", "dplyr", "testthat", "RSQLite"))
 require(devtools)
 install_github('formhub.R', 'SEL-Columbia')
 ```
