@@ -12,8 +12,8 @@ create_db <- function(db_connection) {
                             FOREIGN KEY(facility_id) REFERENCES facility_tb(facility_id));")
 }
 
-insert_facility <- function(conn, survey=NULL){
-    facility_id = ifelse(is.null(survey), gen_uid(), survey$uid)
+insert_facility <- function(conn, facility_id=NULL){
+    facility_id = ifelse(is.null(facility_id), gen_facility_id(), facility_id)
     facility_query <- sprintf("INSERT INTO facility_tb
                         VALUES ('%s')", facility_id)
     dbSendQuery(conn = conn, facility_query)
@@ -31,15 +31,19 @@ insert_facility_db = function(conn, max_try=10000){
                     })
 }
 
-
 ## insert_survey
 insert_survey <- function(conn, survey_id, submission_time, facility_id){
     survey_query <- sprintf("INSERT INTO survey_tb
                         VALUES ('%s', %i, '%s')", survey_id,
                                                   get_epoch(submission_time),
                                                   facility_id)
-    tryCatch(dbSendQuery(conn, survey_query),
-             error = function(e){print(e)})
+    tryCatch({dbSendQuery(conn, survey_query)
+                return(survey_id)
+             },
+             error = function(e){
+                 message(paste("Error! ", e))
+                 return(NA)
+             })
 }
 
 
@@ -48,25 +52,37 @@ pull_survey_id <- function(conn) {
     df <- dbGetQuery(conn, "SELECT survey_id from survey_tb")
     return(df$survey_id)
 }
-
-
-check_exist_survey <- function(conn, survey) {
-    return(survey$uuid %in% survey_list)
+get_facility_id_from_survey <- function(conn, survey_id) {
+    res <- dbGetQuery(conn, sprintf("SELECT facility_id from survey_tb WHERE survey_id = '%s'", survey_id))
+    return(res$facility_id[1])
 }
 
-check_exist_survey_from_db <- function(conn, survey) {
-    res <- dbGetQuery(conn, sprintf("SELECT survey_id from survey_tb WHERE survey_id = '%s'", survey$uuid))
+
+check_exist_survey <- function(conn, survey_id) {
+    return(survey_id %in% survey_list)
+}
+
+check_exist_survey_from_db <- function(conn, survey_id) {
+    res <- dbGetQuery(conn, sprintf("SELECT survey_id from survey_tb WHERE survey_id = '%s'", survey_id))
     return(ifelse(length(res$survey_id)==0, FALSE, TRUE))
 }
 
-check_facility_id <- function(survey){
-    if (!is.null(survey$uid)){
-        if(!is.na(survey$uid)){
-            return(TRUE)
-        }
-    }
-    return(FALSE)
+#check_facility_id <- function(facility_id){
+#    if (!is.null(facility_id)){
+#        if(!is.na(facility_id)){
+#            return(TRUE)
+#        }
+#    }
+#    return(FALSE)
+#}
+check_facility_id <- function(facility_id){
+
+    return(ifelse(!lapply(facility_id, is.null),
+                  ifelse(!is.na(facility_id), TRUE, FALSE),
+                  FALSE))
 }
+
+
 
 get_facility_id <- function(conn, facility_id) {
     res <- dbGetQuery(conn, sprintf("SELECT facility_id from facility_tb
@@ -74,30 +90,35 @@ get_facility_id <- function(conn, facility_id) {
     return(ifelse(length(res$facility_id) == 0, FALSE, TRUE))
 }
 
-sync_row <- function(conn, survey){
-    if (!check_exist_survey_from_db(conn, survey)){
-        if (check_facility_id(survey)){
+sync_row <- function(conn, survey_id, facility_id, submission_time){
+    if (!check_exist_survey_from_db(conn, survey_id)){
+        if (check_facility_id(facility_id)){
             #do something
-            if(get_facility_id(conn, survey$uid)){
+            if(get_facility_id(conn, facility_id)){
                 insert_survey(conn, 
-                              survey$uuid, 
-                              survey$submission_time, 
-                              survey$uid)
+                              survey_id, 
+                              submission_time, 
+                              facility_id)
             } else {
                 # do something
-                facility_id <- insert_facility(conn, survey=survey)
+                facility_id <- insert_facility(conn, facility_id=facility_id)
                 insert_survey(conn,
-                              survey$uuid, 
-                              survey$submission_time, 
+                              survey_id, 
+                              submission_time, 
                               facility_id)
             }
         }else {
             facility_id <- insert_facility_db(conn)
             insert_survey(conn,
-                          survey$uuid, 
-                          survey$submission_time, 
+                          survey_id, 
+                          submission_time, 
                           facility_id)
         }
+        return(facility_id)
+    
+    }else{
+        facility_id <- get_facility_id_from_survey(conn, survey_id)
+        return(facility_id)
     }
 }
 
@@ -109,14 +130,16 @@ sync_db <- function(df){
     }
     database <- dbConnect(SQLite(), dbname=db_path)
     create_db(database)
-    for (i in 1:nrow(df)) {
-        sync_row(database, df[i,])
-    }
-    id_df <- dbGetQuery(database, 
-                        "SELECT facility_id, survey_id FROM survey_tb")
-    df$uid <- NULL
-    df <- merge(df, id_df, by.x="uuid", by.y="survey_id", all.x=TRUE)
-    df <- rename(df, c("facility_id" = "uid"))
+    ### evil for loop
+#    for (i in 1:nrow(df)) {
+#        sync_row(database, df[i,])
+#    }
+    ###
+    df <- df %.% mutate(facility_id = sync_row(database, 
+                                               survey_id,
+                                               facility_id,
+                                               submission_time))
+
     dbDisconnect(database)
     return(df)
 }

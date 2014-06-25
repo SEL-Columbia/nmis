@@ -164,7 +164,7 @@ base26 = function(num, dig_str="") {
     }
 }
 
-gen_uid = function(){
+gen_facility_id = function(){
     return(base26(gen_num()))
 }
 
