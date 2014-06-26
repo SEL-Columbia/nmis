@@ -22,7 +22,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 * { box-sizing: border-box; }
 
 body {
-    padding-top: 115px;
+    padding-top: 150px;
     font-size: 15px;
     width: 1200px;
     margin: auto;
@@ -76,6 +76,25 @@ table .value {
     color: white;
     background-color: #606060;
 }
+
+.green_btn {
+    display: inline-block;
+    color: white;
+    padding: 9px 20px;
+    font-size: 15px;
+    margin: auto;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(0, 152, 72);
+    text-transform: uppercase;
+}
+.green_btn:hover {
+    color: white;
+    background-color: rgb(0, 127, 60);
+    text-decoration: none;
+}
+
 
 
 #header {
@@ -153,7 +172,7 @@ table .value {
 
 #index_content {
     color: white;
-    margin-top: 130px;
+    margin-top: 100px;
 }
 #index_content .intro {
     display: block;
@@ -220,21 +239,9 @@ table .value {
     /* manually align "education facilities" */
     margin-left: 25px;
 }
-#index_content .explore_btn {
+#index_content .green_btn {
     display: block;
     width: 200px;
-    color: white;
-    padding: 9px 20px;
-    font-size: 15px;
-    margin: auto;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 5px;
-    background: rgb(0, 152, 72);
-}
-#index_content .explore_btn:hover {
-    background-color: rgb(0, 127, 60);
 }
 #index_content .learn {
     display: block;
@@ -376,10 +383,10 @@ table .value {
 
 
 #content .content {
-    margin-top: 95px;
+    margin-top: 90px;
 }
 #content .content.index {
-    margin-top: 20px;
+    margin-top: 0;
 }
 
 
@@ -940,6 +947,7 @@ table thead td:active {
 
 .planning_toplevel h2 {
     color: #5B5D5C;
+    margin-top: 0;
 } 
 .planning_sublevel {
     width: 80%;
@@ -953,5 +961,43 @@ table thead td:active {
 .planning_sublevel p {
     color: #5B5D5C;
 }
+
+
+/* Download.html
+=================================================================== */
+
+
+.download_btn {
+    padding: 7px 20px;
+    font-size: 13px;
+}
+.download_about {
+    margin: 10px 0 15px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+.download_h2 {
+    margin: 0 0 35px;
+}
+.download_h3 {
+    color: #555;
+    margin: 0;
+}
+.download_table {
+    margin: 10px 0 15px;
+}
+.download_table_label {
+    color: #555;
+    font-weight: bold;
+    padding-right: 20px;
+}
+.download_grey {
+    color: #999;
+}
+
+
+
+
+
 
 
