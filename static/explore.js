@@ -300,7 +300,6 @@ MapView.render = function(lga, sector){
 };
 
 MapView.facility_map = function(lga, sector, indicator) {
-    var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
     var map_top = $('#header').outerHeight();
     var map_height = $(document).height() - map_top;
     var map_div = $('.map_view')
@@ -310,8 +309,7 @@ MapView.facility_map = function(lga, sector, indicator) {
 
     if (!map){
         // Initialize Leaflet
-        map = new L.Map(map_div, {scrollWheelZoom: false})
-            .setView(lat_lng, 11);
+        map = new L.Map(map_div, {scrollWheelZoom: false});
         var lga_layer = new L.TileLayer(
             mapbox_layer('nigeria_overlays_white'), {
                 minZoom: 6,
@@ -335,14 +333,19 @@ MapView.facility_map = function(lga, sector, indicator) {
         map._unique_lga = lga.unique_lga;
     }
 
-    if (map._facility_layer)
+    if (map._facility_layer){
         map.removeLayer(map._facility_layer);
-
-    if (map._unique_lga !== lga.unique_lga){
-        map._unique_lga = lga.unique_lga;
-        map.setView(lat_lng, 11);
     }
+
     map._facility_layer = this.facility_layer(lga.facilities, sector, indicator);
+
+    // Get facility points for bounding box
+    var lat_lngs = [];
+    _.each(map._facility_layer.getLayers(), function(layer){
+        lat_lngs.push(layer.getLatLng());
+    });
+    
+    map.fitBounds(lat_lngs);
     map._facility_layer.addTo(map);
 };
 
