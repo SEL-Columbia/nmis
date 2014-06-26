@@ -1,11 +1,8 @@
 import csv
+import itertools
 import json
 import os
 import shutil
-
-
-
-CWD = os.path.dirname(os.path.abspath(__file__))
 
 NORMALIZED_VALUES = {
     'NA': None,
@@ -18,89 +15,80 @@ NORMALIZED_VALUES = {
     'No': False
 }
 
+CWD = os.getcwd()
 
-def parse_csv(file):
-    print 'Parsing: ' + file.name
-    output = []
-    reader = csv.reader(file, delimiter=',', quotechar='"')
-    headers = [h.strip('"') for h in reader.next()]
-    for row in reader:
-        value = {}
-        for header, col in zip(headers, row):
-            value[header] = clean_csv_value(col)
-        output.append(value)
-    return output
+def join_cursors(csv_files):
+    open_dirs = itertools.imap(lambda x: csv.DictReader(open(x)), csv_files)
+    return itertools.chain.from_iterable(open_dirs)
+
+def create_lga_files(data_folder):
+    print 'Reading : ' + data_folder
+    path = os.path.join(CWD, data_folder)
+    dir_ = os.listdir(path)
+    
+    files = map(lambda f: os.path.join(path, f), filter(lambda x: x.endswith('csv'), dir_))
+    lga_files = filter(lambda f: 'LGA' in f, files)
+    fac_files = filter(lambda f: 'NMIS' in f, files)
+
+    lgas = {}
+
+    cur = join_cursors(lga_files)
+    for row in cur:
+        row = clean_vals(row)
+        unique_lga = row['unique_lga']
+        if unique_lga:
+            if unique_lga in lgas:
+                lgas[unique_lga] = update(lgas[unique_lga], row)
+            else:
+                lgas[unique_lga] = update(row, {'facilities':[]})
 
 
-def clean_csv_value(value):
-    value = value.strip('"')
-    try:
-        value = int(value)
-    except ValueError:
-        try:
-            if value not in ('Inf', '-Inf', 'NaN'):
-                value = float(value)
-        except ValueError:
-            pass
-    return NORMALIZED_VALUES.get(value, value)
+    cur = join_cursors(fac_files)
+    for row in cur:
+        row = clean_vals(row)
+        unique_lga = row['unique_lga']
+        if unique_lga:
+            lgas[unique_lga]['facilities'].append(row)
+
+    out_dir = os.path.join(CWD, 'lgas')
+    if os.path.exists(out_dir):
+         print "Output directory not empty, removing.."
+         shutil.rmtree(out_dir)
+
+    os.makedirs(out_dir)
+    
+
+    if None in lga:
+        del lga[None]
+    for lga, doc in lgas.iteritems():
+        filename = lga + '.json'
+        destination = os.path.join(out_dir, filename)
+        with open(destination, 'w') as f:
+            f.write(json.dumps(doc, indent=4, ensure_ascii=False))
+
+    zip_download(data_folder, CWD)
+   
+def update(d, other): d.update(other); return d
+
+def clean(v): 
+    try: 
+        v = float(v)
+    except:
+        v = int(v)
+    finally:
+        return v
+        
+clean_vals = lambda row: {k:NORMALIZED_VALUES.get(v, clean(v)) for k, v in row.iteritems()}
 
 def zip_download(in_folder, out_dir):
     out_name = 'nmis_data'
     out_file = os.path.join(out_dir, out_name)
     if os.path.exists(out_file + '.zip'):
-        print "found existing %s, removing" % out_file
+        print "found existing {file}, removing".format(file=out_file)
         os.remove(out_file + '.zip')
     shutil.make_archive(out_file, 'zip', in_folder)
-    print "created zip file %s" % out_name
+    print "created zip file {name}".format(name=out_name)
 
-def create_lga_files(data_folder):
-    print 'Reading: ' + data_folder
-    path = os.path.join(CWD, data_folder)
-    lgas = {}
-    facilities = []
-    for fname in os.listdir(path):
-        if not fname.endswith('.csv'):
-            continue
-
-        file_path = os.path.join(path, fname)
-        with open(file_path, 'rb') as f:
-            results = parse_csv(f)
-
-        for item in results:
-            if 'LGA' in fname:
-                id = item['unique_lga']
-                if not lgas.has_key(id):
-                    lgas[id] = item
-                else:
-                    lgas[id] = dict(lgas[id].items() + item.items())
-            elif 'NMIS' in fname:
-                facilities.append(item)
-
-    out_dir = os.path.join(CWD, 'lgas')
-    if os.path.exists(out_dir):
-        print "Output directory not empty, removing.."
-        shutil.rmtree(out_dir)
         
-    os.makedirs(out_dir)
-    
-    for unique_lga, lga_data in lgas.iteritems():
-        if not unique_lga:
-            continue
-        lga_data['unique_lga'] = unique_lga
-        lga_data['facilities'] = [fac for fac in facilities if fac['unique_lga'] == unique_lga]
-        #out = json.dumps(lga_data, indent=4, ensure_ascii=True)
-        out = json.dumps(lga_data, indent=4, ensure_ascii=False)
-        path = os.path.join(out_dir, unique_lga + '.json')
-        print 'Writing: ' + unique_lga + '.json'
-        with open(path, 'w') as f:
-            f.write(out)
-
-    zip_download(data_folder, CWD)
-
-    
-    
-
-create_lga_files('data/output_data')
-
-
-
+if __name__ == '__main__':
+    create_lga_files('output_data')
