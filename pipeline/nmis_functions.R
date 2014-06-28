@@ -11,6 +11,13 @@ percent_format <- function(numerator, denominator) {
     )
 }
 
+pct_convtr <- function(col){
+    return(ifelse(is.finite(col), 
+                  paste(format(round(col*100, digits=2), nsmall=2, trim=T), "%", sep=""),
+                  NA))
+}
+
+
 # Utility function that takes a data_frame, where a part of the data is percent_format-ted
 # Output is a data_frame, where each of those indicators instead as three different column.
 # eg. percent_functional column (percent_formatted) would turn 3 numerical columns:
