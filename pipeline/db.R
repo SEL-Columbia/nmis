@@ -116,7 +116,9 @@ sync_db <- function(df){
                  dplyr::tbl('survey_tb')
     db_candidate <- dplyr::anti_join(df, survey_df, by='survey_id', copy=TRUE)
     rm(survey_df)
-    apply(db_candidate, 1, function(x){sync_row(database, x)})
+    if(nrow(db_candidate) != 0) {
+        apply(db_candidate, 1, function(x){sync_row(database, x)})
+    }
     dbDisconnect(database)
     #note this survey_df is the more complete data than above
     survey_df <- dplyr::src_sqlite(db_path, create = FALSE) %.%

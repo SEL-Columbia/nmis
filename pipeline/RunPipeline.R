@@ -5,6 +5,7 @@ suppressPackageStartupMessages(require(dplyr))
 ################ EDUCATION ####################################################
 source("nmis_functions.R"); source("0_normalize.R"); source("2_outlier_cleaning.R");
 source("3_facility_level.R"); source("4_lga_level.R"); source("5_necessary_indicators.R")
+source("db.R")
 
 ### LOAD DOWNLOAD(ed) EDUCATION DATA
 edu_mopup_new <- readRDS(sprintf("%s/education_mopup_new.RDS", CONFIG$MOPUP_DATA_DIR))
@@ -47,6 +48,7 @@ rm(list=setdiff(ls(), c("CONFIG")))
 ################ HEALTH ####################################################
 source("nmis_functions.R"); source("0_normalize.R"); source("2_outlier_cleaning.R");
 source("3_facility_level.R"); source("4_lga_level.R"); source("5_necessary_indicators.R")
+source("db.R")
 
 ### LOAD DOWNLOAD(ed) HEALTH DATA
 health_mopup <- readRDS(sprintf("%s/health_mopup.RDS",CONFIG$MOPUP_DATA_DIR))
