@@ -40,12 +40,16 @@ normalize_mopup = function(formhubData, survey_name, sector) {
             )
         d <- rbind_list(filter(d, lga != "NA"), messed_up_lgas)
     }
+
     
     return(d %.% ## drop _dontknow and _calc values, which are only meant for monitoring
         dplyr::select(-matches('_dontknow', '_calc'),
                       formhub_photo_id = photo_facility,
                       unique_lga = lga,
-                      matches('.')) # 
+                      survey_id = uuid,
+                      facility_id = facility_ID,
+                      matches('.')) %.%
+        dplyr::mutate(facility_id = sector_prefix(facility_id, sector))
     )
 }
 
@@ -105,8 +109,10 @@ normalize_2012 = function(d, survey_name, sector) {
                     num_classrms_repair = num_classrms_need_maj_repairs,
                     matches('.') # this is necessary, in order not to drop the rest of the columns
                 )
-        }
-        return(mutate(d, facility_ID = NA))
+        return(d %.% 
+                   dplyr::mutate(facility_id = NA) %.%
+                   dplyr::select(survey_id = uuid) %.%
+                                 matches('.'))
     } else {
         stop("Sector and Survey Name normalization not yet supported.")
     }

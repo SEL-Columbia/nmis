@@ -164,7 +164,7 @@ base26 = function(num, dig_str="") {
     }
 }
 
-gen_uid = function(){
+gen_facility_id = function(){
     return(base26(gen_num()))
 }
 
@@ -172,3 +172,9 @@ gen_uid = function(){
 iso8601DateTimeConvert <- function(x) { ymd_hms(str_extract(x, '^[^+Z]*(T| )[^+Z-]*')) } #TODO: get rid of this
 
 get_epoch <- function(x) {as.integer(as.POSIXct(iso8601DateTimeConvert(x)))}
+        
+sector_prefix <- function(facility_id, sector) {
+    return(ifelse(is.na(facility_id), 
+                  NA,
+                  paste(toupper(substr(sector, 1, 1)), toupper(facility_id), sep='')))
+}

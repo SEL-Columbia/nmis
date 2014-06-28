@@ -13,7 +13,7 @@ create_db <- function(db_connection) {
 }
 
 insert_facility <- function(conn, survey=NULL){
-    facility_id = ifelse(is.null(survey), gen_uid(), survey['facility_id'])
+    facility_id = ifelse(is.null(survey), gen_facility_id(), survey['facility_id'])
     facility_query <- sprintf("INSERT INTO facility_tb
                         VALUES ('%s')", facility_id)
     dbGetQuery(conn = conn, facility_query)
@@ -51,11 +51,11 @@ pull_survey_id <- function(conn) {
 
 
 check_exist_survey <- function(conn, survey) {
-    return(survey['uuid'] %in% survey_list)
+    return(survey['survey_id'] %in% survey_list)
 }
 
 check_exist_survey_from_db <- function(conn, survey) {
-    res <- dbGetQuery(conn, sprintf("SELECT survey_id from survey_tb WHERE survey_id = '%s'", survey['uuid']))
+    res <- dbGetQuery(conn, sprintf("SELECT survey_id from survey_tb WHERE survey_id = '%s'", survey['survey_id']))
     return(ifelse(nrow(res['survey_id'])==0, FALSE, TRUE))
 }
 
@@ -81,21 +81,21 @@ sync_row <- function(conn, survey){
             #do something
             if(get_facility_id(conn, survey['facility_id'])){
                 insert_survey(conn, 
-                              survey['uuid'], 
+                              survey['survey_id'], 
                               survey['submission_time'], 
                               survey['facility_id'])
             } else {
                 # do something
                 facility_id <- insert_facility(conn, survey=survey)
                 insert_survey(conn,
-                              survey['uuid'], 
+                              survey['survey_id'], 
                               survey['submission_time'], 
                               facility_id)
             }
         }else {
             facility_id <- insert_facility_db(conn)
             insert_survey(conn,
-                          survey['uuid'], 
+                          survey['survey_id'], 
                           survey['submission_time'], 
                           facility_id)
         }
@@ -108,17 +108,21 @@ sync_db <- function(df){
         my_db <- dplyr::src_sqlite(db_path, create = TRUE)    
         rm(my_db)
     }
+
     database <- dbConnect(SQLite(), dbname=db_path)
     create_db(database)
         
-    system.time(apply(edu_mopup_all, 1, function(x){sync_row(database, x)}))
-    
+    dplyr_db <- dplyr::src_sqlite(db_path, create = FALSE)
+    survey_df <- dplyr::tbl(dplyr_db, 'survey_tb')
+    df <- df %.%
+        dplyr::anti_join(df, survey_df, by='survey_id', copy=TRUE)
+    apply(df, 1, function(x){sync_row(database, x)})
     
     id_df <- dbGetQuery(database, 
                         "SELECT facility_id, survey_id FROM survey_tb")
     df['facility_id'] <- NULL
-    df <- merge(df, id_df, by.x="uuid", by.y="survey_id", all.x=TRUE)
-    df <- rename(df, c("facility_id" = "uid"))
+    df <- merge(df, id_df, by.x="survey_id", by.y="survey_id", all.x=TRUE)
+    df <- rename(df, c("facility_id" = "facility_id"))
     dbDisconnect(database)
     return(df)
 }
