@@ -111,8 +111,7 @@ normalize_2012 = function(d, survey_name, sector) {
                 )
         return(d %.% 
                    dplyr::mutate(facility_id = NA) %.%
-                   dplyr::select(survey_id = uuid) %.%
-                                 matches('.'))
+                   dplyr::select(survey_id = uuid, matches('.')))
     } else {
         stop("Sector and Survey Name normalization not yet supported.")
     }
