@@ -10,7 +10,7 @@ test_that("LGA indicators match for education for Zurmi", {
                                       "tests/test_data/education_mopup.json", na.strings=c("999", "9999", "n/a"),
                                       keepGroupNames=F)
     source('CONFIG.R'); source('0_normalize.R'); source('3_facility_level.R'); source('4_lga_level.R')
-    edu <- normalize_mopup(test_education_data, "mopup_new")
+    edu <- normalize_mopup(test_education_data, "mopup_new", "education")
     edu <- education_mopup_facility_level(edu)
     edu_lga <- education_mopup_lga_indicators(edu) %.% select(lga = unique_lga, matches('.'))
     ### (2) Test that they are the same
@@ -55,7 +55,7 @@ test_that("LGA indicators match for health for Zurmi", {
                                    "tests/test_data/health_mopup.json", na.strings=c("999", "9999", "n/a", "NA"),
                                    keepGroupNames=F)
     source('CONFIG.R'); source('0_normalize.R'); source('3_facility_level.R'); source('4_lga_level.R')
-    health <- normalize_mopup(test_health_data, "mopup_new")
+    health <- normalize_mopup(test_health_data, "mopup_new", "health")
     health <- health_mopup_facility_level(health)
     health_lga <- health_mopup_lga_indicators(health) %.% 
         select(lga = unique_lga, matches('.')) %.% filter(lga != "DISCARD") ## we had to insert
