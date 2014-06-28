@@ -113,8 +113,8 @@ sync_db <- function(df){
     create_db(database)
         
     survey_df <- dplyr::src_sqlite(db_path, create = FALSE) %.%
-                 dplyr::tbl('survey_tb')
-    db_candidate <- dplyr::anti_join(df, survey_df, by='survey_id', copy=TRUE)
+                 dplyr::tbl('survey_tb') %.% collect()
+    db_candidate <- dplyr::anti_join(df, survey_df, by='survey_id')
     rm(survey_df)
     if(nrow(db_candidate) != 0) {
         apply(db_candidate, 1, function(x){sync_row(database, x)})
@@ -122,8 +122,9 @@ sync_db <- function(df){
     dbDisconnect(database)
     #note this survey_df is the more complete data than above
     survey_df <- dplyr::src_sqlite(db_path, create = FALSE) %.%
-                 dplyr::tbl('survey_tb')
+                 dplyr::tbl('survey_tb') %.% collect()
     df <- df %.% dplyr::select(-facility_id, matches('.'))
-    df <- dplyr::inner_join(df, survey_df, by="survey_id", copy=TRUE)
+    df <- dplyr::inner_join(df, survey_df, by="survey_id")
+    
     return(df)
 }
