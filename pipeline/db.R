@@ -112,17 +112,16 @@ sync_db <- function(df){
     database <- dbConnect(SQLite(), dbname=db_path)
     create_db(database)
         
-    dplyr_db <- dplyr::src_sqlite(db_path, create = FALSE)
-    survey_df <- dplyr::tbl(dplyr_db, 'survey_tb')
-    df <- df %.%
-        dplyr::anti_join(df, survey_df, by='survey_id', copy=TRUE)
-    apply(df, 1, function(x){sync_row(database, x)})
-    
-    id_df <- dbGetQuery(database, 
-                        "SELECT facility_id, survey_id FROM survey_tb")
-    df['facility_id'] <- NULL
-    df <- merge(df, id_df, by.x="survey_id", by.y="survey_id", all.x=TRUE)
-    df <- rename(df, c("facility_id" = "facility_id"))
+    survey_df <- dplyr::src_sqlite(db_path, create = FALSE) %.%
+                 dplyr::tbl('survey_tb')
+    db_candidate <- dplyr::anti_join(df, survey_df, by='survey_id', copy=TRUE)
+    rm(survey_df)
+    apply(db_candidate, 1, function(x){sync_row(database, x)})
     dbDisconnect(database)
+    #note this survey_df is the more complete data than above
+    survey_df <- dplyr::src_sqlite(db_path, create = FALSE) %.%
+                 dplyr::tbl('survey_tb')
+    df <- df %.% dplyr::select(-facility_id, matches('.'))
+    df <- dplyr::inner_join(df, survey_df, by="survey_id", copy=TRUE)
     return(df)
 }
