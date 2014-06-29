@@ -70,7 +70,7 @@
                 "facility_type_display",
                 "date_of_survey",
                 "education_type",
-                "facility_ID",
+                "facility_id",
                 "community",
                 "ward", 
                 "management"
@@ -109,7 +109,7 @@
                 "facility_name",
                 "facility_type_display",
                 "date_of_survey",
-                "facility_ID",
+                "facility_id",
                 "community",
                 "ward", 
                 "management"

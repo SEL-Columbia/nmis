@@ -40,12 +40,16 @@ normalize_mopup = function(formhubData, survey_name, sector) {
             )
         d <- rbind_list(filter(d, lga != "NA"), messed_up_lgas)
     }
+
     
     return(d %.% ## drop _dontknow and _calc values, which are only meant for monitoring
         dplyr::select(-matches('_dontknow', '_calc'),
                       formhub_photo_id = photo_facility,
                       unique_lga = lga,
-                      matches('.')) # 
+                      survey_id = uuid,
+                      facility_id = facility_ID,
+                      matches('.')) %.%
+        dplyr::mutate(facility_id = sector_prefix(facility_id, sector))
     )
 }
 
@@ -60,15 +64,15 @@ normalize_2012 = function(d, survey_name, sector) {
                     facility_type = revalue(facility_type,
                                     c("comprehensivehealthcentre" = "district_hospital",
                                       "cottagehospital" = "general_hospital",
-                                      "dentalclinic" = "DROP", # these are being dropped
+                                      "dentalclinic" = "none", # these are being dropped
                                       "federalmedicalcentre" = "specialist_hospital",
                                       "generalhospital" = "general_hospital",
                                       "healthpostdispensary" = "health_post",
                                       "maternity" = "primary_health_centre",
-                                      "None" = "DROP", "other" = "DROP", # these are being dropped
+                                      "None" = "none", "other" = "none", # these are being dropped
                                       "primaryhealthcarecentre" = "primary_health_centre",
                                       "primaryhealthclinic" = "basic_health_centre",
-                                      "private" = "DROP", # also dropping private facilities -- there are only 24
+                                      "private" = "none", # also dropping private facilities -- there are only 24
                                       "specialisthospital" = "specialist_hospital",
                                       "teachinghospital" = "teaching_hospital",
                                       "wardmodelphccentre" = "primary_health_centre"))
@@ -106,8 +110,26 @@ normalize_2012 = function(d, survey_name, sector) {
                     matches('.') # this is necessary, in order not to drop the rest of the columns
                 )
         }
-        return(mutate(d, facility_ID = NA))
+        return(d %.% 
+                   dplyr::mutate(facility_id = NA) %.%
+                   dplyr::select(survey_id = uuid, matches('.')))
     } else {
         stop("Sector and Survey Name normalization not yet supported.")
     }
+}
+
+
+normalize_external = function(d) {
+           return(d %.% mutate(prevalence_of_underweight_children_u5 = pct_convtr(prevalence_of_underweight_children_u5),
+                               prevalence_of_stunting_children_u5 = pct_convtr(prevalence_of_stunting_children_u5),
+                               prevalence_of_wasting_children_u5 = pct_convtr(prevalence_of_wasting_children_u5),
+                               proportion_of_children_u5_diarrhea_treated_with_ors_med = pct_convtr(proportion_of_children_u5_diarrhea_treated_with_ors_med),
+                               prevalence_of_hiv = pct_convtr(prevalence_of_hiv),
+                               percentage_of_individuals_tested_for_hiv_ever = pct_convtr(percentage_of_individuals_tested_for_hiv_ever),
+                               proportion_children_u5_sleeping_under_itns = pct_convtr(proportion_children_u5_sleeping_under_itns),
+                               percent_antenatal_care_four = pct_convtr(percent_antenatal_care_four),
+                               percentage_pregnant_women_tested_for_hiv_during_pregnancy = pct_convtr(percentage_pregnant_women_tested_for_hiv_during_pregnancy),
+                               percentage_households_with_access_to_improved_water_sources = pct_convtr(percentage_households_with_access_to_improved_water_sources),
+                               percentage_households_with_access_to_improved_sanitation = pct_convtr(percentage_households_with_access_to_improved_sanitation))
+           )
 }
