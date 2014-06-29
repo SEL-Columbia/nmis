@@ -128,7 +128,8 @@ health_mopup_lga_indicators = function(health_data) {
             is_healthpost = facility_type %in% c('dispensary', 'health_post'),
             is_healthfacility = ! (facility_type %in% c('dk', 'none') | is.na(facility_type)),
             is_allExceptHealthPost = is_healthfacility & ! is_healthpost
-        )
+        ) %.%
+        dplyr::filter(is_healthfacility)
     ## (2) Aggregation 1: Services that are provided at Hospitals only
     hospital_data = health_data %.% 
         dplyr::filter(is_hospital) %.% 

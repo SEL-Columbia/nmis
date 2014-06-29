@@ -64,15 +64,15 @@ normalize_2012 = function(d, survey_name, sector) {
                     facility_type = revalue(facility_type,
                                     c("comprehensivehealthcentre" = "district_hospital",
                                       "cottagehospital" = "general_hospital",
-                                      "dentalclinic" = "DROP", # these are being dropped
+                                      "dentalclinic" = "none", # these are being dropped
                                       "federalmedicalcentre" = "specialist_hospital",
                                       "generalhospital" = "general_hospital",
                                       "healthpostdispensary" = "health_post",
                                       "maternity" = "primary_health_centre",
-                                      "None" = "DROP", "other" = "DROP", # these are being dropped
+                                      "None" = "none", "other" = "none", # these are being dropped
                                       "primaryhealthcarecentre" = "primary_health_centre",
                                       "primaryhealthclinic" = "basic_health_centre",
-                                      "private" = "DROP", # also dropping private facilities -- there are only 24
+                                      "private" = "none", # also dropping private facilities -- there are only 24
                                       "specialisthospital" = "specialist_hospital",
                                       "teachinghospital" = "teaching_hospital",
                                       "wardmodelphccentre" = "primary_health_centre"))
