@@ -13,7 +13,7 @@ percent_format <- function(numerator, denominator) {
 
 pct_convtr <- function(col){
     return(ifelse(is.finite(col), 
-                  paste(format(round(col*100, digits=2), nsmall=2, trim=T), "%", sep=""),
+                  paste(format(round(col*100, digits=2), nsmall=0, trim=T), "%", sep=""),
                   NA))
 }
 
