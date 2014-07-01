@@ -6,11 +6,39 @@ library(doMC)
 
 
 
-RJson_ouput <- function(BASE_DIR, nmis_lga, gap_sheet, edu_774,
-                        health_774, water_774){
+RJson_ouput <- function(OUTPUT_DIR, CONFIG){
     registerDoMC(4)
-    # join gap_sheet to lga_level as per chris' request
-    nmis_lga <- merge(nmis_lga, gap_sheet, by="lga_id", all=TRUE)
+    # Read csv into R
+    health_gap <- read.csv(file=sprintf('%s/Health_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR))
+    edu_gap <- read.csv(file = sprintf('%s/Education_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR)) 
+                     
+    
+    health_lga <- read.csv(file=sprintf('%s/Health_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR)) %.% 
+                        select(-lga, -state, -longitude, -latitude, matches("."))
+    edu_lga <- read.csv(file=sprintf('%s/Education_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR)) %.% 
+                        select(-lga, -state, -longitude, -latitude, matches("."))
+    water_lga <- read.csv(file=sprintf('%s/Water_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR)) %.% 
+                        select(-lga, -state, -longitude, -latitude, matches("."))
+    external_lga <- read.csv(file=sprintf('%s/Overview_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
+                        
+    
+    edu_all <- read.csv(file=sprintf('%s/Education_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
+    health_all <- read.csv(file=sprintf('%s/Health_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
+    water_all <- read.csv(file=sprintf('%s/Water_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
+    
+    # join lga level data
+    lga_gap <- external_lga %.% 
+                        inner_join(health_lga, by = "unique_lga") %.% 
+                        inner_join(edu_lga, by = "unique_lga") %.% 
+                        inner_join(water_lga, by = "unique_lga") %.% 
+                        
+                        inner_join(health_gap, by = "unique_lga") %.% 
+                        inner_join(edu_gap, by = "unique_lga")
+    
+    # combine all facility level data                        
+    total_facility_df <- rbind_list(edu_all, health_all, water_all)
+        
+    
     
     # utility function that turns Data.frame into named list
     df_to_list <- function(df){
@@ -20,18 +48,13 @@ RJson_ouput <- function(BASE_DIR, nmis_lga, gap_sheet, edu_774,
     }
     
     # Creating output folder
-    BASE_DIR <- normalizePath(BASE_DIR)
-    if (!file.exists(BASE_DIR)){
-        dir.create(BASE_DIR)
+    OUTPUT_DIR <- normalizePath(OUTPUT_DIR)
+    if (!file.exists(OUTPUT_DIR)){
+        dir.create(OUTPUT_DIR)
     }
     
     # creating lgas level list
-    lgas <- df_to_list(nmis_lga)
-    
-    # for each lga combine faciliti level indicators and append to
-    # lga level indicators
-    
-    total_facility_df <- rbind_list(edu_774, health_774, water_774)
+    lgas <- df_to_list(lga_gap)
     
     mclapply(lgas, function(lga){
         current_lga <- lga$unique_lga
@@ -47,7 +70,7 @@ RJson_ouput <- function(BASE_DIR, nmis_lga, gap_sheet, edu_774,
         output_json <- toJSON(lga)
         
         file_name <- paste(current_lga, "json", sep=".")
-        output_dir <- paste(BASE_DIR, file_name, sep="/")
+        output_dir <- paste(OUTPUT_DIR, file_name, sep="/")
         
         write(output_json, output_dir)
         
