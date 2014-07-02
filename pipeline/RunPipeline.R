@@ -126,3 +126,9 @@ external_data_2012 <- normalize_external(external_data_2012)
 write.csv(output_indicators(external_data_2012, 'lga', 'overview'), row.names=F,
           file=sprintf('%s/Overview_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
 rm(list=setdiff(ls(), "CONFIG"))
+
+
+########## Json output ###################################################
+source("6_write_Json.R")
+
+invisible(RJson_ouput(OUTPUT_DIR="../static/lgas/", CONFIG))
