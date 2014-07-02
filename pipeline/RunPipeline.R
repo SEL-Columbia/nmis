@@ -131,4 +131,4 @@ rm(list=setdiff(ls(), "CONFIG"))
 ########## Json output ###################################################
 source("6_write_Json.R")
 
-RJson_ouput(OUTPUT_DIR="../static/lgas/", CONFIG)
+invisible(RJson_ouput(OUTPUT_DIR="../static/lgas/", CONFIG))

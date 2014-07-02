@@ -59,7 +59,7 @@ RJson_ouput <- function(OUTPUT_DIR, CONFIG){
     mclapply(lgas, function(lga){
         current_lga <- lga$unique_lga
         facility_df <- total_facility_df %.% filter(unique_lga == current_lga)
-        facility_list <- (as.list(as.data.frame(t(facility_df))))
+        facility_list <- as.list(as.data.frame(t(facility_df)))
         # remove names of the facility_list, 
         # so that the output will be a list of hash table instead of 
         # hash table with key=sequence
