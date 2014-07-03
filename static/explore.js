@@ -512,8 +512,8 @@ var FacilitiesView = {
 };
 FacilitiesView.init = function(){
     var self = this;
-    $('#content').on('click', '.facilities_table_container tr', function(){
-        var uuid = $(this).data('uuid');
+    $('#content').on('click', '.facilities_table_container td', function(){
+        var uuid = $(this).closest('tr').data('uuid');
         var facility = self.facility_cache[uuid];
         self.show_modal(facility);
     });
