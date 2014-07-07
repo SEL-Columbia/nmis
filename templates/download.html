@@ -10,52 +10,213 @@
 
 
 {% block content %}
-    <h1>Download Data</h1>
+    <h2 class="download_h2">Download Data</h2>
     
-    <p class="toptext" style="font-size:18px;">
+    <p class="toptext" style="font-size:18px; margin-bottom:40px;">
         The NMIS Nigeria Facility Inventory dataset provides attributes and location information for over 250,000 health, education and water facilities. This dataset will be available for download starting Summer 2014.
     </p>
-    {% if False %}
-        <div class="download_data">
-            <div id="contentButton">
-                <div class="buttonGreen"><a href="/static/nmis_data.zip" class="buttontext">Download NMIS Dataset</a></div>
-                <div style="clear:both;"></div>
-                <div style="margin-top:10px">Permanent URL: <a href=""></a></div>
-            </div>
-            <h3>About the Dataset</h3>
-            <table>
+
+    <div class="row">
+        <div class="col-md-6">
+            <a href="#" class="download_btn green_btn">Download NMIS Dataset</a>
+            
+            <div class="download_about">About the dataset</div>
+
+            <h3 class="download_h3">Nationwide coverage of critical indicators (presented in NMIS)</h3>
+
+            <table class="download_table">
                 <tr>
-                    <td>
-                        <strong>File size</strong>
-                    </td>
-                    <td>27 MB</td>
+                    <td class="download_table_label">Collected</td>
+                    <td>2009-2014</td>
                 </tr>
                 <tr>
-                    <td><strong>File Format</strong></td>
-                    <td>Zipped CSVs </td>
+                    <td class="download_table_label">Surveys</td>
+                    <td>113, 661, Mopup</td>
                 </tr>
                 <tr>
-                    <td><strong>Version</strong></td>
+                    <td class="download_table_label">File size</td>
+                    <td>50.5 MB</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">File Format</td>
+                    <td>CSV</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">Version</td>
                     <td>1.0</td>
                 </tr>
                 <tr>
-                    <td><strong>Created</strong></td>
-                    <td>December 02, 2013</td>
+                    <td class="download_table_label">Created</td>
+                    <td>August 12, 2014</td>
                 </tr>
                 <tr>
-                    <td class="firstcol"><strong>Last Updated</strong></td>
-                    <td>December 02, 2013</td>
+                    <td class="download_table_label">Last Updated</td>
+                    <td>August 12, 2014</td>
                 </tr>
                 <tr>
-                    <td><strong>Attribution</strong></td>
-                    <td>Data provided by <a href="3">OSSAP</a></td>
+                    <td class="download_table_label">Attribution</td>
+                    <td>Data provided by OSSAP</td>
                 </tr>
                 <tr>
-                    <td><strong>Licensing</strong></td>
+                    <td class="download_table_label">Licensing</td>
                     <td>ODbL</td>
                 </tr>
             </table>
+
+            <span class="download_grey">
+                Permanent URL:
+            </span>
+            <a href="#">http://nmis.com/asdf.csv</a>
         </div>
-    {% endif %}
+
+        <div class="col-md-6">
+            <a href="#" class="download_btn green_btn">Download All Raw Data</a>
+            
+            <div class="download_about">About the dataset</div>
+
+            <h3 class="download_h3">All raw data collected</h3>
+
+            <table class="download_table">
+                <tr>
+                    <td class="download_table_label">Collected</td>
+                    <td>2009-2014</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">Surveys</td>
+                    <td>Pilot, 113, 661, Mopup</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">File size</td>
+                    <td>250.5 MB</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">File Format</td>
+                    <td>CSV</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">Version</td>
+                    <td>1.0</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">Created</td>
+                    <td>October 12, 2014</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">Last Updated</td>
+                    <td>October 12, 2014</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">Attribution</td>
+                    <td>Data provided by OSSAP</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">Licensing</td>
+                    <td>ODbL</td>
+                </tr>
+            </table>
+
+            <span class="download_grey">
+                Permanent URL:
+            </span>
+            <a href="#">http://nmis.com/asdf.csv</a>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <h2 class="download_h2">Download Surveys</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <a href="#" class="download_btn green_btn">Download Mopup Survey</a>
+            
+            <div class="download_about">About the survey</div>
+
+            <table class="download_table">
+                <tr>
+                    <td class="download_table_label">Collected</td>
+                    <td>April—June 2014</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">File size</td>
+                    <td>50.5 MB</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">File Format</td>
+                    <td>PDF, CSV</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <a href="#" class="download_btn green_btn">Download 661 Survey</a>
+            
+            <div class="download_about">About the survey</div>
+
+            <table class="download_table">
+                <tr>
+                    <td class="download_table_label">Collected</td>
+                    <td>October 2011 — November 2012</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">File size</td>
+                    <td>50.5 MB</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">File Format</td>
+                    <td>PDF, CSV</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-md-6">
+            <a href="#" class="download_btn green_btn">Download 113 Survey</a>
+            
+            <div class="download_about">About the survey</div>
+
+            <table class="download_table">
+                <tr>
+                    <td class="download_table_label">Collected</td>
+                    <td>April—June 2014</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">File size</td>
+                    <td>50.5 MB</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">File Format</td>
+                    <td>PDF, CSV</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <a href="#" class="download_btn green_btn">Download Pilot</a>
+            
+            <div class="download_about">About the survey</div>
+
+            <table class="download_table">
+                <tr>
+                    <td class="download_table_label">Collected</td>
+                    <td>October 2011 — November 2012</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">File size</td>
+                    <td>50.5 MB</td>
+                </tr>
+                <tr>
+                    <td class="download_table_label">File Format</td>
+                    <td>PDF, CSV</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 {% endblock %}
 

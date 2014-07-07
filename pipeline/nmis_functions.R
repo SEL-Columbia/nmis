@@ -11,6 +11,13 @@ percent_format <- function(numerator, denominator) {
     )
 }
 
+pct_convtr <- function(col){
+    return(ifelse(is.finite(col), 
+                  paste(format(round(col*100, digits=2), nsmall=0, trim=T), "%", sep=""),
+                  NA))
+}
+
+
 # Utility function that takes a data_frame, where a part of the data is percent_format-ted
 # Output is a data_frame, where each of those indicators instead as three different column.
 # eg. percent_functional column (percent_formatted) would turn 3 numerical columns:
@@ -106,7 +113,7 @@ get_necessary_indicators <- function() {
     }
     
     ## "EXTRAS": Indicators hardcoded in the NMIS code
-    facility_level_extras = c("formhub_photo_id", "facility_name", "gps", "uuid", "unique_lga")
+    facility_level_extras = c("formhub_photo_id", "facility_name", "gps", "survey_id", "unique_lga")
     lga_level_extras = c("lga", "unique_lga", "state", "latitude", "longitude")
     ## facility level: education and health indicators should include anything in the overview tab as well
     facility_indicators = RJSONIO::fromJSON("../static/explore/facilities_view.json")
@@ -144,4 +151,37 @@ get_necessary_indicators <- function() {
                   education=lga_indicators$education,
                   water=lga_indicators$water,
                   overview=lga_indicators$overview))
+}
+
+# Hash functions to generate facility UID
+gen_num = function() {
+    return(sample.int(26^5-1, 1, replace=F))
+}
+
+base26 = function(num, dig_str="") {
+    dig = num %% 26
+    letter = toupper(letters)[dig+1]
+    dig_str = paste(letter, dig_str, sep="")
+    if (num %/% 26 >= 1) {
+        base26(num %/% 26, dig_str)
+    } else {
+        append_a = paste(rep("A", 5 - nchar(dig_str)), collapse="", sep="")
+        dig_str = paste(append_a, dig_str, sep="")
+        return(dig_str)
+    }
+}
+
+gen_facility_id = function(){
+    return(base26(gen_num()))
+}
+
+# time conversions
+iso8601DateTimeConvert <- function(x) { ymd_hms(str_extract(x, '^[^+Z]*(T| )[^+Z-]*')) } #TODO: get rid of this
+
+get_epoch <- function(x) {as.integer(as.POSIXct(iso8601DateTimeConvert(x)))}
+        
+sector_prefix <- function(facility_id, sector) {
+    return(ifelse(is.na(facility_id), 
+                  NA,
+                  paste(toupper(substr(sector, 1, 1)), toupper(facility_id), sep='')))
 }

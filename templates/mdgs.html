@@ -8,15 +8,17 @@
     <script>
         (function(){
             NMIS = {};
-            NMIS.indicators = {{ load_file('indicators.json')|safe }};
-            NMIS.mdgs_view = {{ load_file('mdgs_view.json')|safe }};
+            NMIS.indicators = {{ indicators|safe }};
+            NMIS.mdgs_view = {{ mdgs_view|safe }};
 
             var currentLayer = {};
             var cachedLayers = {};
 
             function indicator_name(slug){
                 var indicator = NMIS.indicators[slug];
-                return indicator ? indicator.name : slug;
+                var name = indicator ? indicator.name : slug;
+                // Remove asterisk from end of MDGs indicator names
+                return name.replace(/\*$/, '');
             }
 
             function indicator_description(slug){

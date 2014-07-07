@@ -310,76 +310,75 @@ MapView.facility_map = function(lga, sector, indicator) {
 
     if (!map){
         // Initialize Leaflet
-        map = new L.Map(map_div, {scrollWheelZoom: false})
-            .setView(lat_lng, 11);
+        map = new L.Map(map_div).setView(lat_lng, 11);
         var lga_layer = new L.TileLayer(
-            mapbox_layer('nigeria_overlays_white'), {
+            'http://{s}.tiles.mapbox.com/v3/ossap-mdgs.kelgzaor/{z}/{x}/{y}.png', {
+                subdomains: 'abc',
                 minZoom: 6,
                 maxZoom: 14
             });
         var locality_layer = new L.TileLayer(
-            mapbox_layer('Nigeria_Localities'), {
+            'http://{s}.tiles.mapbox.com/v3/ossap-mdgs.g9s2t85v/{z}/{x}/{y}.png', {
+                subdomains: 'abc',
                 minZoom: 13,
                 maxZoom: 18
             });
-        var google_layer = new L.TileLayer(
-            'http://mt{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-                subdomains: '0123',
+        var satellite_layer = new L.TileLayer(
+            'http://{s}.tiles.mapbox.com/v3/openstreetmap.map-4wvf9l0l/{z}/{x}/{y}.png', {
+                subdomains: 'abc',
                 maxZoom: 18, 
                 minZoom: 3
             });
-        google_layer.addTo(map);
+        satellite_layer.addTo(map);
         lga_layer.addTo(map);
         locality_layer.addTo(map);
         map_div._map = map;
         map._unique_lga = lga.unique_lga;
     }
 
-    if (map._facility_layer)
+    if (map._facility_layer){
         map.removeLayer(map._facility_layer);
-
-    if (map._unique_lga !== lga.unique_lga){
-        map._unique_lga = lga.unique_lga;
-        map.setView(lat_lng, 11);
     }
-    map._facility_layer = this.facility_layer(lga.facilities, sector, indicator);
+
+    var sector_facilities = _.filter(lga.facilities, function(fac){
+        return fac.sector === sector || sector === 'overview';
+    });
+    map._facility_layer = this.facility_layer(sector_facilities, indicator);
     map._facility_layer.addTo(map);
 };
 
-MapView.facility_layer = function(facilities, sector, indicator) {
+MapView.facility_layer = function(facilities, indicator) {
     var self = this;
     var marker_group = new L.LayerGroup();
 
     _.each(facilities, function(fac){
-        if (fac.sector === sector || sector === 'overview') {
-            var lat_lng = fac.gps.split(' ').slice(0,2);
-            var icon_url;
-            if (indicator) {
-                if (fac[indicator] === true || 
-                    fac[indicator] === false) {
-                    icon_url = 'static/images/icons_f/' + 
-                        fac[indicator] +'.png';
-                } else {
-                    icon_url = 'static/images/icons_f/' +
-                        'undefined.png';
-                }
+        var lat_lng = fac.gps.split(' ').slice(0, 2);
+        var icon_url;
+        if (indicator) {
+            if (fac[indicator] === true || 
+                fac[indicator] === false) {
+                icon_url = '/static/images/icons_f/' + 
+                    fac[indicator] +'.png';
             } else {
-                icon_url = 'static/images/icons_f/normal_' + 
-                    fac.sector + '.png';
+                icon_url = '/static/images/icons_f/' +
+                    'undefined.png';
             }
-            var icon = new L.Icon({iconUrl: icon_url}); 
-            var mark = new L.Marker(lat_lng, {icon: icon});
-            var popup = new L.Popup({closeButton: false})
-                .setContent(fac.facility_name)
-                .setLatLng(lat_lng);
-            mark.on('click', function(){
-                FacilitiesView.show_modal(fac);
-            });
-            mark.on('mouseover', mark.openPopup.bind(mark))
-                .on('mouseout', mark.closePopup.bind(mark))
-                .bindPopup(popup, {offset: new L.Point(14, 7)});
-            marker_group.addLayer(mark);
+        } else {
+            icon_url = '/static/images/icons_f/normal_' + 
+                fac.sector + '.png';
         }
+        var icon = new L.Icon({iconUrl: icon_url}); 
+        var mark = new L.Marker(lat_lng, {icon: icon});
+        var popup = new L.Popup({closeButton: false})
+            .setContent(fac.facility_name)
+            .setLatLng(lat_lng);
+        mark.on('click', function(){
+            FacilitiesView.show_modal(fac);
+        });
+        mark.on('mouseover', mark.openPopup.bind(mark))
+            .on('mouseout', mark.closePopup.bind(mark))
+            .bindPopup(popup, {offset: new L.Point(14, 7)});
+        marker_group.addLayer(mark);
     });
     return marker_group;
 };
@@ -509,8 +508,8 @@ var FacilitiesView = {
 };
 FacilitiesView.init = function(){
     var self = this;
-    $('#content').on('click', '.facilities_table_container tr', function(){
-        var uuid = $(this).data('uuid');
+    $('#content').on('click', '.facilities_table_container td', function(){
+        var uuid = $(this).closest('tr').data('uuid');
         var facility = self.facility_cache[uuid];
         self.show_modal(facility);
     });
