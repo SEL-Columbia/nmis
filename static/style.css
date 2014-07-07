@@ -714,6 +714,9 @@ table thead td:active {
 /* Explore.html, Map View
 ==================================================================== */
 
+.leaflet-control-attribution {
+    display: none;
+}
 .leaflet-top, .leaflet-bottom {
     z-index: 50 !important;
 }

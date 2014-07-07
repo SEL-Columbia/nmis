@@ -315,7 +315,7 @@
             </thead>
             <tbody>
                 <% _.each(facilities, function(facility){ %>
-                    <tr data-uuid="<%= facility.uuid %>">
+                    <tr data-survey_id="<%= facility.survey_id %>">
                         <% _.each(indicators, function(indicator){ %>
                             <td><%= format_value(facility[indicator]) %></td>
                         <% }); %>
