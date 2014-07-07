@@ -2,6 +2,7 @@ require(dplyr)
 require(RSQLite)
 source('nmis_functions.R')
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 db_path = "./data/sqlite_db/facility_registry.db"
 if( ! file.exists(db_path)){
@@ -17,11 +18,16 @@ create_db <- function(db_connection) {
                 
     dbSendQuery(conn = db_connection, "CREATE TABLE IF NOT EXISTS survey_tb(
 =======
+=======
+>>>>>>> 0ca0c043f9dd315f54577d59ae34193d45fbc6fb
 create_db <- function(db_connection) {
     dbGetQuery(conn = db_connection, "CREATE TABLE IF NOT EXISTS facility_tb(
                     facility_id VARCHAR(5) PRIMARY KEY);")
                 
     dbGetQuery(conn = db_connection, "CREATE TABLE IF NOT EXISTS survey_tb(
+<<<<<<< HEAD
+>>>>>>> 0ca0c043f9dd315f54577d59ae34193d45fbc6fb
+=======
 >>>>>>> 0ca0c043f9dd315f54577d59ae34193d45fbc6fb
                             survey_id VARCHAR(36) UNIQUE NOT NULL,
                             survey_time INTEGER,
@@ -29,6 +35,7 @@ create_db <- function(db_connection) {
                             FOREIGN KEY(facility_id) REFERENCES facility_tb(facility_id));")
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 create_db(my_db_conn)
 
@@ -51,11 +58,16 @@ insert_facility <- function(conn, survey=NULL){
                         VALUES ('%s')", facility_id)
     dbSendQuery(conn = conn, facility_query)
 =======
+=======
+>>>>>>> 0ca0c043f9dd315f54577d59ae34193d45fbc6fb
 insert_facility <- function(conn, survey=NULL){
     facility_id = ifelse(is.null(survey), gen_facility_id(), survey['facility_id'])
     facility_query <- sprintf("INSERT INTO facility_tb
                         VALUES ('%s')", facility_id)
     dbGetQuery(conn = conn, facility_query)
+<<<<<<< HEAD
+>>>>>>> 0ca0c043f9dd315f54577d59ae34193d45fbc6fb
+=======
 >>>>>>> 0ca0c043f9dd315f54577d59ae34193d45fbc6fb
     return(facility_id)
 }
@@ -74,6 +86,7 @@ insert_facility_db = function(conn, max_try=10000){
 
 ## insert_survey
 <<<<<<< HEAD
+<<<<<<< HEAD
 insert_survey <- function(conn, survey_entry){
     #survey_entry is c(uuid, t, uid)
     survey_query <- sprintf("INSERT INTO survey_tb
@@ -83,6 +96,8 @@ insert_survey <- function(conn, survey_entry){
     tryCatch(dbSendQuery(conn, survey_entry),
              error = function(e){print("error!", e)})
 =======
+=======
+>>>>>>> 0ca0c043f9dd315f54577d59ae34193d45fbc6fb
 insert_survey <- function(conn, survey_id, submission_time, facility_id){
     survey_query <- sprintf("INSERT INTO survey_tb
                         VALUES ('%s', %i, '%s')", survey_id,
@@ -90,6 +105,9 @@ insert_survey <- function(conn, survey_id, submission_time, facility_id){
                                                   facility_id)
     tryCatch(dbGetQuery(conn, survey_query),
              error = function(e){print(e)})
+<<<<<<< HEAD
+>>>>>>> 0ca0c043f9dd315f54577d59ae34193d45fbc6fb
+=======
 >>>>>>> 0ca0c043f9dd315f54577d59ae34193d45fbc6fb
 }
 
@@ -97,6 +115,7 @@ insert_survey <- function(conn, survey_id, submission_time, facility_id){
 ## 
 pull_survey_id <- function(conn) {
     df <- dbGetQuery(conn, "SELECT survey_id from survey_tb")
+<<<<<<< HEAD
 <<<<<<< HEAD
     return(df$survey_id)
 }
@@ -109,6 +128,8 @@ check_exist_survey <- function(survey, survey_list) {
 check_facility_id <- function(survey){
     return(!is.na(survey$uid) | !is.null(survey$uid))
 =======
+=======
+>>>>>>> 0ca0c043f9dd315f54577d59ae34193d45fbc6fb
     return(df['survey_id'])
 }
 
@@ -129,6 +150,9 @@ check_facility_id <- function(survey){
         }
     }
     return(FALSE)
+<<<<<<< HEAD
+>>>>>>> 0ca0c043f9dd315f54577d59ae34193d45fbc6fb
+=======
 >>>>>>> 0ca0c043f9dd315f54577d59ae34193d45fbc6fb
 }
 
@@ -136,11 +160,14 @@ get_facility_id <- function(conn, facility_id) {
     res <- dbGetQuery(conn, sprintf("SELECT facility_id from facility_tb
                                          WHERE facility_id = '%s'", facility_id))
 <<<<<<< HEAD
+<<<<<<< HEAD
     return(ifelse(length(res$facility_id) == 0, FALSE, TRUE))
 }
 
 
 =======
+=======
+>>>>>>> 0ca0c043f9dd315f54577d59ae34193d45fbc6fb
     return(ifelse(nrow(res['facility_id']) == 0, FALSE, TRUE))
 }
 
@@ -198,4 +225,7 @@ sync_db <- function(df){
     
     return(df)
 }
+<<<<<<< HEAD
+>>>>>>> 0ca0c043f9dd315f54577d59ae34193d45fbc6fb
+=======
 >>>>>>> 0ca0c043f9dd315f54577d59ae34193d45fbc6fb
