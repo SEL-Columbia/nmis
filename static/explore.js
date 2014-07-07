@@ -509,8 +509,8 @@ var FacilitiesView = {
 FacilitiesView.init = function(){
     var self = this;
     $('#content').on('click', '.facilities_table_container td', function(){
-        var uuid = $(this).closest('tr').data('uuid');
-        var facility = self.facility_cache[uuid];
+        var survey_id = $(this).closest('tr').data('survey_id');
+        var facility = self.facility_cache[survey_id];
         self.show_modal(facility);
     });
 };
@@ -539,7 +539,7 @@ FacilitiesView.show_table = function(sector, table_index, facilities){
     
     var sector_facilities = [];
     _.each(facilities, function(facility){
-        self.facility_cache[facility.uuid] = facility;
+        self.facility_cache[facility.survey_id] = facility;
         if (facility.sector === sector || (sector === 'overview' && facility.sector !== 'water')){
             sector_facilities.push(facility);
         }
