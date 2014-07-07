@@ -1,7 +1,7 @@
 require(rjson)
 require(dplyr)
 require(foreach)
-library(doMC)
+require(doMC)
 
 
 
