@@ -5,7 +5,8 @@ surveys = list('mopup_questionnaire_education_final', 'mopup_questionnaire_healt
                'education_mopup_new', 'education_mopup', 'health_mopup', 'health_mopup_new')
 l_ply(surveys, function(survey) {
     print(survey)
-    fData = formhubDownload(survey, 'ossap', authfile=CONFIG$AUTHFILE, 
+    fData = formhubDownload(survey, 'ossap', authfile=CONFIG$AUTHFILE,
+                            url = "http://ossap.formhub.org/", 
                 keepGroupNames=F, na.strings=c("999", "9999", "n/a"))
     saveRDS(fData, sprintf("%s/%s.RDS", CONFIG$MOPUP_DATA_DIR, survey))
 })
