@@ -311,27 +311,13 @@ MapView.facility_map = function(lga, sector, indicator) {
     if (!map){
         // Initialize Leaflet
         map = new L.Map(map_div).setView(lat_lng, 11);
-        var lga_layer = new L.TileLayer(
-            'http://{s}.tiles.mapbox.com/v3/ossap-mdgs.kelgzaor/{z}/{x}/{y}.png', {
+        var tile_layer = new L.TileLayer(
+            'http://{s}.tiles.mapbox.com/v3/ossap-mdgs.inh7p9ok/{z}/{x}/{y}.png', {
                 subdomains: 'abc',
-                minZoom: 6,
-                maxZoom: 14
-            });
-        var locality_layer = new L.TileLayer(
-            'http://{s}.tiles.mapbox.com/v3/ossap-mdgs.g9s2t85v/{z}/{x}/{y}.png', {
-                subdomains: 'abc',
-                minZoom: 13,
+                minZoom: 3,
                 maxZoom: 18
             });
-        var satellite_layer = new L.TileLayer(
-            'http://{s}.tiles.mapbox.com/v3/openstreetmap.map-4wvf9l0l/{z}/{x}/{y}.png', {
-                subdomains: 'abc',
-                maxZoom: 18, 
-                minZoom: 3
-            });
-        satellite_layer.addTo(map);
-        lga_layer.addTo(map);
-        locality_layer.addTo(map);
+        tile_layer.addTo(map);
         map_div._map = map;
         map._unique_lga = lga.unique_lga;
     }
