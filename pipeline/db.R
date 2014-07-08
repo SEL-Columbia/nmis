@@ -1,15 +1,30 @@
 require(dplyr)
 require(RSQLite)
 source('nmis_functions.R')
-create_db <- function(db_connection) {
-    dbGetQuery(conn = db_connection, "CREATE TABLE IF NOT EXISTS facility_tb(
+create_db <- function(){
+    db_path = "./data/sqlite_db/facility_registry.db"
+    db_connection <- dbConnect(SQLite(), dbname=db_path)
+    
+    
+    dbSendQuery(conn = db_connection, "CREATE TABLE IF NOT EXISTS facility_tb(
                     facility_id VARCHAR(5) PRIMARY KEY);")
                 
-    dbGetQuery(conn = db_connection, "CREATE TABLE IF NOT EXISTS survey_tb(
+    dbSendQuery(conn = db_connection, "CREATE TABLE IF NOT EXISTS survey_tb(
                             survey_id VARCHAR(36) UNIQUE NOT NULL,
                             survey_time INTEGER,
                             facility_id VARCHAR(5) NOT NULL,
                             FOREIGN KEY(facility_id) REFERENCES facility_tb(facility_id));")
+    
+    # load all mopup todo survey_ids
+    mopup_todo <- read.csv("./data/mopup_do_ids.csv")
+    sql <- "INSERT INTO facility_tb VALUES (@facility_id)"
+    dbBeginTransaction(db_connection)
+    dbGetPreparedQuery(db_connection, sql, bind.data = mopup_todo)
+    dbCommit(db_connection)
+    init_rec_count <- dbGetQuery(db_connection, "select count(*) from facility_tb")[[1]]
+    
+    print(paste(init_rec_count, "mopup facility was initialized", sep = " "))
+    dbDisconnect(db_connection)
 }
 
 insert_facility <- function(conn, survey=NULL){
@@ -107,11 +122,11 @@ sync_db <- function(df){
     if( ! file.exists(db_path)){
         my_db <- dplyr::src_sqlite(db_path, create = TRUE)    
         rm(my_db)
+        create_db()
     }
 
     database <- dbConnect(SQLite(), dbname=db_path)
-    create_db(database)
-        
+            
     survey_df <- dplyr::src_sqlite(db_path, create = FALSE) %.%
                  dplyr::tbl('survey_tb') %.% collect()
     db_candidate <- dplyr::anti_join(df, survey_df, by='survey_id')
