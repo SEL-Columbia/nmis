@@ -399,7 +399,7 @@
     },
     "prevalence_of_underweight_children_u5": {
         "name": "Percentage of children under five who are underweight (weight-for-age)*",
-        "description": "Percentage of children under five whose weight-for-age is below minus two standard deviations (-2 SD) from the median of the reference population (all children under five)(DHS, 2008)",
+        "description": "Percentage of children under five whose weight-for-age is below minus two standard deviations (-2 SD) from the median of the reference population (all children under five) (DHS, 2008)",
         "mapid": "7jh9imxa"
     },
     "student_classroom_ratio_lga_js": {
