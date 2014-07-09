@@ -3,9 +3,6 @@ require(dplyr)
 require(foreach)
 require(doMC)
 
-
-
-
 RJson_ouput <- function(OUTPUT_DIR, CONFIG){
     registerDoMC(4)
     # Read csv into R
@@ -14,11 +11,11 @@ RJson_ouput <- function(OUTPUT_DIR, CONFIG){
                      
     
     health_lga <- read.csv(file=sprintf('%s/Health_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR)) %.% 
-                        select(-lga, -state, -longitude, -latitude, matches("."))
+                        dplyr::select(-lga, -state, -longitude, -latitude, matches("."))
     edu_lga <- read.csv(file=sprintf('%s/Education_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR)) %.% 
-                        select(-lga, -state, -longitude, -latitude, matches("."))
+                        dplyr::select(-lga, -state, -longitude, -latitude, matches("."))
     water_lga <- read.csv(file=sprintf('%s/Water_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR)) %.% 
-                        select(-lga, -state, -longitude, -latitude, matches("."))
+                        dplyr::select(-lga, -state, -longitude, -latitude, matches("."))
     external_lga <- read.csv(file=sprintf('%s/Overview_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
                         
     
