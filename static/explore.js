@@ -265,7 +265,11 @@ LGAView.render = function(lga, sector){
 };
 
 
-var MapView = {};
+var MapView = {
+    map: null,
+    facility_layer: null
+};
+
 MapView.init = function(){
     // Runs after page load
     // Append map outside of .container so it can fill the width of the page
@@ -306,48 +310,32 @@ MapView.facility_map = function(lga, sector, indicator) {
     var map_div = $('.map_view')
         .css({top: map_top, height: map_height})
         .show()[0];
-    var map = map_div._map;
 
-    if (!map){
+    if (!this.map){
         // Initialize Leaflet
-        map = new L.Map(map_div).setView(lat_lng, 11);
-        var lga_layer = new L.TileLayer(
-            'http://{s}.tiles.mapbox.com/v3/ossap-mdgs.kelgzaor/{z}/{x}/{y}.png', {
+        this.map = new L.Map(map_div);
+        var tile_layer = new L.TileLayer(
+            'http://{s}.tiles.mapbox.com/v3/ossap-mdgs.inh7p9ok/{z}/{x}/{y}.png', {
                 subdomains: 'abc',
-                minZoom: 6,
-                maxZoom: 14
-            });
-        var locality_layer = new L.TileLayer(
-            'http://{s}.tiles.mapbox.com/v3/ossap-mdgs.g9s2t85v/{z}/{x}/{y}.png', {
-                subdomains: 'abc',
-                minZoom: 13,
+                minZoom: 3,
                 maxZoom: 18
             });
-        var satellite_layer = new L.TileLayer(
-            'http://{s}.tiles.mapbox.com/v3/openstreetmap.map-4wvf9l0l/{z}/{x}/{y}.png', {
-                subdomains: 'abc',
-                maxZoom: 18, 
-                minZoom: 3
-            });
-        satellite_layer.addTo(map);
-        lga_layer.addTo(map);
-        locality_layer.addTo(map);
-        map_div._map = map;
-        map._unique_lga = lga.unique_lga;
+        tile_layer.addTo(this.map);
     }
 
-    if (map._facility_layer){
-        map.removeLayer(map._facility_layer);
+    if (this.facility_layer){
+        this.map.removeLayer(this.facility_layer);
     }
 
     var sector_facilities = _.filter(lga.facilities, function(fac){
         return fac.sector === sector || sector === 'overview';
     });
-    map._facility_layer = this.facility_layer(sector_facilities, indicator);
-    map._facility_layer.addTo(map);
+    this.facility_layer = this.get_facility_layer(sector_facilities, indicator);
+    this.facility_layer.addTo(this.map);
+    this.map.setView(lat_lng, 11);
 };
 
-MapView.facility_layer = function(facilities, indicator) {
+MapView.get_facility_layer = function(facilities, indicator) {
     var self = this;
     var marker_group = new L.LayerGroup();
 
