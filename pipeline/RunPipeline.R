@@ -55,6 +55,11 @@ health_mopup_all <- health_mopup_facility_level(health_mopup_all)
 
 rm(edu_mopup, edu_mopup_new, edu_mopup_pilot, 
    health_mopup, health_mopup_new, health_mopup_pilot)
+###############################  SYNC DB  #############################################
+##database sync
+edu_all <- sync_db(edu_all)
+health_all <- sync_db(health_all)
+water_baseline_2012 <- sync_db(water_baseline_2012)
 
 ###############################  JOIN DATA  ############################################
 master <- tbl_df(rbind.fill(edu_mopup_all, health_mopup_all, water_baseline_2012))
@@ -82,11 +87,11 @@ drop_na_all <- function(df){
 edu_mopup_all <- drop_na_all(subset(master, sector=='education'))
 health_mopup_all <- drop_na_all(subset(master, sector=='health'))
 water_baseline_2012 <- drop_na_all(subset(master, sector=='water'))
-water_baseline_2012$facility_id = NA
 water_baseline_2012$latitude = NA
 water_baseline_2012$longitude = NA
 
 rm(master)
+
 ############################### LGA LEVEL #############################################
 #EDUCATION
 edu_baseline_2012 <- tbl_df(readRDS(CONFIG$BASELINE_EDUCATION))
@@ -95,8 +100,7 @@ edu_baseline_2012 <- normalize_2012(edu_baseline_2012, '2012', 'education')
 common_indicators <- intersect(names(edu_baseline_2012), names(edu_mopup_all))
 edu_all <- rbind(edu_baseline_2012[common_indicators], edu_mopup_all[common_indicators])
 rm(edu_baseline_2012, edu_mopup_all)
-##database sync
-edu_all <- sync_db(edu_all)
+
 #aggregate
 edu_lga <- education_mopup_lga_indicators(edu_all)
 edu_gap <- education_gap_sheet_indicators(edu_all)
@@ -108,8 +112,7 @@ health_baseline_2012 <- normalize_2012(health_baseline_2012, '2012', 'health')
 common_indicators <- intersect(names(health_baseline_2012), names(health_mopup_all))
 health_all <- rbind(health_baseline_2012[common_indicators], health_mopup_all[common_indicators])
 rm(health_baseline_2012, health_mopup_all)
-##sync database
-health_all <- sync_db(health_all)
+
 ##aggregate
 health_lga <- health_mopup_lga_indicators(health_all)
 health_gap <- health_gap_sheet_indicators(health_all)
@@ -117,8 +120,6 @@ health_gap <- health_gap_sheet_indicators(health_all)
 #WATER
 #What is nwater used for?
 nwater <- get_necessary_indicators()[['facility']][['water']]
-##sync database
-water_baseline_2012 <- sync_db(water_baseline_2012)
 ##aggregate
 water_lga <- water_lga_indicators(water_baseline_2012)
 
