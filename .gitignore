@@ -2,8 +2,8 @@
 .DS_Store
 *.swp
 static/lgas
-static/nmis_data.zip
-static/download/nmis_data.zip
+static/download/nmis_dataset.zip
+static/download/nmis_raw_data.zip
 
 .nmis_virtualenv/
 
