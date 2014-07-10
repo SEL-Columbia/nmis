@@ -2,6 +2,7 @@ require(fpc)
 require(plyr)
 require(dplyr)
 require(sp)
+require(ggplot2)
 
 #This function normalizes data column-wise to the closed interval [0, 1]
 normalize <- plyr::colwise(function(x) (x - min(x)) / (max(x) - min(x)))
@@ -14,7 +15,7 @@ parse_gps <- function(gps){
   return(gps)
 }
 
-cluster_lga <- function(gps){  
+cluster_lga <- function(gps, plot_lga=F){  
   gps_coords <- dplyr::select(parse_gps(gps), latitude, longitude)
   gps_coords <- as.data.frame(normalize(gps_coords))
   
@@ -38,6 +39,11 @@ cluster_lga <- function(gps){
   in_hull <- mapply(function(x, y) point.in.polygon(x, y, poly_hull$longitude, poly_hull$latitude), 
                     gps_coords$longitude, gps_coords$latitude)
   
+  gps_coords <- gps_coords %.% dplyr::mutate(spatial_outlier = (in_hull < 1))
+  if (plot_lga == T){
+    print(ggplot(gps_coords, aes(x=longitude, y=latitude, colour=spatial_outlier)) +
+            geom_point(size=3))
+  }
   
   return(in_hull < 1)
 }
