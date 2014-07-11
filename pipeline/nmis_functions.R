@@ -185,3 +185,13 @@ sector_prefix <- function(facility_id, sector) {
                   NA,
                   paste(toupper(substr(sector, 1, 1)), toupper(facility_id), sep='')))
 }
+
+parse_gps <- function(gps){
+    return(do.call(rbind, strsplit(gps, ' ')))
+}
+get_lat <- function(gps){
+    return(as.numeric(parse_gps(gps)[,1]))
+}
+get_lon <- function(gps){
+    return(as.numeric(parse_gps(gps)[,2]))
+}
