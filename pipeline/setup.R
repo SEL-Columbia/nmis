@@ -27,17 +27,33 @@ install_n_load <- function(required_pkgs){
     # check installed packages and upgrade if version is too low
     sapply(names(check_update), function(pkg){
         pkg <- names(check_update)[1]
-        if(check_update[pkg] > installed[names(installed) == pkg]){
+        if(check_update[pkg] > installed[pkg]){
             install.packages(pkg)
         }   
     })
 }
+
 batch_load <- function(required_pkgs){
     invisible(sapply(names(required_pkgs), 
                      function(pkg){require(pkg, character.only = T)}))
 }
 
+check_formhub <- function(formhub="formhub", version="0.0.4.3"){
+    installed <- installed.packages()[,3]
+    if(!formhub %in% names(installed)){
+        library("devtools", character.only = T)
+        install_github(repo = "formhub.R", username = "SEL-Columbia")
+    }else if(installed["formhub"] < "0.0.4.3"){
+        library("devtools", character.only = T)
+        install_github(repo = "formhub.R", username = "SEL-Columbia")
+    }
+}
+
+
+
+
 install_n_load(required_pkgs)
 batch_load(required_pkgs)
-rm(install_n_load, batch_load, required_pkgs, check_r_version)
+check_formhub()
+rm(install_n_load, batch_load, required_pkgs, check_r_version, check_formhub)
 
