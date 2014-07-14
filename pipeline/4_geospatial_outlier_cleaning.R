@@ -15,11 +15,11 @@ parse_gps <- function(gps){
   return(gps)
 }
 
-cluster_lga <- function(gps, plot_lga=F){  
-  gps_coords <- dplyr::select(parse_gps(gps), latitude, longitude)
+cluster_lga <- function(lat, lon, plot_lga=F){  
+  gps_coords <- data.frame(latitude=lat, longitude=lon)
   gps_coords <- as.data.frame(normalize(gps_coords))
-  
-  epsilon <- as.numeric(quantile(as.vector(dist(gps_coords)), .5))
+
+  epsilon <- as.numeric(quantile(as.vector(dist(gps_coords)), .5, na.rm=T))
   DBSCAN <- fpc::dbscan(gps_coords, eps=epsilon, MinPts = 3)
   if (length(rownames(gps_coords)) <= 1){
     return(F)
@@ -40,6 +40,7 @@ cluster_lga <- function(gps, plot_lga=F){
                     gps_coords$longitude, gps_coords$latitude)
   
   gps_coords <- gps_coords %.% dplyr::mutate(spatial_outlier = (in_hull < 1))
+  
   if (plot_lga == T){
     print(ggplot(gps_coords, aes(x=longitude, y=latitude, colour=spatial_outlier)) +
             geom_point(size=3))
