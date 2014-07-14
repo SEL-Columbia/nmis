@@ -106,7 +106,6 @@ water_baseline_2012$latitude = NA
 water_baseline_2012$longitude = NA
 
 rm(master)
-
 ############################### LGA LEVEL #############################################
 #aggregate
 edu_lga <- education_mopup_lga_indicators(edu_all)
@@ -122,36 +121,36 @@ nwater <- get_necessary_indicators()[['facility']][['water']]
 ##aggregate
 water_lga <- water_lga_indicators(water_baseline_2012)
 
-# ########## EXTERNAL DATA ###################################################
-# external_data_2012 <- tbl_df(readRDS(CONFIG$BASELINE_EXTERNAL))
-# external_data_2012 <- normalize_external(external_data_2012)
-# write.csv(output_indicators(external_data_2012, 'lga', 'overview'), row.names=F,
-#           file=sprintf('%s/Overview_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
-# 
-# ########## OUTPUT DATA #####################################################
-# #EDUCATION
-# write.csv(output_indicators(edu_all, 'facility', 'education'), row.names=F,
-#           file = sprintf('%s/Education_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
-# write.csv(output_indicators(edu_lga, 'lga', 'education'), row.names=F,
-#           file = sprintf('%s/Education_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
-# write.csv(edu_gap, row.names=F,        ## TODO: output_indicators for gap sheets?
-#           file = sprintf('%s/Education_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR))
-# 
-# #HEALTH
-# write.csv(output_indicators(health_all, 'facility', 'health'), row.names=F,
-#           file = sprintf('%s/Health_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
-# write.csv(output_indicators(health_lga, 'lga', 'health'), row.names=F,
-#           file = sprintf('%s/Health_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
-# write.csv(health_gap, row.names=F,
-#           file = sprintf('%s/Health_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR))
-# 
-# #WATER
-# write.csv(output_indicators(water_baseline_2012, 'facility', 'water'), row.names=F,
-#           file=sprintf('%s/Water_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
-# write.csv(output_indicators(water_lga, 'lga', 'water'), row.names=F,
-#           file=sprintf('%s/Water_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
-# rm(list=setdiff(ls(), "CONFIG"))
-# 
-# ########## JSON OUTPUT ###################################################
-# source("7_write_Json.R");
-# invisible(RJson_ouput(OUTPUT_DIR="../static/lgas/", CONFIG))
+########## EXTERNAL DATA ###################################################
+external_data_2012 <- tbl_df(readRDS(CONFIG$BASELINE_EXTERNAL))
+external_data_2012 <- normalize_external(external_data_2012)
+write.csv(output_indicators(external_data_2012, 'lga', 'overview'), row.names=F,
+          file=sprintf('%s/Overview_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
+
+########## OUTPUT DATA #####################################################
+#EDUCATION
+write.csv(output_indicators(edu_all, 'facility', 'education'), row.names=F,
+          file = sprintf('%s/Education_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
+write.csv(output_indicators(edu_lga, 'lga', 'education'), row.names=F,
+          file = sprintf('%s/Education_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
+write.csv(edu_gap, row.names=F,        ## TODO: output_indicators for gap sheets?
+          file = sprintf('%s/Education_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR))
+
+#HEALTH
+write.csv(output_indicators(health_all, 'facility', 'health'), row.names=F,
+          file = sprintf('%s/Health_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
+write.csv(output_indicators(health_lga, 'lga', 'health'), row.names=F,
+          file = sprintf('%s/Health_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
+write.csv(health_gap, row.names=F,
+          file = sprintf('%s/Health_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR))
+
+#WATER
+write.csv(output_indicators(water_baseline_2012, 'facility', 'water'), row.names=F,
+          file=sprintf('%s/Water_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
+write.csv(output_indicators(water_lga, 'lga', 'water'), row.names=F,
+          file=sprintf('%s/Water_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
+rm(list=setdiff(ls(), "CONFIG"))
+
+########## JSON OUTPUT ###################################################
+source("7_write_Json.R");
+invisible(RJson_ouput(OUTPUT_DIR="../static/lgas/", CONFIG))
