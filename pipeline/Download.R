@@ -9,4 +9,5 @@ l_ply(surveys, function(survey) {
                             url = "http://ossap.formhub.org/", 
                 keepGroupNames=F, na.strings=c("999", "9999", "n/a"))
     saveRDS(fData, sprintf("%s/%s.RDS", CONFIG$MOPUP_DATA_DIR, survey))
+    write.csv(fData, sprintf("%s/%s.csv", CONFIG$MOPUP_DATA_DIR, survey), row.names=F)
 })
