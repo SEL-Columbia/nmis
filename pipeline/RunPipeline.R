@@ -1,6 +1,6 @@
+################ setup ########################################################
+source('setup.R')
 source('CONFIG.R')
-suppressPackageStartupMessages(require(formhub))
-suppressPackageStartupMessages(require(dplyr))
 
 ################ EDUCATION ####################################################
 source("nmis_functions.R"); source("0_normalize.R"); source("2_outlier_cleaning.R");

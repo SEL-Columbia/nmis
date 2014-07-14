@@ -14,11 +14,11 @@ RJson_ouput <- function(OUTPUT_DIR, CONFIG){
                      
     
     health_lga <- read.csv(file=sprintf('%s/Health_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR)) %.% 
-                        select(-lga, -state, -longitude, -latitude, matches("."))
+                        dplyr::select(-lga, -state, -longitude, -latitude, matches("."))
     edu_lga <- read.csv(file=sprintf('%s/Education_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR)) %.% 
-                        select(-lga, -state, -longitude, -latitude, matches("."))
+                        dplyr::select(-lga, -state, -longitude, -latitude, matches("."))
     water_lga <- read.csv(file=sprintf('%s/Water_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR)) %.% 
-                        select(-lga, -state, -longitude, -latitude, matches("."))
+                        dplyr::select(-lga, -state, -longitude, -latitude, matches("."))
     external_lga <- read.csv(file=sprintf('%s/Overview_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
                         
     
@@ -28,12 +28,12 @@ RJson_ouput <- function(OUTPUT_DIR, CONFIG){
     
     # join lga level data
     lga_gap <- external_lga %.% 
-                        inner_join(health_lga, by = "unique_lga") %.% 
-                        inner_join(edu_lga, by = "unique_lga") %.% 
-                        inner_join(water_lga, by = "unique_lga") %.% 
+                        dplyr::inner_join(health_lga, by = "unique_lga") %.% 
+                        dplyr::inner_join(edu_lga, by = "unique_lga") %.% 
+                        dplyr::inner_join(water_lga, by = "unique_lga") %.% 
                         
-                        inner_join(health_gap, by = "unique_lga") %.% 
-                        inner_join(edu_gap, by = "unique_lga")
+                        dplyr::inner_join(health_gap, by = "unique_lga") %.% 
+                        dplyr::inner_join(edu_gap, by = "unique_lga")
     
     # combine all facility level data                        
     total_facility_df <- rbind_list(edu_all, health_all, water_all)
