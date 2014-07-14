@@ -8,9 +8,9 @@ check_r_version <- function(){
     }   
 }
 check_r_version()
-required_pkgs <- list("dplyr" = "0.2", "lubridate" = "1.3.3", 
+required_pkgs <- list("plyr" = "1.8.1", "dplyr" = "0.2",
                       "RSQLite" = "0.11.4", "RSQLite" = "0.0.1",
-                      "plyr" = "1.8.1", "stringr" = "0.6.2",
+                      "stringr" = "0.6.2", "lubridate" = "1.3.3", 
                       "rjson" = "0.2.13", "foreach" = "1.4.2",
                       "doMC" = "1.3.3", "fpc" = "2.1-7",
                       "sp" = "1.0-15", "devtools" = "1.5")
