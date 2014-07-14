@@ -12,6 +12,7 @@ source("6_necessary_indicators.R"); source("db.R")
 edu_mopup_new <- readRDS(sprintf("%s/education_mopup_new.RDS", CONFIG$MOPUP_DATA_DIR))
 edu_mopup_pilot <- readRDS(sprintf("%s/mopup_questionnaire_education_final.RDS",CONFIG$MOPUP_DATA_DIR))
 edu_mopup <- readRDS(sprintf("%s/education_mopup.RDS",CONFIG$MOPUP_DATA_DIR))
+#load in 2012 data
 edu_baseline_2012 <- tbl_df(readRDS(CONFIG$BASELINE_EDUCATION))
 edu_baseline_2012 <- normalize_2012(edu_baseline_2012, '2012', 'education')
 
@@ -19,6 +20,7 @@ edu_baseline_2012 <- normalize_2012(edu_baseline_2012, '2012', 'education')
 health_mopup <- readRDS(sprintf("%s/health_mopup.RDS",CONFIG$MOPUP_DATA_DIR))
 health_mopup_new <- readRDS(sprintf("%s/health_mopup_new.RDS", CONFIG$MOPUP_DATA_DIR))
 health_mopup_pilot <- readRDS(sprintf("%s/mopup_questionnaire_health_final.RDS",CONFIG$MOPUP_DATA_DIR))
+#load in 2012 data
 health_baseline_2012 <- tbl_df(readRDS(CONFIG$BASELINE_HEALTH))
 health_baseline_2012 <- normalize_2012(health_baseline_2012, '2012', 'health')
 
@@ -77,33 +79,25 @@ health_all <- sync_db(health_all)
 water_baseline_2012 <- sync_db(water_baseline_2012)
 
 ###############################  JOIN DATA  ############################################
+#rbinds all facility data, filling non intersecting columns with NA
 master <- tbl_df(rbind.fill(edu_all, health_all, water_baseline_2012))
 
 ########################## GEOSPATIAL OUTLIER CLEANING #################################
-master <- master %.%
-  dplyr::group_by(unique_lga) %.%
-  dplyr::mutate(spatial_outlier=cluster_lga(latitude, longitude))
+#strips geospatial outliers from facilities, unless keep_outliers is True,
+# in which case only a column designating outliers is added
+master <- flag_spatial_outliers(master, CONFIG$OUTPUT_DIR)
 
-spatial_outliers <- subset(master, spatial_outlier==T) %.%
-  dplyr::select(-spatial_outlier)
-
-write.csv(spatial_outliers, row.names=F,
-          file=sprintf('%s/Spatial_Outliers_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
-
-master <- subset(master, spatial_outlier==F) %.%
-  dplyr::select(-spatial_outlier)
-
-rm(spatial_outliers)
 ################################ SPLIT DATA ###########################################
+#Takes a dataframe and efficiently drops coulmns with all NA
 drop_na_all <- function(df){
   return(df[,unlist(lapply(df, function(x) !all(is.na(x))))])
 }
 
+#break the master table into their constiuent parts removing non intersecting columns 
+# (e.g removes water columns from education facilities)
 edu_all <- drop_na_all(subset(master, sector=='education'))
 health_all <- drop_na_all(subset(master, sector=='health'))
 water_baseline_2012 <- drop_na_all(subset(master, sector=='water'))
-water_baseline_2012$latitude = NA
-water_baseline_2012$longitude = NA
 
 rm(master)
 ############################### LGA LEVEL #############################################
