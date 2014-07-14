@@ -13,8 +13,10 @@ normalize_mopup = function(formhubData, survey_name, sector) {
                                                "local_gov" = "public",
                                                "state_gov" = "public",
                                                "private_non_profit" = "private",
-                                               "private_profit" = "private"))
-        )
+                                               "private_profit" = "private")),
+            latitude = get_lat(gps),
+            longitude = get_lon(gps)
+        ) 
     ## Survey_name: mopup, mopup_new, or mopup_pilot
     # mopup and mopup_new are pretty much the same, except mopup has some LGAs mistakenly as NA
     if(survey_name %in% c("mopup", "mopup_new")) {
@@ -49,7 +51,8 @@ normalize_mopup = function(formhubData, survey_name, sector) {
                       survey_id = uuid,
                       facility_id = facility_ID,
                       matches('.')) %.%
-        dplyr::mutate(facility_id = sector_prefix(facility_id, sector))
+        dplyr::mutate(facility_id = sector_prefix(facility_id, sector)) %.%
+        dplyr::filter(!(is.na(latitude) & is.na(longitude)))
     )
 }
 
@@ -111,8 +114,11 @@ normalize_2012 = function(d, survey_name, sector) {
                 )
         }
         return(d %.% 
-                   dplyr::mutate(facility_id = NA) %.%
-                   dplyr::select(survey_id = uuid, matches('.')))
+                   dplyr::mutate(facility_id = NA,
+                                 latitude = get_lat(gps),
+                                 longitude = get_lon(gps)) %.%
+                   dplyr::select(survey_id = uuid, matches('.')) %.%
+                   dplyr::filter(!(is.na(latitude) & is.na(longitude))))
     } else {
         stop("Sector and Survey Name normalization not yet supported.")
     }
