@@ -13,7 +13,8 @@ required_pkgs <- list("plyr" = "1.8.1", "dplyr" = "0.2",
                       "stringr" = "0.6.2", "lubridate" = "1.3.3", 
                       "rjson" = "0.2.13", "foreach" = "1.4.2",
                       "doMC" = "1.3.3", "fpc" = "2.1-7",
-                      "sp" = "1.0-15", "devtools" = "1.5")
+                      "sp" = "1.0-15", "devtools" = "1.5",
+                      "testthat" = "0.8.1")
 
 install_n_load <- function(required_pkgs){
     installed <- installed.packages()[,3]
