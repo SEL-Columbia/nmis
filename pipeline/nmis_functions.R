@@ -190,8 +190,8 @@ parse_gps <- function(gps){
     return(do.call(rbind, strsplit(as.character(gps), ' ')))
 }
 get_lat <- function(gps){
-    return(as.numeric(parse_gps(gps)[,1]))
+    return(suppressWarnings(as.numeric(parse_gps(gps)[,1])))
 }
 get_lon <- function(gps){
-    return(as.numeric(parse_gps(gps)[,2]))
+    return(suppressWarnings(as.numeric(parse_gps(gps)[,2])))
 }

@@ -3,9 +3,6 @@ require(dplyr)
 require(foreach)
 require(doMC)
 
-
-
-
 RJson_ouput <- function(OUTPUT_DIR, CONFIG){
     registerDoMC(4)
     # Read csv into R

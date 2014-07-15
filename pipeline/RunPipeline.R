@@ -2,133 +2,148 @@
 source('setup.R')
 source('CONFIG.R')
 
-################ EDUCATION ####################################################
-source("nmis_functions.R"); source("0_normalize.R"); source("2_outlier_cleaning.R");
-source("3_facility_level.R"); source("4_lga_level.R"); source("5_necessary_indicators.R")
-source("db.R")
+source("nmis_functions.R"); source("1_normalize.R"); source("2_outlier_cleaning.R");
+source("3_facility_level.R"); source('4_geospatial_outlier_cleaning.R'); source("5_lga_level.R"); 
+source("6_necessary_indicators.R"); source("db.R")
 
-### LOAD DOWNLOAD(ed) EDUCATION DATA
+############################## LOAD DOWNLOADED DATA ###################################
+#EDUCATION
 edu_mopup_new <- readRDS(sprintf("%s/education_mopup_new.RDS", CONFIG$MOPUP_DATA_DIR))
 edu_mopup_pilot <- readRDS(sprintf("%s/mopup_questionnaire_education_final.RDS",CONFIG$MOPUP_DATA_DIR))
 edu_mopup <- readRDS(sprintf("%s/education_mopup.RDS",CONFIG$MOPUP_DATA_DIR))
+#load in 2012 data
+edu_baseline_2012 <- tbl_df(readRDS(CONFIG$BASELINE_EDUCATION))
+edu_baseline_2012 <- normalize_2012(edu_baseline_2012, '2012', 'education')
 
-### 0. NORMALIZE (and merge)
+#HEALTH
+health_mopup <- readRDS(sprintf("%s/health_mopup.RDS",CONFIG$MOPUP_DATA_DIR))
+health_mopup_new <- readRDS(sprintf("%s/health_mopup_new.RDS", CONFIG$MOPUP_DATA_DIR))
+health_mopup_pilot <- readRDS(sprintf("%s/mopup_questionnaire_health_final.RDS",CONFIG$MOPUP_DATA_DIR))
+#load in 2012 data
+health_baseline_2012 <- tbl_df(readRDS(CONFIG$BASELINE_HEALTH))
+health_baseline_2012 <- normalize_2012(health_baseline_2012, '2012', 'health')
+
+#WATER
+water_baseline_2012 <- tbl_df(readRDS(CONFIG$BASELINE_WATER))
+
+################################ NORMALIZE DATA #######################################
+#EDUCATION
 edu_mopup_all <- rbind(normalize_mopup(edu_mopup, 'mopup', 'education'),
                        normalize_mopup(edu_mopup_new, 'mopup_new', 'education'),
                        normalize_mopup(edu_mopup_pilot, 'mopup_pilot', 'education')
-                       )
-rm(edu_mopup, edu_mopup_new, edu_mopup_pilot)
+)
 
-### 2. OUTLIERS
+
+#HEALTH
+health_mopup_all <- rbind(normalize_mopup(health_mopup, 'mopup', 'health'),
+                          normalize_mopup(health_mopup_new, 'mopup_new', 'health'),
+                          normalize_mopup(health_mopup_pilot, 'mopup_pilot', 'health')
+                          
+)
+
+#WATER
+water_baseline_2012 <- normalize_2012(water_baseline_2012, '2012', 'water')
+
+################################ REMOVE OUTLIERS #####################################
+#EDUCATION
 edu_mopup_all <- education_outlier(edu_mopup_all)
 
-### 3. FACILITY LEVEL
-edu_mopup_all <- education_mopup_facility_level(edu_mopup_all)
+#HEALTH
+health_mopup_all <- health_outlier(health_mopup_all)
 
-### 4. LGA LEVEL
-## 4.1 load in 2012 data
-edu_baseline_2012 <- tbl_df(readRDS(CONFIG$BASELINE_EDUCATION))
-edu_baseline_2012 <- normalize_2012(edu_baseline_2012, '2012', 'education')
-## 4.2 find common indicators, and rbind the common set
+
+#WATER(NA)
+################################ FACILITY DATA #######################################
+#EDUCATION
+edu_mopup_all <- education_mopup_facility_level(edu_mopup_all)
+##find common indicators, and rbind the common set
 common_indicators <- intersect(names(edu_baseline_2012), names(edu_mopup_all))
 edu_all <- rbind(edu_baseline_2012[common_indicators], edu_mopup_all[common_indicators])
-rm(edu_baseline_2012, edu_mopup_all)
-## 4(1/2) database sync
+
+#HEALTH
+health_mopup_all <- health_mopup_facility_level(health_mopup_all)
+##find common indicators, and rbind the common set
+common_indicators <- intersect(names(health_baseline_2012), names(health_mopup_all))
+health_all <- rbind(health_baseline_2012[common_indicators], health_mopup_all[common_indicators])
+health_all <- dplyr::filter(health_all, !is.na(gps))
+
+#WATER
+#NA
+
+rm(edu_mopup, edu_mopup_new, edu_mopup_pilot, health_mopup, health_mopup_new, health_mopup_pilot)
+###############################  SYNC DB  #############################################
+##database sync
 edu_all <- sync_db(edu_all)
-## 4.3 aggregate
+health_all <- sync_db(health_all)
+water_baseline_2012 <- sync_db(water_baseline_2012)
+
+###############################  JOIN DATA  ############################################
+#rbinds all facility data, filling non intersecting columns with NA
+master <- tbl_df(rbind.fill(edu_all, health_all, water_baseline_2012))
+
+########################## GEOSPATIAL OUTLIER CLEANING #################################
+#strips geospatial outliers from facilities, unless keep_outliers is True,
+# in which case only a column designating outliers is added
+master <- flag_spatial_outliers(master, CONFIG$OUTPUT_DIR)
+
+################################ SPLIT DATA ###########################################
+#Takes a dataframe and efficiently drops coulmns with all NA
+drop_na_all <- function(df){
+  return(df[,unlist(lapply(df, function(x) !all(is.na(x))))])
+}
+
+#break the master table into their constiuent parts removing non intersecting columns 
+# (e.g removes water columns from education facilities)
+edu_all <- drop_na_all(subset(master, sector=='education'))
+health_all <- drop_na_all(subset(master, sector=='health'))
+water_baseline_2012 <- drop_na_all(subset(master, sector=='water'))
+
+rm(master)
+############################### LGA LEVEL #############################################
+#aggregate
 edu_lga <- education_mopup_lga_indicators(edu_all)
 edu_gap <- education_gap_sheet_indicators(edu_all)
 
+##aggregate
+health_lga <- health_mopup_lga_indicators(health_all)
+health_gap <- health_gap_sheet_indicators(health_all)
 
-### 5. OUTPUT 
+#WATER
+#What is nwater used for?
+nwater <- get_necessary_indicators()[['facility']][['water']]
+##aggregate
+water_lga <- water_lga_indicators(water_baseline_2012)
+
+########## EXTERNAL DATA ###################################################
+external_data_2012 <- tbl_df(readRDS(CONFIG$BASELINE_EXTERNAL))
+external_data_2012 <- normalize_external(external_data_2012)
+write.csv(output_indicators(external_data_2012, 'lga', 'overview'), row.names=F,
+          file=sprintf('%s/Overview_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
+
+########## OUTPUT DATA #####################################################
+#EDUCATION
 write.csv(output_indicators(edu_all, 'facility', 'education'), row.names=F,
           file = sprintf('%s/Education_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
 write.csv(output_indicators(edu_lga, 'lga', 'education'), row.names=F,
           file = sprintf('%s/Education_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
 write.csv(edu_gap, row.names=F,        ## TODO: output_indicators for gap sheets?
           file = sprintf('%s/Education_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR))
-rm(list=setdiff(ls(), c("CONFIG")))
 
-################ HEALTH ####################################################
-source("nmis_functions.R"); source("0_normalize.R"); source("2_outlier_cleaning.R");
-source("3_facility_level.R"); source("4_lga_level.R"); source("5_necessary_indicators.R")
-source("db.R")
-
-### LOAD DOWNLOAD(ed) HEALTH DATA
-health_mopup <- readRDS(sprintf("%s/health_mopup.RDS",CONFIG$MOPUP_DATA_DIR))
-health_mopup_new <- readRDS(sprintf("%s/health_mopup_new.RDS", CONFIG$MOPUP_DATA_DIR))
-health_mopup_pilot <- readRDS(sprintf("%s/mopup_questionnaire_health_final.RDS",CONFIG$MOPUP_DATA_DIR))
-
-### 0. NORMALIZE (and merge)
-health_mopup_all <- rbind(normalize_mopup(health_mopup, 'mopup', 'health'),
-                          normalize_mopup(health_mopup_new, 'mopup_new', 'health'),
-                          normalize_mopup(health_mopup_pilot, 'mopup_pilot', 'health')
-                          )
-rm(health_mopup, health_mopup_new, health_mopup_pilot)
-
-### 2. OUTLIERS
-health_mopup_all <- health_outlier(health_mopup_all)
-
-### 3. FACILITY LEVEL
-health_mopup_all <- health_mopup_facility_level(health_mopup_all)
-
-### 4. LGA LEVEL
-## 4.1 load in 2012 data
-health_baseline_2012 <- tbl_df(readRDS(CONFIG$BASELINE_HEALTH))
-health_baseline_2012 <- normalize_2012(health_baseline_2012, '2012', 'health')
-## 4.2 find common indicators, and rbind the common set
-common_indicators <- intersect(names(health_baseline_2012), names(health_mopup_all))
-health_all <- rbind(health_baseline_2012[common_indicators], health_mopup_all[common_indicators])
-rm(health_baseline_2012, health_mopup_all)
-## 4(1/2) sync database
-health_all <- sync_db(health_all)
-## 4.3 aggregate
-health_lga <- health_mopup_lga_indicators(health_all)
-health_gap <- health_gap_sheet_indicators(health_all)
-## 5. OUTPUT
+#HEALTH
 write.csv(output_indicators(health_all, 'facility', 'health'), row.names=F,
           file = sprintf('%s/Health_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
 write.csv(output_indicators(health_lga, 'lga', 'health'), row.names=F,
           file = sprintf('%s/Health_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
 write.csv(health_gap, row.names=F,
           file = sprintf('%s/Health_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR))
-rm(list=setdiff(ls(), "CONFIG"))
 
-########## WATER ###########################################################
-source("nmis_functions.R"); source("0_normalize.R"); source("2_outlier_cleaning.R");
-source("3_facility_level.R"); source("4_lga_level.R"); source("5_necessary_indicators.R")
-source("db.R")
-### since there is no mopup data from water, we would go straight to
-### aggregation
-
-### 4. LGA aggregation
-## 4.1 load in 2012 data
-water_baseline_2012 <- tbl_df(readRDS(CONFIG$BASELINE_WATER))
-water_baseline_2012 <- normalize_2012(water_baseline_2012, '2012', 'water')
-nwater <- get_necessary_indicators()[['facility']][['water']]
-## 4(1/2) sync database
-water_baseline_2012 <- sync_db(water_baseline_2012)
-## 4.2 aggregate
-water_lga <- water_lga_indicators(water_baseline_2012)
-### 5. Write Out
+#WATER
 write.csv(output_indicators(water_baseline_2012, 'facility', 'water'), row.names=F,
           file=sprintf('%s/Water_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
 write.csv(output_indicators(water_lga, 'lga', 'water'), row.names=F,
           file=sprintf('%s/Water_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
 rm(list=setdiff(ls(), "CONFIG"))
 
-########## EXTERNAL DATA ###################################################
-source("nmis_functions.R"); source("0_normalize.R"); source("2_outlier_cleaning.R");
-source("3_facility_level.R"); source("4_lga_level.R"); source("5_necessary_indicators.R")
-
-external_data_2012 <- tbl_df(readRDS(CONFIG$BASELINE_EXTERNAL))
-external_data_2012 <- normalize_external(external_data_2012)
-write.csv(output_indicators(external_data_2012, 'lga', 'overview'), row.names=F,
-          file=sprintf('%s/Overview_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
-rm(list=setdiff(ls(), "CONFIG"))
-
-
-########## Json output ###################################################
-source("6_write_Json.R")
-
+########## JSON OUTPUT ###################################################
+source("7_write_Json.R");
 invisible(RJson_ouput(OUTPUT_DIR="../static/lgas/", CONFIG))
