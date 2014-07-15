@@ -1,7 +1,6 @@
+################ setup ########################################################
+source('setup.R')
 source('CONFIG.R')
-suppressPackageStartupMessages(require(plyr))
-suppressPackageStartupMessages(require(formhub))
-suppressPackageStartupMessages(require(dplyr))
 
 source("nmis_functions.R"); source("1_normalize.R"); source("2_outlier_cleaning.R");
 source("3_facility_level.R"); source('4_geospatial_outlier_cleaning.R'); source("5_lga_level.R"); 

@@ -187,7 +187,7 @@ sector_prefix <- function(facility_id, sector) {
 }
 
 parse_gps <- function(gps){
-    return(do.call(rbind, strsplit(gps, ' ')))
+    return(do.call(rbind, strsplit(as.character(gps), ' ')))
 }
 get_lat <- function(gps){
     return(suppressWarnings(as.numeric(parse_gps(gps)[,1])))

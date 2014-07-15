@@ -25,12 +25,12 @@ RJson_ouput <- function(OUTPUT_DIR, CONFIG){
     
     # join lga level data
     lga_gap <- external_lga %.% 
-                        inner_join(health_lga, by = "unique_lga") %.% 
-                        inner_join(edu_lga, by = "unique_lga") %.% 
-                        inner_join(water_lga, by = "unique_lga") %.% 
+                        dplyr::inner_join(health_lga, by = "unique_lga") %.% 
+                        dplyr::inner_join(edu_lga, by = "unique_lga") %.% 
+                        dplyr::inner_join(water_lga, by = "unique_lga") %.% 
                         
-                        inner_join(health_gap, by = "unique_lga") %.% 
-                        inner_join(edu_gap, by = "unique_lga")
+                        dplyr::inner_join(health_gap, by = "unique_lga") %.% 
+                        dplyr::inner_join(edu_gap, by = "unique_lga")
     
     # combine all facility level data                        
     total_facility_df <- rbind_list(edu_all, health_all, water_all)
