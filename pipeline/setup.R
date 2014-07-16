@@ -54,7 +54,7 @@ check_formhub <- function(formhub="formhub", version="0.0.4.3"){
 
 
 install_n_load(required_pkgs)
-batch_load(required_pkgs)
+# batch_load(required_pkgs)
 check_formhub()
 rm(install_n_load, batch_load, required_pkgs, check_r_version, check_formhub)
 

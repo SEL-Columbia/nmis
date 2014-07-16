@@ -28,12 +28,12 @@ RJson_ouput <- function(OUTPUT_DIR, CONFIG){
     
     # join lga level data
     lga_gap <- external_lga %.% 
-                        dplyr::inner_join(health_lga, by = "unique_lga") %.% 
-                        dplyr::inner_join(edu_lga, by = "unique_lga") %.% 
-                        dplyr::inner_join(water_lga, by = "unique_lga") %.% 
+                        dplyr::left_join(health_lga, by = "unique_lga") %.% 
+                        dplyr::left_join(edu_lga, by = "unique_lga") %.% 
+                        dplyr::left_join(water_lga, by = "unique_lga") %.% 
                         
-                        dplyr::inner_join(health_gap, by = "unique_lga") %.% 
-                        dplyr::inner_join(edu_gap, by = "unique_lga")
+                        dplyr::left_join(health_gap, by = "unique_lga") %.% 
+                        dplyr::left_join(edu_gap, by = "unique_lga")
     
     # combine all facility level data                        
     total_facility_df <- rbind_list(edu_all, health_all, water_all)
@@ -70,7 +70,7 @@ RJson_ouput <- function(OUTPUT_DIR, CONFIG){
         output_json <- toJSON(lga)
         
         file_name <- paste(current_lga, "json", sep=".")
-        output_dir <- paste(OUTPUT_DIR, file_name, sep="/")
+        output_dir <- normalizePath(paste(OUTPUT_DIR, file_name, sep="/"))
         
         write(output_json, output_dir)
         
