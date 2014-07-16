@@ -15,48 +15,56 @@
 {% endblock %}
 
 
-{% block content %}
+{% block index_content %}
     <div id="index_content">
-        <div class="intro">
-            <div class="commissioned">
-                Commissioned by The Office of the Senior Special Assistant to the President on MDGs
-            </div>
+        <div class="container">
+            <div class="intro">
+                <div class="commissioned">
+                    Commissioned by The Office of the Senior Special Assistant to the President on MDGs
+                </div>
 
-            <h1>Nigeria’s health, education and water facility inventory</h1>
-            
-            <div class="about">
-                Explore data collected to inform policy and planning for poverty reduction.
-            </div>
+                <h1>Nigeria’s health, education and water facility inventory</h1>
+                
+                <div class="about">
+                    Explore data collected to inform policy and planning for poverty reduction.
+                </div>
 
-            <div class="stats">
-                <div class="stat">
-                    <img src="/static/images/index_health.png">
-                    <div class="num">26,000</div>
-                    <div class="facilities">Health Facilities</div>
+                <div class="stats">
+                    <div class="stat">
+                        <img src="/static/images/index_health.png">
+                        <div class="num">26,000</div>
+                        <div class="facilities">Health Facilities</div>
+                    </div>
+                    <div class="stat mid">
+                        <img src="/static/images/index_education.png">
+                        <div class="num">73,000</div>
+                        <div class="facilities">Education Facilities</div>
+                    </div>
+                    <div class="stat">
+                        <img src="/static/images/index_water.png">
+                        <div class="num">132,000</div>
+                        <div class="facilities">Water Facilities</div>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="stat mid">
-                    <img src="/static/images/index_education.png">
-                    <div class="num">73,000</div>
-                    <div class="facilities">Education Facilities</div>
-                </div>
-                <div class="stat">
-                    <img src="/static/images/index_water.png">
-                    <div class="num">132,000</div>
-                    <div class="facilities">Water Facilities</div>
-                </div>
-                <div class="clearfix"></div>
+            </div>
+            <a class="explore_btn green_btn btn" href="/explore">Explore Data</a>
+            <a class="learn" href="/about">or learn more about the process</a>
+            <div class="caption">Augie, Kebbi</div>
+        </div>
+
+        <div class="amebo" style="display:none">
+            <div class="container">
+                <div class="amebo_green">Amebo! Let your voice be heard! Send your queries about MDGs related projects or facility services to xxxx!</div>
+                It's free and sorted out in no time! <i>Include your name, community, LGA, state and project name.</i>
             </div>
         </div>
 
-        <a class="explore_btn green_btn btn" href="/explore">Explore Data</a>
-
-        <a class="learn" href="/about">or learn more about the process</a>
-
-        <p class="caption">Augie, Kebbi</p>
-
         <div class="sponsors">
-            <img src="/static/images/mdgs_logo.png" alt="Nigeria MDGs Logo">
-            <img src="/static/images/ei_logo.png" alt="Earth Institute Logo">
+            <div class="container">
+                <img src="/static/images/mdgs_logo.png" alt="Nigeria MDGs Logo">
+                <img src="/static/images/ei_logo.png" alt="Earth Institute Logo">
+            </div>
         </div>
     </div>
 {% endblock %}

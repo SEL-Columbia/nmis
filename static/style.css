@@ -24,7 +24,6 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 body {
     padding-top: 150px;
     font-size: 15px;
-    width: 1200px;
     margin: auto;
     /* override bootstrap's modal-open styles */
     margin-right: auto !important;
@@ -172,7 +171,11 @@ table .value {
 
 #index_content {
     color: white;
-    margin-top: 100px;
+    margin: 100px 0;
+}
+#index_content .container {
+    position: relative;
+    padding: 40px 91px 25px;
 }
 #index_content .intro {
     display: block;
@@ -260,10 +263,25 @@ table .value {
     font-style: italic;
     margin-top: 165px;
 }
+#index_content .amebo {
+    background: #eee;
+    padding: 15px 0;
+    color: #777;
+}
+#index_content .amebo .container {
+    padding: 10px 91px;
+}
+#index_content .amebo_green {
+    color: rgb(0, 152, 72);
+    font-size: 18px;
+}
 #index_content .sponsors {
     background: white;
     padding: 10px 0;
-    margin-top: 45px;
+    margin-top: 10px;
+}
+#index_content .sponsors .container {
+    padding: 10px 91px;
 }
 #index_content .sponsors img {
     display: inline-block;
@@ -304,13 +322,6 @@ table .value {
     font-size: 17px;
     line-height: 1.7;
 }
-
-
-
-/* Download.html
-==================================================================== */
-
-
 
 
 
