@@ -21,6 +21,8 @@ CONFIG = list(
     BASELINE_EXTERNAL="~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/external_data/output_data/external_data.rds",
     MOPUP_DATA_DIR="data", 
     OUTPUT_DIR="data/output_data",
+    RAW_661_DIR="~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/in_process_data/merged/",
+    RAW_113_PILOT_DIR="~/Dropbox/Nigeria/Nigeria 661 Baseline Data Cleaning/raw_data/113/",
     AUTHFILE="authfile.txt" # this is the filename that we created in step 3.
 )
 ```
