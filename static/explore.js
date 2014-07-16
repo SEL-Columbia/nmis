@@ -175,7 +175,7 @@ function format_value(value){
     }
     // Strings
     if (_.isString(value)){
-        return value[0].toUpperCase() + value.substr(1);
+        return value.substr(0).toUpperCase() + value.substr(1);
     }
     return value;
 }
