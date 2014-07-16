@@ -2,11 +2,17 @@ require(rjson)
 require(dplyr)
 require(foreach)
 require(doMC)
-
+source("./zip.R")
 
 
 
 RJson_ouput <- function(OUTPUT_DIR, CONFIG){
+    
+    # Create ZIP FILES BEFORE JSON OUTPUT
+    zip_datas(CONFIG)
+    
+    print("WRITING JSON FILES")
+    # register Multi cores
     registerDoMC(4)
     # Read csv into R
     health_gap <- read.csv(file=sprintf('%s/Health_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR))
