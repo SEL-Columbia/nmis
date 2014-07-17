@@ -276,13 +276,15 @@ MapView.init = function(){
     $('#content').append(
         $('#map_view_template').html());
 
+    $('.map_view').hide()
+    this.resize();
+    $(window).resize(this.resize);
+
     if (window.G_vmlCanvasManager){
         // Internet explorer excanvas initialization
         var canvas = $('.map_legend canvas')[0];
         G_vmlCanvasManager.initElement(canvas);
     }
-
-    $('.map_view').hide();
 
     $('.map_legend').on('click', '.close', function(){
         $(this).parent().hide();
@@ -295,21 +297,25 @@ MapView.init = function(){
 
 MapView.render = function(lga, sector){
     render_header(lga, 'map', sector);
-
     $('#content .container').hide();
     $('.map_legend').hide();
-
     this.facility_map(lga, sector);
     this.pie_chart_selector(lga, sector);
 };
 
-MapView.facility_map = function(lga, sector, indicator) {
-    var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
+MapView.resize = function(){
+    var self = MapView;
     var map_top = $('#header').outerHeight();
     var map_height = $(document).height() - map_top;
-    var map_div = $('.map_view')
-        .css({top: map_top, height: map_height})
-        .show()[0];
+    $('.map_view').css({top: map_top, height: map_height});
+    if (self.map){
+        self.map.invalidateSize();
+    }
+};
+
+MapView.facility_map = function(lga, sector, indicator) {
+    var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
+    var map_div = $('.map_view').show()[0];
 
     if (!this.map){
         // Initialize Leaflet
@@ -321,6 +327,7 @@ MapView.facility_map = function(lga, sector, indicator) {
                 maxZoom: 18
             });
         tile_layer.addTo(this.map);
+        this.resize();
     }
 
     if (this.facility_layer){
@@ -348,8 +355,7 @@ MapView.get_facility_layer = function(facilities, indicator) {
                 icon_url = '/static/images/icons_f/' + 
                     fac[indicator] +'.png';
             } else {
-                icon_url = '/static/images/icons_f/' +
-                    'undefined.png';
+                icon_url = '/static/images/icons_f/undefined.png';
             }
         } else {
             icon_url = '/static/images/icons_f/normal_' + 
