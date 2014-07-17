@@ -1,40 +1,41 @@
 require(fpc)
+require(plyr)
 require(dplyr)
 require(sp)
 require(ggplot2)
 
 # This function normalizes data column-wise to the closed interval [0, 1]
-normalize <- function(x) (x - min(x)) / (max(x) - min(x))
+normalize <- plyr::colwise(function(x) (x - min(x)) / (max(x) - min(x)))
 
 cluster_lga <- function(lat, lon, plot_lga=F){  
   # combine gps columns into a dataframe
   gps_coords <- data.frame(latitude=lat, longitude=lon)
   # This function normalizes data column-wise to the closed interval [0, 1]
-  gps_coords <- gps_coords %.% dplyr::mutate(latitude = normalize(latitude),
-                                             longitude = normalize(longitude))
+  gps_coords <- as.data.frame(normalize(gps_coords))
   
-  # if there is only one datapoint clustering wont work, 
-  # so assume point to be valid
-  if (nrow(gps_coords) <= 1){ return(F) }
+  # if there is only one datapoint clustering wont work, so assume point to be valid
+  if (length(rownames(gps_coords)) <= 1){
+    return(F)
+  }
   # computes the pairwise distances (euclidean) between all points in the lga, 
   # selects a triangle, ravels to a vector and computes the 50% quantile
   epsilon <- as.numeric(quantile(as.vector(dist(gps_coords)), .5, na.rm=T))
   # fits the DBSCAN model with the normalized coords and epsilon from above 
   DBSCAN <- fpc::dbscan(gps_coords, eps=epsilon, MinPts = 3)
   gps_coords$cluster <- DBSCAN$cluster
-
-  # noise points are set to 0, thus the complement set are valid clusters
-  valid <- gps_coords %.% dplyr::filter(cluster != 0)
+  
   # Everything is an outlier therefore nothing is 
-  if (nrow(valid) == 0) {
+  if (identical(gps_coords, subset(gps_coords, cluster==0))){
     return(Map(function(x) F, gps$cluster))
   }
+  
+  # noise points are set to 0, thus the complement set are valid clusters
+  valid <- subset(gps_coords, cluster!=0)
   # uses convex hull to infer a psuedo-shapefile around valid clusters
   cvx_hull <- chull(dplyr::select(valid, longitude, latitude))
-  # creating an eclosure by appending the first element in convex hull
   cvx_hull <- c(cvx_hull, cvx_hull[1])
   # data.frame containing the cartesian coordinates for the convex hull polygon 
-  poly_hull <- valid[cvx_hull,]
+  poly_hull <- data.frame(longitude=valid$longitude[cvx_hull], latitude=valid$latitude[cvx_hull])
   #finally tests all the gps points to see if the fit in the pseudo-shapefile
   in_hull <- mapply(function(x, y) point.in.polygon(x, y, poly_hull$longitude, poly_hull$latitude), 
                     gps_coords$longitude, gps_coords$latitude)

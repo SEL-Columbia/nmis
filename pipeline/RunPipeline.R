@@ -78,10 +78,17 @@ water_baseline_2012 <- sync_db(water_baseline_2012)
 source('geospatial_outlier_cleaning.R')
 
 ####### Spatial Outlier
-all_data <- rbind_all(edu_all %.% dplyr::select(survey_id, longitude, latitude), 
-                      health_all %.% dplyr::select(survey_id, longitude, latitude),
-                      water_baseline_2012 %.% dplyr::select(survey_id, longitude, latitude))
+all_data <- rbind.fill(edu_all, 
+                      health_all,
+                      water_baseline_2012) %.% 
+                        dplyr::select(unique_lga, survey_id, longitude, latitude) %.%
+                        dplyr::tbl_df()
 spatial_tagged <- flag_spatial_outliers(all_data, CONFIG$OUTPUT_DIR)
+
+##result of sectors
+edu_all <- edu_all %.% dplyr::semi_join(spatial_tagged, by='survey_id')
+health_all <- health_all %.% dplyr::semi_join(spatial_tagged, by='survey_id')
+water_baseline_2012 <- water_baseline_2012 %.% dplyr::semi_join(spatial_tagged, by='survey_id')
 
 ### education
 ## 4.3 aggregate
