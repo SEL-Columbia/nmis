@@ -74,6 +74,11 @@ RJson_ouput <- function(OUTPUT_DIR, CONFIG){
         lga[["facilities"]] <- facility_list
         
         output_json <- toJSON(lga)
+        # R converts all data types into string during the row split process, 
+        # hack to render a proper json output
+        output_json <- gsub('\" TRUE\"', replacement = 'true', output_json)
+        output_json <- gsub('\"FALSE\"', replacement = 'false', output_json)
+        output_json <- gsub('\"NA\"', replacement = 'null', output_json)
         
         file_name <- paste(current_lga, "json", sep=".")
         output_dir <- normalizePath(paste(OUTPUT_DIR, file_name, sep="/"))
