@@ -36,7 +36,7 @@ normalize_mopup = function(formhubData, survey_name, sector) {
                 lga = str_c(state, lga),   # add state names to make revaluing possible
                 lga = revalue(lga, c("adamawaNA" = "adamawa_larmurde",
                                      "nasarawaNA" = "nasarawa_obi",
-                                     "osunNA" = "NA", ## SADLY: two possible values for osun
+                                     "osunNA" = "osun_irepodun", ## SADLY: two possible values for osun
                                      "oyoNA" = "oyo_surulere",
                                      "plateauNA" = "plateau_bassa"))
             )
