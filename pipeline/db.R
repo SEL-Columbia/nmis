@@ -136,8 +136,16 @@ sync_db <- function(df){
     }
     dbDisconnect(database)
     #note this survey_df is the more complete data than above
+    # pull all existing surveys from db
     survey_df <- dplyr::src_sqlite(db_path, create = FALSE) %.%
-                 dplyr::tbl('survey_tb') %.% collect()
+        dplyr::tbl('survey_tb') %.% collect()
+    # get the latest survey date of each facility
+    latest_survey <- survey_df %.% dplyr::group_by(facility_id) %.% 
+        dplyr::summarise(survey_time = max(survey_time)) 
+    # injoin back to the full survey and keep the latest
+    survey_df <- inner_join(survey_df, latest_survey, 
+                            by=c("facility_id", "survey_time"))
+    # join with nmis data 
     df <- df %.% dplyr::select(-facility_id, matches('.'))
     df <- dplyr::inner_join(df, survey_df, by="survey_id")
     
