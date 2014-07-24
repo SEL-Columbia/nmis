@@ -3,11 +3,14 @@ server {
         server_name localhost;
         charset     utf-8;
 
-
-	location / { try_files $uri @nmis; }
-	location @nmis {
-	  include uwsgi_params;
-	  uwsgi_pass unix:/tmp/uwsgi.sock;
+	location ^~ /static/ {
+		root /home/ubuntu/srv/nmis/;
+		if ($query_string) {
+			expires max;
+		}
 	}
-
+	location / {
+		include uwsgi_params;
+		uwsgi_pass unix:/tmp/uwsgi.sock;
+	}
 }
