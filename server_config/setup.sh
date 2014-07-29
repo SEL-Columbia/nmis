@@ -85,7 +85,7 @@ write_nginx_config() {
     echo "        charset     utf-8;" >> $file_uri
     echo "" >> $file_uri
     echo "	location ^~ /static/ {" >> $file_uri
-    echo "		root $nmis_dir;" >> $file_uri
+    echo "		root $nmis_dir/;" >> $file_uri
     echo "		if (\$query_string) {" >> $file_uri
     echo "			expires max;" >> $file_uri
     echo "		}" >> $file_uri
