@@ -63,6 +63,42 @@ write_uwsgi_ini ()
     echo "done"
 }
 
+write_nginx_config() {
+    # in the save vein with write_uwsgi,
+    # since the static file needs to be defined dynamically
+
+    script_uri=$(readlink -f $0)
+    script_dir=$(dirname $script_uri)
+    nmis_dir=$(dirname $script_dir)
+    file_name="nmis.nginx"
+    file_uri=$script_dir/$file_name
+
+    if [ -f $file_uri ]; then
+        echo -n "Overwriting $file_name..."
+    else
+        echo -n "Creating $file_name..."
+    fi
+
+    echo "server {" > $file_uri
+    echo "	listen 80;" >> $file_uri
+    echo "        server_name localhost;" >> $file_uri
+    echo "        charset     utf-8;" >> $file_uri
+    echo "" >> $file_uri
+    echo "	location ^~ /static/ {" >> $file_uri
+    echo "		root $nmis_dir/;" >> $file_uri
+    echo "		if (\$query_string) {" >> $file_uri
+    echo "			expires max;" >> $file_uri
+    echo "		}" >> $file_uri
+    echo "	}" >> $file_uri
+    echo "	location / {" >> $file_uri
+    echo "		include uwsgi_params;" >> $file_uri
+    echo "		uwsgi_pass unix:/tmp/uwsgi.sock;" >> $file_uri
+    echo "	}" >> $file_uri
+    echo "}" >> $file_uri
+
+    echo "done"
+}
+
 
 # check if virtualenv programm exists
 check_available virtualenv
@@ -82,7 +118,9 @@ else
 fi
 
 # set up nginx for nmis
+## rewrite nginx config dynamically
 ## check if nginx is available
+write_nginx_config
 check_available nginx
 
 sites_available=/etc/nginx/sites-available/nmis
