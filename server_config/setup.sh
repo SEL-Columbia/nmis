@@ -79,7 +79,7 @@ write_nginx_config() {
         echo -n "Creating $file_name..."
     fi
 
-    echo "server {" >> $file_uri
+    echo "server {" > $file_uri
     echo "	listen 80;" >> $file_uri
     echo "        server_name localhost;" >> $file_uri
     echo "        charset     utf-8;" >> $file_uri
