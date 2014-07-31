@@ -1,3 +1,4 @@
 uwsgi.log
 uwsgi.pid
 uwsgi.ini
+nmis.nginx
