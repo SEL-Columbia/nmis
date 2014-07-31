@@ -561,9 +561,11 @@ FacilitiesView.show_table = function(sector, table_index, facilities){
 FacilitiesView.show_modal = function(facility){
     var self = this;
     var template = $('#facility_modal_template').html();
+    var photo_id = facility.formhub_photo_id.replace(/\.jpg/i, '')
     var html = _.template(template, {
         NMIS: NMIS,
         facility: facility,
+        photo_id: photo_id,
         tables: NMIS.facilities_view[facility.sector]
     });
     $('#facility_modal').remove();
