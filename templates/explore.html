@@ -172,7 +172,7 @@
 
         <h2>Sectors</h2>
         
-       <p class="facility_sub"> 
+        <p class="facility_sub"> 
             Below are data from the baseline facility surveys.
         </p>
         
@@ -202,7 +202,7 @@
         <h2>MDG Status</h2>
 
         <em>
-            Below are data collected from HNLSS (2008-2009), DHS (2008), School Census (2005), HSS (2005).
+            Below are data collected from HNLSS (2008-2009), DHS (2008), School Census (2005)**, HSS (2005).
         </em>
 
         <% _.each(lga_overview.mdg_status, function(mdg){ %>        
@@ -223,6 +223,7 @@
             </table>
         <% }); %>
         <p>* This data is disaggregated at the state level</p>
+        <p>** The 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.</p>
     </script>
 
     <script id="lga_view_template" type="text/html">
