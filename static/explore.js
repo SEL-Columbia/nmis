@@ -323,8 +323,8 @@ MapView.facility_map = function(lga, sector, indicator) {
         var tile_layer = new L.TileLayer(
             'http://{s}.tiles.mapbox.com/v3/ossap-mdgs.inh7p9ok/{z}/{x}/{y}.png', {
                 subdomains: 'abc',
-                minZoom: 3,
-                maxZoom: 18
+                minZoom: 6,
+                maxZoom: 16
             });
         tile_layer.addTo(this.map);
         this.resize();
@@ -339,7 +339,7 @@ MapView.facility_map = function(lga, sector, indicator) {
     });
     this.facility_layer = this.get_facility_layer(sector_facilities, indicator);
     this.facility_layer.addTo(this.map);
-    this.map.setView(lat_lng, 11);
+    this.map.setView(lat_lng, 13, {reset: true});
 };
 
 MapView.get_facility_layer = function(facilities, indicator) {
