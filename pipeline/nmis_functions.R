@@ -113,7 +113,7 @@ get_necessary_indicators <- function() {
     }
     
     ## "EXTRAS": Indicators hardcoded in the NMIS code
-    facility_level_extras = c("formhub_photo_id", "facility_name", "gps", "survey_id", "unique_lga")
+    facility_level_extras = c("formhub_photo_id", "facility_name", "gps", "survey_id", "unique_lga", "latitude", "longitude")
     lga_level_extras = c("lga", "unique_lga", "state", "latitude", "longitude")
     ## facility level: education and health indicators should include anything in the overview tab as well
     facility_indicators = RJSONIO::fromJSON("../static/explore/facilities_view.json")
