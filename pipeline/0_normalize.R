@@ -14,6 +14,12 @@ normalize_mopup = function(formhubData, survey_name, sector) {
                                                "state_gov" = "public",
                                                "private_non_profit" = "private",
                                                "private_profit" = "private")),
+            zone = revalue(zone, c("north_central" = "North-Central",
+                                    "north_east" = "Northeast",
+                                    "north_west" = "Northwest",
+                                    "south_east" = "Southeast",
+                                    "south_south" = "South-South",
+                                    "south_west" = "Southwest")),
             latitude = get_lat(gps),
             longitude = get_lon(gps)
         ) 
