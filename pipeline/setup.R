@@ -1,3 +1,7 @@
+# setting cran location for shell scripting
+local({r <- getOption("repos");
+       r["CRAN"] <- "http://cran.r-project.org"; options(repos=r)})
+
 check_r_version <- function(){
     if(R.version$major < 3){
         stop("Your R Version it too low, Upgrade to 3.0.1")
