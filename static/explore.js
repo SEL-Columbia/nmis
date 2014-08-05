@@ -341,7 +341,11 @@ MapView.facility_map = function(lga, sector, indicator) {
     });
     this.facility_layer = this.get_facility_layer(sector_facilities, indicator);
     this.facility_layer.addTo(this.map);
-    this.map.fitBounds(fac_latlngs, {reset: true});
+    if (lga.facilities.length){
+        this.map.fitBounds(fac_latlngs, {reset: true});
+    } else {
+        this.map.setView([lga.latitude, lga.longitude], 13, {reset: true});
+    }
 };
 
 MapView.get_facility_layer = function(facilities, indicator) {
