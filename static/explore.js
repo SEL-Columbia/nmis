@@ -337,9 +337,12 @@ MapView.facility_map = function(lga, sector, indicator) {
     var sector_facilities = _.filter(lga.facilities, function(fac){
         return fac.sector === sector || sector === 'overview';
     });
+    var fac_latlngs = _.map(lga.facilities, function(fac){
+        return fac.gps.split(' ').slice(0, 2);
+    });
     this.facility_layer = this.get_facility_layer(sector_facilities, indicator);
     this.facility_layer.addTo(this.map);
-    this.map.setView(lat_lng, 13, {reset: true});
+    this.map.fitBounds(fac_latlngs, {reset: true});
 };
 
 MapView.get_facility_layer = function(facilities, indicator) {
