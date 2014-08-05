@@ -314,7 +314,6 @@ MapView.resize = function(){
 };
 
 MapView.facility_map = function(lga, sector, indicator) {
-    var lat_lng = new L.LatLng(lga.latitude, lga.longitude);
     var map_div = $('.map_view').show()[0];
 
     if (!this.map){
@@ -338,7 +337,7 @@ MapView.facility_map = function(lga, sector, indicator) {
         return fac.sector === sector || sector === 'overview';
     });
     var fac_latlngs = _.map(lga.facilities, function(fac){
-        return fac.gps.split(' ').slice(0, 2);
+        return [fac.latitude, fac.longitude];
     });
     this.facility_layer = this.get_facility_layer(sector_facilities, indicator);
     this.facility_layer.addTo(this.map);
@@ -350,7 +349,6 @@ MapView.get_facility_layer = function(facilities, indicator) {
     var marker_group = new L.LayerGroup();
 
     _.each(facilities, function(fac){
-        var lat_lng = fac.gps.split(' ').slice(0, 2);
         var icon_url;
         if (indicator) {
             if (fac[indicator] === true || 
@@ -364,6 +362,7 @@ MapView.get_facility_layer = function(facilities, indicator) {
             icon_url = '/static/images/icons_f/normal_' + 
                 fac.sector + '.png';
         }
+        var lat_lng = [fac.latitude, fac.longitude];
         var icon = new L.Icon({iconUrl: icon_url}); 
         var mark = new L.Marker(lat_lng, {icon: icon});
         var popup = new L.Popup({closeButton: false})
