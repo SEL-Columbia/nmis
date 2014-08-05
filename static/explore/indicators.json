@@ -498,7 +498,7 @@
     },
     "prevalence_of_hiv": {
         "name": "HIV prevalence*",
-        "description": "Percentage of pregnant women who tested positive for HIV at a site where all pregnant women are tested (HSS, 2005)",
+        "description": "Percentage of pregnant women who tested positive for HIV at a site where all pregnant women are tested (HSS – National HIV Sero Prevalence Sentinel Survey 2010)",
         "mapid": "4l6dxjtt"
     },
     "num_nurses_and_midwives_per_1000": {
