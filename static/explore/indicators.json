@@ -56,12 +56,12 @@
     },
     "gross_enrollment_rate_pry": {
         "name": "Gross enrollment rate in primary education",
-        "description": "Total enrollment in primary school, regardless of age, expressed as a percentage of the eligible official primary school-age population (6-11 years of age in Nigeria) in a given school year. (School Census, 2005 / Population Census, 2006)",
+        "description": "Total enrollment in primary school, regardless of age, expressed as a percentage of the eligible official primary school-age population (6-11 years of age in Nigeria) in a given school year. (Nigerian School Census Survey, 2005 / Population Census, 2006) \n\nThe 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
         "mapid": "zsgrdx6r"
     },
     "girls_boys_ratio_js": {
         "name": "Ratio of girls to boys in junior secondary schools",
-        "description": "Ratio of the number of female students enrolled in junior secondary school to the number of male students enrolled in junior secondary school, regardless of ages. (School Census, 2005)",
+        "description": "Ratio of the number of female students enrolled in junior secondary school to the number of male students enrolled in junior secondary school, regardless of ages. (Nigerian School Census Survey, 2005) \n\nThe 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
         "mapid": "t0fqolxr"
     },
     "nga_under5_mortality_rate": {
@@ -85,17 +85,17 @@
     },
     "gross_enrollment_rate_js": {
         "name": "Gross enrollment rate in secondary education",
-        "description": "Total enrolment in secondary school, regardless of age, expressed as a percentage of the eligible official secondary school-age population (12-17 years of age in Nigeria) in a given school year. (HNLSS, 2008-2009)",
+        "description": "Total enrolment in secondary school, regardless of age, expressed as a percentage of the eligible official secondary school-age population (12-17 years of age in Nigeria) in a given school year. (HNLSS Production Date 2012, Survey Period 2008-09) \n\nThe 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
         "mapid": "8bgiizfr"
     },
     "nga_pct_hholds_with_access_to_improved_water_sources": {
         "name": "Proportion of households with an improved water source",
-        "description": "Ratio of the number of people in urban and rural areas, who use piped water, public tap, borehole or pump, protected well, protected spring or rainwater to the total population, expressed as a percentage. (HNLSS, 2008-2009)",
+        "description": "Ratio of the number of people in urban and rural areas, who use piped water, public tap, borehole or pump, protected well, protected spring or rainwater to the total population, expressed as a percentage. (HNLSS Production Date 2012, Survey Period 2008-09)",
         "mapid": "ql62bj4i"
     },
     "nga_pct_hholds_with_access_to_improved_sanitation": {
         "name": "Proportion of households with improved sanitation",
-        "description": "Percentage of people in urban or rural areas, out of the total urban or rural population, who have access to access to improved latrines that are not public or shared by many households. (HNLSS, 2008-2009)",
+        "description": "Percentage of people in urban or rural areas, out of the total urban or rural population, who have access to access to improved latrines that are not public or shared by many households. (HNLSS Production Date 2012, Survey Period 2008-09)",
         "mapid": "h9hbmx6r"
     },
     "proportion_lift_type_solar": {
@@ -148,7 +148,7 @@
     },
     "net_enrollment_rate_js": {
         "name": "Net enrollment rate for secondary education",
-        "description": "Number of children of secondary school  going age who are enrolled in it, as a percentage of the official secondary going age population respectively",
+        "description": "Number of children of secondary school  going age who are enrolled in it, as a percentage of the official secondary going age population respectively (Nigerian School Census Survey, 2005). \n\nThe 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
         "mapid": "u33j714i"
     },
     "nigeria_base": {
@@ -190,7 +190,7 @@
     },
     "proportion_of_births_by_skilled_health_personnel": {
         "name": "Proportion of births attended by skilled health personnel",
-        "description": "Percentage of births managed by a health professional trained in managing deliveries and their complications (note: traditional birth attendants are not considered skilled birth attendants) (HNLSS, 2008-2009)",
+        "description": "Percentage of births managed by a health professional trained in managing deliveries and their complications (note: traditional birth attendants are not considered skilled birth attendants). (HNLSS Production Date 2012, Survey Period 2008-09)",
         "mapid": "yskb7f4c"
     },
     "percent_management_public": {
@@ -472,7 +472,7 @@
     },
     "net_enrollment_rate_pry": {
         "name": "Net enrollment rate for primary education",
-        "description": "Number of children of primary school  \ngoing age who are enrolled in it, as a percentage of the official primary school going age population respectively",
+        "description": "Number of children of primary school  \ngoing age who are enrolled in it, as a percentage of the official primary school going age population respectively (Nigerian School Census Survey, 2005). \n\n The 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
         "mapid": "ox14te29"
     },
     "immunization_rate_dpt3": {
@@ -822,7 +822,7 @@
     },
     "gender_parity_index_js": {
         "name": "Gender parity index (GPI) for junior secondary schools",
-        "description": "The gross enrollment ratio for females divided by the gross enrollment ratio for males for junior secondary schools. (see description of gross enrollment ratio). (School Census, 2005)",
+        "description": "The gross enrollment ratio for females divided by the gross enrollment ratio for males for junior secondary schools. (see description of gross enrollment ratio). (Nigerian School Census Survey, 2005) \n\nThe 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
         "mapid": "4uedbo6r"
     },
     "num_diesel": {
@@ -987,7 +987,7 @@
     },
     "literacy_rate": {
         "name": "Literacy rate of 15-24 year olds (men and women)",
-        "description": "Proportion of individuals aged 15 and over  who were unable to read a simple letter either in their local language or in English and were unable to write a letter in their local, language or in English from  the total population greater than 15 years . It could also be calculated as 100-%literacy rate. (School Census, 2005)",
+        "description": "Proportion of individuals aged 15 and over  who were unable to read a simple letter either in their local language or in English and were unable to write a letter in their local, language or in English from  the total population greater than 15 years . It could also be calculated as 100-%literacy rate. (Nigerian School Census Survey, 2005) \n\nThe 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
         "mapid": "wa4cayvi"
     },
     "proportion_schools_two_shifts": {
@@ -1479,7 +1479,7 @@
     },
     "girl_boy_ratio_primary": {
         "name": "Ratio of girls to boys in primary schools ",
-        "description": "Ratio of the number of female students enrolled in primary school to the number of male students enrolled in primary school, regardless of ages. (School Census, 2005)",
+        "description": "Ratio of the number of female students enrolled in primary school to the number of male students enrolled in primary school, regardless of ages. (Nigerian School Census Survey, 2005) \n\nThe 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
         "mapid": "ee20ggb9"
     },
     "num_taps": {
@@ -1580,7 +1580,7 @@
     },
     "percentage_of_individuals_tested_for_hiv_ever": {
         "name": "Percentage of men and women ever tested for HIV",
-        "description": "Percentage of individuals that have been tested for HIV/AIDS (HNLSS, 2009)",
+        "description": "Percentage of individuals that have been tested for HIV/AIDS (HNLSS Production Date 2012, Survey Period 2008-09)",
         "mapid": "d161b57j"
     },
     "malaria_treatment_artemisinin": {
@@ -1802,7 +1802,7 @@
     },
     "gender_parity_index_primary": {
         "name": "Gender parity index (GPI) for primary schools",
-        "description": "The gross enrollment ratio for females divided by the gross enrollment ratio for males for primary schools. (see description of gross enrollment ratio). (School Census, 2005)",
+        "description": "The gross enrollment ratio for females divided by the gross enrollment ratio for males for primary schools. (see description of gross enrollment ratio). (Nigerian School Census Survey, 2005) \n\nThe 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
         "mapid": "vddeu3di"
     },
     "pop_2006": {

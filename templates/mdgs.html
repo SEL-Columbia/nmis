@@ -23,9 +23,9 @@
 
             function indicator_description(slug){
                 var indicator = NMIS.indicators[slug];
-                return indicator ? indicator.description : slug;
+                var description = indicator ? indicator.description : slug;
+                return description.replace(/\n/g, '<br>');
             }
-
             
             $(function(){
                 // Initialize Map
@@ -50,7 +50,7 @@
                             .attr('label');
                         addLayer(map, this.value);
                         $('.mdg_title').text(label);
-                        $('.mdg_description').text(
+                        $('.mdg_description').html(
                             indicator_description(this.value));
                     }).change();
             });
