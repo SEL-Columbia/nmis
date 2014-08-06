@@ -32,7 +32,7 @@
               "nga_under5_mortality_rate",
               "mortality_rate_infant",
               "nga_proportion_immunized_against_measles",
-              "immunization_rate_dpt3",
+              "immunization_rate_basic",
               "proportion_of_children_u5_diarrhea_treated_with_ors_med"
         ]
     },
@@ -40,7 +40,7 @@
         "name" : "MDG 5: Improve maternal health",
         "indicators" : [
               "proportion_of_births_by_skilled_health_personnel",
-              "percent_antenatal_care_four",
+              "percent_receiving_antenatal_care",
               "percentage_pregnant_women_tested_for_hiv_during_pregnancy"
         ]
     },
@@ -49,7 +49,7 @@
         "indicators" : [
               "prevalence_of_hiv",
               "percentage_of_individuals_tested_for_hiv_ever",
-              "nga_proportion_u5_children_sleeping_under_bednets"
+              "proportion_children_u5_sleeping_under_itns_or_IRS_dwellings"
         ]
     },
     {

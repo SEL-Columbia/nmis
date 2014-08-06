@@ -475,9 +475,9 @@
         "description": "Number of children of primary school  \ngoing age who are enrolled in it, as a percentage of the official primary school going age population respectively (Nigerian School Census Survey, 2005). \n\n The 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
         "mapid": "ox14te29"
     },
-    "immunization_rate_dpt3": {
-        "name": "DPT 3 immunization rate*",
-        "description": "Percentage of children aged 12-23 months who received DPT3 immunization any time before the survey. (DHS, 2008)",
+    "immunization_rate_basic": {
+        "name": "Rate of all basic vaccinations*",
+        "description": "Percentage of children aged 12-23 months who received all basic immunization vaccination any time before the survey. (DHS, 2013)",
         "mapid": "02ysc3di"
     },
     "distribution_type": {
@@ -1210,9 +1210,9 @@
         "name": "Three or more skilled birth attendants",
         "description": "Facility has at least three skilled birth attendants (doctor, midwife or nurse-midwife) on staff."
     },
-    "percent_antenatal_care_four": {
-        "name": "Percentage of women who attended at least four antenatal visits*",
-        "description": "Percentage of pregnant women who have had at least four visits for antenatal care (care specifically related to pregnancy) (DHS, 2008)",
+    "percent_receiving_antenatal_care": {
+        "name": "Percentage of women who received antenatal care from a skilled provider*",
+        "description": "Percentage of pregnant women who have had at least four visits for antenatal care (care specifically related to pregnancy) (DHS, 2013)",
         "mapid": "u254ryvr"
     },
     "proportion_adequate_staff": {
@@ -1299,9 +1299,9 @@
         "name": "Percentage of facilities that offer malaria prophylaxis during pregnancy",
         "description": ""
     },
-    "proportion_children_u5_sleeping_under_itns": {
-        "name": "Percentage of children under five sleeping under insecticide-treated bednets*",
-        "description": "Percentage of children under five  who slept under insecticide-treated bednets the night before the survey"
+    "proportion_children_u5_sleeping_under_itns_or_IRS_dwellings": {
+        "name": "Percentage of children under five sleeping under ITNs or in dwellings sprayed with IRS in past 12 months*",
+        "description": "Percentage of children under five sleeping under ITNs or in dwellings sprayed with IRS in past 12 months. (DHS, 2013)"
     },
     "proportion_schools_functioning_library_primary": {
         "name": "Percentage of primary schools with a functioning library",

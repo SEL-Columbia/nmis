@@ -74,7 +74,7 @@
                 "mortality_rate_children_u5", 
                 "mortality_rate_infant", 
                 "immunization_rate_measles", 
-                "immunization_rate_dpt3", 
+                "immunization_rate_basic", 
                 "proportion_of_children_u5_diarrhea_treated_with_ors_med"
             ]
         }, 
@@ -82,7 +82,7 @@
             "header": "Goal 5: Improve maternal health", 
             "indicators": [
                 "proportion_of_births_by_skilled_health_personnel", 
-                "percent_antenatal_care_four", 
+                "percent_receiving_antenatal_care", 
                 "percentage_pregnant_women_tested_for_hiv_during_pregnancy"
             ]
         }, 
@@ -90,7 +90,7 @@
             "header": "Goal 6: Combat HIV/AIDS, malaria and other diseases", 
             "indicators": [
                 "percentage_of_individuals_tested_for_hiv_ever", 
-                "proportion_children_u5_sleeping_under_itns",
+                "proportion_children_u5_sleeping_under_itns_or_IRS_dwellings",
                 "prevalence_of_hiv"
             ]
         }, 
