@@ -138,10 +138,13 @@ normalize_external = function(d) {
                                proportion_of_children_u5_diarrhea_treated_with_ors_med = pct_convtr(proportion_of_children_u5_diarrhea_treated_with_ors_med),
                                prevalence_of_hiv = pct_convtr(prevalence_of_hiv),
                                percentage_of_individuals_tested_for_hiv_ever = pct_convtr(percentage_of_individuals_tested_for_hiv_ever),
-                               proportion_children_u5_sleeping_under_itns = pct_convtr(proportion_children_u5_sleeping_under_itns),
-                               percent_antenatal_care_four = pct_convtr(percent_antenatal_care_four),
+                               proportion_children_u5_sleeping_under_itns_or_IRS_dwellings = pct_convtr(proportion_children_u5_sleeping_under_itns_or_IRS_dwellings),
+                               percent_receiving_antenatal_care = pct_convtr(percent_receiving_antenatal_care),
                                percentage_pregnant_women_tested_for_hiv_during_pregnancy = pct_convtr(percentage_pregnant_women_tested_for_hiv_during_pregnancy),
                                percentage_households_with_access_to_improved_water_sources = pct_convtr(percentage_households_with_access_to_improved_water_sources),
-                               percentage_households_with_access_to_improved_sanitation = pct_convtr(percentage_households_with_access_to_improved_sanitation))
+                               percentage_households_with_access_to_improved_sanitation = pct_convtr(percentage_households_with_access_to_improved_sanitation),
+                               immunization_rate_basic = pct_convtr(immunization_rate_basic),
+                               proportion_of_births_by_skilled_health_personnel = pct_convtr(proportion_of_births_by_skilled_health_personnel),
+                               immunization_rate_measles = pct_convtr(immunization_rate_measles))
            )
 }
