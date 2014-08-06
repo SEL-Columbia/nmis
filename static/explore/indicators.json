@@ -190,7 +190,7 @@
     },
     "proportion_of_births_by_skilled_health_personnel": {
         "name": "Proportion of births attended by skilled health personnel",
-        "description": "Percentage of births managed by a health professional trained in managing deliveries and their complications (note: traditional birth attendants are not considered skilled birth attendants). (HNLSS Production Date 2012, Survey Period 2008-09)",
+        "description": "Percentage of births managed by a health professional trained in managing deliveries and their complications (note: traditional birth attendants are not considered skilled birth attendants). (DHS, 2013)",
         "mapid": "yskb7f4c"
     },
     "percent_management_public": {
@@ -399,7 +399,7 @@
     },
     "prevalence_of_underweight_children_u5": {
         "name": "Percentage of children under five who are underweight (weight-for-age)*",
-        "description": "Percentage of children under five whose weight-for-age is below minus two standard deviations (-2 SD) from the median of the reference population (all children under five) (DHS, 2008)",
+        "description": "Percentage of children under five whose weight-for-age is below minus two standard deviations (-2 SD) from the median of the reference population (all children under five). (DHS, 2013)",
         "mapid": "7jh9imxa"
     },
     "student_classroom_ratio_lga_js": {
@@ -643,7 +643,7 @@
     },
     "prevalence_of_stunting_children_u5": {
         "name": "Percentage of children under five with stunting (height-for-age)*",
-        "description": "Percentage of children under five whose height-for-age is below minus two standard deviations (-2 SD) from the median of the reference population (DHS, 2008)",
+        "description": "Percentage of children under five whose height-for-age is below minus two standard deviations (-2 SD) from the median of the reference population. (DHS, 2013)",
         "mapid": "saud5poq"
     },
     "proportion_water_poor_water_quality": {
@@ -967,7 +967,7 @@
     },
     "immunization_rate_measles": {
         "name": "Measles immunization rate*",
-        "description": "Percentage of children aged 12-23 months who received measles immunization any time before the survey"
+        "description": "Percentage of children aged 12-23 months who received measles immunization any time before the survey. (DHS, 2013)"
     },
     "avg_school_enrollment_fee": {
         "name": "avg_school_enrollment_fee(name=='')",
@@ -1212,7 +1212,7 @@
     },
     "percent_receiving_antenatal_care": {
         "name": "Percentage of women who received antenatal care from a skilled provider*",
-        "description": "Percentage of pregnant women who have had at least four visits for antenatal care (care specifically related to pregnancy) (DHS, 2013)",
+        "description": "Percentage of pregnant women who have had at least four visits for antenatal care (care specifically related to pregnancy). (DHS, 2013)",
         "mapid": "u254ryvr"
     },
     "proportion_adequate_staff": {
@@ -1653,7 +1653,7 @@
     },
     "prevalence_of_wasting_children_u5": {
         "name": "Percentage of children under five with wasting (weight-for-height)*",
-        "description": "Percentage of children whose weight-for-height is below minus two standard deviations (-2 SD) from the median of the reference population (DHS, 2008)",
+        "description": "Percentage of children whose weight-for-height is below minus two standard deviations (-2 SD) from the median of the reference population. (DHS, 2013)",
         "mapid": "3pzlajie"
     },
     "emergency_transport_currently_functioning": {
@@ -1971,7 +1971,7 @@
     },
     "percentage_pregnant_women_tested_for_hiv_during_pregnancy": {
         "name": "Percentage of pregnant women tested for HIV*",
-        "description": "Percentage of women between 15-49 years who were preganant in the last 5 years who got tested for HIV as a part of antenatal visit. (DHS, 2008) ",
+        "description": "Percentage of women between 15-49 years who were preganant in the last 5 years who got tested for HIV as a part of antenatal visit. (DHS, 2013) ",
         "mapid": "tppikof4"
     },
     "school_1kmplus_secondary_school": {
