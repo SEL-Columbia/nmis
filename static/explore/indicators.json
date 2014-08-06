@@ -476,8 +476,8 @@
         "mapid": "ox14te29"
     },
     "immunization_rate_basic": {
-        "name": "Rate of all basic vaccinations*",
-        "description": "Percentage of children aged 12-23 months who received all basic immunization vaccination any time before the survey. (DHS, 2013)",
+        "name": "Full immunization rate*",
+        "description": "Percentage of children aged 12-23 months who received all basic vaccinations any time before the survey. (DHS, 2013)",
         "mapid": "02ysc3di"
     },
     "distribution_type": {
