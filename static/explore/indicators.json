@@ -85,7 +85,7 @@
     },
     "gross_enrollment_rate_js": {
         "name": "Gross enrollment rate in secondary education",
-        "description": "Total enrolment in secondary school, regardless of age, expressed as a percentage of the eligible official secondary school-age population (12-17 years of age in Nigeria) in a given school year. (HNLSS Production Date 2012, Survey Period 2008-09) \n\nThe 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
+        "description": "Total enrolment in secondary school, regardless of age, expressed as a percentage of the eligible official secondary school-age population (12-17 years of age in Nigeria) in a given school year.  (Nigerian School Census Survey, 2005 / Population Census, 2006) \n\nThe 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
         "mapid": "8bgiizfr"
     },
     "nga_pct_hholds_with_access_to_improved_water_sources": {
@@ -822,7 +822,7 @@
     },
     "gender_parity_index_js": {
         "name": "Gender parity index (GPI) for junior secondary schools",
-        "description": "The gross enrollment ratio for females divided by the gross enrollment ratio for males for junior secondary schools. (see description of gross enrollment ratio). (Nigerian School Census Survey, 2005) \n\nThe 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
+        "description": "The gross enrollment ratio for females divided by the gross enrollment ratio for males for junior secondary schools. (Nigerian School Census Survey, 2005) \n\nThe 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
         "mapid": "4uedbo6r"
     },
     "num_diesel": {
@@ -987,7 +987,7 @@
     },
     "literacy_rate": {
         "name": "Literacy rate of 15-24 year olds (men and women)",
-        "description": "Proportion of individuals aged 15 and over  who were unable to read a simple letter either in their local language or in English and were unable to write a letter in their local, language or in English from  the total population greater than 15 years . It could also be calculated as 100-%literacy rate. (Nigerian School Census Survey, 2005) \n\nThe 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
+        "description": "Proportion of individuals aged 15 and over  who were unable to read a simple letter either in their local language or in English and were unable to write a letter in their local, language or in English from  the total population greater than 15 years . It could also be calculated as 100-%literacy rate. (HNLSS Production Date 2012, Survey Period 2008-09) \n\nThe 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
         "mapid": "wa4cayvi"
     },
     "proportion_schools_two_shifts": {
@@ -1802,7 +1802,7 @@
     },
     "gender_parity_index_primary": {
         "name": "Gender parity index (GPI) for primary schools",
-        "description": "The gross enrollment ratio for females divided by the gross enrollment ratio for males for primary schools. (see description of gross enrollment ratio). (Nigerian School Census Survey, 2005) \n\nThe 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
+        "description": "The gross enrollment ratio for females divided by the gross enrollment ratio for males for primary schools. (Nigerian School Census Survey, 2005) \n\nThe 2013 school census data are currently being compiled by the Federal Ministry of Education and thus are unavailable for inclusion on NMIS at this time.",
         "mapid": "vddeu3di"
     },
     "pop_2006": {
