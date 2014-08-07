@@ -71,7 +71,7 @@
     },
     "nga_proportion_immunized_against_measles": {
         "name": "Measles immunization rate",
-        "description": "Percentage of one-year-old children who received a measles vaccination. (DHS, 2008)",
+        "description": "Percentage of one-year-old children who received a measles vaccination. (DHS, 2013)",
         "mapid": "mrmp9zfr"
     },
     "nga_proportion_u5_children_sleeping_under_bednets": {
