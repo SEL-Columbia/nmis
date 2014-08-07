@@ -959,7 +959,7 @@
     },
     "percentage_households_with_access_to_improved_sanitation": {
         "name": "Percentage households with access to improved sanitation",
-        "description": "Number of households with access to improved sanitation/ Total number of households",
+        "description": "Percentage of people in urban or rural areas, out of the total urban or rural population, who have access to access to improved latrines that are not public or shared by many households. (HNLSS Production Date 2012, Survey Period 2008-09)",
         "mapid": "h9hbmx6r"
     },
     "access_first_aid": {
@@ -1466,7 +1466,7 @@
     },
     "percentage_households_with_access_to_improved_water_sources": {
         "name": "Percentage households with access to improved water sources",
-        "description": "Number of households with access to improved water sourcs/ Total number of households",
+        "description": "Ratio of the number of people in urban and rural areas, who use piped water, public tap, borehole or pump, protected well, protected spring or rainwater to the total population, expressed as a percentage. (HNLSS Production Date 2012, Survey Period 2008-09)",
         "mapid": "ql62bj4i"
     },
     "education_improved_sanitation": {
