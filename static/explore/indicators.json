@@ -741,7 +741,7 @@
     },
     "proportion_of_children_u5_diarrhea_treated_with_ors_med": {
         "name": "Percentage of children under five years of age with diarrhea who received oral rehydration therapy*",
-        "description": "Percentage of Children under five years old who had diarrhea in the last two weeks who were treated with ORS or RHS. (DHS, 2008)",
+        "description": "Percentage of Children under five years old who had diarrhea in the last two weeks who were treated with ORS or RHS. (DHS, 2013)",
         "mapid": "h4p5qow9"
     },
     "proportion_schools_missed_pay_juniorsec": {
