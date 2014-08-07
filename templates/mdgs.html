@@ -30,10 +30,16 @@
             $(function(){
                 // Initialize Map
                 var map_div = $('#mdg_map')[0];
-                var mapZoom = 6;
-                var map = new L.Map(map_div).setView([9.2, 8], 6);
-                var baseLayer = createLayer('nigeria_base', 6, 9);
-                baseLayer.addTo(map);
+                var sw = L.latLng(4.0834527720386316, 1.29638671875);
+                var ne = L.latLng(14.264383087562662, 14.7216796875);
+                var map_bounds = new L.latLngBounds(sw, ne);
+                var map = new L.Map(map_div, {
+                    minZoom: 6,
+                    maxZoom: 9,
+                    maxBounds: map_bounds
+                }).fitBounds(map_bounds)
+                var borderLayer = createLayer('nigeria_border_outline', 6, 9, 10);
+                borderLayer.addTo(map);
 
                 // Initialize Select box
                 var template = $('#mdgs_view_template').html();
@@ -55,11 +61,12 @@
                     }).change();
             });
             
-            function createLayer(indicator, minZoom, maxZoom) {
+            function createLayer(indicator, minZoom, maxZoom, zIndex) {
                 var mapboxName = 'ossap-mdgs.' + NMIS.indicators[indicator].mapid;
                 var tileLayer = new L.mapbox.tileLayer(mapboxName, {
                     minZoom: minZoom,
                     maxZoom: maxZoom,
+                    zIndex: zIndex ? zIndex : null
                 });
                 return tileLayer;
             }
