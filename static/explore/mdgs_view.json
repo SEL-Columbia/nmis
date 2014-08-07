@@ -2,8 +2,8 @@
     {
         "name" : "MDG 1: Eradicate extreme poverty and hunger",
         "indicators" : [
-              "prevalence_of_underweight_children_u5",
               "prevalence_of_stunting_children_u5",
+              "prevalence_of_underweight_children_u5",
               "prevalence_of_wasting_children_u5"
         ]
     },
@@ -29,9 +29,9 @@
     {
         "name" : "MDG 4: Reduce child mortality rates",
         "indicators" : [
-              "nga_under5_mortality_rate",
+              "mortality_rate_children_u5", 
               "mortality_rate_infant",
-              "nga_proportion_immunized_against_measles",
+              "immunization_rate_measles",
               "immunization_rate_basic",
               "proportion_of_children_u5_diarrhea_treated_with_ors_med"
         ]
@@ -55,8 +55,8 @@
     {
         "name" : "MDG 7: Ensure environmental sustainability",
         "indicators" : [
-              "nga_pct_hholds_with_access_to_improved_water_sources",
-              "nga_pct_hholds_with_access_to_improved_sanitation"
+              "percentage_households_with_access_to_improved_water_sources", 
+              "percentage_households_with_access_to_improved_sanitation"
         ]
     }
 ]
