@@ -989,7 +989,7 @@
     },
     "literacy_rate": {
         "name": "Literacy rate of 15-24 year olds (men and women)",
-        "description": "The literacy rate of 15-24 year-olds is defined as the proportion of the population aged 15-24 years who can both read and write with understanding a short simple statement on everyday life.",
+        "description": "The literacy rate of 15-24 year-olds is defined as the proportion of the population aged 15-24 years who can both read and write with understanding a short simple statement on everyday life. (HNLSS Production Date 2012, Survey Period 2008-09)",
         "mapid": "wa4cayvi"
     },
     "proportion_schools_two_shifts": {
