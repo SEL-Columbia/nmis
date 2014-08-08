@@ -1851,7 +1851,7 @@
     },
     "mortality_rate_children_u5": {
         "name": "Under five mortality rate (per 1,000 live births)*",
-        "description": "Proportion of children out of 1000 live births who would die before reach 5 years of age ",
+        "description": "The likelihood of a child dying before reaching five years of age (expressed as number of deaths per 1,000 births). (DHS, 2008)",
         "mapid": "v8kf0f6r"
     },
     "supplies_available_latex_gloves": {
