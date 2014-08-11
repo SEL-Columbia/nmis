@@ -144,7 +144,9 @@ sync_db <- function(df){
         dplyr::summarise(survey_time = max(survey_time)) 
     # injoin back to the full survey and keep the latest
     survey_df <- inner_join(survey_df, latest_survey, 
-                            by=c("facility_id", "survey_time"))
+                            by=c("facility_id", "survey_time")) %.% 
+                            filter(!duplicated(facility_id)) %.% 
+                            select(-survey_time)
     # join with nmis data 
     df <- df %.% dplyr::select(-facility_id, matches('.'))
     df <- dplyr::inner_join(df, survey_df, by="survey_id")
