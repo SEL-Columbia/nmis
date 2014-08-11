@@ -454,7 +454,11 @@ MapView.chart_indicators = function(facilities, sector){
 };
 
 MapView.map_legend = function(lga, sector, indicator){
-    var ctx = $('.map_legend canvas')[0].getContext('2d');        
+    $('.map_legend canvas').remove();
+    var ctx = $('<canvas width="80" height="80"></canvas>')
+        .prependTo('.map_legend')
+        [0].getContext('2d');
+                
     var trues = 0;
     var falses = 0;
     var unknowns = 0;
@@ -471,16 +475,20 @@ MapView.map_legend = function(lga, sector, indicator){
     var total = trues + falses + unknowns;
     var percent_complete = trues ? (trues / (trues + falses) * 100).toFixed(0): 0;
     var pie_data = [{
-            value: trues / total * 100,
+            label: 'Yes',
+            value: Math.floor(trues / total * 100),
             color: '#071efb'
         }, {
-            value : falses / total * 100,
+            label: 'No',
+            value : Math.floor(falses / total * 100),
             color : '#cc0202'
         }, {
-            value : unknowns / total * 100,
+            label: 'Unknown',
+            value : Math.floor(unknowns / total * 100),
             color : '#e6e6e6'
         }];
 
+    console.log(pie_data);
     new Chart(ctx).Pie(pie_data, {
         animationEasing: 'easeOutQuart',
         animationSteps: 15
