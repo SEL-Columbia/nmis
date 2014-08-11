@@ -488,7 +488,6 @@ MapView.map_legend = function(lga, sector, indicator){
             color : '#e6e6e6'
         }];
 
-    console.log(pie_data);
     new Chart(ctx).Pie(pie_data, {
         animationEasing: 'easeOutQuart',
         animationSteps: 15
