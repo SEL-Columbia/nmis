@@ -37,14 +37,13 @@ zip_datas <- function(CONFIG){
     ## Combine all raw data file path into one collection
     all_raw_csvs <- c(raw_mopup_csv, raw_six61_csv, raw_pilot_113_csv)
     
-    ## Json data
-    json_files <- normalizePath(file.path("../static/lgas/", list.files("../static/lgas/")))
+    # readme path for raw data
+    readme <- "./data/rawdata_readme.txt"
     
     ### Output part
     ## check and create TMP folders
     if(!file.exists("~/tmp")) {dir.create("~/tmp/")}
     if(!file.exists("~/tmp/nmis_dataset/")) {dir.create("~/tmp/nmis_dataset/")}
-    if(!file.exists("~/tmp/nmis_dataset/lgas")) {dir.create("~/tmp/nmis_dataset/lgas")}
     if(!file.exists("~/tmp/nmis_raw_data/")) {dir.create("~/tmp/nmis_raw_data/")}
     
     
@@ -53,21 +52,27 @@ zip_datas <- function(CONFIG){
     sapply(nmis_csvs, function(file){
         file.copy(from = file, to = "~/tmp/nmis_dataset/", overwrite = T)
     })
-    #json
-    sapply(json_files, function(file){
-        file.copy(from = file, to = "~/tmp/nmis_dataset/lgas/", overwrite = T)
-    })
+
     # all raw data
     sapply(all_raw_csvs, function(file){
         file.copy(from = file, to = "~/tmp/nmis_raw_data/", overwrite = T)
     })
-    
+    # move the readme to raw data folder
+    file.copy(from = readme, to = "~/tmp/nmis_raw_data/", overwrite = T)
 
+    # remove old zip file
+    if(file.exists(nmis_zip)){file.remove(nmis_zip)}
+    if(file.exists(raw_zip)){file.remove(raw_zip)}
     
     ### zipping it! 
     zip(nmis_zip, normalizePath("~/tmp/nmis_dataset/"))
     print("NMIS DATA ZIP CREATED.")
     zip(raw_zip, normalizePath("~/tmp/nmis_raw_data/"))
     print("RAW DATA ZIP CREATED.")
+    
+    # clean up the tmp folder
+    if(file.exists("~/tmp/nmis_dataset/")){
+        unlink("~/tmp/", recursive = T)
+    }
     
 }
