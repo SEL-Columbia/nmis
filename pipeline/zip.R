@@ -22,7 +22,9 @@ zip_datas <- function(CONFIG){
     pilot_113_files <- c("Educ_Baseline_PhaseII_all_merged_cleaned_2011Nov21.csv",
                          "Pilot_Education_cleaned_2011Nov17.csv",
                          "Health_PhII_RoundI&II&III_Clean_2011.10.21.csv",
-                         "Pilot_Data_Health_Clean_2011.11.18.csv")
+                         "Pilot_Data_Health_Clean_2011.11.18.csv",
+                         "Water_Baseline_PhaseII_all_merged_cleaned_2011Nov21.csv",
+                         "Pilot_Water_cleaned_2011Aug29.csv")
     
     six61_files <- c("Education_661_Merged.csv", 
                      "Health_661_Merged.csv",
