@@ -171,7 +171,7 @@ table .value {
 
 #index_content {
     color: white;
-    margin: 100px 0;
+    margin: 200px 0;
 }
 #index_content .container {
     position: relative;
@@ -264,6 +264,9 @@ table .value {
     margin-top: 165px;
 }
 #index_content .amebo {
+    position: absolute;
+    top: 130px;
+    width: 100%;
     background: #eee;
     padding: 15px 0;
     color: #777;
