@@ -102,7 +102,7 @@
         "name": "Variable not found: proportion_lift_type_solar",
         "description": ""
     },
-    "facility_ID": {
+    "facility_id": {
         "name": "Facility ID",
         "description": ""
     },
