@@ -18,7 +18,8 @@
                 "is_improved", 
                 "functional", 
                 "breakdown",
-                "lift_mechanism"
+                "lift_mechanism",
+                "facility_id"
             ], 
             "name": "General"
         }
