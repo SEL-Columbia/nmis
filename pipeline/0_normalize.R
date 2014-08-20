@@ -21,7 +21,11 @@ normalize_mopup = function(formhubData, survey_name, sector) {
                                     "south_south" = "South-South",
                                     "south_west" = "Southwest")),
             latitude = get_lat(gps),
-            longitude = get_lon(gps)
+            longitude = get_lon(gps),
+            facility_name = xxx_replace(facility_name),
+            ward = xxx_replace(ward),
+            community = xxx_replace(community)
+            
         ) 
     ## Survey_name: mopup, mopup_new, or mopup_pilot
     # mopup and mopup_new are pretty much the same, except mopup has some LGAs mistakenly as NA
@@ -122,7 +126,10 @@ normalize_2012 = function(d, survey_name, sector) {
         return(d %.% 
                    dplyr::mutate(facility_id = NA,
                                  latitude = get_lat(gps),
-                                 longitude = get_lon(gps)) %.%
+                                 longitude = get_lon(gps),
+                                 facility_name = xxx_replace(facility_name),
+                                 ward = xxx_replace(ward),
+                                 community = xxx_replace(community)) %.%
                    dplyr::select(survey_id = uuid, matches('.')) %.%
                    dplyr::filter(!(is.na(latitude) & is.na(longitude))))
     } else {

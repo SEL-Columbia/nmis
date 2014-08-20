@@ -195,3 +195,6 @@ get_lat <- function(gps){
 get_lon <- function(gps){
     return(as.numeric(parse_gps(gps)[,2]))
 }
+xxx_replace <- function(vec){
+    return(ifelse(grepl("^x{3,}$", vec, ignore.case = T, perl = T), NA, vec))
+}
