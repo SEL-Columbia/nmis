@@ -2,12 +2,11 @@
     "health": {
         "overview": [
             "pop_2006",
-            "gap_sheet_total_facilities",
-            "gap_sheet_total_hospitals",
             "gap_sheet_total_phcentres",
             "gap_sheet_total_phclinics",
             "gap_sheet_total_dispensary",
-            "gap_sheet_total_sec_tertiary"
+            "gap_sheet_total_facilities",
+            "gap_sheet_total_hospitals"
         ],
         "groups": [
             {

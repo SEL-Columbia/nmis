@@ -261,12 +261,12 @@ health_gap_sheet_indicators <- function(health_data) {
         dplyr::filter(is_healthfacility) %.% 
         dplyr::group_by(unique_lga) %.%
         dplyr::summarise(
-            gap_sheet_total_facilities = sum(is_healthfacility, na.rm=T),
+            gap_sheet_total_facilities = sum(is_phcentre | is_phclinic | is_healthpost, na.rm=T),
             gap_sheet_total_hospitals = sum(is_hospital, na.rm=T),
             gap_sheet_total_phcentres = sum(is_phcentre, na.rm=T),
             gap_sheet_total_phclinics = sum(is_phclinic, na.rm=T),
             gap_sheet_total_dispensary = sum(is_healthpost, na.rm=T),
-            gap_sheet_total_sec_tertiary = 0,
+            gap_sheet_total_sec_tertiary = gap_sheet_total_hospitals,
             
             ## fully staffed indicators:
             gap_sheet_phcentre = percent(num_skilled_birth_attendants >= 5 
