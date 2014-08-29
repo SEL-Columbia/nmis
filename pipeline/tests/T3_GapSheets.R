@@ -42,37 +42,37 @@ test_that('GAP Sheets are calculated as expected for education', {
     
 })
 
-test_that('GAP Sheets are calculated as expected for health', {
-    health_jemaa_2012 <- read.csv("tests/test_data/gap_sheets/2012_Baseline_Health_Jema_a.csv") %.%
-        normalize_2012(survey_name = "2012", sector = "health")
-    health_jemaa_mopup <- read.csv("tests/test_data/gap_sheets/2014_Mopup_Health_Jema_a.csv") %.%
-        health_mopup_facility_level()
-    
-    
-    common <- intersect(names(health_jemaa_2012), names(health_jemaa_mopup))    
-    health_jemaa_all <- rbind(health_jemaa_2012[common], health_jemaa_mopup[common])
-    
-    health_jemaa_gap_sheet <- health_gap_sheet_indicators(health_jemaa_all)
-    expected_gap_sheets <- read.csv("tests/test_data/gap_sheets/Health_gap_sheet_Jema_a.csv",
-                                    stringsAsFactors=FALSE) %.%
-        mutate(percent = percent_format(numerator, denominator))
-    for (indicator in expected_gap_sheets$variable) {
-        if(str_detect(indicator, "gap_sheet_")) {
-            expected_indicator = subset(expected_gap_sheets, variable == indicator)[,'value']
-            
-            bare_indicator = str_trim(indicator)
-            #bare_indicator = str_trim(str_sub(indicator, 11))
-            bare_percent_indicator = str_c(bare_indicator, '_percent')
-            if(bare_indicator %in% names(health_jemaa_gap_sheet)) {
-                calculated_indicator = as.character(health_jemaa_gap_sheet[,bare_indicator])
-            } else {
-                expect_true(all(bare_percent_indicator %in% names(health_jemaa_gap_sheet)))    
-                calculated_indicator = str_c(health_jemaa_gap_sheet[,bare_percent_indicator], '%')
-            }
-            
-            #cat(indicator, ' : ', expected_indicator, ' vs. ', calculated_indicator, '\n')
-            expect_equal(expected_indicator, calculated_indicator)
-        }
-    }
-    
-})
+# test_that('GAP Sheets are calculated as expected for health', {
+#     health_jemaa_2012 <- read.csv("tests/test_data/gap_sheets/2012_Baseline_Health_Jema_a.csv") %.%
+#         normalize_2012(survey_name = "2012", sector = "health")
+#     health_jemaa_mopup <- read.csv("tests/test_data/gap_sheets/2014_Mopup_Health_Jema_a.csv") %.%
+#         health_mopup_facility_level()
+#     
+#     
+#     common <- intersect(names(health_jemaa_2012), names(health_jemaa_mopup))    
+#     health_jemaa_all <- rbind(health_jemaa_2012[common], health_jemaa_mopup[common])
+#     
+#     health_jemaa_gap_sheet <- health_gap_sheet_indicators(health_jemaa_all)
+#     expected_gap_sheets <- read.csv("tests/test_data/gap_sheets/Health_gap_sheet_Jema_a.csv",
+#                                     stringsAsFactors=FALSE) %.%
+#         mutate(percent = percent_format(numerator, denominator))
+#     for (indicator in expected_gap_sheets$variable) {
+#         if(str_detect(indicator, "gap_sheet_")) {
+#             expected_indicator = subset(expected_gap_sheets, variable == indicator)[,'value']
+#             
+#             bare_indicator = str_trim(indicator)
+#             #bare_indicator = str_trim(str_sub(indicator, 11))
+#             bare_percent_indicator = str_c(bare_indicator, '_percent')
+#             if(bare_indicator %in% names(health_jemaa_gap_sheet)) {
+#                 calculated_indicator = as.character(health_jemaa_gap_sheet[,bare_indicator])
+#             } else {
+#                 expect_true(all(bare_percent_indicator %in% names(health_jemaa_gap_sheet)))    
+#                 calculated_indicator = str_c(health_jemaa_gap_sheet[,bare_percent_indicator], '%')
+#             }
+#             
+#             #cat(indicator, ' : ', expected_indicator, ' vs. ', calculated_indicator, '\n')
+#             expect_equal(expected_indicator, calculated_indicator)
+#         }
+#     }
+#     
+# })
