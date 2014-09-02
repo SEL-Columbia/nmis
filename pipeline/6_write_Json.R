@@ -1,7 +1,6 @@
 require(rjson)
 require(dplyr)
 require(foreach)
-require(doMC)
 source("./zip.R")
 
 
@@ -13,7 +12,6 @@ RJson_ouput <- function(OUTPUT_DIR, CONFIG){
     
     print("WRITING JSON FILES")
     # register Multi cores
-    registerDoMC(4)
     # Read csv into R
     health_gap <- read.csv(file=sprintf('%s/Health_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR))
     edu_gap <- read.csv(file = sprintf('%s/Education_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR)) 
@@ -61,8 +59,19 @@ RJson_ouput <- function(OUTPUT_DIR, CONFIG){
     
     # creating lgas level list
     lgas <- df_to_list(lga_gap)
+
+    selective_apply <- function(agg, cb){
+        sysname <- Sys.info()["sysname"]
+        if(sysname == 'Windows'){
+           return(lapply(agg, cb))
+        } else {
+           require('doMC')
+           registerDoMC(4)
+           return(mclapply(agg, cb))
+        }
+    }
     
-    mclapply(lgas, function(lga){
+    selective_apply(lgas, function(lga){
         current_lga <- lga$unique_lga
         facility_df <- total_facility_df %.% filter(unique_lga == current_lga)
         facility_list <- as.list(as.data.frame(t(facility_df)))
