@@ -61,7 +61,6 @@ RJson_ouput <- function(OUTPUT_DIR, CONFIG){
     lgas <- df_to_list(lga_gap)
 
     selective_apply <- function(agg, cb){
-        sysname <- Sys.info()["sysname"]
         if(.Platform$OS.type == 'windows'){
            return(lapply(agg, cb))
         } else {
