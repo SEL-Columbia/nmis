@@ -62,7 +62,7 @@ RJson_ouput <- function(OUTPUT_DIR, CONFIG){
 
     selective_apply <- function(agg, cb){
         sysname <- Sys.info()["sysname"]
-        if(sysname == 'Windows'){
+        if(.Platform$OS.type == 'windows'){
            return(lapply(agg, cb))
         } else {
            require('doMC')
