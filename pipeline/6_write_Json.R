@@ -1,7 +1,6 @@
 require(rjson)
 require(dplyr)
 require(foreach)
-require(doMC)
 source("./zip.R")
 
 
@@ -13,24 +12,23 @@ RJson_ouput <- function(OUTPUT_DIR, CONFIG){
     
     print("WRITING JSON FILES")
     # register Multi cores
-    registerDoMC(4)
     # Read csv into R
-    health_gap <- read.csv(file=sprintf('%s/Health_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR))
-    edu_gap <- read.csv(file = sprintf('%s/Education_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR)) 
+    health_gap <- read.csv(file=sprintf('%s/Health_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR), stringsAsFactors=F)
+    edu_gap <- read.csv(file = sprintf('%s/Education_GAP_SHEETS_LGA_level.csv', CONFIG$OUTPUT_DIR), stringsAsFactors=F) 
                      
     
-    health_lga <- read.csv(file=sprintf('%s/Health_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR)) %.% 
+    health_lga <- read.csv(file=sprintf('%s/Health_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR), stringsAsFactors=F) %.% 
                         dplyr::select(-lga, -state, -longitude, -latitude, matches("."))
-    edu_lga <- read.csv(file=sprintf('%s/Education_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR)) %.% 
+    edu_lga <- read.csv(file=sprintf('%s/Education_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR), stringsAsFactors=F) %.% 
                         dplyr::select(-lga, -state, -longitude, -latitude, matches("."))
-    water_lga <- read.csv(file=sprintf('%s/Water_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR)) %.% 
+    water_lga <- read.csv(file=sprintf('%s/Water_Mopup_and_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR), stringsAsFactors=F) %.% 
                         dplyr::select(-lga, -state, -longitude, -latitude, matches("."))
-    external_lga <- read.csv(file=sprintf('%s/Overview_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR))
+    external_lga <- read.csv(file=sprintf('%s/Overview_Baseline_LGA_Aggregations.csv', CONFIG$OUTPUT_DIR), stringsAsFactors=F)
                         
     
-    edu_all <- read.csv(file=sprintf('%s/Education_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
-    health_all <- read.csv(file=sprintf('%s/Health_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
-    water_all <- read.csv(file=sprintf('%s/Water_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR))
+    edu_all <- read.csv(file=sprintf('%s/Education_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR), stringsAsFactors=F)
+    health_all <- read.csv(file=sprintf('%s/Health_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR), stringsAsFactors=F)
+    water_all <- read.csv(file=sprintf('%s/Water_Mopup_and_Baseline_NMIS_Facility.csv', CONFIG$OUTPUT_DIR), stringsAsFactors=F)
     
     # join lga level data
     lga_gap <- external_lga %.% 
@@ -42,7 +40,7 @@ RJson_ouput <- function(OUTPUT_DIR, CONFIG){
                         dplyr::left_join(edu_gap, by = "unique_lga")
     
     # combine all facility level data                        
-    total_facility_df <- rbind_list(edu_all, health_all, water_all)
+    total_facility_df <- plyr::rbind.fill(edu_all, health_all, water_all)
         
     
     
@@ -61,8 +59,18 @@ RJson_ouput <- function(OUTPUT_DIR, CONFIG){
     
     # creating lgas level list
     lgas <- df_to_list(lga_gap)
+
+    selective_apply <- function(agg, cb){
+        if(.Platform$OS.type == 'windows'){
+           return(lapply(agg, cb))
+        } else {
+           require('doMC')
+           registerDoMC(4)
+           return(mclapply(agg, cb))
+        }
+    }
     
-    mclapply(lgas, function(lga){
+    selective_apply(lgas, function(lga){
         current_lga <- lga$unique_lga
         facility_df <- total_facility_df %.% filter(unique_lga == current_lga)
         facility_list <- as.list(as.data.frame(t(facility_df)))
