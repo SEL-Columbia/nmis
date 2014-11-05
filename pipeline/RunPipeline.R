@@ -85,10 +85,28 @@ all_data <- rbind.fill(edu_all,
                         dplyr::tbl_df()
 spatial_tagged <- flag_spatial_outliers(all_data, CONFIG$OUTPUT_DIR)
 
+
 ##result of sectors
 edu_all <- edu_all %.% dplyr::semi_join(spatial_tagged, by='survey_id')
 health_all <- health_all %.% dplyr::semi_join(spatial_tagged, by='survey_id')
 water_baseline_2012 <- water_baseline_2012 %.% dplyr::semi_join(spatial_tagged, by='survey_id')
+
+#### save invalid facility name record to separate file
+edu_fn_error <- edu_all %.% filter(is.na(facility_name)) %.%
+                        dplyr::select(facility_id, survey_id, sector, unique_lga)
+health_fn_error <- health_all %.% filter(is.na(facility_name)) %.%
+                        dplyr::select(facility_id, survey_id, sector, unique_lga)
+water_fn_error <- water_baseline_2012 %.% filter(is.na(facility_name)) %.%
+                        dplyr::select(facility_id, survey_id, sector, unique_lga)
+
+write.csv(rbind(edu_fn_error, health_fn_error, water_fn_error), "./data/output/invalid_facility_names_list.csv", row.names=F)
+rm(edu_fn_error, health_fn_error, water_fn_error)
+
+
+edu_all <- edu_all %.% filter(!is.na(facility_name))
+health_all <- health_all %.% filter(!is.na(facility_name))
+water_baseline_2012 <- water_baseline_2012 %.% filter(!is.na(facility_name))
+
 
 ### education
 ## 4.3 aggregate
