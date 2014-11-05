@@ -1014,10 +1014,6 @@ table thead td:active {
 .download_grey {
     color: #999;
 }
-
-
-
-
-
-
-
+.download_footer {
+    text-align: center;
+}
