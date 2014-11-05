@@ -93,11 +93,11 @@ water_baseline_2012 <- water_baseline_2012 %.% dplyr::semi_join(spatial_tagged, 
 
 #### save invalid facility name record to separate file
 edu_fn_error <- edu_all %.% filter(is.na(facility_name)) %.%
-                        dplyr::select(facility_id, survey_id, sector, unique_lga)
+                        dplyr::select(facility_id, survey_id, sector, unique_lga, date_of_survey)
 health_fn_error <- health_all %.% filter(is.na(facility_name)) %.%
-                        dplyr::select(facility_id, survey_id, sector, unique_lga)
+                        dplyr::select(facility_id, survey_id, sector, unique_lga, date_of_survey)
 water_fn_error <- water_baseline_2012 %.% filter(is.na(facility_name)) %.%
-                        dplyr::select(facility_id, survey_id, sector, unique_lga)
+                        dplyr::select(facility_id, survey_id, sector, unique_lga, date_of_survey)
 
 write.csv(rbind(edu_fn_error, health_fn_error, water_fn_error), 
           file = sprintf('%s/invalid_facility_names_list.csv', CONFIG$OUTPUT_DIR), 
