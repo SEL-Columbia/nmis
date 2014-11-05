@@ -99,7 +99,9 @@ health_fn_error <- health_all %.% filter(is.na(facility_name)) %.%
 water_fn_error <- water_baseline_2012 %.% filter(is.na(facility_name)) %.%
                         dplyr::select(facility_id, survey_id, sector, unique_lga)
 
-write.csv(rbind(edu_fn_error, health_fn_error, water_fn_error), "/data/output/invalid_facility_names_list.csv", row.names=F)
+write.csv(rbind(edu_fn_error, health_fn_error, water_fn_error), 
+          file = sprintf('%s/invalid_facility_names_list.csv', CONFIG$OUTPUT_DIR), 
+          row.names=F)
 rm(edu_fn_error, health_fn_error, water_fn_error)
 
 
