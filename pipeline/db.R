@@ -2,7 +2,7 @@ require(dplyr)
 require(RSQLite)
 source('nmis_functions.R')
 create_db <- function(){
-    db_path = "./data/sqlite_db/facility_registry.db"
+    db_path = "data/sqlite_db/facility_registry.db"
     db_connection <- dbConnect(SQLite(), dbname=db_path)
     
     
@@ -16,7 +16,7 @@ create_db <- function(){
                             FOREIGN KEY(facility_id) REFERENCES facility_tb(facility_id));")
     
     # load all mopup todo survey_ids
-    mopup_todo <- read.csv("./data/mopup_do_ids.csv")
+    mopup_todo <- read.csv("data/mopup_do_ids.csv")
     sql <- "INSERT INTO facility_tb VALUES (@facility_id)"
     dbBeginTransaction(db_connection)
     dbGetPreparedQuery(db_connection, sql, bind.data = mopup_todo)
@@ -118,7 +118,7 @@ sync_row <- function(conn, survey){
 }
 
 sync_db <- function(df){
-    db_path = "./data/sqlite_db/facility_registry.db"
+    db_path = "data/sqlite_db/facility_registry.db"
     if( ! file.exists(db_path)){
         my_db <- dplyr::src_sqlite(db_path, create = TRUE)    
         rm(my_db)
